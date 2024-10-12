@@ -578,6 +578,14 @@
     [
       "db66d699-14af-49af-adc9-07d31d38aebd",
       "Root"
+    ],
+    [
+      "9f1bbe11-4123-46ce-90f4-b5cdcb0c8e4d",
+      "Lighting"
+    ],
+    [
+      "e8a51251-9d65-4cc8-a38d-fe58165565c7",
+      "Switches"
     ]
   ],
   "text_variables": {}
