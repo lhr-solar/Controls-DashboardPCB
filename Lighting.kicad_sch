@@ -1445,7 +1445,7 @@
 		(uuid "3adb5346-1387-4503-ab42-6d58b234212e")
 	)
 	(junction
-		(at 138.43 97.79)
+		(at 138.43 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4d60ca72-0156-4609-936f-51c0be47a206")
@@ -1457,7 +1457,7 @@
 		(uuid "54d07087-9d8f-45f8-9bfc-c6b7b841aece")
 	)
 	(junction
-		(at 148.59 97.79)
+		(at 148.59 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5a354c6a-2671-49bf-bbe5-111930b6408e")
@@ -1469,7 +1469,7 @@
 		(uuid "5f361dfd-7653-4700-aeb0-827ce70e12c1")
 	)
 	(junction
-		(at 149.86 92.71)
+		(at 149.86 85.09)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "862a3c49-c1bc-4f8c-86cb-413669d86b55")
@@ -1487,20 +1487,20 @@
 		(uuid "9d241929-d3b8-4bd9-8da1-90c24ae7f135")
 	)
 	(junction
-		(at 160.02 106.68)
+		(at 160.02 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ad3ef35c-5c29-4e18-a265-6e041fd849e7")
 	)
 	(junction
-		(at 148.59 106.68)
+		(at 148.59 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cf7e9e34-3d7a-4815-ae8e-cc33577ca35b")
 	)
 	(wire
 		(pts
-			(xy 138.43 100.33) (xy 138.43 97.79)
+			(xy 138.43 92.71) (xy 138.43 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1510,7 +1510,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 96.52) (xy 99.06 96.52)
+			(xy 91.44 88.9) (xy 99.06 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1520,7 +1520,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 106.68) (xy 160.02 106.68)
+			(xy 148.59 99.06) (xy 160.02 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1530,7 +1530,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 102.87) (xy 138.43 106.68)
+			(xy 138.43 95.25) (xy 138.43 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1560,7 +1560,7 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 92.71) (xy 149.86 95.25)
+			(xy 149.86 85.09) (xy 149.86 87.63)
 		)
 		(stroke
 			(width 0)
@@ -1570,7 +1570,7 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 68.58) (xy 251.46 66.04)
+			(xy 251.46 67.31) (xy 251.46 64.77)
 		)
 		(stroke
 			(width 0)
@@ -1580,7 +1580,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 100.33) (xy 107.95 106.68)
+			(xy 107.95 92.71) (xy 107.95 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1590,7 +1590,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 106.68) (xy 161.29 106.68)
+			(xy 160.02 99.06) (xy 161.29 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1620,7 +1620,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 92.71) (xy 161.29 96.52)
+			(xy 161.29 85.09) (xy 161.29 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1660,7 +1660,7 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 73.66) (xy 251.46 74.93)
+			(xy 251.46 72.39) (xy 251.46 73.66)
 		)
 		(stroke
 			(width 0)
@@ -1670,7 +1670,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 100.33) (xy 113.03 100.33)
+			(xy 107.95 92.71) (xy 113.03 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1680,7 +1680,7 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 57.15) (xy 99.06 57.15)
+			(xy 91.44 57.15) (xy 99.06 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1690,7 +1690,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 97.79) (xy 148.59 99.06)
+			(xy 148.59 90.17) (xy 148.59 91.44)
 		)
 		(stroke
 			(width 0)
@@ -1710,7 +1710,7 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 92.71) (xy 161.29 92.71)
+			(xy 149.86 85.09) (xy 161.29 85.09)
 		)
 		(stroke
 			(width 0)
@@ -1720,7 +1720,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 106.68) (xy 148.59 106.68)
+			(xy 138.43 99.06) (xy 148.59 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1740,7 +1740,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 96.52) (xy 107.95 96.52)
+			(xy 106.68 88.9) (xy 107.95 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1750,7 +1750,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 95.25) (xy 149.86 95.25)
+			(xy 138.43 87.63) (xy 149.86 87.63)
 		)
 		(stroke
 			(width 0)
@@ -1780,7 +1780,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 104.14) (xy 148.59 106.68)
+			(xy 148.59 96.52) (xy 148.59 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1790,7 +1790,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 97.79) (xy 148.59 97.79)
+			(xy 138.43 90.17) (xy 148.59 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1850,7 +1850,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 97.79) (xy 107.95 96.52)
+			(xy 107.95 90.17) (xy 107.95 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1870,7 +1870,7 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 85.09) (xy 251.46 82.55)
+			(xy 251.46 83.82) (xy 251.46 81.28)
 		)
 		(stroke
 			(width 0)
@@ -1880,7 +1880,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 97.79) (xy 153.67 97.79)
+			(xy 148.59 90.17) (xy 153.67 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1910,7 +1910,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 97.79) (xy 153.67 101.6)
+			(xy 153.67 90.17) (xy 153.67 93.98)
 		)
 		(stroke
 			(width 0)
@@ -1920,7 +1920,7 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 91.44) (xy 149.86 92.71)
+			(xy 149.86 83.82) (xy 149.86 85.09)
 		)
 		(stroke
 			(width 0)
@@ -1970,13 +1970,33 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 97.79) (xy 107.95 97.79)
+			(xy 113.03 90.17) (xy 107.95 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "fe4b7e1c-b89f-46a0-b7bc-d4d625ae8ec6")
+	)
+	(text "May need to switch from ABC-IS\nto BCD-AS Automoive grade OPN\nDue to 12V UVLO and 4.0A drive\n"
+		(exclude_from_sim no)
+		(at 83.82 74.676 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "25b3d142-9499-4035-af9f-6699de0ce589")
+	)
+	(text "0.6 & 4.0 Amp peak output current,\nVdd from 6.5 to 30V\nOverkill for dashboard indicators,\nbut probably will be needed to drive actual\nblinkers"
+		(exclude_from_sim no)
+		(at 126.746 39.878 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5328a763-f35f-4e10-af89-03a298cf3a6c")
 	)
 	(text "Assuming that all external \nlights have I-Lim Res"
 		(exclude_from_sim no)
@@ -2001,7 +2021,7 @@
 		(uuid "082f7545-a977-4a5f-ba7a-c08cf36204fa")
 	)
 	(label "RT_DASH_LED"
-		(at 161.29 96.52 0)
+		(at 161.29 88.9 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2023,7 +2043,7 @@
 		(uuid "a400ed12-06a8-446b-b67a-0008de9091a0")
 	)
 	(label "RT_DASH_LED"
-		(at 251.46 66.04 0)
+		(at 251.46 64.77 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2047,7 +2067,7 @@
 	)
 	(hierarchical_label "RT_LIGHTS_OUT"
 		(shape output)
-		(at 161.29 92.71 0)
+		(at 161.29 85.09 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2059,7 +2079,7 @@
 	)
 	(hierarchical_label "RT_LIGHTS_IN"
 		(shape input)
-		(at 83.82 96.52 180)
+		(at 91.44 88.9 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2071,7 +2091,7 @@
 	)
 	(hierarchical_label "LFT_LIGHTS_IN"
 		(shape input)
-		(at 86.36 57.15 180)
+		(at 91.44 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2446,7 +2466,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 160.02 106.68 0)
+		(at 160.02 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2454,7 +2474,7 @@
 		(dnp no)
 		(uuid "33cb984e-2fd4-418d-8a36-79431f0abb0b")
 		(property "Reference" "#PWR037"
-			(at 160.02 113.03 0)
+			(at 160.02 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2463,7 +2483,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 165.1 106.68 0)
+			(at 165.1 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2472,7 +2492,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 160.02 106.68 0)
+			(at 160.02 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2481,7 +2501,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 160.02 106.68 0)
+			(at 160.02 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2490,7 +2510,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 160.02 106.68 0)
+			(at 160.02 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2512,7 +2532,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 148.59 101.6 0)
+		(at 148.59 93.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2520,7 +2540,7 @@
 		(dnp no)
 		(uuid "37aed37e-62c8-4afb-8cf4-a2f850ae4034")
 		(property "Reference" "R15"
-			(at 143.51 104.14 90)
+			(at 143.51 96.52 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2529,7 +2549,7 @@
 			)
 		)
 		(property "Value" "100k"
-			(at 146.05 104.14 90)
+			(at 146.05 96.52 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2538,7 +2558,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 148.59 101.6 0)
+			(at 148.59 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2547,7 +2567,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/ProductDetail/71-CRCW0805100KFKEAC"
-			(at 148.59 101.6 0)
+			(at 148.59 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2556,7 +2576,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 148.59 101.6 0)
+			(at 148.59 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2565,7 +2585,7 @@
 			)
 		)
 		(property "P/N" "CRCW0805100KFKEAC"
-			(at 148.59 101.6 0)
+			(at 148.59 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2734,7 +2754,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small_US")
-		(at 251.46 71.12 0)
+		(at 251.46 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2742,7 +2762,7 @@
 		(dnp no)
 		(uuid "6672acd4-6714-49c4-a956-1fa43a8fbeec")
 		(property "Reference" "LED_RES2"
-			(at 258.064 70.104 0)
+			(at 258.064 68.834 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2750,7 +2770,7 @@
 			)
 		)
 		(property "Value" "DASH_LED_RES_VAL"
-			(at 263.398 73.66 0)
+			(at 263.398 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2758,7 +2778,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 251.46 71.12 0)
+			(at 251.46 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2767,7 +2787,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/ProductDetail/71-CRCW0805100RFKEAH"
-			(at 251.46 71.12 0)
+			(at 251.46 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2776,7 +2796,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 251.46 71.12 0)
+			(at 251.46 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2785,7 +2805,7 @@
 			)
 		)
 		(property "P/N" "CRCW0805100RFKEAHP"
-			(at 251.46 71.12 90)
+			(at 251.46 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2888,7 +2908,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 102.87 96.52 90)
+		(at 102.87 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2896,7 +2916,7 @@
 		(dnp no)
 		(uuid "7d41e85c-0bec-4e63-b6a9-61d0ee8bfa11")
 		(property "Reference" "R13"
-			(at 104.902 93.8784 90)
+			(at 104.902 86.2584 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2905,7 +2925,7 @@
 			)
 		)
 		(property "Value" "35"
-			(at 104.902 91.567 90)
+			(at 104.902 83.947 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2914,7 +2934,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 102.87 98.298 90)
+			(at 102.87 90.678 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2923,7 +2943,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 102.87 96.52 0)
+			(at 102.87 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2932,7 +2952,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 102.87 96.52 0)
+			(at 102.87 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2941,7 +2961,7 @@
 			)
 		)
 		(property "P/N" "SDR10EZPJ152"
-			(at 102.87 96.52 90)
+			(at 102.87 88.9 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2966,7 +2986,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 251.46 78.74 90)
+		(at 251.46 77.47 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2975,7 +2995,7 @@
 		(fields_autoplaced yes)
 		(uuid "7e1aa942-5796-4169-9a5f-d8a7588a0883")
 		(property "Reference" "RT_LED1"
-			(at 255.27 79.0574 90)
+			(at 255.27 77.7874 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2984,7 +3004,7 @@
 			)
 		)
 		(property "Value" "RT_DASH_LED"
-			(at 255.27 81.5974 90)
+			(at 255.27 80.3274 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2993,7 +3013,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 251.46 78.74 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3002,7 +3022,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 251.46 78.74 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3011,7 +3031,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 251.46 78.74 0)
+			(at 251.46 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3036,7 +3056,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 107.95 106.68 0)
+		(at 107.95 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3044,7 +3064,7 @@
 		(dnp no)
 		(uuid "a1a7bef2-b5d3-4022-a7c1-6438038a1b5c")
 		(property "Reference" "#PWR018"
-			(at 107.95 113.03 0)
+			(at 107.95 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3053,7 +3073,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 113.03 106.68 0)
+			(at 113.03 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3062,7 +3082,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 107.95 106.68 0)
+			(at 107.95 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3071,7 +3091,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 107.95 106.68 0)
+			(at 107.95 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3080,7 +3100,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 107.95 106.68 0)
+			(at 107.95 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3134,7 +3154,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/Si826x.pdf"
+		(property "Datasheet" "https://octopart.com/datasheet/si8261abc-c-ip-silicon+labs-30243476"
 			(at 125.73 54.61 0)
 			(effects
 				(font
@@ -3287,7 +3307,7 @@
 	)
 	(symbol
 		(lib_id "utsvt-bps:SI8261ABC-IS")
-		(at 125.73 92.71 0)
+		(at 125.73 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3295,7 +3315,7 @@
 		(dnp no)
 		(uuid "aedb8797-002a-4449-9fba-2a97b373d26c")
 		(property "Reference" "U4"
-			(at 125.73 109.22 0)
+			(at 125.73 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3303,7 +3323,7 @@
 			)
 		)
 		(property "Value" "SI8261ABC-IS"
-			(at 125.73 106.68 0)
+			(at 125.73 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3311,7 +3331,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 125.73 92.71 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3319,8 +3339,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/Si826x.pdf"
-			(at 125.73 92.71 0)
+		(property "Datasheet" "https://octopart.com/datasheet/si8261abc-c-ip-silicon+labs-30243476"
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3329,7 +3349,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 125.73 92.71 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3338,7 +3358,7 @@
 			)
 		)
 		(property "Vf" "2.2V"
-			(at 125.73 92.71 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3347,7 +3367,7 @@
 			)
 		)
 		(property "If" "6mA"
-			(at 125.73 92.71 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3390,7 +3410,7 @@
 	)
 	(symbol
 		(lib_id "Transistor_FET:2N7002")
-		(at 158.75 101.6 0)
+		(at 158.75 93.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3398,7 +3418,7 @@
 		(dnp no)
 		(uuid "e314b412-4268-41b9-9d51-95b4b87afc3a")
 		(property "Reference" "Q2"
-			(at 167.64 101.6 90)
+			(at 167.64 93.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3406,7 +3426,7 @@
 			)
 		)
 		(property "Value" "2N7002"
-			(at 165.1 101.6 90)
+			(at 165.1 93.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3414,7 +3434,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 163.83 103.505 0)
+			(at 163.83 95.885 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3425,7 +3445,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
-			(at 158.75 101.6 0)
+			(at 158.75 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3435,7 +3455,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 158.75 101.6 0)
+			(at 158.75 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3444,7 +3464,7 @@
 			)
 		)
 		(property "P/N" "2N7002HR"
-			(at 158.75 101.6 90)
+			(at 158.75 93.98 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3548,7 +3568,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 251.46 85.09 0)
+		(at 251.46 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3557,7 +3577,7 @@
 		(fields_autoplaced yes)
 		(uuid "e774d8ed-9f5b-4408-823d-eac78b796320")
 		(property "Reference" "#PWR022"
-			(at 251.46 91.44 0)
+			(at 251.46 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3566,7 +3586,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 251.46 89.535 0)
+			(at 251.46 88.265 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3574,7 +3594,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 251.46 85.09 0)
+			(at 251.46 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3583,7 +3603,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 251.46 85.09 0)
+			(at 251.46 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3592,7 +3612,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 251.46 85.09 0)
+			(at 251.46 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3684,7 +3704,7 @@
 	)
 	(symbol
 		(lib_id "power:+12V")
-		(at 149.86 91.44 0)
+		(at 149.86 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3692,7 +3712,7 @@
 		(dnp no)
 		(uuid "f187200f-5b10-44fe-b0b2-9ce423120f10")
 		(property "Reference" "#PWR028"
-			(at 149.86 95.25 0)
+			(at 149.86 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3701,7 +3721,7 @@
 			)
 		)
 		(property "Value" "+12V"
-			(at 149.86 86.995 0)
+			(at 149.86 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3709,7 +3729,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 149.86 91.44 0)
+			(at 149.86 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3718,7 +3738,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 149.86 91.44 0)
+			(at 149.86 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3727,7 +3747,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 149.86 91.44 0)
+			(at 149.86 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
