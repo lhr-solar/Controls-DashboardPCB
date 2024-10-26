@@ -2545,7 +2545,7 @@
 		(uuid "fdb90e76-9bd4-4e6e-934a-169f9d47a9f0")
 	)
 	(rectangle
-		(start 147.828 60.96)
+		(start 145.034 60.96)
 		(end 206.756 106.934)
 		(stroke
 			(width 0)
@@ -3267,7 +3267,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 213.36 121.92 0)
 			(effects
 				(font
@@ -3334,7 +3334,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 97.79 133.35 0)
 			(effects
 				(font
@@ -3404,7 +3404,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 247.65 134.62 0)
 			(effects
 				(font
@@ -3471,7 +3471,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal"
 			(at 176.53 91.44 0)
 			(effects
 				(font
@@ -3807,7 +3807,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x02"
+		(property "Value" "Supp_01x02"
 			(at 240.03 68.5799 0)
 			(effects
 				(font
@@ -3886,7 +3886,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 196.85 147.32 0)
 			(effects
 				(font
@@ -4149,7 +4149,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x02"
+		(property "Value" "Supp_01x02"
 			(at 240.03 76.1999 0)
 			(effects
 				(font
@@ -4357,7 +4357,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 71.12 133.35 0)
 			(effects
 				(font
@@ -4571,7 +4571,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 231.14 147.32 0)
 			(effects
 				(font
@@ -4704,7 +4704,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 213.36 147.32 0)
 			(effects
 				(font
@@ -4761,8 +4761,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1N5819"
-			(at 149.098 75.946 90)
+		(property "Value" "1N5819HW"
+			(at 146.304 75.692 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4770,7 +4770,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-123"
 			(at 158.75 74.93 0)
 			(effects
 				(font
@@ -4779,7 +4779,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.digikey.com/en/products/detail/diodes-incorporated/1N5819HW-7-F/814970"
 			(at 158.75 74.93 0)
 			(effects
 				(font
@@ -5053,7 +5053,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 196.85 121.92 0)
 			(effects
 				(font
@@ -5186,7 +5186,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 196.85 134.62 0)
 			(effects
 				(font
@@ -5552,7 +5552,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0300_1x03_P3.00mm_Horizontal"
 			(at 176.53 74.93 0)
 			(effects
 				(font
@@ -5896,7 +5896,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-1200_2x06_P3.00mm_Horizontal"
 			(at 107.95 85.09 0)
 			(effects
 				(font
@@ -5996,7 +5996,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 213.36 134.62 0)
 			(effects
 				(font
@@ -6063,7 +6063,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 247.65 121.92 0)
 			(effects
 				(font
@@ -6130,7 +6130,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 247.65 147.32 0)
 			(effects
 				(font
@@ -6262,7 +6262,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 231.14 121.92 0)
 			(effects
 				(font
@@ -6329,7 +6329,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Plated_Hole_D3.0mm"
 			(at 231.14 134.62 0)
 			(effects
 				(font
@@ -6396,7 +6396,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 125.73 133.35 0)
 			(effects
 				(font
