@@ -3534,7 +3534,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UTSVT_Special:SW_HAZARD"
+		(property "Footprint" "switched:SW_HAZARD"
 			(at 109.22 45.72 0)
 			(effects
 				(font
@@ -4257,7 +4257,7 @@
 				)
 			)
 		)
-		(property "Footprint" "UTSVT_Special:SW_100_SP3T-Vertical"
+		(property "Footprint" "switched:SW_100_SP3T-Vertical"
 			(at 153.035 45.085 0)
 			(effects
 				(font
@@ -4330,7 +4330,7 @@
 				)
 			)
 		)
-		(property "Footprint" "switched:RM103772BCB"
+		(property "Footprint" "switched:SW_ROT_3POS"
 			(at 207.01 -39.04 0)
 			(effects
 				(font
@@ -4602,7 +4602,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UTSVT_Special:SW_Butt_)"
+		(property "Footprint" "switched:SW_Butt_)"
 			(at 49.53 110.49 0)
 			(effects
 				(font
@@ -4826,7 +4826,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UTSVT_Special:SW_Butt_)"
+		(property "Footprint" "switched:SW_Butt_)"
 			(at 86.36 110.49 0)
 			(effects
 				(font
