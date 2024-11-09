@@ -974,7 +974,7 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C2"
-			(at 0 -1.68 360)
+			(at 0 -1.68 0)
 			(layer "F.SilkS")
 			(uuid "0069b583-e469-4180-95cd-209a622a1049")
 			(effects
@@ -985,7 +985,7 @@
 			)
 		)
 		(property "Value" "5uF"
-			(at 0 1.68 360)
+			(at 0 1.68 0)
 			(layer "F.Fab")
 			(uuid "db628251-8d62-4052-aec9-69074592cf77")
 			(effects
@@ -1189,7 +1189,7 @@
 		(descr "Molex Micro-Fit 3.0 Connector System, 43650-0200 (compatible alternatives: 43650-0201, 43650-0202), 2 Pins per row (https://www.molex.com/pdm_docs/sd/436500300_sd.pdf), generated with kicad-footprint-generator")
 		(tags "connector Molex Micro-Fit_3.0 top entry")
 		(property "Reference" "J6"
-			(at 1.5 -8.1 360)
+			(at 1.5 -8.1 0)
 			(layer "F.SilkS")
 			(uuid "ca59d2f0-e664-49c3-a2b2-b20b424c88ff")
 			(effects
@@ -1200,7 +1200,7 @@
 			)
 		)
 		(property "Value" "Horn_Out_01x02"
-			(at 1.5 3.22 360)
+			(at 1.5 3.22 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b716a2b4-2b62-4b70-a68d-932b9af53837")
@@ -2190,7 +2190,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R2"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "F.SilkS")
 			(uuid "c19a341d-593b-4caf-a7b5-46385aa51528")
 			(effects
@@ -2201,7 +2201,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "F.Fab")
 			(uuid "c923a829-610f-41b9-b4a8-02119c2d4233")
 			(effects
@@ -2620,7 +2620,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R13"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "F.SilkS")
 			(uuid "83b9e9f0-bb75-4142-a524-1a8036213d36")
 			(effects
@@ -2631,7 +2631,7 @@
 			)
 		)
 		(property "Value" "HZD_RES_VAL"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "F.Fab")
 			(uuid "0df9fa5a-09a2-49c4-8f24-8659032c5309")
 			(effects
@@ -2799,7 +2799,7 @@
 			(uuid "80d5c046-f8be-47ca-a7fc-e3ea79e58db7")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "652623c2-a6d9-481d-8c64-4fbef124f0a4")
 			(effects
@@ -4671,7 +4671,7 @@
 	(footprint "MountingHole:MountingHole_3mm"
 		(layer "F.Cu")
 		(uuid "4e7c7608-56d5-4c83-8177-bf36dee26868")
-		(at 243.8 41.8)
+		(at 243.6 42.6)
 		(descr "Mounting Hole 3mm, no annular")
 		(tags "mounting hole 3mm no annular")
 		(property "Reference" "H2"
@@ -5823,7 +5823,7 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C1"
-			(at 0 -1.68 360)
+			(at 0 -1.68 0)
 			(layer "F.SilkS")
 			(uuid "858ddb71-14e8-430b-b733-41bb8ace6d79")
 			(effects
@@ -5834,7 +5834,7 @@
 			)
 		)
 		(property "Value" "5uF"
-			(at 0 1.68 360)
+			(at 0 1.68 0)
 			(layer "F.Fab")
 			(uuid "d613d649-0e23-47f6-bec7-a8abc838f903")
 			(effects
@@ -6530,7 +6530,7 @@
 		(descr "Molex Micro-Fit 3.0 Connector System, 43650-0300 (compatible alternatives: 43650-0301, 43650-0302), 3 Pins per row (https://www.molex.com/pdm_docs/sd/436500300_sd.pdf), generated with kicad-footprint-generator")
 		(tags "connector Molex Micro-Fit_3.0 top entry")
 		(property "Reference" "J3"
-			(at 2.6 -8.1 360)
+			(at 2.6 -8.1 0)
 			(layer "F.SilkS")
 			(uuid "58a1da86-0357-4c9d-ba14-02069a845562")
 			(effects
@@ -6541,7 +6541,7 @@
 			)
 		)
 		(property "Value" "INDICATOR_SWITCH_OUT"
-			(at 3 3.22 360)
+			(at 3 3.22 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8a175902-cba6-43d1-a270-091b5b703b7b")
@@ -7461,7 +7461,7 @@
 		(descr "Molex Micro-Fit 3.0 Connector System, 43650-0215 (compatible alternatives: 43650-0216, 43650-0217), 2 Pins per row (http://www.molex.com/pdm_docs/sd/436500215_sd.pdf), generated with kicad-footprint-generator")
 		(tags "connector Molex Micro-Fit_3.0 vertical")
 		(property "Reference" "BPS_HZD_OUT1"
-			(at 1.5 -3.67 360)
+			(at 1.5 -3.67 0)
 			(layer "F.SilkS")
 			(uuid "635705bc-d5fb-492f-a927-c78903aa8e54")
 			(effects
@@ -7472,7 +7472,7 @@
 			)
 		)
 		(property "Value" "BPS_HAZARD_LIGHT"
-			(at 1.5 4.5 360)
+			(at 1.5 4.5 0)
 			(layer "F.Fab")
 			(uuid "1ac25ca8-5840-42a8-9367-b96e13ba9bc1")
 			(effects
@@ -7810,7 +7810,7 @@
 			(uuid "45648633-8633-42ba-8504-fb617bd8d054")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 1.5 1.2 360)
+			(at 1.5 1.2 0)
 			(layer "F.Fab")
 			(uuid "c223981a-6cc1-4c9d-8fa7-5d731be7ea71")
 			(effects
@@ -8235,7 +8235,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R1"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "F.SilkS")
 			(uuid "6bb66d3a-f9e7-4a2f-b1cb-3b7af5b74e41")
 			(effects
@@ -8246,7 +8246,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "F.Fab")
 			(uuid "969d2984-1310-4d02-ae7e-99328c9ccb0f")
 			(effects
@@ -13253,7 +13253,7 @@
 			)
 		)
 		(property "Value" "TestPoint"
-			(at 0 2.33 360)
+			(at 0 2.33 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c5458061-fbd3-4133-914f-719a90eb688d")
@@ -13828,8 +13828,20 @@
 			(type default)
 		)
 		(fill none)
-		(layer "F.Cu")
+		(layer "Edge.Cuts")
 		(uuid "7665fcca-9c85-4cf8-89ad-189656558ca6")
+	)
+	(gr_text "20cm x 10cm"
+		(at 45.9 33.4 0)
+		(layer "F.SilkS")
+		(uuid "25e63882-0d9c-4c5c-91ec-cb8962072536")
+		(effects
+			(font
+				(size 2 2)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
 	)
 	(gr_text "Controls Export"
 		(at 63.7 66.1 90)
