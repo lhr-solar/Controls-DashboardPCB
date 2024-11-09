@@ -4291,7 +4291,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.ckswitches.com/media/1349/arotary.pdf"
 			(at 213.36 55.88 0)
 			(effects
 				(font
@@ -4309,7 +4309,7 @@
 				(hide yes)
 			)
 		)
-		(property "Height" "15.1"
+		(property "Height" ""
 			(at 229.87 443.18 0)
 			(effects
 				(font
@@ -4319,7 +4319,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "611-RM103772BCB"
+		(property "Mouser Part Number" ""
 			(at 229.87 543.18 0)
 			(effects
 				(font
@@ -4329,7 +4329,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/CK/RM103772BCB?qs=367PjNmvCmkgg4M2NDGHLA%3D%3D"
+		(property "Mouser Price/Stock" ""
 			(at 229.87 643.18 0)
 			(effects
 				(font
@@ -4339,7 +4339,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Name" "C & K COMPONENTS"
+		(property "Manufacturer_Name" ""
 			(at 229.87 743.18 0)
 			(effects
 				(font
@@ -4349,7 +4349,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "RM103772BCB"
+		(property "Manufacturer_Part_Number" ""
 			(at 229.87 843.18 0)
 			(effects
 				(font
