@@ -1052,23 +1052,23 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "SW"
-				(at 0 5.08 0)
+			(property "Reference" "GR_SW1"
+				(at 0 8.89 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "SW_SPDT_MSM"
-				(at 0 -5.08 0)
+			(property "Value" "GEAR_SW_12V"
+				(at 0 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "switched:3posSlideToggle"
 				(at -13.97 11.43 0)
 				(effects
 					(font
@@ -1077,7 +1077,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "~"
+			(property "Datasheet" "https://www.vimex.com/switches/techdocs/SS13F11-tech.pdf"
 				(at 0 -7.62 0)
 				(effects
 					(font
@@ -1175,7 +1175,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 2.54 180)
+					(at -5.08 0 0)
 					(length 2.54)
 					(name "1"
 						(effects
@@ -1193,9 +1193,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
+					(at 5.08 2.54 180)
 					(length 2.54)
-					(name "3"
+					(name "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1220,7 +1220,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4212,7 +4212,7 @@
 				)
 			)
 		)
-		(property "Footprint" "switched:SW_100_SP3T-Vertical"
+		(property "Footprint" "switched:3posSlideToggle"
 			(at 154.94 38.1 0)
 			(effects
 				(font
@@ -4221,7 +4221,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.vimex.com/switches/techdocs/SS13F11-tech.pdf"
 			(at 168.91 57.15 0)
 			(effects
 				(font
@@ -4242,7 +4242,7 @@
 		(pin "2"
 			(uuid "1b099f56-3262-45fd-86e8-525c7886ff60")
 		)
-		(pin "3"
+		(pin "4"
 			(uuid "cc4f2870-9da2-44ea-be00-5a24eea0a8dc")
 		)
 		(pin "1"
@@ -4540,7 +4540,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "switched:SW_Butt_)"
+		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
 			(at 49.53 110.49 0)
 			(effects
 				(font
@@ -4764,7 +4764,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "switched:SW_Butt_)"
+		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
 			(at 86.36 110.49 0)
 			(effects
 				(font
