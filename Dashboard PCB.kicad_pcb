@@ -117,7 +117,7 @@
 		(descr "LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "LFT_LED1"
-			(at 0 2 360)
+			(at 0 2 0)
 			(layer "F.SilkS")
 			(uuid "73ff4224-ad59-43e8-b190-88b84844c71d")
 			(effects
@@ -128,7 +128,7 @@
 			)
 		)
 		(property "Value" "SMD_0805"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2d7dbe23-154a-4fa2-b3fa-2922327f271b")
@@ -448,27 +448,27 @@
 			(uuid "30bc5d97-3568-4142-9b89-3d1723a185af")
 		)
 	)
-	(footprint "switched:SW_HAZARD"
+	(footprint "switched:Toggle"
 		(layer "F.Cu")
 		(uuid "3b16d68b-6808-45f3-87c6-b8d306e25035")
-		(at 180 81)
+		(at 180 78.5)
 		(property "Reference" "HZD_SW1"
-			(at 0.21 -14.17 0)
+			(at -0.16 7 0)
+			(unlocked yes)
 			(layer "F.SilkS")
-			(hide yes)
-			(uuid "e2664c36-4388-493c-878c-22acec88f764")
+			(uuid "65e741ef-8f88-4810-8a46-bf6bbdbb2c3c")
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.15)
+					(thickness 0.1)
 				)
 			)
 		)
 		(property "Value" "HAZARD_SWITCH_12V"
-			(at -0.03 13.54 0)
+			(at 0 9 0)
+			(unlocked yes)
 			(layer "F.Fab")
-			(hide yes)
-			(uuid "d27d416d-1fbc-4a42-ade0-2f44c9c0bc33")
+			(uuid "87a3321f-ef3d-4914-9357-2e7cb24f8554")
 			(effects
 				(font
 					(size 1 1)
@@ -476,38 +476,41 @@
 				)
 			)
 		)
-		(property "Footprint" "switched:SW_HAZARD"
-			(at -0.34 -0.31 0)
+		(property "Footprint" "switched:Toggle"
+			(at -0.16 9.85 0)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f002453c-e2da-45f1-be31-f35c544bd24a")
+			(uuid "bb69f2c7-64ea-44fd-b009-732eb9513746")
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
 		)
 		(property "Datasheet" "https://www.digikey.com/en/products/detail/switch-components/TE1-1A-DC-1-AL/11493057"
-			(at -0.34 -0.31 0)
+			(at -0.16 9.85 0)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "b45edb7f-80f7-4df3-adf9-f737daadb2bd")
+			(uuid "91ce09b4-53db-4e49-a6bd-c91d3996b9d0")
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
 		)
 		(property "Description" "Single Pole Single Throw (SPST) switch"
-			(at -0.34 -0.31 0)
+			(at -0.16 9.85 0)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "bc84c809-0d18-4fae-8f9b-eabfc39add50")
+			(uuid "8f7d91c2-79c0-40ad-a3ee-86de9ba250a7")
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -517,40 +520,29 @@
 		(sheetfile "Switches.kicad_sch")
 		(attr through_hole)
 		(fp_rect
-			(start -7 -12.19)
-			(end 7 12.21)
+			(start -5 -5)
+			(end 5 5)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(fill none)
 			(layer "F.SilkS")
-			(uuid "7c1ad6cb-c40e-43e6-b1f9-84b8726dee76")
-		)
-		(fp_circle
-			(center -5.98 -10.93)
-			(end -5.88 -10.93)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(fill none)
-			(layer "F.SilkS")
-			(uuid "b265055d-3763-4aca-bfde-11d342995e30")
+			(uuid "49ee9f7d-583a-44b0-af3d-2b0414970cc1")
 		)
 		(fp_rect
-			(start -7.15 -12.32)
-			(end 7.16 12.37)
+			(start -5.3 -5.3)
+			(end 5.3 5.3)
 			(stroke
-				(width 0.05)
+				(width 0.1)
 				(type default)
 			)
 			(fill none)
-			(layer "F.CrtYd")
-			(uuid "db1f326c-625d-4dfd-b91f-236ceb4eb5c2")
+			(layer "Margin")
+			(uuid "88fb92b8-42fc-45a8-9ca7-56d791a4a990")
 		)
 		(fp_text user "SW_HAZ"
-			(at -2.75 11.49 0)
+			(at -3 1 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "eef648af-bbc2-4541-88f2-c92080086f8e")
@@ -562,48 +554,81 @@
 				(justify left bottom)
 			)
 		)
-		(pad "1" thru_hole rect
-			(at 0 -6.39)
-			(size 9 4)
-			(drill oval 7 2)
+		(fp_text user "${REFERENCE}"
+			(at -0.16 11 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "86753e41-b0d6-4b18-b91e-f67bc55a0887")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "1" thru_hole circle
+			(at 2.5 2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 1 "+12V")
 			(pinfunction "A")
 			(pintype "passive")
-			(solder_mask_margin 0.102)
-			(uuid "44ed16d0-31ff-454a-98f2-6037c7aa6a49")
+			(uuid "912a10b8-b746-4884-8f75-2b19481cebfc")
 		)
-		(pad "2" thru_hole oval
-			(at 0 0.01)
-			(size 9 4)
-			(drill oval 7 2)
+		(pad "2" thru_hole circle
+			(at 0 2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 10 "Net-(D1-A)")
 			(pinfunction "B")
 			(pintype "passive")
-			(solder_mask_margin 0.102)
-			(uuid "51d2fdc1-5370-4c04-86a5-4901f21949f9")
+			(uuid "b23701ae-b727-480c-9400-c53a5b419bf5")
 		)
-		(pad "3" thru_hole oval
-			(at 0 6.41)
-			(size 9 4)
-			(drill oval 7 2)
+		(pad "3" thru_hole circle
+			(at -2.5 2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(solder_mask_margin 0.102)
-			(uuid "99887146-be9e-48e0-8fa8-64bf42b27574")
+			(uuid "3357f48f-a10c-4823-a6fa-eff40eb5a7cb")
 		)
-		(model "${KIPRJMOD}/3d models/ToggleSwitch 3Pin.step"
+		(pad "4" thru_hole circle
+			(at 2.5 -2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(uuid "49c7f2f2-169c-47e9-9931-bee23664af47")
+		)
+		(pad "5" thru_hole circle
+			(at 0 -2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(uuid "a7871e40-541f-4268-92ab-b2ea82a9d708")
+		)
+		(pad "6" thru_hole circle
+			(at -2.5 -2.5)
+			(size 1.524 1.524)
+			(drill 0.762)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+			(uuid "588cd5b9-7397-4773-b952-91438230dc61")
+		)
+		(model "${KIPRJMOD}/3d models/ToggleButt.stp"
 			(offset
-				(xyz 0 0 13.5)
+				(xyz 0 0 3.5)
 			)
 			(scale
-				(xyz 1.7 1.4 1.3)
+				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 0 90)
 			)
 		)
 	)
@@ -1459,7 +1484,7 @@
 		(descr "Generic 6mm SW tactile push button")
 		(tags "tact sw push 6mm")
 		(property "Reference" "CRUZ_EN_SW1"
-			(at 3.25 -2.75 360)
+			(at 3.25 -2.75 0)
 			(layer "F.SilkS")
 			(uuid "85f788f0-0110-4917-8f02-6f34e51fe6cd")
 			(effects
@@ -1470,7 +1495,7 @@
 			)
 		)
 		(property "Value" "CRUSE_EN_SW_12V"
-			(at 3.75 6.7 360)
+			(at 3.75 6.7 0)
 			(layer "F.Fab")
 			(uuid "35ed5fa4-b548-4973-92bf-acc72f6f9d50")
 			(effects
@@ -1745,7 +1770,7 @@
 			(uuid "fb0be9f6-be9f-4aa3-b6ee-7a9ef2d9bdf9")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.25 2.25 360)
+			(at 3.25 2.25 0)
 			(layer "F.Fab")
 			(uuid "528b469f-cc78-4d47-8aa6-780c402a26ac")
 			(effects
@@ -1818,7 +1843,7 @@
 		(descr "LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "LED")
 		(property "Reference" "RT_LED1"
-			(at 0 -2 360)
+			(at 0 -2 0)
 			(layer "F.SilkS")
 			(uuid "8ed26f83-12d4-4551-ad57-9e0043396386")
 			(effects
@@ -1829,7 +1854,7 @@
 			)
 		)
 		(property "Value" "SMD_0805"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "01ab40e6-fcdd-40cd-9b85-b1e736dea425")
@@ -3288,7 +3313,7 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C2"
-			(at 0 1.68 360)
+			(at 0 1.68 0)
 			(layer "B.SilkS")
 			(uuid "0069b583-e469-4180-95cd-209a622a1049")
 			(effects
@@ -3300,7 +3325,7 @@
 			)
 		)
 		(property "Value" "5uF"
-			(at 0 -1.68 360)
+			(at 0 -1.68 0)
 			(layer "B.Fab")
 			(uuid "db628251-8d62-4052-aec9-69074592cf77")
 			(effects
@@ -4301,7 +4326,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R2"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "B.SilkS")
 			(uuid "c19a341d-593b-4caf-a7b5-46385aa51528")
 			(effects
@@ -4313,7 +4338,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "B.Fab")
 			(uuid "c923a829-610f-41b9-b4a8-02119c2d4233")
 			(effects
@@ -4743,7 +4768,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R13"
-			(at 0 2 360)
+			(at 0 2 0)
 			(layer "B.SilkS")
 			(uuid "83b9e9f0-bb75-4142-a524-1a8036213d36")
 			(effects
@@ -4755,7 +4780,7 @@
 			)
 		)
 		(property "Value" "HZD_RES_VAL"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "B.Fab")
 			(uuid "0df9fa5a-09a2-49c4-8f24-8659032c5309")
 			(effects
@@ -4928,7 +4953,7 @@
 			(uuid "11c771a8-2ac1-4c6c-a9cf-6d5bd1b72647")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -1 360)
+			(at 0 -1 0)
 			(layer "B.Fab")
 			(uuid "652623c2-a6d9-481d-8c64-4fbef124f0a4")
 			(effects
@@ -7916,7 +7941,7 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C1"
-			(at 0 1.68 360)
+			(at 0 1.68 0)
 			(layer "B.SilkS")
 			(uuid "858ddb71-14e8-430b-b733-41bb8ace6d79")
 			(effects
@@ -7928,7 +7953,7 @@
 			)
 		)
 		(property "Value" "5uF"
-			(at 0 -1.68 360)
+			(at 0 -1.68 0)
 			(layer "B.Fab")
 			(uuid "d613d649-0e23-47f6-bec7-a8abc838f903")
 			(effects
@@ -8137,7 +8162,7 @@
 		(descr "Molex Micro-Fit 3.0 Connector System, 43045-0600 (alternative finishes: 43045-060x), 3 Pins per row (https://www.molex.com/pdm_docs/sd/430450201_sd.pdf), generated with kicad-footprint-generator")
 		(tags "connector Molex Micro-Fit_3.0 horizontal")
 		(property "Reference" "J7"
-			(at 3 8 360)
+			(at 3 8 0)
 			(layer "B.SilkS")
 			(uuid "80266b07-85be-4313-838c-35a8ac0c156f")
 			(effects
@@ -8428,7 +8453,7 @@
 			(uuid "f4572bba-690a-4137-8026-da55bd2fc2b3")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3 8.22 360)
+			(at 3 8.22 0)
 			(layer "B.Fab")
 			(uuid "dfdc5d54-b650-42fa-b7fa-c2ff5f88f275")
 			(effects
@@ -9596,7 +9621,7 @@
 		(descr "Molex Micro-Fit 3.0 Connector System, 43650-0215 (compatible alternatives: 43650-0216, 43650-0217), 2 Pins per row (http://www.molex.com/pdm_docs/sd/436500215_sd.pdf), generated with kicad-footprint-generator")
 		(tags "connector Molex Micro-Fit_3.0 vertical")
 		(property "Reference" "BPS_HZD_OUT1"
-			(at 1.5 -5 360)
+			(at 1.5 -5 0)
 			(layer "B.SilkS")
 			(uuid "375bb7a9-68cd-4521-8545-703599cde844")
 			(effects
@@ -9608,7 +9633,7 @@
 			)
 		)
 		(property "Value" "BPS_HAZARD_LIGHT"
-			(at 1.5 -4.5 360)
+			(at 1.5 -4.5 0)
 			(layer "B.Fab")
 			(uuid "49b56eb0-955f-4a49-8a5f-81e61e0cf356")
 			(effects
@@ -9951,7 +9976,7 @@
 			(uuid "2353bbcf-a7a6-47ad-b448-05f6a4159e21")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 1.5 -1.2 360)
+			(at 1.5 -1.2 0)
 			(layer "B.Fab")
 			(uuid "ddd68c4a-e2d3-4c72-930b-59af49aad1f0")
 			(effects
@@ -10269,7 +10294,7 @@
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R1"
-			(at 0 1.65 360)
+			(at 0 1.65 0)
 			(layer "B.SilkS")
 			(uuid "6bb66d3a-f9e7-4a2f-b1cb-3b7af5b74e41")
 			(effects
@@ -10281,7 +10306,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 -1.65 360)
+			(at 0 -1.65 0)
 			(layer "B.Fab")
 			(uuid "969d2984-1310-4d02-ae7e-99328c9ccb0f")
 			(effects
@@ -15294,6 +15319,26 @@
 		(layer "Edge.Cuts")
 		(uuid "45af2ab5-625a-42a7-be64-37d4eb3a1d01")
 	)
+	(gr_line
+		(start 64 45)
+		(end 64 141)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "5a526df3-e281-416e-a9b7-ff40a74a4bdb")
+	)
+	(gr_line
+		(start 262 43)
+		(end 66 43)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "5b169db9-aa02-4319-bfd9-2ca2b89d3667")
+	)
 	(gr_arc
 		(start 264 141)
 		(mid 263.414214 142.414214)
@@ -15304,17 +15349,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "5c5d72e7-62be-422a-8c36-db9e0d581b0c")
-	)
-	(gr_rect
-		(start 64 43)
-		(end 264 143)
-		(stroke
-			(width 0.2)
-			(type default)
-		)
-		(fill none)
-		(layer "Edge.Cuts")
-		(uuid "7665fcca-9c85-4cf8-89ad-189656558ca6")
 	)
 	(gr_arc
 		(start 262 43)
@@ -15337,6 +15371,26 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "ca435a4c-95c9-4c96-b999-b2e3b85f894b")
+	)
+	(gr_line
+		(start 264 141)
+		(end 264 45)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "dfc15066-6d9f-442a-ba61-723ee5512539")
+	)
+	(gr_line
+		(start 66 143)
+		(end 262 143)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "dff0df2e-b6bc-4fe7-93a0-0ebddc9c99f7")
 	)
 	(gr_arc
 		(start 66 143)
@@ -15422,7 +15476,7 @@
 		)
 	)
 	(gr_text "Approx\n3d model"
-		(at 135 92 0)
+		(at 134 79 0)
 		(layer "F.Fab")
 		(uuid "0bc53864-a0c4-457a-a811-324492f64ae9")
 		(effects
@@ -15437,18 +15491,6 @@
 		(at 164 105 0)
 		(layer "F.Fab")
 		(uuid "0d9477a7-3b99-4e32-af06-586b217fac4a")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.1)
-			)
-			(justify left bottom)
-		)
-	)
-	(gr_text "Approx\n3d model"
-		(at 177 97 0)
-		(layer "F.Fab")
-		(uuid "a32cd1f7-5a2f-45f4-b850-492d8815ba2f")
 		(effects
 			(font
 				(size 1 1)
