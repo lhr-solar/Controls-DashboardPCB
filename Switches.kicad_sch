@@ -3356,7 +3356,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "switched:SW_HAZARD"
+		(property "Footprint" "switched:Toggle"
 			(at 114.3 45.72 0)
 			(effects
 				(font
@@ -3376,6 +3376,15 @@
 		)
 		(property "Description" "Push button switch, generic, two pins"
 			(at 109.22 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "JN2UEENAGX"
+			(at 109.22 45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4106,6 +4115,15 @@
 				(hide yes)
 			)
 		)
+		(property "Link" "https://www.amazon.com/Yohii-Position-Vertical-Switch-SS13F11/dp/B07DNY27QB/ref=sr_1_1?crid=1IVIIMRQI2HJS&dib=eyJ2IjoiMSJ9.eq4ebiQlMkKEDFRAdhDxYwMIiYvkEjVZD_9xjgnfgCxXy-tZctG5FY5V9etNlcsO9SMg3hhRud0UZ8EvzB1QN5VE4UDG5s6WWWARvN8WRjMmnUkjLekKzcGdvc8ia7Sv9FLgmE0_jsopAeiuapqWnA.1wpn46VPwZhyZ5ITniFuaUG9biDjYCx3dxWY7euUJM8&dib_tag=se&keywords=SS13F11&qid=1732484796&sprefix=ss13f11%2Caps%2C110&sr=8-1"
+			(at 168.91 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1b099f56-3262-45fd-86e8-525c7886ff60")
 		)
@@ -4186,7 +4204,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" ""
+		(property "DigiKey Part Number" "CKN9823-ND"
 			(at 229.87 543.18 0)
 			(effects
 				(font
@@ -4196,27 +4214,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" ""
-			(at 229.87 643.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" ""
-			(at 229.87 743.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" ""
+		(property "Manufacturer_Part_Number" "A10305RNZQ"
 			(at 229.87 843.18 0)
 			(effects
 				(font
@@ -4416,7 +4414,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://switches-sensors.zf.com/wp-content/uploads/2024/10/kfb2ana1bbb.Rev_.H-1.pdf"
+		(property "Datasheet" ""
 			(at 49.53 110.49 0)
 			(effects
 				(font
@@ -4640,7 +4638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://switches-sensors.zf.com/wp-content/uploads/2024/10/kfb2ana1bbb.Rev_.H-1.pdf"
+		(property "Datasheet" ""
 			(at 86.36 110.49 0)
 			(effects
 				(font
