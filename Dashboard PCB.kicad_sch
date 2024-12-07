@@ -3330,7 +3330,7 @@
 		)
 		(uuid "2d21b7fc-52c3-4bfd-8558-e7fa44983275")
 	)
-	(label "IGN_PWR"
+	(label "IGN_MTR"
 		(at 95.25 87.63 180)
 		(fields_autoplaced yes)
 		(effects
@@ -3539,7 +3539,7 @@
 		)
 		(uuid "9c33c87d-b9ac-438c-820d-0533e6f373db")
 	)
-	(label "IGN_PWR"
+	(label "IGN_MTR"
 		(at 54.61 90.17 0)
 		(fields_autoplaced yes)
 		(effects
@@ -3660,7 +3660,7 @@
 		)
 		(uuid "d95012f3-4d23-4e99-ada6-306f800c770a")
 	)
-	(label "IGN_PWR"
+	(label "IGN_MTR"
 		(at 208.28 135.89 0)
 		(fields_autoplaced yes)
 		(effects
@@ -7317,7 +7317,7 @@
 			)
 			(uuid "78391d8e-48e0-4dcb-b0ed-0d33d6d221bd")
 		)
-		(pin "IGN_PWR" output
+		(pin "IGN_MTR" output
 			(at 52.07 90.17 0)
 			(effects
 				(font

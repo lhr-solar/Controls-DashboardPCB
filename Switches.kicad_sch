@@ -2755,7 +2755,7 @@
 		)
 		(uuid "c503a746-e11b-4bb4-b469-13b5ca08fa0d")
 	)
-	(hierarchical_label "IGN_PWR"
+	(hierarchical_label "IGN_MTR"
 		(shape output)
 		(at 233.68 57.15 0)
 		(fields_autoplaced yes)
