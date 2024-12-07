@@ -2458,6 +2458,16 @@
 	)
 	(wire
 		(pts
+			(xy 199.39 71.12) (xy 199.39 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c7acd7f-4c81-47cf-a11d-8808e2c35e8a")
+	)
+	(wire
+		(pts
 			(xy 146.05 78.74) (xy 146.05 81.28)
 		)
 		(stroke
@@ -2538,6 +2548,16 @@
 	)
 	(wire
 		(pts
+			(xy 199.39 80.01) (xy 199.39 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c068f16-a535-4aa2-b952-68be5d523aac")
+	)
+	(wire
+		(pts
 			(xy 74.93 142.24) (xy 74.93 137.16)
 		)
 		(stroke
@@ -2555,6 +2575,16 @@
 			(type default)
 		)
 		(uuid "50bb8c85-41a7-458d-b563-64e4ccb40dc6")
+	)
+	(wire
+		(pts
+			(xy 43.18 139.7) (xy 43.18 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57103a56-c18f-4596-80a5-f2fd1b929aec")
 	)
 	(wire
 		(pts
@@ -2585,6 +2615,16 @@
 			(type default)
 		)
 		(uuid "5cb2377c-d1fc-4a55-8eae-079881ca1e74")
+	)
+	(wire
+		(pts
+			(xy 214.63 80.01) (xy 214.63 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e7fa0be-4b15-4bbb-8672-9a0a2b4126f0")
 	)
 	(wire
 		(pts
@@ -2645,16 +2685,6 @@
 			(type default)
 		)
 		(uuid "7086bf53-a6e8-4f53-94f0-e8a65f484447")
-	)
-	(wire
-		(pts
-			(xy 43.18 138.43) (xy 43.18 140.97)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "76a3c4e3-0df5-43a9-a9ab-445575bab2eb")
 	)
 	(wire
 		(pts
@@ -2738,6 +2768,16 @@
 	)
 	(wire
 		(pts
+			(xy 201.93 80.01) (xy 199.39 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cdfdb6e-52e3-49b7-87c7-4479bb1633c3")
+	)
+	(wire
+		(pts
 			(xy 54.61 86.36) (xy 52.07 86.36)
 		)
 		(stroke
@@ -2778,16 +2818,6 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 130.81) (xy 43.18 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b8a32df5-f49d-469f-a850-461945d399b8")
-	)
-	(wire
-		(pts
 			(xy 212.09 35.56) (xy 212.09 38.1)
 		)
 		(stroke
@@ -2815,6 +2845,16 @@
 			(type default)
 		)
 		(uuid "cb0577fe-3ddf-4b44-94c5-f94d675f687a")
+	)
+	(wire
+		(pts
+			(xy 43.18 132.08) (xy 43.18 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc218697-b576-4a27-b4cc-1f46c335da4f")
 	)
 	(wire
 		(pts
@@ -2885,6 +2925,16 @@
 			(type default)
 		)
 		(uuid "e388b460-4f79-44ee-8a8b-2c46b74f8735")
+	)
+	(wire
+		(pts
+			(xy 214.63 71.12) (xy 214.63 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e75ef636-92eb-4b58-b600-7a7b0feb9a2d")
 	)
 	(wire
 		(pts
@@ -2965,6 +3015,16 @@
 			(type default)
 		)
 		(uuid "f7228ee7-92bd-409d-8042-b5325dee2c03")
+	)
+	(wire
+		(pts
+			(xy 201.93 71.12) (xy 199.39 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb2c95bb-6983-41a2-ab4a-e60475f35c61")
 	)
 	(wire
 		(pts
@@ -3112,16 +3172,6 @@
 		)
 		(uuid "2a3b4083-802b-473e-b41b-2a7d74259c09")
 	)
-	(text "HZD and BPS and ctrled\nthru gnd"
-		(exclude_from_sim no)
-		(at 62.484 140.462 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "2f2073e8-c834-4cf8-bbdb-5a96c863a32a")
-	)
 	(text "LEDs will be constant\n"
 		(exclude_from_sim no)
 		(at 116.84 130.81 0)
@@ -3131,16 +3181,6 @@
 			)
 		)
 		(uuid "332e25a4-ab4c-44a7-ac28-eee6e64ce247")
-	)
-	(text "Supplemental Battery Switch\nMounting\n(No connection to board)"
-		(exclude_from_sim no)
-		(at 212.852 87.122 0)
-		(effects
-			(font
-				(size 1 1)
-			)
-		)
-		(uuid "3b66a18f-42c7-4d90-a5c3-137ed94247fe")
 	)
 	(text "Fan control being\nsent from elsewhere"
 		(exclude_from_sim no)
@@ -3232,15 +3272,16 @@
 		)
 		(uuid "e57d5713-c864-438a-a956-41f5186b8bd3")
 	)
-	(text "BPS Hazard light is seperate\nfrom board. Resistor may not\nbe needed, it's here in case."
-		(exclude_from_sim no)
-		(at 49.53 149.86 0)
+	(label "Supp+"
+		(at 201.93 71.12 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left bottom)
 		)
-		(uuid "f36aa2a9-54d8-414c-9bea-d354909cc02c")
+		(uuid "04c5be0b-8103-40cc-874a-32a7b2761869")
 	)
 	(label "IGN_ARR"
 		(at 95.25 85.09 180)
@@ -3406,6 +3447,17 @@
 			(justify left bottom)
 		)
 		(uuid "4d7730ec-5952-4dba-bd0f-6114dac45d2b")
+	)
+	(label "Supp-"
+		(at 201.93 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "503ea7f1-c21e-425b-9f04-22e796ed9065")
 	)
 	(label "FWD_SW"
 		(at 107.95 85.09 0)
@@ -3649,6 +3701,17 @@
 		)
 		(uuid "c522f348-3175-4b7b-8b85-248ff47172e6")
 	)
+	(label "Supp+"
+		(at 214.63 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d1e1d10b-47fe-4c84-998d-ef143e4b404e")
+	)
 	(label "CAN-H"
 		(at 243.84 38.1 0)
 		(fields_autoplaced yes)
@@ -3659,6 +3722,17 @@
 			(justify left bottom)
 		)
 		(uuid "d95012f3-4d23-4e99-ada6-306f800c770a")
+	)
+	(label "Supp-"
+		(at 214.63 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ddb0e7a5-c2ac-454e-88e7-bc1105847f62")
 	)
 	(label "IGN_MTR"
 		(at 208.28 135.89 0)
@@ -4276,6 +4350,85 @@
 			(project "Dashboard PCB"
 				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
 					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 43.18 135.89 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "21bfad88-3a70-49a1-bb7d-8073c3821709")
+		(property "Reference" "BPS_HZD_LED1"
+			(at 46.99 136.2074 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SMD_0805_RED"
+			(at 46.99 138.7474 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 43.18 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.kingbrightusa.com/images/catalog/SPEC/APTD2012LCGCK.pdf"
+			(at 43.18 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 43.18 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "APTD2012LCGCK"
+			(at 43.18 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1576228b-efaa-4530-b15e-a6defd4d32ad")
+		)
+		(pin "1"
+			(uuid "2f97aacc-3c92-4383-a530-4b8ba2254a3d")
+		)
+		(instances
+			(project "Dashboard PCB"
+				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
+					(reference "BPS_HZD_LED1")
 					(unit 1)
 				)
 			)
@@ -5402,6 +5555,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 219.71 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "79d7127d-9c3d-4c7f-95f1-d5dd36a97f02")
+		(property "Reference" "J8"
+			(at 222.25 73.6599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Supp_Out"
+			(at 222.25 76.1999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal"
+			(at 219.71 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 219.71 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 219.71 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8bbd08a6-a353-4d41-b0b3-7bd26860a1a8")
+		)
+		(pin "1"
+			(uuid "8dbb86fb-fad2-4b01-93b1-3493ced9ff2d")
+		)
+		(instances
+			(project ""
+				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
+					(reference "J8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+12V")
 		(at 168.91 123.19 0)
 		(unit 1)
@@ -6085,7 +6308,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 205.74 74.93 0)
+		(at 205.74 86.36 0)
 		(unit 1)
 		(exclude_from_sim yes)
 		(in_bom no)
@@ -6094,7 +6317,7 @@
 		(fields_autoplaced yes)
 		(uuid "a222e122-84cf-43a9-9a18-b5c6ca0a17dd")
 		(property "Reference" "H5"
-			(at 208.28 73.6599 0)
+			(at 208.28 85.0899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6103,7 +6326,7 @@
 			)
 		)
 		(property "Value" "SuppSwitchMount"
-			(at 208.28 76.1999 0)
+			(at 208.28 87.6299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6112,7 +6335,7 @@
 			)
 		)
 		(property "Footprint" "switched:Supp_Switch"
-			(at 205.74 74.93 0)
+			(at 205.74 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6121,7 +6344,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 205.74 74.93 0)
+			(at 205.74 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6130,7 +6353,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 205.74 74.93 0)
+			(at 205.74 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6291,6 +6514,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 204.47 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "abe8ca3d-dbc7-4e6e-a11e-069ed7f7a84e")
+		(property "Reference" "J9"
+			(at 207.01 73.6599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Supp_In"
+			(at 207.01 76.1999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0215_1x02_P3.00mm_Vertical"
+			(at 204.47 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 204.47 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 204.47 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1e79a4cc-68c0-41f8-8a98-548bc92d79b1")
+		)
+		(pin "1"
+			(uuid "d47a327b-af4d-486f-bf87-89ff1e02ac1a")
+		)
+		(instances
+			(project "Dashboard PCB"
+				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
+					(reference "J9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 171.45 128.27 0)
 		(unit 1)
@@ -6363,84 +6656,6 @@
 			(project "Dashboard PCB"
 				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
 					(reference "C11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 48.26 135.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "b89adab7-8900-4b50-bed7-d7b56da8756c")
-		(property "Reference" "BPS_HZD_OUT1"
-			(at 45.72 131.445 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "BPS_HAZARD_LIGHT"
-			(at 45.085 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0215_1x02_P3.00mm_Vertical"
-			(at 48.26 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 48.26 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 48.26 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "43650-0215"
-			(at 48.26 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4d85b4c9-cb15-45a5-a5d7-5620cdf73ca1")
-		)
-		(pin "2"
-			(uuid "9a8edc1f-7b1f-44d0-b795-836aea21bbba")
-		)
-		(instances
-			(project "Dashboard PCB"
-				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
-					(reference "BPS_HZD_OUT1")
 					(unit 1)
 				)
 			)
