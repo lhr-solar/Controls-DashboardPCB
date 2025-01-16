@@ -3957,6 +3957,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 158.75 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "Dashboard PCB"
 				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
@@ -4013,6 +4022,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 208.28 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 208.28 121.92 0)
 			(effects
 				(font
@@ -4097,6 +4115,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 132.08 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "62f496cc-3a68-4044-ae69-d3874e2eb676")
 		)
@@ -4167,6 +4194,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 242.57 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b2e85516-8d14-4bbe-8b55-ca85afff361c")
 		)
@@ -4226,6 +4262,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 163.83 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 163.83 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0200"
 			(at 163.83 92.71 0)
 			(effects
 				(font
@@ -4443,6 +4497,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 74.93 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1974ecbe-30e8-4150-867a-560b0fa318dc")
 		)
@@ -4522,6 +4585,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 43.18 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1576228b-efaa-4530-b15e-a6defd4d32ad")
 		)
@@ -4584,6 +4656,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x03, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 241.3 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 241.3 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43045-0600"
 			(at 241.3 45.72 0)
 			(effects
 				(font
@@ -4666,6 +4756,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 191.77 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 191.77 147.32 0)
 			(effects
 				(font
@@ -4813,6 +4912,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 102.87 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a09881ea-f85a-40bb-aa8b-52778efb16b7")
 		)
@@ -4883,6 +4991,24 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "APTD2012LCGCK"
+			(at 219.71 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 219.71 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c2486300-e0c9-4786-95be-f6c6d620458c")
 		)
@@ -4944,6 +5070,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 158.75 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 158.75 191.77 0)
 			(effects
 				(font
@@ -5081,6 +5216,24 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 212.09 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43045-0400"
+			(at 212.09 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "25a6af3c-86a6-4cae-999d-d845e01c44fb")
 		)
@@ -5156,6 +5309,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 158.75 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "Dashboard PCB"
 				(path "/db66d699-14af-49af-adc9-07d31d38aebd"
@@ -5212,6 +5374,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 236.22 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 236.22 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0200"
 			(at 236.22 68.58 0)
 			(effects
 				(font
@@ -5292,6 +5472,15 @@
 		)
 		(property "P/N" "APTD2012LCGCK"
 			(at 102.87 133.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 102.87 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5509,6 +5698,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 166.37 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "39cd48eb-bf45-4483-91b1-52b403754b34")
 		)
@@ -5571,6 +5769,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 236.22 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 236.22 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0200"
 			(at 236.22 76.2 0)
 			(effects
 				(font
@@ -5715,6 +5931,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 226.06 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e662d64b-a320-4978-afe9-30e9b7699c88")
 		)
@@ -5774,6 +5999,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 214.63 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 214.63 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0300"
 			(at 214.63 87.63 0)
 			(effects
 				(font
@@ -5921,6 +6164,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 208.28 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "36a6a169-a17f-41a8-93db-96105c005ee0")
 		)
@@ -6005,6 +6257,24 @@
 				(hide yes)
 			)
 		)
+		(property "P/N" "1N5819HW-7-F"
+			(at 146.05 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 146.05 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1e311ca9-a14d-4176-b1ff-36d441c1c91b")
 		)
@@ -6066,6 +6336,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 158.75 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 158.75 185.42 0)
 			(effects
 				(font
@@ -6204,6 +6483,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 43.18 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e3e5f178-f424-4a12-b32b-8d6944b293ab")
 		)
@@ -6263,6 +6551,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 191.77 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 191.77 121.92 0)
 			(effects
 				(font
@@ -6470,6 +6767,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 191.77 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4920f887-6429-4ee5-bc15-635d0107455f")
 		)
@@ -6529,6 +6835,15 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 218.44 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 218.44 93.98 0)
 			(effects
 				(font
@@ -6600,6 +6915,15 @@
 		)
 		(property "P/N" "CRCW0805100RFKEAHP"
 			(at 132.08 125.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 132.08 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6744,6 +7068,24 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 205.74 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0215"
+			(at 205.74 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1e79a4cc-68c0-41f8-8a98-548bc92d79b1")
 		)
@@ -6822,6 +7164,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 171.45 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "39350dbe-c8d7-43d7-9c9f-71f37e5a6d52")
 		)
@@ -6884,6 +7235,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 161.29 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 161.29 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0300"
 			(at 161.29 81.28 0)
 			(effects
 				(font
@@ -7037,6 +7406,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 43.18 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9950159f-6f9f-40f6-b778-47025e6bb1f4")
 		)
@@ -7170,6 +7548,24 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 100.33 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43045-1200"
+			(at 100.33 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6810c7bb-6bfc-47c4-a48b-30196a196a4a")
 		)
@@ -7270,6 +7666,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 208.28 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ce259765-968a-40f5-a127-19744aebc9db")
 		)
@@ -7329,6 +7734,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 242.57 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 242.57 121.92 0)
 			(effects
 				(font
@@ -7404,6 +7818,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 242.57 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "781d18d0-6667-4b11-9d83-20c29af99b7d")
 		)
@@ -7462,6 +7885,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 226.06 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 226.06 121.92 0)
 			(effects
 				(font
@@ -7529,6 +7961,15 @@
 			)
 		)
 		(property "Description" "test point"
+			(at 226.06 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 226.06 134.62 0)
 			(effects
 				(font
@@ -7613,6 +8054,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 74.93 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "163dc427-cbb9-432c-9743-339a63688e47")
 		)
@@ -7682,6 +8132,15 @@
 		)
 		(property "P/N" "CRCW0805100RFKEAHP"
 			(at 219.71 68.58 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 219.71 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)

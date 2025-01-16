@@ -2938,6 +2938,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 228.6 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ea355ff4-ab1b-4f99-aab0-625ae85daa0c")
 		)
@@ -3008,6 +3017,15 @@
 			)
 		)
 		(property "P/N" "C0805C103J5RACTU"
+			(at 186.69 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 186.69 60.96 0)
 			(effects
 				(font
@@ -3094,6 +3112,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 186.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4593d566-27ac-4a28-9238-5cf20e73af40")
 		)
@@ -3164,6 +3191,15 @@
 			)
 		)
 		(property "P/N" "C0805C103J5RACTU"
+			(at 105.41 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 105.41 57.15 0)
 			(effects
 				(font
@@ -3314,6 +3350,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 44.45 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3f797601-b83c-47f6-b54b-5349829b471c")
 		)
@@ -3385,6 +3430,15 @@
 		)
 		(property "P/N" "JN2UEENAGX"
 			(at 109.22 45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 109.22 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3621,6 +3675,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 120.65 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bac95521-be5c-4ff8-abf2-6e0abe0bcc60")
 		)
@@ -3765,6 +3828,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 40.64 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "324d9f3d-3265-4690-bc55-927c1c56d89c")
 		)
@@ -3826,6 +3898,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 58.42 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 58.42 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "43650-0300"
 			(at 58.42 46.99 0)
 			(effects
 				(font
@@ -4047,6 +4137,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 180.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "55f21598-e3e7-49f6-b3e3-1594bca52b8d")
 		)
@@ -4116,6 +4215,24 @@
 			)
 		)
 		(property "Link" "https://www.amazon.com/Yohii-Position-Vertical-Switch-SS13F11/dp/B07DNY27QB/ref=sr_1_1?crid=1IVIIMRQI2HJS&dib=eyJ2IjoiMSJ9.eq4ebiQlMkKEDFRAdhDxYwMIiYvkEjVZD_9xjgnfgCxXy-tZctG5FY5V9etNlcsO9SMg3hhRud0UZ8EvzB1QN5VE4UDG5s6WWWARvN8WRjMmnUkjLekKzcGdvc8ia7Sv9FLgmE0_jsopAeiuapqWnA.1wpn46VPwZhyZ5ITniFuaUG9biDjYCx3dxWY7euUJM8&dib_tag=se&keywords=SS13F11&qid=1732484796&sprefix=ss13f11%2Caps%2C110&sr=8-1"
+			(at 168.91 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 168.91 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "SS13F11"
 			(at 168.91 49.53 0)
 			(effects
 				(font
@@ -4221,6 +4338,24 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
+			(at 213.36 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "A10305RNZQ"
+			(at 213.36 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
@@ -4414,7 +4549,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.sameskydevices.com/product/resource/ts02.pdf"
 			(at 49.53 110.49 0)
 			(effects
 				(font
@@ -4424,6 +4559,24 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
+			(at 44.45 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "TS02-66-43-BK-100-LCR-D"
+			(at 44.45 110.49 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 44.45 110.49 0)
 			(effects
 				(font
@@ -4500,6 +4653,15 @@
 			)
 		)
 		(property "P/N" "CRCW080510K0FKEAC"
+			(at 48.26 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 48.26 63.5 0)
 			(effects
 				(font
@@ -4586,6 +4748,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 77.47 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "78fc48e1-fb19-45aa-be23-7b788248af5e")
 		)
@@ -4638,7 +4809,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.sameskydevices.com/product/resource/ts02.pdf"
 			(at 86.36 110.49 0)
 			(effects
 				(font
@@ -4648,6 +4819,24 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
+			(at 81.28 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "TS02-66-43-BK-100-LCR-D"
+			(at 81.28 110.49 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 81.28 110.49 0)
 			(effects
 				(font
@@ -4753,6 +4942,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 120.65 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "285a2f57-1128-4e03-8346-2033d61c257c")
 		)
@@ -4821,6 +5019,15 @@
 			)
 		)
 		(property "P/N" "CRCW080510K0FKEAC"
+			(at 231.14 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 231.14 60.96 0)
 			(effects
 				(font
@@ -4905,6 +5112,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 81.28 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b2d6fb6e-d869-44b7-b94c-6b567024ee46")
 		)
@@ -4973,6 +5189,15 @@
 			)
 		)
 		(property "P/N" "CRCW080510K0FKEAC"
+			(at 68.58 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 68.58 63.5 0)
 			(effects
 				(font
@@ -5190,6 +5415,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 227.33 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c90c3ddc-d74b-4b00-8822-a1fbd8a0616c")
 		)
@@ -5268,6 +5502,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 179.07 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "77658e78-d732-492b-acd2-c6e3a6c399a8")
 		)
@@ -5336,6 +5579,15 @@
 			)
 		)
 		(property "P/N" "CRCW080510K0FKEAC"
+			(at 109.22 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 109.22 57.15 0)
 			(effects
 				(font
@@ -5544,6 +5796,15 @@
 			)
 		)
 		(property "P/N" "CRCW080510K0FKEAC"
+			(at 232.41 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 232.41 43.18 0)
 			(effects
 				(font
@@ -5827,6 +6088,15 @@
 				(hide yes)
 			)
 		)
+		(property "Field5" ""
+			(at 64.77 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "de440db0-7586-46e8-9237-5559aef87aae")
 		)
@@ -5897,6 +6167,15 @@
 			)
 		)
 		(property "P/N" "C0805C103J5RACTU"
+			(at 52.07 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Field5" ""
 			(at 52.07 63.5 0)
 			(effects
 				(font
