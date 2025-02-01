@@ -15842,7 +15842,7 @@
 			(justify left bottom mirror)
 		)
 	)
-	(gr_text "13cm x 10cm"
+	(gr_text "15cm x 10cm"
 		(at 228.25 70.5 0)
 		(layer "B.SilkS")
 		(uuid "25e63882-0d9c-4c5c-91ec-cb8962072536")
