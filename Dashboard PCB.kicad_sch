@@ -3252,6 +3252,16 @@
 		)
 		(uuid "332e25a4-ab4c-44a7-ac28-eee6e64ce247")
 	)
+	(text "Might need to add mosfet between horn\nso there isnt a bunch of current going thru\nhorn button"
+		(exclude_from_sim no)
+		(at 279.146 77.216 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "5676867a-ecff-4d22-99a3-6b191bcf71b0")
+	)
 	(text "Fan control being\nsent from elsewhere"
 		(exclude_from_sim no)
 		(at 140.716 99.822 0)
