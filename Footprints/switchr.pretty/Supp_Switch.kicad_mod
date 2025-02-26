@@ -1,0 +1,121 @@
+(footprint "Supp_Switch"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -0.03 -11.77 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "9cee0168-0b68-40b1-9206-d7158aa99231")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Supp_Switch"
+		(at 0.5 13.34 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "2c120035-07ea-4f11-9ba9-be517c21c6c8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "517c8e7a-a743-4bf6-bb21-7e073e66ab82")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "75348c12-6947-460b-97db-cf86057f19d9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fa5ab9cf-f3a1-4d65-9637-4fa7f16aef76")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -9.48 -16.24)
+		(end 9.52 16.26)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "e1ddf396-1825-4a30-95bf-7aa45e3b5f67")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.13 11.32 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "205787e8-18d7-4a66-8c46-591b07505996")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "F.SilkS")
+		(uuid "e15df62e-8cd2-4173-96be-4e8485e6d54c")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads not_allowed)
+			(copperpour allowed)
+			(footprints allowed)
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy -9.48 -16.24) (xy 9.52 -16.24) (xy 9.52 16.26) (xy -9.48 16.26)
+			)
+		)
+	)
+)
