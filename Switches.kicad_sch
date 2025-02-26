@@ -2638,7 +2638,7 @@
 	)
 	(text "Supplemental Switch"
 		(exclude_from_sim no)
-		(at 45.212 95.25 0)
+		(at 48.006 94.996 0)
 		(effects
 			(font
 				(size 2 2)
