@@ -176,142 +176,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:Fuse"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "F"
-				(at 2.032 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Fuse"
-				(at -1.905 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -1.778 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Fuse"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "fuse"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*Fuse*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Fuse_0_1"
-				(rectangle
-					(start -0.762 -2.54)
-					(end 0.762 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Fuse_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -1095,19 +959,19 @@
 		(uuid "71f64a10-2cf7-43cb-be15-b90b46b2e89a")
 	)
 	(no_connect
-		(at 205.74 140.97)
+		(at 207.01 140.208)
 		(uuid "25e44350-2e4e-469a-925e-d9f33cf1a26d")
 	)
 	(no_connect
-		(at 210.82 123.19)
+		(at 212.09 122.428)
 		(uuid "4ec440a7-575d-48d0-b7a1-b32b7369867b")
 	)
 	(no_connect
-		(at 210.82 105.41)
+		(at 212.09 104.648)
 		(uuid "6756c128-852a-4a81-be5e-a139280ad83d")
 	)
 	(no_connect
-		(at 205.74 146.05)
+		(at 207.01 145.288)
 		(uuid "7f24450e-a4c7-4a86-aa75-5acd050fa3d7")
 	)
 	(wire
@@ -1122,33 +986,13 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 133.35) (xy 104.14 133.35)
+			(xy 103.886 132.334) (xy 102.87 133.35)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "090b4c62-4734-4261-9f83-b6ed6846cf4f")
-	)
-	(wire
-		(pts
-			(xy 104.14 125.73) (xy 104.14 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0bcd49d1-537f-4842-87ee-832c7106b573")
-	)
-	(wire
-		(pts
-			(xy 199.39 36.83) (xy 199.39 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e51776d-111f-48da-b62f-600884b54a3c")
+		(uuid "052185db-28b5-4530-b28b-203e23179fcd")
 	)
 	(wire
 		(pts
@@ -1172,6 +1016,26 @@
 	)
 	(wire
 		(pts
+			(xy 105.156 147.32) (xy 118.11 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2472942a-9554-4b3f-a1e5-d259edd33a5a")
+	)
+	(wire
+		(pts
+			(xy 104.14 139.446) (xy 103.124 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26508e00-b6c0-48da-976d-da54187f3c60")
+	)
+	(wire
+		(pts
 			(xy 199.39 55.88) (xy 199.39 64.77)
 		)
 		(stroke
@@ -1179,6 +1043,16 @@
 			(type default)
 		)
 		(uuid "2c84d3a8-e29e-4e3a-8642-97194b6f19a9")
+	)
+	(wire
+		(pts
+			(xy 104.14 139.446) (xy 104.14 146.304)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2cfe49a5-2a20-4603-873e-341fbe00f1e5")
 	)
 	(wire
 		(pts
@@ -1192,23 +1066,33 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 36.83) (xy 201.93 36.83)
+			(xy 99.06 133.35) (xy 102.87 133.35)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4c380cce-9da6-4b66-9488-98a46710fdb5")
+		(uuid "64b5c154-2130-4c43-af72-5d362b4bfafb")
 	)
 	(wire
 		(pts
-			(xy 104.14 125.73) (xy 118.11 125.73)
+			(xy 104.902 125.73) (xy 103.886 126.746)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5275398a-d7d6-4cf1-bc05-560a5c040926")
+		(uuid "69400d65-f061-4cf4-8d4c-27dd74e63347")
+	)
+	(wire
+		(pts
+			(xy 207.01 145.288) (xy 207.01 147.066)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d27d03d-3e39-4f04-999d-a0b764165e09")
 	)
 	(wire
 		(pts
@@ -1242,16 +1126,6 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 138.43) (xy 104.14 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c7cdaa0-2112-41a4-a4e2-860c85ea9b14")
-	)
-	(wire
-		(pts
 			(xy 142.24 88.9) (xy 143.51 88.9)
 		)
 		(stroke
@@ -1259,6 +1133,36 @@
 			(type default)
 		)
 		(uuid "8dd67003-5fa7-4055-bbed-80b8ffd9dd17")
+	)
+	(wire
+		(pts
+			(xy 103.886 126.746) (xy 103.886 132.334)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e7242dd-8e5b-4e4f-882e-d9a7a163c417")
+	)
+	(wire
+		(pts
+			(xy 104.14 146.304) (xy 105.156 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92e5c242-588c-4071-93a2-31d7b12950e1")
+	)
+	(wire
+		(pts
+			(xy 199.39 38.354) (xy 200.914 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c22592b-609e-4471-af04-f96aeefe193c")
 	)
 	(wire
 		(pts
@@ -1272,17 +1176,27 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 147.32) (xy 118.11 147.32)
+			(xy 118.11 125.73) (xy 104.902 125.73)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ac6cdff1-2f01-4de5-b809-0a5bbc7ce458")
+		(uuid "b04e82fd-37d8-41ef-b54e-935c3da78443")
 	)
 	(wire
 		(pts
-			(xy 205.74 143.51) (xy 212.09 143.51)
+			(xy 199.39 45.72) (xy 199.39 38.354)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2f111b8-4661-4cf8-b1c4-a8872d5db37d")
+	)
+	(wire
+		(pts
+			(xy 207.01 142.748) (xy 213.36 142.748)
 		)
 		(stroke
 			(width 0)
@@ -1299,6 +1213,16 @@
 			(type default)
 		)
 		(uuid "cf4f29e0-41a0-4f56-99c2-c2cf2312a5a2")
+	)
+	(wire
+		(pts
+			(xy 99.06 138.43) (xy 103.124 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1343d19-6912-4242-bb5c-83146af16661")
 	)
 	(wire
 		(pts
@@ -1332,6 +1256,16 @@
 	)
 	(wire
 		(pts
+			(xy 200.914 36.83) (xy 209.55 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3568e7f-560f-4fbd-8c99-7233568796ac")
+	)
+	(wire
+		(pts
 			(xy 116.84 121.92) (xy 118.11 121.92)
 		)
 		(stroke
@@ -1342,26 +1276,16 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 138.43) (xy 104.14 138.43)
+			(xy 207.01 147.066) (xy 208.788 148.844)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f77f60ee-a7d4-4b97-bf90-879a01b48eed")
-	)
-	(wire
-		(pts
-			(xy 205.74 149.86) (xy 205.74 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fbe17c50-e382-4f6a-8553-23178a36893d")
+		(uuid "f3a3c7f1-2197-454f-b278-7850437fcf72")
 	)
 	(label "Left_Blinker_Signal"
-		(at 205.74 149.86 0)
+		(at 208.788 148.844 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1371,7 +1295,7 @@
 		(uuid "79d38f6c-f3bc-44a8-9ddd-b3fc5966ed10")
 	)
 	(label "Regen_Active_Signal"
-		(at 210.82 123.19 0)
+		(at 212.09 122.428 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1381,7 +1305,7 @@
 		(uuid "7afb7a9a-648d-4a08-b4e3-e8c0411f0b56")
 	)
 	(label "Right_Blinker_Signal"
-		(at 205.74 140.97 0)
+		(at 207.01 140.208 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1390,8 +1314,8 @@
 		)
 		(uuid "8a769524-eff4-4452-89cb-1de6fa5415c6")
 	)
-	(label "Horn_3.3V_Signal"
-		(at 210.82 105.41 0)
+	(label "Horn_5V_Signal"
+		(at 212.09 104.648 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1400,16 +1324,16 @@
 		)
 		(uuid "c3d61692-7412-4ded-b364-bbc837a1d305")
 	)
-	(hierarchical_label "3.3V_LDO"
+	(hierarchical_label "5V_Buck"
 		(shape input)
-		(at 200.66 123.19 180)
+		(at 201.93 122.428 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "387847e4-2f35-4cde-80d3-bfe2898b6a3f")
+		(uuid "0b310e7c-3600-4fb0-9dfb-d9e6fe402a47")
 	)
 	(hierarchical_label "3.3V_LSOM"
 		(shape input)
@@ -1433,6 +1357,17 @@
 		)
 		(uuid "4d871dfe-13ad-4164-a027-278d952deca0")
 	)
+	(hierarchical_label "5V_Buck"
+		(shape input)
+		(at 213.36 142.748 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5203eb49-616e-4334-8ce4-737244654b23")
+	)
 	(hierarchical_label "Horn_24V_Signal_Out"
 		(shape output)
 		(at 209.55 36.83 0)
@@ -1455,7 +1390,7 @@
 		)
 		(uuid "5eaba387-4a99-46f9-a925-47471568b4b7")
 	)
-	(hierarchical_label "Horn_3.3V_Signal"
+	(hierarchical_label "Horn_5V_Signal"
 		(shape input)
 		(at 100.33 50.8 180)
 		(effects
@@ -1521,17 +1456,6 @@
 		)
 		(uuid "d3850584-4e72-441a-aec8-fbf93fedce69")
 	)
-	(hierarchical_label "3.3V_LDO"
-		(shape input)
-		(at 212.09 143.51 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "da3d768f-c341-45ae-b6d4-fd5c5d3e4e08")
-	)
 	(hierarchical_label "Regen_Active_Signal"
 		(shape input)
 		(at 100.33 92.71 180)
@@ -1565,9 +1489,9 @@
 		)
 		(uuid "ef6bfda5-77a7-42b8-9565-d9fd500e6c21")
 	)
-	(hierarchical_label "3.3V_LDO"
+	(hierarchical_label "5V_Buck"
 		(shape input)
-		(at 200.66 105.41 180)
+		(at 201.93 104.648 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1829,7 +1753,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 200.66 143.51 180)
+		(at 201.93 142.748 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -1837,7 +1761,7 @@
 		(dnp yes)
 		(uuid "6d9778b2-d3b7-4a3b-a76d-5e06cbf5b801")
 		(property "Reference" "J10"
-			(at 199.3899 138.43 90)
+			(at 200.6599 137.668 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1846,7 +1770,7 @@
 			)
 		)
 		(property "Value" "Indicator_Switch"
-			(at 196.85 151.384 90)
+			(at 198.12 150.622 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1855,7 +1779,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx03_1x03_P2.50mm_Horizontal"
-			(at 200.66 143.51 0)
+			(at 201.93 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1864,7 +1788,7 @@
 			)
 		)
 		(property "Datasheet" "https://configured-product-images.s3.amazonaws.com/Datasheets/100.pdf"
-			(at 200.66 143.51 0)
+			(at 201.93 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1873,7 +1797,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 200.66 143.51 0)
+			(at 201.93 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1882,7 +1806,7 @@
 			)
 		)
 		(property "Field5" ""
-			(at 200.66 143.51 0)
+			(at 201.93 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1891,7 +1815,7 @@
 			)
 		)
 		(property "P/N" "~"
-			(at 200.66 143.51 0)
+			(at 201.93 142.748 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1900,7 +1824,7 @@
 			)
 		)
 		(property "Distributor Link" "https://www.amazon.com/XINYIELE-Rocker-Switch-Position-Circle/dp/B0D5MMPWJ6/ref=sr_1_3?crid=34OLS6RHBD3LM&dib=eyJ2IjoiMSJ9.VOJn4UvYSBcEt0nTuk384LX2rAHO8r8C_9HI3DG-oSbdDh2bF_UvC4ldiMnTS71ZiofekzehK_eIxdT8eAdan-L3-tl6CKi6fcoEqLfj6kcLjM7rQ24pKe7tB84Z1P6d_zfiBDlBS946zq4WdtnyHATjYj_lr-mALfwT2H6tqhHfKCrjHPozNKcNPWAX2MoDv9H-1QygGIJLCyTfHNhfyogYl62oD77Gyr4v98nTdHk.oj-1RxPLYxxYwISyo3H1CAJAXadPaYHm7P9Rd35IbNY&dib_tag=se&keywords=3%2Bposition%2Brocker%2Bswitch%2B5V&qid=1759983656&sprefix=3%2Bposition%2Brocker%2Bswitch%2B5v%2Caps%2C113&sr=8-3&th=1"
-			(at 200.66 143.51 90)
+			(at 201.93 142.748 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1909,7 +1833,7 @@
 			)
 		)
 		(property "Manufacturer" "Amazon"
-			(at 200.66 143.51 90)
+			(at 201.93 142.748 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1918,7 +1842,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 200.66 143.51 90)
+			(at 201.93 142.748 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2081,84 +2005,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:Fuse")
-		(at 205.74 36.83 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "afab1485-9682-4c95-898f-a1c7614bb0cc")
-		(property "Reference" "F2"
-			(at 205.74 34.798 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Fuse"
-			(at 205.994 39.37 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Fuse:Fuseholder_Blade_Mini_Keystone_3568"
-			(at 205.74 38.608 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 205.74 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Fuse_3.3LDO"
-			(at 205.74 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "3568"
-			(at 205.74 36.83 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "e9382199-aa09-4b4f-a7ae-fdf649fd4e36")
-		)
-		(pin "1"
-			(uuid "a27ffa6b-447f-4970-bd8a-820ec1c99ad5")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c"
-					(reference "F2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 205.74 123.19 0)
+		(at 207.01 122.428 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -2167,7 +2015,7 @@
 		(fields_autoplaced yes)
 		(uuid "b268fbac-3fe9-4489-a691-ada814433f18")
 		(property "Reference" "Regen_Active1"
-			(at 205.74 115.57 0)
+			(at 207.01 114.808 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2175,7 +2023,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 205.74 118.11 0)
+			(at 207.01 117.348 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2183,7 +2031,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx02_1x02_P2.50mm_Horizontal"
-			(at 205.74 118.11 0)
+			(at 207.01 117.348 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2192,7 +2040,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 205.74 118.11 0)
+			(at 207.01 117.348 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2201,7 +2049,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 205.74 123.19 0)
+			(at 207.01 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2210,7 +2058,7 @@
 			)
 		)
 		(property "Distributor Link" "https://www.amazon.com/Gebildet-Waterproof-Momentary-Lockless-Doorbell/dp/B07YDGXMPN/ref=sr_1_20?crid=3CL4V919UK2ZP&dib=eyJ2IjoiMSJ9.YOSVN3Iv8U2slHzp2f1_7I63BiDtfL4TCXtQKaWa6Pf52MwYU_fBN7ze1lnRRvBUU4h5qgghFkZYsdxDPX07nc5adiC4HWCRnnmp-q7S4wOeZPOfkm1k-0Ld0FHu3eFFfxzu6r1wpBF_R6196IlqOF-ISg4KIYVhEnlisPo5mwRrIKnfaOvwoHC1AzHiI_f0D5QHkIQXB4isO9gAaazoFIsOkXnQhDBjYYMPyCRL3m_CziYz-kLB8Zbe414ceUBZIeN04r5rXz-PFeZTRROaW7FA4UsGHNelgT_ORhiMBzQ._eG7wCXgBG8zwqFBxLGDOM8j5CKuOPvPRQmKom2FakY&dib_tag=se&keywords=push%2Bbutton%2B3%2Bcolor%2Bpack%2B24V&qid=1759610579&s=industrial&sprefix=push%2Bbutton%2B3%2Bcolor%2Bpack%2B24%2Cindustrial%2C189&sr=1-20&th=1"
-			(at 205.74 123.19 0)
+			(at 207.01 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2219,7 +2067,7 @@
 			)
 		)
 		(property "Manufacturer" "Amazon"
-			(at 205.74 123.19 0)
+			(at 207.01 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2228,7 +2076,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 205.74 123.19 0)
+			(at 207.01 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2237,7 +2085,7 @@
 			)
 		)
 		(property "P/N" "~"
-			(at 205.74 123.19 0)
+			(at 207.01 122.428 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2262,7 +2110,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 205.74 105.41 0)
+		(at 207.01 104.648 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -2271,7 +2119,7 @@
 		(fields_autoplaced yes)
 		(uuid "ea6d692c-a21f-4441-b194-0e7f276db849")
 		(property "Reference" "Horn2"
-			(at 205.74 97.79 0)
+			(at 207.01 97.028 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2279,7 +2127,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 205.74 100.33 0)
+			(at 207.01 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2287,7 +2135,7 @@
 			)
 		)
 		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx02_1x02_P2.50mm_Horizontal"
-			(at 205.74 100.33 0)
+			(at 207.01 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2296,7 +2144,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 205.74 100.33 0)
+			(at 207.01 99.568 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2305,7 +2153,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 205.74 105.41 0)
+			(at 207.01 104.648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2314,7 +2162,7 @@
 			)
 		)
 		(property "Distributor Link" "https://www.amazon.com/Gebildet-Waterproof-Momentary-Lockless-Doorbell/dp/B07YDGXMPN/ref=sr_1_20?crid=3CL4V919UK2ZP&dib=eyJ2IjoiMSJ9.YOSVN3Iv8U2slHzp2f1_7I63BiDtfL4TCXtQKaWa6Pf52MwYU_fBN7ze1lnRRvBUU4h5qgghFkZYsdxDPX07nc5adiC4HWCRnnmp-q7S4wOeZPOfkm1k-0Ld0FHu3eFFfxzu6r1wpBF_R6196IlqOF-ISg4KIYVhEnlisPo5mwRrIKnfaOvwoHC1AzHiI_f0D5QHkIQXB4isO9gAaazoFIsOkXnQhDBjYYMPyCRL3m_CziYz-kLB8Zbe414ceUBZIeN04r5rXz-PFeZTRROaW7FA4UsGHNelgT_ORhiMBzQ._eG7wCXgBG8zwqFBxLGDOM8j5CKuOPvPRQmKom2FakY&dib_tag=se&keywords=push%2Bbutton%2B3%2Bcolor%2Bpack%2B24V&qid=1759610579&s=industrial&sprefix=push%2Bbutton%2B3%2Bcolor%2Bpack%2B24%2Cindustrial%2C189&sr=1-20&th=1"
-			(at 205.74 105.41 0)
+			(at 207.01 104.648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2323,7 +2171,7 @@
 			)
 		)
 		(property "Manufacturer" "Amazon"
-			(at 205.74 105.41 0)
+			(at 207.01 104.648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2332,7 +2180,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 205.74 105.41 0)
+			(at 207.01 104.648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2341,7 +2189,7 @@
 			)
 		)
 		(property "P/N" "~"
-			(at 205.74 105.41 0)
+			(at 207.01 104.648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2418,9 +2266,9 @@
 				(justify left)
 			)
 		)
-		(pin "3.3V_Switch_Signal" input
+		(pin "5V_Switch_Signal" input
 			(at 118.11 125.73 180)
-			(uuid "d848851d-8a12-4a42-b79e-5918466cc47c")
+			(uuid "c72b03a5-2c17-4876-afd5-ed0863355743")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2490,9 +2338,9 @@
 				(justify left)
 			)
 		)
-		(pin "3.3V_Switch_Signal" input
+		(pin "5V_Switch_Signal" input
 			(at 114.3 50.8 180)
-			(uuid "d2e36aa2-4a5f-4286-b274-0cb7423a33b7")
+			(uuid "fdf7f7db-de76-424e-bd98-e60f3adf5c6b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2562,9 +2410,9 @@
 				(justify left)
 			)
 		)
-		(pin "3.3V_Switch_Signal" input
+		(pin "5V_Switch_Signal" input
 			(at 118.11 147.32 180)
-			(uuid "2bbc9950-dda1-4546-a9a6-dfb01db067f4")
+			(uuid "2a18ed2b-0d43-4760-b17b-07a6a8144fe7")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2634,9 +2482,9 @@
 				(justify left)
 			)
 		)
-		(pin "3.3V_Switch_Signal" input
+		(pin "5V_Switch_Signal" input
 			(at 115.57 92.71 180)
-			(uuid "3d9a144a-b896-4943-b86a-387c6e0c5e05")
+			(uuid "9bf0f5c3-6b59-484f-b7bc-809763984dab")
 			(effects
 				(font
 					(size 1.27 1.27)

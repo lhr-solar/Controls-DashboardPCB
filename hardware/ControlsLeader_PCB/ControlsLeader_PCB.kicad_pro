@@ -542,7 +542,7 @@
           "group_by": false,
           "label": "Reference",
           "name": "Reference",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -554,7 +554,7 @@
           "group_by": true,
           "label": "Value",
           "name": "Value",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -774,12 +774,12 @@
       "NMOS Switch2"
     ],
     [
-      "d00337e6-4975-4ba1-a951-e690956d208d",
-      "24v_5v_Buck"
+      "657cdd31-ee3f-4523-98c1-ca16ae4e41df",
+      "RPP"
     ],
     [
-      "58462af7-0db4-461a-b5b0-8654be380624",
-      "5v_3.3v_LDO"
+      "d00337e6-4975-4ba1-a951-e690956d208d",
+      "24v_5v_Buck"
     ]
   ],
   "text_variables": {}

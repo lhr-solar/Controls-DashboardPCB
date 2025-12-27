@@ -1307,112 +1307,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 154.94 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "013b6578-3b8a-467b-9e6b-05e0c1b3cd4e")
-		(property "Reference" "R52"
-			(at 157.48 142.2399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "20"
-			(at 157.48 144.7799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 153.162 143.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "SWE LED R52"
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 154.94 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "784c59df-4dcb-4201-bb32-cca3311cc265")
-		)
-		(pin "2"
-			(uuid "78661008-890a-463a-a846-e9d6916d251c")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R52")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 110.49 67.31 90)
 		(unit 1)
@@ -1611,7 +1505,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "65"
+		(property "Value" "120"
 			(at 105.918 58.42 90)
 			(effects
 				(font
@@ -1929,112 +1823,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 114.3 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "11dccae2-4a60-497f-a0ff-276b5fa184de")
-		(property "Reference" "R50"
-			(at 116.84 142.2399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "20"
-			(at 116.84 144.7799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 112.522 143.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "SWE LED R52"
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 114.3 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d3f881d6-9385-4ec3-959f-ff3e36c17ad1")
-		)
-		(pin "2"
-			(uuid "bd881546-82b1-44d1-98b3-d0ef2aba0485")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R50")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 74.93 133.35 90)
 		(unit 1)
@@ -2150,111 +1938,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 104.14 90.17 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1a12424d-8fba-4340-be68-a61c62440e5a")
-		(property "Reference" "R55"
-			(at 105.918 87.376 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "65"
-			(at 105.918 92.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 104.14 91.948 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 104.14 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "prgm led R45"
-			(at 104.14 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 104.14 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 104.14 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 104.14 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "FC0402E65R0BGT0"
-			(at 104.14 90.17 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "eb776a21-7358-44a3-960f-eddc6db4fb0a")
-		)
-		(pin "2"
-			(uuid "3079af9c-ddd0-4788-8135-79a7880e96d3")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R55")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 135.89 149.86 0)
 		(unit 1)
@@ -2323,16 +2006,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 135.89 143.51 0)
+		(at 205.74 139.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "268e2d27-da04-4ceb-96e0-8fc47aa197d1")
-		(property "Reference" "R51"
-			(at 138.43 142.2399 0)
+		(uuid "284cdc91-6f18-4fd7-a772-61d58e54c7c7")
+		(property "Reference" "R55"
+			(at 208.534 141.478 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2340,8 +2022,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "20"
-			(at 138.43 144.7799 0)
+		(property "Value" "120"
+			(at 203.2 141.478 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2350,7 +2032,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 134.112 143.51 90)
+			(at 203.962 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2359,7 +2041,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 135.89 143.51 0)
+			(at 205.74 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2367,8 +2049,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SWE LED R52"
-			(at 135.89 143.51 0)
+		(property "Description" "prgm led R45"
+			(at 205.74 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2377,7 +2059,7 @@
 			)
 		)
 		(property "Distributor Link" ""
-			(at 135.89 143.51 0)
+			(at 205.74 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2386,7 +2068,7 @@
 			)
 		)
 		(property "Manufacturer" ""
-			(at 135.89 143.51 0)
+			(at 205.74 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2395,7 +2077,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 135.89 143.51 0)
+			(at 205.74 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2403,8 +2085,8 @@
 				(hide yes)
 			)
 		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 135.89 143.51 0)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 205.74 139.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2413,15 +2095,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "087e69d4-fa52-4072-882c-c40e7375146a")
+			(uuid "15148912-909d-4110-b762-569d5d39282e")
 		)
 		(pin "2"
-			(uuid "19c9c35d-a425-4570-8abd-6f8520fb9b96")
+			(uuid "3322a0c3-7403-4ee3-8467-c1d8c86209f2")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R51")
+					(reference "R55")
 					(unit 1)
 				)
 			)
@@ -2537,112 +2219,6 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 					(reference "D20")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 93.98 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "33f1420d-c7e5-4f24-bdff-d28b63125f04")
-		(property "Reference" "R49"
-			(at 96.52 142.2399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "20"
-			(at 96.52 144.7799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 92.202 143.51 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "SWE LED R52"
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 93.98 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "30a571a2-9e4d-4646-ba37-05b4ec8f0727")
-		)
-		(pin "2"
-			(uuid "19b8896c-f9c6-461a-99c3-049aea40bf31")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R49")
 					(unit 1)
 				)
 			)
@@ -3099,6 +2675,216 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 175.26 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6bf80e99-2bb8-4d2a-b095-30e1c49cd3b1")
+		(property "Reference" "R54"
+			(at 178.054 145.288 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 172.72 145.288 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 173.482 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 175.26 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 175.26 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 175.26 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 175.26 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 175.26 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 175.26 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e4160d5-e8b2-4c3c-b072-8aa5c6cef9b5")
+		)
+		(pin "2"
+			(uuid "0ae6a168-29b2-4f28-a261-9079a5e2b945")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 104.14 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7ef05807-4e9b-4bb3-84e6-50be517c5f33")
+		(property "Reference" "R46"
+			(at 105.918 75.946 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 105.918 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 104.14 80.518 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 104.14 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 104.14 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 104.14 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 104.14 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 104.14 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e07fb78-f1f4-4785-8689-8ab3e095f3e6")
+		)
+		(pin "2"
+			(uuid "21de7fd1-d517-458a-b330-45910e6867a8")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R46")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 189.23 91.44 180)
 		(unit 1)
@@ -3207,6 +2993,111 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 					(reference "D16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 93.98 143.51 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8ee095a0-e4f9-488d-b5e0-f9cec70a08ed")
+		(property "Reference" "R50"
+			(at 91.186 141.732 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 96.52 141.732 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 95.758 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 93.98 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 93.98 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 93.98 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 93.98 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 93.98 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 93.98 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f3645875-52c9-4d5c-ba84-65ea2c869f71")
+		)
+		(pin "2"
+			(uuid "e0c1127a-6ece-4c30-ba57-b427fa79d3fe")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R50")
 					(unit 1)
 				)
 			)
@@ -3453,15 +3344,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 104.14 78.74 90)
+		(at 135.89 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9a2688fa-9d9c-448e-8ae7-60e9faecad37")
-		(property "Reference" "R46"
-			(at 105.918 75.946 90)
+		(uuid "9baf9360-238e-49e7-a202-0c33a2d09c41")
+		(property "Reference" "R52"
+			(at 138.684 145.288 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3469,8 +3360,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "65"
-			(at 105.918 81.28 90)
+		(property "Value" "120"
+			(at 133.35 145.288 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3479,7 +3370,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 104.14 80.518 90)
+			(at 134.112 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3488,7 +3379,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 104.14 78.74 0)
+			(at 135.89 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3497,7 +3388,7 @@
 			)
 		)
 		(property "Description" "prgm led R45"
-			(at 104.14 78.74 0)
+			(at 135.89 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3506,7 +3397,7 @@
 			)
 		)
 		(property "Distributor Link" ""
-			(at 104.14 78.74 90)
+			(at 135.89 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3515,7 +3406,7 @@
 			)
 		)
 		(property "Manufacturer" ""
-			(at 104.14 78.74 90)
+			(at 135.89 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3524,7 +3415,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 104.14 78.74 90)
+			(at 135.89 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3533,7 +3424,7 @@
 			)
 		)
 		(property "P/N" "FC0402E65R0BGT0"
-			(at 104.14 78.74 90)
+			(at 135.89 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3542,120 +3433,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "991ff873-1db0-4b02-a5f2-b6ae47ddc573")
+			(uuid "372b2a93-e52c-4ceb-a58b-5cbb09e4bb05")
 		)
 		(pin "2"
-			(uuid "2835bd29-c9a8-4eae-bb1d-a28876af8c3c")
+			(uuid "efe69614-745a-4411-9815-80a73eb10df7")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R46")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 104.14 67.31 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9adc823b-7a94-4f09-8348-a5530e4e7786")
-		(property "Reference" "R33"
-			(at 105.918 64.516 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "65"
-			(at 105.918 69.85 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 104.14 69.088 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 104.14 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "prgm led R45"
-			(at 104.14 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 104.14 67.31 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 104.14 67.31 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 104.14 67.31 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "FC0402E65R0BGT0"
-			(at 104.14 67.31 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a241d14b-8cea-4c47-97fb-d5334a8c173c")
-		)
-		(pin "2"
-			(uuid "01cbda4b-7fb0-4280-9e77-c85b81eb36bf")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R33")
+					(reference "R52")
 					(unit 1)
 				)
 			)
@@ -3777,6 +3563,216 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 74.93 143.51 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "abe15235-a612-4891-b65d-f00edbcb39de")
+		(property "Reference" "R49"
+			(at 72.136 141.732 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 77.47 141.732 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 76.708 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 74.93 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 74.93 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 74.93 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 74.93 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 74.93 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 74.93 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c8bf9ad0-c1a3-452e-a403-86bd0a606f27")
+		)
+		(pin "2"
+			(uuid "71dc3791-3635-4c40-b251-21865f4ffa95")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 104.14 90.17 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b2df4187-b7bd-4bfd-8626-ca606b358863")
+		(property "Reference" "R48"
+			(at 105.918 87.376 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 105.918 92.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 104.14 91.948 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 104.14 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 104.14 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 104.14 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 104.14 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 104.14 90.17 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1f681dfb-f093-4a8d-83b1-123ec05427ba")
+		)
+		(pin "2"
+			(uuid "dfd7c1ee-50b3-46a6-bb91-bdda201ec154")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 93.98 78.74 180)
 		(unit 1)
@@ -3892,16 +3888,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 175.26 143.51 0)
+		(at 154.94 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c98c7db5-f7d4-4abf-86c4-62433a0a9a7e")
+		(uuid "ca0db6c4-161d-4f7e-9d53-54ee3664a582")
 		(property "Reference" "R53"
-			(at 177.8 142.2399 0)
+			(at 157.734 145.288 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3909,8 +3904,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "20"
-			(at 177.8 144.7799 0)
+		(property "Value" "120"
+			(at 152.4 145.288 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3919,7 +3914,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 173.482 143.51 90)
+			(at 153.162 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3928,7 +3923,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 175.26 143.51 0)
+			(at 154.94 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3936,8 +3931,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SWE LED R52"
-			(at 175.26 143.51 0)
+		(property "Description" "prgm led R45"
+			(at 154.94 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3946,7 +3941,7 @@
 			)
 		)
 		(property "Distributor Link" ""
-			(at 175.26 143.51 0)
+			(at 154.94 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3955,7 +3950,7 @@
 			)
 		)
 		(property "Manufacturer" ""
-			(at 175.26 143.51 0)
+			(at 154.94 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3964,7 +3959,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 175.26 143.51 0)
+			(at 154.94 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3972,8 +3967,8 @@
 				(hide yes)
 			)
 		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 175.26 143.51 0)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 154.94 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3982,10 +3977,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "76769db4-2fe4-48d3-a4a7-212f032b00f6")
+			(uuid "4eb9b040-1e34-44cd-8072-3b1fc984aea6")
 		)
 		(pin "2"
-			(uuid "d795d84d-0c2d-4c83-a4ae-cce68a4ab7fc")
+			(uuid "43aae80f-6efa-44a9-b54a-f8d8a7f17e26")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
@@ -4245,6 +4240,111 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 114.3 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cfd9f545-a1c4-4d3f-b1ce-3bd2d0af1270")
+		(property "Reference" "R51"
+			(at 117.094 145.288 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "120"
+			(at 111.76 145.288 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 112.522 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "prgm led R45"
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 114.3 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 114.3 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 114.3 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 114.3 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5ce5d6c0-0895-469b-801f-bee6577ef179")
+		)
+		(pin "2"
+			(uuid "0c660a18-a4cf-42e8-8960-d6438c0d529a")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R51")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 93.98 55.88 180)
 		(unit 1)
@@ -4359,111 +4459,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 205.74 139.7 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d5a206f9-95f7-4146-8812-f6441d80180a")
-		(property "Reference" "R54"
-			(at 208.534 141.224 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "20"
-			(at 202.692 140.716 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 203.962 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 205.74 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "SWE LED R52"
-			(at 205.74 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Distributor Link" ""
-			(at 205.74 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 205.74 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Prt #" ""
-			(at 205.74 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 205.74 139.7 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "74485133-ea85-4980-8a18-fea5f50c1bdd")
-		)
-		(pin "2"
-			(uuid "1d945b5d-ffae-441c-bfc5-c1537cd76104")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R54")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 186.69 64.77 0)
 		(unit 1)
@@ -4532,16 +4527,15 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 74.93 143.51 0)
+		(at 104.14 67.31 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "dec52b99-dfa9-4c62-8dab-957622715ec6")
-		(property "Reference" "R48"
-			(at 77.47 142.2399 0)
+		(uuid "eaceb35a-9e19-4717-8ec0-609fb4ca88b9")
+		(property "Reference" "R33"
+			(at 105.918 64.516 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4549,8 +4543,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "20"
-			(at 77.47 144.7799 0)
+		(property "Value" "120"
+			(at 105.918 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4559,7 +4553,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 73.152 143.51 90)
+			(at 104.14 69.088 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4568,7 +4562,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 74.93 143.51 0)
+			(at 104.14 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4576,8 +4570,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SWE LED R52"
-			(at 74.93 143.51 0)
+		(property "Description" "prgm led R45"
+			(at 104.14 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4586,7 +4580,7 @@
 			)
 		)
 		(property "Distributor Link" ""
-			(at 74.93 143.51 0)
+			(at 104.14 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4595,7 +4589,7 @@
 			)
 		)
 		(property "Manufacturer" ""
-			(at 74.93 143.51 0)
+			(at 104.14 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4604,7 +4598,7 @@
 			)
 		)
 		(property "Manufacturer Prt #" ""
-			(at 74.93 143.51 0)
+			(at 104.14 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4612,8 +4606,8 @@
 				(hide yes)
 			)
 		)
-		(property "P/N" "ERJ-UP6D20R0V"
-			(at 74.93 143.51 0)
+		(property "P/N" "FC0402E65R0BGT0"
+			(at 104.14 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4622,15 +4616,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "ee73b680-1220-407a-8bb0-97ba68dcc2ab")
+			(uuid "552ec851-957a-4efe-be6b-fd3019640ec4")
 		)
 		(pin "2"
-			(uuid "ccb8b23f-1728-4bd6-947d-11419dbbe550")
+			(uuid "87751586-c2cc-4b2b-8d6b-4dda95561d5f")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
-					(reference "R48")
+					(reference "R33")
 					(unit 1)
 				)
 			)

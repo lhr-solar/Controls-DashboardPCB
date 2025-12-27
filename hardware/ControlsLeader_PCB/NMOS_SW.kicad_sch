@@ -1227,7 +1227,7 @@
 		)
 		(uuid "f98f0c70-9e64-42f5-a2ad-924fb3a70c66")
 	)
-	(hierarchical_label "3.3V_Switch_Signal"
+	(hierarchical_label "5V_Switch_Signal"
 		(shape input)
 		(at 118.11 100.33 180)
 		(effects
@@ -2432,7 +2432,7 @@
 		(dnp no)
 		(uuid "ef845297-bbee-4603-a4ec-ab5545da2eac")
 		(property "Reference" "D1"
-			(at 137.16 104.4574 90)
+			(at 134.874 104.394 90)
 			(effects
 				(font
 					(size 1.27 1.27)
