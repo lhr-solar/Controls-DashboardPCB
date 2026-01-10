@@ -1516,7 +1516,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5uF"
+		(property "Value" "1uF"
 			(at 124.206 103.378 0)
 			(effects
 				(font
@@ -2607,7 +2607,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k"
+		(property "Value" "10k"
 			(at 144.78 90.1699 0)
 			(effects
 				(font
