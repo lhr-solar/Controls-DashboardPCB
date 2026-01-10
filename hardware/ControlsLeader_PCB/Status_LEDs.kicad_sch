@@ -1786,8 +1786,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Value" "65"
 			(at 105.918 58.42 90)
+=======
+		(property "Value" "150"
+			(at 77.216 144.7799 0)
+>>>>>>> Stashed changes
 =======
 		(property "Value" "150"
 			(at 77.216 144.7799 0)
@@ -2331,7 +2336,11 @@
 	(symbol
 		(lib_id "Device:R")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(at 104.14 90.17 90)
+=======
+		(at 93.98 143.51 180)
+>>>>>>> Stashed changes
 =======
 		(at 93.98 143.51 180)
 >>>>>>> Stashed changes
@@ -2341,19 +2350,26 @@
 		(on_board yes)
 		(dnp no)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(uuid "1a12424d-8fba-4340-be68-a61c62440e5a")
 		(property "Reference" "R55"
 			(at 105.918 87.376 90)
 =======
+=======
+>>>>>>> Stashed changes
 		(fields_autoplaced yes)
 		(uuid "13b9e3de-f47b-48ab-988f-5d45b9f7e928")
 		(property "Reference" "R50"
 			(at 95.758 142.2399 0)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 				(justify left)
 			)
@@ -2361,16 +2377,22 @@
 		(property "Value" "65"
 			(at 105.918 92.71 90)
 =======
+=======
+>>>>>>> Stashed changes
 				(justify right)
 			)
 		)
 		(property "Value" "150"
 			(at 95.758 144.7799 0)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 				(justify left)
 			)
@@ -2378,11 +2400,16 @@
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 104.14 91.948 90)
 =======
+=======
+>>>>>>> Stashed changes
 				(justify right)
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 95.758 143.51 90)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
@@ -2393,7 +2420,11 @@
 		)
 		(property "Datasheet" "~"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 104.14 90.17 0)
+=======
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 93.98 143.51 0)
 >>>>>>> Stashed changes
@@ -2405,8 +2436,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Description" "prgm led R45"
 			(at 104.14 90.17 0)
+=======
+		(property "Description" "NMOS 150Ohms"
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 		(property "Description" "NMOS 150Ohms"
 			(at 93.98 143.51 0)
@@ -2420,7 +2456,11 @@
 		)
 		(property "Distributor Link" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 104.14 90.17 90)
+=======
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 93.98 143.51 0)
 >>>>>>> Stashed changes
@@ -2433,7 +2473,11 @@
 		)
 		(property "Manufacturer" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 104.14 90.17 90)
+=======
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 93.98 143.51 0)
 >>>>>>> Stashed changes
@@ -2446,7 +2490,11 @@
 		)
 		(property "Manufacturer Prt #" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 104.14 90.17 90)
+=======
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 93.98 143.51 0)
 >>>>>>> Stashed changes
@@ -2458,8 +2506,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "P/N" "FC0402E65R0BGT0"
 			(at 104.14 90.17 90)
+=======
+		(property "P/N" "ERJ-P03F1500V"
+			(at 93.98 143.51 0)
+>>>>>>> Stashed changes
 =======
 		(property "P/N" "ERJ-P03F1500V"
 			(at 93.98 143.51 0)
@@ -2473,22 +2526,32 @@
 		)
 		(pin "1"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(uuid "eb776a21-7358-44a3-960f-eddc6db4fb0a")
 		)
 		(pin "2"
 			(uuid "3079af9c-ddd0-4788-8135-79a7880e96d3")
 =======
+=======
+>>>>>>> Stashed changes
 			(uuid "fa0a4369-d21a-4bbd-99e5-51af1623828a")
 		)
 		(pin "2"
 			(uuid "a53991a3-6208-46f1-ab18-130685d3ec37")
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 		)
 		(instances
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 					(reference "R55")
+=======
+					(reference "R50")
+>>>>>>> Stashed changes
 =======
 					(reference "R50")
 >>>>>>> Stashed changes
@@ -2567,7 +2630,11 @@
 	(symbol
 		(lib_id "Device:R")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(at 135.89 143.51 0)
+=======
+		(at 154.94 143.51 180)
+>>>>>>> Stashed changes
 =======
 		(at 154.94 143.51 180)
 >>>>>>> Stashed changes
@@ -2578,9 +2645,15 @@
 		(dnp no)
 		(fields_autoplaced yes)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(uuid "268e2d27-da04-4ceb-96e0-8fc47aa197d1")
 		(property "Reference" "R51"
 			(at 138.43 142.2399 0)
+=======
+		(uuid "2c566594-190b-4f68-bdab-de9ab04d1135")
+		(property "Reference" "R53"
+			(at 157.226 142.2399 0)
+>>>>>>> Stashed changes
 =======
 		(uuid "2c566594-190b-4f68-bdab-de9ab04d1135")
 		(property "Reference" "R53"
@@ -2594,8 +2667,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Value" "20"
 			(at 138.43 144.7799 0)
+=======
+		(property "Value" "150"
+			(at 157.226 144.7799 0)
+>>>>>>> Stashed changes
 =======
 		(property "Value" "150"
 			(at 157.226 144.7799 0)
@@ -2609,7 +2687,11 @@
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 134.112 143.51 90)
+=======
+			(at 156.718 143.51 90)
+>>>>>>> Stashed changes
 =======
 			(at 156.718 143.51 90)
 >>>>>>> Stashed changes
@@ -2622,7 +2704,11 @@
 		)
 		(property "Datasheet" "~"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 135.89 143.51 0)
+=======
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 154.94 143.51 0)
 >>>>>>> Stashed changes
@@ -2634,8 +2720,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Description" "SWE LED R52"
 			(at 135.89 143.51 0)
+=======
+		(property "Description" "NMOS 150Ohms"
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 		(property "Description" "NMOS 150Ohms"
 			(at 154.94 143.51 0)
@@ -2649,7 +2740,11 @@
 		)
 		(property "Distributor Link" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 135.89 143.51 0)
+=======
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 154.94 143.51 0)
 >>>>>>> Stashed changes
@@ -2662,7 +2757,11 @@
 		)
 		(property "Manufacturer" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 135.89 143.51 0)
+=======
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 154.94 143.51 0)
 >>>>>>> Stashed changes
@@ -2675,7 +2774,11 @@
 		)
 		(property "Manufacturer Prt #" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 135.89 143.51 0)
+=======
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 			(at 154.94 143.51 0)
 >>>>>>> Stashed changes
@@ -2687,8 +2790,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "P/N" "ERJ-UP6D20R0V"
 			(at 135.89 143.51 0)
+=======
+		(property "P/N" "ERJ-P03F1500V"
+			(at 154.94 143.51 0)
+>>>>>>> Stashed changes
 =======
 		(property "P/N" "ERJ-P03F1500V"
 			(at 154.94 143.51 0)
@@ -2702,10 +2810,17 @@
 		)
 		(pin "1"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(uuid "087e69d4-fa52-4072-882c-c40e7375146a")
 		)
 		(pin "2"
 			(uuid "19c9c35d-a425-4570-8abd-6f8520fb9b96")
+=======
+			(uuid "f676698f-cbc7-40ae-8947-b551fdc2437d")
+		)
+		(pin "2"
+			(uuid "ae46733e-c2c1-405e-934d-88db0c001819")
+>>>>>>> Stashed changes
 =======
 			(uuid "f676698f-cbc7-40ae-8947-b551fdc2437d")
 		)
@@ -2717,8 +2832,11 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 					(reference "R51")
 =======
+=======
+>>>>>>> Stashed changes
 					(reference "R53")
 					(unit 1)
 				)
@@ -2824,6 +2942,9 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 					(reference "R46")
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 					(unit 1)
 				)
@@ -3828,8 +3949,13 @@
 	)
 	(symbol
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(lib_id "Device:R")
 		(at 199.39 91.44 90)
+=======
+		(lib_id "Device:R_US")
+		(at 199.39 89.916 90)
+>>>>>>> Stashed changes
 =======
 		(lib_id "Device:R_US")
 		(at 199.39 89.916 90)
@@ -3840,19 +3966,26 @@
 		(on_board yes)
 		(dnp no)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(uuid "904f82ce-dfaa-42d9-995d-8ed80905790f")
 		(property "Reference" "R47"
 			(at 201.168 88.646 90)
 =======
+=======
+>>>>>>> Stashed changes
 		(fields_autoplaced yes)
 		(uuid "90a3e2ba-51e4-464c-9d8b-18bfaa2c8a18")
 		(property "Reference" "R62"
 			(at 199.39 84.582 90)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 				(justify left)
 			)
@@ -3860,15 +3993,21 @@
 		(property "Value" "1.1k"
 			(at 201.93 94.488 90)
 =======
+=======
+>>>>>>> Stashed changes
 			)
 		)
 		(property "Value" "10k"
 			(at 199.39 87.122 90)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 				(justify left)
 			)
@@ -3876,10 +4015,15 @@
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 199.39 93.218 90)
 =======
+=======
+>>>>>>> Stashed changes
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 199.644 88.9 90)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
@@ -3890,7 +4034,11 @@
 		)
 		(property "Datasheet" "~"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 199.39 91.44 0)
+=======
+			(at 199.39 89.916 0)
+>>>>>>> Stashed changes
 =======
 			(at 199.39 89.916 0)
 >>>>>>> Stashed changes
@@ -3901,6 +4049,7 @@
 				(hide yes)
 			)
 		)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 		(property "Description" "Controls R47"
 			(at 199.39 91.44 0)
@@ -3917,6 +4066,10 @@
 		(property "Description" "Resistor, US symbol"
 			(at 199.39 89.916 0)
 >>>>>>> Stashed changes
+=======
+		(property "Description" "Resistor, US symbol"
+			(at 199.39 89.916 0)
+>>>>>>> Stashed changes
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3926,7 +4079,11 @@
 		)
 		(property "Manufacturer" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 199.39 91.44 90)
+=======
+			(at 199.39 89.916 0)
+>>>>>>> Stashed changes
 =======
 			(at 199.39 89.916 0)
 >>>>>>> Stashed changes
@@ -3938,8 +4095,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Manufacturer Prt #" ""
 			(at 199.39 91.44 90)
+=======
+		(property "Mouser Link" ""
+			(at 199.39 89.916 0)
+>>>>>>> Stashed changes
 =======
 		(property "Mouser Link" ""
 			(at 199.39 89.916 0)
@@ -3952,9 +4114,12 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "P/N" "CRCW12101K10FKEAHP"
 			(at 199.39 91.44 90)
 =======
+=======
+>>>>>>> Stashed changes
 		(property "Manufacturer_Part_Number" "CRCW060310K0FKEI "
 			(at 199.39 89.916 0)
 			(effects
@@ -3975,6 +4140,9 @@
 		)
 		(property "Description (Customer #)" ""
 			(at 199.39 89.916 0)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 			(effects
 				(font
@@ -3985,22 +4153,32 @@
 		)
 		(pin "1"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(uuid "4765a01a-c86d-4b55-81cd-9e692993c9ac")
 		)
 		(pin "2"
 			(uuid "fbbec5d9-f6d6-4665-96b1-8ef3a91761ad")
 =======
+=======
+>>>>>>> Stashed changes
 			(uuid "e30208b2-7971-4656-9894-dbdcb8ea8337")
 		)
 		(pin "2"
 			(uuid "d2d20e95-53e2-4865-858f-cc8a7abcb6e5")
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 		)
 		(instances
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 					(reference "R47")
+=======
+					(reference "R62")
+>>>>>>> Stashed changes
 =======
 					(reference "R62")
 >>>>>>> Stashed changes
@@ -4144,6 +4322,7 @@
 		)
 	)
 	(symbol
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 		(lib_id "Device:R")
 		(at 104.14 78.74 90)
@@ -4355,6 +4534,8 @@
 		)
 	)
 	(symbol
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 		(lib_id "Device:LED")
@@ -4680,6 +4861,221 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 					(reference "R54")
+<<<<<<< Updated upstream
+=======
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 205.74 139.7 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bbec8fb0-b3b4-4ea0-8d15-38b6b3fb30cc")
+		(property "Reference" "R55"
+			(at 208.026 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "150"
+			(at 208.026 140.9699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 207.518 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "NMOS 150Ohms"
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "ERJ-P03F1500V"
+			(at 205.74 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c9124fa8-aaeb-44b1-a442-17965beb2b1c")
+		)
+		(pin "2"
+			(uuid "99c39f2f-1706-43b5-adce-1feef48e75d2")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 114.3 143.51 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c2d6b026-1ecd-4d5a-9708-07e2230dd31d")
+		(property "Reference" "R51"
+			(at 116.586 142.2399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "150"
+			(at 116.586 144.7799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 116.078 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "NMOS 150Ohms"
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Distributor Link" ""
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer Prt #" ""
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "ERJ-P03F1500V"
+			(at 114.3 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "265b8b4c-100c-47dd-a5d5-ec9a6ad8e4ad")
+		)
+		(pin "2"
+			(uuid "9aace0a6-2d5a-40e0-9b41-286940f00c2f")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
+					(reference "R51")
+>>>>>>> Stashed changes
 					(unit 1)
 				)
 			)
@@ -5014,6 +5410,7 @@
 	)
 	(symbol
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(lib_id "Device:R")
 		(at 175.26 143.51 0)
 		(unit 1)
@@ -5120,6 +5517,8 @@
 		)
 	)
 	(symbol
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 		(lib_id "power:GND")
@@ -5665,9 +6064,15 @@
 		(dnp no)
 		(fields_autoplaced yes)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(uuid "dec52b99-dfa9-4c62-8dab-957622715ec6")
 		(property "Reference" "R48"
 			(at 77.47 142.2399 0)
+=======
+		(uuid "e0b036a9-4c8a-4cfe-87c6-c20811a8573f")
+		(property "Reference" "R45"
+			(at 104.14 61.468 90)
+>>>>>>> Stashed changes
 =======
 		(uuid "e0b036a9-4c8a-4cfe-87c6-c20811a8573f")
 		(property "Reference" "R45"
@@ -5680,8 +6085,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Value" "20"
 			(at 77.47 144.7799 0)
+=======
+		(property "Value" "150"
+			(at 104.14 64.008 90)
+>>>>>>> Stashed changes
 =======
 		(property "Value" "150"
 			(at 104.14 64.008 90)
@@ -5711,9 +6121,12 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "Description" "SWE LED R52"
 			(at 74.93 143.51 0)
 =======
+=======
+>>>>>>> Stashed changes
 		(property "Description" "NMOS 150Ohms"
 			(at 104.14 67.31 0)
 >>>>>>> Stashed changes
@@ -5726,7 +6139,11 @@
 		)
 		(property "Distributor Link" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 74.93 143.51 0)
+=======
+			(at 104.14 67.31 0)
+>>>>>>> Stashed changes
 =======
 			(at 104.14 67.31 0)
 >>>>>>> Stashed changes
@@ -5739,7 +6156,11 @@
 		)
 		(property "Manufacturer" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 74.93 143.51 0)
+=======
+			(at 104.14 67.31 0)
+>>>>>>> Stashed changes
 =======
 			(at 104.14 67.31 0)
 >>>>>>> Stashed changes
@@ -5752,7 +6173,11 @@
 		)
 		(property "Manufacturer Prt #" ""
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(at 74.93 143.51 0)
+=======
+			(at 104.14 67.31 0)
+>>>>>>> Stashed changes
 =======
 			(at 104.14 67.31 0)
 >>>>>>> Stashed changes
@@ -5764,8 +6189,13 @@
 			)
 		)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		(property "P/N" "ERJ-UP6D20R0V"
 			(at 74.93 143.51 0)
+=======
+		(property "P/N" "ERJ-P03F1500V"
+			(at 104.14 67.31 0)
+>>>>>>> Stashed changes
 =======
 		(property "P/N" "ERJ-P03F1500V"
 			(at 104.14 67.31 0)
@@ -5779,10 +6209,17 @@
 		)
 		(pin "1"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			(uuid "ee73b680-1220-407a-8bb0-97ba68dcc2ab")
 		)
 		(pin "2"
 			(uuid "ccb8b23f-1728-4bd6-947d-11419dbbe550")
+=======
+			(uuid "af82e1f9-5c83-4ba6-8c55-1d0bb11ea3a7")
+		)
+		(pin "2"
+			(uuid "26dd8d3e-5387-4058-a68d-1cf825ca540c")
+>>>>>>> Stashed changes
 =======
 			(uuid "af82e1f9-5c83-4ba6-8c55-1d0bb11ea3a7")
 		)
@@ -5794,7 +6231,11 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/596c86f4-41b5-4d6a-bb61-b1f944f438e7"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 					(reference "R48")
+=======
+					(reference "R45")
+>>>>>>> Stashed changes
 =======
 					(reference "R45")
 >>>>>>> Stashed changes
