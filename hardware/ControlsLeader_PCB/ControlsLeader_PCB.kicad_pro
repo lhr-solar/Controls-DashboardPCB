@@ -147,7 +147,7 @@
           "td_onpthpad": true,
           "td_onroundshapesonly": false,
           "td_onsmdpad": true,
-          "td_ontrackend": false,
+          "td_ontrackend": true,
           "td_onvia": true
         }
       ],
@@ -774,12 +774,24 @@
       "NMOS Switch2"
     ],
     [
+      "d2a39224-ea42-493b-ad1b-fc800fa3b4ea",
+      "24v to 16v ldo"
+    ],
+    [
       "657cdd31-ee3f-4523-98c1-ca16ae4e41df",
       "RPP"
     ],
     [
+      "b0729058-c6be-49c1-a87e-2ac8a37e6931",
+      "Can Transciever"
+    ],
+    [
       "d00337e6-4975-4ba1-a951-e690956d208d",
       "24v_5v_Buck"
+    ],
+    [
+      "6f9c0058-7b30-4c81-afa5-092cb85861ec",
+      "Steering Angle Sensor Components"
     ]
   ],
   "text_variables": {}
