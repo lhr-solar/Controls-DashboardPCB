@@ -1069,7 +1069,7 @@
 		)
 	)
 	(rectangle
-		(start 72.39 73.66)
+		(start 65.024 73.66)
 		(end 212.217 119.38)
 		(stroke
 			(width 0)
@@ -1217,6 +1217,16 @@
 	)
 	(wire
 		(pts
+			(xy 84.836 106.172) (xy 85.09 106.172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f0e8614-2110-4c67-b55e-4fdaf2b9e0b4")
+	)
+	(wire
+		(pts
 			(xy 84.582 85.344) (xy 85.598 84.328)
 		)
 		(stroke
@@ -1307,6 +1317,26 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 111.252) (xy 88.138 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "864c3470-50d1-4af8-93a0-975fa6335f24")
+	)
+	(wire
+		(pts
+			(xy 89.408 114.3) (xy 89.662 114.046)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88929e5c-b841-4cd7-8470-9a77dd5093be")
+	)
+	(wire
+		(pts
 			(xy 125.984 90.17) (xy 141.224 90.17)
 		)
 		(stroke
@@ -1324,6 +1354,16 @@
 			(type default)
 		)
 		(uuid "8aeb37ba-af51-4706-bd87-610a865112ae")
+	)
+	(wire
+		(pts
+			(xy 85.09 106.172) (xy 87.884 103.378)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e910e96-da40-4705-951c-ccfa94392bf2")
 	)
 	(wire
 		(pts
@@ -1347,6 +1387,16 @@
 	)
 	(wire
 		(pts
+			(xy 87.884 103.378) (xy 89.154 103.378)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7b9691d-3e55-4369-a9de-7c5acfb4ae11")
+	)
+	(wire
+		(pts
 			(xy 113.284 81.026) (xy 113.284 82.55)
 		)
 		(stroke
@@ -1364,6 +1414,16 @@
 			(type default)
 		)
 		(uuid "b88232d8-8ffa-4406-9f5d-db96520f2495")
+	)
+	(wire
+		(pts
+			(xy 89.154 103.378) (xy 89.662 103.886)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bca9f54a-f709-4bdc-8709-c0443d34ab49")
 	)
 	(wire
 		(pts
@@ -1404,6 +1464,16 @@
 			(type default)
 		)
 		(uuid "d8511974-7eb0-435d-9778-bdc657bde753")
+	)
+	(wire
+		(pts
+			(xy 88.138 114.3) (xy 89.408 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da47e1d7-973c-4182-af38-9cfe91f6c090")
 	)
 	(wire
 		(pts
@@ -1477,6 +1547,17 @@
 		)
 		(uuid "0c7fb673-0720-4904-9f35-e57ca06a5320")
 	)
+	(hierarchical_label "CAN_TX"
+		(shape input)
+		(at 84.836 106.172 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "261ef180-2bd6-418b-bf0a-74a4923d27a4")
+	)
 	(hierarchical_label "+3.3v_LSOM"
 		(shape input)
 		(at 85.598 84.328 0)
@@ -1509,6 +1590,17 @@
 			(justify left)
 		)
 		(uuid "65562291-9225-4276-85be-c033bba4c35a")
+	)
+	(hierarchical_label "CAN_RX"
+		(shape output)
+		(at 85.09 111.252 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b9514580-ea35-4dd5-be7d-9728fc6b952a")
 	)
 	(hierarchical_label "CAN_TX"
 		(shape input)
@@ -2451,6 +2543,123 @@
 			(project "ControlsLeader_PCB"
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec/b0729058-c6be-49c1-a87e-2ac8a37e6931"
 					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Jumper:Jumper_2_Open")
+		(at 89.662 108.966 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "7a72aeb9-07e4-416f-a617-3ac9927d0e4e")
+		(property "Reference" "CC_Term2"
+			(at 91.694 109.093 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Jumper_2_Open"
+			(at 94.234 109.093 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Jumper, 2-pole, open"
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PN" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "p/n" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Color" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "If" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Mfg" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Vf" ""
+			(at 89.662 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "692fcee8-ecee-40c4-ac61-a582daaf895d")
+		)
+		(pin "1"
+			(uuid "bb0b2c2f-88e8-454b-b5c7-4c3bbda55dcf")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec/b0729058-c6be-49c1-a87e-2ac8a37e6931"
+					(reference "CC_Term2")
 					(unit 1)
 				)
 			)

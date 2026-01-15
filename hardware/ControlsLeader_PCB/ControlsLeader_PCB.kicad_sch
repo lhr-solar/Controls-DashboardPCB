@@ -172,6 +172,173 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "0805L100WR:0805L100WR"
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "F"
+				(at 13.97 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Value" "0805L100WR"
+				(at 13.97 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Footprint" "FUSC2114X180N"
+				(at 13.97 -96.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.arrow.com/en/products/0805l100wr/littelfuse"
+				(at 13.97 -196.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Description" "LITTELFUSE - 0805L100WR - Resettable Fuse, PPTC, 0805 (2012 Metric), POLYFUSE 0805L, 6 VDC, 1 A, 1.95 A, 0.3 s"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Height" "1.8"
+				(at 13.97 -396.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "576-0805L100"
+				(at 13.97 -496.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Littelfuse/0805L100WR?qs=SJZ%252BTX%252BI2BTMlREVsW49pQ%3D%3D"
+				(at 13.97 -596.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "LITTELFUSE"
+				(at 13.97 -696.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "0805L100WR"
+				(at 13.97 -796.19 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+					(hide yes)
+				)
+			)
+			(symbol "0805L100WR_1_1"
+				(rectangle
+					(start 5.08 1.27)
+					(end 12.7 -1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 0) (xy 12.7 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 17.78 0 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
 				(offset 1.016)
@@ -23410,7 +23577,7 @@
 	)
 	(wire
 		(pts
-			(xy 248.666 177.038) (xy 250.19 177.038)
+			(xy 248.666 178.054) (xy 250.19 178.054)
 		)
 		(stroke
 			(width 0)
@@ -23800,7 +23967,7 @@
 	)
 	(wire
 		(pts
-			(xy 267.97 177.038) (xy 268.732 177.038)
+			(xy 267.97 178.054) (xy 268.732 178.054)
 		)
 		(stroke
 			(width 0)
@@ -27953,7 +28120,7 @@
 		(uuid "244dd6fc-bfee-42bd-be64-50663c951472")
 	)
 	(label "5V_Buck"
-		(at 248.666 177.038 180)
+		(at 248.666 178.054 180)
 		(effects
 			(font
 				(size 0.762 0.762)
@@ -28243,7 +28410,7 @@
 		(uuid "4e56c84c-0a1a-43c0-b695-457a7c3510a2")
 	)
 	(label "5V_Buck_IndicationLights"
-		(at 268.732 177.038 0)
+		(at 268.732 178.054 0)
 		(effects
 			(font
 				(size 0.762 0.762)
@@ -31093,6 +31260,125 @@
 		)
 	)
 	(symbol
+		(lib_id "0805L100WR:0805L100WR")
+		(at 250.19 178.054 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a70464df-60dd-4295-864c-27ee2e6c2626")
+		(property "Reference" "F4"
+			(at 259.334 175.514 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0805L100WR"
+			(at 250.952 175.514 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "FUSC2114X180N"
+			(at 264.16 274.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.arrow.com/en/products/0805l100wr/littelfuse"
+			(at 264.16 374.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "LITTELFUSE - 0805L100WR - Resettable Fuse, PPTC, 0805 (2012 Metric), POLYFUSE 0805L, 6 VDC, 1 A, 1.95 A, 0.3 s"
+			(at 250.19 178.054 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" "1.8"
+			(at 264.16 574.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "576-0805L100"
+			(at 264.16 674.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Littelfuse/0805L100WR?qs=SJZ%252BTX%252BI2BTMlREVsW49pQ%3D%3D"
+			(at 264.16 774.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "LITTELFUSE"
+			(at 264.16 874.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "0805L100WR"
+			(at 264.16 974.244 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "feaf8490-0a3d-493b-95fe-ddbea13d01ee")
+		)
+		(pin "1"
+			(uuid "b94c93f8-f95c-48e5-bc58-9f45bb522e58")
+		)
+		(instances
+			(project ""
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17"
+					(reference "F4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 25.4 191.77 0)
 		(unit 1)
@@ -32238,7 +32524,7 @@
 		(dnp no)
 		(uuid "de55cb7c-37f6-4bf1-847c-d6d070435a12")
 		(property "Reference" "F5"
-			(at 259.334 179.832 0)
+			(at 259.08 168.656 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32246,7 +32532,7 @@
 			)
 		)
 		(property "Value" "0603L025YR"
-			(at 251.206 179.578 0)
+			(at 251.206 168.656 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32545,152 +32831,6 @@
 			(project ""
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17"
 					(reference "#FLG01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "0603L025YR:0603L025YR")
-		(at 250.19 177.038 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f732eca5-976b-40e0-a67f-88b604c76663")
-		(property "Reference" "F4"
-			(at 258.826 173.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0603L025YR"
-			(at 251.46 173.736 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "0603L025YR:FUSC1608X75N"
-			(at 264.16 273.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://m.littelfuse.com/~/media/electronics/datasheets/resettable_ptcs/littelfuse_ptc_0603l_datasheet.pdf.pdf"
-			(at 264.16 373.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resettable Fuses - PPTC PTC 9V .250A POLY SURF MOUNT"
-			(at 250.19 177.038 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Height" "0.75"
-			(at 264.16 573.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "576-0603L025YR"
-			(at 264.16 673.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Littelfuse/0603L025YR?qs=n5MbhIql%252BRmYmNliBUCDFQ%3D%3D"
-			(at 264.16 773.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "LITTELFUSE"
-			(at 264.16 873.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "0603L025YR"
-			(at 264.16 973.228 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" ""
-			(at 250.19 177.038 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Library" ""
-			(at 250.19 177.038 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Name" ""
-			(at 250.19 177.038 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f5732c41-d3b5-4feb-a101-3e8379b825bd")
-		)
-		(pin "1"
-			(uuid "4b765ca3-fd29-476c-82b7-004344b02007")
-		)
-		(instances
-			(project "ControlsLeader_PCB"
-				(path "/298dad81-302c-41c7-874b-fcde1c3cde17"
-					(reference "F4")
 					(unit 1)
 				)
 			)
