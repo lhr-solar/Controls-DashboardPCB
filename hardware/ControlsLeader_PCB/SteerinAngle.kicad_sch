@@ -433,7 +433,7 @@
 		)
 	)
 	(rectangle
-		(start 109.982 88.9)
+		(start 106.426 88.9)
 		(end 194.31 130.048)
 		(stroke
 			(width 0)
@@ -446,7 +446,7 @@
 	)
 	(text "Steering Angle Sensor Components"
 		(exclude_from_sim no)
-		(at 135.128 86.614 0)
+		(at 131.318 86.868 0)
 		(effects
 			(font
 				(size 1.905 1.905)
@@ -488,6 +488,16 @@
 	)
 	(wire
 		(pts
+			(xy 124.46 98.806) (xy 121.412 98.806)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48ce4ad9-544d-4bf0-ba90-1e1d7bed87d3")
+	)
+	(wire
+		(pts
 			(xy 176.022 103.886) (xy 176.53 103.378)
 		)
 		(stroke
@@ -498,6 +508,16 @@
 	)
 	(wire
 		(pts
+			(xy 121.412 98.806) (xy 119.38 96.774)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "601727b8-4095-4b48-8fcb-3a51fed1d8d1")
+	)
+	(wire
+		(pts
 			(xy 174.752 106.426) (xy 176.53 106.426)
 		)
 		(stroke
@@ -505,6 +525,26 @@
 			(type default)
 		)
 		(uuid "6368c911-f09f-44ee-9779-3d66dde8ac25")
+	)
+	(wire
+		(pts
+			(xy 121.158 113.792) (xy 122.174 113.792)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c460a46-6ff6-46d4-9b39-860bfae15b58")
+	)
+	(wire
+		(pts
+			(xy 120.142 119.634) (xy 122.174 119.634)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73b61d74-cd96-4dbb-ad06-659a4359956e")
 	)
 	(wire
 		(pts
@@ -528,7 +568,7 @@
 	)
 	(wire
 		(pts
-			(xy 145.796 120.904) (xy 149.606 120.904)
+			(xy 145.796 121.92) (xy 149.606 121.92)
 		)
 		(stroke
 			(width 0)
@@ -538,7 +578,7 @@
 	)
 	(wire
 		(pts
-			(xy 145.796 117.094) (xy 149.606 117.094)
+			(xy 145.796 117.094) (xy 149.86 117.094)
 		)
 		(stroke
 			(width 0)
@@ -555,26 +595,6 @@
 			(type default)
 		)
 		(uuid "aa423955-8482-4f83-b86b-3f50cdef8c4c")
-	)
-	(wire
-		(pts
-			(xy 145.796 113.792) (xy 150.114 113.792)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bee1fc11-c1fa-4c38-9585-ab6988a633cc")
-	)
-	(wire
-		(pts
-			(xy 121.92 113.792) (xy 124.46 113.792)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed59327c-1b5e-44e1-8a09-50f6438c40de")
 	)
 	(wire
 		(pts
@@ -598,6 +618,16 @@
 	)
 	(wire
 		(pts
+			(xy 145.796 113.792) (xy 149.606 113.792)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f27c3be5-90e9-4674-80c9-312f1735821f")
+	)
+	(wire
+		(pts
 			(xy 146.05 98.806) (xy 148.59 98.806)
 		)
 		(stroke
@@ -606,7 +636,17 @@
 		)
 		(uuid "fc9bd310-dd8f-4f68-8425-8a4d078f80f2")
 	)
-	(label "FDCAN1_RX"
+	(label "SteeringCAN_L"
+		(at 149.606 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "15d54b59-a76c-4c81-96d2-aed52be68e8d")
+	)
+	(label "SteeringCAN_L"
 		(at 176.53 108.966 0)
 		(effects
 			(font
@@ -614,9 +654,19 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "786ca2bd-f825-4a3a-b04a-a0708be6164e")
+		(uuid "3e826614-828c-4e0d-a05b-af160e01febb")
 	)
-	(label "FDCAN1_TX"
+	(label "SteeringCAN_H"
+		(at 149.86 117.094 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "56d9f707-f587-45e6-9b54-d340165d65a4")
+	)
+	(label "SteeringCAN_H"
 		(at 176.53 106.426 0)
 		(effects
 			(font
@@ -624,49 +674,40 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8ac6fe91-7b91-46f3-a7df-d9715ac2f86c")
+		(uuid "f92e1fbf-30d5-4552-8fce-ac49fb648f4f")
 	)
-	(label "FDCAN1_TX"
-		(at 150.114 113.792 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a67f5235-2cbc-40da-864e-5e49c5751d88")
-	)
-	(label "FDCAN1_RX"
-		(at 121.92 113.792 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c7adbf2f-a902-43e9-abba-8a8c3db8a4a2")
-	)
-	(hierarchical_label "CarCAN_H"
+	(hierarchical_label "CAN_TX"
 		(shape input)
-		(at 149.606 117.094 0)
+		(at 149.606 113.792 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "1998dd0d-efe1-4258-bb71-88436b870b8e")
+		(uuid "17b6694b-e29e-45b2-a27a-30f514da92ee")
 	)
-	(hierarchical_label "CarCAN_L"
-		(shape input)
-		(at 149.606 120.904 0)
+	(hierarchical_label "CAN_RX"
+		(shape output)
+		(at 121.158 113.792 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "ab5db231-4467-4808-8086-79eb721f16d5")
+		(uuid "787d5148-7be1-48c8-934e-5471adf6afd1")
+	)
+	(hierarchical_label "+3.3v_LSOM"
+		(shape input)
+		(at 120.142 119.634 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b49a79b9-7c54-4217-9f07-766671ec76ae")
 	)
 	(symbol
 		(lib_id "power:+24V")
@@ -751,7 +792,7 @@
 			)
 		)
 		(property "Value" "SteeringAngleConn_01x04"
-			(at 175.514 117.602 0)
+			(at 173.736 97.282 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -884,6 +925,71 @@
 	)
 	(symbol
 		(lib_id "power:+24V")
+		(at 119.38 96.774 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7562aa98-7c35-4029-aa10-d83dd5814561")
+		(property "Reference" "#PWR052"
+			(at 119.38 100.584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+24V"
+			(at 116.84 93.726 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "60c0bc1d-c375-42bc-b4c0-23ffc8729e28")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
 		(at 176.53 102.616 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -948,8 +1054,8 @@
 		)
 	)
 	(sheet
-		(at 124.46 110.998)
-		(size 21.336 12.954)
+		(at 122.174 110.998)
+		(size 23.622 12.954)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -963,7 +1069,7 @@
 		)
 		(uuid "b0729058-c6be-49c1-a87e-2ac8a37e6931")
 		(property "Sheetname" "Can Transciever"
-			(at 127.254 110.236 0)
+			(at 124.968 110.236 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -972,7 +1078,7 @@
 			)
 		)
 		(property "Sheetfile" "CanTransciever.kicad_sch"
-			(at 121.666 125.222 0)
+			(at 119.38 125.222 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -981,7 +1087,7 @@
 			)
 		)
 		(pin "CAN_RX" output
-			(at 124.46 113.792 180)
+			(at 122.174 113.792 180)
 			(uuid "bf0486c0-83ec-45e2-8e87-ab8f5b55d347")
 			(effects
 				(font
@@ -1000,9 +1106,9 @@
 				(justify right)
 			)
 		)
-		(pin "CarCAN_H" input
+		(pin "SteeringCAN_H" input
 			(at 145.796 117.094 0)
-			(uuid "62bf248b-fbd2-4f18-904e-f75a89b874da")
+			(uuid "d244c7f7-c69e-4451-bc51-85cf3f18493c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1010,14 +1116,24 @@
 				(justify right)
 			)
 		)
-		(pin "CarCAN_L" input
-			(at 145.796 120.904 0)
-			(uuid "76c92200-f9d9-4dc4-945f-953e0ad893c8")
+		(pin "SteeringCAN_L" input
+			(at 145.796 121.92 0)
+			(uuid "68177b35-1316-49a5-b556-9093c55b7641")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+		(pin "+3.3v_LSOM" input
+			(at 122.174 119.634 180)
+			(uuid "e51e444f-778e-408f-a050-3822988acf1a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 		(instances
@@ -1069,6 +1185,16 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+		(pin "+24v_IN" input
+			(at 124.46 98.806 180)
+			(uuid "45bf6894-df32-4819-8fcd-8889f879373f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 		(instances

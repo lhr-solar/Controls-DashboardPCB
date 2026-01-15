@@ -2372,6 +2372,16 @@
 		)
 		(uuid "3e656f2a-1ebc-42f3-8681-d1dba9d52831")
 	)
+	(label "RPP1_SRC"
+		(at 154.94 90.678 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8cb43f96-b994-48e7-8780-3261b52df98b")
+	)
 	(label "LV+"
 		(at 103.632 75.184 0)
 		(effects

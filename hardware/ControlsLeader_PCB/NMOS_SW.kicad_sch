@@ -1316,10 +1316,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "9b1881f4-7bfb-46e4-bcee-008cc3481365")
+			(uuid "ea1f15e4-3db9-4c2b-a9c6-2c8a1a0486b4")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "#PWR078")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "#PWR087")
 					(unit 1)
@@ -1435,10 +1439,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "bf1d00d7-333d-4c8c-876c-ea62f2f28b61")
+			(uuid "2ce5c06a-9ed3-4995-b8c3-d7ab24a992e9")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "#PWR080")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "#PWR024")
 					(unit 1)
@@ -1598,13 +1606,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "e7f2bcf6-04c6-441c-864b-b38cac09c45f")
+			(uuid "086d12b0-8074-4eca-b652-9b4e7ca73279")
 		)
 		(pin "2"
-			(uuid "29934544-b811-4eb1-a231-37ece7bb83fe")
+			(uuid "173cf366-d151-404d-8244-f1820cbb3ea9")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "C28")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "C13")
 					(unit 1)
@@ -1756,13 +1768,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "88dbd746-c1ea-4577-9727-5f6a69cd88f9")
+			(uuid "bd0063dd-5635-49ae-b6c3-1a451a017148")
 		)
 		(pin "2"
-			(uuid "06818f0b-67b2-40a1-b265-25b8f12f9f9b")
+			(uuid "8e8f1b05-d061-4374-bbbf-0e4053330af7")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "R46")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "R29")
 					(unit 1)
@@ -1877,10 +1893,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "31d7c04a-fdc1-42c4-81c6-397a70b6c749")
+			(uuid "3ca62c84-b9b1-4d9b-bd52-d8c201095b40")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "#PWR067")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "#PWR023")
 					(unit 1)
@@ -2059,16 +2079,20 @@
 			)
 		)
 		(pin "2"
-			(uuid "76d2c04b-005e-4ef4-8674-7bc20b6df41b")
+			(uuid "2aa3bcd1-f771-4fa2-9430-121031b76f47")
 		)
 		(pin "3"
-			(uuid "abda2556-71ae-41ae-871c-3e190e43a4db")
+			(uuid "3f5b63b7-13be-4d10-b757-819056d07899")
 		)
 		(pin "1"
-			(uuid "059b3c3c-2eb2-416f-855d-6c2d6fe1dbe2")
+			(uuid "13b03532-7d5e-4b18-ad9c-9e5fe45ca777")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "Q18")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "Q15")
 					(unit 1)
@@ -2228,13 +2252,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "0a22c089-0146-41e6-922a-87bd4c715805")
+			(uuid "eff9248a-ad06-4ec6-83dc-c475135e16c7")
 		)
 		(pin "2"
-			(uuid "6a0f7770-c619-41c3-8570-bfad30478eb9")
+			(uuid "d2ab62c5-f4d6-49f2-b4af-e60454a25170")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "R45")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "R16")
 					(unit 1)
@@ -2359,10 +2387,14 @@
 			)
 		)
 		(pin "1"
-			(uuid "c4507daf-e916-458d-bd04-5efc2d7534fc")
+			(uuid "eaa5e798-e149-44cf-9034-2511cbd56961")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "TP14")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "TP13")
 					(unit 1)
@@ -2522,13 +2554,17 @@
 			)
 		)
 		(pin "2"
-			(uuid "b061fc5b-5987-4356-abdd-bdac7a95983c")
+			(uuid "6a8da4aa-3bf3-491d-acb8-67ea3ae9e3e3")
 		)
 		(pin "1"
-			(uuid "a2bedddd-8334-4a2c-8e0c-f37f720704a8")
+			(uuid "8a53dd06-1a08-4a24-9cf0-ee9379936cd9")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "D17")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "D14")
 					(unit 1)
@@ -2680,13 +2716,17 @@
 			)
 		)
 		(pin "1"
-			(uuid "b03846c4-0eaf-4216-b7e4-a98159c6df51")
+			(uuid "ac73d7a5-d21b-421f-b766-e9693cbd9dca")
 		)
 		(pin "2"
-			(uuid "8012116b-f5d7-4986-bd03-c8a5ec8b39a2")
+			(uuid "e2aa591f-ca4e-49c5-873a-bc0ad91ab2e2")
 		)
 		(instances
 			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/85edfe3f-5ae7-4090-bed8-3b0581e114ea"
+					(reference "R67")
+					(unit 1)
+				)
 				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/cf34858a-7a31-4837-b51d-ee9ae3dd074c/879fa84f-14ed-4d21-9f88-1baa6fbdbf33"
 					(reference "R44")
 					(unit 1)
