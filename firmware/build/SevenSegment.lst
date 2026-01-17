@@ -1,0 +1,1638 @@
+ARM GAS  /tmp/ccMzDXS8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"SevenSegment.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "driver/Src/SevenSegment.c"
+  20              		.section	.text.SevenSegment_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	SevenSegment_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	SevenSegment_Init:
+  28              	.LFB244:
+   1:driver/Src/SevenSegment.c **** #include "stm32xx_hal.h"
+   2:driver/Src/SevenSegment.c **** #include "SevenSegment.h"
+   3:driver/Src/SevenSegment.c **** 
+   4:driver/Src/SevenSegment.c **** static GPIO_InitTypeDef led_configA = {
+   5:driver/Src/SevenSegment.c ****     .Mode = GPIO_MODE_OUTPUT_PP,
+   6:driver/Src/SevenSegment.c ****     .Pull = GPIO_NOPULL,
+   7:driver/Src/SevenSegment.c ****     .Pin = 0 
+   8:driver/Src/SevenSegment.c **** }; 
+   9:driver/Src/SevenSegment.c **** static GPIO_InitTypeDef led_configB = {
+  10:driver/Src/SevenSegment.c ****     .Mode = GPIO_MODE_OUTPUT_PP,
+  11:driver/Src/SevenSegment.c ****     .Pull = GPIO_NOPULL,
+  12:driver/Src/SevenSegment.c ****     .Pin = 0
+  13:driver/Src/SevenSegment.c **** }; 
+  14:driver/Src/SevenSegment.c **** 
+  15:driver/Src/SevenSegment.c **** static GPIO_InitTypeDef led_configC = {
+  16:driver/Src/SevenSegment.c ****     .Mode = GPIO_MODE_OUTPUT_PP,
+  17:driver/Src/SevenSegment.c ****     .Pull = GPIO_NOPULL,
+  18:driver/Src/SevenSegment.c ****     .Pin = 0
+  19:driver/Src/SevenSegment.c **** }; 
+  20:driver/Src/SevenSegment.c **** 
+  21:driver/Src/SevenSegment.c **** const led_t seven_segment_led[NUMBER_SEVEN_SEGMENTS][NUMBER_SEGMENTS] = {{{GPIO_PIN_10, GPIOB}, {GP
+  22:driver/Src/SevenSegment.c ****    {{GPIO_PIN_6, GPIOC}, {GPIO_PIN_7, GPIOC}, {GPIO_PIN_15, GPIOB}, {GPIO_PIN_15, GPIOA}, {GPIO_PIN
+  23:driver/Src/SevenSegment.c **** 
+  24:driver/Src/SevenSegment.c **** //Initializes the LEDs for the Seven Segment LED.
+  25:driver/Src/SevenSegment.c **** void SevenSegment_Init(){ 
+  29              		.loc 1 25 25 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 16
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 00B5     		push	{lr}
+ARM GAS  /tmp/ccMzDXS8.s 			page 2
+
+
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 14, -4
+  37 0002 85B0     		sub	sp, sp, #20
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  26:driver/Src/SevenSegment.c ****     __HAL_RCC_GPIOA_CLK_ENABLE(); // enable clock for GPIOA
+  40              		.loc 1 26 5 view .LVU1
+  41              	.LBB2:
+  42              		.loc 1 26 5 view .LVU2
+  43 0004 0022     		movs	r2, #0
+  44 0006 0192     		str	r2, [sp, #4]
+  45              		.loc 1 26 5 view .LVU3
+  46 0008 364B     		ldr	r3, .L12
+  47 000a 196B     		ldr	r1, [r3, #48]
+  48 000c 41F00101 		orr	r1, r1, #1
+  49 0010 1963     		str	r1, [r3, #48]
+  50              		.loc 1 26 5 view .LVU4
+  51 0012 196B     		ldr	r1, [r3, #48]
+  52 0014 01F00101 		and	r1, r1, #1
+  53 0018 0191     		str	r1, [sp, #4]
+  54              		.loc 1 26 5 view .LVU5
+  55 001a 0199     		ldr	r1, [sp, #4]
+  56              	.LBE2:
+  57              		.loc 1 26 5 view .LVU6
+  27:driver/Src/SevenSegment.c ****     __HAL_RCC_GPIOB_CLK_ENABLE(); // enable clock for GPIOB
+  58              		.loc 1 27 5 view .LVU7
+  59              	.LBB3:
+  60              		.loc 1 27 5 view .LVU8
+  61 001c 0292     		str	r2, [sp, #8]
+  62              		.loc 1 27 5 view .LVU9
+  63 001e 196B     		ldr	r1, [r3, #48]
+  64 0020 41F00201 		orr	r1, r1, #2
+  65 0024 1963     		str	r1, [r3, #48]
+  66              		.loc 1 27 5 view .LVU10
+  67 0026 196B     		ldr	r1, [r3, #48]
+  68 0028 01F00201 		and	r1, r1, #2
+  69 002c 0291     		str	r1, [sp, #8]
+  70              		.loc 1 27 5 view .LVU11
+  71 002e 0299     		ldr	r1, [sp, #8]
+  72              	.LBE3:
+  73              		.loc 1 27 5 view .LVU12
+  28:driver/Src/SevenSegment.c ****     __HAL_RCC_GPIOC_CLK_ENABLE(); // enable clock for GPIOC
+  74              		.loc 1 28 5 view .LVU13
+  75              	.LBB4:
+  76              		.loc 1 28 5 view .LVU14
+  77 0030 0392     		str	r2, [sp, #12]
+  78              		.loc 1 28 5 view .LVU15
+  79 0032 196B     		ldr	r1, [r3, #48]
+  80 0034 41F00401 		orr	r1, r1, #4
+  81 0038 1963     		str	r1, [r3, #48]
+  82              		.loc 1 28 5 view .LVU16
+  83 003a 1B6B     		ldr	r3, [r3, #48]
+  84 003c 03F00403 		and	r3, r3, #4
+  85 0040 0393     		str	r3, [sp, #12]
+  86              		.loc 1 28 5 view .LVU17
+  87 0042 039B     		ldr	r3, [sp, #12]
+ARM GAS  /tmp/ccMzDXS8.s 			page 3
+
+
+  88              	.LBE4:
+  89              		.loc 1 28 5 view .LVU18
+  29:driver/Src/SevenSegment.c **** 
+  30:driver/Src/SevenSegment.c ****     for (uint8_t i = 0; i < NUMBER_SEVEN_SEGMENTS; i++) {
+  90              		.loc 1 30 5 view .LVU19
+  91              	.LBB5:
+  92              		.loc 1 30 10 view .LVU20
+  93              	.LVL0:
+  94              		.loc 1 30 18 is_stmt 0 view .LVU21
+  95 0044 9446     		mov	ip, r2
+  96              		.loc 1 30 5 view .LVU22
+  97 0046 39E0     		b	.L2
+  98              	.LVL1:
+  99              	.L3:
+ 100              	.LBB6:
+  31:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+  32:driver/Src/SevenSegment.c ****             switch ((uint32_t)seven_segment_led[i][j].Port){
+  33:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOA:
+  34:driver/Src/SevenSegment.c ****                     led_configA.Pin = (seven_segment_led[i][j].Pin | led_configA.Pin);  
+  35:driver/Src/SevenSegment.c ****                     break; 
+  36:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOB:
+  37:driver/Src/SevenSegment.c ****                     led_configB.Pin = (seven_segment_led[i][j].Pin | led_configB.Pin);   
+ 101              		.loc 1 37 21 is_stmt 1 view .LVU23
+ 102              		.loc 1 37 63 is_stmt 0 view .LVU24
+ 103 0048 CCEBCC02 		rsb	r2, ip, ip, lsl #3
+ 104 004c 1A44     		add	r2, r2, r3
+ 105 004e 2649     		ldr	r1, .L12+4
+ 106 0050 51F83220 		ldr	r2, [r1, r2, lsl #3]
+ 107              		.loc 1 37 81 view .LVU25
+ 108 0054 2549     		ldr	r1, .L12+8
+ 109 0056 0868     		ldr	r0, [r1]
+ 110              		.loc 1 37 68 view .LVU26
+ 111 0058 0243     		orrs	r2, r2, r0
+ 112              		.loc 1 37 37 view .LVU27
+ 113 005a 0A60     		str	r2, [r1]
+  38:driver/Src/SevenSegment.c ****                     break;
+ 114              		.loc 1 38 21 is_stmt 1 view .LVU28
+ 115              	.L5:
+  31:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ 116              		.loc 1 31 51 discriminator 2 view .LVU29
+ 117 005c 0133     		adds	r3, r3, #1
+ 118              	.LVL2:
+  31:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ 119              		.loc 1 31 51 is_stmt 0 discriminator 2 view .LVU30
+ 120 005e DBB2     		uxtb	r3, r3
+ 121              	.LVL3:
+ 122              	.L7:
+  31:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ 123              		.loc 1 31 31 is_stmt 1 discriminator 1 view .LVU31
+ 124 0060 062B     		cmp	r3, #6
+ 125 0062 27D8     		bhi	.L10
+  32:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOA:
+ 126              		.loc 1 32 13 view .LVU32
+  32:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOA:
+ 127              		.loc 1 32 54 is_stmt 0 view .LVU33
+ 128 0064 CCEBCC01 		rsb	r1, ip, ip, lsl #3
+ 129 0068 1944     		add	r1, r1, r3
+ARM GAS  /tmp/ccMzDXS8.s 			page 4
+
+
+ 130 006a 1F4A     		ldr	r2, .L12+4
+ 131 006c 02EBC102 		add	r2, r2, r1, lsl #3
+ 132 0070 5268     		ldr	r2, [r2, #4]
+  32:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOA:
+ 133              		.loc 1 32 13 view .LVU34
+ 134 0072 1F49     		ldr	r1, .L12+12
+ 135 0074 8A42     		cmp	r2, r1
+ 136 0076 E7D0     		beq	.L3
+ 137 0078 01F58061 		add	r1, r1, #1024
+ 138 007c 8A42     		cmp	r2, r1
+ 139 007e 0ED0     		beq	.L4
+ 140 0080 A1F50061 		sub	r1, r1, #2048
+ 141 0084 8A42     		cmp	r2, r1
+ 142 0086 E9D1     		bne	.L5
+  34:driver/Src/SevenSegment.c ****                     break; 
+ 143              		.loc 1 34 21 is_stmt 1 view .LVU35
+  34:driver/Src/SevenSegment.c ****                     break; 
+ 144              		.loc 1 34 63 is_stmt 0 view .LVU36
+ 145 0088 CCEBCC00 		rsb	r0, ip, ip, lsl #3
+ 146 008c 1844     		add	r0, r0, r3
+ 147 008e 164A     		ldr	r2, .L12+4
+ 148 0090 52F83020 		ldr	r2, [r2, r0, lsl #3]
+  34:driver/Src/SevenSegment.c ****                     break; 
+ 149              		.loc 1 34 81 view .LVU37
+ 150 0094 1749     		ldr	r1, .L12+16
+ 151 0096 0868     		ldr	r0, [r1]
+  34:driver/Src/SevenSegment.c ****                     break; 
+ 152              		.loc 1 34 68 view .LVU38
+ 153 0098 0243     		orrs	r2, r2, r0
+  34:driver/Src/SevenSegment.c ****                     break; 
+ 154              		.loc 1 34 37 view .LVU39
+ 155 009a 0A60     		str	r2, [r1]
+  35:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOB:
+ 156              		.loc 1 35 21 is_stmt 1 view .LVU40
+ 157 009c DEE7     		b	.L5
+ 158              	.L4:
+  39:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOC:
+  40:driver/Src/SevenSegment.c ****                     led_configC.Pin = (seven_segment_led[i][j].Pin | led_configC.Pin);   
+ 159              		.loc 1 40 21 view .LVU41
+ 160              		.loc 1 40 63 is_stmt 0 view .LVU42
+ 161 009e CCEBCC00 		rsb	r0, ip, ip, lsl #3
+ 162 00a2 1844     		add	r0, r0, r3
+ 163 00a4 104A     		ldr	r2, .L12+4
+ 164 00a6 52F83020 		ldr	r2, [r2, r0, lsl #3]
+ 165              		.loc 1 40 81 view .LVU43
+ 166 00aa 1349     		ldr	r1, .L12+20
+ 167 00ac 0868     		ldr	r0, [r1]
+ 168              		.loc 1 40 68 view .LVU44
+ 169 00ae 0243     		orrs	r2, r2, r0
+ 170              		.loc 1 40 37 view .LVU45
+ 171 00b0 0A60     		str	r2, [r1]
+  41:driver/Src/SevenSegment.c ****                     break;
+ 172              		.loc 1 41 21 is_stmt 1 view .LVU46
+ 173 00b2 D3E7     		b	.L5
+ 174              	.L10:
+ 175              	.LBE6:
+  30:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ARM GAS  /tmp/ccMzDXS8.s 			page 5
+
+
+ 176              		.loc 1 30 53 discriminator 2 view .LVU47
+ 177 00b4 0CF1010C 		add	ip, ip, #1
+ 178              	.LVL4:
+  30:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ 179              		.loc 1 30 53 is_stmt 0 discriminator 2 view .LVU48
+ 180 00b8 5FFA8CFC 		uxtb	ip, ip
+ 181              	.LVL5:
+ 182              	.L2:
+  30:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
+ 183              		.loc 1 30 27 is_stmt 1 discriminator 1 view .LVU49
+ 184 00bc BCF1010F 		cmp	ip, #1
+ 185 00c0 01D8     		bhi	.L11
+ 186              	.LBB7:
+  31:driver/Src/SevenSegment.c ****             switch ((uint32_t)seven_segment_led[i][j].Port){
+ 187              		.loc 1 31 22 is_stmt 0 view .LVU50
+ 188 00c2 0023     		movs	r3, #0
+ 189 00c4 CCE7     		b	.L7
+ 190              	.L11:
+ 191              	.LBE7:
+ 192              	.LBE5:
+  42:driver/Src/SevenSegment.c ****             }
+  43:driver/Src/SevenSegment.c ****         } 
+  44:driver/Src/SevenSegment.c ****     }
+  45:driver/Src/SevenSegment.c ****     HAL_GPIO_Init(GPIOA, &led_configA); // initialize GPIOA with led_configA 
+ 193              		.loc 1 45 5 is_stmt 1 view .LVU51
+ 194 00c6 0B49     		ldr	r1, .L12+16
+ 195 00c8 0C48     		ldr	r0, .L12+24
+ 196 00ca FFF7FEFF 		bl	HAL_GPIO_Init
+ 197              	.LVL6:
+  46:driver/Src/SevenSegment.c ****     HAL_GPIO_Init(GPIOB, &led_configB); // initialize GPIOB with led_configB
+ 198              		.loc 1 46 5 view .LVU52
+ 199 00ce 0749     		ldr	r1, .L12+8
+ 200 00d0 0748     		ldr	r0, .L12+12
+ 201 00d2 FFF7FEFF 		bl	HAL_GPIO_Init
+ 202              	.LVL7:
+  47:driver/Src/SevenSegment.c ****     HAL_GPIO_Init(GPIOC, &led_configC); // initialize GPIOC with led_configC
+ 203              		.loc 1 47 5 view .LVU53
+ 204 00d6 0849     		ldr	r1, .L12+20
+ 205 00d8 0948     		ldr	r0, .L12+28
+ 206 00da FFF7FEFF 		bl	HAL_GPIO_Init
+ 207              	.LVL8:
+  48:driver/Src/SevenSegment.c **** 
+  49:driver/Src/SevenSegment.c ****     //DISPLAY1 LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED5 PB0, LED6 PC5, LED7 PC4
+  50:driver/Src/SevenSegment.c ****     //DISPLAY2 LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED12 PC10, LED13 PC11, LED14 PC12
+  51:driver/Src/SevenSegment.c **** }
+ 208              		.loc 1 51 1 is_stmt 0 view .LVU54
+ 209 00de 05B0     		add	sp, sp, #20
+ 210              	.LCFI2:
+ 211              		.cfi_def_cfa_offset 4
+ 212              		@ sp needed
+ 213 00e0 5DF804FB 		ldr	pc, [sp], #4
+ 214              	.L13:
+ 215              		.align	2
+ 216              	.L12:
+ 217 00e4 00380240 		.word	1073887232
+ 218 00e8 00000000 		.word	seven_segment_led
+ 219 00ec 00000000 		.word	led_configB
+ARM GAS  /tmp/ccMzDXS8.s 			page 6
+
+
+ 220 00f0 00040240 		.word	1073873920
+ 221 00f4 00000000 		.word	led_configA
+ 222 00f8 00000000 		.word	led_configC
+ 223 00fc 00000240 		.word	1073872896
+ 224 0100 00080240 		.word	1073874944
+ 225              		.cfi_endproc
+ 226              	.LFE244:
+ 228              		.section	.text.displayNum_SevenSegment,"ax",%progbits
+ 229              		.align	1
+ 230              		.global	displayNum_SevenSegment
+ 231              		.syntax unified
+ 232              		.thumb
+ 233              		.thumb_func
+ 235              	displayNum_SevenSegment:
+ 236              	.LVL9:
+ 237              	.LFB245:
+  52:driver/Src/SevenSegment.c **** 
+  53:driver/Src/SevenSegment.c **** 
+  54:driver/Src/SevenSegment.c **** /*Displays a number on the Seven Segment LEDs. Display refers to display_0 or display_1 
+  55:driver/Src/SevenSegment.c ****  and number is the number 0-99 that the LEDs will display. 
+  56:driver/Src/SevenSegment.c ****  If the number is larger than 10, display input does not matter since it will use both displays. 
+  57:driver/Src/SevenSegment.c ****  Returns 1 for success and 0 for failure.*/
+  58:driver/Src/SevenSegment.c **** 
+  59:driver/Src/SevenSegment.c ****  uint8_t displayNum_SevenSegment(display_t display, uint8_t number){ //display is 0 or 1
+ 238              		.loc 1 59 68 is_stmt 1 view -0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+  60:driver/Src/SevenSegment.c ****     uint8_t digit = 0;
+ 242              		.loc 1 60 5 view .LVU56
+  61:driver/Src/SevenSegment.c ****     if (number > MAX_NUM){
+ 243              		.loc 1 61 5 view .LVU57
+ 244              		.loc 1 61 8 is_stmt 0 view .LVU58
+ 245 0000 6329     		cmp	r1, #99
+ 246 0002 00F29581 		bhi	.L64
+  59:driver/Src/SevenSegment.c ****     uint8_t digit = 0;
+ 247              		.loc 1 59 68 view .LVU59
+ 248 0006 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 249              	.LCFI3:
+ 250              		.cfi_def_cfa_offset 32
+ 251              		.cfi_offset 3, -32
+ 252              		.cfi_offset 4, -28
+ 253              		.cfi_offset 5, -24
+ 254              		.cfi_offset 6, -20
+ 255              		.cfi_offset 7, -16
+ 256              		.cfi_offset 8, -12
+ 257              		.cfi_offset 9, -8
+ 258              		.cfi_offset 14, -4
+ 259 000a 0446     		mov	r4, r0
+ 260 000c 0F46     		mov	r7, r1
+ 261              	.LBB8:
+  62:driver/Src/SevenSegment.c ****         return 0;
+  63:driver/Src/SevenSegment.c ****     }
+  64:driver/Src/SevenSegment.c ****    for (uint8_t i = 0; i < NUMBER_SEVEN_SEGMENTS; i++){
+ 262              		.loc 1 64 17 view .LVU60
+ 263 000e 0025     		movs	r5, #0
+ 264              	.LBE8:
+ARM GAS  /tmp/ccMzDXS8.s 			page 7
+
+
+  60:driver/Src/SevenSegment.c ****     if (number > MAX_NUM){
+ 265              		.loc 1 60 13 view .LVU61
+ 266 0010 A846     		mov	r8, r5
+ 267 0012 35E0     		b	.L16
+ 268              	.LVL10:
+ 269              	.L17:
+ 270              	.LBB21:
+  65:driver/Src/SevenSegment.c ****         if ((number/10) == 0){
+  66:driver/Src/SevenSegment.c ****             if (display > display_1){
+  67:driver/Src/SevenSegment.c ****                 return 0;
+  68:driver/Src/SevenSegment.c ****             }
+  69:driver/Src/SevenSegment.c ****             digit = number;
+  70:driver/Src/SevenSegment.c ****         }
+  71:driver/Src/SevenSegment.c ****         else if ((number/10) != 0 && i == 0) {
+ 271              		.loc 1 71 14 is_stmt 1 view .LVU62
+ 272              		.loc 1 71 35 is_stmt 0 discriminator 1 view .LVU63
+ 273 0014 75B1     		cbz	r5, .L80
+  72:driver/Src/SevenSegment.c ****             digit = number / 10;
+  73:driver/Src/SevenSegment.c ****             display = display_1;
+  74:driver/Src/SevenSegment.c ****         }
+  75:driver/Src/SevenSegment.c ****         else if ((number/10) != 0 && i == 1){
+ 274              		.loc 1 75 14 is_stmt 1 view .LVU64
+ 275              		.loc 1 75 35 is_stmt 0 discriminator 1 view .LVU65
+ 276 0016 012D     		cmp	r5, #1
+ 277 0018 3BD1     		bne	.L18
+  76:driver/Src/SevenSegment.c ****             digit = number % 10;
+ 278              		.loc 1 76 13 is_stmt 1 view .LVU66
+ 279              		.loc 1 76 19 is_stmt 0 view .LVU67
+ 280 001a C34B     		ldr	r3, .L86
+ 281 001c A3FB0738 		umull	r3, r8, r3, r7
+ 282              	.LVL11:
+ 283              		.loc 1 76 19 view .LVU68
+ 284 0020 4FEAD808 		lsr	r8, r8, #3
+ 285 0024 08EB8808 		add	r8, r8, r8, lsl #2
+ 286 0028 A7EB4808 		sub	r8, r7, r8, lsl #1
+ 287 002c 5FFA88F8 		uxtb	r8, r8
+ 288              	.LVL12:
+  77:driver/Src/SevenSegment.c ****             display = display_0;
+ 289              		.loc 1 77 13 is_stmt 1 view .LVU69
+ 290              		.loc 1 77 21 is_stmt 0 view .LVU70
+ 291 0030 0024     		movs	r4, #0
+ 292 0032 2EE0     		b	.L18
+ 293              	.LVL13:
+ 294              	.L80:
+  72:driver/Src/SevenSegment.c ****             digit = number / 10;
+ 295              		.loc 1 72 13 is_stmt 1 view .LVU71
+  72:driver/Src/SevenSegment.c ****             digit = number / 10;
+ 296              		.loc 1 72 19 is_stmt 0 view .LVU72
+ 297 0034 BC4B     		ldr	r3, .L86
+ 298 0036 A3FB0738 		umull	r3, r8, r3, r7
+ 299              	.LVL14:
+  72:driver/Src/SevenSegment.c ****             digit = number / 10;
+ 300              		.loc 1 72 19 view .LVU73
+ 301 003a 4FEAD808 		lsr	r8, r8, #3
+ 302              	.LVL15:
+  73:driver/Src/SevenSegment.c ****         }
+ 303              		.loc 1 73 13 is_stmt 1 view .LVU74
+ARM GAS  /tmp/ccMzDXS8.s 			page 8
+
+
+  73:driver/Src/SevenSegment.c ****         }
+ 304              		.loc 1 73 21 is_stmt 0 view .LVU75
+ 305 003e 0124     		movs	r4, #1
+ 306 0040 27E0     		b	.L18
+ 307              	.LVL16:
+ 308              	.L31:
+  78:driver/Src/SevenSegment.c ****         }
+  79:driver/Src/SevenSegment.c ****     switch (digit){
+  80:driver/Src/SevenSegment.c ****          case 0:
+  81:driver/Src/SevenSegment.c ****             HAL_GPIO_WritePin(seven_segment_led[display][6].Port, seven_segment_led[display][6].Pin
+ 309              		.loc 1 81 13 is_stmt 1 view .LVU76
+ 310 0042 A146     		mov	r9, r4
+ 311              		.loc 1 81 60 is_stmt 0 view .LVU77
+ 312 0044 C4EBC402 		rsb	r2, r4, r4, lsl #3
+ 313 0048 B84B     		ldr	r3, .L86+4
+ 314 004a 03EBC203 		add	r3, r3, r2, lsl #3
+ 315              		.loc 1 81 13 view .LVU78
+ 316 004e 0122     		movs	r2, #1
+ 317 0050 198E     		ldrh	r1, [r3, #48]
+ 318 0052 586B     		ldr	r0, [r3, #52]
+ 319 0054 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 320              	.LVL17:
+  82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
+ 321              		.loc 1 82 13 is_stmt 1 view .LVU79
+ 322              	.LBB9:
+ 323              		.loc 1 82 18 view .LVU80
+ 324              		.loc 1 82 26 is_stmt 0 view .LVU81
+ 325 0058 4646     		mov	r6, r8
+ 326              		.loc 1 82 13 view .LVU82
+ 327 005a 0DE0     		b	.L32
+ 328              	.LVL18:
+ 329              	.L33:
+  83:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 330              		.loc 1 83 17 is_stmt 1 view .LVU83
+ 331              		.loc 1 83 64 is_stmt 0 view .LVU84
+ 332 005c B349     		ldr	r1, .L86+4
+ 333 005e C9EBC903 		rsb	r3, r9, r9, lsl #3
+ 334 0062 3344     		add	r3, r3, r6
+ 335 0064 01EBC300 		add	r0, r1, r3, lsl #3
+ 336              		.loc 1 83 17 view .LVU85
+ 337 0068 0022     		movs	r2, #0
+ 338 006a 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 339 006e 4068     		ldr	r0, [r0, #4]
+ 340 0070 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 341              	.LVL19:
+  82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
+ 342              		.loc 1 82 41 is_stmt 1 discriminator 3 view .LVU86
+ 343 0074 0136     		adds	r6, r6, #1
+ 344              	.LVL20:
+  82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
+ 345              		.loc 1 82 41 is_stmt 0 discriminator 3 view .LVU87
+ 346 0076 F6B2     		uxtb	r6, r6
+ 347              	.LVL21:
+ 348              	.L32:
+  82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
+ 349              		.loc 1 82 35 is_stmt 1 discriminator 1 view .LVU88
+ 350 0078 052E     		cmp	r6, #5
+ARM GAS  /tmp/ccMzDXS8.s 			page 9
+
+
+ 351 007a EFD9     		bls	.L33
+ 352              	.LVL22:
+ 353              	.L20:
+  82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
+ 354              		.loc 1 82 35 is_stmt 0 discriminator 1 view .LVU89
+ 355              	.LBE9:
+  64:driver/Src/SevenSegment.c ****         if ((number/10) == 0){
+ 356              		.loc 1 64 52 is_stmt 1 discriminator 2 view .LVU90
+ 357 007c 0135     		adds	r5, r5, #1
+ 358              	.LVL23:
+  64:driver/Src/SevenSegment.c ****         if ((number/10) == 0){
+ 359              		.loc 1 64 52 is_stmt 0 discriminator 2 view .LVU91
+ 360 007e EDB2     		uxtb	r5, r5
+ 361              	.LVL24:
+ 362              	.L16:
+  64:driver/Src/SevenSegment.c ****         if ((number/10) == 0){
+ 363              		.loc 1 64 26 is_stmt 1 discriminator 1 view .LVU92
+ 364 0080 012D     		cmp	r5, #1
+ 365 0082 00F24D81 		bhi	.L81
+  65:driver/Src/SevenSegment.c ****             if (display > display_1){
+ 366              		.loc 1 65 9 view .LVU93
+  65:driver/Src/SevenSegment.c ****             if (display > display_1){
+ 367              		.loc 1 65 12 is_stmt 0 view .LVU94
+ 368 0086 092F     		cmp	r7, #9
+ 369 0088 C4D8     		bhi	.L17
+  66:driver/Src/SevenSegment.c ****                 return 0;
+ 370              		.loc 1 66 13 is_stmt 1 view .LVU95
+  66:driver/Src/SevenSegment.c ****                 return 0;
+ 371              		.loc 1 66 16 is_stmt 0 view .LVU96
+ 372 008a 012C     		cmp	r4, #1
+ 373 008c 00F25281 		bhi	.L65
+  69:driver/Src/SevenSegment.c ****         }
+ 374              		.loc 1 69 19 view .LVU97
+ 375 0090 B846     		mov	r8, r7
+ 376              	.LVL25:
+ 377              	.L18:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 378              		.loc 1 79 5 is_stmt 1 view .LVU98
+ 379 0092 B8F1090F 		cmp	r8, #9
+ 380 0096 F1D8     		bhi	.L20
+ 381 0098 01A3     		adr	r3, .L22
+ 382 009a 53F828F0 		ldr	pc, [r3, r8, lsl #2]
+ 383 009e 00BF     		.p2align 2
+ 384              	.L22:
+ 385 00a0 43000000 		.word	.L31+1
+ 386 00a4 E3000000 		.word	.L66+1
+ 387 00a8 51010000 		.word	.L67+1
+ 388 00ac 6F010000 		.word	.L68+1
+ 389 00b0 DF010000 		.word	.L69+1
+ 390 00b4 27020000 		.word	.L70+1
+ 391 00b8 6B020000 		.word	.L71+1
+ 392 00bc B3020000 		.word	.L72+1
+ 393 00c0 B7020000 		.word	.L73+1
+ 394 00c4 1D030000 		.word	.L74+1
+ 395              	.LVL26:
+ 396              		.p2align 1
+ 397              	.L82:
+ARM GAS  /tmp/ccMzDXS8.s 			page 10
+
+
+ 398              	.LBB10:
+  84:driver/Src/SevenSegment.c ****             }
+  85:driver/Src/SevenSegment.c ****            
+  86:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED5 PB0, LED6 PC5
+  87:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED12 PC10, LED13 PC11
+  88:driver/Src/SevenSegment.c ****             break;
+  89:driver/Src/SevenSegment.c ****          case 1:
+  90:driver/Src/SevenSegment.c ****              for (uint8_t i = 0; i <= 6; i++){
+  91:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+  92:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 399              		.loc 1 92 21 view .LVU99
+ 400              		.loc 1 92 68 is_stmt 0 view .LVU100
+ 401 00c8 9849     		ldr	r1, .L86+4
+ 402 00ca C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 403 00ce 3344     		add	r3, r3, r6
+ 404 00d0 01EBC300 		add	r0, r1, r3, lsl #3
+ 405              		.loc 1 92 21 view .LVU101
+ 406 00d4 0122     		movs	r2, #1
+ 407 00d6 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 408 00da 4068     		ldr	r0, [r0, #4]
+ 409 00dc FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 410              	.LVL27:
+ 411 00e0 12E0     		b	.L35
+ 412              	.LVL28:
+ 413              	.L66:
+ 414              		.loc 1 92 21 view .LVU102
+ 415              	.LBE10:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 416              		.loc 1 79 5 view .LVU103
+ 417 00e2 0026     		movs	r6, #0
+ 418              	.L30:
+ 419              	.LVL29:
+ 420              	.LBB11:
+  90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+ 421              		.loc 1 90 36 is_stmt 1 discriminator 1 view .LVU104
+ 422 00e4 062E     		cmp	r6, #6
+ 423 00e6 C9D8     		bhi	.L20
+  91:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 424              		.loc 1 91 17 view .LVU105
+  91:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 425              		.loc 1 91 27 is_stmt 0 view .LVU106
+ 426 00e8 331F     		subs	r3, r6, #4
+ 427 00ea DBB2     		uxtb	r3, r3
+  91:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 428              		.loc 1 91 20 view .LVU107
+ 429 00ec 012B     		cmp	r3, #1
+ 430 00ee EBD8     		bhi	.L82
+  93:driver/Src/SevenSegment.c ****                 }
+  94:driver/Src/SevenSegment.c ****                 else{
+  95:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 431              		.loc 1 95 21 is_stmt 1 view .LVU108
+ 432              		.loc 1 95 68 is_stmt 0 view .LVU109
+ 433 00f0 8E49     		ldr	r1, .L86+4
+ 434 00f2 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 435 00f6 3344     		add	r3, r3, r6
+ 436 00f8 01EBC300 		add	r0, r1, r3, lsl #3
+ 437              		.loc 1 95 21 view .LVU110
+ARM GAS  /tmp/ccMzDXS8.s 			page 11
+
+
+ 438 00fc 0022     		movs	r2, #0
+ 439 00fe 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 440 0102 4068     		ldr	r0, [r0, #4]
+ 441 0104 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 442              	.LVL30:
+ 443              	.L35:
+  90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+ 444              		.loc 1 90 43 is_stmt 1 discriminator 2 view .LVU111
+ 445 0108 0136     		adds	r6, r6, #1
+ 446              	.LVL31:
+  90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+ 447              		.loc 1 90 43 is_stmt 0 discriminator 2 view .LVU112
+ 448 010a F6B2     		uxtb	r6, r6
+ 449              	.LVL32:
+  90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+ 450              		.loc 1 90 43 discriminator 2 view .LVU113
+ 451 010c EAE7     		b	.L30
+ 452              	.LVL33:
+ 453              	.L37:
+  90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
+ 454              		.loc 1 90 43 discriminator 2 view .LVU114
+ 455              	.LBE11:
+ 456              	.LBB12:
+  96:driver/Src/SevenSegment.c ****                 }
+  97:driver/Src/SevenSegment.c ****              }
+  98:driver/Src/SevenSegment.c ****              //On: LED2 PB1, LED3 PB14
+  99:driver/Src/SevenSegment.c ****              //On: LED9 PC7, LED10 PB15
+ 100:driver/Src/SevenSegment.c ****              break;
+ 101:driver/Src/SevenSegment.c ****         case 2:
+ 102:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 103:driver/Src/SevenSegment.c ****                 if ((i == 2) || (i == 5)) {
+ 104:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 457              		.loc 1 104 21 is_stmt 1 view .LVU115
+ 458              		.loc 1 104 68 is_stmt 0 view .LVU116
+ 459 010e 8749     		ldr	r1, .L86+4
+ 460 0110 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 461 0114 3344     		add	r3, r3, r6
+ 462 0116 01EBC300 		add	r0, r1, r3, lsl #3
+ 463              		.loc 1 104 21 view .LVU117
+ 464 011a 0122     		movs	r2, #1
+ 465 011c 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 466 0120 4068     		ldr	r0, [r0, #4]
+ 467 0122 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 468              	.LVL34:
+ 469              	.L39:
+ 102:driver/Src/SevenSegment.c ****                 if ((i == 2) || (i == 5)) {
+ 470              		.loc 1 102 42 is_stmt 1 discriminator 2 view .LVU118
+ 471 0126 0136     		adds	r6, r6, #1
+ 472              	.LVL35:
+ 102:driver/Src/SevenSegment.c ****                 if ((i == 2) || (i == 5)) {
+ 473              		.loc 1 102 42 is_stmt 0 discriminator 2 view .LVU119
+ 474 0128 F6B2     		uxtb	r6, r6
+ 475              	.LVL36:
+ 476              	.L29:
+ 102:driver/Src/SevenSegment.c ****                 if ((i == 2) || (i == 5)) {
+ 477              		.loc 1 102 35 is_stmt 1 discriminator 1 view .LVU120
+ 478 012a 062E     		cmp	r6, #6
+ARM GAS  /tmp/ccMzDXS8.s 			page 12
+
+
+ 479 012c A6D8     		bhi	.L20
+ 103:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 480              		.loc 1 103 17 view .LVU121
+ 103:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 481              		.loc 1 103 20 is_stmt 0 view .LVU122
+ 482 012e 022E     		cmp	r6, #2
+ 483 0130 EDD0     		beq	.L37
+ 103:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 484              		.loc 1 103 30 discriminator 1 view .LVU123
+ 485 0132 052E     		cmp	r6, #5
+ 486 0134 EBD0     		beq	.L37
+ 105:driver/Src/SevenSegment.c ****                 }
+ 106:driver/Src/SevenSegment.c ****                 else{
+ 107:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 487              		.loc 1 107 21 is_stmt 1 view .LVU124
+ 488              		.loc 1 107 68 is_stmt 0 view .LVU125
+ 489 0136 7D49     		ldr	r1, .L86+4
+ 490 0138 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 491 013c 3344     		add	r3, r3, r6
+ 492 013e 01EBC300 		add	r0, r1, r3, lsl #3
+ 493              		.loc 1 107 21 view .LVU126
+ 494 0142 0022     		movs	r2, #0
+ 495 0144 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 496 0148 4068     		ldr	r0, [r0, #4]
+ 497 014a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 498              	.LVL37:
+ 499 014e EAE7     		b	.L39
+ 500              	.LVL38:
+ 501              	.L67:
+ 502              		.loc 1 107 21 view .LVU127
+ 503              	.LBE12:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 504              		.loc 1 79 5 view .LVU128
+ 505 0150 0026     		movs	r6, #0
+ 506 0152 EAE7     		b	.L29
+ 507              	.LVL39:
+ 508              	.L83:
+ 509              	.LBB13:
+ 108:driver/Src/SevenSegment.c ****                 }
+ 109:driver/Src/SevenSegment.c ****             }
+ 110:driver/Src/SevenSegment.c **** 
+ 111:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED4 PB2, LED5 PB0, LED7 PC4
+ 112:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED11 PA15, LED12 PC10, LED14 PC12
+ 113:driver/Src/SevenSegment.c ****             break;
+ 114:driver/Src/SevenSegment.c ****         case 3:
+ 115:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 116:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 117:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 510              		.loc 1 117 21 is_stmt 1 view .LVU129
+ 511              		.loc 1 117 68 is_stmt 0 view .LVU130
+ 512 0154 7549     		ldr	r1, .L86+4
+ 513 0156 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 514 015a 3344     		add	r3, r3, r6
+ 515 015c 01EBC300 		add	r0, r1, r3, lsl #3
+ 516              		.loc 1 117 21 view .LVU131
+ 517 0160 0122     		movs	r2, #1
+ 518 0162 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ARM GAS  /tmp/ccMzDXS8.s 			page 13
+
+
+ 519 0166 4068     		ldr	r0, [r0, #4]
+ 520 0168 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 521              	.LVL40:
+ 522 016c 12E0     		b	.L42
+ 523              	.LVL41:
+ 524              	.L68:
+ 525              		.loc 1 117 21 view .LVU132
+ 526              	.LBE13:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 527              		.loc 1 79 5 view .LVU133
+ 528 016e 0026     		movs	r6, #0
+ 529              	.L28:
+ 530              	.LVL42:
+ 531              	.LBB14:
+ 115:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 532              		.loc 1 115 35 is_stmt 1 discriminator 1 view .LVU134
+ 533 0170 062E     		cmp	r6, #6
+ 534 0172 83D8     		bhi	.L20
+ 116:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 535              		.loc 1 116 17 view .LVU135
+ 116:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 536              		.loc 1 116 28 is_stmt 0 view .LVU136
+ 537 0174 731E     		subs	r3, r6, #1
+ 538 0176 DBB2     		uxtb	r3, r3
+ 116:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 539              		.loc 1 116 20 view .LVU137
+ 540 0178 012B     		cmp	r3, #1
+ 541 017a EBD9     		bls	.L83
+ 118:driver/Src/SevenSegment.c ****                 }
+ 119:driver/Src/SevenSegment.c ****                 else{
+ 120:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 542              		.loc 1 120 21 is_stmt 1 view .LVU138
+ 543              		.loc 1 120 68 is_stmt 0 view .LVU139
+ 544 017c 6B49     		ldr	r1, .L86+4
+ 545 017e C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 546 0182 3344     		add	r3, r3, r6
+ 547 0184 01EBC300 		add	r0, r1, r3, lsl #3
+ 548              		.loc 1 120 21 view .LVU140
+ 549 0188 0022     		movs	r2, #0
+ 550 018a 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 551 018e 4068     		ldr	r0, [r0, #4]
+ 552 0190 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 553              	.LVL43:
+ 554              	.L42:
+ 115:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 555              		.loc 1 115 42 is_stmt 1 discriminator 2 view .LVU141
+ 556 0194 0136     		adds	r6, r6, #1
+ 557              	.LVL44:
+ 115:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 558              		.loc 1 115 42 is_stmt 0 discriminator 2 view .LVU142
+ 559 0196 F6B2     		uxtb	r6, r6
+ 560              	.LVL45:
+ 115:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 561              		.loc 1 115 42 discriminator 2 view .LVU143
+ 562 0198 EAE7     		b	.L28
+ 563              	.LVL46:
+ 564              	.L44:
+ARM GAS  /tmp/ccMzDXS8.s 			page 14
+
+
+ 115:driver/Src/SevenSegment.c ****                 if (i == 2 || i == 1) {
+ 565              		.loc 1 115 42 discriminator 2 view .LVU144
+ 566              	.LBE14:
+ 567              	.LBB15:
+ 121:driver/Src/SevenSegment.c ****                 }
+ 122:driver/Src/SevenSegment.c ****             }
+ 123:driver/Src/SevenSegment.c ****     
+ 124:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED7 PC4
+ 125:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED14 PC12
+ 126:driver/Src/SevenSegment.c ****             break;
+ 127:driver/Src/SevenSegment.c ****         case 4:
+ 128:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 129:driver/Src/SevenSegment.c ****                 if ((i <= 1) || (i == 3)) {
+ 130:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 568              		.loc 1 130 21 is_stmt 1 view .LVU145
+ 569              		.loc 1 130 68 is_stmt 0 view .LVU146
+ 570 019a 6449     		ldr	r1, .L86+4
+ 571 019c C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 572 01a0 3344     		add	r3, r3, r6
+ 573 01a2 01EBC300 		add	r0, r1, r3, lsl #3
+ 574              		.loc 1 130 21 view .LVU147
+ 575 01a6 0122     		movs	r2, #1
+ 576 01a8 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 577 01ac 4068     		ldr	r0, [r0, #4]
+ 578 01ae FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 579              	.LVL47:
+ 580              	.L46:
+ 128:driver/Src/SevenSegment.c ****                 if ((i <= 1) || (i == 3)) {
+ 581              		.loc 1 128 42 is_stmt 1 discriminator 2 view .LVU148
+ 582 01b2 0136     		adds	r6, r6, #1
+ 583              	.LVL48:
+ 128:driver/Src/SevenSegment.c ****                 if ((i <= 1) || (i == 3)) {
+ 584              		.loc 1 128 42 is_stmt 0 discriminator 2 view .LVU149
+ 585 01b4 F6B2     		uxtb	r6, r6
+ 586              	.LVL49:
+ 587              	.L27:
+ 128:driver/Src/SevenSegment.c ****                 if ((i <= 1) || (i == 3)) {
+ 588              		.loc 1 128 35 is_stmt 1 discriminator 1 view .LVU150
+ 589 01b6 062E     		cmp	r6, #6
+ 590 01b8 3FF660AF 		bhi	.L20
+ 129:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 591              		.loc 1 129 17 view .LVU151
+ 129:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 592              		.loc 1 129 20 is_stmt 0 view .LVU152
+ 593 01bc 012E     		cmp	r6, #1
+ 594 01be ECD9     		bls	.L44
+ 129:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 595              		.loc 1 129 30 discriminator 1 view .LVU153
+ 596 01c0 032E     		cmp	r6, #3
+ 597 01c2 EAD0     		beq	.L44
+ 131:driver/Src/SevenSegment.c ****                 }
+ 132:driver/Src/SevenSegment.c ****                 else{
+ 133:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 598              		.loc 1 133 21 is_stmt 1 view .LVU154
+ 599              		.loc 1 133 68 is_stmt 0 view .LVU155
+ 600 01c4 5949     		ldr	r1, .L86+4
+ 601 01c6 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ARM GAS  /tmp/ccMzDXS8.s 			page 15
+
+
+ 602 01ca 3344     		add	r3, r3, r6
+ 603 01cc 01EBC300 		add	r0, r1, r3, lsl #3
+ 604              		.loc 1 133 21 view .LVU156
+ 605 01d0 0022     		movs	r2, #0
+ 606 01d2 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 607 01d6 4068     		ldr	r0, [r0, #4]
+ 608 01d8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 609              	.LVL50:
+ 610 01dc E9E7     		b	.L46
+ 611              	.LVL51:
+ 612              	.L69:
+ 613              		.loc 1 133 21 view .LVU157
+ 614              	.LBE15:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 615              		.loc 1 79 5 view .LVU158
+ 616 01de 0026     		movs	r6, #0
+ 617 01e0 E9E7     		b	.L27
+ 618              	.LVL52:
+ 619              	.L48:
+ 620              	.LBB16:
+ 134:driver/Src/SevenSegment.c ****                 }
+ 135:driver/Src/SevenSegment.c ****             }
+ 136:driver/Src/SevenSegment.c ****            
+ 137:driver/Src/SevenSegment.c ****             //On: LED2 PB1, LED3 PB14, LED6 PC5, LED7 PC4
+ 138:driver/Src/SevenSegment.c ****             //On: LED9 PC7, LED10 PB15, LED13 PC11, LED14 PC12
+ 139:driver/Src/SevenSegment.c ****             break;
+ 140:driver/Src/SevenSegment.c ****         case 5:
+ 141:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 142:driver/Src/SevenSegment.c ****                 if ((i == 1) || (i == 4)) {
+ 143:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 621              		.loc 1 143 21 is_stmt 1 view .LVU159
+ 622              		.loc 1 143 68 is_stmt 0 view .LVU160
+ 623 01e2 5249     		ldr	r1, .L86+4
+ 624 01e4 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 625 01e8 3344     		add	r3, r3, r6
+ 626 01ea 01EBC300 		add	r0, r1, r3, lsl #3
+ 627              		.loc 1 143 21 view .LVU161
+ 628 01ee 0122     		movs	r2, #1
+ 629 01f0 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 630 01f4 4068     		ldr	r0, [r0, #4]
+ 631 01f6 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 632              	.LVL53:
+ 633              	.L50:
+ 141:driver/Src/SevenSegment.c ****                 if ((i == 1) || (i == 4)) {
+ 634              		.loc 1 141 42 is_stmt 1 discriminator 2 view .LVU162
+ 635 01fa 0136     		adds	r6, r6, #1
+ 636              	.LVL54:
+ 141:driver/Src/SevenSegment.c ****                 if ((i == 1) || (i == 4)) {
+ 637              		.loc 1 141 42 is_stmt 0 discriminator 2 view .LVU163
+ 638 01fc F6B2     		uxtb	r6, r6
+ 639              	.LVL55:
+ 640              	.L26:
+ 141:driver/Src/SevenSegment.c ****                 if ((i == 1) || (i == 4)) {
+ 641              		.loc 1 141 35 is_stmt 1 discriminator 1 view .LVU164
+ 642 01fe 062E     		cmp	r6, #6
+ 643 0200 3FF63CAF 		bhi	.L20
+ 142:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ARM GAS  /tmp/ccMzDXS8.s 			page 16
+
+
+ 644              		.loc 1 142 17 view .LVU165
+ 142:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 645              		.loc 1 142 20 is_stmt 0 view .LVU166
+ 646 0204 012E     		cmp	r6, #1
+ 647 0206 ECD0     		beq	.L48
+ 142:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 648              		.loc 1 142 30 discriminator 1 view .LVU167
+ 649 0208 042E     		cmp	r6, #4
+ 650 020a EAD0     		beq	.L48
+ 144:driver/Src/SevenSegment.c ****                 }
+ 145:driver/Src/SevenSegment.c ****                 else{
+ 146:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 651              		.loc 1 146 21 is_stmt 1 view .LVU168
+ 652              		.loc 1 146 68 is_stmt 0 view .LVU169
+ 653 020c 4749     		ldr	r1, .L86+4
+ 654 020e C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 655 0212 3344     		add	r3, r3, r6
+ 656 0214 01EBC300 		add	r0, r1, r3, lsl #3
+ 657              		.loc 1 146 21 view .LVU170
+ 658 0218 0022     		movs	r2, #0
+ 659 021a 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 660 021e 4068     		ldr	r0, [r0, #4]
+ 661 0220 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 662              	.LVL56:
+ 663 0224 E9E7     		b	.L50
+ 664              	.LVL57:
+ 665              	.L70:
+ 666              		.loc 1 146 21 view .LVU171
+ 667              	.LBE16:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 668              		.loc 1 79 5 view .LVU172
+ 669 0226 0026     		movs	r6, #0
+ 670 0228 E9E7     		b	.L26
+ 671              	.LVL58:
+ 672              	.L84:
+ 673              	.LBB17:
+ 147:driver/Src/SevenSegment.c ****                 }
+ 148:driver/Src/SevenSegment.c ****             }
+ 149:driver/Src/SevenSegment.c ****             
+ 150:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED3 PB14, LED4 PB2, LED6 PC5, LED7 PC4
+ 151:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED10 PB15, LED11 PA15, LED13 PC11, LED14 PC12
+ 152:driver/Src/SevenSegment.c ****             break;
+ 153:driver/Src/SevenSegment.c ****         case 6:
+ 154:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 155:driver/Src/SevenSegment.c ****                 if (i == 4) {
+ 156:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 674              		.loc 1 156 21 is_stmt 1 view .LVU173
+ 675              		.loc 1 156 68 is_stmt 0 view .LVU174
+ 676 022a 4049     		ldr	r1, .L86+4
+ 677 022c C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 678 0230 3344     		add	r3, r3, r6
+ 679 0232 01EBC300 		add	r0, r1, r3, lsl #3
+ 680              		.loc 1 156 21 view .LVU175
+ 681 0236 0122     		movs	r2, #1
+ 682 0238 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 683 023c 4068     		ldr	r0, [r0, #4]
+ 684 023e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  /tmp/ccMzDXS8.s 			page 17
+
+
+ 685              	.LVL59:
+ 686              	.L53:
+ 154:driver/Src/SevenSegment.c ****                 if (i == 4) {
+ 687              		.loc 1 154 42 is_stmt 1 discriminator 2 view .LVU176
+ 688 0242 0136     		adds	r6, r6, #1
+ 689              	.LVL60:
+ 154:driver/Src/SevenSegment.c ****                 if (i == 4) {
+ 690              		.loc 1 154 42 is_stmt 0 discriminator 2 view .LVU177
+ 691 0244 F6B2     		uxtb	r6, r6
+ 692              	.LVL61:
+ 693              	.L25:
+ 154:driver/Src/SevenSegment.c ****                 if (i == 4) {
+ 694              		.loc 1 154 35 is_stmt 1 discriminator 1 view .LVU178
+ 695 0246 062E     		cmp	r6, #6
+ 696 0248 3FF618AF 		bhi	.L20
+ 155:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 697              		.loc 1 155 17 view .LVU179
+ 155:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 698              		.loc 1 155 20 is_stmt 0 view .LVU180
+ 699 024c 042E     		cmp	r6, #4
+ 700 024e ECD0     		beq	.L84
+ 157:driver/Src/SevenSegment.c ****                 }
+ 158:driver/Src/SevenSegment.c ****                 else{
+ 159:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 701              		.loc 1 159 21 is_stmt 1 view .LVU181
+ 702              		.loc 1 159 68 is_stmt 0 view .LVU182
+ 703 0250 3649     		ldr	r1, .L86+4
+ 704 0252 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 705 0256 3344     		add	r3, r3, r6
+ 706 0258 01EBC300 		add	r0, r1, r3, lsl #3
+ 707              		.loc 1 159 21 view .LVU183
+ 708 025c 0022     		movs	r2, #0
+ 709 025e 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 710 0262 4068     		ldr	r0, [r0, #4]
+ 711 0264 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 712              	.LVL62:
+ 713 0268 EBE7     		b	.L53
+ 714              	.LVL63:
+ 715              	.L71:
+ 716              		.loc 1 159 21 view .LVU184
+ 717              	.LBE17:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 718              		.loc 1 79 5 view .LVU185
+ 719 026a 0026     		movs	r6, #0
+ 720 026c EBE7     		b	.L25
+ 721              	.LVL64:
+ 722              	.L55:
+ 723              	.LBB18:
+ 160:driver/Src/SevenSegment.c ****                 }
+ 161:driver/Src/SevenSegment.c ****             }
+ 162:driver/Src/SevenSegment.c ****     
+ 163:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED3 PB14, LED4 PB2, LED5 PB0, LED6 PC5, LED7 PC4
+ 164:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED10 PB15, LED11 PA15, LED12 PC10, LED13 PC11, LED14 PC12
+ 165:driver/Src/SevenSegment.c ****             break;
+ 166:driver/Src/SevenSegment.c ****         case 7:
+ 167:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 168:driver/Src/SevenSegment.c ****                 if ((i <= 2) || i == 6){
+ARM GAS  /tmp/ccMzDXS8.s 			page 18
+
+
+ 169:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 724              		.loc 1 169 21 is_stmt 1 view .LVU186
+ 725              		.loc 1 169 68 is_stmt 0 view .LVU187
+ 726 026e 2F49     		ldr	r1, .L86+4
+ 727 0270 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 728 0274 3344     		add	r3, r3, r6
+ 729 0276 01EBC300 		add	r0, r1, r3, lsl #3
+ 730              		.loc 1 169 21 view .LVU188
+ 731 027a 0122     		movs	r2, #1
+ 732 027c 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 733 0280 4068     		ldr	r0, [r0, #4]
+ 734 0282 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 735              	.LVL65:
+ 736              	.L57:
+ 167:driver/Src/SevenSegment.c ****                 if ((i <= 2) || i == 6){
+ 737              		.loc 1 167 42 is_stmt 1 discriminator 2 view .LVU189
+ 738 0286 0136     		adds	r6, r6, #1
+ 739              	.LVL66:
+ 167:driver/Src/SevenSegment.c ****                 if ((i <= 2) || i == 6){
+ 740              		.loc 1 167 42 is_stmt 0 discriminator 2 view .LVU190
+ 741 0288 F6B2     		uxtb	r6, r6
+ 742              	.LVL67:
+ 743              	.L24:
+ 167:driver/Src/SevenSegment.c ****                 if ((i <= 2) || i == 6){
+ 744              		.loc 1 167 35 is_stmt 1 discriminator 1 view .LVU191
+ 745 028a 062E     		cmp	r6, #6
+ 746 028c 3FF6F6AE 		bhi	.L20
+ 168:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 747              		.loc 1 168 17 view .LVU192
+ 168:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 748              		.loc 1 168 20 is_stmt 0 view .LVU193
+ 749 0290 022E     		cmp	r6, #2
+ 750 0292 ECD9     		bls	.L55
+ 168:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 751              		.loc 1 168 30 discriminator 1 view .LVU194
+ 752 0294 062E     		cmp	r6, #6
+ 753 0296 EAD0     		beq	.L55
+ 170:driver/Src/SevenSegment.c ****                 }
+ 171:driver/Src/SevenSegment.c ****                 else{
+ 172:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 754              		.loc 1 172 21 is_stmt 1 view .LVU195
+ 755              		.loc 1 172 68 is_stmt 0 view .LVU196
+ 756 0298 2449     		ldr	r1, .L86+4
+ 757 029a C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 758 029e 3344     		add	r3, r3, r6
+ 759 02a0 01EBC300 		add	r0, r1, r3, lsl #3
+ 760              		.loc 1 172 21 view .LVU197
+ 761 02a4 0022     		movs	r2, #0
+ 762 02a6 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 763 02aa 4068     		ldr	r0, [r0, #4]
+ 764 02ac FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 765              	.LVL68:
+ 766 02b0 E9E7     		b	.L57
+ 767              	.LVL69:
+ 768              	.L72:
+ 769              		.loc 1 172 21 view .LVU198
+ 770              	.LBE18:
+ARM GAS  /tmp/ccMzDXS8.s 			page 19
+
+
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 771              		.loc 1 79 5 view .LVU199
+ 772 02b2 0026     		movs	r6, #0
+ 773 02b4 E9E7     		b	.L24
+ 774              	.L73:
+ 775 02b6 0026     		movs	r6, #0
+ 776              	.L23:
+ 777              	.LVL70:
+ 778              	.LBB19:
+ 173:driver/Src/SevenSegment.c ****                 }
+ 174:driver/Src/SevenSegment.c ****             }
+ 175:driver/Src/SevenSegment.c ****             
+ 176:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14
+ 177:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15
+ 178:driver/Src/SevenSegment.c ****             break;
+ 179:driver/Src/SevenSegment.c ****         case 8:
+ 180:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 779              		.loc 1 180 35 is_stmt 1 discriminator 1 view .LVU200
+ 780 02b8 062E     		cmp	r6, #6
+ 781 02ba 3FF6DFAE 		bhi	.L20
+ 181:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 782              		.loc 1 181 17 view .LVU201
+ 783              		.loc 1 181 64 is_stmt 0 view .LVU202
+ 784 02be 1B49     		ldr	r1, .L86+4
+ 785 02c0 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 786 02c4 3344     		add	r3, r3, r6
+ 787 02c6 01EBC300 		add	r0, r1, r3, lsl #3
+ 788              		.loc 1 181 17 view .LVU203
+ 789 02ca 0022     		movs	r2, #0
+ 790 02cc 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 791 02d0 4068     		ldr	r0, [r0, #4]
+ 792 02d2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 793              	.LVL71:
+ 180:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 794              		.loc 1 180 42 is_stmt 1 discriminator 3 view .LVU204
+ 795 02d6 0136     		adds	r6, r6, #1
+ 796              	.LVL72:
+ 180:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 797              		.loc 1 180 42 is_stmt 0 discriminator 3 view .LVU205
+ 798 02d8 F6B2     		uxtb	r6, r6
+ 799              	.LVL73:
+ 180:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 800              		.loc 1 180 42 discriminator 3 view .LVU206
+ 801 02da EDE7     		b	.L23
+ 802              	.LVL74:
+ 803              	.L85:
+ 180:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 804              		.loc 1 180 42 discriminator 3 view .LVU207
+ 805              	.LBE19:
+ 806              	.LBB20:
+ 182:driver/Src/SevenSegment.c ****             } 
+ 183:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED5 PB0, LED6 PC5, LED7 PC4
+ 184:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED12 PC10, LED13 PC11, LED14 PC12
+ 185:driver/Src/SevenSegment.c ****             break;
+ 186:driver/Src/SevenSegment.c ****         case 9:
+ 187:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){ 
+ 188:driver/Src/SevenSegment.c ****                 if (i == 1){
+ARM GAS  /tmp/ccMzDXS8.s 			page 20
+
+
+ 189:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 807              		.loc 1 189 21 is_stmt 1 view .LVU208
+ 808              		.loc 1 189 68 is_stmt 0 view .LVU209
+ 809 02dc 1349     		ldr	r1, .L86+4
+ 810 02de C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 811 02e2 3344     		add	r3, r3, r6
+ 812 02e4 01EBC300 		add	r0, r1, r3, lsl #3
+ 813              		.loc 1 189 21 view .LVU210
+ 814 02e8 0122     		movs	r2, #1
+ 815 02ea 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 816 02ee 4068     		ldr	r0, [r0, #4]
+ 817 02f0 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 818              	.LVL75:
+ 819              	.L61:
+ 187:driver/Src/SevenSegment.c ****                 if (i == 1){
+ 820              		.loc 1 187 42 is_stmt 1 discriminator 2 view .LVU211
+ 821 02f4 0136     		adds	r6, r6, #1
+ 822              	.LVL76:
+ 187:driver/Src/SevenSegment.c ****                 if (i == 1){
+ 823              		.loc 1 187 42 is_stmt 0 discriminator 2 view .LVU212
+ 824 02f6 F6B2     		uxtb	r6, r6
+ 825              	.LVL77:
+ 826              	.L21:
+ 187:driver/Src/SevenSegment.c ****                 if (i == 1){
+ 827              		.loc 1 187 35 is_stmt 1 discriminator 1 view .LVU213
+ 828 02f8 062E     		cmp	r6, #6
+ 829 02fa 3FF6BFAE 		bhi	.L20
+ 188:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 830              		.loc 1 188 17 view .LVU214
+ 188:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 831              		.loc 1 188 20 is_stmt 0 view .LVU215
+ 832 02fe 012E     		cmp	r6, #1
+ 833 0300 ECD0     		beq	.L85
+ 190:driver/Src/SevenSegment.c ****                 }
+ 191:driver/Src/SevenSegment.c ****                 else{
+ 192:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
+ 834              		.loc 1 192 21 is_stmt 1 view .LVU216
+ 835              		.loc 1 192 68 is_stmt 0 view .LVU217
+ 836 0302 0A49     		ldr	r1, .L86+4
+ 837 0304 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 838 0308 3344     		add	r3, r3, r6
+ 839 030a 01EBC300 		add	r0, r1, r3, lsl #3
+ 840              		.loc 1 192 21 view .LVU218
+ 841 030e 0022     		movs	r2, #0
+ 842 0310 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 843 0314 4068     		ldr	r0, [r0, #4]
+ 844 0316 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 845              	.LVL78:
+ 846 031a EBE7     		b	.L61
+ 847              	.LVL79:
+ 848              	.L74:
+ 849              		.loc 1 192 21 view .LVU219
+ 850              	.LBE20:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 851              		.loc 1 79 5 view .LVU220
+ 852 031c 0026     		movs	r6, #0
+ 853 031e EBE7     		b	.L21
+ARM GAS  /tmp/ccMzDXS8.s 			page 21
+
+
+ 854              	.L81:
+  79:driver/Src/SevenSegment.c ****          case 0:
+ 855              		.loc 1 79 5 view .LVU221
+ 856              	.LBE21:
+ 193:driver/Src/SevenSegment.c ****                 }
+ 194:driver/Src/SevenSegment.c ****             }
+ 195:driver/Src/SevenSegment.c ****             
+ 196:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED6 PC5, LED7 PC4
+ 197:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED13 PC11, LED14 PC12
+ 198:driver/Src/SevenSegment.c ****             break;
+ 199:driver/Src/SevenSegment.c ****     }
+ 200:driver/Src/SevenSegment.c ****     }
+ 201:driver/Src/SevenSegment.c ****     return 1;
+ 857              		.loc 1 201 12 view .LVU222
+ 858 0320 0120     		movs	r0, #1
+ 859              	.L15:
+ 202:driver/Src/SevenSegment.c **** }
+ 860              		.loc 1 202 1 view .LVU223
+ 861 0322 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 862              	.LVL80:
+ 863              	.L87:
+ 864              		.loc 1 202 1 view .LVU224
+ 865 0326 00BF     		.align	2
+ 866              	.L86:
+ 867 0328 CDCCCCCC 		.word	-858993459
+ 868 032c 00000000 		.word	seven_segment_led
+ 869              	.LVL81:
+ 870              	.L64:
+ 871              	.LCFI4:
+ 872              		.cfi_def_cfa_offset 0
+ 873              		.cfi_restore 3
+ 874              		.cfi_restore 4
+ 875              		.cfi_restore 5
+ 876              		.cfi_restore 6
+ 877              		.cfi_restore 7
+ 878              		.cfi_restore 8
+ 879              		.cfi_restore 9
+ 880              		.cfi_restore 14
+  62:driver/Src/SevenSegment.c ****     }
+ 881              		.loc 1 62 16 view .LVU225
+ 882 0330 0020     		movs	r0, #0
+ 883              	.LVL82:
+ 884              		.loc 1 202 1 view .LVU226
+ 885 0332 7047     		bx	lr
+ 886              	.LVL83:
+ 887              	.L65:
+ 888              	.LCFI5:
+ 889              		.cfi_def_cfa_offset 32
+ 890              		.cfi_offset 3, -32
+ 891              		.cfi_offset 4, -28
+ 892              		.cfi_offset 5, -24
+ 893              		.cfi_offset 6, -20
+ 894              		.cfi_offset 7, -16
+ 895              		.cfi_offset 8, -12
+ 896              		.cfi_offset 9, -8
+ 897              		.cfi_offset 14, -4
+ 898              	.LBB22:
+ARM GAS  /tmp/ccMzDXS8.s 			page 22
+
+
+  67:driver/Src/SevenSegment.c ****             }
+ 899              		.loc 1 67 24 view .LVU227
+ 900 0334 0020     		movs	r0, #0
+ 901 0336 F4E7     		b	.L15
+ 902              	.LBE22:
+ 903              		.cfi_endproc
+ 904              	.LFE245:
+ 906              		.section	.text.displayTwoNum_SevenSegment,"ax",%progbits
+ 907              		.align	1
+ 908              		.global	displayTwoNum_SevenSegment
+ 909              		.syntax unified
+ 910              		.thumb
+ 911              		.thumb_func
+ 913              	displayTwoNum_SevenSegment:
+ 914              	.LVL84:
+ 915              	.LFB246:
+ 203:driver/Src/SevenSegment.c **** 
+ 204:driver/Src/SevenSegment.c **** //Displays a 2 number input and returns 0 for failure and 1 for success
+ 205:driver/Src/SevenSegment.c **** uint8_t displayTwoNum_SevenSegment(uint8_t number){
+ 916              		.loc 1 205 51 is_stmt 1 view -0
+ 917              		.cfi_startproc
+ 918              		@ args = 0, pretend = 0, frame = 0
+ 919              		@ frame_needed = 0, uses_anonymous_args = 0
+ 920              		.loc 1 205 51 is_stmt 0 view .LVU229
+ 921 0000 08B5     		push	{r3, lr}
+ 922              	.LCFI6:
+ 923              		.cfi_def_cfa_offset 8
+ 924              		.cfi_offset 3, -8
+ 925              		.cfi_offset 14, -4
+ 926 0002 0146     		mov	r1, r0
+ 206:driver/Src/SevenSegment.c ****     return displayNum_SevenSegment(0, number);
+ 927              		.loc 1 206 5 is_stmt 1 view .LVU230
+ 928              		.loc 1 206 12 is_stmt 0 view .LVU231
+ 929 0004 0020     		movs	r0, #0
+ 930              	.LVL85:
+ 931              		.loc 1 206 12 view .LVU232
+ 932 0006 FFF7FEFF 		bl	displayNum_SevenSegment
+ 933              	.LVL86:
+ 207:driver/Src/SevenSegment.c ****  }
+ 934              		.loc 1 207 2 view .LVU233
+ 935 000a 08BD     		pop	{r3, pc}
+ 936              		.cfi_endproc
+ 937              	.LFE246:
+ 939              		.section	.text.off_SevenSegment,"ax",%progbits
+ 940              		.align	1
+ 941              		.global	off_SevenSegment
+ 942              		.syntax unified
+ 943              		.thumb
+ 944              		.thumb_func
+ 946              	off_SevenSegment:
+ 947              	.LVL87:
+ 948              	.LFB247:
+ 208:driver/Src/SevenSegment.c **** 
+ 209:driver/Src/SevenSegment.c **** /* This function turns off the LEDs in one or both displays. 
+ 210:driver/Src/SevenSegment.c **** Input is display_0, display_1, or display_off */
+ 211:driver/Src/SevenSegment.c **** void off_SevenSegment(uint8_t display){
+ 949              		.loc 1 211 39 is_stmt 1 view -0
+ARM GAS  /tmp/ccMzDXS8.s 			page 23
+
+
+ 950              		.cfi_startproc
+ 951              		@ args = 0, pretend = 0, frame = 0
+ 952              		@ frame_needed = 0, uses_anonymous_args = 0
+ 953              		.loc 1 211 39 is_stmt 0 view .LVU235
+ 954 0000 38B5     		push	{r3, r4, r5, lr}
+ 955              	.LCFI7:
+ 956              		.cfi_def_cfa_offset 16
+ 957              		.cfi_offset 3, -16
+ 958              		.cfi_offset 4, -12
+ 959              		.cfi_offset 5, -8
+ 960              		.cfi_offset 14, -4
+ 961 0002 0446     		mov	r4, r0
+ 212:driver/Src/SevenSegment.c ****     switch (display){
+ 962              		.loc 1 212 5 is_stmt 1 view .LVU236
+ 963 0004 0128     		cmp	r0, #1
+ 964 0006 27D0     		beq	.L100
+ 965 0008 0228     		cmp	r0, #2
+ 966 000a 36D0     		beq	.L101
+ 967 000c 88B1     		cbz	r0, .L102
+ 968              	.LVL88:
+ 969              	.L90:
+ 213:driver/Src/SevenSegment.c ****         case display_0:
+ 214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 215:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 216:driver/Src/SevenSegment.c ****             }
+ 217:driver/Src/SevenSegment.c ****             break;
+ 218:driver/Src/SevenSegment.c ****         case display_1:
+ 219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 220:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 221:driver/Src/SevenSegment.c ****             }   
+ 222:driver/Src/SevenSegment.c ****             break; 
+ 223:driver/Src/SevenSegment.c ****         case display_off:
+ 224:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 225:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[0][i].Port, seven_segment_led[0][i].Pin, 1);
+ 226:driver/Src/SevenSegment.c ****             }  
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
+ 229:driver/Src/SevenSegment.c ****             } 
+ 230:driver/Src/SevenSegment.c ****             break;
+ 231:driver/Src/SevenSegment.c ****     }
+ 232:driver/Src/SevenSegment.c **** }...
+ 970              		.loc 1 232 1 is_stmt 0 view .LVU237
+ 971 000e 38BD     		pop	{r3, r4, r5, pc}
+ 972              	.LVL89:
+ 973              	.L95:
+ 974              	.LBB23:
+ 215:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 975              		.loc 1 215 17 is_stmt 1 view .LVU238
+ 215:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 976              		.loc 1 215 64 is_stmt 0 view .LVU239
+ 977 0010 2249     		ldr	r1, .L104
+ 978 0012 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 979 0016 2B44     		add	r3, r3, r5
+ 980 0018 01EBC300 		add	r0, r1, r3, lsl #3
+ 215:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 981              		.loc 1 215 17 view .LVU240
+ 982 001c 0122     		movs	r2, #1
+ARM GAS  /tmp/ccMzDXS8.s 			page 24
+
+
+ 983 001e 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 984 0022 4068     		ldr	r0, [r0, #4]
+ 985 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 986              	.LVL90:
+ 214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 987              		.loc 1 214 42 is_stmt 1 discriminator 3 view .LVU241
+ 988 0028 0135     		adds	r5, r5, #1
+ 989              	.LVL91:
+ 214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 990              		.loc 1 214 42 is_stmt 0 discriminator 3 view .LVU242
+ 991 002a EDB2     		uxtb	r5, r5
+ 992              	.LVL92:
+ 993              	.L93:
+ 214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 994              		.loc 1 214 35 is_stmt 1 discriminator 1 view .LVU243
+ 995 002c 062D     		cmp	r5, #6
+ 996 002e EFD9     		bls	.L95
+ 997 0030 EDE7     		b	.L90
+ 998              	.LVL93:
+ 999              	.L102:
+ 214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1000              		.loc 1 214 35 is_stmt 0 discriminator 1 view .LVU244
+ 1001              	.LBE23:
+ 212:driver/Src/SevenSegment.c ****     switch (display){
+ 1002              		.loc 1 212 5 view .LVU245
+ 1003 0032 0546     		mov	r5, r0
+ 1004 0034 FAE7     		b	.L93
+ 1005              	.LVL94:
+ 1006              	.L96:
+ 1007              	.LBB24:
+ 220:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 1008              		.loc 1 220 17 is_stmt 1 view .LVU246
+ 220:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 1009              		.loc 1 220 64 is_stmt 0 view .LVU247
+ 1010 0036 1949     		ldr	r1, .L104
+ 1011 0038 C4EBC403 		rsb	r3, r4, r4, lsl #3
+ 1012 003c 2B44     		add	r3, r3, r5
+ 1013 003e 01EBC300 		add	r0, r1, r3, lsl #3
+ 220:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display][i]
+ 1014              		.loc 1 220 17 view .LVU248
+ 1015 0042 0122     		movs	r2, #1
+ 1016 0044 31F83310 		ldrh	r1, [r1, r3, lsl #3]
+ 1017 0048 4068     		ldr	r0, [r0, #4]
+ 1018 004a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1019              	.LVL95:
+ 219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1020              		.loc 1 219 42 is_stmt 1 discriminator 3 view .LVU249
+ 1021 004e 0135     		adds	r5, r5, #1
+ 1022              	.LVL96:
+ 219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1023              		.loc 1 219 42 is_stmt 0 discriminator 3 view .LVU250
+ 1024 0050 EDB2     		uxtb	r5, r5
+ 1025              	.LVL97:
+ 1026              	.L91:
+ 219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1027              		.loc 1 219 35 is_stmt 1 discriminator 1 view .LVU251
+ 1028 0052 062D     		cmp	r5, #6
+ARM GAS  /tmp/ccMzDXS8.s 			page 25
+
+
+ 1029 0054 EFD9     		bls	.L96
+ 1030 0056 DAE7     		b	.L90
+ 1031              	.LVL98:
+ 1032              	.L100:
+ 219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1033              		.loc 1 219 35 is_stmt 0 discriminator 1 view .LVU252
+ 1034              	.LBE24:
+ 212:driver/Src/SevenSegment.c ****     switch (display){
+ 1035              		.loc 1 212 5 view .LVU253
+ 1036 0058 0025     		movs	r5, #0
+ 1037 005a FAE7     		b	.L91
+ 1038              	.LVL99:
+ 1039              	.L97:
+ 1040              	.LBB25:
+ 225:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[0][i].Port, seven_segment_led[0][i].Pin, 1);
+ 1041              		.loc 1 225 17 is_stmt 1 view .LVU254
+ 225:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[0][i].Port, seven_segment_led[0][i].Pin, 1);
+ 1042              		.loc 1 225 58 is_stmt 0 view .LVU255
+ 1043 005c 0F4B     		ldr	r3, .L104
+ 1044 005e 03EBC400 		add	r0, r3, r4, lsl #3
+ 225:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[0][i].Port, seven_segment_led[0][i].Pin, 1);
+ 1045              		.loc 1 225 17 view .LVU256
+ 1046 0062 0122     		movs	r2, #1
+ 1047 0064 33F83410 		ldrh	r1, [r3, r4, lsl #3]
+ 1048 0068 4068     		ldr	r0, [r0, #4]
+ 1049 006a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1050              	.LVL100:
+ 224:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1051              		.loc 1 224 42 is_stmt 1 discriminator 3 view .LVU257
+ 1052 006e 0134     		adds	r4, r4, #1
+ 1053              	.LVL101:
+ 224:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1054              		.loc 1 224 42 is_stmt 0 discriminator 3 view .LVU258
+ 1055 0070 E4B2     		uxtb	r4, r4
+ 1056              	.LVL102:
+ 1057              	.L92:
+ 224:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1058              		.loc 1 224 35 is_stmt 1 discriminator 1 view .LVU259
+ 1059 0072 062C     		cmp	r4, #6
+ 1060 0074 F2D9     		bls	.L97
+ 1061              	.LBE25:
+ 1062              	.LBB26:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1063              		.loc 1 227 26 is_stmt 0 view .LVU260
+ 1064 0076 0024     		movs	r4, #0
+ 1065              	.LVL103:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1066              		.loc 1 227 26 view .LVU261
+ 1067 0078 0DE0     		b	.L98
+ 1068              	.LVL104:
+ 1069              	.L101:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1070              		.loc 1 227 26 view .LVU262
+ 1071              	.LBE26:
+ 212:driver/Src/SevenSegment.c ****     switch (display){
+ 1072              		.loc 1 212 5 view .LVU263
+ 1073 007a 0024     		movs	r4, #0
+ARM GAS  /tmp/ccMzDXS8.s 			page 26
+
+
+ 1074 007c F9E7     		b	.L92
+ 1075              	.LVL105:
+ 1076              	.L99:
+ 1077              	.LBB27:
+ 228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
+ 1078              		.loc 1 228 17 is_stmt 1 view .LVU264
+ 228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
+ 1079              		.loc 1 228 58 is_stmt 0 view .LVU265
+ 1080 007e 074B     		ldr	r3, .L104
+ 1081 0080 E11D     		adds	r1, r4, #7
+ 1082 0082 03EBC100 		add	r0, r3, r1, lsl #3
+ 228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
+ 1083              		.loc 1 228 17 view .LVU266
+ 1084 0086 0122     		movs	r2, #1
+ 1085 0088 33F83110 		ldrh	r1, [r3, r1, lsl #3]
+ 1086 008c 4068     		ldr	r0, [r0, #4]
+ 1087 008e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1088              	.LVL106:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1089              		.loc 1 227 42 is_stmt 1 discriminator 3 view .LVU267
+ 1090 0092 0134     		adds	r4, r4, #1
+ 1091              	.LVL107:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1092              		.loc 1 227 42 is_stmt 0 discriminator 3 view .LVU268
+ 1093 0094 E4B2     		uxtb	r4, r4
+ 1094              	.LVL108:
+ 1095              	.L98:
+ 227:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
+ 1096              		.loc 1 227 35 is_stmt 1 discriminator 1 view .LVU269
+ 1097 0096 062C     		cmp	r4, #6
+ 1098 0098 F1D9     		bls	.L99
+ 1099 009a B8E7     		b	.L90
+ 1100              	.L105:
+ 1101              		.align	2
+ 1102              	.L104:
+ 1103 009c 00000000 		.word	seven_segment_led
+ 1104              	.LBE27:
+ 1105              		.cfi_endproc
+ 1106              	.LFE247:
+ 1108              		.global	seven_segment_led
+ 1109              		.section	.rodata.seven_segment_led,"a"
+ 1110              		.align	2
+ 1113              	seven_segment_led:
+ 1114 0000 00040000 		.word	1024
+ 1115 0004 00040240 		.word	1073873920
+ 1116 0008 02000000 		.word	2
+ 1117 000c 00040240 		.word	1073873920
+ 1118 0010 00400000 		.word	16384
+ 1119 0014 00040240 		.word	1073873920
+ 1120 0018 04000000 		.word	4
+ 1121 001c 00040240 		.word	1073873920
+ 1122 0020 01000000 		.word	1
+ 1123 0024 00040240 		.word	1073873920
+ 1124 0028 20000000 		.word	32
+ 1125 002c 00080240 		.word	1073874944
+ 1126 0030 10000000 		.word	16
+ 1127 0034 00080240 		.word	1073874944
+ARM GAS  /tmp/ccMzDXS8.s 			page 27
+
+
+ 1128 0038 40000000 		.word	64
+ 1129 003c 00080240 		.word	1073874944
+ 1130 0040 80000000 		.word	128
+ 1131 0044 00080240 		.word	1073874944
+ 1132 0048 00800000 		.word	32768
+ 1133 004c 00040240 		.word	1073873920
+ 1134 0050 00800000 		.word	32768
+ 1135 0054 00000240 		.word	1073872896
+ 1136 0058 00040000 		.word	1024
+ 1137 005c 00080240 		.word	1073874944
+ 1138 0060 00080000 		.word	2048
+ 1139 0064 00080240 		.word	1073874944
+ 1140 0068 00100000 		.word	4096
+ 1141 006c 00080240 		.word	1073874944
+ 1142              		.section	.data.led_configC,"aw"
+ 1143              		.align	2
+ 1146              	led_configC:
+ 1147 0000 00000000 		.word	0
+ 1148 0004 01000000 		.word	1
+ 1149 0008 00000000 		.word	0
+ 1150 000c 00000000 		.space	8
+ 1150      00000000 
+ 1151              		.section	.data.led_configB,"aw"
+ 1152              		.align	2
+ 1155              	led_configB:
+ 1156 0000 00000000 		.word	0
+ 1157 0004 01000000 		.word	1
+ 1158 0008 00000000 		.word	0
+ 1159 000c 00000000 		.space	8
+ 1159      00000000 
+ 1160              		.section	.data.led_configA,"aw"
+ 1161              		.align	2
+ 1164              	led_configA:
+ 1165 0000 00000000 		.word	0
+ 1166 0004 01000000 		.word	1
+ 1167 0008 00000000 		.word	0
+ 1168 000c 00000000 		.space	8
+ 1168      00000000 
+ 1169              		.text
+ 1170              	.Letext0:
+ 1171              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 1172              		.file 3 "stm/stm32f4xx/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 1173              		.file 4 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1174              		.file 5 "driver/Inc/SevenSegment.h"
+ARM GAS  /tmp/ccMzDXS8.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 SevenSegment.c
+     /tmp/ccMzDXS8.s:21     .text.SevenSegment_Init:00000000 $t
+     /tmp/ccMzDXS8.s:27     .text.SevenSegment_Init:00000000 SevenSegment_Init
+     /tmp/ccMzDXS8.s:217    .text.SevenSegment_Init:000000e4 $d
+     /tmp/ccMzDXS8.s:1113   .rodata.seven_segment_led:00000000 seven_segment_led
+     /tmp/ccMzDXS8.s:1155   .data.led_configB:00000000 led_configB
+     /tmp/ccMzDXS8.s:1164   .data.led_configA:00000000 led_configA
+     /tmp/ccMzDXS8.s:1146   .data.led_configC:00000000 led_configC
+     /tmp/ccMzDXS8.s:229    .text.displayNum_SevenSegment:00000000 $t
+     /tmp/ccMzDXS8.s:235    .text.displayNum_SevenSegment:00000000 displayNum_SevenSegment
+     /tmp/ccMzDXS8.s:385    .text.displayNum_SevenSegment:000000a0 $d
+     /tmp/ccMzDXS8.s:396    .text.displayNum_SevenSegment:000000c8 $t
+     /tmp/ccMzDXS8.s:867    .text.displayNum_SevenSegment:00000328 $d
+     /tmp/ccMzDXS8.s:882    .text.displayNum_SevenSegment:00000330 $t
+     /tmp/ccMzDXS8.s:907    .text.displayTwoNum_SevenSegment:00000000 $t
+     /tmp/ccMzDXS8.s:913    .text.displayTwoNum_SevenSegment:00000000 displayTwoNum_SevenSegment
+     /tmp/ccMzDXS8.s:940    .text.off_SevenSegment:00000000 $t
+     /tmp/ccMzDXS8.s:946    .text.off_SevenSegment:00000000 off_SevenSegment
+     /tmp/ccMzDXS8.s:1103   .text.off_SevenSegment:0000009c $d
+     /tmp/ccMzDXS8.s:1110   .rodata.seven_segment_led:00000000 $d
+     /tmp/ccMzDXS8.s:1143   .data.led_configC:00000000 $d
+     /tmp/ccMzDXS8.s:1152   .data.led_configB:00000000 $d
+     /tmp/ccMzDXS8.s:1161   .data.led_configA:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
