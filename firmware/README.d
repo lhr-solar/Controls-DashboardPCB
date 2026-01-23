@@ -1,3 +1,0 @@
-Controls Leader Firmware
-
-//TODO
