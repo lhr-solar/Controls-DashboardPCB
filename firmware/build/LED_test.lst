@@ -1,0 +1,271 @@
+ARM GAS  /tmp/ccqF3TBA.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"LED_test.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c"
+  20              		.section	.text.Heartbeat_Clock_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	Heartbeat_Clock_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Heartbeat_Clock_Init:
+  28              	.LFB334:
+   1:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** #include "stm32xx_hal.h"
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** // Heartbeat pin on stm32l432kcu is PB3
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** #ifdef STM32L432xx
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PIN GPIO_PIN_3
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PORT GPIOB
+   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** #elif STM32L431xx
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PIN GPIO_PIN_11
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PORT GPIOB
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** #else
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** // Most other nucleos have a heartbeat for A5
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PIN_OB GPIO_PIN_3
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PORT_OB GPIOB
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PIN GPIO_PIN_5 //4 LSOM
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     #define LED_PORT GPIOA //B LSOM
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** #endif
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** // Initialize clock for heartbeat LED port
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** void Heartbeat_Clock_Init() {
+  29              		.loc 1 20 29 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 82B0     		sub	sp, sp, #8
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     switch ((uint32_t)LED_PORT) {
+  37              		.loc 1 21 5 view .LVU1
+ARM GAS  /tmp/ccqF3TBA.s 			page 2
+
+
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOA:
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOA_CLK_ENABLE();
+  38              		.loc 1 23 13 view .LVU2
+  39              	.LBB2:
+  40              		.loc 1 23 13 view .LVU3
+  41              		.loc 1 23 13 view .LVU4
+  42 0002 0A4B     		ldr	r3, .L3
+  43 0004 DA6C     		ldr	r2, [r3, #76]
+  44 0006 42F00102 		orr	r2, r2, #1
+  45 000a DA64     		str	r2, [r3, #76]
+  46              		.loc 1 23 13 view .LVU5
+  47 000c DA6C     		ldr	r2, [r3, #76]
+  48 000e 02F00102 		and	r2, r2, #1
+  49 0012 0092     		str	r2, [sp]
+  50              		.loc 1 23 13 view .LVU6
+  51 0014 009A     		ldr	r2, [sp]
+  52              	.LBE2:
+  53              		.loc 1 23 13 view .LVU7
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  54              		.loc 1 24 13 view .LVU8
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOB:
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOB_CLK_ENABLE();
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOC:
+  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOC_CLK_ENABLE();
+  30:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  31:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     }
+  32:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     switch ((uint32_t)LED_PORT_OB) {
+  55              		.loc 1 32 5 view .LVU9
+  33:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOA:
+  34:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOA_CLK_ENABLE();
+  35:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  36:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOB:
+  37:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOB_CLK_ENABLE();
+  56              		.loc 1 37 13 view .LVU10
+  57              	.LBB3:
+  58              		.loc 1 37 13 view .LVU11
+  59              		.loc 1 37 13 view .LVU12
+  60 0016 DA6C     		ldr	r2, [r3, #76]
+  61 0018 42F00202 		orr	r2, r2, #2
+  62 001c DA64     		str	r2, [r3, #76]
+  63              		.loc 1 37 13 view .LVU13
+  64 001e DB6C     		ldr	r3, [r3, #76]
+  65 0020 03F00203 		and	r3, r3, #2
+  66 0024 0193     		str	r3, [sp, #4]
+  67              		.loc 1 37 13 view .LVU14
+  68 0026 019B     		ldr	r3, [sp, #4]
+  69              	.LBE3:
+  70              		.loc 1 37 13 view .LVU15
+  38:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  71              		.loc 1 38 13 view .LVU16
+  39:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         case (uint32_t)GPIOC:
+  40:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             __HAL_RCC_GPIOC_CLK_ENABLE();
+  41:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****             break;
+  42:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     }
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** }
+  72              		.loc 1 43 1 is_stmt 0 view .LVU17
+ARM GAS  /tmp/ccqF3TBA.s 			page 3
+
+
+  73 0028 02B0     		add	sp, sp, #8
+  74              	.LCFI1:
+  75              		.cfi_def_cfa_offset 0
+  76              		@ sp needed
+  77 002a 7047     		bx	lr
+  78              	.L4:
+  79              		.align	2
+  80              	.L3:
+  81 002c 00100240 		.word	1073876992
+  82              		.cfi_endproc
+  83              	.LFE334:
+  85              		.section	.text.main,"ax",%progbits
+  86              		.align	1
+  87              		.global	main
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	main:
+  93              	.LFB335:
+  44:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  45:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** int main(){
+  94              		.loc 1 45 11 is_stmt 1 view -0
+  95              		.cfi_startproc
+  96              		@ Volatile: function does not return.
+  97              		@ args = 0, pretend = 0, frame = 40
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99 0000 00B5     		push	{lr}
+ 100              	.LCFI2:
+ 101              		.cfi_def_cfa_offset 4
+ 102              		.cfi_offset 14, -4
+ 103 0002 8BB0     		sub	sp, sp, #44
+ 104              	.LCFI3:
+ 105              		.cfi_def_cfa_offset 48
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     HAL_Init();
+ 106              		.loc 1 46 5 view .LVU19
+ 107 0004 FFF7FEFF 		bl	HAL_Init
+ 108              	.LVL0:
+  47:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  48:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     GPIO_InitTypeDef led_config = {
+ 109              		.loc 1 48 5 view .LVU20
+ 110              		.loc 1 48 22 is_stmt 0 view .LVU21
+ 111 0008 0023     		movs	r3, #0
+ 112 000a 0593     		str	r3, [sp, #20]
+ 113 000c 0693     		str	r3, [sp, #24]
+ 114 000e 0793     		str	r3, [sp, #28]
+ 115 0010 0893     		str	r3, [sp, #32]
+ 116 0012 0993     		str	r3, [sp, #36]
+ 117 0014 2022     		movs	r2, #32
+ 118 0016 0592     		str	r2, [sp, #20]
+ 119 0018 0122     		movs	r2, #1
+ 120 001a 0692     		str	r2, [sp, #24]
+  49:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Mode = GPIO_MODE_OUTPUT_PP,
+  50:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Pull = GPIO_NOPULL,
+  51:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Pin = LED_PIN
+  52:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     };
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  54:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     GPIO_InitTypeDef led_config_OB = {
+ARM GAS  /tmp/ccqF3TBA.s 			page 4
+
+
+ 121              		.loc 1 54 5 is_stmt 1 view .LVU22
+ 122              		.loc 1 54 22 is_stmt 0 view .LVU23
+ 123 001c 0093     		str	r3, [sp]
+ 124 001e 0193     		str	r3, [sp, #4]
+ 125 0020 0293     		str	r3, [sp, #8]
+ 126 0022 0393     		str	r3, [sp, #12]
+ 127 0024 0493     		str	r3, [sp, #16]
+ 128 0026 0823     		movs	r3, #8
+ 129 0028 0093     		str	r3, [sp]
+ 130 002a 0192     		str	r2, [sp, #4]
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Mode = GPIO_MODE_OUTPUT_PP,
+  56:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Pull = GPIO_NOPULL,
+  57:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         .Pin = LED_PIN_OB
+  58:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     };
+  59:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     
+  60:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     Heartbeat_Clock_Init(); // enable clock for LED_PORT
+ 131              		.loc 1 60 5 is_stmt 1 view .LVU24
+ 132 002c FFF7FEFF 		bl	Heartbeat_Clock_Init
+ 133              	.LVL1:
+  61:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     HAL_GPIO_Init(LED_PORT, &led_config); // initialize GPIOA with led_config
+ 134              		.loc 1 61 5 view .LVU25
+ 135 0030 05A9     		add	r1, sp, #20
+ 136 0032 4FF09040 		mov	r0, #1207959552
+ 137 0036 FFF7FEFF 		bl	HAL_GPIO_Init
+ 138              	.LVL2:
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     HAL_GPIO_Init(LED_PORT_OB, &led_config_OB);
+ 139              		.loc 1 62 5 view .LVU26
+ 140 003a 6946     		mov	r1, sp
+ 141 003c 0848     		ldr	r0, .L8
+ 142 003e FFF7FEFF 		bl	HAL_GPIO_Init
+ 143              	.LVL3:
+ 144              	.L6:
+  63:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c **** 
+  64:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****     while(1){
+ 145              		.loc 1 64 5 view .LVU27
+  65:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
+ 146              		.loc 1 65 9 view .LVU28
+ 147 0042 2021     		movs	r1, #32
+ 148 0044 4FF09040 		mov	r0, #1207959552
+ 149 0048 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 150              	.LVL4:
+  66:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         HAL_GPIO_TogglePin(LED_PORT_OB, LED_PIN_OB);
+ 151              		.loc 1 66 9 view .LVU29
+ 152 004c 0821     		movs	r1, #8
+ 153 004e 0448     		ldr	r0, .L8
+ 154 0050 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 155              	.LVL5:
+  67:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         HAL_Delay(500);
+ 156              		.loc 1 67 9 discriminator 1 view .LVU30
+ 157 0054 4FF4FA70 		mov	r0, #500
+ 158 0058 FFF7FEFF 		bl	HAL_Delay
+ 159              	.LVL6:
+  64:/home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c ****         HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
+ 160              		.loc 1 64 10 view .LVU31
+ 161 005c F1E7     		b	.L6
+ 162              	.L9:
+ 163 005e 00BF     		.align	2
+ARM GAS  /tmp/ccqF3TBA.s 			page 5
+
+
+ 164              	.L8:
+ 165 0060 00040048 		.word	1207960576
+ 166              		.cfi_endproc
+ 167              	.LFE335:
+ 169              		.text
+ 170              	.Letext0:
+ 171              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 172              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 173              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 174              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 175              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ARM GAS  /tmp/ccqF3TBA.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 LED_test.c
+     /tmp/ccqF3TBA.s:21     .text.Heartbeat_Clock_Init:00000000 $t
+     /tmp/ccqF3TBA.s:27     .text.Heartbeat_Clock_Init:00000000 Heartbeat_Clock_Init
+     /tmp/ccqF3TBA.s:81     .text.Heartbeat_Clock_Init:0000002c $d
+     /tmp/ccqF3TBA.s:86     .text.main:00000000 $t
+     /tmp/ccqF3TBA.s:92     .text.main:00000000 main
+     /tmp/ccqF3TBA.s:165    .text.main:00000060 $d
+
+UNDEFINED SYMBOLS
+HAL_Init
+HAL_GPIO_Init
+HAL_GPIO_TogglePin
+HAL_Delay

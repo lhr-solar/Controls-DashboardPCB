@@ -1,0 +1,2761 @@
+ARM GAS  /tmp/cc15kb9a.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"CAN.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "bsp/Src/CAN.c"
+  20              		.section	.text.HAL_CAN_MspF4Init,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	HAL_CAN_MspF4Init:
+  27              	.LVL0:
+  28              	.LFB244:
+   1:bsp/Src/CAN.c **** #include "CAN.h"
+   2:bsp/Src/CAN.c **** #include "queue_ex.h"
+   3:bsp/Src/CAN.c **** 
+   4:bsp/Src/CAN.c **** // 8 for now unless extended payload is supported
+   5:bsp/Src/CAN.c **** #define DATA_SIZE (8)
+   6:bsp/Src/CAN.c **** 
+   7:bsp/Src/CAN.c **** // entries in queues
+   8:bsp/Src/CAN.c **** typedef struct {
+   9:bsp/Src/CAN.c ****   CAN_TxHeaderTypeDef header;
+  10:bsp/Src/CAN.c ****   uint8_t data[DATA_SIZE];
+  11:bsp/Src/CAN.c **** } tx_payload_t;
+  12:bsp/Src/CAN.c **** 
+  13:bsp/Src/CAN.c **** typedef struct {
+  14:bsp/Src/CAN.c ****   CAN_RxHeaderTypeDef header;
+  15:bsp/Src/CAN.c ****   uint8_t data[DATA_SIZE];
+  16:bsp/Src/CAN.c **** } rx_payload_t;
+  17:bsp/Src/CAN.c **** 
+  18:bsp/Src/CAN.c **** // metadata for recieve queues
+  19:bsp/Src/CAN.c **** typedef struct {
+  20:bsp/Src/CAN.c ****   uint16_t id;
+  21:bsp/Src/CAN.c ****   uint16_t size;
+  22:bsp/Src/CAN.c ****   QueueHandle_t queue;
+  23:bsp/Src/CAN.c ****   uint8_t* storage;
+  24:bsp/Src/CAN.c ****   bool circular;
+  25:bsp/Src/CAN.c ****   StaticQueue_t buffer;
+  26:bsp/Src/CAN.c **** } recv_entry_t;
+  27:bsp/Src/CAN.c **** 
+  28:bsp/Src/CAN.c **** #ifdef CAN1
+  29:bsp/Src/CAN.c **** // fallback can1 send queue size
+  30:bsp/Src/CAN.c **** #ifndef CAN1_SEND_QUEUE_SIZE
+ARM GAS  /tmp/cc15kb9a.s 			page 2
+
+
+  31:bsp/Src/CAN.c **** #define CAN1_SEND_QUEUE_SIZE (10)
+  32:bsp/Src/CAN.c **** #endif
+  33:bsp/Src/CAN.c **** 
+  34:bsp/Src/CAN.c **** // can1 handle
+  35:bsp/Src/CAN.c **** static CAN_HandleTypeDef hcan1_ = {.Instance = CAN1};
+  36:bsp/Src/CAN.c **** CAN_HandleTypeDef* hcan1 = &hcan1_;
+  37:bsp/Src/CAN.c **** 
+  38:bsp/Src/CAN.c **** // can1 send queue
+  39:bsp/Src/CAN.c **** static QueueHandle_t can1_send_queue = NULL;
+  40:bsp/Src/CAN.c **** static StaticQueue_t can1_send_queue_buffer;
+  41:bsp/Src/CAN.c **** static uint8_t
+  42:bsp/Src/CAN.c ****     can1_send_queue_storage[CAN1_SEND_QUEUE_SIZE * sizeof(tx_payload_t)];
+  43:bsp/Src/CAN.c **** 
+  44:bsp/Src/CAN.c **** #if __has_include("can1_recv_entries.h")
+  45:bsp/Src/CAN.c **** // create can1 recv queue storage
+  46:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_) \
+  47:bsp/Src/CAN.c ****   static uint8_t can1_recv_queue_storage_##ID_[SIZE_ * sizeof(rx_payload_t)];
+  48:bsp/Src/CAN.c **** 
+  49:bsp/Src/CAN.c **** #include "can1_recv_entries.h"
+  50:bsp/Src/CAN.c **** 
+  51:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+  52:bsp/Src/CAN.c **** 
+  53:bsp/Src/CAN.c **** // create can1 recv queue array
+  54:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_)      \
+  55:bsp/Src/CAN.c ****   {.id = (ID_),                         \
+  56:bsp/Src/CAN.c ****    .size = (SIZE_),                     \
+  57:bsp/Src/CAN.c ****    .queue = NULL,                       \
+  58:bsp/Src/CAN.c ****    .storage = can1_recv_queue_storage_##ID_, \
+  59:bsp/Src/CAN.c ****    .circular = (CIRCULAR_), \
+  60:bsp/Src/CAN.c ****    .buffer = {{0}}},
+  61:bsp/Src/CAN.c **** 
+  62:bsp/Src/CAN.c **** static recv_entry_t can1_recv_entries[] = {
+  63:bsp/Src/CAN.c **** #include "can1_recv_entries.h"
+  64:bsp/Src/CAN.c **** };
+  65:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+  66:bsp/Src/CAN.c **** 
+  67:bsp/Src/CAN.c **** // calculate amount of can1 recv entries
+  68:bsp/Src/CAN.c **** static const uint32_t can1_recv_entry_count =
+  69:bsp/Src/CAN.c ****     sizeof(can1_recv_entries) / sizeof(can1_recv_entries[0]);
+  70:bsp/Src/CAN.c **** 
+  71:bsp/Src/CAN.c **** #else /* can1_recv_entries.h */
+  72:bsp/Src/CAN.c **** // create can1 recv queue array
+  73:bsp/Src/CAN.c **** static recv_entry_t can1_recv_entries[] = {};
+  74:bsp/Src/CAN.c **** // calculate amount of can1 recv entries
+  75:bsp/Src/CAN.c **** static const uint32_t can1_recv_entry_count = 0;
+  76:bsp/Src/CAN.c **** #endif /* can1_recv_entries.h */
+  77:bsp/Src/CAN.c **** #endif /* CAN1 */
+  78:bsp/Src/CAN.c **** 
+  79:bsp/Src/CAN.c **** #ifdef CAN2
+  80:bsp/Src/CAN.c **** // fallback can2 send queue size
+  81:bsp/Src/CAN.c **** #ifndef CAN2_SEND_QUEUE_SIZE
+  82:bsp/Src/CAN.c **** #define CAN2_SEND_QUEUE_SIZE (10)
+  83:bsp/Src/CAN.c **** #endif
+  84:bsp/Src/CAN.c **** 
+  85:bsp/Src/CAN.c **** // can2 handle
+  86:bsp/Src/CAN.c **** static CAN_HandleTypeDef hcan2_ = {.Instance = CAN2};
+  87:bsp/Src/CAN.c **** CAN_HandleTypeDef* hcan2 = &hcan2_;
+ARM GAS  /tmp/cc15kb9a.s 			page 3
+
+
+  88:bsp/Src/CAN.c **** 
+  89:bsp/Src/CAN.c **** // can2 send queue
+  90:bsp/Src/CAN.c **** static QueueHandle_t can2_send_queue = NULL;
+  91:bsp/Src/CAN.c **** static StaticQueue_t can2_send_queue_buffer;
+  92:bsp/Src/CAN.c **** static uint8_t
+  93:bsp/Src/CAN.c ****     can2_send_queue_storage[CAN2_SEND_QUEUE_SIZE * sizeof(tx_payload_t)];
+  94:bsp/Src/CAN.c **** 
+  95:bsp/Src/CAN.c **** #if __has_include("can2_recv_entries.h")
+  96:bsp/Src/CAN.c **** // create can2 recv queue storage
+  97:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_) \
+  98:bsp/Src/CAN.c ****   static uint8_t can2_recv_queue_storage_##ID_[SIZE_ * sizeof(rx_payload_t)];
+  99:bsp/Src/CAN.c **** 
+ 100:bsp/Src/CAN.c **** #include "can2_recv_entries.h"
+ 101:bsp/Src/CAN.c **** 
+ 102:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+ 103:bsp/Src/CAN.c **** 
+ 104:bsp/Src/CAN.c **** // create can2 recv queue array
+ 105:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_)      \
+ 106:bsp/Src/CAN.c ****   {.id = (ID_),                         \
+ 107:bsp/Src/CAN.c ****    .size = (SIZE_),                     \
+ 108:bsp/Src/CAN.c ****    .queue = NULL,                       \
+ 109:bsp/Src/CAN.c ****    .storage = can2_recv_queue_storage_##ID_, \
+ 110:bsp/Src/CAN.c ****    .circular = (CIRCULAR_), \
+ 111:bsp/Src/CAN.c ****    .buffer = {{0}}},
+ 112:bsp/Src/CAN.c **** 
+ 113:bsp/Src/CAN.c **** static recv_entry_t can2_recv_entries[] = {
+ 114:bsp/Src/CAN.c **** #include "can2_recv_entries.h"
+ 115:bsp/Src/CAN.c **** };
+ 116:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+ 117:bsp/Src/CAN.c **** 
+ 118:bsp/Src/CAN.c **** // calculate amount of can2 recv entries
+ 119:bsp/Src/CAN.c **** static const uint32_t can2_recv_entry_count =
+ 120:bsp/Src/CAN.c ****     sizeof(can2_recv_entries) / sizeof(can2_recv_entries[0]);
+ 121:bsp/Src/CAN.c **** 
+ 122:bsp/Src/CAN.c **** #else /* can2_recv_entries.h */
+ 123:bsp/Src/CAN.c **** // create can2 recv queue array
+ 124:bsp/Src/CAN.c **** static recv_entry_t can2_recv_entries[] = {};
+ 125:bsp/Src/CAN.c **** // calculate amount of can2 recv entries
+ 126:bsp/Src/CAN.c **** static const uint32_t can2_recv_entry_count = 0;
+ 127:bsp/Src/CAN.c **** #endif /* can2_recv_entries.h */
+ 128:bsp/Src/CAN.c **** #endif /* CAN2 */
+ 129:bsp/Src/CAN.c **** 
+ 130:bsp/Src/CAN.c **** #ifdef CAN3
+ 131:bsp/Src/CAN.c **** // fallback can3 send queue size
+ 132:bsp/Src/CAN.c **** #ifndef CAN3_SEND_QUEUE_SIZE
+ 133:bsp/Src/CAN.c **** #define CAN3_SEND_QUEUE_SIZE (10)
+ 134:bsp/Src/CAN.c **** #endif
+ 135:bsp/Src/CAN.c **** 
+ 136:bsp/Src/CAN.c **** // can3 handle
+ 137:bsp/Src/CAN.c **** static CAN_HandleTypeDef hcan3_ = {.Instance = CAN3};
+ 138:bsp/Src/CAN.c **** CAN_HandleTypeDef* hcan3 = &hcan3_;
+ 139:bsp/Src/CAN.c **** 
+ 140:bsp/Src/CAN.c **** // can3 send queue
+ 141:bsp/Src/CAN.c **** static QueueHandle_t can3_send_queue = NULL;
+ 142:bsp/Src/CAN.c **** static StaticQueue_t can3_send_queue_buffer;
+ 143:bsp/Src/CAN.c **** static uint8_t
+ 144:bsp/Src/CAN.c ****     can3_send_queue_storage[CAN3_SEND_QUEUE_SIZE * sizeof(tx_payload_t)];
+ARM GAS  /tmp/cc15kb9a.s 			page 4
+
+
+ 145:bsp/Src/CAN.c **** 
+ 146:bsp/Src/CAN.c **** #if __has_include("can3_recv_entries.h")
+ 147:bsp/Src/CAN.c **** // create recv queue storage
+ 148:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_) \
+ 149:bsp/Src/CAN.c ****   static uint8_t recv_queue_storage_##ID_[SIZE_ * sizeof(rx_payload_t)];
+ 150:bsp/Src/CAN.c **** 
+ 151:bsp/Src/CAN.c **** #include "can3_recv_entries.h"
+ 152:bsp/Src/CAN.c **** 
+ 153:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+ 154:bsp/Src/CAN.c **** 
+ 155:bsp/Src/CAN.c **** // create can3 recv queue array
+ 156:bsp/Src/CAN.c **** #define CAN_RECV_ENTRY(ID_, SIZE_, CIRCULAR_)      \
+ 157:bsp/Src/CAN.c ****   {.id = (ID_),                         \
+ 158:bsp/Src/CAN.c ****    .size = (SIZE_),                     \
+ 159:bsp/Src/CAN.c ****    .queue = NULL,                       \
+ 160:bsp/Src/CAN.c ****    .storage = recv_queue_storage_##ID_, \
+ 161:bsp/Src/CAN.c ****    .circular = (CIRCULAR_), \
+ 162:bsp/Src/CAN.c ****    .buffer = {{0}}},
+ 163:bsp/Src/CAN.c **** 
+ 164:bsp/Src/CAN.c **** static recv_entry_t can3_recv_entries[] = {
+ 165:bsp/Src/CAN.c **** #include "can3_recv_entries.h"
+ 166:bsp/Src/CAN.c **** };
+ 167:bsp/Src/CAN.c **** #undef CAN_RECV_ENTRY
+ 168:bsp/Src/CAN.c **** 
+ 169:bsp/Src/CAN.c **** // calculate amount of can3 recv entries
+ 170:bsp/Src/CAN.c **** static const uint32_t can3_recv_entry_count =
+ 171:bsp/Src/CAN.c ****     sizeof(can3_recv_entries) / sizeof(can3_recv_entries[0]);
+ 172:bsp/Src/CAN.c **** 
+ 173:bsp/Src/CAN.c **** #else /* can3_recv_entries.h */
+ 174:bsp/Src/CAN.c **** // create can3 recv queue array
+ 175:bsp/Src/CAN.c **** static recv_entry_t can3_recv_entries[] = {};
+ 176:bsp/Src/CAN.c **** // calculate amount of can3 recv entries
+ 177:bsp/Src/CAN.c **** static const uint32_t can3_recv_entry_count = 0;
+ 178:bsp/Src/CAN.c **** #endif /* can3_recv_entries.h */
+ 179:bsp/Src/CAN.c **** #endif /* CAN3 */
+ 180:bsp/Src/CAN.c **** 
+ 181:bsp/Src/CAN.c **** static inline void HAL_CAN_MspF4Init(CAN_HandleTypeDef* hcan){
+  29              		.loc 1 181 62 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 181 62 is_stmt 0 view .LVU1
+  34 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 24
+  37              		.cfi_offset 4, -24
+  38              		.cfi_offset 5, -20
+  39              		.cfi_offset 6, -16
+  40              		.cfi_offset 7, -12
+  41              		.cfi_offset 8, -8
+  42              		.cfi_offset 14, -4
+  43 0004 88B0     		sub	sp, sp, #32
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 56
+ 182:bsp/Src/CAN.c ****   GPIO_InitTypeDef init = {0};
+  46              		.loc 1 182 3 is_stmt 1 view .LVU2
+  47              		.loc 1 182 20 is_stmt 0 view .LVU3
+ARM GAS  /tmp/cc15kb9a.s 			page 5
+
+
+  48 0006 0023     		movs	r3, #0
+  49 0008 0393     		str	r3, [sp, #12]
+  50 000a 0493     		str	r3, [sp, #16]
+  51 000c 0593     		str	r3, [sp, #20]
+  52 000e 0693     		str	r3, [sp, #24]
+  53 0010 0793     		str	r3, [sp, #28]
+ 183:bsp/Src/CAN.c ****   
+ 184:bsp/Src/CAN.c ****   // CAN1
+ 185:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+  54              		.loc 1 185 3 is_stmt 1 view .LVU4
+  55              		.loc 1 185 11 is_stmt 0 view .LVU5
+  56 0012 0368     		ldr	r3, [r0]
+  57              		.loc 1 185 6 view .LVU6
+  58 0014 2F4A     		ldr	r2, .L7
+  59 0016 9342     		cmp	r3, r2
+  60 0018 05D0     		beq	.L5
+ 186:bsp/Src/CAN.c ****     // enable clocks
+ 187:bsp/Src/CAN.c ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 188:bsp/Src/CAN.c **** 
+ 189:bsp/Src/CAN.c ****     /* enable gpio
+ 190:bsp/Src/CAN.c ****     PA11 -> CAN1_RX
+ 191:bsp/Src/CAN.c ****     PA12 -> CAN1_TX
+ 192:bsp/Src/CAN.c ****     */
+ 193:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_11;
+ 194:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 195:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 196:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 197:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 198:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 199:bsp/Src/CAN.c **** 
+ 200:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_12;
+ 201:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 202:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 203:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 204:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 205:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 206:bsp/Src/CAN.c ****   }
+ 207:bsp/Src/CAN.c **** 
+ 208:bsp/Src/CAN.c ****   // CAN2
+ 209:bsp/Src/CAN.c ****   #ifdef CAN2
+ 210:bsp/Src/CAN.c ****   else if (hcan->Instance == CAN2) {
+  61              		.loc 1 210 8 is_stmt 1 view .LVU7
+  62              		.loc 1 210 11 is_stmt 0 view .LVU8
+  63 001a 2F4A     		ldr	r2, .L7+4
+  64 001c 9342     		cmp	r3, r2
+  65 001e 2DD0     		beq	.L6
+  66              	.LVL1:
+  67              	.L1:
+ 211:bsp/Src/CAN.c ****     // enable clocks
+ 212:bsp/Src/CAN.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+ 213:bsp/Src/CAN.c **** 
+ 214:bsp/Src/CAN.c ****     /* enable gpio
+ 215:bsp/Src/CAN.c ****     PB12 -> CAN2_RX
+ 216:bsp/Src/CAN.c ****     PB13 -> CAN2_TX
+ 217:bsp/Src/CAN.c ****     */
+ 218:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_12;
+ 219:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ARM GAS  /tmp/cc15kb9a.s 			page 6
+
+
+ 220:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 221:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 222:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 223:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 224:bsp/Src/CAN.c **** 
+ 225:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_13;
+ 226:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 227:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 228:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 229:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 230:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 231:bsp/Src/CAN.c ****   }
+ 232:bsp/Src/CAN.c ****   #endif /* CAN2 */
+ 233:bsp/Src/CAN.c **** 
+ 234:bsp/Src/CAN.c ****   // CAN3
+ 235:bsp/Src/CAN.c ****   #ifdef CAN3
+ 236:bsp/Src/CAN.c ****   else if (hcan->Instance == CAN3) {
+ 237:bsp/Src/CAN.c ****     // enable clocks
+ 238:bsp/Src/CAN.c ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 239:bsp/Src/CAN.c **** 
+ 240:bsp/Src/CAN.c ****     /* enable gpio
+ 241:bsp/Src/CAN.c ****     PA8  -> CAN3_RX
+ 242:bsp/Src/CAN.c ****     PA15 -> CAN3_TX
+ 243:bsp/Src/CAN.c ****     */
+ 244:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_8;
+ 245:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 246:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 247:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 248:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF11_CAN3;
+ 249:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 250:bsp/Src/CAN.c **** 
+ 251:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_15;
+ 252:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 253:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 254:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 255:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF11_CAN3;
+ 256:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 257:bsp/Src/CAN.c ****   }
+ 258:bsp/Src/CAN.c ****   #endif /* CAN3 */
+ 259:bsp/Src/CAN.c **** }
+  68              		.loc 1 259 1 view .LVU9
+  69 0020 08B0     		add	sp, sp, #32
+  70              	.LCFI2:
+  71              		.cfi_remember_state
+  72              		.cfi_def_cfa_offset 24
+  73              		@ sp needed
+  74 0022 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  75              	.LVL2:
+  76              	.L5:
+  77              	.LCFI3:
+  78              		.cfi_restore_state
+ 187:bsp/Src/CAN.c **** 
+  79              		.loc 1 187 5 is_stmt 1 view .LVU10
+  80              	.LBB2:
+ 187:bsp/Src/CAN.c **** 
+  81              		.loc 1 187 5 view .LVU11
+  82 0026 0026     		movs	r6, #0
+ARM GAS  /tmp/cc15kb9a.s 			page 7
+
+
+  83 0028 0196     		str	r6, [sp, #4]
+ 187:bsp/Src/CAN.c **** 
+  84              		.loc 1 187 5 view .LVU12
+  85 002a 2C4B     		ldr	r3, .L7+8
+  86 002c 1A6B     		ldr	r2, [r3, #48]
+  87 002e 42F00102 		orr	r2, r2, #1
+  88 0032 1A63     		str	r2, [r3, #48]
+ 187:bsp/Src/CAN.c **** 
+  89              		.loc 1 187 5 view .LVU13
+  90 0034 1B6B     		ldr	r3, [r3, #48]
+  91 0036 03F00103 		and	r3, r3, #1
+  92 003a 0193     		str	r3, [sp, #4]
+ 187:bsp/Src/CAN.c **** 
+  93              		.loc 1 187 5 view .LVU14
+  94 003c 019B     		ldr	r3, [sp, #4]
+  95              	.LBE2:
+ 187:bsp/Src/CAN.c **** 
+  96              		.loc 1 187 5 view .LVU15
+ 193:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+  97              		.loc 1 193 5 view .LVU16
+ 193:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+  98              		.loc 1 193 14 is_stmt 0 view .LVU17
+  99 003e 4FF40063 		mov	r3, #2048
+ 100 0042 0393     		str	r3, [sp, #12]
+ 194:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 101              		.loc 1 194 5 is_stmt 1 view .LVU18
+ 194:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 102              		.loc 1 194 15 is_stmt 0 view .LVU19
+ 103 0044 4FF00208 		mov	r8, #2
+ 104 0048 CDF81080 		str	r8, [sp, #16]
+ 195:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 105              		.loc 1 195 5 is_stmt 1 view .LVU20
+ 195:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 106              		.loc 1 195 15 is_stmt 0 view .LVU21
+ 107 004c 0123     		movs	r3, #1
+ 108 004e 0593     		str	r3, [sp, #20]
+ 196:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 109              		.loc 1 196 5 is_stmt 1 view .LVU22
+ 196:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 110              		.loc 1 196 16 is_stmt 0 view .LVU23
+ 111 0050 0327     		movs	r7, #3
+ 112 0052 0697     		str	r7, [sp, #24]
+ 197:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 113              		.loc 1 197 5 is_stmt 1 view .LVU24
+ 197:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 114              		.loc 1 197 20 is_stmt 0 view .LVU25
+ 115 0054 0925     		movs	r5, #9
+ 116 0056 0795     		str	r5, [sp, #28]
+ 198:bsp/Src/CAN.c **** 
+ 117              		.loc 1 198 5 is_stmt 1 view .LVU26
+ 118 0058 214C     		ldr	r4, .L7+12
+ 119 005a 03A9     		add	r1, sp, #12
+ 120 005c 2046     		mov	r0, r4
+ 121              	.LVL3:
+ 198:bsp/Src/CAN.c **** 
+ 122              		.loc 1 198 5 is_stmt 0 view .LVU27
+ 123 005e FFF7FEFF 		bl	HAL_GPIO_Init
+ARM GAS  /tmp/cc15kb9a.s 			page 8
+
+
+ 124              	.LVL4:
+ 200:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 125              		.loc 1 200 5 is_stmt 1 view .LVU28
+ 200:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 126              		.loc 1 200 14 is_stmt 0 view .LVU29
+ 127 0062 4FF48053 		mov	r3, #4096
+ 128 0066 0393     		str	r3, [sp, #12]
+ 201:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 129              		.loc 1 201 5 is_stmt 1 view .LVU30
+ 201:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 130              		.loc 1 201 15 is_stmt 0 view .LVU31
+ 131 0068 CDF81080 		str	r8, [sp, #16]
+ 202:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 132              		.loc 1 202 5 is_stmt 1 view .LVU32
+ 202:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 133              		.loc 1 202 15 is_stmt 0 view .LVU33
+ 134 006c 0596     		str	r6, [sp, #20]
+ 203:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 135              		.loc 1 203 5 is_stmt 1 view .LVU34
+ 203:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 136              		.loc 1 203 16 is_stmt 0 view .LVU35
+ 137 006e 0697     		str	r7, [sp, #24]
+ 204:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 138              		.loc 1 204 5 is_stmt 1 view .LVU36
+ 204:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 139              		.loc 1 204 20 is_stmt 0 view .LVU37
+ 140 0070 0795     		str	r5, [sp, #28]
+ 205:bsp/Src/CAN.c ****   }
+ 141              		.loc 1 205 5 is_stmt 1 view .LVU38
+ 142 0072 03A9     		add	r1, sp, #12
+ 143 0074 2046     		mov	r0, r4
+ 144 0076 FFF7FEFF 		bl	HAL_GPIO_Init
+ 145              	.LVL5:
+ 146 007a D1E7     		b	.L1
+ 147              	.LVL6:
+ 148              	.L6:
+ 212:bsp/Src/CAN.c **** 
+ 149              		.loc 1 212 5 view .LVU39
+ 150              	.LBB3:
+ 212:bsp/Src/CAN.c **** 
+ 151              		.loc 1 212 5 view .LVU40
+ 152 007c 0026     		movs	r6, #0
+ 153 007e 0296     		str	r6, [sp, #8]
+ 212:bsp/Src/CAN.c **** 
+ 154              		.loc 1 212 5 view .LVU41
+ 155 0080 164B     		ldr	r3, .L7+8
+ 156 0082 1A6B     		ldr	r2, [r3, #48]
+ 157 0084 42F00202 		orr	r2, r2, #2
+ 158 0088 1A63     		str	r2, [r3, #48]
+ 212:bsp/Src/CAN.c **** 
+ 159              		.loc 1 212 5 view .LVU42
+ 160 008a 1B6B     		ldr	r3, [r3, #48]
+ 161 008c 03F00203 		and	r3, r3, #2
+ 162 0090 0293     		str	r3, [sp, #8]
+ 212:bsp/Src/CAN.c **** 
+ 163              		.loc 1 212 5 view .LVU43
+ 164 0092 029B     		ldr	r3, [sp, #8]
+ARM GAS  /tmp/cc15kb9a.s 			page 9
+
+
+ 165              	.LBE3:
+ 212:bsp/Src/CAN.c **** 
+ 166              		.loc 1 212 5 view .LVU44
+ 218:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 167              		.loc 1 218 5 view .LVU45
+ 218:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 168              		.loc 1 218 14 is_stmt 0 view .LVU46
+ 169 0094 4FF48053 		mov	r3, #4096
+ 170 0098 0393     		str	r3, [sp, #12]
+ 219:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 171              		.loc 1 219 5 is_stmt 1 view .LVU47
+ 219:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 172              		.loc 1 219 15 is_stmt 0 view .LVU48
+ 173 009a 4FF00208 		mov	r8, #2
+ 174 009e CDF81080 		str	r8, [sp, #16]
+ 220:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 175              		.loc 1 220 5 is_stmt 1 view .LVU49
+ 220:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 176              		.loc 1 220 15 is_stmt 0 view .LVU50
+ 177 00a2 0123     		movs	r3, #1
+ 178 00a4 0593     		str	r3, [sp, #20]
+ 221:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 179              		.loc 1 221 5 is_stmt 1 view .LVU51
+ 221:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 180              		.loc 1 221 16 is_stmt 0 view .LVU52
+ 181 00a6 0327     		movs	r7, #3
+ 182 00a8 0697     		str	r7, [sp, #24]
+ 222:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 183              		.loc 1 222 5 is_stmt 1 view .LVU53
+ 222:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 184              		.loc 1 222 20 is_stmt 0 view .LVU54
+ 185 00aa 0925     		movs	r5, #9
+ 186 00ac 0795     		str	r5, [sp, #28]
+ 223:bsp/Src/CAN.c **** 
+ 187              		.loc 1 223 5 is_stmt 1 view .LVU55
+ 188 00ae 0D4C     		ldr	r4, .L7+16
+ 189 00b0 03A9     		add	r1, sp, #12
+ 190 00b2 2046     		mov	r0, r4
+ 191              	.LVL7:
+ 223:bsp/Src/CAN.c **** 
+ 192              		.loc 1 223 5 is_stmt 0 view .LVU56
+ 193 00b4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 194              	.LVL8:
+ 225:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 195              		.loc 1 225 5 is_stmt 1 view .LVU57
+ 225:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 196              		.loc 1 225 14 is_stmt 0 view .LVU58
+ 197 00b8 4FF40053 		mov	r3, #8192
+ 198 00bc 0393     		str	r3, [sp, #12]
+ 226:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 199              		.loc 1 226 5 is_stmt 1 view .LVU59
+ 226:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 200              		.loc 1 226 15 is_stmt 0 view .LVU60
+ 201 00be CDF81080 		str	r8, [sp, #16]
+ 227:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 202              		.loc 1 227 5 is_stmt 1 view .LVU61
+ 227:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ARM GAS  /tmp/cc15kb9a.s 			page 10
+
+
+ 203              		.loc 1 227 15 is_stmt 0 view .LVU62
+ 204 00c2 0596     		str	r6, [sp, #20]
+ 228:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 205              		.loc 1 228 5 is_stmt 1 view .LVU63
+ 228:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN2;
+ 206              		.loc 1 228 16 is_stmt 0 view .LVU64
+ 207 00c4 0697     		str	r7, [sp, #24]
+ 229:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 208              		.loc 1 229 5 is_stmt 1 view .LVU65
+ 229:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOB, &init);
+ 209              		.loc 1 229 20 is_stmt 0 view .LVU66
+ 210 00c6 0795     		str	r5, [sp, #28]
+ 230:bsp/Src/CAN.c ****   }
+ 211              		.loc 1 230 5 is_stmt 1 view .LVU67
+ 212 00c8 03A9     		add	r1, sp, #12
+ 213 00ca 2046     		mov	r0, r4
+ 214 00cc FFF7FEFF 		bl	HAL_GPIO_Init
+ 215              	.LVL9:
+ 216              		.loc 1 259 1 is_stmt 0 view .LVU68
+ 217 00d0 A6E7     		b	.L1
+ 218              	.L8:
+ 219 00d2 00BF     		.align	2
+ 220              	.L7:
+ 221 00d4 00640040 		.word	1073767424
+ 222 00d8 00680040 		.word	1073768448
+ 223 00dc 00380240 		.word	1073887232
+ 224 00e0 00000240 		.word	1073872896
+ 225 00e4 00040240 		.word	1073873920
+ 226              		.cfi_endproc
+ 227              	.LFE244:
+ 229              		.section	.text.transmit,"ax",%progbits
+ 230              		.align	1
+ 231              		.syntax unified
+ 232              		.thumb
+ 233              		.thumb_func
+ 235              	transmit:
+ 236              	.LVL10:
+ 237              	.LFB254:
+ 260:bsp/Src/CAN.c **** 
+ 261:bsp/Src/CAN.c **** // CAN MSP deinit
+ 262:bsp/Src/CAN.c **** void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan) {
+ 263:bsp/Src/CAN.c ****   // CAN1
+ 264:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+ 265:bsp/Src/CAN.c ****     // disable clocks
+ 266:bsp/Src/CAN.c ****     __HAL_RCC_CAN1_CLK_DISABLE();
+ 267:bsp/Src/CAN.c **** 
+ 268:bsp/Src/CAN.c ****     /* disable gpio
+ 269:bsp/Src/CAN.c ****     PA11 -> CAN1_RX
+ 270:bsp/Src/CAN.c ****     PA12 -> CAN1_TX
+ 271:bsp/Src/CAN.c ****     */
+ 272:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11);
+ 273:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12);
+ 274:bsp/Src/CAN.c **** 
+ 275:bsp/Src/CAN.c ****     // disable interrupts
+ 276:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
+ 277:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+ 278:bsp/Src/CAN.c ****   }
+ARM GAS  /tmp/cc15kb9a.s 			page 11
+
+
+ 279:bsp/Src/CAN.c **** 
+ 280:bsp/Src/CAN.c ****   // CAN2
+ 281:bsp/Src/CAN.c ****   #ifdef CAN2
+ 282:bsp/Src/CAN.c ****   else if (hcan->Instance == CAN2) {
+ 283:bsp/Src/CAN.c ****     // disable clocks
+ 284:bsp/Src/CAN.c ****     __HAL_RCC_CAN2_CLK_DISABLE();
+ 285:bsp/Src/CAN.c **** 
+ 286:bsp/Src/CAN.c ****     /* disable gpio
+ 287:bsp/Src/CAN.c ****     PB12 -> CAN2_RX
+ 288:bsp/Src/CAN.c ****     PB13 -> CAN2_TX
+ 289:bsp/Src/CAN.c ****     */
+ 290:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12);
+ 291:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13);
+ 292:bsp/Src/CAN.c **** 
+ 293:bsp/Src/CAN.c ****     // disable interrupts
+ 294:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN2_TX_IRQn);
+ 295:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
+ 296:bsp/Src/CAN.c ****   }
+ 297:bsp/Src/CAN.c ****   #endif /* CAN2 */
+ 298:bsp/Src/CAN.c **** 
+ 299:bsp/Src/CAN.c ****   // CAN3
+ 300:bsp/Src/CAN.c ****   #ifdef CAN3
+ 301:bsp/Src/CAN.c ****   else if (hcan->Instance == CAN3) {
+ 302:bsp/Src/CAN.c ****     // disable clocks
+ 303:bsp/Src/CAN.c ****     __HAL_RCC_CAN3_CLK_DISABLE();
+ 304:bsp/Src/CAN.c **** 
+ 305:bsp/Src/CAN.c ****     /* disable gpio
+ 306:bsp/Src/CAN.c ****     PA8  -> CAN3_RX
+ 307:bsp/Src/CAN.c ****     PB15 -> CAN3_TX
+ 308:bsp/Src/CAN.c ****     */
+ 309:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_8);
+ 310:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_15);
+ 311:bsp/Src/CAN.c **** 
+ 312:bsp/Src/CAN.c ****     // disable interrupts
+ 313:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN3_TX_IRQn);
+ 314:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN3_RX0_IRQn);
+ 315:bsp/Src/CAN.c ****   }
+ 316:bsp/Src/CAN.c ****   #endif /* CAN3 */
+ 317:bsp/Src/CAN.c **** }
+ 318:bsp/Src/CAN.c **** 
+ 319:bsp/Src/CAN.c **** static inline void HAL_CAN_MspL4Init(CAN_HandleTypeDef* hcan){
+ 320:bsp/Src/CAN.c ****   GPIO_InitTypeDef init = {0};
+ 321:bsp/Src/CAN.c ****   // CAN1
+ 322:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+ 323:bsp/Src/CAN.c ****     // enable clocks
+ 324:bsp/Src/CAN.c ****     __HAL_RCC_GPIOA_CLK_ENABLE();
+ 325:bsp/Src/CAN.c **** 
+ 326:bsp/Src/CAN.c ****     /* enable gpio
+ 327:bsp/Src/CAN.c ****     PA11 -> CAN1_RX
+ 328:bsp/Src/CAN.c ****     PA12 -> CAN1_TX
+ 329:bsp/Src/CAN.c ****     */
+ 330:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_11;
+ 331:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 332:bsp/Src/CAN.c ****     init.Pull = GPIO_PULLUP;
+ 333:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 334:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 335:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ARM GAS  /tmp/cc15kb9a.s 			page 12
+
+
+ 336:bsp/Src/CAN.c **** 
+ 337:bsp/Src/CAN.c ****     init.Pin = GPIO_PIN_12;
+ 338:bsp/Src/CAN.c ****     init.Mode = GPIO_MODE_AF_PP;
+ 339:bsp/Src/CAN.c ****     init.Pull = GPIO_NOPULL;
+ 340:bsp/Src/CAN.c ****     init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 341:bsp/Src/CAN.c ****     init.Alternate = GPIO_AF9_CAN1;
+ 342:bsp/Src/CAN.c ****     HAL_GPIO_Init(GPIOA, &init);
+ 343:bsp/Src/CAN.c ****   }
+ 344:bsp/Src/CAN.c **** }
+ 345:bsp/Src/CAN.c ****     
+ 346:bsp/Src/CAN.c **** // CAN MSP init
+ 347:bsp/Src/CAN.c **** void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan) {
+ 348:bsp/Src/CAN.c ****   IRQn_Type txIRQ = 0;
+ 349:bsp/Src/CAN.c ****   IRQn_Type rxIRQ = 0;
+ 350:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+ 351:bsp/Src/CAN.c ****     __HAL_RCC_CAN1_CLK_ENABLE();
+ 352:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 353:bsp/Src/CAN.c ****     rxIRQ = CAN1_RX0_IRQn;
+ 354:bsp/Src/CAN.c ****   }
+ 355:bsp/Src/CAN.c ****   #ifdef CAN2
+ 356:bsp/Src/CAN.c ****   else if(hcan->Instance == CAN2){
+ 357:bsp/Src/CAN.c ****     __HAL_RCC_CAN2_CLK_ENABLE();
+ 358:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 359:bsp/Src/CAN.c ****     rxIRQ = CAN2_RX0_IRQn;
+ 360:bsp/Src/CAN.c ****   }
+ 361:bsp/Src/CAN.c ****   #endif
+ 362:bsp/Src/CAN.c ****   #ifdef CAN3
+ 363:bsp/Src/CAN.c ****   else if(hcan->Instance == CAN3){
+ 364:bsp/Src/CAN.c ****     __HAL_RCC_CAN3_CLK_ENABLE();
+ 365:bsp/Src/CAN.c ****     txIRQ = CAN3_TX_IRQn;
+ 366:bsp/Src/CAN.c ****     rxIRQ = CAN3_RX0_IRQn;
+ 367:bsp/Src/CAN.c ****   }
+ 368:bsp/Src/CAN.c ****   #endif
+ 369:bsp/Src/CAN.c **** 
+ 370:bsp/Src/CAN.c ****   // configure GPIO pins for CAN
+ 371:bsp/Src/CAN.c ****   #if defined(STM32F4xx)
+ 372:bsp/Src/CAN.c ****   HAL_CAN_MspF4Init(hcan);
+ 373:bsp/Src/CAN.c ****   #elif defined(STM32L4xx)
+ 374:bsp/Src/CAN.c ****   HAL_CAN_MspL4Init(hcan);
+ 375:bsp/Src/CAN.c ****   #endif
+ 376:bsp/Src/CAN.c **** 
+ 377:bsp/Src/CAN.c ****   // enable can interrupts
+ 378:bsp/Src/CAN.c ****   if(txIRQ !=0 && rxIRQ !=0){
+ 379:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(txIRQ, 5, 0);
+ 380:bsp/Src/CAN.c ****     HAL_NVIC_EnableIRQ(txIRQ);
+ 381:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(rxIRQ, 5, 0);
+ 382:bsp/Src/CAN.c ****     HAL_NVIC_EnableIRQ(rxIRQ);
+ 383:bsp/Src/CAN.c ****   }
+ 384:bsp/Src/CAN.c **** }
+ 385:bsp/Src/CAN.c **** 
+ 386:bsp/Src/CAN.c **** can_status_t can_init(CAN_HandleTypeDef* handle, CAN_FilterTypeDef* filter) {
+ 387:bsp/Src/CAN.c ****   // CAN1
+ 388:bsp/Src/CAN.c ****   if (handle->Instance == CAN1) {
+ 389:bsp/Src/CAN.c ****     // init queues
+ 390:bsp/Src/CAN.c ****     can1_send_queue =
+ 391:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN1_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 392:bsp/Src/CAN.c ****                            can1_send_queue_storage, &can1_send_queue_buffer);
+ARM GAS  /tmp/cc15kb9a.s 			page 13
+
+
+ 393:bsp/Src/CAN.c ****     for (int i = 0; i < can1_recv_entry_count; i++) {
+ 394:bsp/Src/CAN.c ****       can1_recv_entries[i].queue = xQueueCreateStatic(
+ 395:bsp/Src/CAN.c ****           can1_recv_entries[i].size, sizeof(rx_payload_t),
+ 396:bsp/Src/CAN.c ****           can1_recv_entries[i].storage, &can1_recv_entries[i].buffer);
+ 397:bsp/Src/CAN.c ****     }
+ 398:bsp/Src/CAN.c ****   }
+ 399:bsp/Src/CAN.c **** 
+ 400:bsp/Src/CAN.c ****   // CAN2
+ 401:bsp/Src/CAN.c ****   #ifdef CAN2
+ 402:bsp/Src/CAN.c ****   else if (handle->Instance == CAN2) {
+ 403:bsp/Src/CAN.c ****     // init queues
+ 404:bsp/Src/CAN.c ****     can2_send_queue =
+ 405:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN2_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 406:bsp/Src/CAN.c ****                            can2_send_queue_storage, &can2_send_queue_buffer);
+ 407:bsp/Src/CAN.c ****     for (int i = 0; i < can2_recv_entry_count; i++) {
+ 408:bsp/Src/CAN.c ****       can2_recv_entries[i].queue = xQueueCreateStatic(
+ 409:bsp/Src/CAN.c ****           can2_recv_entries[i].size, sizeof(rx_payload_t),
+ 410:bsp/Src/CAN.c ****           can2_recv_entries[i].storage, &can2_recv_entries[i].buffer);
+ 411:bsp/Src/CAN.c ****     }
+ 412:bsp/Src/CAN.c ****   }
+ 413:bsp/Src/CAN.c ****   #endif /* CAN2 */
+ 414:bsp/Src/CAN.c **** 
+ 415:bsp/Src/CAN.c ****   // CAN3
+ 416:bsp/Src/CAN.c ****   #ifdef CAN3
+ 417:bsp/Src/CAN.c ****   else if (handle->Instance == CAN3) {
+ 418:bsp/Src/CAN.c ****     // init queues
+ 419:bsp/Src/CAN.c ****     can3_send_queue =
+ 420:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN3_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 421:bsp/Src/CAN.c ****                            can3_send_queue_storage, &can3_send_queue_buffer);
+ 422:bsp/Src/CAN.c ****     for (int i = 0; i < can3_recv_entry_count; i++) {
+ 423:bsp/Src/CAN.c ****       can3_recv_entries[i].queue = xQueueCreateStatic(
+ 424:bsp/Src/CAN.c ****           can3_recv_entries[i].size, sizeof(rx_payload_t),
+ 425:bsp/Src/CAN.c ****           can3_recv_entries[i].storage, &can3_recv_entries[i].buffer);
+ 426:bsp/Src/CAN.c ****     }
+ 427:bsp/Src/CAN.c ****   }
+ 428:bsp/Src/CAN.c ****   #endif /* CAN3 */
+ 429:bsp/Src/CAN.c **** 
+ 430:bsp/Src/CAN.c ****   else {
+ 431:bsp/Src/CAN.c ****     return CAN_ERR;
+ 432:bsp/Src/CAN.c ****   }
+ 433:bsp/Src/CAN.c **** 
+ 434:bsp/Src/CAN.c ****   // init HAL
+ 435:bsp/Src/CAN.c ****   if (HAL_CAN_Init(handle) != HAL_OK) {
+ 436:bsp/Src/CAN.c ****     return CAN_ERR;
+ 437:bsp/Src/CAN.c ****   }
+ 438:bsp/Src/CAN.c **** 
+ 439:bsp/Src/CAN.c ****   // init filter
+ 440:bsp/Src/CAN.c ****   if (HAL_CAN_ConfigFilter(handle, filter) != HAL_OK) {
+ 441:bsp/Src/CAN.c ****     return CAN_ERR;
+ 442:bsp/Src/CAN.c ****   }
+ 443:bsp/Src/CAN.c **** 
+ 444:bsp/Src/CAN.c ****   // enable interrupts
+ 445:bsp/Src/CAN.c ****   if (HAL_CAN_ActivateNotification(handle, CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK) {
+ 446:bsp/Src/CAN.c ****     return CAN_ERR;
+ 447:bsp/Src/CAN.c ****   }
+ 448:bsp/Src/CAN.c ****   if (HAL_CAN_ActivateNotification(handle, CAN_IT_RX_FIFO0_MSG_PENDING) !=
+ 449:bsp/Src/CAN.c ****       HAL_OK) {
+ARM GAS  /tmp/cc15kb9a.s 			page 14
+
+
+ 450:bsp/Src/CAN.c ****     return CAN_ERR;
+ 451:bsp/Src/CAN.c ****   }
+ 452:bsp/Src/CAN.c **** 
+ 453:bsp/Src/CAN.c ****   return CAN_OK;
+ 454:bsp/Src/CAN.c **** }
+ 455:bsp/Src/CAN.c **** 
+ 456:bsp/Src/CAN.c **** can_status_t can_deinit(CAN_HandleTypeDef* handle) {
+ 457:bsp/Src/CAN.c ****   // deinit HAL
+ 458:bsp/Src/CAN.c ****   if (HAL_CAN_DeInit(handle) != HAL_OK) {
+ 459:bsp/Src/CAN.c ****     return CAN_ERR;
+ 460:bsp/Src/CAN.c ****   }
+ 461:bsp/Src/CAN.c **** 
+ 462:bsp/Src/CAN.c ****   // disable interrupts
+ 463:bsp/Src/CAN.c ****   if (HAL_CAN_DeactivateNotification(handle, CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK) {
+ 464:bsp/Src/CAN.c ****     return CAN_ERR;
+ 465:bsp/Src/CAN.c ****   }
+ 466:bsp/Src/CAN.c ****   if (HAL_CAN_DeactivateNotification(handle, CAN_IT_RX_FIFO0_MSG_PENDING) !=
+ 467:bsp/Src/CAN.c ****       HAL_OK) {
+ 468:bsp/Src/CAN.c ****     return CAN_ERR;
+ 469:bsp/Src/CAN.c ****   }
+ 470:bsp/Src/CAN.c **** 
+ 471:bsp/Src/CAN.c ****   return CAN_OK;
+ 472:bsp/Src/CAN.c **** }
+ 473:bsp/Src/CAN.c **** 
+ 474:bsp/Src/CAN.c **** can_status_t can_start(CAN_HandleTypeDef* handle) {
+ 475:bsp/Src/CAN.c ****   if (HAL_CAN_Start(handle) != HAL_OK) {
+ 476:bsp/Src/CAN.c ****     return CAN_ERR;
+ 477:bsp/Src/CAN.c ****   }
+ 478:bsp/Src/CAN.c **** 
+ 479:bsp/Src/CAN.c ****   return CAN_OK;
+ 480:bsp/Src/CAN.c **** }
+ 481:bsp/Src/CAN.c **** 
+ 482:bsp/Src/CAN.c **** can_status_t can_stop(CAN_HandleTypeDef* handle) {
+ 483:bsp/Src/CAN.c ****   if (HAL_CAN_Stop(handle) != HAL_OK) {
+ 484:bsp/Src/CAN.c ****     return CAN_ERR;
+ 485:bsp/Src/CAN.c ****   }
+ 486:bsp/Src/CAN.c **** 
+ 487:bsp/Src/CAN.c ****   return CAN_OK;
+ 488:bsp/Src/CAN.c **** }
+ 489:bsp/Src/CAN.c **** 
+ 490:bsp/Src/CAN.c **** can_status_t can_recv(CAN_HandleTypeDef* handle, uint16_t id,
+ 491:bsp/Src/CAN.c ****                       CAN_RxHeaderTypeDef* header, uint8_t data[],
+ 492:bsp/Src/CAN.c ****                       TickType_t delay_ticks) {
+ 493:bsp/Src/CAN.c ****   // recieve from queue matching id
+ 494:bsp/Src/CAN.c ****   rx_payload_t payload = {0};
+ 495:bsp/Src/CAN.c ****   bool valid_id = false;
+ 496:bsp/Src/CAN.c ****   // CAN1
+ 497:bsp/Src/CAN.c ****   if (handle->Instance == CAN1) {
+ 498:bsp/Src/CAN.c ****     for (int i = 0; i < can1_recv_entry_count; i++) {
+ 499:bsp/Src/CAN.c ****       if (can1_recv_entries[i].id == id) {
+ 500:bsp/Src/CAN.c ****         valid_id = true;
+ 501:bsp/Src/CAN.c **** 
+ 502:bsp/Src/CAN.c ****         // if delay_ticks == portMAX_DELAY thread blocks, 
+ 503:bsp/Src/CAN.c ****         // other values of delay_ticks are delays
+ 504:bsp/Src/CAN.c ****         if (xQueueReceive(can1_recv_entries[i].queue, &payload, delay_ticks) ==
+ 505:bsp/Src/CAN.c ****             errQUEUE_EMPTY) {
+ 506:bsp/Src/CAN.c ****           return CAN_EMPTY;
+ARM GAS  /tmp/cc15kb9a.s 			page 15
+
+
+ 507:bsp/Src/CAN.c ****         }
+ 508:bsp/Src/CAN.c ****   
+ 509:bsp/Src/CAN.c ****         break;
+ 510:bsp/Src/CAN.c ****       }
+ 511:bsp/Src/CAN.c ****     }
+ 512:bsp/Src/CAN.c ****   }
+ 513:bsp/Src/CAN.c **** 
+ 514:bsp/Src/CAN.c ****   // CAN2
+ 515:bsp/Src/CAN.c ****   #ifdef CAN2
+ 516:bsp/Src/CAN.c ****   else if (handle->Instance == CAN2) {
+ 517:bsp/Src/CAN.c ****     for (int i = 0; i < can2_recv_entry_count; i++) {
+ 518:bsp/Src/CAN.c ****       if (can2_recv_entries[i].id == id) {
+ 519:bsp/Src/CAN.c ****         valid_id = true;
+ 520:bsp/Src/CAN.c **** 
+ 521:bsp/Src/CAN.c ****         // if delay_ticks == portMAX_DELAY thread blocks, 
+ 522:bsp/Src/CAN.c ****         // other values of delay_ticks are delays
+ 523:bsp/Src/CAN.c ****         if (xQueueReceive(can2_recv_entries[i].queue, &payload, delay_ticks) ==
+ 524:bsp/Src/CAN.c ****             errQUEUE_EMPTY) {
+ 525:bsp/Src/CAN.c ****           return CAN_EMPTY;
+ 526:bsp/Src/CAN.c ****         }
+ 527:bsp/Src/CAN.c ****   
+ 528:bsp/Src/CAN.c ****         break;
+ 529:bsp/Src/CAN.c ****       }
+ 530:bsp/Src/CAN.c ****     }
+ 531:bsp/Src/CAN.c ****   }
+ 532:bsp/Src/CAN.c ****   #endif /* CAN2 */
+ 533:bsp/Src/CAN.c **** 
+ 534:bsp/Src/CAN.c ****   // CAN3
+ 535:bsp/Src/CAN.c ****   #ifdef CAN3
+ 536:bsp/Src/CAN.c ****   else if (handle->Instance == CAN3) {
+ 537:bsp/Src/CAN.c ****     for (int i = 0; i < can3_recv_entry_count; i++) {
+ 538:bsp/Src/CAN.c ****       if (can3_recv_entries[i].id == id) {
+ 539:bsp/Src/CAN.c ****         valid_id = true;
+ 540:bsp/Src/CAN.c **** 
+ 541:bsp/Src/CAN.c ****         // if delay_ticks == portMAX_DELAY thread blocks, 
+ 542:bsp/Src/CAN.c ****         // other values of delay_ticks are delays
+ 543:bsp/Src/CAN.c ****         if (xQueueReceive(can3_recv_entries[i].queue, &payload, delay_ticks) ==
+ 544:bsp/Src/CAN.c ****             errQUEUE_EMPTY) {
+ 545:bsp/Src/CAN.c ****           return CAN_EMPTY;
+ 546:bsp/Src/CAN.c ****         }
+ 547:bsp/Src/CAN.c ****   
+ 548:bsp/Src/CAN.c ****         break;
+ 549:bsp/Src/CAN.c ****       }
+ 550:bsp/Src/CAN.c ****     }
+ 551:bsp/Src/CAN.c ****   }
+ 552:bsp/Src/CAN.c ****   #endif /* CAN3 */
+ 553:bsp/Src/CAN.c **** 
+ 554:bsp/Src/CAN.c ****   else {
+ 555:bsp/Src/CAN.c ****     return CAN_ERR;
+ 556:bsp/Src/CAN.c ****   }
+ 557:bsp/Src/CAN.c **** 
+ 558:bsp/Src/CAN.c ****   // decode payload if it is valid and message recieved
+ 559:bsp/Src/CAN.c ****   if (valid_id) {
+ 560:bsp/Src/CAN.c ****     *header = payload.header;
+ 561:bsp/Src/CAN.c ****     for (int i = 0; i < DATA_SIZE; i++) {
+ 562:bsp/Src/CAN.c ****       data[i] = payload.data[i];
+ 563:bsp/Src/CAN.c ****     }
+ARM GAS  /tmp/cc15kb9a.s 			page 16
+
+
+ 564:bsp/Src/CAN.c **** 
+ 565:bsp/Src/CAN.c ****     return CAN_RECV;
+ 566:bsp/Src/CAN.c **** 
+ 567:bsp/Src/CAN.c ****   } else {
+ 568:bsp/Src/CAN.c ****     return CAN_ERR;
+ 569:bsp/Src/CAN.c ****   }
+ 570:bsp/Src/CAN.c **** }
+ 571:bsp/Src/CAN.c **** 
+ 572:bsp/Src/CAN.c **** can_status_t can_send(CAN_HandleTypeDef* handle,
+ 573:bsp/Src/CAN.c ****                       const CAN_TxHeaderTypeDef* header, const uint8_t data[],
+ 574:bsp/Src/CAN.c ****                       TickType_t delay_ticks) {
+ 575:bsp/Src/CAN.c **** 
+ 576:bsp/Src/CAN.c ****   // disable interrupts (do not want race conditions
+ 577:bsp/Src/CAN.c ****   // on shared resource (mailbox) between threads and
+ 578:bsp/Src/CAN.c ****   // interrupt routines (TxComplete))
+ 579:bsp/Src/CAN.c ****   portENTER_CRITICAL();
+ 580:bsp/Src/CAN.c **** 
+ 581:bsp/Src/CAN.c ****   // if transmit is inactive, put payload into mailbox
+ 582:bsp/Src/CAN.c ****   if (HAL_CAN_GetTxMailboxesFreeLevel(handle) >= 1) {
+ 583:bsp/Src/CAN.c ****     uint32_t mailbox;
+ 584:bsp/Src/CAN.c ****     if (HAL_CAN_AddTxMessage(handle, header, data, &mailbox) != HAL_OK) {
+ 585:bsp/Src/CAN.c ****       // disable interrupts
+ 586:bsp/Src/CAN.c ****       portEXIT_CRITICAL();
+ 587:bsp/Src/CAN.c **** 
+ 588:bsp/Src/CAN.c ****       return CAN_ERR;
+ 589:bsp/Src/CAN.c ****     }
+ 590:bsp/Src/CAN.c **** 
+ 591:bsp/Src/CAN.c ****     // disable interrupts
+ 592:bsp/Src/CAN.c ****     portEXIT_CRITICAL();
+ 593:bsp/Src/CAN.c ****   }
+ 594:bsp/Src/CAN.c ****   // otherwise, put into send queue
+ 595:bsp/Src/CAN.c ****   else {
+ 596:bsp/Src/CAN.c ****     // disable interrupts
+ 597:bsp/Src/CAN.c ****     portEXIT_CRITICAL();
+ 598:bsp/Src/CAN.c ****     
+ 599:bsp/Src/CAN.c ****     tx_payload_t payload = {0};
+ 600:bsp/Src/CAN.c ****     payload.header = *header;
+ 601:bsp/Src/CAN.c ****     for (int i = 0; i < DATA_SIZE; i++) {
+ 602:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 603:bsp/Src/CAN.c ****     }
+ 604:bsp/Src/CAN.c **** 
+ 605:bsp/Src/CAN.c ****     // CAN1
+ 606:bsp/Src/CAN.c ****     if (handle->Instance == CAN1) {
+ 607:bsp/Src/CAN.c ****       if (xQueueSend(can1_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 608:bsp/Src/CAN.c ****         return CAN_ERR;
+ 609:bsp/Src/CAN.c ****       }
+ 610:bsp/Src/CAN.c ****     }
+ 611:bsp/Src/CAN.c **** 
+ 612:bsp/Src/CAN.c ****     // CAN2
+ 613:bsp/Src/CAN.c ****     #ifdef CAN2
+ 614:bsp/Src/CAN.c ****     else if (handle->Instance == CAN2) {
+ 615:bsp/Src/CAN.c ****       if (xQueueSend(can2_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 616:bsp/Src/CAN.c ****         return CAN_ERR;
+ 617:bsp/Src/CAN.c ****       }
+ 618:bsp/Src/CAN.c ****     }
+ 619:bsp/Src/CAN.c ****     #endif /* CAN2 */
+ 620:bsp/Src/CAN.c **** 
+ARM GAS  /tmp/cc15kb9a.s 			page 17
+
+
+ 621:bsp/Src/CAN.c ****     // CAN3
+ 622:bsp/Src/CAN.c ****     #ifdef CAN3
+ 623:bsp/Src/CAN.c ****     else if (handle->Instance == CAN3) {
+ 624:bsp/Src/CAN.c ****       if (xQueueSend(can3_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 625:bsp/Src/CAN.c ****         return CAN_ERR;
+ 626:bsp/Src/CAN.c ****       }
+ 627:bsp/Src/CAN.c ****     }
+ 628:bsp/Src/CAN.c ****     #endif /* CAN3 */
+ 629:bsp/Src/CAN.c ****   }
+ 630:bsp/Src/CAN.c **** 
+ 631:bsp/Src/CAN.c ****   return CAN_SENT;
+ 632:bsp/Src/CAN.c **** }
+ 633:bsp/Src/CAN.c **** 
+ 634:bsp/Src/CAN.c **** static void transmit(CAN_HandleTypeDef* handle) {
+ 238              		.loc 1 634 49 is_stmt 1 view -0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 40
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		.loc 1 634 49 is_stmt 0 view .LVU70
+ 243 0000 10B5     		push	{r4, lr}
+ 244              	.LCFI4:
+ 245              		.cfi_def_cfa_offset 8
+ 246              		.cfi_offset 4, -8
+ 247              		.cfi_offset 14, -4
+ 248 0002 8AB0     		sub	sp, sp, #40
+ 249              	.LCFI5:
+ 250              		.cfi_def_cfa_offset 48
+ 251 0004 0446     		mov	r4, r0
+ 635:bsp/Src/CAN.c ****   tx_payload_t payload = {0};
+ 252              		.loc 1 635 3 is_stmt 1 view .LVU71
+ 253              		.loc 1 635 16 is_stmt 0 view .LVU72
+ 254 0006 2022     		movs	r2, #32
+ 255 0008 0021     		movs	r1, #0
+ 256 000a 02A8     		add	r0, sp, #8
+ 257              	.LVL11:
+ 258              		.loc 1 635 16 view .LVU73
+ 259 000c FFF7FEFF 		bl	memset
+ 260              	.LVL12:
+ 636:bsp/Src/CAN.c ****   BaseType_t higherPriorityTaskWoken = pdFALSE;
+ 261              		.loc 1 636 3 is_stmt 1 view .LVU74
+ 262              		.loc 1 636 14 is_stmt 0 view .LVU75
+ 263 0010 0023     		movs	r3, #0
+ 264 0012 0193     		str	r3, [sp, #4]
+ 637:bsp/Src/CAN.c **** 
+ 638:bsp/Src/CAN.c ****   // receive data from send queue
+ 639:bsp/Src/CAN.c ****   bool success = false;
+ 265              		.loc 1 639 3 is_stmt 1 view .LVU76
+ 266              	.LVL13:
+ 640:bsp/Src/CAN.c ****   // CAN1
+ 641:bsp/Src/CAN.c ****   if (handle->Instance == CAN1) {
+ 267              		.loc 1 641 3 view .LVU77
+ 268              		.loc 1 641 13 is_stmt 0 view .LVU78
+ 269 0014 2368     		ldr	r3, [r4]
+ 270              		.loc 1 641 6 view .LVU79
+ 271 0016 164A     		ldr	r2, .L17
+ 272 0018 9342     		cmp	r3, r2
+ 273 001a 10D0     		beq	.L15
+ARM GAS  /tmp/cc15kb9a.s 			page 18
+
+
+ 642:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can1_send_queue, &payload,
+ 643:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 644:bsp/Src/CAN.c ****       success = true;
+ 645:bsp/Src/CAN.c ****     }
+ 646:bsp/Src/CAN.c ****   }
+ 647:bsp/Src/CAN.c **** 
+ 648:bsp/Src/CAN.c ****   // CAN2
+ 649:bsp/Src/CAN.c ****   #ifdef CAN2
+ 650:bsp/Src/CAN.c ****   else if (handle->Instance == CAN2) {
+ 274              		.loc 1 650 8 is_stmt 1 view .LVU80
+ 275              		.loc 1 650 11 is_stmt 0 view .LVU81
+ 276 001c 154A     		ldr	r2, .L17+4
+ 277 001e 9342     		cmp	r3, r2
+ 278 0020 1CD0     		beq	.L16
+ 279              	.LVL14:
+ 280              	.L12:
+ 651:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can2_send_queue, &payload,
+ 652:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 653:bsp/Src/CAN.c ****       success = true;
+ 654:bsp/Src/CAN.c ****     }
+ 655:bsp/Src/CAN.c ****   }
+ 656:bsp/Src/CAN.c ****   #endif /* CAN2 */
+ 657:bsp/Src/CAN.c **** 
+ 658:bsp/Src/CAN.c ****   // CAN3
+ 659:bsp/Src/CAN.c ****   #ifdef CAN3
+ 660:bsp/Src/CAN.c ****   else if (handle->Instance == CAN3) {
+ 661:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can3_send_queue, &payload,
+ 662:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 663:bsp/Src/CAN.c ****       success = true;
+ 664:bsp/Src/CAN.c ****     }
+ 665:bsp/Src/CAN.c ****   }
+ 666:bsp/Src/CAN.c ****   #endif /* CAN3 */
+ 667:bsp/Src/CAN.c ****   
+ 668:bsp/Src/CAN.c ****   // add payload to mailbox
+ 669:bsp/Src/CAN.c ****   if (success) {
+ 670:bsp/Src/CAN.c ****     uint32_t mailbox;
+ 671:bsp/Src/CAN.c ****     if (HAL_CAN_AddTxMessage(handle, &payload.header, payload.data, &mailbox) != HAL_OK) {
+ 672:bsp/Src/CAN.c ****       // Handle transmission error (optional: log or retry mechanism)
+ 673:bsp/Src/CAN.c ****       // treated as lost packet for now
+ 674:bsp/Src/CAN.c ****     }
+ 675:bsp/Src/CAN.c ****   }
+ 676:bsp/Src/CAN.c **** 
+ 677:bsp/Src/CAN.c ****   portYIELD_FROM_ISR(higherPriorityTaskWoken);
+ 281              		.loc 1 677 3 is_stmt 1 view .LVU82
+ 282              		.loc 1 677 3 view .LVU83
+ 283 0022 019B     		ldr	r3, [sp, #4]
+ 284 0024 4BB1     		cbz	r3, .L9
+ 285              		.loc 1 677 3 discriminator 1 view .LVU84
+ 286              		.loc 1 677 3 discriminator 1 view .LVU85
+ 287 0026 4FF0E023 		mov	r3, #-536813568
+ 288 002a 4FF08052 		mov	r2, #268435456
+ 289 002e C3F8042D 		str	r2, [r3, #3332]
+ 290              		.loc 1 677 3 discriminator 1 view .LVU86
+ 291              		.syntax unified
+ 292              	@ 677 "bsp/Src/CAN.c" 1
+ 293 0032 BFF34F8F 		dsb
+ 294              	@ 0 "" 2
+ARM GAS  /tmp/cc15kb9a.s 			page 19
+
+
+ 295              		.loc 1 677 3 discriminator 1 view .LVU87
+ 296              	@ 677 "bsp/Src/CAN.c" 1
+ 297 0036 BFF36F8F 		isb
+ 298              	@ 0 "" 2
+ 299              		.loc 1 677 3 discriminator 1 view .LVU88
+ 300              		.loc 1 677 3 discriminator 3 view .LVU89
+ 301              		.loc 1 677 3 discriminator 3 view .LVU90
+ 302              		.thumb
+ 303              		.syntax unified
+ 304              	.L9:
+ 678:bsp/Src/CAN.c **** }
+ 305              		.loc 1 678 1 is_stmt 0 view .LVU91
+ 306 003a 0AB0     		add	sp, sp, #40
+ 307              	.LCFI6:
+ 308              		.cfi_remember_state
+ 309              		.cfi_def_cfa_offset 8
+ 310              		@ sp needed
+ 311 003c 10BD     		pop	{r4, pc}
+ 312              	.LVL15:
+ 313              	.L15:
+ 314              	.LCFI7:
+ 315              		.cfi_restore_state
+ 642:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can1_send_queue, &payload,
+ 316              		.loc 1 642 5 is_stmt 1 view .LVU92
+ 642:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can1_send_queue, &payload,
+ 317              		.loc 1 642 9 is_stmt 0 view .LVU93
+ 318 003e 01AA     		add	r2, sp, #4
+ 319 0040 02A9     		add	r1, sp, #8
+ 320 0042 0D4B     		ldr	r3, .L17+8
+ 321 0044 1868     		ldr	r0, [r3]
+ 322 0046 FFF7FEFF 		bl	xQueueReceiveFromISR
+ 323              	.LVL16:
+ 642:bsp/Src/CAN.c ****     if (xQueueReceiveFromISR(can1_send_queue, &payload,
+ 324              		.loc 1 642 8 discriminator 1 view .LVU94
+ 325 004a 0128     		cmp	r0, #1
+ 326 004c E9D1     		bne	.L12
+ 327              	.L11:
+ 328              	.LVL17:
+ 329              	.LBB4:
+ 670:bsp/Src/CAN.c ****     if (HAL_CAN_AddTxMessage(handle, &payload.header, payload.data, &mailbox) != HAL_OK) {
+ 330              		.loc 1 670 5 is_stmt 1 view .LVU95
+ 671:bsp/Src/CAN.c ****       // Handle transmission error (optional: log or retry mechanism)
+ 331              		.loc 1 671 5 view .LVU96
+ 671:bsp/Src/CAN.c ****       // Handle transmission error (optional: log or retry mechanism)
+ 332              		.loc 1 671 9 is_stmt 0 view .LVU97
+ 333 004e 6B46     		mov	r3, sp
+ 334 0050 08AA     		add	r2, sp, #32
+ 335 0052 02A9     		add	r1, sp, #8
+ 336 0054 2046     		mov	r0, r4
+ 337 0056 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 338              	.LVL18:
+ 674:bsp/Src/CAN.c ****   }
+ 339              		.loc 1 674 5 is_stmt 1 view .LVU98
+ 340 005a E2E7     		b	.L12
+ 341              	.LVL19:
+ 342              	.L16:
+ 674:bsp/Src/CAN.c ****   }
+ARM GAS  /tmp/cc15kb9a.s 			page 20
+
+
+ 343              		.loc 1 674 5 is_stmt 0 view .LVU99
+ 344              	.LBE4:
+ 651:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 345              		.loc 1 651 5 is_stmt 1 view .LVU100
+ 651:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 346              		.loc 1 651 9 is_stmt 0 view .LVU101
+ 347 005c 01AA     		add	r2, sp, #4
+ 348 005e 02A9     		add	r1, sp, #8
+ 349 0060 064B     		ldr	r3, .L17+12
+ 350 0062 1868     		ldr	r0, [r3]
+ 351 0064 FFF7FEFF 		bl	xQueueReceiveFromISR
+ 352              	.LVL20:
+ 651:bsp/Src/CAN.c ****                              &higherPriorityTaskWoken) == pdTRUE) {
+ 353              		.loc 1 651 8 discriminator 1 view .LVU102
+ 354 0068 0128     		cmp	r0, #1
+ 355 006a DAD1     		bne	.L12
+ 356 006c EFE7     		b	.L11
+ 357              	.L18:
+ 358 006e 00BF     		.align	2
+ 359              	.L17:
+ 360 0070 00640040 		.word	1073767424
+ 361 0074 00680040 		.word	1073768448
+ 362 0078 00000000 		.word	can1_send_queue
+ 363 007c 00000000 		.word	can2_send_queue
+ 364              		.cfi_endproc
+ 365              	.LFE254:
+ 367              		.section	.text.HAL_CAN_MspDeInit,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	HAL_CAN_MspDeInit
+ 370              		.syntax unified
+ 371              		.thumb
+ 372              		.thumb_func
+ 374              	HAL_CAN_MspDeInit:
+ 375              	.LVL21:
+ 376              	.LFB245:
+ 262:bsp/Src/CAN.c ****   // CAN1
+ 377              		.loc 1 262 49 is_stmt 1 view -0
+ 378              		.cfi_startproc
+ 379              		@ args = 0, pretend = 0, frame = 0
+ 380              		@ frame_needed = 0, uses_anonymous_args = 0
+ 262:bsp/Src/CAN.c ****   // CAN1
+ 381              		.loc 1 262 49 is_stmt 0 view .LVU104
+ 382 0000 10B5     		push	{r4, lr}
+ 383              	.LCFI8:
+ 384              		.cfi_def_cfa_offset 8
+ 385              		.cfi_offset 4, -8
+ 386              		.cfi_offset 14, -4
+ 264:bsp/Src/CAN.c ****     // disable clocks
+ 387              		.loc 1 264 3 is_stmt 1 view .LVU105
+ 264:bsp/Src/CAN.c ****     // disable clocks
+ 388              		.loc 1 264 11 is_stmt 0 view .LVU106
+ 389 0002 0368     		ldr	r3, [r0]
+ 264:bsp/Src/CAN.c ****     // disable clocks
+ 390              		.loc 1 264 6 view .LVU107
+ 391 0004 1B4A     		ldr	r2, .L25
+ 392 0006 9342     		cmp	r3, r2
+ 393 0008 03D0     		beq	.L23
+ARM GAS  /tmp/cc15kb9a.s 			page 21
+
+
+ 282:bsp/Src/CAN.c ****     // disable clocks
+ 394              		.loc 1 282 8 is_stmt 1 view .LVU108
+ 282:bsp/Src/CAN.c ****     // disable clocks
+ 395              		.loc 1 282 11 is_stmt 0 view .LVU109
+ 396 000a 1B4A     		ldr	r2, .L25+4
+ 397 000c 9342     		cmp	r3, r2
+ 398 000e 18D0     		beq	.L24
+ 399              	.LVL22:
+ 400              	.L19:
+ 317:bsp/Src/CAN.c **** 
+ 401              		.loc 1 317 1 view .LVU110
+ 402 0010 10BD     		pop	{r4, pc}
+ 403              	.LVL23:
+ 404              	.L23:
+ 266:bsp/Src/CAN.c **** 
+ 405              		.loc 1 266 5 is_stmt 1 view .LVU111
+ 406 0012 02F5EA32 		add	r2, r2, #119808
+ 407 0016 136C     		ldr	r3, [r2, #64]
+ 408 0018 23F00073 		bic	r3, r3, #33554432
+ 409 001c 1364     		str	r3, [r2, #64]
+ 272:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12);
+ 410              		.loc 1 272 5 view .LVU112
+ 411 001e 174C     		ldr	r4, .L25+8
+ 412 0020 4FF40061 		mov	r1, #2048
+ 413 0024 2046     		mov	r0, r4
+ 414              	.LVL24:
+ 272:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12);
+ 415              		.loc 1 272 5 is_stmt 0 view .LVU113
+ 416 0026 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 417              	.LVL25:
+ 273:bsp/Src/CAN.c **** 
+ 418              		.loc 1 273 5 is_stmt 1 view .LVU114
+ 419 002a 4FF48051 		mov	r1, #4096
+ 420 002e 2046     		mov	r0, r4
+ 421 0030 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 422              	.LVL26:
+ 276:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+ 423              		.loc 1 276 5 view .LVU115
+ 424 0034 1320     		movs	r0, #19
+ 425 0036 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 426              	.LVL27:
+ 277:bsp/Src/CAN.c ****   }
+ 427              		.loc 1 277 5 view .LVU116
+ 428 003a 1420     		movs	r0, #20
+ 429 003c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 430              	.LVL28:
+ 431 0040 E6E7     		b	.L19
+ 432              	.LVL29:
+ 433              	.L24:
+ 284:bsp/Src/CAN.c **** 
+ 434              		.loc 1 284 5 view .LVU117
+ 435 0042 02F5E832 		add	r2, r2, #118784
+ 436 0046 136C     		ldr	r3, [r2, #64]
+ 437 0048 23F08063 		bic	r3, r3, #67108864
+ 438 004c 1364     		str	r3, [r2, #64]
+ 290:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13);
+ 439              		.loc 1 290 5 view .LVU118
+ARM GAS  /tmp/cc15kb9a.s 			page 22
+
+
+ 440 004e 0C4C     		ldr	r4, .L25+12
+ 441 0050 4FF48051 		mov	r1, #4096
+ 442 0054 2046     		mov	r0, r4
+ 443              	.LVL30:
+ 290:bsp/Src/CAN.c ****     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13);
+ 444              		.loc 1 290 5 is_stmt 0 view .LVU119
+ 445 0056 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 446              	.LVL31:
+ 291:bsp/Src/CAN.c **** 
+ 447              		.loc 1 291 5 is_stmt 1 view .LVU120
+ 448 005a 4FF40051 		mov	r1, #8192
+ 449 005e 2046     		mov	r0, r4
+ 450 0060 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 451              	.LVL32:
+ 294:bsp/Src/CAN.c ****     HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
+ 452              		.loc 1 294 5 view .LVU121
+ 453 0064 3F20     		movs	r0, #63
+ 454 0066 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 455              	.LVL33:
+ 295:bsp/Src/CAN.c ****   }
+ 456              		.loc 1 295 5 view .LVU122
+ 457 006a 4020     		movs	r0, #64
+ 458 006c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 459              	.LVL34:
+ 317:bsp/Src/CAN.c **** 
+ 460              		.loc 1 317 1 is_stmt 0 view .LVU123
+ 461 0070 CEE7     		b	.L19
+ 462              	.L26:
+ 463 0072 00BF     		.align	2
+ 464              	.L25:
+ 465 0074 00640040 		.word	1073767424
+ 466 0078 00680040 		.word	1073768448
+ 467 007c 00000240 		.word	1073872896
+ 468 0080 00040240 		.word	1073873920
+ 469              		.cfi_endproc
+ 470              	.LFE245:
+ 472              		.section	.text.HAL_CAN_MspInit,"ax",%progbits
+ 473              		.align	1
+ 474              		.global	HAL_CAN_MspInit
+ 475              		.syntax unified
+ 476              		.thumb
+ 477              		.thumb_func
+ 479              	HAL_CAN_MspInit:
+ 480              	.LVL35:
+ 481              	.LFB247:
+ 347:bsp/Src/CAN.c ****   IRQn_Type txIRQ = 0;
+ 482              		.loc 1 347 47 is_stmt 1 view -0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 8
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347:bsp/Src/CAN.c ****   IRQn_Type txIRQ = 0;
+ 486              		.loc 1 347 47 is_stmt 0 view .LVU125
+ 487 0000 30B5     		push	{r4, r5, lr}
+ 488              	.LCFI9:
+ 489              		.cfi_def_cfa_offset 12
+ 490              		.cfi_offset 4, -12
+ 491              		.cfi_offset 5, -8
+ARM GAS  /tmp/cc15kb9a.s 			page 23
+
+
+ 492              		.cfi_offset 14, -4
+ 493 0002 83B0     		sub	sp, sp, #12
+ 494              	.LCFI10:
+ 495              		.cfi_def_cfa_offset 24
+ 348:bsp/Src/CAN.c ****   IRQn_Type rxIRQ = 0;
+ 496              		.loc 1 348 3 is_stmt 1 view .LVU126
+ 497              	.LVL36:
+ 349:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+ 498              		.loc 1 349 3 view .LVU127
+ 350:bsp/Src/CAN.c ****     __HAL_RCC_CAN1_CLK_ENABLE();
+ 499              		.loc 1 350 3 view .LVU128
+ 350:bsp/Src/CAN.c ****     __HAL_RCC_CAN1_CLK_ENABLE();
+ 500              		.loc 1 350 11 is_stmt 0 view .LVU129
+ 501 0004 0368     		ldr	r3, [r0]
+ 350:bsp/Src/CAN.c ****     __HAL_RCC_CAN1_CLK_ENABLE();
+ 502              		.loc 1 350 6 view .LVU130
+ 503 0006 1E4A     		ldr	r2, .L36
+ 504 0008 9342     		cmp	r3, r2
+ 505 000a 0AD0     		beq	.L33
+ 356:bsp/Src/CAN.c ****     __HAL_RCC_CAN2_CLK_ENABLE();
+ 506              		.loc 1 356 8 is_stmt 1 view .LVU131
+ 356:bsp/Src/CAN.c ****     __HAL_RCC_CAN2_CLK_ENABLE();
+ 507              		.loc 1 356 10 is_stmt 0 view .LVU132
+ 508 000c 1D4A     		ldr	r2, .L36+4
+ 509 000e 9342     		cmp	r3, r2
+ 510 0010 16D0     		beq	.L34
+ 349:bsp/Src/CAN.c ****   if (hcan->Instance == CAN1) {
+ 511              		.loc 1 349 13 view .LVU133
+ 512 0012 0025     		movs	r5, #0
+ 348:bsp/Src/CAN.c ****   IRQn_Type rxIRQ = 0;
+ 513              		.loc 1 348 13 view .LVU134
+ 514 0014 2C46     		mov	r4, r5
+ 515              	.LVL37:
+ 516              	.L29:
+ 372:bsp/Src/CAN.c ****   #elif defined(STM32L4xx)
+ 517              		.loc 1 372 3 is_stmt 1 view .LVU135
+ 518 0016 FFF7FEFF 		bl	HAL_CAN_MspF4Init
+ 519              	.LVL38:
+ 378:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(txIRQ, 5, 0);
+ 520              		.loc 1 378 3 view .LVU136
+ 378:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(txIRQ, 5, 0);
+ 521              		.loc 1 378 5 is_stmt 0 view .LVU137
+ 522 001a 04B1     		cbz	r4, .L27
+ 378:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(txIRQ, 5, 0);
+ 523              		.loc 1 378 16 discriminator 1 view .LVU138
+ 524 001c FDB9     		cbnz	r5, .L35
+ 525              	.L27:
+ 384:bsp/Src/CAN.c **** 
+ 526              		.loc 1 384 1 view .LVU139
+ 527 001e 03B0     		add	sp, sp, #12
+ 528              	.LCFI11:
+ 529              		.cfi_remember_state
+ 530              		.cfi_def_cfa_offset 12
+ 531              		@ sp needed
+ 532 0020 30BD     		pop	{r4, r5, pc}
+ 533              	.LVL39:
+ 534              	.L33:
+ARM GAS  /tmp/cc15kb9a.s 			page 24
+
+
+ 535              	.LCFI12:
+ 536              		.cfi_restore_state
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 537              		.loc 1 351 5 is_stmt 1 view .LVU140
+ 538              	.LBB5:
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 539              		.loc 1 351 5 view .LVU141
+ 540 0022 0023     		movs	r3, #0
+ 541 0024 0093     		str	r3, [sp]
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 542              		.loc 1 351 5 view .LVU142
+ 543 0026 184B     		ldr	r3, .L36+8
+ 544 0028 1A6C     		ldr	r2, [r3, #64]
+ 545 002a 42F00072 		orr	r2, r2, #33554432
+ 546 002e 1A64     		str	r2, [r3, #64]
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 547              		.loc 1 351 5 view .LVU143
+ 548 0030 1B6C     		ldr	r3, [r3, #64]
+ 549 0032 03F00073 		and	r3, r3, #33554432
+ 550 0036 0093     		str	r3, [sp]
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 551              		.loc 1 351 5 view .LVU144
+ 552 0038 009B     		ldr	r3, [sp]
+ 553              	.LBE5:
+ 351:bsp/Src/CAN.c ****     txIRQ = CAN1_TX_IRQn;
+ 554              		.loc 1 351 5 view .LVU145
+ 352:bsp/Src/CAN.c ****     rxIRQ = CAN1_RX0_IRQn;
+ 555              		.loc 1 352 5 view .LVU146
+ 556              	.LVL40:
+ 353:bsp/Src/CAN.c ****   }
+ 557              		.loc 1 353 5 view .LVU147
+ 353:bsp/Src/CAN.c ****   }
+ 558              		.loc 1 353 11 is_stmt 0 view .LVU148
+ 559 003a 1425     		movs	r5, #20
+ 352:bsp/Src/CAN.c ****     rxIRQ = CAN1_RX0_IRQn;
+ 560              		.loc 1 352 11 view .LVU149
+ 561 003c 1324     		movs	r4, #19
+ 562 003e EAE7     		b	.L29
+ 563              	.LVL41:
+ 564              	.L34:
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 565              		.loc 1 357 5 is_stmt 1 view .LVU150
+ 566              	.LBB6:
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 567              		.loc 1 357 5 view .LVU151
+ 568 0040 0023     		movs	r3, #0
+ 569 0042 0193     		str	r3, [sp, #4]
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 570              		.loc 1 357 5 view .LVU152
+ 571 0044 104B     		ldr	r3, .L36+8
+ 572 0046 1A6C     		ldr	r2, [r3, #64]
+ 573 0048 42F08062 		orr	r2, r2, #67108864
+ 574 004c 1A64     		str	r2, [r3, #64]
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 575              		.loc 1 357 5 view .LVU153
+ 576 004e 1B6C     		ldr	r3, [r3, #64]
+ 577 0050 03F08063 		and	r3, r3, #67108864
+ARM GAS  /tmp/cc15kb9a.s 			page 25
+
+
+ 578 0054 0193     		str	r3, [sp, #4]
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 579              		.loc 1 357 5 view .LVU154
+ 580 0056 019B     		ldr	r3, [sp, #4]
+ 581              	.LBE6:
+ 357:bsp/Src/CAN.c ****     txIRQ = CAN2_TX_IRQn;
+ 582              		.loc 1 357 5 view .LVU155
+ 358:bsp/Src/CAN.c ****     rxIRQ = CAN2_RX0_IRQn;
+ 583              		.loc 1 358 5 view .LVU156
+ 584              	.LVL42:
+ 359:bsp/Src/CAN.c ****   }
+ 585              		.loc 1 359 5 view .LVU157
+ 359:bsp/Src/CAN.c ****   }
+ 586              		.loc 1 359 11 is_stmt 0 view .LVU158
+ 587 0058 4025     		movs	r5, #64
+ 358:bsp/Src/CAN.c ****     rxIRQ = CAN2_RX0_IRQn;
+ 588              		.loc 1 358 11 view .LVU159
+ 589 005a 3F24     		movs	r4, #63
+ 590 005c DBE7     		b	.L29
+ 591              	.LVL43:
+ 592              	.L35:
+ 379:bsp/Src/CAN.c ****     HAL_NVIC_EnableIRQ(txIRQ);
+ 593              		.loc 1 379 5 is_stmt 1 view .LVU160
+ 594 005e 0022     		movs	r2, #0
+ 595 0060 0521     		movs	r1, #5
+ 596 0062 2046     		mov	r0, r4
+ 597 0064 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 598              	.LVL44:
+ 380:bsp/Src/CAN.c ****     HAL_NVIC_SetPriority(rxIRQ, 5, 0);
+ 599              		.loc 1 380 5 view .LVU161
+ 600 0068 2046     		mov	r0, r4
+ 601 006a FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 602              	.LVL45:
+ 381:bsp/Src/CAN.c ****     HAL_NVIC_EnableIRQ(rxIRQ);
+ 603              		.loc 1 381 5 view .LVU162
+ 604 006e 0022     		movs	r2, #0
+ 605 0070 0521     		movs	r1, #5
+ 606 0072 2846     		mov	r0, r5
+ 607 0074 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 608              	.LVL46:
+ 382:bsp/Src/CAN.c ****   }
+ 609              		.loc 1 382 5 view .LVU163
+ 610 0078 2846     		mov	r0, r5
+ 611 007a FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 612              	.LVL47:
+ 384:bsp/Src/CAN.c **** 
+ 613              		.loc 1 384 1 is_stmt 0 view .LVU164
+ 614 007e CEE7     		b	.L27
+ 615              	.L37:
+ 616              		.align	2
+ 617              	.L36:
+ 618 0080 00640040 		.word	1073767424
+ 619 0084 00680040 		.word	1073768448
+ 620 0088 00380240 		.word	1073887232
+ 621              		.cfi_endproc
+ 622              	.LFE247:
+ 624              		.section	.text.can_init,"ax",%progbits
+ARM GAS  /tmp/cc15kb9a.s 			page 26
+
+
+ 625              		.align	1
+ 626              		.global	can_init
+ 627              		.syntax unified
+ 628              		.thumb
+ 629              		.thumb_func
+ 631              	can_init:
+ 632              	.LVL48:
+ 633              	.LFB248:
+ 386:bsp/Src/CAN.c ****   // CAN1
+ 634              		.loc 1 386 77 is_stmt 1 view -0
+ 635              		.cfi_startproc
+ 636              		@ args = 0, pretend = 0, frame = 0
+ 637              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386:bsp/Src/CAN.c ****   // CAN1
+ 638              		.loc 1 386 77 is_stmt 0 view .LVU166
+ 639 0000 70B5     		push	{r4, r5, r6, lr}
+ 640              	.LCFI13:
+ 641              		.cfi_def_cfa_offset 16
+ 642              		.cfi_offset 4, -16
+ 643              		.cfi_offset 5, -12
+ 644              		.cfi_offset 6, -8
+ 645              		.cfi_offset 14, -4
+ 646 0002 82B0     		sub	sp, sp, #8
+ 647              	.LCFI14:
+ 648              		.cfi_def_cfa_offset 24
+ 649 0004 0446     		mov	r4, r0
+ 650 0006 0E46     		mov	r6, r1
+ 388:bsp/Src/CAN.c ****     // init queues
+ 651              		.loc 1 388 3 is_stmt 1 view .LVU167
+ 388:bsp/Src/CAN.c ****     // init queues
+ 652              		.loc 1 388 13 is_stmt 0 view .LVU168
+ 653 0008 0368     		ldr	r3, [r0]
+ 388:bsp/Src/CAN.c ****     // init queues
+ 654              		.loc 1 388 6 view .LVU169
+ 655 000a 1E4A     		ldr	r2, .L50
+ 656 000c 9342     		cmp	r3, r2
+ 657 000e 06D0     		beq	.L46
+ 402:bsp/Src/CAN.c ****     // init queues
+ 658              		.loc 1 402 8 is_stmt 1 view .LVU170
+ 402:bsp/Src/CAN.c ****     // init queues
+ 659              		.loc 1 402 11 is_stmt 0 view .LVU171
+ 660 0010 1D4A     		ldr	r2, .L50+4
+ 661 0012 9342     		cmp	r3, r2
+ 662 0014 0ED0     		beq	.L47
+ 431:bsp/Src/CAN.c ****   }
+ 663              		.loc 1 431 12 view .LVU172
+ 664 0016 0025     		movs	r5, #0
+ 665              	.LVL49:
+ 666              	.L41:
+ 454:bsp/Src/CAN.c **** 
+ 667              		.loc 1 454 1 view .LVU173
+ 668 0018 2846     		mov	r0, r5
+ 669 001a 02B0     		add	sp, sp, #8
+ 670              	.LCFI15:
+ 671              		.cfi_remember_state
+ 672              		.cfi_def_cfa_offset 16
+ 673              		@ sp needed
+ARM GAS  /tmp/cc15kb9a.s 			page 27
+
+
+ 674 001c 70BD     		pop	{r4, r5, r6, pc}
+ 675              	.LVL50:
+ 676              	.L46:
+ 677              	.LCFI16:
+ 678              		.cfi_restore_state
+ 390:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN1_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 679              		.loc 1 390 5 is_stmt 1 view .LVU174
+ 391:bsp/Src/CAN.c ****                            can1_send_queue_storage, &can1_send_queue_buffer);
+ 680              		.loc 1 391 9 is_stmt 0 view .LVU175
+ 681 001e 0023     		movs	r3, #0
+ 682 0020 0093     		str	r3, [sp]
+ 683 0022 1A4B     		ldr	r3, .L50+8
+ 684 0024 1A4A     		ldr	r2, .L50+12
+ 685 0026 2021     		movs	r1, #32
+ 686              	.LVL51:
+ 391:bsp/Src/CAN.c ****                            can1_send_queue_storage, &can1_send_queue_buffer);
+ 687              		.loc 1 391 9 view .LVU176
+ 688 0028 0A20     		movs	r0, #10
+ 689              	.LVL52:
+ 391:bsp/Src/CAN.c ****                            can1_send_queue_storage, &can1_send_queue_buffer);
+ 690              		.loc 1 391 9 view .LVU177
+ 691 002a FFF7FEFF 		bl	xQueueGenericCreateStatic
+ 692              	.LVL53:
+ 390:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN1_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 693              		.loc 1 390 21 view .LVU178
+ 694 002e 194B     		ldr	r3, .L50+16
+ 695 0030 1860     		str	r0, [r3]
+ 393:bsp/Src/CAN.c ****       can1_recv_entries[i].queue = xQueueCreateStatic(
+ 696              		.loc 1 393 5 is_stmt 1 view .LVU179
+ 393:bsp/Src/CAN.c ****       can1_recv_entries[i].queue = xQueueCreateStatic(
+ 697              		.loc 1 393 10 view .LVU180
+ 698              	.LVL54:
+ 393:bsp/Src/CAN.c ****       can1_recv_entries[i].queue = xQueueCreateStatic(
+ 699              		.loc 1 393 5 discriminator 1 view .LVU181
+ 700 0032 09E0     		b	.L40
+ 701              	.LVL55:
+ 702              	.L47:
+ 404:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN2_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 703              		.loc 1 404 5 view .LVU182
+ 405:bsp/Src/CAN.c ****                            can2_send_queue_storage, &can2_send_queue_buffer);
+ 704              		.loc 1 405 9 is_stmt 0 view .LVU183
+ 705 0034 0023     		movs	r3, #0
+ 706 0036 0093     		str	r3, [sp]
+ 707 0038 174B     		ldr	r3, .L50+20
+ 708 003a 184A     		ldr	r2, .L50+24
+ 709 003c 2021     		movs	r1, #32
+ 710              	.LVL56:
+ 405:bsp/Src/CAN.c ****                            can2_send_queue_storage, &can2_send_queue_buffer);
+ 711              		.loc 1 405 9 view .LVU184
+ 712 003e 0A20     		movs	r0, #10
+ 713              	.LVL57:
+ 405:bsp/Src/CAN.c ****                            can2_send_queue_storage, &can2_send_queue_buffer);
+ 714              		.loc 1 405 9 view .LVU185
+ 715 0040 FFF7FEFF 		bl	xQueueGenericCreateStatic
+ 716              	.LVL58:
+ 404:bsp/Src/CAN.c ****         xQueueCreateStatic(CAN2_SEND_QUEUE_SIZE, sizeof(tx_payload_t),
+ 717              		.loc 1 404 21 view .LVU186
+ARM GAS  /tmp/cc15kb9a.s 			page 28
+
+
+ 718 0044 164B     		ldr	r3, .L50+28
+ 719 0046 1860     		str	r0, [r3]
+ 407:bsp/Src/CAN.c ****       can2_recv_entries[i].queue = xQueueCreateStatic(
+ 720              		.loc 1 407 5 is_stmt 1 view .LVU187
+ 407:bsp/Src/CAN.c ****       can2_recv_entries[i].queue = xQueueCreateStatic(
+ 721              		.loc 1 407 10 view .LVU188
+ 722              	.LVL59:
+ 407:bsp/Src/CAN.c ****       can2_recv_entries[i].queue = xQueueCreateStatic(
+ 723              		.loc 1 407 5 discriminator 1 view .LVU189
+ 724              	.L40:
+ 435:bsp/Src/CAN.c ****     return CAN_ERR;
+ 725              		.loc 1 435 3 view .LVU190
+ 435:bsp/Src/CAN.c ****     return CAN_ERR;
+ 726              		.loc 1 435 7 is_stmt 0 view .LVU191
+ 727 0048 2046     		mov	r0, r4
+ 728 004a FFF7FEFF 		bl	HAL_CAN_Init
+ 729              	.LVL60:
+ 435:bsp/Src/CAN.c ****     return CAN_ERR;
+ 730              		.loc 1 435 6 discriminator 1 view .LVU192
+ 731 004e 0546     		mov	r5, r0
+ 732 0050 08B1     		cbz	r0, .L48
+ 436:bsp/Src/CAN.c ****   }
+ 733              		.loc 1 436 12 view .LVU193
+ 734 0052 0025     		movs	r5, #0
+ 735 0054 E0E7     		b	.L41
+ 736              	.L48:
+ 440:bsp/Src/CAN.c ****     return CAN_ERR;
+ 737              		.loc 1 440 3 is_stmt 1 view .LVU194
+ 440:bsp/Src/CAN.c ****     return CAN_ERR;
+ 738              		.loc 1 440 7 is_stmt 0 view .LVU195
+ 739 0056 3146     		mov	r1, r6
+ 740 0058 2046     		mov	r0, r4
+ 741 005a FFF7FEFF 		bl	HAL_CAN_ConfigFilter
+ 742              	.LVL61:
+ 440:bsp/Src/CAN.c ****     return CAN_ERR;
+ 743              		.loc 1 440 6 discriminator 1 view .LVU196
+ 744 005e 0646     		mov	r6, r0
+ 745              	.LVL62:
+ 440:bsp/Src/CAN.c ****     return CAN_ERR;
+ 746              		.loc 1 440 6 discriminator 1 view .LVU197
+ 747 0060 0028     		cmp	r0, #0
+ 748 0062 D9D1     		bne	.L41
+ 445:bsp/Src/CAN.c ****     return CAN_ERR;
+ 749              		.loc 1 445 3 is_stmt 1 view .LVU198
+ 445:bsp/Src/CAN.c ****     return CAN_ERR;
+ 750              		.loc 1 445 7 is_stmt 0 view .LVU199
+ 751 0064 0121     		movs	r1, #1
+ 752 0066 2046     		mov	r0, r4
+ 753 0068 FFF7FEFF 		bl	HAL_CAN_ActivateNotification
+ 754              	.LVL63:
+ 445:bsp/Src/CAN.c ****     return CAN_ERR;
+ 755              		.loc 1 445 6 discriminator 1 view .LVU200
+ 756 006c 0546     		mov	r5, r0
+ 757 006e 08B1     		cbz	r0, .L49
+ 446:bsp/Src/CAN.c ****   }
+ 758              		.loc 1 446 12 view .LVU201
+ 759 0070 3546     		mov	r5, r6
+ARM GAS  /tmp/cc15kb9a.s 			page 29
+
+
+ 760 0072 D1E7     		b	.L41
+ 761              	.L49:
+ 448:bsp/Src/CAN.c ****       HAL_OK) {
+ 762              		.loc 1 448 3 is_stmt 1 view .LVU202
+ 448:bsp/Src/CAN.c ****       HAL_OK) {
+ 763              		.loc 1 448 7 is_stmt 0 view .LVU203
+ 764 0074 0221     		movs	r1, #2
+ 765 0076 2046     		mov	r0, r4
+ 766 0078 FFF7FEFF 		bl	HAL_CAN_ActivateNotification
+ 767              	.LVL64:
+ 448:bsp/Src/CAN.c ****       HAL_OK) {
+ 768              		.loc 1 448 6 discriminator 1 view .LVU204
+ 769 007c 0028     		cmp	r0, #0
+ 770 007e CBD1     		bne	.L41
+ 453:bsp/Src/CAN.c **** }
+ 771              		.loc 1 453 10 view .LVU205
+ 772 0080 0125     		movs	r5, #1
+ 773 0082 C9E7     		b	.L41
+ 774              	.L51:
+ 775              		.align	2
+ 776              	.L50:
+ 777 0084 00640040 		.word	1073767424
+ 778 0088 00680040 		.word	1073768448
+ 779 008c 00000000 		.word	can1_send_queue_buffer
+ 780 0090 00000000 		.word	can1_send_queue_storage
+ 781 0094 00000000 		.word	can1_send_queue
+ 782 0098 00000000 		.word	can2_send_queue_buffer
+ 783 009c 00000000 		.word	can2_send_queue_storage
+ 784 00a0 00000000 		.word	can2_send_queue
+ 785              		.cfi_endproc
+ 786              	.LFE248:
+ 788              		.section	.text.can_deinit,"ax",%progbits
+ 789              		.align	1
+ 790              		.global	can_deinit
+ 791              		.syntax unified
+ 792              		.thumb
+ 793              		.thumb_func
+ 795              	can_deinit:
+ 796              	.LVL65:
+ 797              	.LFB249:
+ 456:bsp/Src/CAN.c ****   // deinit HAL
+ 798              		.loc 1 456 52 is_stmt 1 view -0
+ 799              		.cfi_startproc
+ 800              		@ args = 0, pretend = 0, frame = 0
+ 801              		@ frame_needed = 0, uses_anonymous_args = 0
+ 456:bsp/Src/CAN.c ****   // deinit HAL
+ 802              		.loc 1 456 52 is_stmt 0 view .LVU207
+ 803 0000 70B5     		push	{r4, r5, r6, lr}
+ 804              	.LCFI17:
+ 805              		.cfi_def_cfa_offset 16
+ 806              		.cfi_offset 4, -16
+ 807              		.cfi_offset 5, -12
+ 808              		.cfi_offset 6, -8
+ 809              		.cfi_offset 14, -4
+ 810 0002 0446     		mov	r4, r0
+ 458:bsp/Src/CAN.c ****     return CAN_ERR;
+ 811              		.loc 1 458 3 is_stmt 1 view .LVU208
+ARM GAS  /tmp/cc15kb9a.s 			page 30
+
+
+ 458:bsp/Src/CAN.c ****     return CAN_ERR;
+ 812              		.loc 1 458 7 is_stmt 0 view .LVU209
+ 813 0004 FFF7FEFF 		bl	HAL_CAN_DeInit
+ 814              	.LVL66:
+ 458:bsp/Src/CAN.c ****     return CAN_ERR;
+ 815              		.loc 1 458 6 discriminator 1 view .LVU210
+ 816 0008 10B1     		cbz	r0, .L57
+ 459:bsp/Src/CAN.c ****   }
+ 817              		.loc 1 459 12 view .LVU211
+ 818 000a 0025     		movs	r5, #0
+ 819              	.L53:
+ 472:bsp/Src/CAN.c **** 
+ 820              		.loc 1 472 1 view .LVU212
+ 821 000c 2846     		mov	r0, r5
+ 822 000e 70BD     		pop	{r4, r5, r6, pc}
+ 823              	.LVL67:
+ 824              	.L57:
+ 472:bsp/Src/CAN.c **** 
+ 825              		.loc 1 472 1 view .LVU213
+ 826 0010 0546     		mov	r5, r0
+ 463:bsp/Src/CAN.c ****     return CAN_ERR;
+ 827              		.loc 1 463 3 is_stmt 1 view .LVU214
+ 463:bsp/Src/CAN.c ****     return CAN_ERR;
+ 828              		.loc 1 463 7 is_stmt 0 view .LVU215
+ 829 0012 0121     		movs	r1, #1
+ 830 0014 2046     		mov	r0, r4
+ 831 0016 FFF7FEFF 		bl	HAL_CAN_DeactivateNotification
+ 832              	.LVL68:
+ 463:bsp/Src/CAN.c ****     return CAN_ERR;
+ 833              		.loc 1 463 6 discriminator 1 view .LVU216
+ 834 001a 0646     		mov	r6, r0
+ 835 001c 0028     		cmp	r0, #0
+ 836 001e F5D1     		bne	.L53
+ 466:bsp/Src/CAN.c ****       HAL_OK) {
+ 837              		.loc 1 466 3 is_stmt 1 view .LVU217
+ 466:bsp/Src/CAN.c ****       HAL_OK) {
+ 838              		.loc 1 466 7 is_stmt 0 view .LVU218
+ 839 0020 0221     		movs	r1, #2
+ 840 0022 2046     		mov	r0, r4
+ 841 0024 FFF7FEFF 		bl	HAL_CAN_DeactivateNotification
+ 842              	.LVL69:
+ 466:bsp/Src/CAN.c ****       HAL_OK) {
+ 843              		.loc 1 466 6 discriminator 1 view .LVU219
+ 844 0028 08B9     		cbnz	r0, .L55
+ 471:bsp/Src/CAN.c **** }
+ 845              		.loc 1 471 10 view .LVU220
+ 846 002a 0125     		movs	r5, #1
+ 847 002c EEE7     		b	.L53
+ 848              	.L55:
+ 468:bsp/Src/CAN.c ****   }
+ 849              		.loc 1 468 12 view .LVU221
+ 850 002e 3546     		mov	r5, r6
+ 851 0030 ECE7     		b	.L53
+ 852              		.cfi_endproc
+ 853              	.LFE249:
+ 855              		.section	.text.can_start,"ax",%progbits
+ 856              		.align	1
+ARM GAS  /tmp/cc15kb9a.s 			page 31
+
+
+ 857              		.global	can_start
+ 858              		.syntax unified
+ 859              		.thumb
+ 860              		.thumb_func
+ 862              	can_start:
+ 863              	.LVL70:
+ 864              	.LFB250:
+ 474:bsp/Src/CAN.c ****   if (HAL_CAN_Start(handle) != HAL_OK) {
+ 865              		.loc 1 474 51 is_stmt 1 view -0
+ 866              		.cfi_startproc
+ 867              		@ args = 0, pretend = 0, frame = 0
+ 868              		@ frame_needed = 0, uses_anonymous_args = 0
+ 474:bsp/Src/CAN.c ****   if (HAL_CAN_Start(handle) != HAL_OK) {
+ 869              		.loc 1 474 51 is_stmt 0 view .LVU223
+ 870 0000 08B5     		push	{r3, lr}
+ 871              	.LCFI18:
+ 872              		.cfi_def_cfa_offset 8
+ 873              		.cfi_offset 3, -8
+ 874              		.cfi_offset 14, -4
+ 475:bsp/Src/CAN.c ****     return CAN_ERR;
+ 875              		.loc 1 475 3 is_stmt 1 view .LVU224
+ 475:bsp/Src/CAN.c ****     return CAN_ERR;
+ 876              		.loc 1 475 7 is_stmt 0 view .LVU225
+ 877 0002 FFF7FEFF 		bl	HAL_CAN_Start
+ 878              	.LVL71:
+ 475:bsp/Src/CAN.c ****     return CAN_ERR;
+ 879              		.loc 1 475 6 discriminator 1 view .LVU226
+ 880 0006 08B9     		cbnz	r0, .L60
+ 479:bsp/Src/CAN.c **** }
+ 881              		.loc 1 479 10 view .LVU227
+ 882 0008 0120     		movs	r0, #1
+ 883              	.L59:
+ 480:bsp/Src/CAN.c **** 
+ 884              		.loc 1 480 1 view .LVU228
+ 885 000a 08BD     		pop	{r3, pc}
+ 886              	.L60:
+ 476:bsp/Src/CAN.c ****   }
+ 887              		.loc 1 476 12 view .LVU229
+ 888 000c 0020     		movs	r0, #0
+ 889 000e FCE7     		b	.L59
+ 890              		.cfi_endproc
+ 891              	.LFE250:
+ 893              		.section	.text.can_stop,"ax",%progbits
+ 894              		.align	1
+ 895              		.global	can_stop
+ 896              		.syntax unified
+ 897              		.thumb
+ 898              		.thumb_func
+ 900              	can_stop:
+ 901              	.LVL72:
+ 902              	.LFB251:
+ 482:bsp/Src/CAN.c ****   if (HAL_CAN_Stop(handle) != HAL_OK) {
+ 903              		.loc 1 482 50 is_stmt 1 view -0
+ 904              		.cfi_startproc
+ 905              		@ args = 0, pretend = 0, frame = 0
+ 906              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482:bsp/Src/CAN.c ****   if (HAL_CAN_Stop(handle) != HAL_OK) {
+ARM GAS  /tmp/cc15kb9a.s 			page 32
+
+
+ 907              		.loc 1 482 50 is_stmt 0 view .LVU231
+ 908 0000 08B5     		push	{r3, lr}
+ 909              	.LCFI19:
+ 910              		.cfi_def_cfa_offset 8
+ 911              		.cfi_offset 3, -8
+ 912              		.cfi_offset 14, -4
+ 483:bsp/Src/CAN.c ****     return CAN_ERR;
+ 913              		.loc 1 483 3 is_stmt 1 view .LVU232
+ 483:bsp/Src/CAN.c ****     return CAN_ERR;
+ 914              		.loc 1 483 7 is_stmt 0 view .LVU233
+ 915 0002 FFF7FEFF 		bl	HAL_CAN_Stop
+ 916              	.LVL73:
+ 483:bsp/Src/CAN.c ****     return CAN_ERR;
+ 917              		.loc 1 483 6 discriminator 1 view .LVU234
+ 918 0006 08B9     		cbnz	r0, .L64
+ 487:bsp/Src/CAN.c **** }
+ 919              		.loc 1 487 10 view .LVU235
+ 920 0008 0120     		movs	r0, #1
+ 921              	.L63:
+ 488:bsp/Src/CAN.c **** 
+ 922              		.loc 1 488 1 view .LVU236
+ 923 000a 08BD     		pop	{r3, pc}
+ 924              	.L64:
+ 484:bsp/Src/CAN.c ****   }
+ 925              		.loc 1 484 12 view .LVU237
+ 926 000c 0020     		movs	r0, #0
+ 927 000e FCE7     		b	.L63
+ 928              		.cfi_endproc
+ 929              	.LFE251:
+ 931              		.section	.text.can_recv,"ax",%progbits
+ 932              		.align	1
+ 933              		.global	can_recv
+ 934              		.syntax unified
+ 935              		.thumb
+ 936              		.thumb_func
+ 938              	can_recv:
+ 939              	.LVL74:
+ 940              	.LFB252:
+ 492:bsp/Src/CAN.c ****   // recieve from queue matching id
+ 941              		.loc 1 492 47 is_stmt 1 view -0
+ 942              		.cfi_startproc
+ 943              		@ args = 4, pretend = 0, frame = 40
+ 944              		@ frame_needed = 0, uses_anonymous_args = 0
+ 492:bsp/Src/CAN.c ****   // recieve from queue matching id
+ 945              		.loc 1 492 47 is_stmt 0 view .LVU239
+ 946 0000 00B5     		push	{lr}
+ 947              	.LCFI20:
+ 948              		.cfi_def_cfa_offset 4
+ 949              		.cfi_offset 14, -4
+ 950 0002 8BB0     		sub	sp, sp, #44
+ 951              	.LCFI21:
+ 952              		.cfi_def_cfa_offset 48
+ 494:bsp/Src/CAN.c ****   bool valid_id = false;
+ 953              		.loc 1 494 3 is_stmt 1 view .LVU240
+ 494:bsp/Src/CAN.c ****   bool valid_id = false;
+ 954              		.loc 1 494 16 is_stmt 0 view .LVU241
+ 955 0004 2422     		movs	r2, #36
+ARM GAS  /tmp/cc15kb9a.s 			page 33
+
+
+ 956              	.LVL75:
+ 494:bsp/Src/CAN.c ****   bool valid_id = false;
+ 957              		.loc 1 494 16 view .LVU242
+ 958 0006 0021     		movs	r1, #0
+ 959              	.LVL76:
+ 494:bsp/Src/CAN.c ****   bool valid_id = false;
+ 960              		.loc 1 494 16 view .LVU243
+ 961 0008 01A8     		add	r0, sp, #4
+ 962              	.LVL77:
+ 494:bsp/Src/CAN.c ****   bool valid_id = false;
+ 963              		.loc 1 494 16 view .LVU244
+ 964 000a FFF7FEFF 		bl	memset
+ 965              	.LVL78:
+ 495:bsp/Src/CAN.c ****   // CAN1
+ 966              		.loc 1 495 3 is_stmt 1 view .LVU245
+ 497:bsp/Src/CAN.c ****     for (int i = 0; i < can1_recv_entry_count; i++) {
+ 967              		.loc 1 497 3 view .LVU246
+ 516:bsp/Src/CAN.c ****     for (int i = 0; i < can2_recv_entry_count; i++) {
+ 968              		.loc 1 516 8 view .LVU247
+ 570:bsp/Src/CAN.c **** 
+ 969              		.loc 1 570 1 is_stmt 0 view .LVU248
+ 970 000e 0020     		movs	r0, #0
+ 971 0010 0BB0     		add	sp, sp, #44
+ 972              	.LCFI22:
+ 973              		.cfi_def_cfa_offset 4
+ 974              		@ sp needed
+ 975 0012 5DF804FB 		ldr	pc, [sp], #4
+ 570:bsp/Src/CAN.c **** 
+ 976              		.loc 1 570 1 view .LVU249
+ 977              		.cfi_endproc
+ 978              	.LFE252:
+ 980              		.section	.text.can_send,"ax",%progbits
+ 981              		.align	1
+ 982              		.global	can_send
+ 983              		.syntax unified
+ 984              		.thumb
+ 985              		.thumb_func
+ 987              	can_send:
+ 988              	.LVL79:
+ 989              	.LFB253:
+ 574:bsp/Src/CAN.c **** 
+ 990              		.loc 1 574 47 is_stmt 1 view -0
+ 991              		.cfi_startproc
+ 992              		@ args = 0, pretend = 0, frame = 32
+ 993              		@ frame_needed = 0, uses_anonymous_args = 0
+ 574:bsp/Src/CAN.c **** 
+ 994              		.loc 1 574 47 is_stmt 0 view .LVU251
+ 995 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 996              	.LCFI23:
+ 997              		.cfi_def_cfa_offset 20
+ 998              		.cfi_offset 4, -20
+ 999              		.cfi_offset 5, -16
+ 1000              		.cfi_offset 6, -12
+ 1001              		.cfi_offset 7, -8
+ 1002              		.cfi_offset 14, -4
+ 1003 0002 89B0     		sub	sp, sp, #36
+ 1004              	.LCFI24:
+ARM GAS  /tmp/cc15kb9a.s 			page 34
+
+
+ 1005              		.cfi_def_cfa_offset 56
+ 1006 0004 0646     		mov	r6, r0
+ 1007 0006 0C46     		mov	r4, r1
+ 1008 0008 1546     		mov	r5, r2
+ 1009 000a 1F46     		mov	r7, r3
+ 579:bsp/Src/CAN.c **** 
+ 1010              		.loc 1 579 3 is_stmt 1 view .LVU252
+ 1011 000c FFF7FEFF 		bl	vPortEnterCritical
+ 1012              	.LVL80:
+ 582:bsp/Src/CAN.c ****     uint32_t mailbox;
+ 1013              		.loc 1 582 3 view .LVU253
+ 582:bsp/Src/CAN.c ****     uint32_t mailbox;
+ 1014              		.loc 1 582 7 is_stmt 0 view .LVU254
+ 1015 0010 3046     		mov	r0, r6
+ 1016 0012 FFF7FEFF 		bl	HAL_CAN_GetTxMailboxesFreeLevel
+ 1017              	.LVL81:
+ 582:bsp/Src/CAN.c ****     uint32_t mailbox;
+ 1018              		.loc 1 582 6 discriminator 1 view .LVU255
+ 1019 0016 70B1     		cbz	r0, .L69
+ 1020              	.LBB7:
+ 583:bsp/Src/CAN.c ****     if (HAL_CAN_AddTxMessage(handle, header, data, &mailbox) != HAL_OK) {
+ 1021              		.loc 1 583 5 is_stmt 1 view .LVU256
+ 584:bsp/Src/CAN.c ****       // disable interrupts
+ 1022              		.loc 1 584 5 view .LVU257
+ 584:bsp/Src/CAN.c ****       // disable interrupts
+ 1023              		.loc 1 584 9 is_stmt 0 view .LVU258
+ 1024 0018 6B46     		mov	r3, sp
+ 1025 001a 2A46     		mov	r2, r5
+ 1026 001c 2146     		mov	r1, r4
+ 1027 001e 3046     		mov	r0, r6
+ 1028 0020 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1029              	.LVL82:
+ 584:bsp/Src/CAN.c ****       // disable interrupts
+ 1030              		.loc 1 584 8 discriminator 1 view .LVU259
+ 1031 0024 18B9     		cbnz	r0, .L78
+ 592:bsp/Src/CAN.c ****   }
+ 1032              		.loc 1 592 5 is_stmt 1 view .LVU260
+ 1033 0026 FFF7FEFF 		bl	vPortExitCritical
+ 1034              	.LVL83:
+ 1035              	.LBE7:
+ 631:bsp/Src/CAN.c **** }
+ 1036              		.loc 1 631 10 is_stmt 0 view .LVU261
+ 1037 002a 0220     		movs	r0, #2
+ 1038 002c 29E0     		b	.L71
+ 1039              	.L78:
+ 1040              	.LBB8:
+ 586:bsp/Src/CAN.c **** 
+ 1041              		.loc 1 586 7 is_stmt 1 view .LVU262
+ 1042 002e FFF7FEFF 		bl	vPortExitCritical
+ 1043              	.LVL84:
+ 588:bsp/Src/CAN.c ****     }
+ 1044              		.loc 1 588 7 view .LVU263
+ 588:bsp/Src/CAN.c ****     }
+ 1045              		.loc 1 588 14 is_stmt 0 view .LVU264
+ 1046 0032 0020     		movs	r0, #0
+ 1047 0034 25E0     		b	.L71
+ 1048              	.L69:
+ARM GAS  /tmp/cc15kb9a.s 			page 35
+
+
+ 1049              	.LBE8:
+ 1050              	.LBB9:
+ 597:bsp/Src/CAN.c ****     
+ 1051              		.loc 1 597 5 is_stmt 1 view .LVU265
+ 1052 0036 FFF7FEFF 		bl	vPortExitCritical
+ 1053              	.LVL85:
+ 599:bsp/Src/CAN.c ****     payload.header = *header;
+ 1054              		.loc 1 599 5 view .LVU266
+ 599:bsp/Src/CAN.c ****     payload.header = *header;
+ 1055              		.loc 1 599 18 is_stmt 0 view .LVU267
+ 1056 003a 2022     		movs	r2, #32
+ 1057 003c 0021     		movs	r1, #0
+ 1058 003e 6846     		mov	r0, sp
+ 1059 0040 FFF7FEFF 		bl	memset
+ 1060              	.LVL86:
+ 600:bsp/Src/CAN.c ****     for (int i = 0; i < DATA_SIZE; i++) {
+ 1061              		.loc 1 600 5 is_stmt 1 view .LVU268
+ 600:bsp/Src/CAN.c ****     for (int i = 0; i < DATA_SIZE; i++) {
+ 1062              		.loc 1 600 20 is_stmt 0 view .LVU269
+ 1063 0044 EE46     		mov	lr, sp
+ 1064 0046 A446     		mov	ip, r4
+ 1065 0048 BCE80F00 		ldmia	ip!, {r0, r1, r2, r3}
+ 1066 004c AEE80F00 		stmia	lr!, {r0, r1, r2, r3}
+ 1067 0050 9CE80300 		ldm	ip, {r0, r1}
+ 1068 0054 8EE80300 		stm	lr, {r0, r1}
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1069              		.loc 1 601 5 is_stmt 1 view .LVU270
+ 1070              	.LBB10:
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1071              		.loc 1 601 10 view .LVU271
+ 1072              	.LVL87:
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1073              		.loc 1 601 14 is_stmt 0 view .LVU272
+ 1074 0058 0021     		movs	r1, #0
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1075              		.loc 1 601 5 view .LVU273
+ 1076 005a 08E0     		b	.L72
+ 1077              	.LVL88:
+ 1078              	.L73:
+ 602:bsp/Src/CAN.c ****     }
+ 1079              		.loc 1 602 7 is_stmt 1 view .LVU274
+ 602:bsp/Src/CAN.c ****     }
+ 1080              		.loc 1 602 29 is_stmt 0 view .LVU275
+ 1081 005c 15F801C0 		ldrb	ip, [r5, r1]	@ zero_extendqisi2
+ 602:bsp/Src/CAN.c ****     }
+ 1082              		.loc 1 602 23 view .LVU276
+ 1083 0060 01F12003 		add	r3, r1, #32
+ 1084 0064 0DEB0304 		add	r4, sp, r3
+ 1085 0068 04F808CC 		strb	ip, [r4, #-8]
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1086              		.loc 1 601 37 is_stmt 1 discriminator 3 view .LVU277
+ 1087 006c 0131     		adds	r1, r1, #1
+ 1088              	.LVL89:
+ 1089              	.L72:
+ 601:bsp/Src/CAN.c ****       payload.data[i] = data[i];
+ 1090              		.loc 1 601 23 discriminator 1 view .LVU278
+ 1091 006e 0729     		cmp	r1, #7
+ARM GAS  /tmp/cc15kb9a.s 			page 36
+
+
+ 1092 0070 F4DD     		ble	.L73
+ 1093              	.LBE10:
+ 606:bsp/Src/CAN.c ****       if (xQueueSend(can1_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1094              		.loc 1 606 5 view .LVU279
+ 606:bsp/Src/CAN.c ****       if (xQueueSend(can1_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1095              		.loc 1 606 15 is_stmt 0 view .LVU280
+ 1096 0072 3368     		ldr	r3, [r6]
+ 606:bsp/Src/CAN.c ****       if (xQueueSend(can1_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1097              		.loc 1 606 8 view .LVU281
+ 1098 0074 0E4A     		ldr	r2, .L81
+ 1099 0076 9342     		cmp	r3, r2
+ 1100 0078 05D0     		beq	.L79
+ 614:bsp/Src/CAN.c ****       if (xQueueSend(can2_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1101              		.loc 1 614 10 is_stmt 1 view .LVU282
+ 614:bsp/Src/CAN.c ****       if (xQueueSend(can2_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1102              		.loc 1 614 13 is_stmt 0 view .LVU283
+ 1103 007a 0E4A     		ldr	r2, .L81+4
+ 1104 007c 9342     		cmp	r3, r2
+ 1105 007e 0CD0     		beq	.L80
+ 1106              	.LVL90:
+ 1107              	.L76:
+ 614:bsp/Src/CAN.c ****       if (xQueueSend(can2_send_queue, &payload, delay_ticks) != pdTRUE) {
+ 1108              		.loc 1 614 13 view .LVU284
+ 1109              	.LBE9:
+ 631:bsp/Src/CAN.c **** }
+ 1110              		.loc 1 631 10 view .LVU285
+ 1111 0080 0220     		movs	r0, #2
+ 1112              	.LVL91:
+ 1113              	.L71:
+ 632:bsp/Src/CAN.c **** 
+ 1114              		.loc 1 632 1 view .LVU286
+ 1115 0082 09B0     		add	sp, sp, #36
+ 1116              	.LCFI25:
+ 1117              		.cfi_remember_state
+ 1118              		.cfi_def_cfa_offset 20
+ 1119              		@ sp needed
+ 1120 0084 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1121              	.LVL92:
+ 1122              	.L79:
+ 1123              	.LCFI26:
+ 1124              		.cfi_restore_state
+ 1125              	.LBB11:
+ 607:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1126              		.loc 1 607 7 is_stmt 1 view .LVU287
+ 607:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1127              		.loc 1 607 11 is_stmt 0 view .LVU288
+ 1128 0086 0023     		movs	r3, #0
+ 1129 0088 3A46     		mov	r2, r7
+ 1130 008a 6946     		mov	r1, sp
+ 1131              	.LVL93:
+ 607:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1132              		.loc 1 607 11 view .LVU289
+ 1133 008c 0A48     		ldr	r0, .L81+8
+ 1134 008e 0068     		ldr	r0, [r0]
+ 1135 0090 FFF7FEFF 		bl	xQueueGenericSend
+ 1136              	.LVL94:
+ 607:bsp/Src/CAN.c ****         return CAN_ERR;
+ARM GAS  /tmp/cc15kb9a.s 			page 37
+
+
+ 1137              		.loc 1 607 10 discriminator 1 view .LVU290
+ 1138 0094 0128     		cmp	r0, #1
+ 1139 0096 09D1     		bne	.L75
+ 1140 0098 F2E7     		b	.L76
+ 1141              	.LVL95:
+ 1142              	.L80:
+ 615:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1143              		.loc 1 615 7 is_stmt 1 view .LVU291
+ 615:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1144              		.loc 1 615 11 is_stmt 0 view .LVU292
+ 1145 009a 0023     		movs	r3, #0
+ 1146 009c 3A46     		mov	r2, r7
+ 1147 009e 6946     		mov	r1, sp
+ 1148              	.LVL96:
+ 615:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1149              		.loc 1 615 11 view .LVU293
+ 1150 00a0 0648     		ldr	r0, .L81+12
+ 1151 00a2 0068     		ldr	r0, [r0]
+ 1152 00a4 FFF7FEFF 		bl	xQueueGenericSend
+ 1153              	.LVL97:
+ 615:bsp/Src/CAN.c ****         return CAN_ERR;
+ 1154              		.loc 1 615 10 discriminator 1 view .LVU294
+ 1155 00a8 0128     		cmp	r0, #1
+ 1156 00aa E9D0     		beq	.L76
+ 1157              	.L75:
+ 608:bsp/Src/CAN.c ****       }
+ 1158              		.loc 1 608 16 discriminator 1 view .LVU295
+ 1159 00ac 0020     		movs	r0, #0
+ 1160 00ae E8E7     		b	.L71
+ 1161              	.L82:
+ 1162              		.align	2
+ 1163              	.L81:
+ 1164 00b0 00640040 		.word	1073767424
+ 1165 00b4 00680040 		.word	1073768448
+ 1166 00b8 00000000 		.word	can1_send_queue
+ 1167 00bc 00000000 		.word	can2_send_queue
+ 1168              	.LBE11:
+ 1169              		.cfi_endproc
+ 1170              	.LFE253:
+ 1172              		.section	.text.HAL_CAN_TxMailbox0CompleteCallback,"ax",%progbits
+ 1173              		.align	1
+ 1174              		.global	HAL_CAN_TxMailbox0CompleteCallback
+ 1175              		.syntax unified
+ 1176              		.thumb
+ 1177              		.thumb_func
+ 1179              	HAL_CAN_TxMailbox0CompleteCallback:
+ 1180              	.LVL98:
+ 1181              	.LFB255:
+ 679:bsp/Src/CAN.c **** 
+ 680:bsp/Src/CAN.c **** void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef* hcan) {
+ 1182              		.loc 1 680 66 is_stmt 1 view -0
+ 1183              		.cfi_startproc
+ 1184              		@ args = 0, pretend = 0, frame = 0
+ 1185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1186              		.loc 1 680 66 is_stmt 0 view .LVU297
+ 1187 0000 08B5     		push	{r3, lr}
+ 1188              	.LCFI27:
+ARM GAS  /tmp/cc15kb9a.s 			page 38
+
+
+ 1189              		.cfi_def_cfa_offset 8
+ 1190              		.cfi_offset 3, -8
+ 1191              		.cfi_offset 14, -4
+ 681:bsp/Src/CAN.c ****   transmit(hcan);
+ 1192              		.loc 1 681 3 is_stmt 1 view .LVU298
+ 1193 0002 FFF7FEFF 		bl	transmit
+ 1194              	.LVL99:
+ 682:bsp/Src/CAN.c **** }
+ 1195              		.loc 1 682 1 is_stmt 0 view .LVU299
+ 1196 0006 08BD     		pop	{r3, pc}
+ 1197              		.cfi_endproc
+ 1198              	.LFE255:
+ 1200              		.section	.text.HAL_CAN_TxMailbox1CompleteCallback,"ax",%progbits
+ 1201              		.align	1
+ 1202              		.global	HAL_CAN_TxMailbox1CompleteCallback
+ 1203              		.syntax unified
+ 1204              		.thumb
+ 1205              		.thumb_func
+ 1207              	HAL_CAN_TxMailbox1CompleteCallback:
+ 1208              	.LVL100:
+ 1209              	.LFB256:
+ 683:bsp/Src/CAN.c **** 
+ 684:bsp/Src/CAN.c **** void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef* hcan) {
+ 1210              		.loc 1 684 66 is_stmt 1 view -0
+ 1211              		.cfi_startproc
+ 1212              		@ args = 0, pretend = 0, frame = 0
+ 1213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1214              		.loc 1 684 66 is_stmt 0 view .LVU301
+ 1215 0000 08B5     		push	{r3, lr}
+ 1216              	.LCFI28:
+ 1217              		.cfi_def_cfa_offset 8
+ 1218              		.cfi_offset 3, -8
+ 1219              		.cfi_offset 14, -4
+ 685:bsp/Src/CAN.c ****   transmit(hcan);
+ 1220              		.loc 1 685 3 is_stmt 1 view .LVU302
+ 1221 0002 FFF7FEFF 		bl	transmit
+ 1222              	.LVL101:
+ 686:bsp/Src/CAN.c **** }
+ 1223              		.loc 1 686 1 is_stmt 0 view .LVU303
+ 1224 0006 08BD     		pop	{r3, pc}
+ 1225              		.cfi_endproc
+ 1226              	.LFE256:
+ 1228              		.section	.text.HAL_CAN_TxMailbox2CompleteCallback,"ax",%progbits
+ 1229              		.align	1
+ 1230              		.global	HAL_CAN_TxMailbox2CompleteCallback
+ 1231              		.syntax unified
+ 1232              		.thumb
+ 1233              		.thumb_func
+ 1235              	HAL_CAN_TxMailbox2CompleteCallback:
+ 1236              	.LVL102:
+ 1237              	.LFB257:
+ 687:bsp/Src/CAN.c **** 
+ 688:bsp/Src/CAN.c **** void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef* hcan) {
+ 1238              		.loc 1 688 66 is_stmt 1 view -0
+ 1239              		.cfi_startproc
+ 1240              		@ args = 0, pretend = 0, frame = 0
+ 1241              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc15kb9a.s 			page 39
+
+
+ 1242              		.loc 1 688 66 is_stmt 0 view .LVU305
+ 1243 0000 08B5     		push	{r3, lr}
+ 1244              	.LCFI29:
+ 1245              		.cfi_def_cfa_offset 8
+ 1246              		.cfi_offset 3, -8
+ 1247              		.cfi_offset 14, -4
+ 689:bsp/Src/CAN.c ****   transmit(hcan);
+ 1248              		.loc 1 689 3 is_stmt 1 view .LVU306
+ 1249 0002 FFF7FEFF 		bl	transmit
+ 1250              	.LVL103:
+ 690:bsp/Src/CAN.c **** }
+ 1251              		.loc 1 690 1 is_stmt 0 view .LVU307
+ 1252 0006 08BD     		pop	{r3, pc}
+ 1253              		.cfi_endproc
+ 1254              	.LFE257:
+ 1256              		.section	.text.HAL_CAN_RxFifo0MsgPendingCallback,"ax",%progbits
+ 1257              		.align	1
+ 1258              		.global	HAL_CAN_RxFifo0MsgPendingCallback
+ 1259              		.syntax unified
+ 1260              		.thumb
+ 1261              		.thumb_func
+ 1263              	HAL_CAN_RxFifo0MsgPendingCallback:
+ 1264              	.LVL104:
+ 1265              	.LFB258:
+ 691:bsp/Src/CAN.c **** 
+ 692:bsp/Src/CAN.c **** void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
+ 1266              		.loc 1 692 65 is_stmt 1 view -0
+ 1267              		.cfi_startproc
+ 1268              		@ args = 0, pretend = 0, frame = 40
+ 1269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1270              		.loc 1 692 65 is_stmt 0 view .LVU309
+ 1271 0000 10B5     		push	{r4, lr}
+ 1272              	.LCFI30:
+ 1273              		.cfi_def_cfa_offset 8
+ 1274              		.cfi_offset 4, -8
+ 1275              		.cfi_offset 14, -4
+ 1276 0002 8AB0     		sub	sp, sp, #40
+ 1277              	.LCFI31:
+ 1278              		.cfi_def_cfa_offset 48
+ 1279 0004 0446     		mov	r4, r0
+ 693:bsp/Src/CAN.c ****   rx_payload_t payload = {0};
+ 1280              		.loc 1 693 3 is_stmt 1 view .LVU310
+ 1281              		.loc 1 693 16 is_stmt 0 view .LVU311
+ 1282 0006 2422     		movs	r2, #36
+ 1283 0008 0021     		movs	r1, #0
+ 1284 000a 01A8     		add	r0, sp, #4
+ 1285              	.LVL105:
+ 1286              		.loc 1 693 16 view .LVU312
+ 1287 000c FFF7FEFF 		bl	memset
+ 1288              	.LVL106:
+ 694:bsp/Src/CAN.c ****   BaseType_t higherPriorityTaskWoken = pdFALSE;
+ 1289              		.loc 1 694 3 is_stmt 1 view .LVU313
+ 695:bsp/Src/CAN.c **** 
+ 696:bsp/Src/CAN.c ****   // recieve messages from queue till empty and put into recieve queues
+ 697:bsp/Src/CAN.c ****   while (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &payload.header,
+ 1290              		.loc 1 697 3 view .LVU314
+ 1291              	.L90:
+ARM GAS  /tmp/cc15kb9a.s 			page 40
+
+
+ 698:bsp/Src/CAN.c ****                               payload.data) == HAL_OK) {
+ 699:bsp/Src/CAN.c ****     // CAN1
+ 700:bsp/Src/CAN.c ****     if (hcan->Instance == CAN1) {
+ 701:bsp/Src/CAN.c ****       for (int i = 0; i < can1_recv_entry_count; i++) {
+ 702:bsp/Src/CAN.c ****         if (can1_recv_entries[i].id == payload.header.StdId) {
+ 703:bsp/Src/CAN.c ****           if (can1_recv_entries[i].circular){
+ 704:bsp/Src/CAN.c ****             xQueueSendCircularBufferFromISR(
+ 705:bsp/Src/CAN.c ****               can1_recv_entries[i].queue, 
+ 706:bsp/Src/CAN.c ****               &payload, 
+ 707:bsp/Src/CAN.c ****               &higherPriorityTaskWoken, 
+ 708:bsp/Src/CAN.c ****               sizeof(rx_payload_t)
+ 709:bsp/Src/CAN.c ****             );
+ 710:bsp/Src/CAN.c ****           } else {
+ 711:bsp/Src/CAN.c ****             xQueueSendFromISR(can1_recv_entries[i].queue, &payload,
+ 712:bsp/Src/CAN.c ****                             &higherPriorityTaskWoken);
+ 713:bsp/Src/CAN.c ****           }
+ 714:bsp/Src/CAN.c **** 	  break;
+ 715:bsp/Src/CAN.c ****         }
+ 716:bsp/Src/CAN.c ****       }
+ 717:bsp/Src/CAN.c ****     }
+ 718:bsp/Src/CAN.c **** 
+ 719:bsp/Src/CAN.c ****     // CAN2
+ 720:bsp/Src/CAN.c ****     #ifdef CAN2
+ 721:bsp/Src/CAN.c ****     else if (hcan->Instance == CAN2) {
+ 722:bsp/Src/CAN.c ****       for (int i = 0; i < can2_recv_entry_count; i++) {
+ 1292              		.loc 1 722 7 discriminator 1 view .LVU315
+ 698:bsp/Src/CAN.c ****                               payload.data) == HAL_OK) {
+ 1293              		.loc 1 698 45 view .LVU316
+ 697:bsp/Src/CAN.c ****                               payload.data) == HAL_OK) {
+ 1294              		.loc 1 697 10 is_stmt 0 view .LVU317
+ 1295 0010 08AB     		add	r3, sp, #32
+ 1296 0012 01AA     		add	r2, sp, #4
+ 1297 0014 0021     		movs	r1, #0
+ 1298 0016 2046     		mov	r0, r4
+ 1299 0018 FFF7FEFF 		bl	HAL_CAN_GetRxMessage
+ 1300              	.LVL107:
+ 698:bsp/Src/CAN.c ****                               payload.data) == HAL_OK) {
+ 1301              		.loc 1 698 45 view .LVU318
+ 1302 001c 0028     		cmp	r0, #0
+ 1303 001e F7D0     		beq	.L90
+ 723:bsp/Src/CAN.c ****         if (can2_recv_entries[i].id == payload.header.StdId) {
+ 724:bsp/Src/CAN.c ****           if (can2_recv_entries[i].circular){
+ 725:bsp/Src/CAN.c ****             xQueueSendCircularBufferFromISR(
+ 726:bsp/Src/CAN.c ****               can2_recv_entries[i].queue, 
+ 727:bsp/Src/CAN.c ****               &payload, 
+ 728:bsp/Src/CAN.c ****               &higherPriorityTaskWoken, 
+ 729:bsp/Src/CAN.c ****               sizeof(rx_payload_t)
+ 730:bsp/Src/CAN.c ****             );
+ 731:bsp/Src/CAN.c ****           } else {
+ 732:bsp/Src/CAN.c ****             xQueueSendFromISR(can2_recv_entries[i].queue, &payload,
+ 733:bsp/Src/CAN.c ****                             &higherPriorityTaskWoken);
+ 734:bsp/Src/CAN.c ****           }
+ 735:bsp/Src/CAN.c **** 	  break;
+ 736:bsp/Src/CAN.c ****         }
+ 737:bsp/Src/CAN.c ****       }
+ 738:bsp/Src/CAN.c ****     }
+ 739:bsp/Src/CAN.c ****     #endif /* CAN2 */
+ARM GAS  /tmp/cc15kb9a.s 			page 41
+
+
+ 740:bsp/Src/CAN.c **** 
+ 741:bsp/Src/CAN.c ****     // CAN3
+ 742:bsp/Src/CAN.c ****     #ifdef CAN3
+ 743:bsp/Src/CAN.c ****     if (hcan->Instance == CAN3) {
+ 744:bsp/Src/CAN.c ****       for (int i = 0; i < can3_recv_entry_count; i++) {
+ 745:bsp/Src/CAN.c ****         if (can3_recv_entries[i].id == payload.header.StdId) {
+ 746:bsp/Src/CAN.c ****           if (can3_recv_entries[i].circular){
+ 747:bsp/Src/CAN.c ****             xQueueSendCircularBufferFromISR(
+ 748:bsp/Src/CAN.c ****               can3_recv_entries[i].queue, 
+ 749:bsp/Src/CAN.c ****               &payload, 
+ 750:bsp/Src/CAN.c ****               &higherPriorityTaskWoken, 
+ 751:bsp/Src/CAN.c ****               sizeof(rx_payload_t)
+ 752:bsp/Src/CAN.c ****             );
+ 753:bsp/Src/CAN.c ****           } else {
+ 754:bsp/Src/CAN.c ****             xQueueSendFromISR(can3_recv_entries[i].queue, &payload,
+ 755:bsp/Src/CAN.c ****                             &higherPriorityTaskWoken);
+ 756:bsp/Src/CAN.c ****           }
+ 757:bsp/Src/CAN.c **** 	  break;
+ 758:bsp/Src/CAN.c ****         }
+ 759:bsp/Src/CAN.c ****       }
+ 760:bsp/Src/CAN.c ****     }
+ 761:bsp/Src/CAN.c ****     #endif /* CAN3 */
+ 762:bsp/Src/CAN.c ****   }
+ 763:bsp/Src/CAN.c **** 
+ 764:bsp/Src/CAN.c ****   portYIELD_FROM_ISR(higherPriorityTaskWoken);
+ 765:bsp/Src/CAN.c **** }
+ 1304              		.loc 1 765 1 view .LVU319
+ 1305 0020 0AB0     		add	sp, sp, #40
+ 1306              	.LCFI32:
+ 1307              		.cfi_def_cfa_offset 8
+ 1308              		@ sp needed
+ 1309 0022 10BD     		pop	{r4, pc}
+ 1310              		.loc 1 765 1 view .LVU320
+ 1311              		.cfi_endproc
+ 1312              	.LFE258:
+ 1314              		.section	.text.CAN1_TX_IRQHandler,"ax",%progbits
+ 1315              		.align	1
+ 1316              		.global	CAN1_TX_IRQHandler
+ 1317              		.syntax unified
+ 1318              		.thumb
+ 1319              		.thumb_func
+ 1321              	CAN1_TX_IRQHandler:
+ 1322              	.LFB259:
+ 766:bsp/Src/CAN.c **** 
+ 767:bsp/Src/CAN.c **** // CAN1
+ 768:bsp/Src/CAN.c **** #ifdef CAN1
+ 769:bsp/Src/CAN.c **** void CAN1_TX_IRQHandler(void) { HAL_CAN_IRQHandler(hcan1); }
+ 1323              		.loc 1 769 31 is_stmt 1 view -0
+ 1324              		.cfi_startproc
+ 1325              		@ args = 0, pretend = 0, frame = 0
+ 1326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1327 0000 08B5     		push	{r3, lr}
+ 1328              	.LCFI33:
+ 1329              		.cfi_def_cfa_offset 8
+ 1330              		.cfi_offset 3, -8
+ 1331              		.cfi_offset 14, -4
+ 1332              		.loc 1 769 33 view .LVU322
+ARM GAS  /tmp/cc15kb9a.s 			page 42
+
+
+ 1333 0002 024B     		ldr	r3, .L94
+ 1334 0004 1868     		ldr	r0, [r3]
+ 1335 0006 FFF7FEFF 		bl	HAL_CAN_IRQHandler
+ 1336              	.LVL108:
+ 1337              		.loc 1 769 60 is_stmt 0 view .LVU323
+ 1338 000a 08BD     		pop	{r3, pc}
+ 1339              	.L95:
+ 1340              		.align	2
+ 1341              	.L94:
+ 1342 000c 00000000 		.word	hcan1
+ 1343              		.cfi_endproc
+ 1344              	.LFE259:
+ 1346              		.section	.text.CAN1_RX0_IRQHandler,"ax",%progbits
+ 1347              		.align	1
+ 1348              		.global	CAN1_RX0_IRQHandler
+ 1349              		.syntax unified
+ 1350              		.thumb
+ 1351              		.thumb_func
+ 1353              	CAN1_RX0_IRQHandler:
+ 1354              	.LFB260:
+ 770:bsp/Src/CAN.c **** void CAN1_RX0_IRQHandler(void) { HAL_CAN_IRQHandler(hcan1); }
+ 1355              		.loc 1 770 32 is_stmt 1 view -0
+ 1356              		.cfi_startproc
+ 1357              		@ args = 0, pretend = 0, frame = 0
+ 1358              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1359 0000 08B5     		push	{r3, lr}
+ 1360              	.LCFI34:
+ 1361              		.cfi_def_cfa_offset 8
+ 1362              		.cfi_offset 3, -8
+ 1363              		.cfi_offset 14, -4
+ 1364              		.loc 1 770 34 view .LVU325
+ 1365 0002 024B     		ldr	r3, .L98
+ 1366 0004 1868     		ldr	r0, [r3]
+ 1367 0006 FFF7FEFF 		bl	HAL_CAN_IRQHandler
+ 1368              	.LVL109:
+ 1369              		.loc 1 770 61 is_stmt 0 view .LVU326
+ 1370 000a 08BD     		pop	{r3, pc}
+ 1371              	.L99:
+ 1372              		.align	2
+ 1373              	.L98:
+ 1374 000c 00000000 		.word	hcan1
+ 1375              		.cfi_endproc
+ 1376              	.LFE260:
+ 1378              		.section	.text.CAN2_TX_IRQHandler,"ax",%progbits
+ 1379              		.align	1
+ 1380              		.global	CAN2_TX_IRQHandler
+ 1381              		.syntax unified
+ 1382              		.thumb
+ 1383              		.thumb_func
+ 1385              	CAN2_TX_IRQHandler:
+ 1386              	.LFB261:
+ 771:bsp/Src/CAN.c **** #endif /* CAN1 */
+ 772:bsp/Src/CAN.c **** 
+ 773:bsp/Src/CAN.c **** // CAN2
+ 774:bsp/Src/CAN.c **** #ifdef CAN2
+ 775:bsp/Src/CAN.c **** void CAN2_TX_IRQHandler(void) { HAL_CAN_IRQHandler(hcan2); }
+ 1387              		.loc 1 775 31 is_stmt 1 view -0
+ARM GAS  /tmp/cc15kb9a.s 			page 43
+
+
+ 1388              		.cfi_startproc
+ 1389              		@ args = 0, pretend = 0, frame = 0
+ 1390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1391 0000 08B5     		push	{r3, lr}
+ 1392              	.LCFI35:
+ 1393              		.cfi_def_cfa_offset 8
+ 1394              		.cfi_offset 3, -8
+ 1395              		.cfi_offset 14, -4
+ 1396              		.loc 1 775 33 view .LVU328
+ 1397 0002 024B     		ldr	r3, .L102
+ 1398 0004 1868     		ldr	r0, [r3]
+ 1399 0006 FFF7FEFF 		bl	HAL_CAN_IRQHandler
+ 1400              	.LVL110:
+ 1401              		.loc 1 775 60 is_stmt 0 view .LVU329
+ 1402 000a 08BD     		pop	{r3, pc}
+ 1403              	.L103:
+ 1404              		.align	2
+ 1405              	.L102:
+ 1406 000c 00000000 		.word	hcan2
+ 1407              		.cfi_endproc
+ 1408              	.LFE261:
+ 1410              		.section	.text.CAN2_RX0_IRQHandler,"ax",%progbits
+ 1411              		.align	1
+ 1412              		.global	CAN2_RX0_IRQHandler
+ 1413              		.syntax unified
+ 1414              		.thumb
+ 1415              		.thumb_func
+ 1417              	CAN2_RX0_IRQHandler:
+ 1418              	.LFB262:
+ 776:bsp/Src/CAN.c **** void CAN2_RX0_IRQHandler(void) { HAL_CAN_IRQHandler(hcan2); }
+ 1419              		.loc 1 776 32 is_stmt 1 view -0
+ 1420              		.cfi_startproc
+ 1421              		@ args = 0, pretend = 0, frame = 0
+ 1422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1423 0000 08B5     		push	{r3, lr}
+ 1424              	.LCFI36:
+ 1425              		.cfi_def_cfa_offset 8
+ 1426              		.cfi_offset 3, -8
+ 1427              		.cfi_offset 14, -4
+ 1428              		.loc 1 776 34 view .LVU331
+ 1429 0002 024B     		ldr	r3, .L106
+ 1430 0004 1868     		ldr	r0, [r3]
+ 1431 0006 FFF7FEFF 		bl	HAL_CAN_IRQHandler
+ 1432              	.LVL111:
+ 1433              		.loc 1 776 61 is_stmt 0 view .LVU332
+ 1434 000a 08BD     		pop	{r3, pc}
+ 1435              	.L107:
+ 1436              		.align	2
+ 1437              	.L106:
+ 1438 000c 00000000 		.word	hcan2
+ 1439              		.cfi_endproc
+ 1440              	.LFE262:
+ 1442              		.section	.bss.can2_send_queue_storage,"aw",%nobits
+ 1443              		.align	2
+ 1446              	can2_send_queue_storage:
+ 1447 0000 00000000 		.space	320
+ 1447      00000000 
+ARM GAS  /tmp/cc15kb9a.s 			page 44
+
+
+ 1447      00000000 
+ 1447      00000000 
+ 1447      00000000 
+ 1448              		.section	.bss.can2_send_queue_buffer,"aw",%nobits
+ 1449              		.align	2
+ 1452              	can2_send_queue_buffer:
+ 1453 0000 00000000 		.space	72
+ 1453      00000000 
+ 1453      00000000 
+ 1453      00000000 
+ 1453      00000000 
+ 1454              		.section	.bss.can2_send_queue,"aw",%nobits
+ 1455              		.align	2
+ 1458              	can2_send_queue:
+ 1459 0000 00000000 		.space	4
+ 1460              		.global	hcan2
+ 1461              		.section	.data.hcan2,"aw"
+ 1462              		.align	2
+ 1465              	hcan2:
+ 1466 0000 00000000 		.word	hcan2_
+ 1467              		.section	.data.hcan2_,"aw"
+ 1468              		.align	2
+ 1471              	hcan2_:
+ 1472 0000 00680040 		.word	1073768448
+ 1473 0004 00000000 		.space	36
+ 1473      00000000 
+ 1473      00000000 
+ 1473      00000000 
+ 1473      00000000 
+ 1474              		.section	.bss.can1_send_queue_storage,"aw",%nobits
+ 1475              		.align	2
+ 1478              	can1_send_queue_storage:
+ 1479 0000 00000000 		.space	320
+ 1479      00000000 
+ 1479      00000000 
+ 1479      00000000 
+ 1479      00000000 
+ 1480              		.section	.bss.can1_send_queue_buffer,"aw",%nobits
+ 1481              		.align	2
+ 1484              	can1_send_queue_buffer:
+ 1485 0000 00000000 		.space	72
+ 1485      00000000 
+ 1485      00000000 
+ 1485      00000000 
+ 1485      00000000 
+ 1486              		.section	.bss.can1_send_queue,"aw",%nobits
+ 1487              		.align	2
+ 1490              	can1_send_queue:
+ 1491 0000 00000000 		.space	4
+ 1492              		.global	hcan1
+ 1493              		.section	.data.hcan1,"aw"
+ 1494              		.align	2
+ 1497              	hcan1:
+ 1498 0000 00000000 		.word	hcan1_
+ 1499              		.section	.data.hcan1_,"aw"
+ 1500              		.align	2
+ 1503              	hcan1_:
+ARM GAS  /tmp/cc15kb9a.s 			page 45
+
+
+ 1504 0000 00640040 		.word	1073767424
+ 1505 0004 00000000 		.space	36
+ 1505      00000000 
+ 1505      00000000 
+ 1505      00000000 
+ 1505      00000000 
+ 1506              		.text
+ 1507              	.Letext0:
+ 1508              		.file 2 "stm/stm32f4xx/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 1509              		.file 3 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 1510              		.file 4 "stm/stm32f4xx/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 1511              		.file 5 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1512              		.file 6 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1513              		.file 7 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h"
+ 1514              		.file 8 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 1515              		.file 9 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
+ 1516              		.file 10 "middleware/FreeRTOS-Kernel/include/queue.h"
+ 1517              		.file 11 "bsp/Inc/CAN.h"
+ 1518              		.file 12 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
+ 1519              		.file 13 "<built-in>"
+ARM GAS  /tmp/cc15kb9a.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 CAN.c
+     /tmp/cc15kb9a.s:21     .text.HAL_CAN_MspF4Init:00000000 $t
+     /tmp/cc15kb9a.s:26     .text.HAL_CAN_MspF4Init:00000000 HAL_CAN_MspF4Init
+     /tmp/cc15kb9a.s:221    .text.HAL_CAN_MspF4Init:000000d4 $d
+     /tmp/cc15kb9a.s:230    .text.transmit:00000000 $t
+     /tmp/cc15kb9a.s:235    .text.transmit:00000000 transmit
+     /tmp/cc15kb9a.s:360    .text.transmit:00000070 $d
+     /tmp/cc15kb9a.s:1490   .bss.can1_send_queue:00000000 can1_send_queue
+     /tmp/cc15kb9a.s:1458   .bss.can2_send_queue:00000000 can2_send_queue
+     /tmp/cc15kb9a.s:368    .text.HAL_CAN_MspDeInit:00000000 $t
+     /tmp/cc15kb9a.s:374    .text.HAL_CAN_MspDeInit:00000000 HAL_CAN_MspDeInit
+     /tmp/cc15kb9a.s:465    .text.HAL_CAN_MspDeInit:00000074 $d
+     /tmp/cc15kb9a.s:473    .text.HAL_CAN_MspInit:00000000 $t
+     /tmp/cc15kb9a.s:479    .text.HAL_CAN_MspInit:00000000 HAL_CAN_MspInit
+     /tmp/cc15kb9a.s:618    .text.HAL_CAN_MspInit:00000080 $d
+     /tmp/cc15kb9a.s:625    .text.can_init:00000000 $t
+     /tmp/cc15kb9a.s:631    .text.can_init:00000000 can_init
+     /tmp/cc15kb9a.s:777    .text.can_init:00000084 $d
+     /tmp/cc15kb9a.s:1484   .bss.can1_send_queue_buffer:00000000 can1_send_queue_buffer
+     /tmp/cc15kb9a.s:1478   .bss.can1_send_queue_storage:00000000 can1_send_queue_storage
+     /tmp/cc15kb9a.s:1452   .bss.can2_send_queue_buffer:00000000 can2_send_queue_buffer
+     /tmp/cc15kb9a.s:1446   .bss.can2_send_queue_storage:00000000 can2_send_queue_storage
+     /tmp/cc15kb9a.s:789    .text.can_deinit:00000000 $t
+     /tmp/cc15kb9a.s:795    .text.can_deinit:00000000 can_deinit
+     /tmp/cc15kb9a.s:856    .text.can_start:00000000 $t
+     /tmp/cc15kb9a.s:862    .text.can_start:00000000 can_start
+     /tmp/cc15kb9a.s:894    .text.can_stop:00000000 $t
+     /tmp/cc15kb9a.s:900    .text.can_stop:00000000 can_stop
+     /tmp/cc15kb9a.s:932    .text.can_recv:00000000 $t
+     /tmp/cc15kb9a.s:938    .text.can_recv:00000000 can_recv
+     /tmp/cc15kb9a.s:981    .text.can_send:00000000 $t
+     /tmp/cc15kb9a.s:987    .text.can_send:00000000 can_send
+     /tmp/cc15kb9a.s:1164   .text.can_send:000000b0 $d
+     /tmp/cc15kb9a.s:1173   .text.HAL_CAN_TxMailbox0CompleteCallback:00000000 $t
+     /tmp/cc15kb9a.s:1179   .text.HAL_CAN_TxMailbox0CompleteCallback:00000000 HAL_CAN_TxMailbox0CompleteCallback
+     /tmp/cc15kb9a.s:1201   .text.HAL_CAN_TxMailbox1CompleteCallback:00000000 $t
+     /tmp/cc15kb9a.s:1207   .text.HAL_CAN_TxMailbox1CompleteCallback:00000000 HAL_CAN_TxMailbox1CompleteCallback
+     /tmp/cc15kb9a.s:1229   .text.HAL_CAN_TxMailbox2CompleteCallback:00000000 $t
+     /tmp/cc15kb9a.s:1235   .text.HAL_CAN_TxMailbox2CompleteCallback:00000000 HAL_CAN_TxMailbox2CompleteCallback
+     /tmp/cc15kb9a.s:1257   .text.HAL_CAN_RxFifo0MsgPendingCallback:00000000 $t
+     /tmp/cc15kb9a.s:1263   .text.HAL_CAN_RxFifo0MsgPendingCallback:00000000 HAL_CAN_RxFifo0MsgPendingCallback
+     /tmp/cc15kb9a.s:1315   .text.CAN1_TX_IRQHandler:00000000 $t
+     /tmp/cc15kb9a.s:1321   .text.CAN1_TX_IRQHandler:00000000 CAN1_TX_IRQHandler
+     /tmp/cc15kb9a.s:1342   .text.CAN1_TX_IRQHandler:0000000c $d
+     /tmp/cc15kb9a.s:1497   .data.hcan1:00000000 hcan1
+     /tmp/cc15kb9a.s:1347   .text.CAN1_RX0_IRQHandler:00000000 $t
+     /tmp/cc15kb9a.s:1353   .text.CAN1_RX0_IRQHandler:00000000 CAN1_RX0_IRQHandler
+     /tmp/cc15kb9a.s:1374   .text.CAN1_RX0_IRQHandler:0000000c $d
+     /tmp/cc15kb9a.s:1379   .text.CAN2_TX_IRQHandler:00000000 $t
+     /tmp/cc15kb9a.s:1385   .text.CAN2_TX_IRQHandler:00000000 CAN2_TX_IRQHandler
+     /tmp/cc15kb9a.s:1406   .text.CAN2_TX_IRQHandler:0000000c $d
+     /tmp/cc15kb9a.s:1465   .data.hcan2:00000000 hcan2
+     /tmp/cc15kb9a.s:1411   .text.CAN2_RX0_IRQHandler:00000000 $t
+     /tmp/cc15kb9a.s:1417   .text.CAN2_RX0_IRQHandler:00000000 CAN2_RX0_IRQHandler
+     /tmp/cc15kb9a.s:1438   .text.CAN2_RX0_IRQHandler:0000000c $d
+     /tmp/cc15kb9a.s:1443   .bss.can2_send_queue_storage:00000000 $d
+ARM GAS  /tmp/cc15kb9a.s 			page 47
+
+
+     /tmp/cc15kb9a.s:1449   .bss.can2_send_queue_buffer:00000000 $d
+     /tmp/cc15kb9a.s:1455   .bss.can2_send_queue:00000000 $d
+     /tmp/cc15kb9a.s:1462   .data.hcan2:00000000 $d
+     /tmp/cc15kb9a.s:1471   .data.hcan2_:00000000 hcan2_
+     /tmp/cc15kb9a.s:1468   .data.hcan2_:00000000 $d
+     /tmp/cc15kb9a.s:1475   .bss.can1_send_queue_storage:00000000 $d
+     /tmp/cc15kb9a.s:1481   .bss.can1_send_queue_buffer:00000000 $d
+     /tmp/cc15kb9a.s:1487   .bss.can1_send_queue:00000000 $d
+     /tmp/cc15kb9a.s:1494   .data.hcan1:00000000 $d
+     /tmp/cc15kb9a.s:1503   .data.hcan1_:00000000 hcan1_
+     /tmp/cc15kb9a.s:1500   .data.hcan1_:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+memset
+xQueueReceiveFromISR
+HAL_CAN_AddTxMessage
+HAL_GPIO_DeInit
+HAL_NVIC_DisableIRQ
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+xQueueGenericCreateStatic
+HAL_CAN_Init
+HAL_CAN_ConfigFilter
+HAL_CAN_ActivateNotification
+HAL_CAN_DeInit
+HAL_CAN_DeactivateNotification
+HAL_CAN_Start
+HAL_CAN_Stop
+vPortEnterCritical
+HAL_CAN_GetTxMailboxesFreeLevel
+vPortExitCritical
+xQueueGenericSend
+HAL_CAN_GetRxMessage
+HAL_CAN_IRQHandler

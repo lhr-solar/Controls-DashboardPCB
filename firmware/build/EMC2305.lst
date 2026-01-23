@@ -1,0 +1,3718 @@
+ARM GAS  /tmp/ccmsWjof.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"EMC2305.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "driver/Src/EMC2305.c"
+  20              		.section	.text.prvAcquireFreeSemaphore,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	prvAcquireFreeSemaphore:
+  27              	.LFB244:
+   1:driver/Src/EMC2305.c **** // Driver for Microchip EMC2305 PWM Fan Controller
+   2:driver/Src/EMC2305.c **** 
+   3:driver/Src/EMC2305.c **** #include "EMC2305.h"
+   4:driver/Src/EMC2305.c **** 
+   5:driver/Src/EMC2305.c **** // Buffers for static semaphores
+   6:driver/Src/EMC2305.c **** StaticSemaphore_t worker_semaphore_buffer;
+   7:driver/Src/EMC2305.c **** StaticSemaphore_t caller_semaphore_buffer_pool[EMC2305_SEMAPHORE_POOL_SIZE];
+   8:driver/Src/EMC2305.c **** // Semaphore handles for caller
+   9:driver/Src/EMC2305.c **** SemaphoreHandle_t caller_semaphore_handle_pool[EMC2305_SEMAPHORE_POOL_SIZE];
+  10:driver/Src/EMC2305.c **** // Status array to track semaphore usage
+  11:driver/Src/EMC2305.c **** volatile bool caller_semaphore_in_use[EMC2305_SEMAPHORE_POOL_SIZE] = { false };
+  12:driver/Src/EMC2305.c **** // Mutex for protecting the pool usage array
+  13:driver/Src/EMC2305.c **** StaticSemaphore_t caller_semaphore_pool_usage_buffer;
+  14:driver/Src/EMC2305.c **** SemaphoreHandle_t caller_semaphore_pool_usage_mutex;
+  15:driver/Src/EMC2305.c **** 
+  16:driver/Src/EMC2305.c **** // Queue of I2C messages to be sent to the EMC2305
+  17:driver/Src/EMC2305.c **** QueueHandle_t EMC2305_I2C_Queue;
+  18:driver/Src/EMC2305.c **** // Array to use as the queue's storage area
+  19:driver/Src/EMC2305.c **** uint8_t ucQueueStorageArea[EMC2305_QUEUE_LENGTH * EMC2305_QUEUE_ITEM_SIZE];
+  20:driver/Src/EMC2305.c **** // Variable to hold the queue's data structure
+  21:driver/Src/EMC2305.c **** static StaticQueue_t xStaticQueue;
+  22:driver/Src/EMC2305.c **** 
+  23:driver/Src/EMC2305.c **** // Task buffer for I2C worker
+  24:driver/Src/EMC2305.c **** StaticTask_t EMC2305_I2C_TaskBuffer;
+  25:driver/Src/EMC2305.c **** // Task stack for I2C worker
+  26:driver/Src/EMC2305.c **** StackType_t EMC2305_I2C_TaskStack[configMINIMAL_STACK_SIZE];
+  27:driver/Src/EMC2305.c **** 
+  28:driver/Src/EMC2305.c **** // Some bullshit until i find a better way
+  29:driver/Src/EMC2305.c **** static EMC2305_HandleTypeDef* chip_I2C1 = NULL;
+  30:driver/Src/EMC2305.c **** #ifdef I2C2
+  31:driver/Src/EMC2305.c **** static EMC2305_HandleTypeDef* chip_I2C2 = NULL;
+ARM GAS  /tmp/ccmsWjof.s 			page 2
+
+
+  32:driver/Src/EMC2305.c **** #endif
+  33:driver/Src/EMC2305.c **** #ifdef I2C3
+  34:driver/Src/EMC2305.c **** static EMC2305_HandleTypeDef* chip_I2C3 = NULL;
+  35:driver/Src/EMC2305.c **** #endif
+  36:driver/Src/EMC2305.c **** 
+  37:driver/Src/EMC2305.c **** // Helper function to acquire a free semaphore index from the pool
+  38:driver/Src/EMC2305.c **** // Returns the index (0 to N-1) or -1 if the pool is full.
+  39:driver/Src/EMC2305.c **** static int8_t prvAcquireFreeSemaphore(void) {
+  28              		.loc 1 39 45 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  40:driver/Src/EMC2305.c ****     int8_t index = -1;
+  37              		.loc 1 40 5 view .LVU1
+  38              	.LVL0:
+  41:driver/Src/EMC2305.c **** 
+  42:driver/Src/EMC2305.c ****     if (xSemaphoreTake(caller_semaphore_pool_usage_mutex, portMAX_DELAY) == pdTRUE) {
+  39              		.loc 1 42 5 view .LVU2
+  40              		.loc 1 42 9 is_stmt 0 view .LVU3
+  41 0002 4FF0FF31 		mov	r1, #-1
+  42 0006 104B     		ldr	r3, .L12
+  43 0008 1868     		ldr	r0, [r3]
+  44 000a FFF7FEFF 		bl	xQueueSemaphoreTake
+  45              	.LVL1:
+  46              		.loc 1 42 8 discriminator 1 view .LVU4
+  47 000e 0128     		cmp	r0, #1
+  48 0010 07D1     		bne	.L9
+  49              	.LBB2:
+  43:driver/Src/EMC2305.c ****         for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
+  50              		.loc 1 43 18 view .LVU5
+  51 0012 0020     		movs	r0, #0
+  52              	.L2:
+  53              	.LVL2:
+  54              		.loc 1 43 27 is_stmt 1 discriminator 1 view .LVU6
+  55 0014 0928     		cmp	r0, #9
+  56 0016 0CDC     		bgt	.L10
+  44:driver/Src/EMC2305.c ****             if (caller_semaphore_in_use[i] == false) {
+  57              		.loc 1 44 13 view .LVU7
+  58              		.loc 1 44 40 is_stmt 0 view .LVU8
+  59 0018 0C4B     		ldr	r3, .L12+4
+  60 001a 1B5C     		ldrb	r3, [r3, r0]	@ zero_extendqisi2
+  61              		.loc 1 44 16 view .LVU9
+  62 001c 23B1     		cbz	r3, .L11
+  43:driver/Src/EMC2305.c ****         for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
+  63              		.loc 1 43 59 is_stmt 1 discriminator 2 view .LVU10
+  64 001e 0130     		adds	r0, r0, #1
+  65              	.LVL3:
+  43:driver/Src/EMC2305.c ****         for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
+  66              		.loc 1 43 59 is_stmt 0 discriminator 2 view .LVU11
+  67 0020 F8E7     		b	.L2
+  68              	.LVL4:
+  69              	.L9:
+ARM GAS  /tmp/ccmsWjof.s 			page 3
+
+
+  43:driver/Src/EMC2305.c ****         for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
+  70              		.loc 1 43 59 discriminator 2 view .LVU12
+  71              	.LBE2:
+  40:driver/Src/EMC2305.c **** 
+  72              		.loc 1 40 12 view .LVU13
+  73 0022 4FF0FF34 		mov	r4, #-1
+  74 0026 0DE0     		b	.L3
+  75              	.LVL5:
+  76              	.L11:
+  77              	.LBB3:
+  45:driver/Src/EMC2305.c ****                 caller_semaphore_in_use[i] = true; // Mark as in use
+  78              		.loc 1 45 17 is_stmt 1 view .LVU14
+  79              		.loc 1 45 44 is_stmt 0 view .LVU15
+  80 0028 084B     		ldr	r3, .L12+4
+  81 002a 0122     		movs	r2, #1
+  82 002c 1A54     		strb	r2, [r3, r0]
+  46:driver/Src/EMC2305.c ****                 index = i;
+  83              		.loc 1 46 17 is_stmt 1 view .LVU16
+  84              		.loc 1 46 23 is_stmt 0 view .LVU17
+  85 002e 44B2     		sxtb	r4, r0
+  86              	.LVL6:
+  47:driver/Src/EMC2305.c ****                 break;
+  87              		.loc 1 47 17 is_stmt 1 view .LVU18
+  88 0030 01E0     		b	.L5
+  89              	.LVL7:
+  90              	.L10:
+  91              		.loc 1 47 17 is_stmt 0 view .LVU19
+  92              	.LBE3:
+  40:driver/Src/EMC2305.c **** 
+  93              		.loc 1 40 12 view .LVU20
+  94 0032 4FF0FF34 		mov	r4, #-1
+  95              	.LVL8:
+  96              	.L5:
+  48:driver/Src/EMC2305.c ****             }
+  49:driver/Src/EMC2305.c ****         }
+  50:driver/Src/EMC2305.c ****         xSemaphoreGive(caller_semaphore_pool_usage_mutex); // Release the mutex
+  97              		.loc 1 50 9 is_stmt 1 view .LVU21
+  98 0036 0023     		movs	r3, #0
+  99 0038 1A46     		mov	r2, r3
+ 100 003a 1946     		mov	r1, r3
+ 101 003c 0248     		ldr	r0, .L12
+ 102              	.LVL9:
+ 103              		.loc 1 50 9 is_stmt 0 view .LVU22
+ 104 003e 0068     		ldr	r0, [r0]
+ 105 0040 FFF7FEFF 		bl	xQueueGenericSend
+ 106              	.LVL10:
+ 107              	.L3:
+  51:driver/Src/EMC2305.c ****     }
+  52:driver/Src/EMC2305.c ****     return index;
+ 108              		.loc 1 52 5 is_stmt 1 view .LVU23
+  53:driver/Src/EMC2305.c **** }
+ 109              		.loc 1 53 1 is_stmt 0 view .LVU24
+ 110 0044 2046     		mov	r0, r4
+ 111 0046 10BD     		pop	{r4, pc}
+ 112              	.LVL11:
+ 113              	.L13:
+ 114              		.loc 1 53 1 view .LVU25
+ARM GAS  /tmp/ccmsWjof.s 			page 4
+
+
+ 115              		.align	2
+ 116              	.L12:
+ 117 0048 00000000 		.word	caller_semaphore_pool_usage_mutex
+ 118 004c 00000000 		.word	caller_semaphore_in_use
+ 119              		.cfi_endproc
+ 120              	.LFE244:
+ 122              		.section	.text.prvReturnSemaphore,"ax",%progbits
+ 123              		.align	1
+ 124              		.syntax unified
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	prvReturnSemaphore:
+ 129              	.LVL12:
+ 130              	.LFB245:
+  54:driver/Src/EMC2305.c **** 
+  55:driver/Src/EMC2305.c **** // Helper function to return a semaphore to the pool
+  56:driver/Src/EMC2305.c **** static void prvReturnSemaphore(uint8_t index) {
+ 131              		.loc 1 56 47 is_stmt 1 view -0
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		.loc 1 56 47 is_stmt 0 view .LVU27
+ 136 0000 10B5     		push	{r4, lr}
+ 137              	.LCFI1:
+ 138              		.cfi_def_cfa_offset 8
+ 139              		.cfi_offset 4, -8
+ 140              		.cfi_offset 14, -4
+ 141 0002 0446     		mov	r4, r0
+  57:driver/Src/EMC2305.c ****     if (xSemaphoreTake(caller_semaphore_pool_usage_mutex, portMAX_DELAY) == pdTRUE) {
+ 142              		.loc 1 57 5 is_stmt 1 view .LVU28
+ 143              		.loc 1 57 9 is_stmt 0 view .LVU29
+ 144 0004 4FF0FF31 		mov	r1, #-1
+ 145 0008 084B     		ldr	r3, .L18
+ 146 000a 1868     		ldr	r0, [r3]
+ 147              	.LVL13:
+ 148              		.loc 1 57 9 view .LVU30
+ 149 000c FFF7FEFF 		bl	xQueueSemaphoreTake
+ 150              	.LVL14:
+ 151              		.loc 1 57 8 discriminator 1 view .LVU31
+ 152 0010 0128     		cmp	r0, #1
+ 153 0012 00D0     		beq	.L17
+ 154              	.L14:
+  58:driver/Src/EMC2305.c ****         caller_semaphore_in_use[index] = false; // Mark as free
+  59:driver/Src/EMC2305.c ****         xSemaphoreGive(caller_semaphore_pool_usage_mutex); // Release the mutex
+  60:driver/Src/EMC2305.c ****     }
+  61:driver/Src/EMC2305.c **** }
+ 155              		.loc 1 61 1 view .LVU32
+ 156 0014 10BD     		pop	{r4, pc}
+ 157              	.LVL15:
+ 158              	.L17:
+  58:driver/Src/EMC2305.c ****         caller_semaphore_in_use[index] = false; // Mark as free
+ 159              		.loc 1 58 9 is_stmt 1 view .LVU33
+  58:driver/Src/EMC2305.c ****         caller_semaphore_in_use[index] = false; // Mark as free
+ 160              		.loc 1 58 40 is_stmt 0 view .LVU34
+ 161 0016 0021     		movs	r1, #0
+ 162 0018 054B     		ldr	r3, .L18+4
+ 163 001a 1955     		strb	r1, [r3, r4]
+ARM GAS  /tmp/ccmsWjof.s 			page 5
+
+
+  59:driver/Src/EMC2305.c ****     }
+ 164              		.loc 1 59 9 is_stmt 1 view .LVU35
+ 165 001c 0B46     		mov	r3, r1
+ 166 001e 0A46     		mov	r2, r1
+ 167 0020 0248     		ldr	r0, .L18
+ 168 0022 0068     		ldr	r0, [r0]
+ 169 0024 FFF7FEFF 		bl	xQueueGenericSend
+ 170              	.LVL16:
+ 171              		.loc 1 61 1 is_stmt 0 view .LVU36
+ 172 0028 F4E7     		b	.L14
+ 173              	.L19:
+ 174 002a 00BF     		.align	2
+ 175              	.L18:
+ 176 002c 00000000 		.word	caller_semaphore_pool_usage_mutex
+ 177 0030 00000000 		.word	caller_semaphore_in_use
+ 178              		.cfi_endproc
+ 179              	.LFE245:
+ 181              		.section	.text.EMC2305_I2C_Worker_Task,"ax",%progbits
+ 182              		.align	1
+ 183              		.global	EMC2305_I2C_Worker_Task
+ 184              		.syntax unified
+ 185              		.thumb
+ 186              		.thumb_func
+ 188              	EMC2305_I2C_Worker_Task:
+ 189              	.LVL17:
+ 190              	.LFB259:
+  62:driver/Src/EMC2305.c **** 
+  63:driver/Src/EMC2305.c **** // Device Management Functions
+  64:driver/Src/EMC2305.c **** 
+  65:driver/Src/EMC2305.c **** /**
+  66:driver/Src/EMC2305.c ****  * @brief   Initializes the I2C bus and validates the chip by reading the Product ID and Manufactur
+  67:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to initialize
+  68:driver/Src/EMC2305.c ****  * @param   hi2c STM32 HAL I2C handle
+  69:driver/Src/EMC2305.c ****  * @param   dev_addr Device address (not shifted - directly from datasheet)
+  70:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+  71:driver/Src/EMC2305.c ****  */
+  72:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_Init(EMC2305_HandleTypeDef* chip, I2C_HandleTypeDef* hi2c, uint16_t dev_addr
+  73:driver/Src/EMC2305.c ****     // Set I2C handle and device address in EMC2305 handle
+  74:driver/Src/EMC2305.c ****     chip->hi2c = hi2c;
+  75:driver/Src/EMC2305.c ****     chip->dev_addr = dev_addr << 1; // 7-bit i2c address << 1
+  76:driver/Src/EMC2305.c **** 
+  77:driver/Src/EMC2305.c ****     // Create caller semaphore pool mutex
+  78:driver/Src/EMC2305.c ****     caller_semaphore_pool_usage_mutex = xSemaphoreCreateMutexStatic(&caller_semaphore_pool_usage_bu
+  79:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+  80:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+  81:driver/Src/EMC2305.c ****     }
+  82:driver/Src/EMC2305.c **** 
+  83:driver/Src/EMC2305.c ****     // Create all caller semaphores in pool
+  84:driver/Src/EMC2305.c ****     for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
+  85:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+  86:driver/Src/EMC2305.c ****         if (caller_semaphore_handle_pool[i] == NULL) {
+  87:driver/Src/EMC2305.c ****             return EMC2305_ERR;
+  88:driver/Src/EMC2305.c ****         }
+  89:driver/Src/EMC2305.c ****     }
+  90:driver/Src/EMC2305.c **** 
+  91:driver/Src/EMC2305.c ****     // Create RTOS semaphore
+  92:driver/Src/EMC2305.c ****     chip->i2c_complete = xSemaphoreCreateBinaryStatic(&worker_semaphore_buffer);
+ARM GAS  /tmp/ccmsWjof.s 			page 6
+
+
+  93:driver/Src/EMC2305.c ****     if (chip->i2c_complete == NULL) {
+  94:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+  95:driver/Src/EMC2305.c ****     }
+  96:driver/Src/EMC2305.c **** 
+  97:driver/Src/EMC2305.c ****     // Create RTOS queue
+  98:driver/Src/EMC2305.c ****     EMC2305_I2C_Queue = xQueueCreateStatic(EMC2305_QUEUE_LENGTH, EMC2305_QUEUE_ITEM_SIZE, ucQueueSt
+  99:driver/Src/EMC2305.c ****     if (EMC2305_I2C_Queue == NULL) {
+ 100:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 101:driver/Src/EMC2305.c ****     }
+ 102:driver/Src/EMC2305.c **** 
+ 103:driver/Src/EMC2305.c ****     // Create I2C Worker Task
+ 104:driver/Src/EMC2305.c ****     xTaskCreateStatic(EMC2305_I2C_Worker_Task,
+ 105:driver/Src/EMC2305.c ****         "EMC2305 I2C Worker Task",
+ 106:driver/Src/EMC2305.c ****         configMINIMAL_STACK_SIZE,
+ 107:driver/Src/EMC2305.c ****         NULL,
+ 108:driver/Src/EMC2305.c ****         tskIDLE_PRIORITY + 1,
+ 109:driver/Src/EMC2305.c ****         EMC2305_I2C_TaskStack,
+ 110:driver/Src/EMC2305.c ****         &EMC2305_I2C_TaskBuffer);
+ 111:driver/Src/EMC2305.c **** 
+ 112:driver/Src/EMC2305.c ****     // I hate this so much
+ 113:driver/Src/EMC2305.c ****     if (hi2c->Instance == I2C1) {
+ 114:driver/Src/EMC2305.c ****         chip_I2C1 = chip;
+ 115:driver/Src/EMC2305.c ****     }
+ 116:driver/Src/EMC2305.c **** #ifdef I2C2
+ 117:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C2) {
+ 118:driver/Src/EMC2305.c ****         chip_I2C2 = chip;
+ 119:driver/Src/EMC2305.c ****     }
+ 120:driver/Src/EMC2305.c **** #endif
+ 121:driver/Src/EMC2305.c **** #ifdef I2C3
+ 122:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C3) {
+ 123:driver/Src/EMC2305.c ****         chip_I2C3 = chip;
+ 124:driver/Src/EMC2305.c ****     }
+ 125:driver/Src/EMC2305.c **** #endif
+ 126:driver/Src/EMC2305.c ****     else {
+ 127:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 128:driver/Src/EMC2305.c ****     }
+ 129:driver/Src/EMC2305.c **** 
+ 130:driver/Src/EMC2305.c ****     // Check Product ID
+ 131:driver/Src/EMC2305.c ****     uint8_t product_id = 0;
+ 132:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PRODUCT_ID, &product_id) != EMC2305_OK) {
+ 133:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 134:driver/Src/EMC2305.c ****     }
+ 135:driver/Src/EMC2305.c ****     if ((product_id & 0b11) != 0b00) {
+ 136:driver/Src/EMC2305.c ****         // EMC2305 is id 00
+ 137:driver/Src/EMC2305.c ****         // If we ever use other chips in the product line this will change
+ 138:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 139:driver/Src/EMC2305.c ****     }
+ 140:driver/Src/EMC2305.c **** 
+ 141:driver/Src/EMC2305.c ****     // Check Manufacturer ID
+ 142:driver/Src/EMC2305.c ****     uint8_t mfg_id = 0;
+ 143:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_MANUFACTURER_ID, &mfg_id) != EMC2305_OK) {
+ 144:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 145:driver/Src/EMC2305.c ****     }
+ 146:driver/Src/EMC2305.c ****     if (mfg_id != 0x5D) {
+ 147:driver/Src/EMC2305.c ****         // ur cooked lmao
+ 148:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 149:driver/Src/EMC2305.c ****     }
+ARM GAS  /tmp/ccmsWjof.s 			page 7
+
+
+ 150:driver/Src/EMC2305.c **** 
+ 151:driver/Src/EMC2305.c ****     return EMC2305_OK;
+ 152:driver/Src/EMC2305.c **** }
+ 153:driver/Src/EMC2305.c **** 
+ 154:driver/Src/EMC2305.c **** /**
+ 155:driver/Src/EMC2305.c ****  * @brief   Software locks all SWL registers. SWL registers are now read-only until power cycle.
+ 156:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to lock
+ 157:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 158:driver/Src/EMC2305.c ****  */
+ 159:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_EnableSWLock(EMC2305_HandleTypeDef* chip) {
+ 160:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_SW_LOCK, EMC2305_SWL);
+ 161:driver/Src/EMC2305.c **** }
+ 162:driver/Src/EMC2305.c **** 
+ 163:driver/Src/EMC2305.c **** /**
+ 164:driver/Src/EMC2305.c ****  * @brief   Sets the EMC2305 global configuration register based on provided config
+ 165:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to configure
+ 166:driver/Src/EMC2305.c ****  * @param   config Global configuration to use
+ 167:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 168:driver/Src/EMC2305.c ****  */
+ 169:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetGlobalConfig(EMC2305_HandleTypeDef* chip, EMC2305_Global_Config* config) 
+ 170:driver/Src/EMC2305.c ****     // Set bits based on config
+ 171:driver/Src/EMC2305.c ****     uint8_t config_bits = 0;
+ 172:driver/Src/EMC2305.c ****     if (config->alert_mask) {
+ 173:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_MASK_ALERT;
+ 174:driver/Src/EMC2305.c ****     }
+ 175:driver/Src/EMC2305.c ****     if (config->disable_smbus_timeout) {
+ 176:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DIS_TO;
+ 177:driver/Src/EMC2305.c ****     }
+ 178:driver/Src/EMC2305.c ****     if (config->watchdog_enable) {
+ 179:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_WD_EN;
+ 180:driver/Src/EMC2305.c ****     }
+ 181:driver/Src/EMC2305.c ****     if (config->drive_ext_clk) {
+ 182:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DRECK;
+ 183:driver/Src/EMC2305.c ****     }
+ 184:driver/Src/EMC2305.c ****     if (config->use_ext_clk) {
+ 185:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_USECK;
+ 186:driver/Src/EMC2305.c ****     }
+ 187:driver/Src/EMC2305.c **** 
+ 188:driver/Src/EMC2305.c ****     // Write configuration
+ 189:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_CONFIGURATION, config_bits);
+ 190:driver/Src/EMC2305.c **** }
+ 191:driver/Src/EMC2305.c **** 
+ 192:driver/Src/EMC2305.c **** // Fan Configuration Functions
+ 193:driver/Src/EMC2305.c **** 
+ 194:driver/Src/EMC2305.c **** /**
+ 195:driver/Src/EMC2305.c ****  * @brief   Sets the base frequency of the specified fan's PWM driver
+ 196:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to use
+ 197:driver/Src/EMC2305.c ****  * @param   fan Fan to use (1-5)
+ 198:driver/Src/EMC2305.c ****  * @param   freq Base frequency as specified in Section 6.10
+ 199:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 200:driver/Src/EMC2305.c ****  */
+ 201:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetPWMBaseFrequency(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan, EMC2305_PW
+ 202:driver/Src/EMC2305.c ****     // Check if the user is stupid (lakshay)
+ 203:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 204:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 205:driver/Src/EMC2305.c ****     }
+ 206:driver/Src/EMC2305.c **** 
+ARM GAS  /tmp/ccmsWjof.s 			page 8
+
+
+ 207:driver/Src/EMC2305.c ****     // Determine which register to use
+ 208:driver/Src/EMC2305.c ****     uint8_t reg;
+ 209:driver/Src/EMC2305.c ****     if ((fan == EMC2305_FAN4) || (fan == EMC2305_FAN5)) {
+ 210:driver/Src/EMC2305.c ****         // PWM BaseF45 Register
+ 211:driver/Src/EMC2305.c ****         reg = EMC2305_REG_PWM_BASEF45;
+ 212:driver/Src/EMC2305.c ****     }
+ 213:driver/Src/EMC2305.c ****     else {
+ 214:driver/Src/EMC2305.c ****         // PWM BaseF123 Register
+ 215:driver/Src/EMC2305.c ****         reg = EMC2305_REG_PWM_BASEF123;
+ 216:driver/Src/EMC2305.c ****     }
+ 217:driver/Src/EMC2305.c **** 
+ 218:driver/Src/EMC2305.c ****     // Read current value of register (need to be friendly :PPP)
+ 219:driver/Src/EMC2305.c ****     uint8_t val = 0;
+ 220:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, reg, &val) != EMC2305_OK) {
+ 221:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 222:driver/Src/EMC2305.c ****     }
+ 223:driver/Src/EMC2305.c **** 
+ 224:driver/Src/EMC2305.c ****     // Clear and update frequency
+ 225:driver/Src/EMC2305.c ****     switch (fan)
+ 226:driver/Src/EMC2305.c ****     {
+ 227:driver/Src/EMC2305.c ****     case EMC2305_FAN1:
+ 228:driver/Src/EMC2305.c ****         val &= ~EMC2305_PWM_FAN1_MASK;
+ 229:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN1_SHIFT;
+ 230:driver/Src/EMC2305.c ****         break;
+ 231:driver/Src/EMC2305.c ****     case EMC2305_FAN2:
+ 232:driver/Src/EMC2305.c ****         val &= ~EMC2305_PWM_FAN2_MASK;
+ 233:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN2_SHIFT;
+ 234:driver/Src/EMC2305.c ****         break;
+ 235:driver/Src/EMC2305.c ****     case EMC2305_FAN3:
+ 236:driver/Src/EMC2305.c ****         val &= ~EMC2305_PWM_FAN3_MASK;
+ 237:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN3_SHIFT;
+ 238:driver/Src/EMC2305.c ****         break;
+ 239:driver/Src/EMC2305.c ****     case EMC2305_FAN4:
+ 240:driver/Src/EMC2305.c ****         val &= ~EMC2305_PWM_FAN4_MASK;
+ 241:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN4_SHIFT;
+ 242:driver/Src/EMC2305.c ****         break;
+ 243:driver/Src/EMC2305.c ****     case EMC2305_FAN5:
+ 244:driver/Src/EMC2305.c ****         val &= ~EMC2305_PWM_FAN5_MASK;
+ 245:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN5_SHIFT;
+ 246:driver/Src/EMC2305.c ****         break;
+ 247:driver/Src/EMC2305.c ****     default:
+ 248:driver/Src/EMC2305.c ****         // lmfao
+ 249:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 250:driver/Src/EMC2305.c ****         break;
+ 251:driver/Src/EMC2305.c ****     }
+ 252:driver/Src/EMC2305.c **** 
+ 253:driver/Src/EMC2305.c ****     // Write PWM base frequency
+ 254:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, reg, val);
+ 255:driver/Src/EMC2305.c **** }
+ 256:driver/Src/EMC2305.c **** 
+ 257:driver/Src/EMC2305.c **** /**
+ 258:driver/Src/EMC2305.c ****  * @brief   Sets the EMC2305 configuration 1 and 2 registers based on the provided config
+ 259:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to set
+ 260:driver/Src/EMC2305.c ****  * @param   fan Fan to set (1-5)
+ 261:driver/Src/EMC2305.c ****  * @param   config1 Configuration for register 1
+ 262:driver/Src/EMC2305.c ****  * @param   config2 Configuration for register 2
+ 263:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ARM GAS  /tmp/ccmsWjof.s 			page 9
+
+
+ 264:driver/Src/EMC2305.c ****  */
+ 265:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetFanConfig(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan, EMC2305_Fan_Confi
+ 266:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 267:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 268:driver/Src/EMC2305.c ****     }
+ 269:driver/Src/EMC2305.c **** 
+ 270:driver/Src/EMC2305.c ****     // Pack config 1
+ 271:driver/Src/EMC2305.c ****     uint8_t config1_bits = 0;
+ 272:driver/Src/EMC2305.c ****     config1_bits |= (config1->enable_closed_loop << EMC2305_CONFIG1_ENAG_SHIFT);
+ 273:driver/Src/EMC2305.c ****     config1_bits |= (config1->range << EMC2305_CONFIG1_RNG_SHIFT);
+ 274:driver/Src/EMC2305.c ****     config1_bits |= (config1->edges << EMC2305_CONFIG1_EDG_SHIFT);
+ 275:driver/Src/EMC2305.c ****     config1_bits |= (config1->update_time << EMC2305_CONFIG1_UDT_SHIFT);
+ 276:driver/Src/EMC2305.c **** 
+ 277:driver/Src/EMC2305.c ****     // Pack config 2
+ 278:driver/Src/EMC2305.c ****     uint8_t config2_bits = 0;
+ 279:driver/Src/EMC2305.c ****     config2_bits |= (config2->enable_ramp_rate_ctl << EMC2305_CONFIG2_ENRC_SHIFT);
+ 280:driver/Src/EMC2305.c ****     config2_bits |= (config2->enable_glitch_filter << EMC2305_CONFIG2_GHEN_SHIFT);
+ 281:driver/Src/EMC2305.c ****     config2_bits |= (config2->derivative_options << EMC2305_CONFIG2_DPT_SHIFT);
+ 282:driver/Src/EMC2305.c ****     config2_bits |= (config2->error_window << EMC2305_CONFIG2_ERG_SHIFT);
+ 283:driver/Src/EMC2305.c **** 
+ 284:driver/Src/EMC2305.c ****     // Write config 1
+ 285:driver/Src/EMC2305.c ****     if (EMC2305_WriteReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_CONFIG1), config1_bits) !
+ 286:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 287:driver/Src/EMC2305.c ****     }
+ 288:driver/Src/EMC2305.c **** 
+ 289:driver/Src/EMC2305.c ****     // Write config 2
+ 290:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_CONFIG2), config2_bits
+ 291:driver/Src/EMC2305.c **** }
+ 292:driver/Src/EMC2305.c **** 
+ 293:driver/Src/EMC2305.c **** /**
+ 294:driver/Src/EMC2305.c ****  * @brief   Sets the specified fan's PWM driver to open-drain or push-pull
+ 295:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to set
+ 296:driver/Src/EMC2305.c ****  * @param   fan Fan to set (1-5)
+ 297:driver/Src/EMC2305.c ****  * @param   open_drain Set to true for open-drain (only driven low, requires pullup) or false for p
+ 298:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 299:driver/Src/EMC2305.c ****  */
+ 300:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetPWMOutputMode(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan, bool open_dra
+ 301:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 302:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 303:driver/Src/EMC2305.c ****     }
+ 304:driver/Src/EMC2305.c **** 
+ 305:driver/Src/EMC2305.c ****     // Read current value of register (friendly)
+ 306:driver/Src/EMC2305.c ****     uint8_t val = 0;
+ 307:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PWM_OUTPUT_CONFIG, &val) != EMC2305_OK) {
+ 308:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 309:driver/Src/EMC2305.c ****     }
+ 310:driver/Src/EMC2305.c **** 
+ 311:driver/Src/EMC2305.c ****     if (open_drain == true) {
+ 312:driver/Src/EMC2305.c ****         // Open-drain output mode
+ 313:driver/Src/EMC2305.c ****         val &= ~(1 << fan);
+ 314:driver/Src/EMC2305.c ****     }
+ 315:driver/Src/EMC2305.c ****     else {
+ 316:driver/Src/EMC2305.c ****         // Push-pull output mode
+ 317:driver/Src/EMC2305.c ****         val |= (1 << fan);
+ 318:driver/Src/EMC2305.c ****     }
+ 319:driver/Src/EMC2305.c **** 
+ 320:driver/Src/EMC2305.c ****     // Write back PWM output config
+ARM GAS  /tmp/ccmsWjof.s 			page 10
+
+
+ 321:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_PWM_OUTPUT_CONFIG, val);
+ 322:driver/Src/EMC2305.c **** }
+ 323:driver/Src/EMC2305.c **** 
+ 324:driver/Src/EMC2305.c **** // Fan Control Functions
+ 325:driver/Src/EMC2305.c **** 
+ 326:driver/Src/EMC2305.c **** /**
+ 327:driver/Src/EMC2305.c ****  * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FS
+ 328:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to set
+ 329:driver/Src/EMC2305.c ****  * @param   fan Fan to set (1-5)
+ 330:driver/Src/EMC2305.c ****  * @param   duty_cycle PWM duty cycle percentage (0 to 100)
+ 331:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 332:driver/Src/EMC2305.c ****  */
+ 333:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetFanPWM(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan, uint8_t duty_cycle) 
+ 334:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 335:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 336:driver/Src/EMC2305.c ****     }
+ 337:driver/Src/EMC2305.c **** 
+ 338:driver/Src/EMC2305.c ****     // oops
+ 339:driver/Src/EMC2305.c ****     if (duty_cycle > 100) {
+ 340:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 341:driver/Src/EMC2305.c ****     }
+ 342:driver/Src/EMC2305.c **** 
+ 343:driver/Src/EMC2305.c ****     // Convert duty cycle percentage drive to register value using Equation 4-1: Drive = (Value/255
+ 344:driver/Src/EMC2305.c ****     uint8_t val = (duty_cycle * 255) / 100;
+ 345:driver/Src/EMC2305.c **** 
+ 346:driver/Src/EMC2305.c ****     // Write PWM to drive register
+ 347:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_SETTING), val);
+ 348:driver/Src/EMC2305.c **** }
+ 349:driver/Src/EMC2305.c **** 
+ 350:driver/Src/EMC2305.c **** /**
+ 351:driver/Src/EMC2305.c ****  * @brief   Sets the RPM target for the control algorithm. Works only with fan speed control (FSC) 
+ 352:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to set
+ 353:driver/Src/EMC2305.c ****  * @param   fan Fan to set (1-5)
+ 354:driver/Src/EMC2305.c ****  * @param   rpm_target RPM target to set (500 to 16k)
+ 355:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
+ 356:driver/Src/EMC2305.c ****  */
+ 357:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_SetFanRPM(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan, uint16_t rpm_target)
+ 358:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 359:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 360:driver/Src/EMC2305.c ****     }
+ 361:driver/Src/EMC2305.c **** 
+ 362:driver/Src/EMC2305.c ****     // idiot check
+ 363:driver/Src/EMC2305.c ****     if ((rpm_target < EMC2305_MIN_RPM) || (rpm_target > EMC2305_MAX_RPM)) {
+ 364:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 365:driver/Src/EMC2305.c ****     }
+ 366:driver/Src/EMC2305.c **** 
+ 367:driver/Src/EMC2305.c ****     // Convert RPM target to tachometer counts
+ 368:driver/Src/EMC2305.c ****     // DO NOT CHANGE THIS NUMBER OR CALCULATION YOU WILL REGRET
+ 369:driver/Src/EMC2305.c ****     // WARNING: assuming 2 poles, 32.768 measurement freq, 5 edges, multiplier = 1
+ 370:driver/Src/EMC2305.c ****     // This is the default configuration. Reference app note (https://ww1.microchip.com/downloads/e
+ 371:driver/Src/EMC2305.c ****     uint16_t tach_target = (EMC2305_TACH_RPM_CONV * EMC2305_TACH_MULT) / rpm_target;
+ 372:driver/Src/EMC2305.c **** 
+ 373:driver/Src/EMC2305.c ****     // Split into high and low bytes
+ 374:driver/Src/EMC2305.c ****     tach_target &= 0x1FFF; // ensure 13-bit range
+ 375:driver/Src/EMC2305.c ****     uint8_t high_byte = (tach_target >> 5) & 0xFF;     // bits [12:5]
+ 376:driver/Src/EMC2305.c ****     uint8_t low_byte = (tach_target & 0x1F) << 3;      // bits [4:0]
+ 377:driver/Src/EMC2305.c **** 
+ARM GAS  /tmp/ccmsWjof.s 			page 11
+
+
+ 378:driver/Src/EMC2305.c ****     // Must write low byte first, value is saved once high byte is written
+ 379:driver/Src/EMC2305.c ****     if (EMC2305_WriteReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_TARGET_L), low_byte)
+ 380:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 381:driver/Src/EMC2305.c ****     }
+ 382:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_TARGET_H), high_b
+ 383:driver/Src/EMC2305.c **** }
+ 384:driver/Src/EMC2305.c **** 
+ 385:driver/Src/EMC2305.c **** // Status & Measurement Functions
+ 386:driver/Src/EMC2305.c **** 
+ 387:driver/Src/EMC2305.c **** /**
+ 388:driver/Src/EMC2305.c ****  * @brief   Gets current fan RPM based on tachometer measurement
+ 389:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to get
+ 390:driver/Src/EMC2305.c ****  * @param   fan Fan to get (1-5)
+ 391:driver/Src/EMC2305.c ****  * @return  Measured fan RPM. UINT16_MAX on error
+ 392:driver/Src/EMC2305.c ****  */
+ 393:driver/Src/EMC2305.c **** uint16_t EMC2305_GetFanRPM(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan) {
+ 394:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 395:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 396:driver/Src/EMC2305.c ****     }
+ 397:driver/Src/EMC2305.c **** 
+ 398:driver/Src/EMC2305.c ****     // Read tachometer reading high and low bytes
+ 399:driver/Src/EMC2305.c ****     uint8_t high_byte = 0;
+ 400:driver/Src/EMC2305.c ****     uint8_t low_byte = 0;
+ 401:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_READING_H), &high_byt
+ 402:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 403:driver/Src/EMC2305.c ****     }
+ 404:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_READING_L), &low_byte
+ 405:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 406:driver/Src/EMC2305.c ****     }
+ 407:driver/Src/EMC2305.c **** 
+ 408:driver/Src/EMC2305.c ****     // Combine into tach measurement
+ 409:driver/Src/EMC2305.c ****     uint16_t tach_reading = ((high_byte << 5) + ((low_byte >> 3) & 0x1F)) & 0x1FFF;
+ 410:driver/Src/EMC2305.c **** 
+ 411:driver/Src/EMC2305.c ****     // Divide by zero bad
+ 412:driver/Src/EMC2305.c ****     if (tach_reading == 0) {
+ 413:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 414:driver/Src/EMC2305.c ****     }
+ 415:driver/Src/EMC2305.c **** 
+ 416:driver/Src/EMC2305.c ****     // Convert tachometer counts to RPM
+ 417:driver/Src/EMC2305.c ****     uint16_t rpm = (EMC2305_TACH_RPM_CONV * EMC2305_TACH_MULT) / tach_reading;
+ 418:driver/Src/EMC2305.c ****     return rpm;
+ 419:driver/Src/EMC2305.c **** }
+ 420:driver/Src/EMC2305.c **** 
+ 421:driver/Src/EMC2305.c **** /**
+ 422:driver/Src/EMC2305.c ****  * @brief   Gets current fan driver PWM duty cycle
+ 423:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to get
+ 424:driver/Src/EMC2305.c ****  * @param   fan Fan to get (1-5)
+ 425:driver/Src/EMC2305.c ****  * @return  Driven fan PWM duty cycle (0-100). UINT8_MAX on error
+ 426:driver/Src/EMC2305.c ****  */
+ 427:driver/Src/EMC2305.c **** uint8_t EMC2305_GetFanPWM(EMC2305_HandleTypeDef* chip, EMC2305_Fan fan) {
+ 428:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 429:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 430:driver/Src/EMC2305.c ****     }
+ 431:driver/Src/EMC2305.c **** 
+ 432:driver/Src/EMC2305.c ****     // Read PWM from drive register
+ 433:driver/Src/EMC2305.c ****     uint8_t val = 0;
+ 434:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_SETTING), &val) != EMC2305
+ARM GAS  /tmp/ccmsWjof.s 			page 12
+
+
+ 435:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 436:driver/Src/EMC2305.c ****     }
+ 437:driver/Src/EMC2305.c **** 
+ 438:driver/Src/EMC2305.c ****     // Convert register value to duty cycle percentage
+ 439:driver/Src/EMC2305.c ****     uint8_t pwm = (val * 100) / 255;
+ 440:driver/Src/EMC2305.c **** 
+ 441:driver/Src/EMC2305.c ****     return pwm;
+ 442:driver/Src/EMC2305.c **** }
+ 443:driver/Src/EMC2305.c **** 
+ 444:driver/Src/EMC2305.c **** /**
+ 445:driver/Src/EMC2305.c ****  * @brief   Gets current fan status for all drivers
+ 446:driver/Src/EMC2305.c ****  * @param   chip EMC2305 to get
+ 447:driver/Src/EMC2305.c ****  * @return  Fan status for all drivers
+ 448:driver/Src/EMC2305.c ****  */
+ 449:driver/Src/EMC2305.c **** EMC2305_Fan_Status EMC2305_GetFanStatus(EMC2305_HandleTypeDef* chip) {
+ 450:driver/Src/EMC2305.c ****     EMC2305_Fan_Status status = { 0 };
+ 451:driver/Src/EMC2305.c **** 
+ 452:driver/Src/EMC2305.c ****     // Read fan status register
+ 453:driver/Src/EMC2305.c ****     uint8_t val = 0;
+ 454:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_FAN_STATUS, &val) != EMC2305_OK) {
+ 455:driver/Src/EMC2305.c ****         // Error handling is fake :D
+ 456:driver/Src/EMC2305.c ****         return status;
+ 457:driver/Src/EMC2305.c ****     }
+ 458:driver/Src/EMC2305.c **** 
+ 459:driver/Src/EMC2305.c ****     // Update status values
+ 460:driver/Src/EMC2305.c ****     status.watchdog_fired = ((val & EMC2305_STAT_WATCH) == EMC2305_STAT_WATCH);
+ 461:driver/Src/EMC2305.c ****     status.drive_failed = ((val & EMC2305_STAT_DRVFAIL) == EMC2305_STAT_DRVFAIL);
+ 462:driver/Src/EMC2305.c ****     status.spin_failed = ((val & EMC2305_STAT_FNSPIN) == EMC2305_STAT_FNSPIN);
+ 463:driver/Src/EMC2305.c ****     status.stalled = ((val & EMC2305_STAT_FNSTL) == EMC2305_STAT_FNSTL);
+ 464:driver/Src/EMC2305.c **** 
+ 465:driver/Src/EMC2305.c ****     return status;
+ 466:driver/Src/EMC2305.c **** }
+ 467:driver/Src/EMC2305.c **** 
+ 468:driver/Src/EMC2305.c **** // Register Read/Write Functions
+ 469:driver/Src/EMC2305.c **** 
+ 470:driver/Src/EMC2305.c **** /**
+ 471:driver/Src/EMC2305.c ****  * @brief   Reads a byte of data from the specified register
+ 472:driver/Src/EMC2305.c ****  * @param   chip EMC2305 handle
+ 473:driver/Src/EMC2305.c ****  * @param   reg Register to read from
+ 474:driver/Src/EMC2305.c ****  * @param   data Pointer where register data will be stored
+ 475:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR if message queue is full
+ 476:driver/Src/EMC2305.c ****  */
+ 477:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_ReadReg(EMC2305_HandleTypeDef* chip, uint8_t reg, uint8_t* data) {
+ 478:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 479:driver/Src/EMC2305.c ****     int8_t index = prvAcquireFreeSemaphore();
+ 480:driver/Src/EMC2305.c ****     if (index < 0) {
+ 481:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 482:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 483:driver/Src/EMC2305.c ****     }
+ 484:driver/Src/EMC2305.c ****     SemaphoreHandle_t complete = caller_semaphore_handle_pool[index];
+ 485:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 486:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 487:driver/Src/EMC2305.c ****     }
+ 488:driver/Src/EMC2305.c **** 
+ 489:driver/Src/EMC2305.c ****     // Ensure semaphore is taken
+ 490:driver/Src/EMC2305.c ****     xSemaphoreTake(complete, 0);
+ 491:driver/Src/EMC2305.c **** 
+ARM GAS  /tmp/ccmsWjof.s 			page 13
+
+
+ 492:driver/Src/EMC2305.c ****     // Pack message struct
+ 493:driver/Src/EMC2305.c ****     EMC2305_I2C_Message msg = {
+ 494:driver/Src/EMC2305.c ****         .chip = chip,
+ 495:driver/Src/EMC2305.c ****         .operation = EMC2305_OP_READ,
+ 496:driver/Src/EMC2305.c ****         .reg_addr = reg,
+ 497:driver/Src/EMC2305.c ****         .write_data = 0,
+ 498:driver/Src/EMC2305.c ****         .read_data = data,
+ 499:driver/Src/EMC2305.c ****         .semaphore_index = (uint8_t)index,
+ 500:driver/Src/EMC2305.c ****     };
+ 501:driver/Src/EMC2305.c **** 
+ 502:driver/Src/EMC2305.c ****     if (xQueueSend(EMC2305_I2C_Queue, &msg, 0) != pdTRUE) {
+ 503:driver/Src/EMC2305.c ****         // Error if queue is full
+ 504:driver/Src/EMC2305.c ****         prvReturnSemaphore(index);
+ 505:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 506:driver/Src/EMC2305.c ****     }
+ 507:driver/Src/EMC2305.c **** 
+ 508:driver/Src/EMC2305.c ****     // Wait for the worker task to signal completion
+ 509:driver/Src/EMC2305.c ****     if (xSemaphoreTake(complete, pdMS_TO_TICKS(EMC2305_I2C_TIMEOUT * 2)) != pdTRUE) {
+ 510:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 511:driver/Src/EMC2305.c ****         prvReturnSemaphore(index);
+ 512:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 513:driver/Src/EMC2305.c ****     }
+ 514:driver/Src/EMC2305.c **** 
+ 515:driver/Src/EMC2305.c ****     prvReturnSemaphore(index);
+ 516:driver/Src/EMC2305.c ****     return EMC2305_OK;
+ 517:driver/Src/EMC2305.c **** }
+ 518:driver/Src/EMC2305.c **** 
+ 519:driver/Src/EMC2305.c **** /**
+ 520:driver/Src/EMC2305.c ****  * @brief   Writes a byte of data to the specified register
+ 521:driver/Src/EMC2305.c ****  * @param   chip EMC2305 handle
+ 522:driver/Src/EMC2305.c ****  * @param   reg Register to write to
+ 523:driver/Src/EMC2305.c ****  * @param   data Data to write
+ 524:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR if message queue is full
+ 525:driver/Src/EMC2305.c ****  */
+ 526:driver/Src/EMC2305.c **** EMC2305_Status EMC2305_WriteReg(EMC2305_HandleTypeDef* chip, uint8_t reg, uint8_t data) {
+ 527:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 528:driver/Src/EMC2305.c ****     int8_t index = prvAcquireFreeSemaphore();
+ 529:driver/Src/EMC2305.c ****     if (index < 0) {
+ 530:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 531:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 532:driver/Src/EMC2305.c ****     }
+ 533:driver/Src/EMC2305.c ****     SemaphoreHandle_t complete = caller_semaphore_handle_pool[index];
+ 534:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 535:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 536:driver/Src/EMC2305.c ****     }
+ 537:driver/Src/EMC2305.c **** 
+ 538:driver/Src/EMC2305.c ****     // Ensure semaphore is taken
+ 539:driver/Src/EMC2305.c ****     xSemaphoreTake(complete, 0);
+ 540:driver/Src/EMC2305.c **** 
+ 541:driver/Src/EMC2305.c ****     // Pack message struct
+ 542:driver/Src/EMC2305.c ****     EMC2305_I2C_Message msg = {
+ 543:driver/Src/EMC2305.c ****         .chip = chip,
+ 544:driver/Src/EMC2305.c ****         .operation = EMC2305_OP_WRITE,
+ 545:driver/Src/EMC2305.c ****         .reg_addr = reg,
+ 546:driver/Src/EMC2305.c ****         .write_data = data,
+ 547:driver/Src/EMC2305.c ****         .read_data = NULL,
+ 548:driver/Src/EMC2305.c ****         .semaphore_index = (uint8_t)index,
+ARM GAS  /tmp/ccmsWjof.s 			page 14
+
+
+ 549:driver/Src/EMC2305.c ****     };
+ 550:driver/Src/EMC2305.c **** 
+ 551:driver/Src/EMC2305.c ****     if (xQueueSend(EMC2305_I2C_Queue, &msg, 0) != pdTRUE) {
+ 552:driver/Src/EMC2305.c ****         // Error if queue is full
+ 553:driver/Src/EMC2305.c ****         prvReturnSemaphore(index);
+ 554:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 555:driver/Src/EMC2305.c ****     }
+ 556:driver/Src/EMC2305.c **** 
+ 557:driver/Src/EMC2305.c ****     // Wait for the worker task to signal completion
+ 558:driver/Src/EMC2305.c ****     if (xSemaphoreTake(complete, pdMS_TO_TICKS(EMC2305_I2C_TIMEOUT * 2)) != pdTRUE) {
+ 559:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 560:driver/Src/EMC2305.c ****         prvReturnSemaphore(index);
+ 561:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 562:driver/Src/EMC2305.c ****     }
+ 563:driver/Src/EMC2305.c **** 
+ 564:driver/Src/EMC2305.c ****     prvReturnSemaphore(index);
+ 565:driver/Src/EMC2305.c ****     return EMC2305_OK;
+ 566:driver/Src/EMC2305.c **** }
+ 567:driver/Src/EMC2305.c **** 
+ 568:driver/Src/EMC2305.c **** // Worker task to consume messages from the queue and send on I2C bus
+ 569:driver/Src/EMC2305.c **** void EMC2305_I2C_Worker_Task(void* pvParameters) {
+ 191              		.loc 1 569 50 is_stmt 1 view -0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 24
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195              		.loc 1 569 50 is_stmt 0 view .LVU38
+ 196 0000 10B5     		push	{r4, lr}
+ 197              	.LCFI2:
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 4, -8
+ 200              		.cfi_offset 14, -4
+ 201 0002 86B0     		sub	sp, sp, #24
+ 202              	.LCFI3:
+ 203              		.cfi_def_cfa_offset 32
+ 570:driver/Src/EMC2305.c ****     EMC2305_I2C_Message msg = { 0 };
+ 204              		.loc 1 570 5 is_stmt 1 view .LVU39
+ 205              		.loc 1 570 25 is_stmt 0 view .LVU40
+ 206 0004 0023     		movs	r3, #0
+ 207 0006 0293     		str	r3, [sp, #8]
+ 208 0008 0393     		str	r3, [sp, #12]
+ 209 000a 0493     		str	r3, [sp, #16]
+ 210 000c 0593     		str	r3, [sp, #20]
+ 571:driver/Src/EMC2305.c ****     EMC2305_Status status = EMC2305_OK;
+ 211              		.loc 1 571 5 is_stmt 1 view .LVU41
+ 212              	.LVL18:
+ 213              		.loc 1 571 5 is_stmt 0 view .LVU42
+ 214 000e 07E0     		b	.L21
+ 215              	.LVL19:
+ 216              	.L22:
+ 217              	.LBB4:
+ 572:driver/Src/EMC2305.c **** 
+ 573:driver/Src/EMC2305.c ****     while (1) {
+ 574:driver/Src/EMC2305.c ****         // Block until message enters the queue
+ 575:driver/Src/EMC2305.c ****         if (xQueueReceive(EMC2305_I2C_Queue, &msg, portMAX_DELAY) == pdTRUE) {
+ 576:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
+ 577:driver/Src/EMC2305.c ****             SemaphoreHandle_t complete = caller_semaphore_handle_pool[msg.semaphore_index];
+ 578:driver/Src/EMC2305.c ****             status = EMC2305_OK;
+ARM GAS  /tmp/ccmsWjof.s 			page 15
+
+
+ 579:driver/Src/EMC2305.c **** 
+ 580:driver/Src/EMC2305.c ****             if (msg.operation == EMC2305_OP_WRITE) {
+ 581:driver/Src/EMC2305.c ****                 // Perform write operation
+ 582:driver/Src/EMC2305.c ****                 // Buffer so we don't pull a stupid
+ 583:driver/Src/EMC2305.c ****                 uint8_t tx_buffer[2] = { msg.reg_addr, msg.write_data };
+ 584:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 585:driver/Src/EMC2305.c ****                 if (HAL_I2C_Master_Transmit_IT(msg.chip->hi2c, msg.chip->dev_addr, tx_buffer, 2) !=
+ 586:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 587:driver/Src/EMC2305.c ****                 }
+ 588:driver/Src/EMC2305.c ****                 // Wait for ISR to signal completion
+ 589:driver/Src/EMC2305.c ****                 if ((status == EMC2305_OK) && (xSemaphoreTake(msg.chip->i2c_complete, pdMS_TO_TICKS
+ 590:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 591:driver/Src/EMC2305.c ****                 }
+ 592:driver/Src/EMC2305.c ****             }
+ 593:driver/Src/EMC2305.c ****             else if (msg.operation == EMC2305_OP_READ) {
+ 218              		.loc 1 593 18 is_stmt 1 view .LVU43
+ 219              		.loc 1 593 21 is_stmt 0 view .LVU44
+ 220 0010 012B     		cmp	r3, #1
+ 221 0012 2ED0     		beq	.L27
+ 222              	.LVL20:
+ 223              	.L24:
+ 594:driver/Src/EMC2305.c ****                 // Perform read operation
+ 595:driver/Src/EMC2305.c ****                 // Transmit register to read
+ 596:driver/Src/EMC2305.c ****                 if (HAL_I2C_Master_Transmit_IT(msg.chip->hi2c, msg.chip->dev_addr, &msg.reg_addr, 1
+ 597:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 598:driver/Src/EMC2305.c ****                 }
+ 599:driver/Src/EMC2305.c **** 
+ 600:driver/Src/EMC2305.c ****                 // Wait for ISR to signal completion
+ 601:driver/Src/EMC2305.c ****                 if ((status == EMC2305_OK) && (xSemaphoreTake(msg.chip->i2c_complete, pdMS_TO_TICKS
+ 602:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 603:driver/Src/EMC2305.c ****                 }
+ 604:driver/Src/EMC2305.c **** 
+ 605:driver/Src/EMC2305.c ****                 // Receive response
+ 606:driver/Src/EMC2305.c ****                 if ((status == EMC2305_OK) && (HAL_I2C_Master_Receive_IT(msg.chip->hi2c, msg.chip->
+ 607:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 608:driver/Src/EMC2305.c ****                 }
+ 609:driver/Src/EMC2305.c **** 
+ 610:driver/Src/EMC2305.c ****                 // Wait for ISR to signal completion
+ 611:driver/Src/EMC2305.c ****                 if ((status == EMC2305_OK) && (xSemaphoreTake(msg.chip->i2c_complete, pdMS_TO_TICKS
+ 612:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 613:driver/Src/EMC2305.c ****                 }
+ 614:driver/Src/EMC2305.c ****             }
+ 615:driver/Src/EMC2305.c **** 
+ 616:driver/Src/EMC2305.c ****             // Signal to the calling task that I2C transaction has finished
+ 617:driver/Src/EMC2305.c ****             xSemaphoreGive(complete);
+ 224              		.loc 1 617 13 is_stmt 1 view .LVU45
+ 225 0014 0023     		movs	r3, #0
+ 226 0016 1A46     		mov	r2, r3
+ 227 0018 1946     		mov	r1, r3
+ 228 001a 2046     		mov	r0, r4
+ 229 001c FFF7FEFF 		bl	xQueueGenericSend
+ 230              	.LVL21:
+ 231              	.L21:
+ 232              		.loc 1 617 13 is_stmt 0 view .LVU46
+ 233              	.LBE4:
+ 573:driver/Src/EMC2305.c ****         // Block until message enters the queue
+ 234              		.loc 1 573 5 is_stmt 1 view .LVU47
+ARM GAS  /tmp/ccmsWjof.s 			page 16
+
+
+ 575:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
+ 235              		.loc 1 575 9 view .LVU48
+ 575:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
+ 236              		.loc 1 575 13 is_stmt 0 view .LVU49
+ 237 0020 4FF0FF32 		mov	r2, #-1
+ 238 0024 02A9     		add	r1, sp, #8
+ 239 0026 224B     		ldr	r3, .L28
+ 240 0028 1868     		ldr	r0, [r3]
+ 241 002a FFF7FEFF 		bl	xQueueReceive
+ 242              	.LVL22:
+ 575:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
+ 243              		.loc 1 575 12 discriminator 1 view .LVU50
+ 244 002e 0128     		cmp	r0, #1
+ 245 0030 F6D1     		bne	.L21
+ 246              	.LBB6:
+ 577:driver/Src/EMC2305.c ****             status = EMC2305_OK;
+ 247              		.loc 1 577 13 is_stmt 1 view .LVU51
+ 577:driver/Src/EMC2305.c ****             status = EMC2305_OK;
+ 248              		.loc 1 577 74 is_stmt 0 view .LVU52
+ 249 0032 9DF81420 		ldrb	r2, [sp, #20]	@ zero_extendqisi2
+ 577:driver/Src/EMC2305.c ****             status = EMC2305_OK;
+ 250              		.loc 1 577 31 view .LVU53
+ 251 0036 1F4B     		ldr	r3, .L28+4
+ 252 0038 53F82240 		ldr	r4, [r3, r2, lsl #2]
+ 253              	.LVL23:
+ 578:driver/Src/EMC2305.c **** 
+ 254              		.loc 1 578 13 is_stmt 1 view .LVU54
+ 580:driver/Src/EMC2305.c ****                 // Perform write operation
+ 255              		.loc 1 580 13 view .LVU55
+ 580:driver/Src/EMC2305.c ****                 // Perform write operation
+ 256              		.loc 1 580 20 is_stmt 0 view .LVU56
+ 257 003c 9DF80C30 		ldrb	r3, [sp, #12]	@ zero_extendqisi2
+ 580:driver/Src/EMC2305.c ****                 // Perform write operation
+ 258              		.loc 1 580 16 view .LVU57
+ 259 0040 002B     		cmp	r3, #0
+ 260 0042 E5D1     		bne	.L22
+ 261              	.LBB5:
+ 583:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 262              		.loc 1 583 17 is_stmt 1 view .LVU58
+ 583:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 263              		.loc 1 583 45 is_stmt 0 view .LVU59
+ 264 0044 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 583:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 265              		.loc 1 583 25 view .LVU60
+ 266 0048 8DF80430 		strb	r3, [sp, #4]
+ 583:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 267              		.loc 1 583 59 view .LVU61
+ 268 004c 9DF80E30 		ldrb	r3, [sp, #14]	@ zero_extendqisi2
+ 583:driver/Src/EMC2305.c ****                 // Transmit register + data
+ 269              		.loc 1 583 25 view .LVU62
+ 270 0050 8DF80530 		strb	r3, [sp, #5]
+ 585:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 271              		.loc 1 585 17 is_stmt 1 view .LVU63
+ 585:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 272              		.loc 1 585 51 is_stmt 0 view .LVU64
+ 273 0054 0298     		ldr	r0, [sp, #8]
+ 585:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ARM GAS  /tmp/ccmsWjof.s 			page 17
+
+
+ 274              		.loc 1 585 21 view .LVU65
+ 275 0056 0223     		movs	r3, #2
+ 276 0058 01AA     		add	r2, sp, #4
+ 277 005a 8188     		ldrh	r1, [r0, #4]
+ 278 005c 0068     		ldr	r0, [r0]
+ 279 005e FFF7FEFF 		bl	HAL_I2C_Master_Transmit_IT
+ 280              	.LVL24:
+ 585:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 281              		.loc 1 585 20 discriminator 1 view .LVU66
+ 282 0062 0028     		cmp	r0, #0
+ 283 0064 D6D1     		bne	.L24
+ 589:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 284              		.loc 1 589 17 is_stmt 1 view .LVU67
+ 589:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 285              		.loc 1 589 48 is_stmt 0 discriminator 1 view .LVU68
+ 286 0066 6421     		movs	r1, #100
+ 287 0068 029B     		ldr	r3, [sp, #8]
+ 288 006a 9868     		ldr	r0, [r3, #8]
+ 289 006c FFF7FEFF 		bl	xQueueSemaphoreTake
+ 290              	.LVL25:
+ 590:driver/Src/EMC2305.c ****                 }
+ 291              		.loc 1 590 21 is_stmt 1 view .LVU69
+ 590:driver/Src/EMC2305.c ****                 }
+ 292              		.loc 1 590 21 is_stmt 0 view .LVU70
+ 293 0070 D0E7     		b	.L24
+ 294              	.LVL26:
+ 295              	.L27:
+ 590:driver/Src/EMC2305.c ****                 }
+ 296              		.loc 1 590 21 view .LVU71
+ 297              	.LBE5:
+ 596:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 298              		.loc 1 596 17 is_stmt 1 view .LVU72
+ 596:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 299              		.loc 1 596 51 is_stmt 0 view .LVU73
+ 300 0072 0298     		ldr	r0, [sp, #8]
+ 596:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 301              		.loc 1 596 21 view .LVU74
+ 302 0074 0DF10D02 		add	r2, sp, #13
+ 303 0078 8188     		ldrh	r1, [r0, #4]
+ 304 007a 0068     		ldr	r0, [r0]
+ 305 007c FFF7FEFF 		bl	HAL_I2C_Master_Transmit_IT
+ 306              	.LVL27:
+ 596:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 307              		.loc 1 596 20 discriminator 1 view .LVU75
+ 308 0080 0028     		cmp	r0, #0
+ 309 0082 C7D1     		bne	.L24
+ 601:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 310              		.loc 1 601 17 is_stmt 1 view .LVU76
+ 601:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 311              		.loc 1 601 48 is_stmt 0 discriminator 1 view .LVU77
+ 312 0084 6421     		movs	r1, #100
+ 313 0086 029B     		ldr	r3, [sp, #8]
+ 314 0088 9868     		ldr	r0, [r3, #8]
+ 315 008a FFF7FEFF 		bl	xQueueSemaphoreTake
+ 316              	.LVL28:
+ 601:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 317              		.loc 1 601 44 discriminator 1 view .LVU78
+ARM GAS  /tmp/ccmsWjof.s 			page 18
+
+
+ 318 008e 0128     		cmp	r0, #1
+ 319 0090 C0D1     		bne	.L24
+ 606:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 320              		.loc 1 606 17 is_stmt 1 view .LVU79
+ 606:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 321              		.loc 1 606 77 is_stmt 0 discriminator 1 view .LVU80
+ 322 0092 0298     		ldr	r0, [sp, #8]
+ 606:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 323              		.loc 1 606 48 discriminator 1 view .LVU81
+ 324 0094 0123     		movs	r3, #1
+ 325 0096 049A     		ldr	r2, [sp, #16]
+ 326 0098 8188     		ldrh	r1, [r0, #4]
+ 327 009a 0068     		ldr	r0, [r0]
+ 328 009c FFF7FEFF 		bl	HAL_I2C_Master_Receive_IT
+ 329              	.LVL29:
+ 606:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 330              		.loc 1 606 44 discriminator 1 view .LVU82
+ 331 00a0 0028     		cmp	r0, #0
+ 332 00a2 B7D1     		bne	.L24
+ 611:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 333              		.loc 1 611 17 is_stmt 1 view .LVU83
+ 611:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
+ 334              		.loc 1 611 48 is_stmt 0 discriminator 1 view .LVU84
+ 335 00a4 6421     		movs	r1, #100
+ 336 00a6 029B     		ldr	r3, [sp, #8]
+ 337 00a8 9868     		ldr	r0, [r3, #8]
+ 338 00aa FFF7FEFF 		bl	xQueueSemaphoreTake
+ 339              	.LVL30:
+ 612:driver/Src/EMC2305.c ****                 }
+ 340              		.loc 1 612 21 is_stmt 1 view .LVU85
+ 612:driver/Src/EMC2305.c ****                 }
+ 341              		.loc 1 612 21 is_stmt 0 view .LVU86
+ 342 00ae B1E7     		b	.L24
+ 343              	.L29:
+ 344              		.align	2
+ 345              	.L28:
+ 346 00b0 00000000 		.word	EMC2305_I2C_Queue
+ 347 00b4 00000000 		.word	caller_semaphore_handle_pool
+ 348              	.LBE6:
+ 349              		.cfi_endproc
+ 350              	.LFE259:
+ 352              		.section	.text.EMC2305_ReadReg,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	EMC2305_ReadReg
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 359              	EMC2305_ReadReg:
+ 360              	.LVL31:
+ 361              	.LFB257:
+ 477:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 362              		.loc 1 477 89 is_stmt 1 view -0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 16
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 477:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 366              		.loc 1 477 89 is_stmt 0 view .LVU88
+ARM GAS  /tmp/ccmsWjof.s 			page 19
+
+
+ 367 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 368              	.LCFI4:
+ 369              		.cfi_def_cfa_offset 24
+ 370              		.cfi_offset 4, -24
+ 371              		.cfi_offset 5, -20
+ 372              		.cfi_offset 6, -16
+ 373              		.cfi_offset 7, -12
+ 374              		.cfi_offset 8, -8
+ 375              		.cfi_offset 14, -4
+ 376 0004 84B0     		sub	sp, sp, #16
+ 377              	.LCFI5:
+ 378              		.cfi_def_cfa_offset 40
+ 379 0006 8046     		mov	r8, r0
+ 380 0008 0E46     		mov	r6, r1
+ 381 000a 1546     		mov	r5, r2
+ 479:driver/Src/EMC2305.c ****     if (index < 0) {
+ 382              		.loc 1 479 5 is_stmt 1 view .LVU89
+ 479:driver/Src/EMC2305.c ****     if (index < 0) {
+ 383              		.loc 1 479 20 is_stmt 0 view .LVU90
+ 384 000c FFF7FEFF 		bl	prvAcquireFreeSemaphore
+ 385              	.LVL32:
+ 480:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 386              		.loc 1 480 5 is_stmt 1 view .LVU91
+ 480:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 387              		.loc 1 480 8 is_stmt 0 view .LVU92
+ 388 0010 041E     		subs	r4, r0, #0
+ 389 0012 32DB     		blt	.L34
+ 484:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 390              		.loc 1 484 5 is_stmt 1 view .LVU93
+ 484:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 391              		.loc 1 484 23 is_stmt 0 view .LVU94
+ 392 0014 1C4B     		ldr	r3, .L37
+ 393 0016 53F82470 		ldr	r7, [r3, r4, lsl #2]
+ 394              	.LVL33:
+ 485:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 395              		.loc 1 485 5 is_stmt 1 view .LVU95
+ 485:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 396              		.loc 1 485 8 is_stmt 0 view .LVU96
+ 397 001a 97B3     		cbz	r7, .L35
+ 490:driver/Src/EMC2305.c **** 
+ 398              		.loc 1 490 5 is_stmt 1 view .LVU97
+ 399 001c 0021     		movs	r1, #0
+ 400 001e 3846     		mov	r0, r7
+ 401              	.LVL34:
+ 490:driver/Src/EMC2305.c **** 
+ 402              		.loc 1 490 5 is_stmt 0 view .LVU98
+ 403 0020 FFF7FEFF 		bl	xQueueSemaphoreTake
+ 404              	.LVL35:
+ 493:driver/Src/EMC2305.c ****         .chip = chip,
+ 405              		.loc 1 493 5 is_stmt 1 view .LVU99
+ 493:driver/Src/EMC2305.c ****         .chip = chip,
+ 406              		.loc 1 493 25 is_stmt 0 view .LVU100
+ 407 0024 CDF80080 		str	r8, [sp]
+ 408 0028 0123     		movs	r3, #1
+ 409 002a 8DF80430 		strb	r3, [sp, #4]
+ 410 002e 8DF80560 		strb	r6, [sp, #5]
+ 411 0032 0022     		movs	r2, #0
+ARM GAS  /tmp/ccmsWjof.s 			page 20
+
+
+ 412 0034 8DF80620 		strb	r2, [sp, #6]
+ 413 0038 0295     		str	r5, [sp, #8]
+ 499:driver/Src/EMC2305.c ****     };
+ 414              		.loc 1 499 28 view .LVU101
+ 415 003a E4B2     		uxtb	r4, r4
+ 416              	.LVL36:
+ 493:driver/Src/EMC2305.c ****         .chip = chip,
+ 417              		.loc 1 493 25 view .LVU102
+ 418 003c 8DF80C40 		strb	r4, [sp, #12]
+ 502:driver/Src/EMC2305.c ****         // Error if queue is full
+ 419              		.loc 1 502 5 is_stmt 1 view .LVU103
+ 502:driver/Src/EMC2305.c ****         // Error if queue is full
+ 420              		.loc 1 502 9 is_stmt 0 view .LVU104
+ 421 0040 1346     		mov	r3, r2
+ 422 0042 6946     		mov	r1, sp
+ 423 0044 1148     		ldr	r0, .L37+4
+ 424 0046 0068     		ldr	r0, [r0]
+ 425 0048 FFF7FEFF 		bl	xQueueGenericSend
+ 426              	.LVL37:
+ 502:driver/Src/EMC2305.c ****         // Error if queue is full
+ 427              		.loc 1 502 8 discriminator 1 view .LVU105
+ 428 004c 0128     		cmp	r0, #1
+ 429 004e 04D0     		beq	.L32
+ 504:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 430              		.loc 1 504 9 is_stmt 1 view .LVU106
+ 431 0050 2046     		mov	r0, r4
+ 432 0052 FFF7FEFF 		bl	prvReturnSemaphore
+ 433              	.LVL38:
+ 505:driver/Src/EMC2305.c ****     }
+ 434              		.loc 1 505 9 view .LVU107
+ 505:driver/Src/EMC2305.c ****     }
+ 435              		.loc 1 505 16 is_stmt 0 view .LVU108
+ 436 0056 0120     		movs	r0, #1
+ 437 0058 10E0     		b	.L31
+ 438              	.L32:
+ 509:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 439              		.loc 1 509 5 is_stmt 1 view .LVU109
+ 509:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 440              		.loc 1 509 9 is_stmt 0 view .LVU110
+ 441 005a C821     		movs	r1, #200
+ 442 005c 3846     		mov	r0, r7
+ 443 005e FFF7FEFF 		bl	xQueueSemaphoreTake
+ 444              	.LVL39:
+ 509:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 445              		.loc 1 509 8 discriminator 1 view .LVU111
+ 446 0062 0128     		cmp	r0, #1
+ 447 0064 04D0     		beq	.L33
+ 511:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 448              		.loc 1 511 9 is_stmt 1 view .LVU112
+ 449 0066 2046     		mov	r0, r4
+ 450 0068 FFF7FEFF 		bl	prvReturnSemaphore
+ 451              	.LVL40:
+ 512:driver/Src/EMC2305.c ****     }
+ 452              		.loc 1 512 9 view .LVU113
+ 512:driver/Src/EMC2305.c ****     }
+ 453              		.loc 1 512 16 is_stmt 0 view .LVU114
+ 454 006c 0120     		movs	r0, #1
+ARM GAS  /tmp/ccmsWjof.s 			page 21
+
+
+ 455 006e 05E0     		b	.L31
+ 456              	.L33:
+ 515:driver/Src/EMC2305.c ****     return EMC2305_OK;
+ 457              		.loc 1 515 5 is_stmt 1 view .LVU115
+ 458 0070 2046     		mov	r0, r4
+ 459 0072 FFF7FEFF 		bl	prvReturnSemaphore
+ 460              	.LVL41:
+ 516:driver/Src/EMC2305.c **** }
+ 461              		.loc 1 516 5 view .LVU116
+ 516:driver/Src/EMC2305.c **** }
+ 462              		.loc 1 516 12 is_stmt 0 view .LVU117
+ 463 0076 0020     		movs	r0, #0
+ 464 0078 00E0     		b	.L31
+ 465              	.LVL42:
+ 466              	.L34:
+ 482:driver/Src/EMC2305.c ****     }
+ 467              		.loc 1 482 16 view .LVU118
+ 468 007a 0120     		movs	r0, #1
+ 469              	.LVL43:
+ 470              	.L31:
+ 517:driver/Src/EMC2305.c **** 
+ 471              		.loc 1 517 1 view .LVU119
+ 472 007c 04B0     		add	sp, sp, #16
+ 473              	.LCFI6:
+ 474              		.cfi_remember_state
+ 475              		.cfi_def_cfa_offset 24
+ 476              		@ sp needed
+ 477 007e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 478              	.LVL44:
+ 479              	.L35:
+ 480              	.LCFI7:
+ 481              		.cfi_restore_state
+ 486:driver/Src/EMC2305.c ****     }
+ 482              		.loc 1 486 16 view .LVU120
+ 483 0082 0120     		movs	r0, #1
+ 484              	.LVL45:
+ 486:driver/Src/EMC2305.c ****     }
+ 485              		.loc 1 486 16 view .LVU121
+ 486 0084 FAE7     		b	.L31
+ 487              	.L38:
+ 488 0086 00BF     		.align	2
+ 489              	.L37:
+ 490 0088 00000000 		.word	caller_semaphore_handle_pool
+ 491 008c 00000000 		.word	EMC2305_I2C_Queue
+ 492              		.cfi_endproc
+ 493              	.LFE257:
+ 495              		.section	.rodata.EMC2305_Init.str1.4,"aMS",%progbits,1
+ 496              		.align	2
+ 497              	.LC0:
+ 498 0000 454D4332 		.ascii	"EMC2305 I2C Worker Task\000"
+ 498      33303520 
+ 498      49324320 
+ 498      576F726B 
+ 498      65722054 
+ 499              		.section	.text.EMC2305_Init,"ax",%progbits
+ 500              		.align	1
+ 501              		.global	EMC2305_Init
+ARM GAS  /tmp/ccmsWjof.s 			page 22
+
+
+ 502              		.syntax unified
+ 503              		.thumb
+ 504              		.thumb_func
+ 506              	EMC2305_Init:
+ 507              	.LVL46:
+ 508              	.LFB246:
+  72:driver/Src/EMC2305.c ****     // Set I2C handle and device address in EMC2305 handle
+ 509              		.loc 1 72 102 is_stmt 1 view -0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 8
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+  72:driver/Src/EMC2305.c ****     // Set I2C handle and device address in EMC2305 handle
+ 513              		.loc 1 72 102 is_stmt 0 view .LVU123
+ 514 0000 70B5     		push	{r4, r5, r6, lr}
+ 515              	.LCFI8:
+ 516              		.cfi_def_cfa_offset 16
+ 517              		.cfi_offset 4, -16
+ 518              		.cfi_offset 5, -12
+ 519              		.cfi_offset 6, -8
+ 520              		.cfi_offset 14, -4
+ 521 0002 86B0     		sub	sp, sp, #24
+ 522              	.LCFI9:
+ 523              		.cfi_def_cfa_offset 40
+ 524 0004 0546     		mov	r5, r0
+ 525 0006 0E46     		mov	r6, r1
+  74:driver/Src/EMC2305.c ****     chip->dev_addr = dev_addr << 1; // 7-bit i2c address << 1
+ 526              		.loc 1 74 5 is_stmt 1 view .LVU124
+  74:driver/Src/EMC2305.c ****     chip->dev_addr = dev_addr << 1; // 7-bit i2c address << 1
+ 527              		.loc 1 74 16 is_stmt 0 view .LVU125
+ 528 0008 0160     		str	r1, [r0]
+  75:driver/Src/EMC2305.c **** 
+ 529              		.loc 1 75 5 is_stmt 1 view .LVU126
+  75:driver/Src/EMC2305.c **** 
+ 530              		.loc 1 75 31 is_stmt 0 view .LVU127
+ 531 000a 5200     		lsls	r2, r2, #1
+ 532              	.LVL47:
+  75:driver/Src/EMC2305.c **** 
+ 533              		.loc 1 75 20 view .LVU128
+ 534 000c 8280     		strh	r2, [r0, #4]	@ movhi
+  78:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+ 535              		.loc 1 78 5 is_stmt 1 view .LVU129
+  78:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+ 536              		.loc 1 78 41 is_stmt 0 view .LVU130
+ 537 000e 4149     		ldr	r1, .L61
+ 538              	.LVL48:
+  78:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+ 539              		.loc 1 78 41 view .LVU131
+ 540 0010 0120     		movs	r0, #1
+ 541              	.LVL49:
+  78:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+ 542              		.loc 1 78 41 view .LVU132
+ 543 0012 FFF7FEFF 		bl	xQueueCreateMutexStatic
+ 544              	.LVL50:
+  78:driver/Src/EMC2305.c ****     if (caller_semaphore_pool_usage_mutex == NULL) {
+ 545              		.loc 1 78 39 discriminator 1 view .LVU133
+ 546 0016 404B     		ldr	r3, .L61+4
+ 547 0018 1860     		str	r0, [r3]
+ARM GAS  /tmp/ccmsWjof.s 			page 23
+
+
+  79:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 548              		.loc 1 79 5 is_stmt 1 view .LVU134
+  79:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 549              		.loc 1 79 8 is_stmt 0 view .LVU135
+ 550 001a 0028     		cmp	r0, #0
+ 551 001c 6DD0     		beq	.L46
+ 552              	.LBB7:
+  84:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+ 553              		.loc 1 84 14 view .LVU136
+ 554 001e 0024     		movs	r4, #0
+ 555              	.L41:
+ 556              	.LVL51:
+  84:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+ 557              		.loc 1 84 23 is_stmt 1 discriminator 1 view .LVU137
+ 558 0020 092C     		cmp	r4, #9
+ 559 0022 12DC     		bgt	.L56
+  85:driver/Src/EMC2305.c ****         if (caller_semaphore_handle_pool[i] == NULL) {
+ 560              		.loc 1 85 9 view .LVU138
+  85:driver/Src/EMC2305.c ****         if (caller_semaphore_handle_pool[i] == NULL) {
+ 561              		.loc 1 85 43 is_stmt 0 view .LVU139
+ 562 0024 04EBC403 		add	r3, r4, r4, lsl #3
+ 563 0028 0322     		movs	r2, #3
+ 564 002a 0092     		str	r2, [sp]
+ 565 002c 3B4A     		ldr	r2, .L61+8
+ 566 002e 02EBC303 		add	r3, r2, r3, lsl #3
+ 567 0032 0022     		movs	r2, #0
+ 568 0034 1146     		mov	r1, r2
+ 569 0036 0120     		movs	r0, #1
+ 570 0038 FFF7FEFF 		bl	xQueueGenericCreateStatic
+ 571              	.LVL52:
+  85:driver/Src/EMC2305.c ****         if (caller_semaphore_handle_pool[i] == NULL) {
+ 572              		.loc 1 85 41 discriminator 1 view .LVU140
+ 573 003c 384B     		ldr	r3, .L61+12
+ 574 003e 43F82400 		str	r0, [r3, r4, lsl #2]
+  86:driver/Src/EMC2305.c ****             return EMC2305_ERR;
+ 575              		.loc 1 86 9 is_stmt 1 view .LVU141
+  86:driver/Src/EMC2305.c ****             return EMC2305_ERR;
+ 576              		.loc 1 86 12 is_stmt 0 view .LVU142
+ 577 0042 0028     		cmp	r0, #0
+ 578 0044 5BD0     		beq	.L47
+  84:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+ 579              		.loc 1 84 55 is_stmt 1 discriminator 2 view .LVU143
+ 580 0046 0134     		adds	r4, r4, #1
+ 581              	.LVL53:
+  84:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+ 582              		.loc 1 84 55 is_stmt 0 discriminator 2 view .LVU144
+ 583 0048 EAE7     		b	.L41
+ 584              	.L56:
+  84:driver/Src/EMC2305.c ****         caller_semaphore_handle_pool[i] = xSemaphoreCreateBinaryStatic(&caller_semaphore_buffer_poo
+ 585              		.loc 1 84 55 discriminator 2 view .LVU145
+ 586              	.LBE7:
+  92:driver/Src/EMC2305.c ****     if (chip->i2c_complete == NULL) {
+ 587              		.loc 1 92 5 is_stmt 1 view .LVU146
+  92:driver/Src/EMC2305.c ****     if (chip->i2c_complete == NULL) {
+ 588              		.loc 1 92 26 is_stmt 0 view .LVU147
+ 589 004a 0323     		movs	r3, #3
+ 590 004c 0093     		str	r3, [sp]
+ARM GAS  /tmp/ccmsWjof.s 			page 24
+
+
+ 591 004e 354B     		ldr	r3, .L61+16
+ 592 0050 0022     		movs	r2, #0
+ 593 0052 1146     		mov	r1, r2
+ 594 0054 0120     		movs	r0, #1
+ 595 0056 FFF7FEFF 		bl	xQueueGenericCreateStatic
+ 596              	.LVL54:
+  92:driver/Src/EMC2305.c ****     if (chip->i2c_complete == NULL) {
+ 597              		.loc 1 92 24 discriminator 1 view .LVU148
+ 598 005a A860     		str	r0, [r5, #8]
+  93:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 599              		.loc 1 93 5 is_stmt 1 view .LVU149
+  93:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 600              		.loc 1 93 8 is_stmt 0 view .LVU150
+ 601 005c 0028     		cmp	r0, #0
+ 602 005e 51D0     		beq	.L48
+  98:driver/Src/EMC2305.c ****     if (EMC2305_I2C_Queue == NULL) {
+ 603              		.loc 1 98 5 is_stmt 1 view .LVU151
+  98:driver/Src/EMC2305.c ****     if (EMC2305_I2C_Queue == NULL) {
+ 604              		.loc 1 98 25 is_stmt 0 view .LVU152
+ 605 0060 0023     		movs	r3, #0
+ 606 0062 0093     		str	r3, [sp]
+ 607 0064 304B     		ldr	r3, .L61+20
+ 608 0066 314A     		ldr	r2, .L61+24
+ 609 0068 1021     		movs	r1, #16
+ 610 006a 0A20     		movs	r0, #10
+ 611 006c FFF7FEFF 		bl	xQueueGenericCreateStatic
+ 612              	.LVL55:
+  98:driver/Src/EMC2305.c ****     if (EMC2305_I2C_Queue == NULL) {
+ 613              		.loc 1 98 23 discriminator 1 view .LVU153
+ 614 0070 2F4B     		ldr	r3, .L61+28
+ 615 0072 1860     		str	r0, [r3]
+  99:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 616              		.loc 1 99 5 is_stmt 1 view .LVU154
+  99:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 617              		.loc 1 99 8 is_stmt 0 view .LVU155
+ 618 0074 0028     		cmp	r0, #0
+ 619 0076 47D0     		beq	.L49
+ 104:driver/Src/EMC2305.c ****         "EMC2305 I2C Worker Task",
+ 620              		.loc 1 104 5 is_stmt 1 view .LVU156
+ 621 0078 2E4B     		ldr	r3, .L61+32
+ 622 007a 0293     		str	r3, [sp, #8]
+ 623 007c 2E4B     		ldr	r3, .L61+36
+ 624 007e 0193     		str	r3, [sp, #4]
+ 625 0080 0123     		movs	r3, #1
+ 626 0082 0093     		str	r3, [sp]
+ 627 0084 0023     		movs	r3, #0
+ 628 0086 8022     		movs	r2, #128
+ 629 0088 2C49     		ldr	r1, .L61+40
+ 630 008a 2D48     		ldr	r0, .L61+44
+ 631 008c FFF7FEFF 		bl	xTaskCreateStatic
+ 632              	.LVL56:
+ 113:driver/Src/EMC2305.c ****         chip_I2C1 = chip;
+ 633              		.loc 1 113 5 view .LVU157
+ 113:driver/Src/EMC2305.c ****         chip_I2C1 = chip;
+ 634              		.loc 1 113 13 is_stmt 0 view .LVU158
+ 635 0090 3368     		ldr	r3, [r6]
+ 113:driver/Src/EMC2305.c ****         chip_I2C1 = chip;
+ARM GAS  /tmp/ccmsWjof.s 			page 25
+
+
+ 636              		.loc 1 113 8 view .LVU159
+ 637 0092 2C4A     		ldr	r2, .L61+48
+ 638 0094 9342     		cmp	r3, r2
+ 639 0096 07D0     		beq	.L57
+ 117:driver/Src/EMC2305.c ****         chip_I2C2 = chip;
+ 640              		.loc 1 117 10 is_stmt 1 view .LVU160
+ 117:driver/Src/EMC2305.c ****         chip_I2C2 = chip;
+ 641              		.loc 1 117 13 is_stmt 0 view .LVU161
+ 642 0098 2B4A     		ldr	r2, .L61+52
+ 643 009a 9342     		cmp	r3, r2
+ 644 009c 17D0     		beq	.L58
+ 122:driver/Src/EMC2305.c ****         chip_I2C3 = chip;
+ 645              		.loc 1 122 10 is_stmt 1 view .LVU162
+ 122:driver/Src/EMC2305.c ****         chip_I2C3 = chip;
+ 646              		.loc 1 122 13 is_stmt 0 view .LVU163
+ 647 009e 2B4A     		ldr	r2, .L61+56
+ 648 00a0 9342     		cmp	r3, r2
+ 649 00a2 17D0     		beq	.L59
+ 127:driver/Src/EMC2305.c ****     }
+ 650              		.loc 1 127 16 view .LVU164
+ 651 00a4 0120     		movs	r0, #1
+ 652 00a6 2BE0     		b	.L40
+ 653              	.L57:
+ 114:driver/Src/EMC2305.c ****     }
+ 654              		.loc 1 114 9 is_stmt 1 view .LVU165
+ 114:driver/Src/EMC2305.c ****     }
+ 655              		.loc 1 114 19 is_stmt 0 view .LVU166
+ 656 00a8 294B     		ldr	r3, .L61+60
+ 657 00aa 1D60     		str	r5, [r3]
+ 658              	.L44:
+ 131:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PRODUCT_ID, &product_id) != EMC2305_OK) {
+ 659              		.loc 1 131 5 is_stmt 1 view .LVU167
+ 131:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PRODUCT_ID, &product_id) != EMC2305_OK) {
+ 660              		.loc 1 131 13 is_stmt 0 view .LVU168
+ 661 00ac 0023     		movs	r3, #0
+ 662 00ae 8DF81730 		strb	r3, [sp, #23]
+ 132:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 663              		.loc 1 132 5 is_stmt 1 view .LVU169
+ 132:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 664              		.loc 1 132 9 is_stmt 0 view .LVU170
+ 665 00b2 0DF11702 		add	r2, sp, #23
+ 666 00b6 FD21     		movs	r1, #253
+ 667 00b8 2846     		mov	r0, r5
+ 668 00ba FFF7FEFF 		bl	EMC2305_ReadReg
+ 669              	.LVL57:
+ 132:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 670              		.loc 1 132 8 discriminator 1 view .LVU171
+ 671 00be 28BB     		cbnz	r0, .L51
+ 135:driver/Src/EMC2305.c ****         // EMC2305 is id 00
+ 672              		.loc 1 135 5 is_stmt 1 view .LVU172
+ 135:driver/Src/EMC2305.c ****         // EMC2305 is id 00
+ 673              		.loc 1 135 21 is_stmt 0 view .LVU173
+ 674 00c0 9DF81730 		ldrb	r3, [sp, #23]	@ zero_extendqisi2
+ 135:driver/Src/EMC2305.c ****         // EMC2305 is id 00
+ 675              		.loc 1 135 8 view .LVU174
+ 676 00c4 13F0030F 		tst	r3, #3
+ 677 00c8 07D0     		beq	.L60
+ARM GAS  /tmp/ccmsWjof.s 			page 26
+
+
+ 138:driver/Src/EMC2305.c ****     }
+ 678              		.loc 1 138 16 view .LVU175
+ 679 00ca 0120     		movs	r0, #1
+ 680 00cc 18E0     		b	.L40
+ 681              	.L58:
+ 118:driver/Src/EMC2305.c ****     }
+ 682              		.loc 1 118 9 is_stmt 1 view .LVU176
+ 118:driver/Src/EMC2305.c ****     }
+ 683              		.loc 1 118 19 is_stmt 0 view .LVU177
+ 684 00ce 214B     		ldr	r3, .L61+64
+ 685 00d0 1D60     		str	r5, [r3]
+ 686 00d2 EBE7     		b	.L44
+ 687              	.L59:
+ 123:driver/Src/EMC2305.c ****     }
+ 688              		.loc 1 123 9 is_stmt 1 view .LVU178
+ 123:driver/Src/EMC2305.c ****     }
+ 689              		.loc 1 123 19 is_stmt 0 view .LVU179
+ 690 00d4 204B     		ldr	r3, .L61+68
+ 691 00d6 1D60     		str	r5, [r3]
+ 692 00d8 E8E7     		b	.L44
+ 693              	.L60:
+ 142:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_MANUFACTURER_ID, &mfg_id) != EMC2305_OK) {
+ 694              		.loc 1 142 5 is_stmt 1 view .LVU180
+ 142:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_MANUFACTURER_ID, &mfg_id) != EMC2305_OK) {
+ 695              		.loc 1 142 13 is_stmt 0 view .LVU181
+ 696 00da 0023     		movs	r3, #0
+ 697 00dc 8DF81630 		strb	r3, [sp, #22]
+ 143:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 698              		.loc 1 143 5 is_stmt 1 view .LVU182
+ 143:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 699              		.loc 1 143 9 is_stmt 0 view .LVU183
+ 700 00e0 0DF11602 		add	r2, sp, #22
+ 701 00e4 FE21     		movs	r1, #254
+ 702 00e6 2846     		mov	r0, r5
+ 703 00e8 FFF7FEFF 		bl	EMC2305_ReadReg
+ 704              	.LVL58:
+ 143:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 705              		.loc 1 143 8 discriminator 1 view .LVU184
+ 706 00ec 80B9     		cbnz	r0, .L53
+ 146:driver/Src/EMC2305.c ****         // ur cooked lmao
+ 707              		.loc 1 146 5 is_stmt 1 view .LVU185
+ 146:driver/Src/EMC2305.c ****         // ur cooked lmao
+ 708              		.loc 1 146 16 is_stmt 0 view .LVU186
+ 709 00ee 9DF81630 		ldrb	r3, [sp, #22]	@ zero_extendqisi2
+ 146:driver/Src/EMC2305.c ****         // ur cooked lmao
+ 710              		.loc 1 146 8 view .LVU187
+ 711 00f2 5D2B     		cmp	r3, #93
+ 712 00f4 04D0     		beq	.L40
+ 148:driver/Src/EMC2305.c ****     }
+ 713              		.loc 1 148 16 view .LVU188
+ 714 00f6 0120     		movs	r0, #1
+ 715 00f8 02E0     		b	.L40
+ 716              	.LVL59:
+ 717              	.L46:
+  80:driver/Src/EMC2305.c ****     }
+ 718              		.loc 1 80 16 view .LVU189
+ 719 00fa 0120     		movs	r0, #1
+ARM GAS  /tmp/ccmsWjof.s 			page 27
+
+
+ 720 00fc 00E0     		b	.L40
+ 721              	.LVL60:
+ 722              	.L47:
+ 723              	.LBB8:
+  87:driver/Src/EMC2305.c ****         }
+ 724              		.loc 1 87 20 view .LVU190
+ 725 00fe 0120     		movs	r0, #1
+ 726              	.LVL61:
+ 727              	.L40:
+  87:driver/Src/EMC2305.c ****         }
+ 728              		.loc 1 87 20 view .LVU191
+ 729              	.LBE8:
+ 152:driver/Src/EMC2305.c **** 
+ 730              		.loc 1 152 1 view .LVU192
+ 731 0100 06B0     		add	sp, sp, #24
+ 732              	.LCFI10:
+ 733              		.cfi_remember_state
+ 734              		.cfi_def_cfa_offset 16
+ 735              		@ sp needed
+ 736 0102 70BD     		pop	{r4, r5, r6, pc}
+ 737              	.LVL62:
+ 738              	.L48:
+ 739              	.LCFI11:
+ 740              		.cfi_restore_state
+  94:driver/Src/EMC2305.c ****     }
+ 741              		.loc 1 94 16 view .LVU193
+ 742 0104 0120     		movs	r0, #1
+ 743 0106 FBE7     		b	.L40
+ 744              	.L49:
+ 100:driver/Src/EMC2305.c ****     }
+ 745              		.loc 1 100 16 view .LVU194
+ 746 0108 0120     		movs	r0, #1
+ 747 010a F9E7     		b	.L40
+ 748              	.L51:
+ 133:driver/Src/EMC2305.c ****     }
+ 749              		.loc 1 133 16 view .LVU195
+ 750 010c 0120     		movs	r0, #1
+ 751 010e F7E7     		b	.L40
+ 752              	.L53:
+ 144:driver/Src/EMC2305.c ****     }
+ 753              		.loc 1 144 16 view .LVU196
+ 754 0110 0120     		movs	r0, #1
+ 755 0112 F5E7     		b	.L40
+ 756              	.L62:
+ 757              		.align	2
+ 758              	.L61:
+ 759 0114 00000000 		.word	caller_semaphore_pool_usage_buffer
+ 760 0118 00000000 		.word	caller_semaphore_pool_usage_mutex
+ 761 011c 00000000 		.word	caller_semaphore_buffer_pool
+ 762 0120 00000000 		.word	caller_semaphore_handle_pool
+ 763 0124 00000000 		.word	worker_semaphore_buffer
+ 764 0128 00000000 		.word	xStaticQueue
+ 765 012c 00000000 		.word	ucQueueStorageArea
+ 766 0130 00000000 		.word	EMC2305_I2C_Queue
+ 767 0134 00000000 		.word	EMC2305_I2C_TaskBuffer
+ 768 0138 00000000 		.word	EMC2305_I2C_TaskStack
+ 769 013c 00000000 		.word	.LC0
+ARM GAS  /tmp/ccmsWjof.s 			page 28
+
+
+ 770 0140 00000000 		.word	EMC2305_I2C_Worker_Task
+ 771 0144 00540040 		.word	1073763328
+ 772 0148 00580040 		.word	1073764352
+ 773 014c 005C0040 		.word	1073765376
+ 774 0150 00000000 		.word	chip_I2C1
+ 775 0154 00000000 		.word	chip_I2C2
+ 776 0158 00000000 		.word	chip_I2C3
+ 777              		.cfi_endproc
+ 778              	.LFE246:
+ 780              		.section	.text.EMC2305_GetFanRPM,"ax",%progbits
+ 781              		.align	1
+ 782              		.global	EMC2305_GetFanRPM
+ 783              		.syntax unified
+ 784              		.thumb
+ 785              		.thumb_func
+ 787              	EMC2305_GetFanRPM:
+ 788              	.LVL63:
+ 789              	.LFB254:
+ 393:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 790              		.loc 1 393 74 is_stmt 1 view -0
+ 791              		.cfi_startproc
+ 792              		@ args = 0, pretend = 0, frame = 8
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 394:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 794              		.loc 1 394 5 view .LVU198
+ 394:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 795              		.loc 1 394 8 is_stmt 0 view .LVU199
+ 796 0000 0429     		cmp	r1, #4
+ 797 0002 2CD8     		bhi	.L65
+ 393:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 798              		.loc 1 393 74 view .LVU200
+ 799 0004 30B5     		push	{r4, r5, lr}
+ 800              	.LCFI12:
+ 801              		.cfi_def_cfa_offset 12
+ 802              		.cfi_offset 4, -12
+ 803              		.cfi_offset 5, -8
+ 804              		.cfi_offset 14, -4
+ 805 0006 83B0     		sub	sp, sp, #12
+ 806              	.LCFI13:
+ 807              		.cfi_def_cfa_offset 24
+ 808 0008 0546     		mov	r5, r0
+ 399:driver/Src/EMC2305.c ****     uint8_t low_byte = 0;
+ 809              		.loc 1 399 5 is_stmt 1 view .LVU201
+ 399:driver/Src/EMC2305.c ****     uint8_t low_byte = 0;
+ 810              		.loc 1 399 13 is_stmt 0 view .LVU202
+ 811 000a 0023     		movs	r3, #0
+ 812 000c 8DF80730 		strb	r3, [sp, #7]
+ 400:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_READING_H), &high_byt
+ 813              		.loc 1 400 5 is_stmt 1 view .LVU203
+ 400:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_TACH_READING_H), &high_byt
+ 814              		.loc 1 400 13 is_stmt 0 view .LVU204
+ 815 0010 8DF80630 		strb	r3, [sp, #6]
+ 401:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 816              		.loc 1 401 5 is_stmt 1 view .LVU205
+ 401:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 817              		.loc 1 401 31 is_stmt 0 view .LVU206
+ 818 0014 0901     		lsls	r1, r1, #4
+ARM GAS  /tmp/ccmsWjof.s 			page 29
+
+
+ 819              	.LVL64:
+ 401:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 820              		.loc 1 401 31 view .LVU207
+ 821 0016 CCB2     		uxtb	r4, r1
+ 401:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 822              		.loc 1 401 9 view .LVU208
+ 823 0018 04F13E01 		add	r1, r4, #62
+ 824 001c 0DF10702 		add	r2, sp, #7
+ 825 0020 01F0FE01 		and	r1, r1, #254
+ 826 0024 FFF7FEFF 		bl	EMC2305_ReadReg
+ 827              	.LVL65:
+ 401:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 828              		.loc 1 401 8 discriminator 1 view .LVU209
+ 829 0028 E0B9     		cbnz	r0, .L66
+ 404:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 830              		.loc 1 404 5 is_stmt 1 view .LVU210
+ 404:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 831              		.loc 1 404 9 is_stmt 0 view .LVU211
+ 832 002a 04F13F01 		add	r1, r4, #63
+ 833 002e 0DF10602 		add	r2, sp, #6
+ 834 0032 C9B2     		uxtb	r1, r1
+ 835 0034 2846     		mov	r0, r5
+ 836 0036 FFF7FEFF 		bl	EMC2305_ReadReg
+ 837              	.LVL66:
+ 404:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 838              		.loc 1 404 8 discriminator 1 view .LVU212
+ 839 003a B0B9     		cbnz	r0, .L67
+ 409:driver/Src/EMC2305.c **** 
+ 840              		.loc 1 409 5 is_stmt 1 view .LVU213
+ 409:driver/Src/EMC2305.c **** 
+ 841              		.loc 1 409 41 is_stmt 0 view .LVU214
+ 842 003c 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 409:driver/Src/EMC2305.c **** 
+ 843              		.loc 1 409 66 view .LVU215
+ 844 0040 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 845 0044 DB08     		lsrs	r3, r3, #3
+ 409:driver/Src/EMC2305.c **** 
+ 846              		.loc 1 409 47 view .LVU216
+ 847 0046 03EB4213 		add	r3, r3, r2, lsl #5
+ 409:driver/Src/EMC2305.c **** 
+ 848              		.loc 1 409 14 view .LVU217
+ 849 004a C3F30C03 		ubfx	r3, r3, #0, #13
+ 850              	.LVL67:
+ 412:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 851              		.loc 1 412 5 is_stmt 1 view .LVU218
+ 412:driver/Src/EMC2305.c ****         return UINT16_MAX;
+ 852              		.loc 1 412 8 is_stmt 0 view .LVU219
+ 853 004e 7BB1     		cbz	r3, .L68
+ 417:driver/Src/EMC2305.c ****     return rpm;
+ 854              		.loc 1 417 5 is_stmt 1 view .LVU220
+ 417:driver/Src/EMC2305.c ****     return rpm;
+ 855              		.loc 1 417 64 is_stmt 0 view .LVU221
+ 856 0050 4FF4F000 		mov	r0, #7864320
+ 857 0054 B0FBF3F0 		udiv	r0, r0, r3
+ 417:driver/Src/EMC2305.c ****     return rpm;
+ 858              		.loc 1 417 14 view .LVU222
+ 859 0058 80B2     		uxth	r0, r0
+ARM GAS  /tmp/ccmsWjof.s 			page 30
+
+
+ 860              	.LVL68:
+ 418:driver/Src/EMC2305.c **** }
+ 861              		.loc 1 418 5 is_stmt 1 view .LVU223
+ 862              	.L64:
+ 419:driver/Src/EMC2305.c **** 
+ 863              		.loc 1 419 1 is_stmt 0 view .LVU224
+ 864 005a 03B0     		add	sp, sp, #12
+ 865              	.LCFI14:
+ 866              		.cfi_def_cfa_offset 12
+ 867              		@ sp needed
+ 868 005c 30BD     		pop	{r4, r5, pc}
+ 869              	.LVL69:
+ 870              	.L65:
+ 871              	.LCFI15:
+ 872              		.cfi_def_cfa_offset 0
+ 873              		.cfi_restore 4
+ 874              		.cfi_restore 5
+ 875              		.cfi_restore 14
+ 395:driver/Src/EMC2305.c ****     }
+ 876              		.loc 1 395 16 view .LVU225
+ 877 005e 4FF6FF70 		movw	r0, #65535
+ 878              	.LVL70:
+ 419:driver/Src/EMC2305.c **** 
+ 879              		.loc 1 419 1 view .LVU226
+ 880 0062 7047     		bx	lr
+ 881              	.LVL71:
+ 882              	.L66:
+ 883              	.LCFI16:
+ 884              		.cfi_def_cfa_offset 24
+ 885              		.cfi_offset 4, -12
+ 886              		.cfi_offset 5, -8
+ 887              		.cfi_offset 14, -4
+ 402:driver/Src/EMC2305.c ****     }
+ 888              		.loc 1 402 16 view .LVU227
+ 889 0064 4FF6FF70 		movw	r0, #65535
+ 890 0068 F7E7     		b	.L64
+ 891              	.L67:
+ 405:driver/Src/EMC2305.c ****     }
+ 892              		.loc 1 405 16 view .LVU228
+ 893 006a 4FF6FF70 		movw	r0, #65535
+ 894 006e F4E7     		b	.L64
+ 895              	.LVL72:
+ 896              	.L68:
+ 413:driver/Src/EMC2305.c ****     }
+ 897              		.loc 1 413 16 view .LVU229
+ 898 0070 4FF6FF70 		movw	r0, #65535
+ 899 0074 F1E7     		b	.L64
+ 900              		.cfi_endproc
+ 901              	.LFE254:
+ 903              		.section	.text.EMC2305_GetFanPWM,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	EMC2305_GetFanPWM
+ 906              		.syntax unified
+ 907              		.thumb
+ 908              		.thumb_func
+ 910              	EMC2305_GetFanPWM:
+ 911              	.LVL73:
+ARM GAS  /tmp/ccmsWjof.s 			page 31
+
+
+ 912              	.LFB255:
+ 427:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 913              		.loc 1 427 73 is_stmt 1 view -0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 8
+ 916              		@ frame_needed = 0, uses_anonymous_args = 0
+ 428:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 917              		.loc 1 428 5 view .LVU231
+ 428:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 918              		.loc 1 428 8 is_stmt 0 view .LVU232
+ 919 0000 0429     		cmp	r1, #4
+ 920 0002 1CD8     		bhi	.L75
+ 427:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 921              		.loc 1 427 73 view .LVU233
+ 922 0004 00B5     		push	{lr}
+ 923              	.LCFI17:
+ 924              		.cfi_def_cfa_offset 4
+ 925              		.cfi_offset 14, -4
+ 926 0006 83B0     		sub	sp, sp, #12
+ 927              	.LCFI18:
+ 928              		.cfi_def_cfa_offset 16
+ 433:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_SETTING), &val) != EMC2305
+ 929              		.loc 1 433 5 is_stmt 1 view .LVU234
+ 433:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_SETTING), &val) != EMC2305
+ 930              		.loc 1 433 13 is_stmt 0 view .LVU235
+ 931 0008 0023     		movs	r3, #0
+ 932 000a 8DF80730 		strb	r3, [sp, #7]
+ 434:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 933              		.loc 1 434 5 is_stmt 1 view .LVU236
+ 434:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 934              		.loc 1 434 9 is_stmt 0 view .LVU237
+ 935 000e 0331     		adds	r1, r1, #3
+ 936              	.LVL74:
+ 434:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 937              		.loc 1 434 9 view .LVU238
+ 938 0010 0901     		lsls	r1, r1, #4
+ 939              	.LVL75:
+ 434:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 940              		.loc 1 434 9 view .LVU239
+ 941 0012 0DF10702 		add	r2, sp, #7
+ 942 0016 01F0F001 		and	r1, r1, #240
+ 943 001a FFF7FEFF 		bl	EMC2305_ReadReg
+ 944              	.LVL76:
+ 434:driver/Src/EMC2305.c ****         return UINT8_MAX;
+ 945              		.loc 1 434 8 discriminator 1 view .LVU240
+ 946 001e 80B9     		cbnz	r0, .L76
+ 439:driver/Src/EMC2305.c **** 
+ 947              		.loc 1 439 5 is_stmt 1 view .LVU241
+ 439:driver/Src/EMC2305.c **** 
+ 948              		.loc 1 439 24 is_stmt 0 view .LVU242
+ 949 0020 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 950 0024 6422     		movs	r2, #100
+ 951 0026 02FB03F3 		mul	r3, r2, r3
+ 439:driver/Src/EMC2305.c **** 
+ 952              		.loc 1 439 31 view .LVU243
+ 953 002a A0F17F30 		sub	r0, r0, #2139062143
+ 954 002e 80FB0320 		smull	r2, r0, r0, r3
+ARM GAS  /tmp/ccmsWjof.s 			page 32
+
+
+ 955 0032 1844     		add	r0, r0, r3
+ 439:driver/Src/EMC2305.c **** 
+ 956              		.loc 1 439 13 view .LVU244
+ 957 0034 C0F3C710 		ubfx	r0, r0, #7, #8
+ 958              	.LVL77:
+ 441:driver/Src/EMC2305.c **** }
+ 959              		.loc 1 441 5 is_stmt 1 view .LVU245
+ 960              	.L74:
+ 442:driver/Src/EMC2305.c **** 
+ 961              		.loc 1 442 1 is_stmt 0 view .LVU246
+ 962 0038 03B0     		add	sp, sp, #12
+ 963              	.LCFI19:
+ 964              		.cfi_def_cfa_offset 4
+ 965              		@ sp needed
+ 966 003a 5DF804FB 		ldr	pc, [sp], #4
+ 967              	.LVL78:
+ 968              	.L75:
+ 969              	.LCFI20:
+ 970              		.cfi_def_cfa_offset 0
+ 971              		.cfi_restore 14
+ 429:driver/Src/EMC2305.c ****     }
+ 972              		.loc 1 429 16 view .LVU247
+ 973 003e FF20     		movs	r0, #255
+ 974              	.LVL79:
+ 442:driver/Src/EMC2305.c **** 
+ 975              		.loc 1 442 1 view .LVU248
+ 976 0040 7047     		bx	lr
+ 977              	.LVL80:
+ 978              	.L76:
+ 979              	.LCFI21:
+ 980              		.cfi_def_cfa_offset 16
+ 981              		.cfi_offset 14, -4
+ 435:driver/Src/EMC2305.c ****     }
+ 982              		.loc 1 435 16 view .LVU249
+ 983 0042 FF20     		movs	r0, #255
+ 984 0044 F8E7     		b	.L74
+ 985              		.cfi_endproc
+ 986              	.LFE255:
+ 988              		.section	.text.EMC2305_GetFanStatus,"ax",%progbits
+ 989              		.align	1
+ 990              		.global	EMC2305_GetFanStatus
+ 991              		.syntax unified
+ 992              		.thumb
+ 993              		.thumb_func
+ 995              	EMC2305_GetFanStatus:
+ 996              	.LVL81:
+ 997              	.LFB256:
+ 449:driver/Src/EMC2305.c ****     EMC2305_Fan_Status status = { 0 };
+ 998              		.loc 1 449 70 is_stmt 1 view -0
+ 999              		.cfi_startproc
+ 1000              		@ args = 0, pretend = 0, frame = 16
+ 1001              		@ frame_needed = 0, uses_anonymous_args = 0
+ 449:driver/Src/EMC2305.c ****     EMC2305_Fan_Status status = { 0 };
+ 1002              		.loc 1 449 70 is_stmt 0 view .LVU251
+ 1003 0000 00B5     		push	{lr}
+ 1004              	.LCFI22:
+ 1005              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccmsWjof.s 			page 33
+
+
+ 1006              		.cfi_offset 14, -4
+ 1007 0002 85B0     		sub	sp, sp, #20
+ 1008              	.LCFI23:
+ 1009              		.cfi_def_cfa_offset 24
+ 450:driver/Src/EMC2305.c **** 
+ 1010              		.loc 1 450 5 is_stmt 1 view .LVU252
+ 450:driver/Src/EMC2305.c **** 
+ 1011              		.loc 1 450 24 is_stmt 0 view .LVU253
+ 1012 0004 0023     		movs	r3, #0
+ 1013 0006 0293     		str	r3, [sp, #8]
+ 453:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_FAN_STATUS, &val) != EMC2305_OK) {
+ 1014              		.loc 1 453 5 is_stmt 1 view .LVU254
+ 453:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_FAN_STATUS, &val) != EMC2305_OK) {
+ 1015              		.loc 1 453 13 is_stmt 0 view .LVU255
+ 1016 0008 8DF80730 		strb	r3, [sp, #7]
+ 454:driver/Src/EMC2305.c ****         // Error handling is fake :D
+ 1017              		.loc 1 454 5 is_stmt 1 view .LVU256
+ 454:driver/Src/EMC2305.c ****         // Error handling is fake :D
+ 1018              		.loc 1 454 9 is_stmt 0 view .LVU257
+ 1019 000c 0DF10702 		add	r2, sp, #7
+ 1020 0010 2421     		movs	r1, #36
+ 1021 0012 FFF7FEFF 		bl	EMC2305_ReadReg
+ 1022              	.LVL82:
+ 454:driver/Src/EMC2305.c ****         // Error handling is fake :D
+ 1023              		.loc 1 454 8 discriminator 1 view .LVU258
+ 1024 0016 30BB     		cbnz	r0, .L85
+ 460:driver/Src/EMC2305.c ****     status.drive_failed = ((val & EMC2305_STAT_DRVFAIL) == EMC2305_STAT_DRVFAIL);
+ 1025              		.loc 1 460 5 is_stmt 1 view .LVU259
+ 460:driver/Src/EMC2305.c ****     status.drive_failed = ((val & EMC2305_STAT_DRVFAIL) == EMC2305_STAT_DRVFAIL);
+ 1026              		.loc 1 460 57 is_stmt 0 view .LVU260
+ 1027 0018 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1028 001c DA09     		lsrs	r2, r3, #7
+ 460:driver/Src/EMC2305.c ****     status.drive_failed = ((val & EMC2305_STAT_DRVFAIL) == EMC2305_STAT_DRVFAIL);
+ 1029              		.loc 1 460 27 view .LVU261
+ 1030 001e 8DF80820 		strb	r2, [sp, #8]
+ 461:driver/Src/EMC2305.c ****     status.spin_failed = ((val & EMC2305_STAT_FNSPIN) == EMC2305_STAT_FNSPIN);
+ 1031              		.loc 1 461 5 is_stmt 1 view .LVU262
+ 461:driver/Src/EMC2305.c ****     status.spin_failed = ((val & EMC2305_STAT_FNSPIN) == EMC2305_STAT_FNSPIN);
+ 1032              		.loc 1 461 57 is_stmt 0 view .LVU263
+ 1033 0022 C3F38002 		ubfx	r2, r3, #2, #1
+ 461:driver/Src/EMC2305.c ****     status.spin_failed = ((val & EMC2305_STAT_FNSPIN) == EMC2305_STAT_FNSPIN);
+ 1034              		.loc 1 461 25 view .LVU264
+ 1035 0026 8DF80920 		strb	r2, [sp, #9]
+ 462:driver/Src/EMC2305.c ****     status.stalled = ((val & EMC2305_STAT_FNSTL) == EMC2305_STAT_FNSTL);
+ 1036              		.loc 1 462 5 is_stmt 1 view .LVU265
+ 462:driver/Src/EMC2305.c ****     status.stalled = ((val & EMC2305_STAT_FNSTL) == EMC2305_STAT_FNSTL);
+ 1037              		.loc 1 462 55 is_stmt 0 view .LVU266
+ 1038 002a C3F34002 		ubfx	r2, r3, #1, #1
+ 462:driver/Src/EMC2305.c ****     status.stalled = ((val & EMC2305_STAT_FNSTL) == EMC2305_STAT_FNSTL);
+ 1039              		.loc 1 462 24 view .LVU267
+ 1040 002e 8DF80A20 		strb	r2, [sp, #10]
+ 463:driver/Src/EMC2305.c **** 
+ 1041              		.loc 1 463 5 is_stmt 1 view .LVU268
+ 463:driver/Src/EMC2305.c **** 
+ 1042              		.loc 1 463 50 is_stmt 0 view .LVU269
+ 1043 0032 03F00103 		and	r3, r3, #1
+ 463:driver/Src/EMC2305.c **** 
+ARM GAS  /tmp/ccmsWjof.s 			page 34
+
+
+ 1044              		.loc 1 463 20 view .LVU270
+ 1045 0036 8DF80B30 		strb	r3, [sp, #11]
+ 465:driver/Src/EMC2305.c **** }
+ 1046              		.loc 1 465 5 is_stmt 1 view .LVU271
+ 465:driver/Src/EMC2305.c **** }
+ 1047              		.loc 1 465 12 is_stmt 0 view .LVU272
+ 1048 003a 029B     		ldr	r3, [sp, #8]
+ 1049 003c 0393     		str	r3, [sp, #12]
+ 1050              	.L83:
+ 466:driver/Src/EMC2305.c **** 
+ 1051              		.loc 1 466 1 view .LVU273
+ 1052 003e 0020     		movs	r0, #0
+ 1053 0040 9DF80C30 		ldrb	r3, [sp, #12]	@ zero_extendqisi2
+ 1054 0044 63F30700 		bfi	r0, r3, #0, #8
+ 1055 0048 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 1056 004c 63F30F20 		bfi	r0, r3, #8, #8
+ 1057 0050 9DF80E30 		ldrb	r3, [sp, #14]	@ zero_extendqisi2
+ 1058 0054 63F31740 		bfi	r0, r3, #16, #8
+ 1059 0058 9DF80F30 		ldrb	r3, [sp, #15]	@ zero_extendqisi2
+ 1060 005c 63F31F60 		bfi	r0, r3, #24, #8
+ 1061 0060 05B0     		add	sp, sp, #20
+ 1062              	.LCFI24:
+ 1063              		.cfi_remember_state
+ 1064              		.cfi_def_cfa_offset 4
+ 1065              		@ sp needed
+ 1066 0062 5DF804FB 		ldr	pc, [sp], #4
+ 1067              	.L85:
+ 1068              	.LCFI25:
+ 1069              		.cfi_restore_state
+ 456:driver/Src/EMC2305.c ****     }
+ 1070              		.loc 1 456 9 is_stmt 1 view .LVU274
+ 456:driver/Src/EMC2305.c ****     }
+ 1071              		.loc 1 456 16 is_stmt 0 view .LVU275
+ 1072 0066 029B     		ldr	r3, [sp, #8]
+ 1073 0068 0393     		str	r3, [sp, #12]
+ 1074 006a E8E7     		b	.L83
+ 1075              		.cfi_endproc
+ 1076              	.LFE256:
+ 1078              		.section	.text.EMC2305_WriteReg,"ax",%progbits
+ 1079              		.align	1
+ 1080              		.global	EMC2305_WriteReg
+ 1081              		.syntax unified
+ 1082              		.thumb
+ 1083              		.thumb_func
+ 1085              	EMC2305_WriteReg:
+ 1086              	.LVL83:
+ 1087              	.LFB258:
+ 526:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 1088              		.loc 1 526 89 is_stmt 1 view -0
+ 1089              		.cfi_startproc
+ 1090              		@ args = 0, pretend = 0, frame = 16
+ 1091              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
+ 1092              		.loc 1 526 89 is_stmt 0 view .LVU277
+ 1093 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1094              	.LCFI26:
+ 1095              		.cfi_def_cfa_offset 24
+ARM GAS  /tmp/ccmsWjof.s 			page 35
+
+
+ 1096              		.cfi_offset 4, -24
+ 1097              		.cfi_offset 5, -20
+ 1098              		.cfi_offset 6, -16
+ 1099              		.cfi_offset 7, -12
+ 1100              		.cfi_offset 8, -8
+ 1101              		.cfi_offset 14, -4
+ 1102 0004 84B0     		sub	sp, sp, #16
+ 1103              	.LCFI27:
+ 1104              		.cfi_def_cfa_offset 40
+ 1105 0006 8046     		mov	r8, r0
+ 1106 0008 0F46     		mov	r7, r1
+ 1107 000a 1546     		mov	r5, r2
+ 528:driver/Src/EMC2305.c ****     if (index < 0) {
+ 1108              		.loc 1 528 5 is_stmt 1 view .LVU278
+ 528:driver/Src/EMC2305.c ****     if (index < 0) {
+ 1109              		.loc 1 528 20 is_stmt 0 view .LVU279
+ 1110 000c FFF7FEFF 		bl	prvAcquireFreeSemaphore
+ 1111              	.LVL84:
+ 529:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 1112              		.loc 1 529 5 is_stmt 1 view .LVU280
+ 529:driver/Src/EMC2305.c ****         // Pool full (Queue likely full too)
+ 1113              		.loc 1 529 8 is_stmt 0 view .LVU281
+ 1114 0010 041E     		subs	r4, r0, #0
+ 1115 0012 31DB     		blt	.L90
+ 533:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 1116              		.loc 1 533 5 is_stmt 1 view .LVU282
+ 533:driver/Src/EMC2305.c ****     if (complete == NULL) {
+ 1117              		.loc 1 533 23 is_stmt 0 view .LVU283
+ 1118 0014 1B4B     		ldr	r3, .L93
+ 1119 0016 53F82460 		ldr	r6, [r3, r4, lsl #2]
+ 1120              	.LVL85:
+ 534:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1121              		.loc 1 534 5 is_stmt 1 view .LVU284
+ 534:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1122              		.loc 1 534 8 is_stmt 0 view .LVU285
+ 1123 001a 8EB3     		cbz	r6, .L91
+ 539:driver/Src/EMC2305.c **** 
+ 1124              		.loc 1 539 5 is_stmt 1 view .LVU286
+ 1125 001c 0021     		movs	r1, #0
+ 1126 001e 3046     		mov	r0, r6
+ 1127              	.LVL86:
+ 539:driver/Src/EMC2305.c **** 
+ 1128              		.loc 1 539 5 is_stmt 0 view .LVU287
+ 1129 0020 FFF7FEFF 		bl	xQueueSemaphoreTake
+ 1130              	.LVL87:
+ 542:driver/Src/EMC2305.c ****         .chip = chip,
+ 1131              		.loc 1 542 5 is_stmt 1 view .LVU288
+ 542:driver/Src/EMC2305.c ****         .chip = chip,
+ 1132              		.loc 1 542 25 is_stmt 0 view .LVU289
+ 1133 0024 CDF80080 		str	r8, [sp]
+ 1134 0028 0022     		movs	r2, #0
+ 1135 002a 8DF80420 		strb	r2, [sp, #4]
+ 1136 002e 8DF80570 		strb	r7, [sp, #5]
+ 1137 0032 8DF80650 		strb	r5, [sp, #6]
+ 1138 0036 0292     		str	r2, [sp, #8]
+ 548:driver/Src/EMC2305.c ****     };
+ 1139              		.loc 1 548 28 view .LVU290
+ARM GAS  /tmp/ccmsWjof.s 			page 36
+
+
+ 1140 0038 E4B2     		uxtb	r4, r4
+ 1141              	.LVL88:
+ 542:driver/Src/EMC2305.c ****         .chip = chip,
+ 1142              		.loc 1 542 25 view .LVU291
+ 1143 003a 8DF80C40 		strb	r4, [sp, #12]
+ 551:driver/Src/EMC2305.c ****         // Error if queue is full
+ 1144              		.loc 1 551 5 is_stmt 1 view .LVU292
+ 551:driver/Src/EMC2305.c ****         // Error if queue is full
+ 1145              		.loc 1 551 9 is_stmt 0 view .LVU293
+ 1146 003e 1346     		mov	r3, r2
+ 1147 0040 6946     		mov	r1, sp
+ 1148 0042 1148     		ldr	r0, .L93+4
+ 1149 0044 0068     		ldr	r0, [r0]
+ 1150 0046 FFF7FEFF 		bl	xQueueGenericSend
+ 1151              	.LVL89:
+ 551:driver/Src/EMC2305.c ****         // Error if queue is full
+ 1152              		.loc 1 551 8 discriminator 1 view .LVU294
+ 1153 004a 0128     		cmp	r0, #1
+ 1154 004c 04D0     		beq	.L88
+ 553:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1155              		.loc 1 553 9 is_stmt 1 view .LVU295
+ 1156 004e 2046     		mov	r0, r4
+ 1157 0050 FFF7FEFF 		bl	prvReturnSemaphore
+ 1158              	.LVL90:
+ 554:driver/Src/EMC2305.c ****     }
+ 1159              		.loc 1 554 9 view .LVU296
+ 554:driver/Src/EMC2305.c ****     }
+ 1160              		.loc 1 554 16 is_stmt 0 view .LVU297
+ 1161 0054 0120     		movs	r0, #1
+ 1162 0056 10E0     		b	.L87
+ 1163              	.L88:
+ 558:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 1164              		.loc 1 558 5 is_stmt 1 view .LVU298
+ 558:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 1165              		.loc 1 558 9 is_stmt 0 view .LVU299
+ 1166 0058 C821     		movs	r1, #200
+ 1167 005a 3046     		mov	r0, r6
+ 1168 005c FFF7FEFF 		bl	xQueueSemaphoreTake
+ 1169              	.LVL91:
+ 558:driver/Src/EMC2305.c ****         // Timeout waiting for worker to finish the I2C operation
+ 1170              		.loc 1 558 8 discriminator 1 view .LVU300
+ 1171 0060 0128     		cmp	r0, #1
+ 1172 0062 04D0     		beq	.L89
+ 560:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1173              		.loc 1 560 9 is_stmt 1 view .LVU301
+ 1174 0064 2046     		mov	r0, r4
+ 1175 0066 FFF7FEFF 		bl	prvReturnSemaphore
+ 1176              	.LVL92:
+ 561:driver/Src/EMC2305.c ****     }
+ 1177              		.loc 1 561 9 view .LVU302
+ 561:driver/Src/EMC2305.c ****     }
+ 1178              		.loc 1 561 16 is_stmt 0 view .LVU303
+ 1179 006a 0120     		movs	r0, #1
+ 1180 006c 05E0     		b	.L87
+ 1181              	.L89:
+ 564:driver/Src/EMC2305.c ****     return EMC2305_OK;
+ 1182              		.loc 1 564 5 is_stmt 1 view .LVU304
+ARM GAS  /tmp/ccmsWjof.s 			page 37
+
+
+ 1183 006e 2046     		mov	r0, r4
+ 1184 0070 FFF7FEFF 		bl	prvReturnSemaphore
+ 1185              	.LVL93:
+ 565:driver/Src/EMC2305.c **** }
+ 1186              		.loc 1 565 5 view .LVU305
+ 565:driver/Src/EMC2305.c **** }
+ 1187              		.loc 1 565 12 is_stmt 0 view .LVU306
+ 1188 0074 0020     		movs	r0, #0
+ 1189 0076 00E0     		b	.L87
+ 1190              	.LVL94:
+ 1191              	.L90:
+ 531:driver/Src/EMC2305.c ****     }
+ 1192              		.loc 1 531 16 view .LVU307
+ 1193 0078 0120     		movs	r0, #1
+ 1194              	.LVL95:
+ 1195              	.L87:
+ 566:driver/Src/EMC2305.c **** 
+ 1196              		.loc 1 566 1 view .LVU308
+ 1197 007a 04B0     		add	sp, sp, #16
+ 1198              	.LCFI28:
+ 1199              		.cfi_remember_state
+ 1200              		.cfi_def_cfa_offset 24
+ 1201              		@ sp needed
+ 1202 007c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1203              	.LVL96:
+ 1204              	.L91:
+ 1205              	.LCFI29:
+ 1206              		.cfi_restore_state
+ 535:driver/Src/EMC2305.c ****     }
+ 1207              		.loc 1 535 16 view .LVU309
+ 1208 0080 0120     		movs	r0, #1
+ 1209              	.LVL97:
+ 535:driver/Src/EMC2305.c ****     }
+ 1210              		.loc 1 535 16 view .LVU310
+ 1211 0082 FAE7     		b	.L87
+ 1212              	.L94:
+ 1213              		.align	2
+ 1214              	.L93:
+ 1215 0084 00000000 		.word	caller_semaphore_handle_pool
+ 1216 0088 00000000 		.word	EMC2305_I2C_Queue
+ 1217              		.cfi_endproc
+ 1218              	.LFE258:
+ 1220              		.section	.text.EMC2305_EnableSWLock,"ax",%progbits
+ 1221              		.align	1
+ 1222              		.global	EMC2305_EnableSWLock
+ 1223              		.syntax unified
+ 1224              		.thumb
+ 1225              		.thumb_func
+ 1227              	EMC2305_EnableSWLock:
+ 1228              	.LVL98:
+ 1229              	.LFB247:
+ 159:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_SW_LOCK, EMC2305_SWL);
+ 1230              		.loc 1 159 66 is_stmt 1 view -0
+ 1231              		.cfi_startproc
+ 1232              		@ args = 0, pretend = 0, frame = 0
+ 1233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_SW_LOCK, EMC2305_SWL);
+ARM GAS  /tmp/ccmsWjof.s 			page 38
+
+
+ 1234              		.loc 1 159 66 is_stmt 0 view .LVU312
+ 1235 0000 08B5     		push	{r3, lr}
+ 1236              	.LCFI30:
+ 1237              		.cfi_def_cfa_offset 8
+ 1238              		.cfi_offset 3, -8
+ 1239              		.cfi_offset 14, -4
+ 160:driver/Src/EMC2305.c **** }
+ 1240              		.loc 1 160 5 is_stmt 1 view .LVU313
+ 160:driver/Src/EMC2305.c **** }
+ 1241              		.loc 1 160 12 is_stmt 0 view .LVU314
+ 1242 0002 0122     		movs	r2, #1
+ 1243 0004 EF21     		movs	r1, #239
+ 1244 0006 FFF7FEFF 		bl	EMC2305_WriteReg
+ 1245              	.LVL99:
+ 161:driver/Src/EMC2305.c **** 
+ 1246              		.loc 1 161 1 view .LVU315
+ 1247 000a 08BD     		pop	{r3, pc}
+ 1248              		.cfi_endproc
+ 1249              	.LFE247:
+ 1251              		.section	.text.EMC2305_SetGlobalConfig,"ax",%progbits
+ 1252              		.align	1
+ 1253              		.global	EMC2305_SetGlobalConfig
+ 1254              		.syntax unified
+ 1255              		.thumb
+ 1256              		.thumb_func
+ 1258              	EMC2305_SetGlobalConfig:
+ 1259              	.LVL100:
+ 1260              	.LFB248:
+ 169:driver/Src/EMC2305.c ****     // Set bits based on config
+ 1261              		.loc 1 169 100 is_stmt 1 view -0
+ 1262              		.cfi_startproc
+ 1263              		@ args = 0, pretend = 0, frame = 0
+ 1264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169:driver/Src/EMC2305.c ****     // Set bits based on config
+ 1265              		.loc 1 169 100 is_stmt 0 view .LVU317
+ 1266 0000 08B5     		push	{r3, lr}
+ 1267              	.LCFI31:
+ 1268              		.cfi_def_cfa_offset 8
+ 1269              		.cfi_offset 3, -8
+ 1270              		.cfi_offset 14, -4
+ 171:driver/Src/EMC2305.c ****     if (config->alert_mask) {
+ 1271              		.loc 1 171 5 is_stmt 1 view .LVU318
+ 1272              	.LVL101:
+ 172:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_MASK_ALERT;
+ 1273              		.loc 1 172 5 view .LVU319
+ 172:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_MASK_ALERT;
+ 1274              		.loc 1 172 15 is_stmt 0 view .LVU320
+ 1275 0002 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 172:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_MASK_ALERT;
+ 1276              		.loc 1 172 8 view .LVU321
+ 1277 0004 A3B9     		cbnz	r3, .L103
+ 171:driver/Src/EMC2305.c ****     if (config->alert_mask) {
+ 1278              		.loc 1 171 13 view .LVU322
+ 1279 0006 0022     		movs	r2, #0
+ 1280              	.L98:
+ 1281              	.LVL102:
+ 175:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DIS_TO;
+ARM GAS  /tmp/ccmsWjof.s 			page 39
+
+
+ 1282              		.loc 1 175 5 is_stmt 1 view .LVU323
+ 175:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DIS_TO;
+ 1283              		.loc 1 175 15 is_stmt 0 view .LVU324
+ 1284 0008 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 175:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DIS_TO;
+ 1285              		.loc 1 175 8 view .LVU325
+ 1286 000a 0BB1     		cbz	r3, .L99
+ 176:driver/Src/EMC2305.c ****     }
+ 1287              		.loc 1 176 9 is_stmt 1 view .LVU326
+ 176:driver/Src/EMC2305.c ****     }
+ 1288              		.loc 1 176 21 is_stmt 0 view .LVU327
+ 1289 000c 42F04002 		orr	r2, r2, #64
+ 1290              	.LVL103:
+ 1291              	.L99:
+ 178:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_WD_EN;
+ 1292              		.loc 1 178 5 is_stmt 1 view .LVU328
+ 178:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_WD_EN;
+ 1293              		.loc 1 178 15 is_stmt 0 view .LVU329
+ 1294 0010 8B78     		ldrb	r3, [r1, #2]	@ zero_extendqisi2
+ 178:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_WD_EN;
+ 1295              		.loc 1 178 8 view .LVU330
+ 1296 0012 0BB1     		cbz	r3, .L100
+ 179:driver/Src/EMC2305.c ****     }
+ 1297              		.loc 1 179 9 is_stmt 1 view .LVU331
+ 179:driver/Src/EMC2305.c ****     }
+ 1298              		.loc 1 179 21 is_stmt 0 view .LVU332
+ 1299 0014 42F02002 		orr	r2, r2, #32
+ 1300              	.LVL104:
+ 1301              	.L100:
+ 181:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DRECK;
+ 1302              		.loc 1 181 5 is_stmt 1 view .LVU333
+ 181:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DRECK;
+ 1303              		.loc 1 181 15 is_stmt 0 view .LVU334
+ 1304 0018 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 181:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DRECK;
+ 1305              		.loc 1 181 8 view .LVU335
+ 1306 001a 0BB1     		cbz	r3, .L101
+ 182:driver/Src/EMC2305.c ****     }
+ 1307              		.loc 1 182 9 is_stmt 1 view .LVU336
+ 182:driver/Src/EMC2305.c ****     }
+ 1308              		.loc 1 182 21 is_stmt 0 view .LVU337
+ 1309 001c 42F00202 		orr	r2, r2, #2
+ 1310              	.LVL105:
+ 1311              	.L101:
+ 184:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_USECK;
+ 1312              		.loc 1 184 5 is_stmt 1 view .LVU338
+ 184:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_USECK;
+ 1313              		.loc 1 184 15 is_stmt 0 view .LVU339
+ 1314 0020 0B79     		ldrb	r3, [r1, #4]	@ zero_extendqisi2
+ 184:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_USECK;
+ 1315              		.loc 1 184 8 view .LVU340
+ 1316 0022 0BB1     		cbz	r3, .L102
+ 185:driver/Src/EMC2305.c ****     }
+ 1317              		.loc 1 185 9 is_stmt 1 view .LVU341
+ 185:driver/Src/EMC2305.c ****     }
+ 1318              		.loc 1 185 21 is_stmt 0 view .LVU342
+ 1319 0024 42F00102 		orr	r2, r2, #1
+ARM GAS  /tmp/ccmsWjof.s 			page 40
+
+
+ 1320              	.LVL106:
+ 1321              	.L102:
+ 189:driver/Src/EMC2305.c **** }
+ 1322              		.loc 1 189 5 is_stmt 1 view .LVU343
+ 189:driver/Src/EMC2305.c **** }
+ 1323              		.loc 1 189 12 is_stmt 0 view .LVU344
+ 1324 0028 2021     		movs	r1, #32
+ 1325              	.LVL107:
+ 189:driver/Src/EMC2305.c **** }
+ 1326              		.loc 1 189 12 view .LVU345
+ 1327 002a FFF7FEFF 		bl	EMC2305_WriteReg
+ 1328              	.LVL108:
+ 190:driver/Src/EMC2305.c **** 
+ 1329              		.loc 1 190 1 view .LVU346
+ 1330 002e 08BD     		pop	{r3, pc}
+ 1331              	.LVL109:
+ 1332              	.L103:
+ 173:driver/Src/EMC2305.c ****     }
+ 1333              		.loc 1 173 21 view .LVU347
+ 1334 0030 8022     		movs	r2, #128
+ 1335 0032 E9E7     		b	.L98
+ 1336              		.cfi_endproc
+ 1337              	.LFE248:
+ 1339              		.section	.text.EMC2305_SetPWMBaseFrequency,"ax",%progbits
+ 1340              		.align	1
+ 1341              		.global	EMC2305_SetPWMBaseFrequency
+ 1342              		.syntax unified
+ 1343              		.thumb
+ 1344              		.thumb_func
+ 1346              	EMC2305_SetPWMBaseFrequency:
+ 1347              	.LVL110:
+ 1348              	.LFB249:
+ 201:driver/Src/EMC2305.c ****     // Check if the user is stupid (lakshay)
+ 1349              		.loc 1 201 117 is_stmt 1 view -0
+ 1350              		.cfi_startproc
+ 1351              		@ args = 0, pretend = 0, frame = 8
+ 1352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 203:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1353              		.loc 1 203 5 view .LVU349
+ 203:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1354              		.loc 1 203 8 is_stmt 0 view .LVU350
+ 1355 0000 0429     		cmp	r1, #4
+ 1356 0002 59D8     		bhi	.L115
+ 201:driver/Src/EMC2305.c ****     // Check if the user is stupid (lakshay)
+ 1357              		.loc 1 201 117 view .LVU351
+ 1358 0004 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1359              	.LCFI32:
+ 1360              		.cfi_def_cfa_offset 20
+ 1361              		.cfi_offset 4, -20
+ 1362              		.cfi_offset 5, -16
+ 1363              		.cfi_offset 6, -12
+ 1364              		.cfi_offset 7, -8
+ 1365              		.cfi_offset 14, -4
+ 1366 0006 83B0     		sub	sp, sp, #12
+ 1367              	.LCFI33:
+ 1368              		.cfi_def_cfa_offset 32
+ 1369 0008 0646     		mov	r6, r0
+ARM GAS  /tmp/ccmsWjof.s 			page 41
+
+
+ 1370 000a 0C46     		mov	r4, r1
+ 1371 000c 1546     		mov	r5, r2
+ 208:driver/Src/EMC2305.c ****     if ((fan == EMC2305_FAN4) || (fan == EMC2305_FAN5)) {
+ 1372              		.loc 1 208 5 is_stmt 1 view .LVU352
+ 209:driver/Src/EMC2305.c ****         // PWM BaseF45 Register
+ 1373              		.loc 1 209 5 view .LVU353
+ 209:driver/Src/EMC2305.c ****         // PWM BaseF45 Register
+ 1374              		.loc 1 209 31 is_stmt 0 view .LVU354
+ 1375 000e CB1E     		subs	r3, r1, #3
+ 1376 0010 DBB2     		uxtb	r3, r3
+ 209:driver/Src/EMC2305.c ****         // PWM BaseF45 Register
+ 1377              		.loc 1 209 8 view .LVU355
+ 1378 0012 012B     		cmp	r3, #1
+ 1379 0014 12D9     		bls	.L123
+ 215:driver/Src/EMC2305.c ****     }
+ 1380              		.loc 1 215 13 view .LVU356
+ 1381 0016 2D27     		movs	r7, #45
+ 1382              	.L107:
+ 1383              	.LVL111:
+ 219:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, reg, &val) != EMC2305_OK) {
+ 1384              		.loc 1 219 5 is_stmt 1 view .LVU357
+ 219:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, reg, &val) != EMC2305_OK) {
+ 1385              		.loc 1 219 13 is_stmt 0 view .LVU358
+ 1386 0018 0023     		movs	r3, #0
+ 1387 001a 8DF80730 		strb	r3, [sp, #7]
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1388              		.loc 1 220 5 is_stmt 1 view .LVU359
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1389              		.loc 1 220 9 is_stmt 0 view .LVU360
+ 1390 001e 0DF10702 		add	r2, sp, #7
+ 1391              	.LVL112:
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1392              		.loc 1 220 9 view .LVU361
+ 1393 0022 3946     		mov	r1, r7
+ 1394              	.LVL113:
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1395              		.loc 1 220 9 view .LVU362
+ 1396 0024 3046     		mov	r0, r6
+ 1397              	.LVL114:
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1398              		.loc 1 220 9 view .LVU363
+ 1399 0026 FFF7FEFF 		bl	EMC2305_ReadReg
+ 1400              	.LVL115:
+ 220:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1401              		.loc 1 220 8 discriminator 1 view .LVU364
+ 1402 002a 0028     		cmp	r0, #0
+ 1403 002c 46D1     		bne	.L117
+ 225:driver/Src/EMC2305.c ****     {
+ 1404              		.loc 1 225 5 is_stmt 1 view .LVU365
+ 1405 002e 042C     		cmp	r4, #4
+ 1406 0030 46D8     		bhi	.L118
+ 1407 0032 DFE804F0 		tbb	[pc, r4]
+ 1408              	.L109:
+ 1409 0036 05       		.byte	(.L113-.L109)/2
+ 1410 0037 16       		.byte	(.L112-.L109)/2
+ 1411 0038 21       		.byte	(.L111-.L109)/2
+ 1412 0039 2C       		.byte	(.L110-.L109)/2
+ARM GAS  /tmp/ccmsWjof.s 			page 42
+
+
+ 1413 003a 36       		.byte	(.L108-.L109)/2
+ 1414              	.LVL116:
+ 1415 003b 00       		.p2align 1
+ 1416              	.L123:
+ 211:driver/Src/EMC2305.c ****     }
+ 1417              		.loc 1 211 13 is_stmt 0 view .LVU366
+ 1418 003c 2C27     		movs	r7, #44
+ 1419 003e EBE7     		b	.L107
+ 1420              	.LVL117:
+ 1421              	.L113:
+ 228:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN1_SHIFT;
+ 1422              		.loc 1 228 9 is_stmt 1 view .LVU367
+ 228:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN1_SHIFT;
+ 1423              		.loc 1 228 13 is_stmt 0 view .LVU368
+ 1424 0040 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1425 0044 03F0FC03 		and	r3, r3, #252
+ 1426 0048 8DF80730 		strb	r3, [sp, #7]
+ 229:driver/Src/EMC2305.c ****         break;
+ 1427              		.loc 1 229 9 is_stmt 1 view .LVU369
+ 229:driver/Src/EMC2305.c ****         break;
+ 1428              		.loc 1 229 13 is_stmt 0 view .LVU370
+ 1429 004c 2B43     		orrs	r3, r3, r5
+ 1430 004e 8DF80730 		strb	r3, [sp, #7]
+ 230:driver/Src/EMC2305.c ****     case EMC2305_FAN2:
+ 1431              		.loc 1 230 9 is_stmt 1 view .LVU371
+ 1432              	.L114:
+ 250:driver/Src/EMC2305.c ****     }
+ 1433              		.loc 1 250 9 view .LVU372
+ 254:driver/Src/EMC2305.c **** }
+ 1434              		.loc 1 254 5 view .LVU373
+ 254:driver/Src/EMC2305.c **** }
+ 1435              		.loc 1 254 12 is_stmt 0 view .LVU374
+ 1436 0052 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 1437 0056 3946     		mov	r1, r7
+ 1438 0058 3046     		mov	r0, r6
+ 1439 005a FFF7FEFF 		bl	EMC2305_WriteReg
+ 1440              	.LVL118:
+ 1441              	.L106:
+ 255:driver/Src/EMC2305.c **** 
+ 1442              		.loc 1 255 1 view .LVU375
+ 1443 005e 03B0     		add	sp, sp, #12
+ 1444              	.LCFI34:
+ 1445              		.cfi_remember_state
+ 1446              		.cfi_def_cfa_offset 20
+ 1447              		@ sp needed
+ 1448 0060 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1449              	.LVL119:
+ 1450              	.L112:
+ 1451              	.LCFI35:
+ 1452              		.cfi_restore_state
+ 232:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN2_SHIFT;
+ 1453              		.loc 1 232 9 is_stmt 1 view .LVU376
+ 232:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN2_SHIFT;
+ 1454              		.loc 1 232 13 is_stmt 0 view .LVU377
+ 1455 0062 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1456 0066 03F0F303 		and	r3, r3, #243
+ 1457 006a 8DF80730 		strb	r3, [sp, #7]
+ARM GAS  /tmp/ccmsWjof.s 			page 43
+
+
+ 233:driver/Src/EMC2305.c ****         break;
+ 1458              		.loc 1 233 9 is_stmt 1 view .LVU378
+ 233:driver/Src/EMC2305.c ****         break;
+ 1459              		.loc 1 233 13 is_stmt 0 view .LVU379
+ 1460 006e 43EA8503 		orr	r3, r3, r5, lsl #2
+ 1461 0072 8DF80730 		strb	r3, [sp, #7]
+ 234:driver/Src/EMC2305.c ****     case EMC2305_FAN3:
+ 1462              		.loc 1 234 9 is_stmt 1 view .LVU380
+ 1463 0076 ECE7     		b	.L114
+ 1464              	.L111:
+ 236:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN3_SHIFT;
+ 1465              		.loc 1 236 9 view .LVU381
+ 236:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN3_SHIFT;
+ 1466              		.loc 1 236 13 is_stmt 0 view .LVU382
+ 1467 0078 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1468 007c 03F0CF03 		and	r3, r3, #207
+ 1469 0080 8DF80730 		strb	r3, [sp, #7]
+ 237:driver/Src/EMC2305.c ****         break;
+ 1470              		.loc 1 237 9 is_stmt 1 view .LVU383
+ 237:driver/Src/EMC2305.c ****         break;
+ 1471              		.loc 1 237 13 is_stmt 0 view .LVU384
+ 1472 0084 43EA0513 		orr	r3, r3, r5, lsl #4
+ 1473 0088 8DF80730 		strb	r3, [sp, #7]
+ 238:driver/Src/EMC2305.c ****     case EMC2305_FAN4:
+ 1474              		.loc 1 238 9 is_stmt 1 view .LVU385
+ 1475 008c E1E7     		b	.L114
+ 1476              	.L110:
+ 240:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN4_SHIFT;
+ 1477              		.loc 1 240 9 view .LVU386
+ 240:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN4_SHIFT;
+ 1478              		.loc 1 240 13 is_stmt 0 view .LVU387
+ 1479 008e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1480 0092 03F0FC03 		and	r3, r3, #252
+ 1481 0096 8DF80730 		strb	r3, [sp, #7]
+ 241:driver/Src/EMC2305.c ****         break;
+ 1482              		.loc 1 241 9 is_stmt 1 view .LVU388
+ 241:driver/Src/EMC2305.c ****         break;
+ 1483              		.loc 1 241 13 is_stmt 0 view .LVU389
+ 1484 009a 2B43     		orrs	r3, r3, r5
+ 1485 009c 8DF80730 		strb	r3, [sp, #7]
+ 242:driver/Src/EMC2305.c ****     case EMC2305_FAN5:
+ 1486              		.loc 1 242 9 is_stmt 1 view .LVU390
+ 1487 00a0 D7E7     		b	.L114
+ 1488              	.L108:
+ 244:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN5_SHIFT;
+ 1489              		.loc 1 244 9 view .LVU391
+ 244:driver/Src/EMC2305.c ****         val |= freq << EMC2305_PWM_FAN5_SHIFT;
+ 1490              		.loc 1 244 13 is_stmt 0 view .LVU392
+ 1491 00a2 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1492 00a6 03F0F303 		and	r3, r3, #243
+ 1493 00aa 8DF80730 		strb	r3, [sp, #7]
+ 245:driver/Src/EMC2305.c ****         break;
+ 1494              		.loc 1 245 9 is_stmt 1 view .LVU393
+ 245:driver/Src/EMC2305.c ****         break;
+ 1495              		.loc 1 245 13 is_stmt 0 view .LVU394
+ 1496 00ae 43EA8503 		orr	r3, r3, r5, lsl #2
+ 1497 00b2 8DF80730 		strb	r3, [sp, #7]
+ARM GAS  /tmp/ccmsWjof.s 			page 44
+
+
+ 246:driver/Src/EMC2305.c ****     default:
+ 1498              		.loc 1 246 9 is_stmt 1 view .LVU395
+ 1499 00b6 CCE7     		b	.L114
+ 1500              	.LVL120:
+ 1501              	.L115:
+ 1502              	.LCFI36:
+ 1503              		.cfi_def_cfa_offset 0
+ 1504              		.cfi_restore 4
+ 1505              		.cfi_restore 5
+ 1506              		.cfi_restore 6
+ 1507              		.cfi_restore 7
+ 1508              		.cfi_restore 14
+ 204:driver/Src/EMC2305.c ****     }
+ 1509              		.loc 1 204 16 is_stmt 0 view .LVU396
+ 1510 00b8 0120     		movs	r0, #1
+ 1511              	.LVL121:
+ 255:driver/Src/EMC2305.c **** 
+ 1512              		.loc 1 255 1 view .LVU397
+ 1513 00ba 7047     		bx	lr
+ 1514              	.LVL122:
+ 1515              	.L117:
+ 1516              	.LCFI37:
+ 1517              		.cfi_def_cfa_offset 32
+ 1518              		.cfi_offset 4, -20
+ 1519              		.cfi_offset 5, -16
+ 1520              		.cfi_offset 6, -12
+ 1521              		.cfi_offset 7, -8
+ 1522              		.cfi_offset 14, -4
+ 221:driver/Src/EMC2305.c ****     }
+ 1523              		.loc 1 221 16 view .LVU398
+ 1524 00bc 0120     		movs	r0, #1
+ 1525 00be CEE7     		b	.L106
+ 1526              	.L118:
+ 225:driver/Src/EMC2305.c ****     {
+ 1527              		.loc 1 225 5 view .LVU399
+ 1528 00c0 0120     		movs	r0, #1
+ 1529 00c2 CCE7     		b	.L106
+ 1530              		.cfi_endproc
+ 1531              	.LFE249:
+ 1533              		.section	.text.EMC2305_SetFanConfig,"ax",%progbits
+ 1534              		.align	1
+ 1535              		.global	EMC2305_SetFanConfig
+ 1536              		.syntax unified
+ 1537              		.thumb
+ 1538              		.thumb_func
+ 1540              	EMC2305_SetFanConfig:
+ 1541              	.LVL123:
+ 1542              	.LFB250:
+ 265:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1543              		.loc 1 265 143 is_stmt 1 view -0
+ 1544              		.cfi_startproc
+ 1545              		@ args = 0, pretend = 0, frame = 0
+ 1546              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1547              		.loc 1 266 5 view .LVU401
+ 266:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1548              		.loc 1 266 8 is_stmt 0 view .LVU402
+ARM GAS  /tmp/ccmsWjof.s 			page 45
+
+
+ 1549 0000 0429     		cmp	r1, #4
+ 1550 0002 01D9     		bls	.L132
+ 267:driver/Src/EMC2305.c ****     }
+ 1551              		.loc 1 267 16 view .LVU403
+ 1552 0004 0120     		movs	r0, #1
+ 1553              	.LVL124:
+ 291:driver/Src/EMC2305.c **** 
+ 1554              		.loc 1 291 1 view .LVU404
+ 1555 0006 7047     		bx	lr
+ 1556              	.LVL125:
+ 1557              	.L132:
+ 265:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1558              		.loc 1 265 143 view .LVU405
+ 1559 0008 70B5     		push	{r4, r5, r6, lr}
+ 1560              	.LCFI38:
+ 1561              		.cfi_def_cfa_offset 16
+ 1562              		.cfi_offset 4, -16
+ 1563              		.cfi_offset 5, -12
+ 1564              		.cfi_offset 6, -8
+ 1565              		.cfi_offset 14, -4
+ 1566 000a 0446     		mov	r4, r0
+ 271:driver/Src/EMC2305.c ****     config1_bits |= (config1->enable_closed_loop << EMC2305_CONFIG1_ENAG_SHIFT);
+ 1567              		.loc 1 271 5 is_stmt 1 view .LVU406
+ 1568              	.LVL126:
+ 272:driver/Src/EMC2305.c ****     config1_bits |= (config1->range << EMC2305_CONFIG1_RNG_SHIFT);
+ 1569              		.loc 1 272 5 view .LVU407
+ 272:driver/Src/EMC2305.c ****     config1_bits |= (config1->range << EMC2305_CONFIG1_RNG_SHIFT);
+ 1570              		.loc 1 272 18 is_stmt 0 view .LVU408
+ 1571 000c 92F90000 		ldrsb	r0, [r2]
+ 1572              	.LVL127:
+ 273:driver/Src/EMC2305.c ****     config1_bits |= (config1->edges << EMC2305_CONFIG1_EDG_SHIFT);
+ 1573              		.loc 1 273 5 is_stmt 1 view .LVU409
+ 273:driver/Src/EMC2305.c ****     config1_bits |= (config1->edges << EMC2305_CONFIG1_EDG_SHIFT);
+ 1574              		.loc 1 273 29 is_stmt 0 view .LVU410
+ 1575 0010 5578     		ldrb	r5, [r2, #1]	@ zero_extendqisi2
+ 273:driver/Src/EMC2305.c ****     config1_bits |= (config1->edges << EMC2305_CONFIG1_EDG_SHIFT);
+ 1576              		.loc 1 273 18 view .LVU411
+ 1577 0012 C001     		lsls	r0, r0, #7
+ 1578 0014 40EA4510 		orr	r0, r0, r5, lsl #5
+ 1579 0018 40B2     		sxtb	r0, r0
+ 1580              	.LVL128:
+ 274:driver/Src/EMC2305.c ****     config1_bits |= (config1->update_time << EMC2305_CONFIG1_UDT_SHIFT);
+ 1581              		.loc 1 274 5 is_stmt 1 view .LVU412
+ 274:driver/Src/EMC2305.c ****     config1_bits |= (config1->update_time << EMC2305_CONFIG1_UDT_SHIFT);
+ 1582              		.loc 1 274 29 is_stmt 0 view .LVU413
+ 1583 001a 9578     		ldrb	r5, [r2, #2]	@ zero_extendqisi2
+ 274:driver/Src/EMC2305.c ****     config1_bits |= (config1->update_time << EMC2305_CONFIG1_UDT_SHIFT);
+ 1584              		.loc 1 274 18 view .LVU414
+ 1585 001c 40EAC500 		orr	r0, r0, r5, lsl #3
+ 1586              	.LVL129:
+ 274:driver/Src/EMC2305.c ****     config1_bits |= (config1->update_time << EMC2305_CONFIG1_UDT_SHIFT);
+ 1587              		.loc 1 274 18 view .LVU415
+ 1588 0020 C0B2     		uxtb	r0, r0
+ 1589              	.LVL130:
+ 275:driver/Src/EMC2305.c **** 
+ 1590              		.loc 1 275 5 is_stmt 1 view .LVU416
+ 275:driver/Src/EMC2305.c **** 
+ARM GAS  /tmp/ccmsWjof.s 			page 46
+
+
+ 1591              		.loc 1 275 29 is_stmt 0 view .LVU417
+ 1592 0022 D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 1593              	.LVL131:
+ 278:driver/Src/EMC2305.c ****     config2_bits |= (config2->enable_ramp_rate_ctl << EMC2305_CONFIG2_ENRC_SHIFT);
+ 1594              		.loc 1 278 5 is_stmt 1 view .LVU418
+ 279:driver/Src/EMC2305.c ****     config2_bits |= (config2->enable_glitch_filter << EMC2305_CONFIG2_GHEN_SHIFT);
+ 1595              		.loc 1 279 5 view .LVU419
+ 279:driver/Src/EMC2305.c ****     config2_bits |= (config2->enable_glitch_filter << EMC2305_CONFIG2_GHEN_SHIFT);
+ 1596              		.loc 1 279 18 is_stmt 0 view .LVU420
+ 1597 0024 93F900C0 		ldrsb	ip, [r3]
+ 1598              	.LVL132:
+ 280:driver/Src/EMC2305.c ****     config2_bits |= (config2->derivative_options << EMC2305_CONFIG2_DPT_SHIFT);
+ 1599              		.loc 1 280 5 is_stmt 1 view .LVU421
+ 280:driver/Src/EMC2305.c ****     config2_bits |= (config2->derivative_options << EMC2305_CONFIG2_DPT_SHIFT);
+ 1600              		.loc 1 280 29 is_stmt 0 view .LVU422
+ 1601 0028 5D78     		ldrb	r5, [r3, #1]	@ zero_extendqisi2
+ 280:driver/Src/EMC2305.c ****     config2_bits |= (config2->derivative_options << EMC2305_CONFIG2_DPT_SHIFT);
+ 1602              		.loc 1 280 18 view .LVU423
+ 1603 002a 4FEA8C1C 		lsl	ip, ip, #6
+ 1604 002e 4CEA451C 		orr	ip, ip, r5, lsl #5
+ 1605 0032 4FFA8CFC 		sxtb	ip, ip
+ 1606              	.LVL133:
+ 281:driver/Src/EMC2305.c ****     config2_bits |= (config2->error_window << EMC2305_CONFIG2_ERG_SHIFT);
+ 1607              		.loc 1 281 5 is_stmt 1 view .LVU424
+ 281:driver/Src/EMC2305.c ****     config2_bits |= (config2->error_window << EMC2305_CONFIG2_ERG_SHIFT);
+ 1608              		.loc 1 281 29 is_stmt 0 view .LVU425
+ 1609 0036 9D78     		ldrb	r5, [r3, #2]	@ zero_extendqisi2
+ 281:driver/Src/EMC2305.c ****     config2_bits |= (config2->error_window << EMC2305_CONFIG2_ERG_SHIFT);
+ 1610              		.loc 1 281 18 view .LVU426
+ 1611 0038 4CEAC50C 		orr	ip, ip, r5, lsl #3
+ 1612              	.LVL134:
+ 281:driver/Src/EMC2305.c ****     config2_bits |= (config2->error_window << EMC2305_CONFIG2_ERG_SHIFT);
+ 1613              		.loc 1 281 18 view .LVU427
+ 1614 003c 4FFA8CFC 		sxtb	ip, ip
+ 1615              	.LVL135:
+ 282:driver/Src/EMC2305.c **** 
+ 1616              		.loc 1 282 5 is_stmt 1 view .LVU428
+ 282:driver/Src/EMC2305.c **** 
+ 1617              		.loc 1 282 29 is_stmt 0 view .LVU429
+ 1618 0040 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1619              	.LVL136:
+ 282:driver/Src/EMC2305.c **** 
+ 1620              		.loc 1 282 18 view .LVU430
+ 1621 0042 4CEA4303 		orr	r3, ip, r3, lsl #1
+ 1622 0046 DDB2     		uxtb	r5, r3
+ 1623              	.LVL137:
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1624              		.loc 1 285 5 is_stmt 1 view .LVU431
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1625              		.loc 1 285 32 is_stmt 0 view .LVU432
+ 1626 0048 0901     		lsls	r1, r1, #4
+ 1627              	.LVL138:
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1628              		.loc 1 285 32 view .LVU433
+ 1629 004a CEB2     		uxtb	r6, r1
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1630              		.loc 1 285 9 view .LVU434
+ARM GAS  /tmp/ccmsWjof.s 			page 47
+
+
+ 1631 004c 06F13201 		add	r1, r6, #50
+ 1632 0050 0243     		orrs	r2, r2, r0
+ 1633              	.LVL139:
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1634              		.loc 1 285 9 view .LVU435
+ 1635 0052 01F0FE01 		and	r1, r1, #254
+ 1636 0056 2046     		mov	r0, r4
+ 1637 0058 FFF7FEFF 		bl	EMC2305_WriteReg
+ 1638              	.LVL140:
+ 285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1639              		.loc 1 285 8 discriminator 1 view .LVU436
+ 1640 005c 08B1     		cbz	r0, .L133
+ 286:driver/Src/EMC2305.c ****     }
+ 1641              		.loc 1 286 16 view .LVU437
+ 1642 005e 0120     		movs	r0, #1
+ 1643              	.L125:
+ 291:driver/Src/EMC2305.c **** 
+ 1644              		.loc 1 291 1 view .LVU438
+ 1645 0060 70BD     		pop	{r4, r5, r6, pc}
+ 1646              	.LVL141:
+ 1647              	.L133:
+ 290:driver/Src/EMC2305.c **** }
+ 1648              		.loc 1 290 5 is_stmt 1 view .LVU439
+ 290:driver/Src/EMC2305.c **** }
+ 1649              		.loc 1 290 12 is_stmt 0 view .LVU440
+ 1650 0062 06F13301 		add	r1, r6, #51
+ 1651 0066 2A46     		mov	r2, r5
+ 1652 0068 C9B2     		uxtb	r1, r1
+ 1653 006a 2046     		mov	r0, r4
+ 1654 006c FFF7FEFF 		bl	EMC2305_WriteReg
+ 1655              	.LVL142:
+ 1656 0070 F6E7     		b	.L125
+ 1657              		.cfi_endproc
+ 1658              	.LFE250:
+ 1660              		.section	.text.EMC2305_SetPWMOutputMode,"ax",%progbits
+ 1661              		.align	1
+ 1662              		.global	EMC2305_SetPWMOutputMode
+ 1663              		.syntax unified
+ 1664              		.thumb
+ 1665              		.thumb_func
+ 1667              	EMC2305_SetPWMOutputMode:
+ 1668              	.LVL143:
+ 1669              	.LFB251:
+ 300:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1670              		.loc 1 300 104 is_stmt 1 view -0
+ 1671              		.cfi_startproc
+ 1672              		@ args = 0, pretend = 0, frame = 8
+ 1673              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1674              		.loc 1 301 5 view .LVU442
+ 301:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1675              		.loc 1 301 8 is_stmt 0 view .LVU443
+ 1676 0000 0429     		cmp	r1, #4
+ 1677 0002 01D9     		bls	.L144
+ 302:driver/Src/EMC2305.c ****     }
+ 1678              		.loc 1 302 16 view .LVU444
+ 1679 0004 0120     		movs	r0, #1
+ARM GAS  /tmp/ccmsWjof.s 			page 48
+
+
+ 1680              	.LVL144:
+ 322:driver/Src/EMC2305.c **** 
+ 1681              		.loc 1 322 1 view .LVU445
+ 1682 0006 7047     		bx	lr
+ 1683              	.LVL145:
+ 1684              	.L144:
+ 300:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1685              		.loc 1 300 104 view .LVU446
+ 1686 0008 70B5     		push	{r4, r5, r6, lr}
+ 1687              	.LCFI39:
+ 1688              		.cfi_def_cfa_offset 16
+ 1689              		.cfi_offset 4, -16
+ 1690              		.cfi_offset 5, -12
+ 1691              		.cfi_offset 6, -8
+ 1692              		.cfi_offset 14, -4
+ 1693 000a 82B0     		sub	sp, sp, #8
+ 1694              	.LCFI40:
+ 1695              		.cfi_def_cfa_offset 24
+ 1696 000c 0646     		mov	r6, r0
+ 1697 000e 0C46     		mov	r4, r1
+ 1698 0010 1546     		mov	r5, r2
+ 306:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PWM_OUTPUT_CONFIG, &val) != EMC2305_OK) {
+ 1699              		.loc 1 306 5 is_stmt 1 view .LVU447
+ 306:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_REG_PWM_OUTPUT_CONFIG, &val) != EMC2305_OK) {
+ 1700              		.loc 1 306 13 is_stmt 0 view .LVU448
+ 1701 0012 0023     		movs	r3, #0
+ 1702 0014 8DF80730 		strb	r3, [sp, #7]
+ 307:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1703              		.loc 1 307 5 is_stmt 1 view .LVU449
+ 307:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1704              		.loc 1 307 9 is_stmt 0 view .LVU450
+ 1705 0018 0DF10702 		add	r2, sp, #7
+ 1706              	.LVL146:
+ 307:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1707              		.loc 1 307 9 view .LVU451
+ 1708 001c 2B21     		movs	r1, #43
+ 1709              	.LVL147:
+ 307:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1710              		.loc 1 307 9 view .LVU452
+ 1711 001e FFF7FEFF 		bl	EMC2305_ReadReg
+ 1712              	.LVL148:
+ 307:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1713              		.loc 1 307 8 discriminator 1 view .LVU453
+ 1714 0022 C8B9     		cbnz	r0, .L139
+ 311:driver/Src/EMC2305.c ****         // Open-drain output mode
+ 1715              		.loc 1 311 5 is_stmt 1 view .LVU454
+ 311:driver/Src/EMC2305.c ****         // Open-drain output mode
+ 1716              		.loc 1 311 8 is_stmt 0 view .LVU455
+ 1717 0024 85B1     		cbz	r5, .L136
+ 313:driver/Src/EMC2305.c ****     }
+ 1718              		.loc 1 313 9 is_stmt 1 view .LVU456
+ 313:driver/Src/EMC2305.c ****     }
+ 1719              		.loc 1 313 20 is_stmt 0 view .LVU457
+ 1720 0026 0123     		movs	r3, #1
+ 1721 0028 A340     		lsls	r3, r3, r4
+ 313:driver/Src/EMC2305.c ****     }
+ 1722              		.loc 1 313 13 view .LVU458
+ARM GAS  /tmp/ccmsWjof.s 			page 49
+
+
+ 1723 002a DB43     		mvns	r3, r3
+ 1724 002c 5BB2     		sxtb	r3, r3
+ 1725 002e 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 1726 0032 1340     		ands	r3, r3, r2
+ 1727 0034 8DF80730 		strb	r3, [sp, #7]
+ 1728              	.L137:
+ 321:driver/Src/EMC2305.c **** }
+ 1729              		.loc 1 321 5 is_stmt 1 view .LVU459
+ 321:driver/Src/EMC2305.c **** }
+ 1730              		.loc 1 321 12 is_stmt 0 view .LVU460
+ 1731 0038 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 1732 003c 2B21     		movs	r1, #43
+ 1733 003e 3046     		mov	r0, r6
+ 1734 0040 FFF7FEFF 		bl	EMC2305_WriteReg
+ 1735              	.LVL149:
+ 1736              	.L135:
+ 322:driver/Src/EMC2305.c **** 
+ 1737              		.loc 1 322 1 view .LVU461
+ 1738 0044 02B0     		add	sp, sp, #8
+ 1739              	.LCFI41:
+ 1740              		.cfi_remember_state
+ 1741              		.cfi_def_cfa_offset 16
+ 1742              		@ sp needed
+ 1743 0046 70BD     		pop	{r4, r5, r6, pc}
+ 1744              	.LVL150:
+ 1745              	.L136:
+ 1746              	.LCFI42:
+ 1747              		.cfi_restore_state
+ 317:driver/Src/EMC2305.c ****     }
+ 1748              		.loc 1 317 9 is_stmt 1 view .LVU462
+ 317:driver/Src/EMC2305.c ****     }
+ 1749              		.loc 1 317 19 is_stmt 0 view .LVU463
+ 1750 0048 0122     		movs	r2, #1
+ 1751 004a A240     		lsls	r2, r2, r4
+ 317:driver/Src/EMC2305.c ****     }
+ 1752              		.loc 1 317 13 view .LVU464
+ 1753 004c 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1754 0050 1343     		orrs	r3, r3, r2
+ 1755 0052 8DF80730 		strb	r3, [sp, #7]
+ 1756 0056 EFE7     		b	.L137
+ 1757              	.L139:
+ 308:driver/Src/EMC2305.c ****     }
+ 1758              		.loc 1 308 16 view .LVU465
+ 1759 0058 0120     		movs	r0, #1
+ 1760 005a F3E7     		b	.L135
+ 1761              		.cfi_endproc
+ 1762              	.LFE251:
+ 1764              		.section	.text.EMC2305_SetFanPWM,"ax",%progbits
+ 1765              		.align	1
+ 1766              		.global	EMC2305_SetFanPWM
+ 1767              		.syntax unified
+ 1768              		.thumb
+ 1769              		.thumb_func
+ 1771              	EMC2305_SetFanPWM:
+ 1772              	.LVL151:
+ 1773              	.LFB252:
+ 333:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ARM GAS  /tmp/ccmsWjof.s 			page 50
+
+
+ 1774              		.loc 1 333 100 is_stmt 1 view -0
+ 1775              		.cfi_startproc
+ 1776              		@ args = 0, pretend = 0, frame = 0
+ 1777              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1778              		.loc 1 334 5 view .LVU467
+ 334:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1779              		.loc 1 334 8 is_stmt 0 view .LVU468
+ 1780 0000 0429     		cmp	r1, #4
+ 1781 0002 14D8     		bhi	.L147
+ 339:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1782              		.loc 1 339 5 is_stmt 1 view .LVU469
+ 339:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1783              		.loc 1 339 8 is_stmt 0 view .LVU470
+ 1784 0004 642A     		cmp	r2, #100
+ 1785 0006 01D9     		bls	.L153
+ 340:driver/Src/EMC2305.c ****     }
+ 1786              		.loc 1 340 16 view .LVU471
+ 1787 0008 0120     		movs	r0, #1
+ 1788              	.LVL152:
+ 348:driver/Src/EMC2305.c **** 
+ 1789              		.loc 1 348 1 view .LVU472
+ 1790 000a 7047     		bx	lr
+ 1791              	.LVL153:
+ 1792              	.L153:
+ 333:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1793              		.loc 1 333 100 view .LVU473
+ 1794 000c 08B5     		push	{r3, lr}
+ 1795              	.LCFI43:
+ 1796              		.cfi_def_cfa_offset 8
+ 1797              		.cfi_offset 3, -8
+ 1798              		.cfi_offset 14, -4
+ 344:driver/Src/EMC2305.c **** 
+ 1799              		.loc 1 344 5 is_stmt 1 view .LVU474
+ 344:driver/Src/EMC2305.c **** 
+ 1800              		.loc 1 344 31 is_stmt 0 view .LVU475
+ 1801 000e C2EB0222 		rsb	r2, r2, r2, lsl #8
+ 1802              	.LVL154:
+ 344:driver/Src/EMC2305.c **** 
+ 1803              		.loc 1 344 38 view .LVU476
+ 1804 0012 084B     		ldr	r3, .L154
+ 1805 0014 83FB02C3 		smull	ip, r3, r3, r2
+ 1806 0018 D217     		asrs	r2, r2, #31
+ 1807 001a C2EB6312 		rsb	r2, r2, r3, asr #5
+ 1808              	.LVL155:
+ 347:driver/Src/EMC2305.c **** }
+ 1809              		.loc 1 347 5 is_stmt 1 view .LVU477
+ 347:driver/Src/EMC2305.c **** }
+ 1810              		.loc 1 347 12 is_stmt 0 view .LVU478
+ 1811 001e 0331     		adds	r1, r1, #3
+ 1812              	.LVL156:
+ 347:driver/Src/EMC2305.c **** }
+ 1813              		.loc 1 347 12 view .LVU479
+ 1814 0020 0901     		lsls	r1, r1, #4
+ 1815 0022 D2B2     		uxtb	r2, r2
+ 347:driver/Src/EMC2305.c **** }
+ 1816              		.loc 1 347 12 view .LVU480
+ARM GAS  /tmp/ccmsWjof.s 			page 51
+
+
+ 1817 0024 01F0F001 		and	r1, r1, #240
+ 1818 0028 FFF7FEFF 		bl	EMC2305_WriteReg
+ 1819              	.LVL157:
+ 348:driver/Src/EMC2305.c **** 
+ 1820              		.loc 1 348 1 view .LVU481
+ 1821 002c 08BD     		pop	{r3, pc}
+ 1822              	.LVL158:
+ 1823              	.L147:
+ 1824              	.LCFI44:
+ 1825              		.cfi_def_cfa_offset 0
+ 1826              		.cfi_restore 3
+ 1827              		.cfi_restore 14
+ 335:driver/Src/EMC2305.c ****     }
+ 1828              		.loc 1 335 16 view .LVU482
+ 1829 002e 0120     		movs	r0, #1
+ 1830              	.LVL159:
+ 335:driver/Src/EMC2305.c ****     }
+ 1831              		.loc 1 335 16 view .LVU483
+ 1832 0030 7047     		bx	lr
+ 1833              	.L155:
+ 1834 0032 00BF     		.align	2
+ 1835              	.L154:
+ 1836 0034 1F85EB51 		.word	1374389535
+ 1837              		.cfi_endproc
+ 1838              	.LFE252:
+ 1840              		.section	.text.EMC2305_SetFanRPM,"ax",%progbits
+ 1841              		.align	1
+ 1842              		.global	EMC2305_SetFanRPM
+ 1843              		.syntax unified
+ 1844              		.thumb
+ 1845              		.thumb_func
+ 1847              	EMC2305_SetFanRPM:
+ 1848              	.LVL160:
+ 1849              	.LFB253:
+ 357:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1850              		.loc 1 357 101 is_stmt 1 view -0
+ 1851              		.cfi_startproc
+ 1852              		@ args = 0, pretend = 0, frame = 0
+ 1853              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1854              		.loc 1 358 5 view .LVU485
+ 358:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1855              		.loc 1 358 8 is_stmt 0 view .LVU486
+ 1856 0000 0429     		cmp	r1, #4
+ 1857 0002 29D8     		bhi	.L158
+ 357:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
+ 1858              		.loc 1 357 101 view .LVU487
+ 1859 0004 70B5     		push	{r4, r5, r6, lr}
+ 1860              	.LCFI45:
+ 1861              		.cfi_def_cfa_offset 16
+ 1862              		.cfi_offset 4, -16
+ 1863              		.cfi_offset 5, -12
+ 1864              		.cfi_offset 6, -8
+ 1865              		.cfi_offset 14, -4
+ 1866 0006 0546     		mov	r5, r0
+ 363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1867              		.loc 1 363 5 is_stmt 1 view .LVU488
+ARM GAS  /tmp/ccmsWjof.s 			page 52
+
+
+ 363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1868              		.loc 1 363 40 is_stmt 0 view .LVU489
+ 1869 0008 A2F5FA73 		sub	r3, r2, #500
+ 1870 000c 9BB2     		uxth	r3, r3
+ 363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1871              		.loc 1 363 8 view .LVU490
+ 1872 000e 43F68C40 		movw	r0, #15500
+ 1873              	.LVL161:
+ 363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1874              		.loc 1 363 8 view .LVU491
+ 1875 0012 8342     		cmp	r3, r0
+ 1876 0014 01D9     		bls	.L165
+ 364:driver/Src/EMC2305.c ****     }
+ 1877              		.loc 1 364 16 view .LVU492
+ 1878 0016 0120     		movs	r0, #1
+ 1879              	.LVL162:
+ 1880              	.L157:
+ 383:driver/Src/EMC2305.c **** 
+ 1881              		.loc 1 383 1 view .LVU493
+ 1882 0018 70BD     		pop	{r4, r5, r6, pc}
+ 1883              	.LVL163:
+ 1884              	.L165:
+ 371:driver/Src/EMC2305.c **** 
+ 1885              		.loc 1 371 5 is_stmt 1 view .LVU494
+ 371:driver/Src/EMC2305.c **** 
+ 1886              		.loc 1 371 72 is_stmt 0 view .LVU495
+ 1887 001a 4FF4F003 		mov	r3, #7864320
+ 1888 001e B3FBF2F3 		udiv	r3, r3, r2
+ 1889              	.LVL164:
+ 374:driver/Src/EMC2305.c ****     uint8_t high_byte = (tach_target >> 5) & 0xFF;     // bits [12:5]
+ 1890              		.loc 1 374 5 is_stmt 1 view .LVU496
+ 374:driver/Src/EMC2305.c ****     uint8_t high_byte = (tach_target >> 5) & 0xFF;     // bits [12:5]
+ 1891              		.loc 1 374 17 is_stmt 0 view .LVU497
+ 1892 0022 C3F30C02 		ubfx	r2, r3, #0, #13
+ 1893              	.LVL165:
+ 375:driver/Src/EMC2305.c ****     uint8_t low_byte = (tach_target & 0x1F) << 3;      // bits [4:0]
+ 1894              		.loc 1 375 5 is_stmt 1 view .LVU498
+ 375:driver/Src/EMC2305.c ****     uint8_t low_byte = (tach_target & 0x1F) << 3;      // bits [4:0]
+ 1895              		.loc 1 375 13 is_stmt 0 view .LVU499
+ 1896 0026 C3F34716 		ubfx	r6, r3, #5, #8
+ 1897              	.LVL166:
+ 376:driver/Src/EMC2305.c **** 
+ 1898              		.loc 1 376 5 is_stmt 1 view .LVU500
+ 376:driver/Src/EMC2305.c **** 
+ 1899              		.loc 1 376 13 is_stmt 0 view .LVU501
+ 1900 002a D200     		lsls	r2, r2, #3
+ 1901              	.LVL167:
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1902              		.loc 1 379 5 is_stmt 1 view .LVU502
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1903              		.loc 1 379 32 is_stmt 0 view .LVU503
+ 1904 002c 0901     		lsls	r1, r1, #4
+ 1905              	.LVL168:
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1906              		.loc 1 379 32 view .LVU504
+ 1907 002e CCB2     		uxtb	r4, r1
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ARM GAS  /tmp/ccmsWjof.s 			page 53
+
+
+ 1908              		.loc 1 379 9 view .LVU505
+ 1909 0030 04F13C01 		add	r1, r4, #60
+ 1910 0034 02F0F802 		and	r2, r2, #248
+ 1911              	.LVL169:
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1912              		.loc 1 379 9 view .LVU506
+ 1913 0038 01F0FC01 		and	r1, r1, #252
+ 1914 003c 2846     		mov	r0, r5
+ 1915 003e FFF7FEFF 		bl	EMC2305_WriteReg
+ 1916              	.LVL170:
+ 379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
+ 1917              		.loc 1 379 8 discriminator 1 view .LVU507
+ 1918 0042 08B1     		cbz	r0, .L166
+ 380:driver/Src/EMC2305.c ****     }
+ 1919              		.loc 1 380 16 view .LVU508
+ 1920 0044 0120     		movs	r0, #1
+ 1921 0046 E7E7     		b	.L157
+ 1922              	.L166:
+ 382:driver/Src/EMC2305.c **** }
+ 1923              		.loc 1 382 5 is_stmt 1 view .LVU509
+ 382:driver/Src/EMC2305.c **** }
+ 1924              		.loc 1 382 12 is_stmt 0 view .LVU510
+ 1925 0048 04F13D01 		add	r1, r4, #61
+ 1926 004c 3246     		mov	r2, r6
+ 1927 004e C9B2     		uxtb	r1, r1
+ 1928 0050 2846     		mov	r0, r5
+ 1929 0052 FFF7FEFF 		bl	EMC2305_WriteReg
+ 1930              	.LVL171:
+ 1931 0056 DFE7     		b	.L157
+ 1932              	.LVL172:
+ 1933              	.L158:
+ 1934              	.LCFI46:
+ 1935              		.cfi_def_cfa_offset 0
+ 1936              		.cfi_restore 4
+ 1937              		.cfi_restore 5
+ 1938              		.cfi_restore 6
+ 1939              		.cfi_restore 14
+ 359:driver/Src/EMC2305.c ****     }
+ 1940              		.loc 1 359 16 view .LVU511
+ 1941 0058 0120     		movs	r0, #1
+ 1942              	.LVL173:
+ 383:driver/Src/EMC2305.c **** 
+ 1943              		.loc 1 383 1 view .LVU512
+ 1944 005a 7047     		bx	lr
+ 1945              		.cfi_endproc
+ 1946              	.LFE253:
+ 1948              		.section	.text.EMC2305_I2C_MasterTxCpltCallback,"ax",%progbits
+ 1949              		.align	1
+ 1950              		.global	EMC2305_I2C_MasterTxCpltCallback
+ 1951              		.syntax unified
+ 1952              		.thumb
+ 1953              		.thumb_func
+ 1955              	EMC2305_I2C_MasterTxCpltCallback:
+ 1956              	.LVL174:
+ 1957              	.LFB260:
+ 618:driver/Src/EMC2305.c ****         }
+ 619:driver/Src/EMC2305.c ****     }
+ARM GAS  /tmp/ccmsWjof.s 			page 54
+
+
+ 620:driver/Src/EMC2305.c **** }
+ 621:driver/Src/EMC2305.c **** 
+ 622:driver/Src/EMC2305.c **** // I2C Transmit Interrupt Callback (Internal)
+ 623:driver/Src/EMC2305.c **** void EMC2305_I2C_MasterTxCpltCallback(I2C_HandleTypeDef* hi2c) {
+ 1958              		.loc 1 623 64 is_stmt 1 view -0
+ 1959              		.cfi_startproc
+ 1960              		@ args = 0, pretend = 0, frame = 8
+ 1961              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1962              		.loc 1 623 64 is_stmt 0 view .LVU514
+ 1963 0000 00B5     		push	{lr}
+ 1964              	.LCFI47:
+ 1965              		.cfi_def_cfa_offset 4
+ 1966              		.cfi_offset 14, -4
+ 1967 0002 83B0     		sub	sp, sp, #12
+ 1968              	.LCFI48:
+ 1969              		.cfi_def_cfa_offset 16
+ 624:driver/Src/EMC2305.c ****     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+ 1970              		.loc 1 624 5 is_stmt 1 view .LVU515
+ 1971              		.loc 1 624 16 is_stmt 0 view .LVU516
+ 1972 0004 0023     		movs	r3, #0
+ 1973 0006 0193     		str	r3, [sp, #4]
+ 625:driver/Src/EMC2305.c **** 
+ 626:driver/Src/EMC2305.c ****     // Get the chip using this I2C bus
+ 627:driver/Src/EMC2305.c ****     EMC2305_HandleTypeDef* chip = NULL;
+ 1974              		.loc 1 627 5 is_stmt 1 view .LVU517
+ 1975              	.LVL175:
+ 628:driver/Src/EMC2305.c ****     if (hi2c->Instance == I2C1) {
+ 1976              		.loc 1 628 5 view .LVU518
+ 1977              		.loc 1 628 13 is_stmt 0 view .LVU519
+ 1978 0008 0368     		ldr	r3, [r0]
+ 1979              		.loc 1 628 8 view .LVU520
+ 1980 000a 124A     		ldr	r2, .L176
+ 1981 000c 9342     		cmp	r3, r2
+ 1982 000e 08D0     		beq	.L174
+ 629:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 630:driver/Src/EMC2305.c ****     }
+ 631:driver/Src/EMC2305.c **** #ifdef I2C2
+ 632:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C2) {
+ 1983              		.loc 1 632 10 is_stmt 1 view .LVU521
+ 1984              		.loc 1 632 13 is_stmt 0 view .LVU522
+ 1985 0010 114A     		ldr	r2, .L176+4
+ 1986 0012 9342     		cmp	r3, r2
+ 1987 0014 1BD0     		beq	.L175
+ 633:driver/Src/EMC2305.c ****         chip = chip_I2C2;
+ 634:driver/Src/EMC2305.c ****     }
+ 635:driver/Src/EMC2305.c **** #endif
+ 636:driver/Src/EMC2305.c **** #ifdef I2C3
+ 637:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C3) {
+ 1988              		.loc 1 637 10 is_stmt 1 view .LVU523
+ 1989              		.loc 1 637 13 is_stmt 0 view .LVU524
+ 1990 0016 114A     		ldr	r2, .L176+8
+ 1991 0018 9342     		cmp	r3, r2
+ 1992 001a 09D1     		bne	.L171
+ 638:driver/Src/EMC2305.c ****         chip = chip_I2C3;
+ 1993              		.loc 1 638 9 is_stmt 1 view .LVU525
+ 1994              		.loc 1 638 14 is_stmt 0 view .LVU526
+ 1995 001c 104B     		ldr	r3, .L176+12
+ARM GAS  /tmp/ccmsWjof.s 			page 55
+
+
+ 1996 001e 1B68     		ldr	r3, [r3]
+ 1997              	.LVL176:
+ 1998              		.loc 1 638 14 view .LVU527
+ 1999 0020 01E0     		b	.L169
+ 2000              	.LVL177:
+ 2001              	.L174:
+ 629:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 2002              		.loc 1 629 9 is_stmt 1 view .LVU528
+ 629:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 2003              		.loc 1 629 14 is_stmt 0 view .LVU529
+ 2004 0022 104B     		ldr	r3, .L176+16
+ 2005 0024 1B68     		ldr	r3, [r3]
+ 2006              	.LVL178:
+ 2007              	.L169:
+ 639:driver/Src/EMC2305.c ****     }
+ 640:driver/Src/EMC2305.c **** #endif
+ 641:driver/Src/EMC2305.c **** 
+ 642:driver/Src/EMC2305.c ****     if (chip != NULL) {
+ 2008              		.loc 1 642 5 is_stmt 1 view .LVU530
+ 2009              		.loc 1 642 8 is_stmt 0 view .LVU531
+ 2010 0026 1BB1     		cbz	r3, .L171
+ 643:driver/Src/EMC2305.c ****         xSemaphoreGiveFromISR(chip->i2c_complete, &xHigherPriorityTaskWoken);
+ 2011              		.loc 1 643 9 is_stmt 1 view .LVU532
+ 2012 0028 01A9     		add	r1, sp, #4
+ 2013 002a 9868     		ldr	r0, [r3, #8]
+ 2014              	.LVL179:
+ 2015              		.loc 1 643 9 is_stmt 0 view .LVU533
+ 2016 002c FFF7FEFF 		bl	xQueueGiveFromISR
+ 2017              	.LVL180:
+ 2018              	.L171:
+ 644:driver/Src/EMC2305.c ****     }
+ 645:driver/Src/EMC2305.c **** 
+ 646:driver/Src/EMC2305.c ****     // Context switch back to higher priority task if woken
+ 647:driver/Src/EMC2305.c ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+ 2019              		.loc 1 647 5 is_stmt 1 view .LVU534
+ 2020              		.loc 1 647 5 view .LVU535
+ 2021 0030 019B     		ldr	r3, [sp, #4]
+ 2022 0032 4BB1     		cbz	r3, .L167
+ 2023              		.loc 1 647 5 discriminator 1 view .LVU536
+ 2024              		.loc 1 647 5 discriminator 1 view .LVU537
+ 2025 0034 4FF0E023 		mov	r3, #-536813568
+ 2026 0038 4FF08052 		mov	r2, #268435456
+ 2027 003c C3F8042D 		str	r2, [r3, #3332]
+ 2028              		.loc 1 647 5 discriminator 1 view .LVU538
+ 2029              		.syntax unified
+ 2030              	@ 647 "driver/Src/EMC2305.c" 1
+ 2031 0040 BFF34F8F 		dsb
+ 2032              	@ 0 "" 2
+ 2033              		.loc 1 647 5 discriminator 1 view .LVU539
+ 2034              	@ 647 "driver/Src/EMC2305.c" 1
+ 2035 0044 BFF36F8F 		isb
+ 2036              	@ 0 "" 2
+ 2037              		.loc 1 647 5 discriminator 1 view .LVU540
+ 2038              		.loc 1 647 5 discriminator 3 view .LVU541
+ 2039              		.loc 1 647 5 discriminator 3 view .LVU542
+ 2040              		.thumb
+ 2041              		.syntax unified
+ARM GAS  /tmp/ccmsWjof.s 			page 56
+
+
+ 2042              	.L167:
+ 648:driver/Src/EMC2305.c **** }
+ 2043              		.loc 1 648 1 is_stmt 0 view .LVU543
+ 2044 0048 03B0     		add	sp, sp, #12
+ 2045              	.LCFI49:
+ 2046              		.cfi_remember_state
+ 2047              		.cfi_def_cfa_offset 4
+ 2048              		@ sp needed
+ 2049 004a 5DF804FB 		ldr	pc, [sp], #4
+ 2050              	.LVL181:
+ 2051              	.L175:
+ 2052              	.LCFI50:
+ 2053              		.cfi_restore_state
+ 633:driver/Src/EMC2305.c ****     }
+ 2054              		.loc 1 633 9 is_stmt 1 view .LVU544
+ 633:driver/Src/EMC2305.c ****     }
+ 2055              		.loc 1 633 14 is_stmt 0 view .LVU545
+ 2056 004e 064B     		ldr	r3, .L176+20
+ 2057 0050 1B68     		ldr	r3, [r3]
+ 2058              	.LVL182:
+ 633:driver/Src/EMC2305.c ****     }
+ 2059              		.loc 1 633 14 view .LVU546
+ 2060 0052 E8E7     		b	.L169
+ 2061              	.L177:
+ 2062              		.align	2
+ 2063              	.L176:
+ 2064 0054 00540040 		.word	1073763328
+ 2065 0058 00580040 		.word	1073764352
+ 2066 005c 005C0040 		.word	1073765376
+ 2067 0060 00000000 		.word	chip_I2C3
+ 2068 0064 00000000 		.word	chip_I2C1
+ 2069 0068 00000000 		.word	chip_I2C2
+ 2070              		.cfi_endproc
+ 2071              	.LFE260:
+ 2073              		.section	.text.EMC2305_I2C_MasterRxCpltCallback,"ax",%progbits
+ 2074              		.align	1
+ 2075              		.global	EMC2305_I2C_MasterRxCpltCallback
+ 2076              		.syntax unified
+ 2077              		.thumb
+ 2078              		.thumb_func
+ 2080              	EMC2305_I2C_MasterRxCpltCallback:
+ 2081              	.LVL183:
+ 2082              	.LFB261:
+ 649:driver/Src/EMC2305.c **** 
+ 650:driver/Src/EMC2305.c **** // I2C Receive Interrupt Callback (Internal)
+ 651:driver/Src/EMC2305.c **** void EMC2305_I2C_MasterRxCpltCallback(I2C_HandleTypeDef* hi2c) {
+ 2083              		.loc 1 651 64 is_stmt 1 view -0
+ 2084              		.cfi_startproc
+ 2085              		@ args = 0, pretend = 0, frame = 8
+ 2086              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2087              		.loc 1 651 64 is_stmt 0 view .LVU548
+ 2088 0000 00B5     		push	{lr}
+ 2089              	.LCFI51:
+ 2090              		.cfi_def_cfa_offset 4
+ 2091              		.cfi_offset 14, -4
+ 2092 0002 83B0     		sub	sp, sp, #12
+ 2093              	.LCFI52:
+ARM GAS  /tmp/ccmsWjof.s 			page 57
+
+
+ 2094              		.cfi_def_cfa_offset 16
+ 652:driver/Src/EMC2305.c ****     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+ 2095              		.loc 1 652 5 is_stmt 1 view .LVU549
+ 2096              		.loc 1 652 16 is_stmt 0 view .LVU550
+ 2097 0004 0023     		movs	r3, #0
+ 2098 0006 0193     		str	r3, [sp, #4]
+ 653:driver/Src/EMC2305.c **** 
+ 654:driver/Src/EMC2305.c ****     // Get the chip using this I2C bus
+ 655:driver/Src/EMC2305.c ****     EMC2305_HandleTypeDef* chip = NULL;
+ 2099              		.loc 1 655 5 is_stmt 1 view .LVU551
+ 2100              	.LVL184:
+ 656:driver/Src/EMC2305.c ****     if (hi2c->Instance == I2C1) {
+ 2101              		.loc 1 656 5 view .LVU552
+ 2102              		.loc 1 656 13 is_stmt 0 view .LVU553
+ 2103 0008 0368     		ldr	r3, [r0]
+ 2104              		.loc 1 656 8 view .LVU554
+ 2105 000a 124A     		ldr	r2, .L187
+ 2106 000c 9342     		cmp	r3, r2
+ 2107 000e 08D0     		beq	.L185
+ 657:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 658:driver/Src/EMC2305.c ****     }
+ 659:driver/Src/EMC2305.c **** #ifdef I2C2
+ 660:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C2) {
+ 2108              		.loc 1 660 10 is_stmt 1 view .LVU555
+ 2109              		.loc 1 660 13 is_stmt 0 view .LVU556
+ 2110 0010 114A     		ldr	r2, .L187+4
+ 2111 0012 9342     		cmp	r3, r2
+ 2112 0014 1BD0     		beq	.L186
+ 661:driver/Src/EMC2305.c ****         chip = chip_I2C2;
+ 662:driver/Src/EMC2305.c ****     }
+ 663:driver/Src/EMC2305.c **** #endif
+ 664:driver/Src/EMC2305.c **** #ifdef I2C3
+ 665:driver/Src/EMC2305.c ****     else if (hi2c->Instance == I2C3) {
+ 2113              		.loc 1 665 10 is_stmt 1 view .LVU557
+ 2114              		.loc 1 665 13 is_stmt 0 view .LVU558
+ 2115 0016 114A     		ldr	r2, .L187+8
+ 2116 0018 9342     		cmp	r3, r2
+ 2117 001a 09D1     		bne	.L182
+ 666:driver/Src/EMC2305.c ****         chip = chip_I2C3;
+ 2118              		.loc 1 666 9 is_stmt 1 view .LVU559
+ 2119              		.loc 1 666 14 is_stmt 0 view .LVU560
+ 2120 001c 104B     		ldr	r3, .L187+12
+ 2121 001e 1B68     		ldr	r3, [r3]
+ 2122              	.LVL185:
+ 2123              		.loc 1 666 14 view .LVU561
+ 2124 0020 01E0     		b	.L180
+ 2125              	.LVL186:
+ 2126              	.L185:
+ 657:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 2127              		.loc 1 657 9 is_stmt 1 view .LVU562
+ 657:driver/Src/EMC2305.c ****         chip = chip_I2C1;
+ 2128              		.loc 1 657 14 is_stmt 0 view .LVU563
+ 2129 0022 104B     		ldr	r3, .L187+16
+ 2130 0024 1B68     		ldr	r3, [r3]
+ 2131              	.LVL187:
+ 2132              	.L180:
+ 667:driver/Src/EMC2305.c ****     }
+ARM GAS  /tmp/ccmsWjof.s 			page 58
+
+
+ 668:driver/Src/EMC2305.c **** #endif
+ 669:driver/Src/EMC2305.c **** 
+ 670:driver/Src/EMC2305.c ****     if (chip != NULL) {
+ 2133              		.loc 1 670 5 is_stmt 1 view .LVU564
+ 2134              		.loc 1 670 8 is_stmt 0 view .LVU565
+ 2135 0026 1BB1     		cbz	r3, .L182
+ 671:driver/Src/EMC2305.c ****         xSemaphoreGiveFromISR(chip->i2c_complete, &xHigherPriorityTaskWoken);
+ 2136              		.loc 1 671 9 is_stmt 1 view .LVU566
+ 2137 0028 01A9     		add	r1, sp, #4
+ 2138 002a 9868     		ldr	r0, [r3, #8]
+ 2139              	.LVL188:
+ 2140              		.loc 1 671 9 is_stmt 0 view .LVU567
+ 2141 002c FFF7FEFF 		bl	xQueueGiveFromISR
+ 2142              	.LVL189:
+ 2143              	.L182:
+ 672:driver/Src/EMC2305.c ****     }
+ 673:driver/Src/EMC2305.c **** 
+ 674:driver/Src/EMC2305.c ****     // Context switch back to higher priority task if woken
+ 675:driver/Src/EMC2305.c ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+ 2144              		.loc 1 675 5 is_stmt 1 view .LVU568
+ 2145              		.loc 1 675 5 view .LVU569
+ 2146 0030 019B     		ldr	r3, [sp, #4]
+ 2147 0032 4BB1     		cbz	r3, .L178
+ 2148              		.loc 1 675 5 discriminator 1 view .LVU570
+ 2149              		.loc 1 675 5 discriminator 1 view .LVU571
+ 2150 0034 4FF0E023 		mov	r3, #-536813568
+ 2151 0038 4FF08052 		mov	r2, #268435456
+ 2152 003c C3F8042D 		str	r2, [r3, #3332]
+ 2153              		.loc 1 675 5 discriminator 1 view .LVU572
+ 2154              		.syntax unified
+ 2155              	@ 675 "driver/Src/EMC2305.c" 1
+ 2156 0040 BFF34F8F 		dsb
+ 2157              	@ 0 "" 2
+ 2158              		.loc 1 675 5 discriminator 1 view .LVU573
+ 2159              	@ 675 "driver/Src/EMC2305.c" 1
+ 2160 0044 BFF36F8F 		isb
+ 2161              	@ 0 "" 2
+ 2162              		.loc 1 675 5 discriminator 1 view .LVU574
+ 2163              		.loc 1 675 5 discriminator 3 view .LVU575
+ 2164              		.loc 1 675 5 discriminator 3 view .LVU576
+ 2165              		.thumb
+ 2166              		.syntax unified
+ 2167              	.L178:
+ 676:driver/Src/EMC2305.c **** }
+ 2168              		.loc 1 676 1 is_stmt 0 view .LVU577
+ 2169 0048 03B0     		add	sp, sp, #12
+ 2170              	.LCFI53:
+ 2171              		.cfi_remember_state
+ 2172              		.cfi_def_cfa_offset 4
+ 2173              		@ sp needed
+ 2174 004a 5DF804FB 		ldr	pc, [sp], #4
+ 2175              	.LVL190:
+ 2176              	.L186:
+ 2177              	.LCFI54:
+ 2178              		.cfi_restore_state
+ 661:driver/Src/EMC2305.c ****     }
+ 2179              		.loc 1 661 9 is_stmt 1 view .LVU578
+ARM GAS  /tmp/ccmsWjof.s 			page 59
+
+
+ 661:driver/Src/EMC2305.c ****     }
+ 2180              		.loc 1 661 14 is_stmt 0 view .LVU579
+ 2181 004e 064B     		ldr	r3, .L187+20
+ 2182 0050 1B68     		ldr	r3, [r3]
+ 2183              	.LVL191:
+ 661:driver/Src/EMC2305.c ****     }
+ 2184              		.loc 1 661 14 view .LVU580
+ 2185 0052 E8E7     		b	.L180
+ 2186              	.L188:
+ 2187              		.align	2
+ 2188              	.L187:
+ 2189 0054 00540040 		.word	1073763328
+ 2190 0058 00580040 		.word	1073764352
+ 2191 005c 005C0040 		.word	1073765376
+ 2192 0060 00000000 		.word	chip_I2C3
+ 2193 0064 00000000 		.word	chip_I2C1
+ 2194 0068 00000000 		.word	chip_I2C2
+ 2195              		.cfi_endproc
+ 2196              	.LFE261:
+ 2198              		.section	.bss.chip_I2C3,"aw",%nobits
+ 2199              		.align	2
+ 2202              	chip_I2C3:
+ 2203 0000 00000000 		.space	4
+ 2204              		.section	.bss.chip_I2C2,"aw",%nobits
+ 2205              		.align	2
+ 2208              	chip_I2C2:
+ 2209 0000 00000000 		.space	4
+ 2210              		.section	.bss.chip_I2C1,"aw",%nobits
+ 2211              		.align	2
+ 2214              	chip_I2C1:
+ 2215 0000 00000000 		.space	4
+ 2216              		.global	EMC2305_I2C_TaskStack
+ 2217              		.section	.bss.EMC2305_I2C_TaskStack,"aw",%nobits
+ 2218              		.align	2
+ 2221              	EMC2305_I2C_TaskStack:
+ 2222 0000 00000000 		.space	512
+ 2222      00000000 
+ 2222      00000000 
+ 2222      00000000 
+ 2222      00000000 
+ 2223              		.global	EMC2305_I2C_TaskBuffer
+ 2224              		.section	.bss.EMC2305_I2C_TaskBuffer,"aw",%nobits
+ 2225              		.align	2
+ 2228              	EMC2305_I2C_TaskBuffer:
+ 2229 0000 00000000 		.space	84
+ 2229      00000000 
+ 2229      00000000 
+ 2229      00000000 
+ 2229      00000000 
+ 2230              		.section	.bss.xStaticQueue,"aw",%nobits
+ 2231              		.align	2
+ 2234              	xStaticQueue:
+ 2235 0000 00000000 		.space	72
+ 2235      00000000 
+ 2235      00000000 
+ 2235      00000000 
+ 2235      00000000 
+ARM GAS  /tmp/ccmsWjof.s 			page 60
+
+
+ 2236              		.global	ucQueueStorageArea
+ 2237              		.section	.bss.ucQueueStorageArea,"aw",%nobits
+ 2238              		.align	2
+ 2241              	ucQueueStorageArea:
+ 2242 0000 00000000 		.space	160
+ 2242      00000000 
+ 2242      00000000 
+ 2242      00000000 
+ 2242      00000000 
+ 2243              		.global	EMC2305_I2C_Queue
+ 2244              		.section	.bss.EMC2305_I2C_Queue,"aw",%nobits
+ 2245              		.align	2
+ 2248              	EMC2305_I2C_Queue:
+ 2249 0000 00000000 		.space	4
+ 2250              		.global	caller_semaphore_pool_usage_mutex
+ 2251              		.section	.bss.caller_semaphore_pool_usage_mutex,"aw",%nobits
+ 2252              		.align	2
+ 2255              	caller_semaphore_pool_usage_mutex:
+ 2256 0000 00000000 		.space	4
+ 2257              		.global	caller_semaphore_pool_usage_buffer
+ 2258              		.section	.bss.caller_semaphore_pool_usage_buffer,"aw",%nobits
+ 2259              		.align	2
+ 2262              	caller_semaphore_pool_usage_buffer:
+ 2263 0000 00000000 		.space	72
+ 2263      00000000 
+ 2263      00000000 
+ 2263      00000000 
+ 2263      00000000 
+ 2264              		.global	caller_semaphore_in_use
+ 2265              		.section	.bss.caller_semaphore_in_use,"aw",%nobits
+ 2266              		.align	2
+ 2269              	caller_semaphore_in_use:
+ 2270 0000 00000000 		.space	10
+ 2270      00000000 
+ 2270      0000
+ 2271              		.global	caller_semaphore_handle_pool
+ 2272              		.section	.bss.caller_semaphore_handle_pool,"aw",%nobits
+ 2273              		.align	2
+ 2276              	caller_semaphore_handle_pool:
+ 2277 0000 00000000 		.space	40
+ 2277      00000000 
+ 2277      00000000 
+ 2277      00000000 
+ 2277      00000000 
+ 2278              		.global	caller_semaphore_buffer_pool
+ 2279              		.section	.bss.caller_semaphore_buffer_pool,"aw",%nobits
+ 2280              		.align	2
+ 2283              	caller_semaphore_buffer_pool:
+ 2284 0000 00000000 		.space	720
+ 2284      00000000 
+ 2284      00000000 
+ 2284      00000000 
+ 2284      00000000 
+ 2285              		.global	worker_semaphore_buffer
+ 2286              		.section	.bss.worker_semaphore_buffer,"aw",%nobits
+ 2287              		.align	2
+ 2290              	worker_semaphore_buffer:
+ARM GAS  /tmp/ccmsWjof.s 			page 61
+
+
+ 2291 0000 00000000 		.space	72
+ 2291      00000000 
+ 2291      00000000 
+ 2291      00000000 
+ 2291      00000000 
+ 2292              		.text
+ 2293              	.Letext0:
+ 2294              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 2295              		.file 3 "stm/stm32f4xx/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 2296              		.file 4 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 2297              		.file 5 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 2298              		.file 6 "stm/stm32f4xx/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 2299              		.file 7 "middleware/FreeRTOS-Kernel/include/projdefs.h"
+ 2300              		.file 8 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 2301              		.file 9 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
+ 2302              		.file 10 "middleware/FreeRTOS-Kernel/include/task.h"
+ 2303              		.file 11 "middleware/FreeRTOS-Kernel/include/queue.h"
+ 2304              		.file 12 "middleware/FreeRTOS-Kernel/include/semphr.h"
+ 2305              		.file 13 "driver/Inc/EMC2305.h"
+ARM GAS  /tmp/ccmsWjof.s 			page 62
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 EMC2305.c
+     /tmp/ccmsWjof.s:21     .text.prvAcquireFreeSemaphore:00000000 $t
+     /tmp/ccmsWjof.s:26     .text.prvAcquireFreeSemaphore:00000000 prvAcquireFreeSemaphore
+     /tmp/ccmsWjof.s:117    .text.prvAcquireFreeSemaphore:00000048 $d
+     /tmp/ccmsWjof.s:2255   .bss.caller_semaphore_pool_usage_mutex:00000000 caller_semaphore_pool_usage_mutex
+     /tmp/ccmsWjof.s:2269   .bss.caller_semaphore_in_use:00000000 caller_semaphore_in_use
+     /tmp/ccmsWjof.s:123    .text.prvReturnSemaphore:00000000 $t
+     /tmp/ccmsWjof.s:128    .text.prvReturnSemaphore:00000000 prvReturnSemaphore
+     /tmp/ccmsWjof.s:176    .text.prvReturnSemaphore:0000002c $d
+     /tmp/ccmsWjof.s:182    .text.EMC2305_I2C_Worker_Task:00000000 $t
+     /tmp/ccmsWjof.s:188    .text.EMC2305_I2C_Worker_Task:00000000 EMC2305_I2C_Worker_Task
+     /tmp/ccmsWjof.s:346    .text.EMC2305_I2C_Worker_Task:000000b0 $d
+     /tmp/ccmsWjof.s:2248   .bss.EMC2305_I2C_Queue:00000000 EMC2305_I2C_Queue
+     /tmp/ccmsWjof.s:2276   .bss.caller_semaphore_handle_pool:00000000 caller_semaphore_handle_pool
+     /tmp/ccmsWjof.s:353    .text.EMC2305_ReadReg:00000000 $t
+     /tmp/ccmsWjof.s:359    .text.EMC2305_ReadReg:00000000 EMC2305_ReadReg
+     /tmp/ccmsWjof.s:490    .text.EMC2305_ReadReg:00000088 $d
+     /tmp/ccmsWjof.s:496    .rodata.EMC2305_Init.str1.4:00000000 $d
+     /tmp/ccmsWjof.s:500    .text.EMC2305_Init:00000000 $t
+     /tmp/ccmsWjof.s:506    .text.EMC2305_Init:00000000 EMC2305_Init
+     /tmp/ccmsWjof.s:759    .text.EMC2305_Init:00000114 $d
+     /tmp/ccmsWjof.s:2262   .bss.caller_semaphore_pool_usage_buffer:00000000 caller_semaphore_pool_usage_buffer
+     /tmp/ccmsWjof.s:2283   .bss.caller_semaphore_buffer_pool:00000000 caller_semaphore_buffer_pool
+     /tmp/ccmsWjof.s:2290   .bss.worker_semaphore_buffer:00000000 worker_semaphore_buffer
+     /tmp/ccmsWjof.s:2234   .bss.xStaticQueue:00000000 xStaticQueue
+     /tmp/ccmsWjof.s:2241   .bss.ucQueueStorageArea:00000000 ucQueueStorageArea
+     /tmp/ccmsWjof.s:2228   .bss.EMC2305_I2C_TaskBuffer:00000000 EMC2305_I2C_TaskBuffer
+     /tmp/ccmsWjof.s:2221   .bss.EMC2305_I2C_TaskStack:00000000 EMC2305_I2C_TaskStack
+     /tmp/ccmsWjof.s:2214   .bss.chip_I2C1:00000000 chip_I2C1
+     /tmp/ccmsWjof.s:2208   .bss.chip_I2C2:00000000 chip_I2C2
+     /tmp/ccmsWjof.s:2202   .bss.chip_I2C3:00000000 chip_I2C3
+     /tmp/ccmsWjof.s:781    .text.EMC2305_GetFanRPM:00000000 $t
+     /tmp/ccmsWjof.s:787    .text.EMC2305_GetFanRPM:00000000 EMC2305_GetFanRPM
+     /tmp/ccmsWjof.s:904    .text.EMC2305_GetFanPWM:00000000 $t
+     /tmp/ccmsWjof.s:910    .text.EMC2305_GetFanPWM:00000000 EMC2305_GetFanPWM
+     /tmp/ccmsWjof.s:989    .text.EMC2305_GetFanStatus:00000000 $t
+     /tmp/ccmsWjof.s:995    .text.EMC2305_GetFanStatus:00000000 EMC2305_GetFanStatus
+     /tmp/ccmsWjof.s:1079   .text.EMC2305_WriteReg:00000000 $t
+     /tmp/ccmsWjof.s:1085   .text.EMC2305_WriteReg:00000000 EMC2305_WriteReg
+     /tmp/ccmsWjof.s:1215   .text.EMC2305_WriteReg:00000084 $d
+     /tmp/ccmsWjof.s:1221   .text.EMC2305_EnableSWLock:00000000 $t
+     /tmp/ccmsWjof.s:1227   .text.EMC2305_EnableSWLock:00000000 EMC2305_EnableSWLock
+     /tmp/ccmsWjof.s:1252   .text.EMC2305_SetGlobalConfig:00000000 $t
+     /tmp/ccmsWjof.s:1258   .text.EMC2305_SetGlobalConfig:00000000 EMC2305_SetGlobalConfig
+     /tmp/ccmsWjof.s:1340   .text.EMC2305_SetPWMBaseFrequency:00000000 $t
+     /tmp/ccmsWjof.s:1346   .text.EMC2305_SetPWMBaseFrequency:00000000 EMC2305_SetPWMBaseFrequency
+     /tmp/ccmsWjof.s:1409   .text.EMC2305_SetPWMBaseFrequency:00000036 $d
+     /tmp/ccmsWjof.s:1534   .text.EMC2305_SetFanConfig:00000000 $t
+     /tmp/ccmsWjof.s:1540   .text.EMC2305_SetFanConfig:00000000 EMC2305_SetFanConfig
+     /tmp/ccmsWjof.s:1661   .text.EMC2305_SetPWMOutputMode:00000000 $t
+     /tmp/ccmsWjof.s:1667   .text.EMC2305_SetPWMOutputMode:00000000 EMC2305_SetPWMOutputMode
+     /tmp/ccmsWjof.s:1765   .text.EMC2305_SetFanPWM:00000000 $t
+     /tmp/ccmsWjof.s:1771   .text.EMC2305_SetFanPWM:00000000 EMC2305_SetFanPWM
+     /tmp/ccmsWjof.s:1836   .text.EMC2305_SetFanPWM:00000034 $d
+     /tmp/ccmsWjof.s:1841   .text.EMC2305_SetFanRPM:00000000 $t
+     /tmp/ccmsWjof.s:1847   .text.EMC2305_SetFanRPM:00000000 EMC2305_SetFanRPM
+ARM GAS  /tmp/ccmsWjof.s 			page 63
+
+
+     /tmp/ccmsWjof.s:1949   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 $t
+     /tmp/ccmsWjof.s:1955   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 EMC2305_I2C_MasterTxCpltCallback
+     /tmp/ccmsWjof.s:2064   .text.EMC2305_I2C_MasterTxCpltCallback:00000054 $d
+     /tmp/ccmsWjof.s:2074   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 $t
+     /tmp/ccmsWjof.s:2080   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 EMC2305_I2C_MasterRxCpltCallback
+     /tmp/ccmsWjof.s:2189   .text.EMC2305_I2C_MasterRxCpltCallback:00000054 $d
+     /tmp/ccmsWjof.s:2199   .bss.chip_I2C3:00000000 $d
+     /tmp/ccmsWjof.s:2205   .bss.chip_I2C2:00000000 $d
+     /tmp/ccmsWjof.s:2211   .bss.chip_I2C1:00000000 $d
+     /tmp/ccmsWjof.s:2218   .bss.EMC2305_I2C_TaskStack:00000000 $d
+     /tmp/ccmsWjof.s:2225   .bss.EMC2305_I2C_TaskBuffer:00000000 $d
+     /tmp/ccmsWjof.s:2231   .bss.xStaticQueue:00000000 $d
+     /tmp/ccmsWjof.s:2238   .bss.ucQueueStorageArea:00000000 $d
+     /tmp/ccmsWjof.s:2245   .bss.EMC2305_I2C_Queue:00000000 $d
+     /tmp/ccmsWjof.s:2252   .bss.caller_semaphore_pool_usage_mutex:00000000 $d
+     /tmp/ccmsWjof.s:2259   .bss.caller_semaphore_pool_usage_buffer:00000000 $d
+     /tmp/ccmsWjof.s:2266   .bss.caller_semaphore_in_use:00000000 $d
+     /tmp/ccmsWjof.s:2273   .bss.caller_semaphore_handle_pool:00000000 $d
+     /tmp/ccmsWjof.s:2280   .bss.caller_semaphore_buffer_pool:00000000 $d
+     /tmp/ccmsWjof.s:2287   .bss.worker_semaphore_buffer:00000000 $d
+     /tmp/ccmsWjof.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003b $d
+     /tmp/ccmsWjof.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003c $t
+
+UNDEFINED SYMBOLS
+xQueueSemaphoreTake
+xQueueGenericSend
+xQueueReceive
+HAL_I2C_Master_Transmit_IT
+HAL_I2C_Master_Receive_IT
+xQueueCreateMutexStatic
+xQueueGenericCreateStatic
+xTaskCreateStatic
+xQueueGiveFromISR
