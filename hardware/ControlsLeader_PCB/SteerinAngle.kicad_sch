@@ -1,0 +1,1208 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "6f59e621-2497-4d45-b039-01047670899a")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Connector_Generic:Conn_01x04"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x04"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x04_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 1.27 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -5.08 0)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:+24V"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+24V"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+24V\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+24V_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+24V_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(rectangle
+		(start 106.426 88.9)
+		(end 194.31 130.048)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 6fe5b706-5dca-4d9f-a119-319faf1808bf)
+	)
+	(text "Steering Angle Sensor Components"
+		(exclude_from_sim no)
+		(at 131.318 86.868 0)
+		(effects
+			(font
+				(size 1.905 1.905)
+				(thickness 0.254)
+				(bold yes)
+			)
+		)
+		(uuid "055b13a7-71f3-4ea0-9ce3-0732c0113790")
+	)
+	(wire
+		(pts
+			(xy 148.59 98.806) (xy 149.352 98.044)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1113768d-cb6b-4357-858a-612671b14d68")
+	)
+	(wire
+		(pts
+			(xy 149.352 97.282) (xy 149.352 98.044)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a2b66b1-65af-42d8-97ec-879e95499dff")
+	)
+	(wire
+		(pts
+			(xy 174.752 108.966) (xy 176.53 108.966)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a61327f-02d4-4d31-a808-01714f444e18")
+	)
+	(wire
+		(pts
+			(xy 124.46 98.806) (xy 121.412 98.806)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48ce4ad9-544d-4bf0-ba90-1e1d7bed87d3")
+	)
+	(wire
+		(pts
+			(xy 176.022 103.886) (xy 176.53 103.378)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e163a1b-55e1-4da2-8368-d1bd149375f3")
+	)
+	(wire
+		(pts
+			(xy 121.412 98.806) (xy 119.38 96.774)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "601727b8-4095-4b48-8fcb-3a51fed1d8d1")
+	)
+	(wire
+		(pts
+			(xy 174.752 106.426) (xy 176.53 106.426)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6368c911-f09f-44ee-9779-3d66dde8ac25")
+	)
+	(wire
+		(pts
+			(xy 121.158 113.792) (xy 122.174 113.792)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c460a46-6ff6-46d4-9b39-860bfae15b58")
+	)
+	(wire
+		(pts
+			(xy 120.142 119.634) (xy 122.174 119.634)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73b61d74-cd96-4dbb-ad06-659a4359956e")
+	)
+	(wire
+		(pts
+			(xy 176.53 112.776) (xy 176.53 112.014)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "955820a5-8b86-4a21-aaf3-4e3ebf1bc330")
+	)
+	(wire
+		(pts
+			(xy 174.752 103.886) (xy 176.022 103.886)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b0f26d3-d863-4752-9c60-b835efa64cc0")
+	)
+	(wire
+		(pts
+			(xy 145.796 121.92) (xy 149.606 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c3006cc-d62d-4e2f-8f48-fa219e3b7865")
+	)
+	(wire
+		(pts
+			(xy 145.796 117.094) (xy 149.86 117.094)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cad38b4-21e1-419f-8914-249b525e8047")
+	)
+	(wire
+		(pts
+			(xy 176.022 111.506) (xy 176.53 112.014)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa423955-8482-4f83-b86b-3f50cdef8c4c")
+	)
+	(wire
+		(pts
+			(xy 176.53 102.616) (xy 176.53 103.378)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edd138ca-29f3-4679-968d-36b53fc57aa6")
+	)
+	(wire
+		(pts
+			(xy 174.752 111.506) (xy 176.022 111.506)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef9ee76f-dad9-4876-ba33-1df81a764b51")
+	)
+	(wire
+		(pts
+			(xy 145.796 113.792) (xy 149.606 113.792)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f27c3be5-90e9-4674-80c9-312f1735821f")
+	)
+	(wire
+		(pts
+			(xy 146.05 98.806) (xy 148.59 98.806)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc9bd310-dd8f-4f68-8425-8a4d078f80f2")
+	)
+	(label "SteeringCAN_L"
+		(at 149.606 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "15d54b59-a76c-4c81-96d2-aed52be68e8d")
+	)
+	(label "SteeringCAN_L"
+		(at 176.53 108.966 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3e826614-828c-4e0d-a05b-af160e01febb")
+	)
+	(label "SteeringCAN_H"
+		(at 149.86 117.094 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "56d9f707-f587-45e6-9b54-d340165d65a4")
+	)
+	(label "SteeringCAN_H"
+		(at 176.53 106.426 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f92e1fbf-30d5-4552-8fce-ac49fb648f4f")
+	)
+	(hierarchical_label "CAN_TX"
+		(shape input)
+		(at 149.606 113.792 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "17b6694b-e29e-45b2-a27a-30f514da92ee")
+	)
+	(hierarchical_label "CAN_RX"
+		(shape output)
+		(at 121.158 113.792 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "787d5148-7be1-48c8-934e-5471adf6afd1")
+	)
+	(hierarchical_label "+3.3v_LSOM"
+		(shape input)
+		(at 120.142 119.634 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b49a79b9-7c54-4217-9f07-766671ec76ae")
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 149.352 97.282 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "585b3354-9380-4a87-9944-dae9c2b37e2a")
+		(property "Reference" "#PWR057"
+			(at 149.352 101.092 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+16V"
+			(at 152.146 94.996 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.352 97.282 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.352 97.282 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 149.352 97.282 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "56e548ec-2eb7-4bea-937d-0513c2be0772")
+		)
+		(instances
+			(project ""
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "#PWR057")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x04")
+		(at 169.672 108.966 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5c29381b-bdf3-43d4-900d-4b7299563ddb")
+		(property "Reference" "J12"
+			(at 166.624 107.95 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SteeringAngleConn_01x04"
+			(at 173.736 97.282 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_Molex:Molex_Nano-Fit_105313-xx04_1x04_P2.50mm_Horizontal"
+			(at 169.672 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 169.672 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ign Conn"
+			(at 169.672 108.966 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "P/N" "1053131104"
+			(at 169.672 108.966 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "33e87c9f-cae4-43b6-b591-a96086ec11a4")
+		)
+		(pin "2"
+			(uuid "1acc6feb-e191-4e10-a1a5-ed2aa3bb5018")
+		)
+		(pin "1"
+			(uuid "5af76b74-ecd0-424e-aa2a-afafbc08de6e")
+		)
+		(pin "4"
+			(uuid "f5bb4f9f-e146-4452-9df3-ced14af25b8c")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "J12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 176.53 112.776 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "72ec15dc-3fd4-4b92-a332-531390e892bb")
+		(property "Reference" "#PWR072"
+			(at 176.53 119.126 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 176.53 117.094 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.53 112.776 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 176.53 112.776 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 176.53 112.776 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "91ad9fe9-8231-44f6-88a8-e2e0d1ed0e76")
+		)
+		(instances
+			(project ""
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "#PWR072")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 119.38 96.774 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7562aa98-7c35-4029-aa10-d83dd5814561")
+		(property "Reference" "#PWR052"
+			(at 119.38 100.584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+24V"
+			(at 116.84 93.726 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 119.38 96.774 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "60c0bc1d-c375-42bc-b4c0-23ffc8729e28")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 176.53 102.616 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e5e12d91-8185-4ae0-ab45-8ae5fccf922e")
+		(property "Reference" "#PWR070"
+			(at 176.53 106.426 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+16V"
+			(at 179.324 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.53 102.616 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 176.53 102.616 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 176.53 102.616 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5db39bef-8ee8-4f3b-8d20-8a00795e2304")
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(reference "#PWR070")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 122.174 110.998)
+		(size 23.622 12.954)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b0729058-c6be-49c1-a87e-2ac8a37e6931")
+		(property "Sheetname" "Can Transciever"
+			(at 124.968 110.236 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "CanTransciever.kicad_sch"
+			(at 119.38 125.222 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CAN_RX" output
+			(at 122.174 113.792 180)
+			(uuid "bf0486c0-83ec-45e2-8e87-ab8f5b55d347")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CAN_TX" input
+			(at 145.796 113.792 0)
+			(uuid "eb961a98-547a-4fad-ad4c-c2dbff9d1d99")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SteeringCAN_H" input
+			(at 145.796 117.094 0)
+			(uuid "d244c7f7-c69e-4451-bc51-85cf3f18493c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SteeringCAN_L" input
+			(at 145.796 121.92 0)
+			(uuid "68177b35-1316-49a5-b556-9093c55b7641")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "+3.3v_LSOM" input
+			(at 122.174 119.634 180)
+			(uuid "e51e444f-778e-408f-a050-3822988acf1a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(page "21")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 124.46 93.98)
+		(size 21.59 9.398)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "d2a39224-ea42-493b-ad1b-fc800fa3b4ea")
+		(property "Sheetname" "24v to 16v ldo"
+			(at 127.762 106.172 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "steeringAngleLDO.kicad_sch"
+			(at 120.142 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "16Vout" output
+			(at 146.05 98.806 0)
+			(uuid "b1f227d1-183c-4e3d-ab66-2d5aa5ad2c22")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "+24v_IN" input
+			(at 124.46 98.806 180)
+			(uuid "45bf6894-df32-4819-8fcd-8889f879373f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "ControlsLeader_PCB"
+				(path "/298dad81-302c-41c7-874b-fcde1c3cde17/6f9c0058-7b30-4c81-afa5-092cb85861ec"
+					(page "19")
+				)
+			)
+		)
+	)
+)
