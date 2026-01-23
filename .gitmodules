@@ -4,3 +4,6 @@
 [submodule "hardware/ControlsLeader_PCB/lib/KiCAD-Sharepoint"]
 	path = hardware/ControlsLeader_PCB/lib/KiCAD-Sharepoint
 	url = https://github.com/lhr-solar/KiCAD-Sharepoint.git
+[submodule "firmware/Embedded-Sharepoint"]
+	path = firmware/Embedded-Sharepoint
+	url = https://github.com/lhr-solar/Embedded-Sharepoint.git
