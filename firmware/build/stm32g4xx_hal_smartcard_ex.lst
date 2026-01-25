@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTZZWtj.s 			page 1
+ARM GAS  /tmp/ccDNCcRG.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
   28:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
   29:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****     (#) After having configured the SMARTCARD basic features with HAL_SMARTCARD_Init(),
   30:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****         then program SMARTCARD advanced features if required (TX/RX pins swap, TimeOut,
-ARM GAS  /tmp/ccTZZWtj.s 			page 2
+ARM GAS  /tmp/ccDNCcRG.s 			page 2
 
 
   31:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****         auto-retry counter,...) in the hsmartcard AdvancedInit structure.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
   85:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****                       ##### Peripheral Control functions #####
   86:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   ===============================================================================
   87:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   [..]
-ARM GAS  /tmp/ccTZZWtj.s 			page 3
+ARM GAS  /tmp/ccDNCcRG.s 			page 3
 
 
   88:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   This subsection provides a set of functions allowing to initialize the SMARTCARD.
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  142:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****     __HAL_UNLOCK(hsmartcard);
  143:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  144:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****     return HAL_OK;
-ARM GAS  /tmp/ccTZZWtj.s 			page 4
+ARM GAS  /tmp/ccDNCcRG.s 			page 4
 
 
  145:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   }
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  199:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  200:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** @endverbatim
  201:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   * @{
-ARM GAS  /tmp/ccTZZWtj.s 			page 5
+ARM GAS  /tmp/ccDNCcRG.s 			page 5
 
 
  202:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  256:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   */
  257:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  258:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** /**
-ARM GAS  /tmp/ccTZZWtj.s 			page 6
+ARM GAS  /tmp/ccDNCcRG.s 			page 6
 
 
  259:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   * @brief  Enable the FIFO mode.
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  313:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  314:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   hsmartcard->gState = HAL_SMARTCARD_STATE_BUSY;
  315:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
-ARM GAS  /tmp/ccTZZWtj.s 			page 7
+ARM GAS  /tmp/ccDNCcRG.s 			page 7
 
 
  316:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   /* Save actual SMARTCARD configuration */
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  370:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   MODIFY_REG(hsmartcard->Instance->CR3, USART_CR3_TXFTCFG, Threshold);
  371:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  372:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   /* Determine the number of data to process during RX/TX ISR execution */
-ARM GAS  /tmp/ccTZZWtj.s 			page 8
+ARM GAS  /tmp/ccDNCcRG.s 			page 8
 
 
  373:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   SMARTCARDEx_SetNbDataToProcess(hsmartcard);
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  427:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   hsmartcard->gState = HAL_SMARTCARD_STATE_READY;
  428:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  429:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   /* Process Unlocked */
-ARM GAS  /tmp/ccTZZWtj.s 			page 9
+ARM GAS  /tmp/ccDNCcRG.s 			page 9
 
 
  430:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****   __HAL_UNLOCK(hsmartcard);
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
   46              		.loc 1 466 35 is_stmt 0 view .LVU11
   47 0004 0123     		movs	r3, #1
   48 0006 A0F86630 		strh	r3, [r0, #102]	@ movhi
-ARM GAS  /tmp/ccTZZWtj.s 			page 10
+ARM GAS  /tmp/ccDNCcRG.s 			page 10
 
 
  467:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****     hsmartcard->NbRxDataToProcess = 1U;
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  477:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c ****     hsmartcard->NbRxDataToProcess = ((uint16_t)rx_fifo_depth * numerator[rx_fifo_threshold]) / \
   90              		.loc 1 477 5 is_stmt 1 view .LVU29
   91              		.loc 1 477 73 is_stmt 0 view .LVU30
-ARM GAS  /tmp/ccTZZWtj.s 			page 11
+ARM GAS  /tmp/ccDNCcRG.s 			page 11
 
 
   92 0030 AB5C     		ldrb	r3, [r5, r2]	@ zero_extendqisi2
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  140              		.cfi_endproc
  141              	.LFE329:
  143              		.section	.text.HAL_SMARTCARDEx_TimeOut_Config,"ax",%progbits
-ARM GAS  /tmp/ccTZZWtj.s 			page 12
+ARM GAS  /tmp/ccDNCcRG.s 			page 12
 
 
  144              		.align	1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  132:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  192              		.loc 1 132 5 view .LVU48
  193 0008 90F87C30 		ldrb	r3, [r0, #124]	@ zero_extendqisi2
-ARM GAS  /tmp/ccTZZWtj.s 			page 13
+ARM GAS  /tmp/ccDNCcRG.s 			page 13
 
 
  194 000c 012B     		cmp	r3, #1
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  132:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  233              		.loc 1 132 5 discriminator 1 view .LVU64
  234 003a 0220     		movs	r0, #2
-ARM GAS  /tmp/ccTZZWtj.s 			page 14
+ARM GAS  /tmp/ccDNCcRG.s 			page 14
 
 
  235              	.LVL13:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  279 0024 5360     		str	r3, [r2, #4]
  169:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  280              		.loc 1 169 5 view .LVU77
-ARM GAS  /tmp/ccTZZWtj.s 			page 15
+ARM GAS  /tmp/ccDNCcRG.s 			page 15
 
 
  169:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  325              		@ frame_needed = 0, uses_anonymous_args = 0
  326              		@ link register save eliminated.
  213:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
-ARM GAS  /tmp/ccTZZWtj.s 			page 16
+ARM GAS  /tmp/ccDNCcRG.s 			page 16
 
 
  327              		.loc 1 213 3 view .LVU90
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  375              		.loc 1 264 1 is_stmt 0 view .LVU100
  376 0008 10B5     		push	{r4, lr}
  377              	.LCFI2:
-ARM GAS  /tmp/ccTZZWtj.s 			page 17
+ARM GAS  /tmp/ccDNCcRG.s 			page 17
 
 
  378              		.cfi_def_cfa_offset 8
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  294:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  417              		.loc 1 294 3 is_stmt 1 view .LVU116
  294:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
-ARM GAS  /tmp/ccTZZWtj.s 			page 18
+ARM GAS  /tmp/ccDNCcRG.s 			page 18
 
 
  418              		.loc 1 294 3 view .LVU117
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  463 000a 80F87C30 		strb	r3, [r0, #124]
  312:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  464              		.loc 1 312 3 discriminator 2 view .LVU129
-ARM GAS  /tmp/ccTZZWtj.s 			page 19
+ARM GAS  /tmp/ccDNCcRG.s 			page 19
 
 
  314:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  501              		.loc 1 334 10 is_stmt 0 view .LVU147
  502 0036 1846     		mov	r0, r3
  503              	.LVL33:
-ARM GAS  /tmp/ccTZZWtj.s 			page 20
+ARM GAS  /tmp/ccDNCcRG.s 			page 20
 
 
  334:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** }
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  549 000e 80F87C30 		strb	r3, [r0, #124]
  359:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  550              		.loc 1 359 3 discriminator 2 view .LVU159
-ARM GAS  /tmp/ccTZZWtj.s 			page 21
+ARM GAS  /tmp/ccDNCcRG.s 			page 21
 
 
  361:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  590              		.loc 1 381 3 view .LVU174
  383:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** }
  591              		.loc 1 383 3 view .LVU175
-ARM GAS  /tmp/ccTZZWtj.s 			page 22
+ARM GAS  /tmp/ccDNCcRG.s 			page 22
 
 
  592              	.LVL40:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  637              		.loc 1 408 3 discriminator 2 view .LVU186
  638 000c 0123     		movs	r3, #1
  639 000e 80F87C30 		strb	r3, [r0, #124]
-ARM GAS  /tmp/ccTZZWtj.s 			page 23
+ARM GAS  /tmp/ccDNCcRG.s 			page 23
 
 
  408:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  679 0048 84F87C00 		strb	r0, [r4, #124]
  430:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** 
  680              		.loc 1 430 3 view .LVU202
-ARM GAS  /tmp/ccTZZWtj.s 			page 24
+ARM GAS  /tmp/ccDNCcRG.s 			page 24
 
 
  432:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smartcard_ex.c **** }
@@ -1412,41 +1412,41 @@ ARM GAS  /tmp/ccTZZWtj.s 			page 1
  708              		.text
  709              	.Letext0:
  710              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 711              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 711              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h"
  712              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  713              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h"
  714              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_smartcard.h"
-ARM GAS  /tmp/ccTZZWtj.s 			page 25
+ARM GAS  /tmp/ccDNCcRG.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32g4xx_hal_smartcard_ex.c
-     /tmp/ccTZZWtj.s:21     .text.SMARTCARDEx_SetNbDataToProcess:00000000 $t
-     /tmp/ccTZZWtj.s:26     .text.SMARTCARDEx_SetNbDataToProcess:00000000 SMARTCARDEx_SetNbDataToProcess
-     /tmp/ccTZZWtj.s:112    .text.SMARTCARDEx_SetNbDataToProcess:00000044 $d
-     /tmp/ccTZZWtj.s:706    .rodata.numerator.1:00000000 numerator.1
-     /tmp/ccTZZWtj.s:700    .rodata.denominator.0:00000000 denominator.0
-     /tmp/ccTZZWtj.s:118    .text.HAL_SMARTCARDEx_BlockLength_Config:00000000 $t
-     /tmp/ccTZZWtj.s:124    .text.HAL_SMARTCARDEx_BlockLength_Config:00000000 HAL_SMARTCARDEx_BlockLength_Config
-     /tmp/ccTZZWtj.s:144    .text.HAL_SMARTCARDEx_TimeOut_Config:00000000 $t
-     /tmp/ccTZZWtj.s:150    .text.HAL_SMARTCARDEx_TimeOut_Config:00000000 HAL_SMARTCARDEx_TimeOut_Config
-     /tmp/ccTZZWtj.s:171    .text.HAL_SMARTCARDEx_EnableReceiverTimeOut:00000000 $t
-     /tmp/ccTZZWtj.s:177    .text.HAL_SMARTCARDEx_EnableReceiverTimeOut:00000000 HAL_SMARTCARDEx_EnableReceiverTimeOut
-     /tmp/ccTZZWtj.s:242    .text.HAL_SMARTCARDEx_DisableReceiverTimeOut:00000000 $t
-     /tmp/ccTZZWtj.s:248    .text.HAL_SMARTCARDEx_DisableReceiverTimeOut:00000000 HAL_SMARTCARDEx_DisableReceiverTimeOut
-     /tmp/ccTZZWtj.s:313    .text.HAL_SMARTCARDEx_RxFifoFullCallback:00000000 $t
-     /tmp/ccTZZWtj.s:319    .text.HAL_SMARTCARDEx_RxFifoFullCallback:00000000 HAL_SMARTCARDEx_RxFifoFullCallback
-     /tmp/ccTZZWtj.s:334    .text.HAL_SMARTCARDEx_TxFifoEmptyCallback:00000000 $t
-     /tmp/ccTZZWtj.s:340    .text.HAL_SMARTCARDEx_TxFifoEmptyCallback:00000000 HAL_SMARTCARDEx_TxFifoEmptyCallback
-     /tmp/ccTZZWtj.s:355    .text.HAL_SMARTCARDEx_EnableFifoMode:00000000 $t
-     /tmp/ccTZZWtj.s:361    .text.HAL_SMARTCARDEx_EnableFifoMode:00000000 HAL_SMARTCARDEx_EnableFifoMode
-     /tmp/ccTZZWtj.s:440    .text.HAL_SMARTCARDEx_DisableFifoMode:00000000 $t
-     /tmp/ccTZZWtj.s:446    .text.HAL_SMARTCARDEx_DisableFifoMode:00000000 HAL_SMARTCARDEx_DisableFifoMode
-     /tmp/ccTZZWtj.s:517    .text.HAL_SMARTCARDEx_SetTxFifoThreshold:00000000 $t
-     /tmp/ccTZZWtj.s:523    .text.HAL_SMARTCARDEx_SetTxFifoThreshold:00000000 HAL_SMARTCARDEx_SetTxFifoThreshold
-     /tmp/ccTZZWtj.s:607    .text.HAL_SMARTCARDEx_SetRxFifoThreshold:00000000 $t
-     /tmp/ccTZZWtj.s:613    .text.HAL_SMARTCARDEx_SetRxFifoThreshold:00000000 HAL_SMARTCARDEx_SetRxFifoThreshold
-     /tmp/ccTZZWtj.s:697    .rodata.denominator.0:00000000 $d
-     /tmp/ccTZZWtj.s:703    .rodata.numerator.1:00000000 $d
+     /tmp/ccDNCcRG.s:21     .text.SMARTCARDEx_SetNbDataToProcess:00000000 $t
+     /tmp/ccDNCcRG.s:26     .text.SMARTCARDEx_SetNbDataToProcess:00000000 SMARTCARDEx_SetNbDataToProcess
+     /tmp/ccDNCcRG.s:112    .text.SMARTCARDEx_SetNbDataToProcess:00000044 $d
+     /tmp/ccDNCcRG.s:706    .rodata.numerator.1:00000000 numerator.1
+     /tmp/ccDNCcRG.s:700    .rodata.denominator.0:00000000 denominator.0
+     /tmp/ccDNCcRG.s:118    .text.HAL_SMARTCARDEx_BlockLength_Config:00000000 $t
+     /tmp/ccDNCcRG.s:124    .text.HAL_SMARTCARDEx_BlockLength_Config:00000000 HAL_SMARTCARDEx_BlockLength_Config
+     /tmp/ccDNCcRG.s:144    .text.HAL_SMARTCARDEx_TimeOut_Config:00000000 $t
+     /tmp/ccDNCcRG.s:150    .text.HAL_SMARTCARDEx_TimeOut_Config:00000000 HAL_SMARTCARDEx_TimeOut_Config
+     /tmp/ccDNCcRG.s:171    .text.HAL_SMARTCARDEx_EnableReceiverTimeOut:00000000 $t
+     /tmp/ccDNCcRG.s:177    .text.HAL_SMARTCARDEx_EnableReceiverTimeOut:00000000 HAL_SMARTCARDEx_EnableReceiverTimeOut
+     /tmp/ccDNCcRG.s:242    .text.HAL_SMARTCARDEx_DisableReceiverTimeOut:00000000 $t
+     /tmp/ccDNCcRG.s:248    .text.HAL_SMARTCARDEx_DisableReceiverTimeOut:00000000 HAL_SMARTCARDEx_DisableReceiverTimeOut
+     /tmp/ccDNCcRG.s:313    .text.HAL_SMARTCARDEx_RxFifoFullCallback:00000000 $t
+     /tmp/ccDNCcRG.s:319    .text.HAL_SMARTCARDEx_RxFifoFullCallback:00000000 HAL_SMARTCARDEx_RxFifoFullCallback
+     /tmp/ccDNCcRG.s:334    .text.HAL_SMARTCARDEx_TxFifoEmptyCallback:00000000 $t
+     /tmp/ccDNCcRG.s:340    .text.HAL_SMARTCARDEx_TxFifoEmptyCallback:00000000 HAL_SMARTCARDEx_TxFifoEmptyCallback
+     /tmp/ccDNCcRG.s:355    .text.HAL_SMARTCARDEx_EnableFifoMode:00000000 $t
+     /tmp/ccDNCcRG.s:361    .text.HAL_SMARTCARDEx_EnableFifoMode:00000000 HAL_SMARTCARDEx_EnableFifoMode
+     /tmp/ccDNCcRG.s:440    .text.HAL_SMARTCARDEx_DisableFifoMode:00000000 $t
+     /tmp/ccDNCcRG.s:446    .text.HAL_SMARTCARDEx_DisableFifoMode:00000000 HAL_SMARTCARDEx_DisableFifoMode
+     /tmp/ccDNCcRG.s:517    .text.HAL_SMARTCARDEx_SetTxFifoThreshold:00000000 $t
+     /tmp/ccDNCcRG.s:523    .text.HAL_SMARTCARDEx_SetTxFifoThreshold:00000000 HAL_SMARTCARDEx_SetTxFifoThreshold
+     /tmp/ccDNCcRG.s:607    .text.HAL_SMARTCARDEx_SetRxFifoThreshold:00000000 $t
+     /tmp/ccDNCcRG.s:613    .text.HAL_SMARTCARDEx_SetRxFifoThreshold:00000000 HAL_SMARTCARDEx_SetRxFifoThreshold
+     /tmp/ccDNCcRG.s:697    .rodata.denominator.0:00000000 $d
+     /tmp/ccDNCcRG.s:703    .rodata.numerator.1:00000000 $d
 
 NO UNDEFINED SYMBOLS

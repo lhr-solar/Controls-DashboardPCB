@@ -1,11 +1,11 @@
-/home/pani_/LHRS/VCAT-Dashboard/firmware/test/../build/stm32g4xx_hal_adc.o: \
+/home/pani_/LHRS/VCAT-Dashboard/firmware/build/stm32g4xx_hal_adc.o: \
  stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c \
  stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
  common/Inc/stm32g4xx_hal_conf.h \
  stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
  stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h \
  stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
- stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h \
+ stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h \
  stm/stm32g4xx/CMSIS/Include/core_cm4.h \
  stm/stm32g4xx/CMSIS/Include/cmsis_version.h \
  stm/stm32g4xx/CMSIS/Include/cmsis_compiler.h \
@@ -54,7 +54,7 @@ common/Inc/stm32g4xx_hal_conf.h:
 stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:
 stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h:
 stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
-stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h:
+stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h:
 stm/stm32g4xx/CMSIS/Include/core_cm4.h:
 stm/stm32g4xx/CMSIS/Include/cmsis_version.h:
 stm/stm32g4xx/CMSIS/Include/cmsis_compiler.h:

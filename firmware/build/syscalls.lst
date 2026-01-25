@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2Ags7V.s 			page 1
+ARM GAS  /tmp/ccIv8Rmf.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -27,7 +27,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   24              		.thumb
   25              		.thumb_func
   27              	_getpid:
-  28              	.LFB269:
+  28              	.LFB359:
    1:common/Src/syscalls.c **** /**
    2:common/Src/syscalls.c ****  ******************************************************************************
    3:common/Src/syscalls.c ****  * @file      syscalls.c
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   28:common/Src/syscalls.c **** #include <sys/stat.h>
   29:common/Src/syscalls.c **** #include <sys/time.h>
   30:common/Src/syscalls.c **** #include <sys/times.h>
-ARM GAS  /tmp/cc2Ags7V.s 			page 2
+ARM GAS  /tmp/ccIv8Rmf.s 			page 2
 
 
   31:common/Src/syscalls.c **** #include <time.h>
@@ -83,7 +83,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   36 0000 0120     		movs	r0, #1
   37 0002 7047     		bx	lr
   38              		.cfi_endproc
-  39              	.LFE269:
+  39              	.LFE359:
   41              		.section	.text._kill,"ax",%progbits
   42              		.align	1
   43              		.global	_kill
@@ -92,7 +92,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   46              		.thumb_func
   48              	_kill:
   49              	.LVL0:
-  50              	.LFB270:
+  50              	.LFB360:
   43:common/Src/syscalls.c **** 
   44:common/Src/syscalls.c **** int _kill(int pid, int sig) {
   51              		.loc 1 44 29 is_stmt 1 view -0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   68 0008 0360     		str	r3, [r0]
   48:common/Src/syscalls.c ****   return -1;
   69              		.loc 1 48 3 is_stmt 1 view .LVU9
-ARM GAS  /tmp/cc2Ags7V.s 			page 3
+ARM GAS  /tmp/ccIv8Rmf.s 			page 3
 
 
   49:common/Src/syscalls.c **** }
@@ -126,7 +126,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   71 000a 4FF0FF30 		mov	r0, #-1
   72 000e 08BD     		pop	{r3, pc}
   73              		.cfi_endproc
-  74              	.LFE270:
+  74              	.LFE360:
   76              		.section	.text._exit,"ax",%progbits
   77              		.align	1
   78              		.global	_exit
@@ -135,7 +135,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
   81              		.thumb_func
   83              	_exit:
   84              	.LVL2:
-  85              	.LFB271:
+  85              	.LFB361:
   50:common/Src/syscalls.c **** 
   51:common/Src/syscalls.c **** void _exit(int status) {
   86              		.loc 1 51 24 is_stmt 1 view -0
@@ -163,7 +163,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  104              		.loc 1 53 9 view .LVU16
  105 000a FEE7     		b	.L5
  106              		.cfi_endproc
- 107              	.LFE271:
+ 107              	.LFE361:
  109              		.section	.text._read,"ax",%progbits
  110              		.align	1
  111              		.weak	_read
@@ -172,13 +172,13 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  114              		.thumb_func
  116              	_read:
  117              	.LVL4:
- 118              	.LFB272:
+ 118              	.LFB362:
   55:common/Src/syscalls.c **** }
   56:common/Src/syscalls.c **** 
   57:common/Src/syscalls.c **** __weak int _read(int file, char *ptr, int len) {
  119              		.loc 1 57 48 view -0
  120              		.cfi_startproc
-ARM GAS  /tmp/cc2Ags7V.s 			page 4
+ARM GAS  /tmp/ccIv8Rmf.s 			page 4
 
 
  121              		@ args = 0, pretend = 0, frame = 0
@@ -238,12 +238,12 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  164              		.loc 1 66 1 is_stmt 0 view .LVU32
  165 001c 3046     		mov	r0, r6
  166 001e 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  /tmp/cc2Ags7V.s 			page 5
+ARM GAS  /tmp/ccIv8Rmf.s 			page 5
 
 
  167              		.loc 1 66 1 view .LVU33
  168              		.cfi_endproc
- 169              	.LFE272:
+ 169              	.LFE362:
  171              		.section	.text._write,"ax",%progbits
  172              		.align	1
  173              		.weak	_write
@@ -252,7 +252,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  176              		.thumb_func
  178              	_write:
  179              	.LVL12:
- 180              	.LFB273:
+ 180              	.LFB363:
   67:common/Src/syscalls.c **** 
   68:common/Src/syscalls.c **** __weak int _write(int file, char *ptr, int len) {
  181              		.loc 1 68 49 is_stmt 1 view -0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  215              	.L12:
   72:common/Src/syscalls.c ****     __io_putchar(*ptr++);
  216              		.loc 1 72 29 discriminator 1 view .LVU45
-ARM GAS  /tmp/cc2Ags7V.s 			page 6
+ARM GAS  /tmp/ccIv8Rmf.s 			page 6
 
 
  217 0014 B542     		cmp	r5, r6
@@ -312,7 +312,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  222 001a 70BD     		pop	{r4, r5, r6, pc}
  223              		.loc 1 76 1 view .LVU48
  224              		.cfi_endproc
- 225              	.LFE273:
+ 225              	.LFE363:
  227              		.section	.text._close,"ax",%progbits
  228              		.align	1
  229              		.global	_close
@@ -321,7 +321,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  232              		.thumb_func
  234              	_close:
  235              	.LVL18:
- 236              	.LFB274:
+ 236              	.LFB364:
   77:common/Src/syscalls.c **** 
   78:common/Src/syscalls.c **** int _close(int file) {
  237              		.loc 1 78 22 is_stmt 1 view -0
@@ -340,7 +340,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  247              		.loc 1 81 1 view .LVU53
  248 0004 7047     		bx	lr
  249              		.cfi_endproc
- 250              	.LFE274:
+ 250              	.LFE364:
  252              		.section	.text._fstat,"ax",%progbits
  253              		.align	1
  254              		.global	_fstat
@@ -349,7 +349,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  257              		.thumb_func
  259              	_fstat:
  260              	.LVL20:
- 261              	.LFB275:
+ 261              	.LFB365:
   82:common/Src/syscalls.c **** 
   83:common/Src/syscalls.c **** int _fstat(int file, struct stat *st) {
  262              		.loc 1 83 39 is_stmt 1 view -0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  265              		@ frame_needed = 0, uses_anonymous_args = 0
  266              		@ link register save eliminated.
   84:common/Src/syscalls.c ****   (void)file;
-ARM GAS  /tmp/cc2Ags7V.s 			page 7
+ARM GAS  /tmp/ccIv8Rmf.s 			page 7
 
 
  267              		.loc 1 84 3 view .LVU55
@@ -376,7 +376,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  276              		.loc 1 87 1 view .LVU60
  277 0008 7047     		bx	lr
  278              		.cfi_endproc
- 279              	.LFE275:
+ 279              	.LFE365:
  281              		.section	.text._isatty,"ax",%progbits
  282              		.align	1
  283              		.global	_isatty
@@ -385,7 +385,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  286              		.thumb_func
  288              	_isatty:
  289              	.LVL22:
- 290              	.LFB276:
+ 290              	.LFB366:
   88:common/Src/syscalls.c **** 
   89:common/Src/syscalls.c **** int _isatty(int file) {
  291              		.loc 1 89 23 is_stmt 1 view -0
@@ -404,7 +404,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  301              		.loc 1 92 1 view .LVU65
  302 0002 7047     		bx	lr
  303              		.cfi_endproc
- 304              	.LFE276:
+ 304              	.LFE366:
  306              		.section	.text._lseek,"ax",%progbits
  307              		.align	1
  308              		.global	_lseek
@@ -413,12 +413,12 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  311              		.thumb_func
  313              	_lseek:
  314              	.LVL24:
- 315              	.LFB277:
+ 315              	.LFB367:
   93:common/Src/syscalls.c **** 
   94:common/Src/syscalls.c **** int _lseek(int file, int ptr, int dir) {
  316              		.loc 1 94 40 is_stmt 1 view -0
  317              		.cfi_startproc
-ARM GAS  /tmp/cc2Ags7V.s 			page 8
+ARM GAS  /tmp/ccIv8Rmf.s 			page 8
 
 
  318              		@ args = 0, pretend = 0, frame = 0
@@ -439,7 +439,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  328              		.loc 1 99 1 view .LVU72
  329 0002 7047     		bx	lr
  330              		.cfi_endproc
- 331              	.LFE277:
+ 331              	.LFE367:
  333              		.section	.text._open,"ax",%progbits
  334              		.align	1
  335              		.global	_open
@@ -448,7 +448,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  338              		.thumb_func
  340              	_open:
  341              	.LVL26:
- 342              	.LFB278:
+ 342              	.LFB368:
  100:common/Src/syscalls.c **** 
  101:common/Src/syscalls.c **** int _open(char *path, int flags, ...) {
  343              		.loc 1 101 39 is_stmt 1 view -0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  362 0006 03B0     		add	sp, sp, #12
  363              	.LCFI5:
  364              		.cfi_restore 3
-ARM GAS  /tmp/cc2Ags7V.s 			page 9
+ARM GAS  /tmp/ccIv8Rmf.s 			page 9
 
 
  365              		.cfi_restore 2
@@ -486,7 +486,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  367              		.cfi_def_cfa_offset 0
  368 0008 7047     		bx	lr
  369              		.cfi_endproc
- 370              	.LFE278:
+ 370              	.LFE368:
  372              		.section	.text._wait,"ax",%progbits
  373              		.align	1
  374              		.global	_wait
@@ -495,7 +495,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  377              		.thumb_func
  379              	_wait:
  380              	.LVL28:
- 381              	.LFB279:
+ 381              	.LFB369:
  107:common/Src/syscalls.c **** 
  108:common/Src/syscalls.c **** int _wait(int *status) {
  382              		.loc 1 108 24 is_stmt 1 view -0
@@ -524,7 +524,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  401 000a 4FF0FF30 		mov	r0, #-1
  402 000e 08BD     		pop	{r3, pc}
  403              		.cfi_endproc
- 404              	.LFE279:
+ 404              	.LFE369:
  406              		.section	.text._unlink,"ax",%progbits
  407              		.align	1
  408              		.global	_unlink
@@ -533,12 +533,12 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  411              		.thumb_func
  413              	_unlink:
  414              	.LVL30:
- 415              	.LFB280:
+ 415              	.LFB370:
  113:common/Src/syscalls.c **** 
  114:common/Src/syscalls.c **** int _unlink(char *name) {
  416              		.loc 1 114 25 is_stmt 1 view -0
  417              		.cfi_startproc
-ARM GAS  /tmp/cc2Ags7V.s 			page 10
+ARM GAS  /tmp/ccIv8Rmf.s 			page 10
 
 
  418              		@ args = 0, pretend = 0, frame = 0
@@ -565,7 +565,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  435 000a 4FF0FF30 		mov	r0, #-1
  436 000e 08BD     		pop	{r3, pc}
  437              		.cfi_endproc
- 438              	.LFE280:
+ 438              	.LFE370:
  440              		.section	.text._times,"ax",%progbits
  441              		.align	1
  442              		.global	_times
@@ -574,7 +574,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  445              		.thumb_func
  447              	_times:
  448              	.LVL32:
- 449              	.LFB281:
+ 449              	.LFB371:
  119:common/Src/syscalls.c **** 
  120:common/Src/syscalls.c **** int _times(struct tms *buf) {
  450              		.loc 1 120 29 is_stmt 1 view -0
@@ -593,19 +593,19 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  460              		.loc 1 123 1 view .LVU98
  461 0004 7047     		bx	lr
  462              		.cfi_endproc
- 463              	.LFE281:
+ 463              	.LFE371:
  465              		.section	.text._stat,"ax",%progbits
  466              		.align	1
  467              		.global	_stat
  468              		.syntax unified
-ARM GAS  /tmp/cc2Ags7V.s 			page 11
+ARM GAS  /tmp/ccIv8Rmf.s 			page 11
 
 
  469              		.thumb
  470              		.thumb_func
  472              	_stat:
  473              	.LVL34:
- 474              	.LFB282:
+ 474              	.LFB372:
  124:common/Src/syscalls.c **** 
  125:common/Src/syscalls.c **** int _stat(char *file, struct stat *st) {
  475              		.loc 1 125 40 is_stmt 1 view -0
@@ -629,7 +629,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  489              		.loc 1 129 1 view .LVU105
  490 0008 7047     		bx	lr
  491              		.cfi_endproc
- 492              	.LFE282:
+ 492              	.LFE372:
  494              		.section	.text._link,"ax",%progbits
  495              		.align	1
  496              		.global	_link
@@ -638,7 +638,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  499              		.thumb_func
  501              	_link:
  502              	.LVL36:
- 503              	.LFB283:
+ 503              	.LFB373:
  130:common/Src/syscalls.c **** 
  131:common/Src/syscalls.c **** int _link(char *old, char *new) {
  504              		.loc 1 131 33 is_stmt 1 view -0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  134:common/Src/syscalls.c ****   errno = EMLINK;
  516              		.loc 1 134 3 view .LVU110
  517 0002 FFF7FEFF 		bl	__errno
-ARM GAS  /tmp/cc2Ags7V.s 			page 12
+ARM GAS  /tmp/ccIv8Rmf.s 			page 12
 
 
  518              	.LVL37:
@@ -672,7 +672,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  524 000a 4FF0FF30 		mov	r0, #-1
  525 000e 08BD     		pop	{r3, pc}
  526              		.cfi_endproc
- 527              	.LFE283:
+ 527              	.LFE373:
  529              		.section	.text._fork,"ax",%progbits
  530              		.align	1
  531              		.global	_fork
@@ -680,7 +680,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  533              		.thumb
  534              		.thumb_func
  536              	_fork:
- 537              	.LFB284:
+ 537              	.LFB374:
  137:common/Src/syscalls.c **** 
  138:common/Src/syscalls.c **** int _fork(void) {
  538              		.loc 1 138 17 is_stmt 1 view -0
@@ -706,7 +706,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  555 000a 4FF0FF30 		mov	r0, #-1
  556 000e 08BD     		pop	{r3, pc}
  557              		.cfi_endproc
- 558              	.LFE284:
+ 558              	.LFE374:
  560              		.section	.text._execve,"ax",%progbits
  561              		.align	1
  562              		.global	_execve
@@ -715,10 +715,10 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  565              		.thumb_func
  567              	_execve:
  568              	.LVL39:
- 569              	.LFB285:
+ 569              	.LFB375:
  142:common/Src/syscalls.c **** 
  143:common/Src/syscalls.c **** int _execve(char *name, char **argv, char **env) {
-ARM GAS  /tmp/cc2Ags7V.s 			page 13
+ARM GAS  /tmp/ccIv8Rmf.s 			page 13
 
 
  570              		.loc 1 143 50 is_stmt 1 view -0
@@ -751,7 +751,7 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  591 000a 4FF0FF30 		mov	r0, #-1
  592 000e 08BD     		pop	{r3, pc}
  593              		.cfi_endproc
- 594              	.LFE285:
+ 594              	.LFE375:
  596              		.global	environ
  597              		.section	.data.environ,"aw"
  598              		.align	2
@@ -774,49 +774,49 @@ ARM GAS  /tmp/cc2Ags7V.s 			page 1
  619              		.file 7 "/usr/include/newlib/sys/stat.h"
  620              		.file 8 "/usr/include/newlib/sys/times.h"
  621              		.file 9 "/usr/include/newlib/sys/errno.h"
-ARM GAS  /tmp/cc2Ags7V.s 			page 14
+ARM GAS  /tmp/ccIv8Rmf.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/cc2Ags7V.s:21     .text._getpid:00000000 $t
-     /tmp/cc2Ags7V.s:27     .text._getpid:00000000 _getpid
-     /tmp/cc2Ags7V.s:42     .text._kill:00000000 $t
-     /tmp/cc2Ags7V.s:48     .text._kill:00000000 _kill
-     /tmp/cc2Ags7V.s:77     .text._exit:00000000 $t
-     /tmp/cc2Ags7V.s:83     .text._exit:00000000 _exit
-     /tmp/cc2Ags7V.s:110    .text._read:00000000 $t
-     /tmp/cc2Ags7V.s:116    .text._read:00000000 _read
-     /tmp/cc2Ags7V.s:172    .text._write:00000000 $t
-     /tmp/cc2Ags7V.s:178    .text._write:00000000 _write
-     /tmp/cc2Ags7V.s:228    .text._close:00000000 $t
-     /tmp/cc2Ags7V.s:234    .text._close:00000000 _close
-     /tmp/cc2Ags7V.s:253    .text._fstat:00000000 $t
-     /tmp/cc2Ags7V.s:259    .text._fstat:00000000 _fstat
-     /tmp/cc2Ags7V.s:282    .text._isatty:00000000 $t
-     /tmp/cc2Ags7V.s:288    .text._isatty:00000000 _isatty
-     /tmp/cc2Ags7V.s:307    .text._lseek:00000000 $t
-     /tmp/cc2Ags7V.s:313    .text._lseek:00000000 _lseek
-     /tmp/cc2Ags7V.s:334    .text._open:00000000 $t
-     /tmp/cc2Ags7V.s:340    .text._open:00000000 _open
-     /tmp/cc2Ags7V.s:373    .text._wait:00000000 $t
-     /tmp/cc2Ags7V.s:379    .text._wait:00000000 _wait
-     /tmp/cc2Ags7V.s:407    .text._unlink:00000000 $t
-     /tmp/cc2Ags7V.s:413    .text._unlink:00000000 _unlink
-     /tmp/cc2Ags7V.s:441    .text._times:00000000 $t
-     /tmp/cc2Ags7V.s:447    .text._times:00000000 _times
-     /tmp/cc2Ags7V.s:466    .text._stat:00000000 $t
-     /tmp/cc2Ags7V.s:472    .text._stat:00000000 _stat
-     /tmp/cc2Ags7V.s:495    .text._link:00000000 $t
-     /tmp/cc2Ags7V.s:501    .text._link:00000000 _link
-     /tmp/cc2Ags7V.s:530    .text._fork:00000000 $t
-     /tmp/cc2Ags7V.s:536    .text._fork:00000000 _fork
-     /tmp/cc2Ags7V.s:561    .text._execve:00000000 $t
-     /tmp/cc2Ags7V.s:567    .text._execve:00000000 _execve
-     /tmp/cc2Ags7V.s:601    .data.environ:00000000 environ
-     /tmp/cc2Ags7V.s:598    .data.environ:00000000 $d
-     /tmp/cc2Ags7V.s:608    .bss.__env:00000000 __env
-     /tmp/cc2Ags7V.s:605    .bss.__env:00000000 $d
+     /tmp/ccIv8Rmf.s:21     .text._getpid:00000000 $t
+     /tmp/ccIv8Rmf.s:27     .text._getpid:00000000 _getpid
+     /tmp/ccIv8Rmf.s:42     .text._kill:00000000 $t
+     /tmp/ccIv8Rmf.s:48     .text._kill:00000000 _kill
+     /tmp/ccIv8Rmf.s:77     .text._exit:00000000 $t
+     /tmp/ccIv8Rmf.s:83     .text._exit:00000000 _exit
+     /tmp/ccIv8Rmf.s:110    .text._read:00000000 $t
+     /tmp/ccIv8Rmf.s:116    .text._read:00000000 _read
+     /tmp/ccIv8Rmf.s:172    .text._write:00000000 $t
+     /tmp/ccIv8Rmf.s:178    .text._write:00000000 _write
+     /tmp/ccIv8Rmf.s:228    .text._close:00000000 $t
+     /tmp/ccIv8Rmf.s:234    .text._close:00000000 _close
+     /tmp/ccIv8Rmf.s:253    .text._fstat:00000000 $t
+     /tmp/ccIv8Rmf.s:259    .text._fstat:00000000 _fstat
+     /tmp/ccIv8Rmf.s:282    .text._isatty:00000000 $t
+     /tmp/ccIv8Rmf.s:288    .text._isatty:00000000 _isatty
+     /tmp/ccIv8Rmf.s:307    .text._lseek:00000000 $t
+     /tmp/ccIv8Rmf.s:313    .text._lseek:00000000 _lseek
+     /tmp/ccIv8Rmf.s:334    .text._open:00000000 $t
+     /tmp/ccIv8Rmf.s:340    .text._open:00000000 _open
+     /tmp/ccIv8Rmf.s:373    .text._wait:00000000 $t
+     /tmp/ccIv8Rmf.s:379    .text._wait:00000000 _wait
+     /tmp/ccIv8Rmf.s:407    .text._unlink:00000000 $t
+     /tmp/ccIv8Rmf.s:413    .text._unlink:00000000 _unlink
+     /tmp/ccIv8Rmf.s:441    .text._times:00000000 $t
+     /tmp/ccIv8Rmf.s:447    .text._times:00000000 _times
+     /tmp/ccIv8Rmf.s:466    .text._stat:00000000 $t
+     /tmp/ccIv8Rmf.s:472    .text._stat:00000000 _stat
+     /tmp/ccIv8Rmf.s:495    .text._link:00000000 $t
+     /tmp/ccIv8Rmf.s:501    .text._link:00000000 _link
+     /tmp/ccIv8Rmf.s:530    .text._fork:00000000 $t
+     /tmp/ccIv8Rmf.s:536    .text._fork:00000000 _fork
+     /tmp/ccIv8Rmf.s:561    .text._execve:00000000 $t
+     /tmp/ccIv8Rmf.s:567    .text._execve:00000000 _execve
+     /tmp/ccIv8Rmf.s:601    .data.environ:00000000 environ
+     /tmp/ccIv8Rmf.s:598    .data.environ:00000000 $d
+     /tmp/ccIv8Rmf.s:608    .bss.__env:00000000 __env
+     /tmp/ccIv8Rmf.s:605    .bss.__env:00000000 $d
 
 UNDEFINED SYMBOLS
 __errno

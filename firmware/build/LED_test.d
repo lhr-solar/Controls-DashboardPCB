@@ -1,5 +1,5 @@
-/home/pani_/LHRS/VCAT-Dashboard/firmware/test/../build/LED_test.o: \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/test/tests/LED_test.c \
+/home/pani_/LHRS/VCAT-Dashboard/firmware/build/LED_test.o: \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/tests/LED_test.c \
  common/Inc/stm32xx_hal.h \
  stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h \

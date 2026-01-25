@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccpolCuQ.s 			page 1
+ARM GAS  /tmp/ccZINekD.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
   28:middleware/FreeRTOS-Kernel/timers.c **** 
   29:middleware/FreeRTOS-Kernel/timers.c **** /* Standard includes. */
   30:middleware/FreeRTOS-Kernel/timers.c **** #include <stdlib.h>
-ARM GAS  /tmp/ccpolCuQ.s 			page 2
+ARM GAS  /tmp/ccZINekD.s 			page 2
 
 
   31:middleware/FreeRTOS-Kernel/timers.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
   85:middleware/FreeRTOS-Kernel/timers.c ****         const char * pcTimerName;                                                /**< Text name.  T
   86:middleware/FreeRTOS-Kernel/timers.c ****         ListItem_t xTimerListItem;                                               /**< Standard link
   87:middleware/FreeRTOS-Kernel/timers.c ****         TickType_t xTimerPeriodInTicks;                                          /**< How quickly a
-ARM GAS  /tmp/ccpolCuQ.s 			page 3
+ARM GAS  /tmp/ccZINekD.s 			page 3
 
 
   88:middleware/FreeRTOS-Kernel/timers.c ****         void * pvTimerID;                                                        /**< An ID to iden
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  142:middleware/FreeRTOS-Kernel/timers.c ****  * static qualifier. */
  143:middleware/FreeRTOS-Kernel/timers.c ****     PRIVILEGED_DATA static List_t xActiveTimerList1;
  144:middleware/FreeRTOS-Kernel/timers.c ****     PRIVILEGED_DATA static List_t xActiveTimerList2;
-ARM GAS  /tmp/ccpolCuQ.s 			page 4
+ARM GAS  /tmp/ccZINekD.s 			page 4
 
 
  145:middleware/FreeRTOS-Kernel/timers.c ****     PRIVILEGED_DATA static List_t * pxCurrentTimerList;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  199:middleware/FreeRTOS-Kernel/timers.c ****  * The tick count has overflowed.  Switch the timer lists after ensuring the
  200:middleware/FreeRTOS-Kernel/timers.c ****  * current timer list does not still reference some timers.
  201:middleware/FreeRTOS-Kernel/timers.c ****  */
-ARM GAS  /tmp/ccpolCuQ.s 			page 5
+ARM GAS  /tmp/ccZINekD.s 			page 5
 
 
  202:middleware/FreeRTOS-Kernel/timers.c ****     static void prvSwitchTimerLists( void ) PRIVILEGED_FUNCTION;
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  256:middleware/FreeRTOS-Kernel/timers.c ****                     StackType_t * pxTimerTaskStackBuffer = NULL;
  257:middleware/FreeRTOS-Kernel/timers.c ****                     configSTACK_DEPTH_TYPE uxTimerTaskStackSize;
  258:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 6
+ARM GAS  /tmp/ccZINekD.s 			page 6
 
 
  259:middleware/FreeRTOS-Kernel/timers.c ****                     vApplicationGetTimerTaskMemory( &pxTimerTaskTCBBuffer, &pxTimerTaskStackBuffer,
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  313:middleware/FreeRTOS-Kernel/timers.c ****                                            NULL,
  314:middleware/FreeRTOS-Kernel/timers.c ****                                            ( ( UBaseType_t ) configTIMER_TASK_PRIORITY ) | portPRIV
  315:middleware/FreeRTOS-Kernel/timers.c ****                                            &xTimerTaskHandle );
-ARM GAS  /tmp/ccpolCuQ.s 			page 7
+ARM GAS  /tmp/ccZINekD.s 			page 7
 
 
  316:middleware/FreeRTOS-Kernel/timers.c ****                 }
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  370:middleware/FreeRTOS-Kernel/timers.c ****         TimerHandle_t xTimerCreateStatic( const char * const pcTimerName,
  371:middleware/FreeRTOS-Kernel/timers.c ****                                           const TickType_t xTimerPeriodInTicks,
  372:middleware/FreeRTOS-Kernel/timers.c ****                                           const BaseType_t xAutoReload,
-ARM GAS  /tmp/ccpolCuQ.s 			page 8
+ARM GAS  /tmp/ccZINekD.s 			page 8
 
 
  373:middleware/FreeRTOS-Kernel/timers.c ****                                           void * const pvTimerID,
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  427:middleware/FreeRTOS-Kernel/timers.c ****         /* Ensure the infrastructure used by the timer service task has been
  428:middleware/FreeRTOS-Kernel/timers.c ****          * created/initialised. */
  429:middleware/FreeRTOS-Kernel/timers.c ****         prvCheckForValidListAndQueue();
-ARM GAS  /tmp/ccpolCuQ.s 			page 9
+ARM GAS  /tmp/ccZINekD.s 			page 9
 
 
  430:middleware/FreeRTOS-Kernel/timers.c **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  484:middleware/FreeRTOS-Kernel/timers.c ****             }
  485:middleware/FreeRTOS-Kernel/timers.c **** 
  486:middleware/FreeRTOS-Kernel/timers.c ****             traceTIMER_COMMAND_SEND( xTimer, xCommandID, xOptionalValue, xReturn );
-ARM GAS  /tmp/ccpolCuQ.s 			page 10
+ARM GAS  /tmp/ccZINekD.s 			page 10
 
 
  487:middleware/FreeRTOS-Kernel/timers.c ****         }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  541:middleware/FreeRTOS-Kernel/timers.c **** /*-----------------------------------------------------------*/
  542:middleware/FreeRTOS-Kernel/timers.c **** 
  543:middleware/FreeRTOS-Kernel/timers.c ****     TaskHandle_t xTimerGetTimerDaemonTaskHandle( void )
-ARM GAS  /tmp/ccpolCuQ.s 			page 11
+ARM GAS  /tmp/ccZINekD.s 			page 11
 
 
  544:middleware/FreeRTOS-Kernel/timers.c ****     {
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  598:middleware/FreeRTOS-Kernel/timers.c ****         Timer_t * pxTimer = xTimer;
  599:middleware/FreeRTOS-Kernel/timers.c ****         BaseType_t xReturn;
  600:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 12
+ARM GAS  /tmp/ccZINekD.s 			page 12
 
 
  601:middleware/FreeRTOS-Kernel/timers.c ****         traceENTER_xTimerGetReloadMode( xTimer );
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  655:middleware/FreeRTOS-Kernel/timers.c ****         BaseType_t xTimerGetStaticBuffer( TimerHandle_t xTimer,
  656:middleware/FreeRTOS-Kernel/timers.c ****                                           StaticTimer_t ** ppxTimerBuffer )
  657:middleware/FreeRTOS-Kernel/timers.c ****         {
-ARM GAS  /tmp/ccpolCuQ.s 			page 13
+ARM GAS  /tmp/ccZINekD.s 			page 13
 
 
  658:middleware/FreeRTOS-Kernel/timers.c ****             BaseType_t xReturn;
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  712:middleware/FreeRTOS-Kernel/timers.c ****             traceTIMER_EXPIRED( pxTimer );
  713:middleware/FreeRTOS-Kernel/timers.c ****             pxTimer->pxCallbackFunction( ( TimerHandle_t ) pxTimer );
  714:middleware/FreeRTOS-Kernel/timers.c ****         }
-ARM GAS  /tmp/ccpolCuQ.s 			page 14
+ARM GAS  /tmp/ccZINekD.s 			page 14
 
 
  715:middleware/FreeRTOS-Kernel/timers.c ****     }
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  769:middleware/FreeRTOS-Kernel/timers.c ****              * obtain the time at which the next timer will expire. */
  770:middleware/FreeRTOS-Kernel/timers.c ****             xNextExpireTime = prvGetNextExpireTime( &xListWasEmpty );
  771:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 15
+ARM GAS  /tmp/ccZINekD.s 			page 15
 
 
  772:middleware/FreeRTOS-Kernel/timers.c ****             /* If a timer has expired, process it.  Otherwise, block this task
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  826:middleware/FreeRTOS-Kernel/timers.c ****                          * critical section being exited and this yield then the yield
  827:middleware/FreeRTOS-Kernel/timers.c ****                          * will not cause the task to block. */
  828:middleware/FreeRTOS-Kernel/timers.c ****                         taskYIELD_WITHIN_API();
-ARM GAS  /tmp/ccpolCuQ.s 			page 16
+ARM GAS  /tmp/ccZINekD.s 			page 16
 
 
  829:middleware/FreeRTOS-Kernel/timers.c ****                     }
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
   52              		.loc 1 859 29 view .LVU10
   53 0010 1868     		ldr	r0, [r3]
   54              	.LVL1:
-ARM GAS  /tmp/ccpolCuQ.s 			page 17
+ARM GAS  /tmp/ccZINekD.s 			page 17
 
 
   55              		.loc 1 859 29 view .LVU11
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  885:middleware/FreeRTOS-Kernel/timers.c ****             *pxTimerListsWereSwitched = pdFALSE;
  886:middleware/FreeRTOS-Kernel/timers.c ****         }
  887:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 18
+ARM GAS  /tmp/ccZINekD.s 			page 18
 
 
  888:middleware/FreeRTOS-Kernel/timers.c ****         xLastTime = xTimeNow;
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  912:middleware/FreeRTOS-Kernel/timers.c ****                 xProcessTimerNow = pdTRUE;
  115              		.loc 1 912 34 view .LVU27
  116 0012 0120     		movs	r0, #1
-ARM GAS  /tmp/ccpolCuQ.s 			page 19
+ARM GAS  /tmp/ccZINekD.s 			page 19
 
 
  117              	.LVL8:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  921:middleware/FreeRTOS-Kernel/timers.c ****             {
  142              		.loc 1 921 45 discriminator 1 view .LVU35
  143 0028 9942     		cmp	r1, r3
-ARM GAS  /tmp/ccpolCuQ.s 			page 20
+ARM GAS  /tmp/ccZINekD.s 			page 20
 
 
  144 002a 06D2     		bcs	.L13
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  190              		.loc 1 702 5 is_stmt 0 view .LVU45
  191 0000 70B5     		push	{r4, r5, r6, lr}
  192              	.LCFI1:
-ARM GAS  /tmp/ccpolCuQ.s 			page 21
+ARM GAS  /tmp/ccZINekD.s 			page 21
 
 
  193              		.cfi_def_cfa_offset 16
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  715:middleware/FreeRTOS-Kernel/timers.c **** /*-----------------------------------------------------------*/
  234              		.loc 1 715 5 view .LVU59
  235 0026 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  /tmp/ccpolCuQ.s 			page 22
+ARM GAS  /tmp/ccZINekD.s 			page 22
 
 
  715:middleware/FreeRTOS-Kernel/timers.c **** /*-----------------------------------------------------------*/
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  733:middleware/FreeRTOS-Kernel/timers.c ****         {
  281              		.loc 1 733 11 view .LVU71
  282 0018 13F0040F 		tst	r3, #4
-ARM GAS  /tmp/ccpolCuQ.s 			page 23
+ARM GAS  /tmp/ccZINekD.s 			page 23
 
 
  283 001c 07D1     		bne	.L26
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  944:middleware/FreeRTOS-Kernel/timers.c **** 
  945:middleware/FreeRTOS-Kernel/timers.c ****         while( xQueueReceive( xTimerQueue, &xMessage, tmrNO_DELAY ) != pdFAIL )
  946:middleware/FreeRTOS-Kernel/timers.c ****         {
-ARM GAS  /tmp/ccpolCuQ.s 			page 24
+ARM GAS  /tmp/ccZINekD.s 			page 24
 
 
  947:middleware/FreeRTOS-Kernel/timers.c ****             #if ( INCLUDE_xTimerPendFunctionCall == 1 )
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1001:middleware/FreeRTOS-Kernel/timers.c ****                     case tmrCOMMAND_RESET:
 1002:middleware/FreeRTOS-Kernel/timers.c ****                     case tmrCOMMAND_RESET_FROM_ISR:
 1003:middleware/FreeRTOS-Kernel/timers.c ****                         /* Start or restart a timer. */
-ARM GAS  /tmp/ccpolCuQ.s 			page 25
+ARM GAS  /tmp/ccZINekD.s 			page 25
 
 
 1004:middleware/FreeRTOS-Kernel/timers.c ****                         pxTimer->ucStatus |= ( uint8_t ) tmrSTATUS_IS_ACTIVE;
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1058:middleware/FreeRTOS-Kernel/timers.c ****                             {
 1059:middleware/FreeRTOS-Kernel/timers.c ****                                 vPortFree( pxTimer );
 1060:middleware/FreeRTOS-Kernel/timers.c ****                             }
-ARM GAS  /tmp/ccpolCuQ.s 			page 26
+ARM GAS  /tmp/ccZINekD.s 			page 26
 
 
 1061:middleware/FreeRTOS-Kernel/timers.c ****                             else
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  340 0004 DB68     		ldr	r3, [r3, #12]
  341              	.LVL32:
 1098:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 27
+ARM GAS  /tmp/ccZINekD.s 			page 27
 
 
 1099:middleware/FreeRTOS-Kernel/timers.c ****             /* Process the expired timer.  For auto-reload timers, be careful to
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  385              	prvSampleTimeNow:
  386              	.LVL36:
  387              	.LFB23:
-ARM GAS  /tmp/ccpolCuQ.s 			page 28
+ARM GAS  /tmp/ccZINekD.s 			page 28
 
 
  872:middleware/FreeRTOS-Kernel/timers.c ****         TickType_t xTimeNow;
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  427              		.loc 1 890 9 is_stmt 1 view .LVU112
  891:middleware/FreeRTOS-Kernel/timers.c **** /*-----------------------------------------------------------*/
  428              		.loc 1 891 5 is_stmt 0 view .LVU113
-ARM GAS  /tmp/ccpolCuQ.s 			page 29
+ARM GAS  /tmp/ccZINekD.s 			page 29
 
 
  429 001a 2046     		mov	r0, r4
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  477 0008 FFF7FEFF 		bl	vTaskSuspendAll
  478              	.LVL43:
  795:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 30
+ARM GAS  /tmp/ccZINekD.s 			page 30
 
 
  479              		.loc 1 795 13 view .LVU122
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  519              	@ 828 "middleware/FreeRTOS-Kernel/timers.c" 1
  520 003c BFF34F8F 		dsb
  521              	@ 0 "" 2
-ARM GAS  /tmp/ccpolCuQ.s 			page 31
+ARM GAS  /tmp/ccZINekD.s 			page 31
 
 
  828:middleware/FreeRTOS-Kernel/timers.c ****                     }
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  564              		.loc 1 838 17 is_stmt 1 view .LVU148
  838:middleware/FreeRTOS-Kernel/timers.c ****             }
  565              		.loc 1 838 26 is_stmt 0 view .LVU149
-ARM GAS  /tmp/ccpolCuQ.s 			page 32
+ARM GAS  /tmp/ccZINekD.s 			page 32
 
 
  566 0064 FFF7FEFF 		bl	xTaskResumeAll
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  614              		.loc 1 943 9 view .LVU157
  945:middleware/FreeRTOS-Kernel/timers.c ****         {
  615              		.loc 1 945 9 view .LVU158
-ARM GAS  /tmp/ccpolCuQ.s 			page 33
+ARM GAS  /tmp/ccZINekD.s 			page 33
 
 
  616              	.L54:
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  653 002e 6846     		mov	r0, sp
  654 0030 FFF7FEFF 		bl	prvSampleTimeNow
  655              	.LVL62:
-ARM GAS  /tmp/ccpolCuQ.s 			page 34
+ARM GAS  /tmp/ccZINekD.s 			page 34
 
 
  656 0034 0546     		mov	r5, r0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  698 0066 0028     		cmp	r0, #0
  699 0068 D0D0     		beq	.L54
 1010:middleware/FreeRTOS-Kernel/timers.c ****                             {
-ARM GAS  /tmp/ccpolCuQ.s 			page 35
+ARM GAS  /tmp/ccZINekD.s 			page 35
 
 
  700              		.loc 1 1010 29 is_stmt 1 view .LVU188
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1034:middleware/FreeRTOS-Kernel/timers.c **** 
  740              		.loc 1 1034 25 is_stmt 1 view .LVU203
  741 00a0 B4E7     		b	.L54
-ARM GAS  /tmp/ccpolCuQ.s 			page 36
+ARM GAS  /tmp/ccZINekD.s 			page 36
 
 
  742              	.L57:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
    9:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****  * the Software without restriction, including without limitation the rights to
   10:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
   11:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****  * the Software, and to permit persons to whom the Software is furnished to do so,
-ARM GAS  /tmp/ccpolCuQ.s 			page 37
+ARM GAS  /tmp/ccZINekD.s 			page 37
 
 
   12:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****  * subject to the following conditions:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
   66:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     typedef uint32_t     TickType_t;
   67:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     #define portMAX_DELAY              ( TickType_t ) 0xffffffffUL
   68:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 38
+ARM GAS  /tmp/ccZINekD.s 			page 38
 
 
   69:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** /* 32-bit tick type on a 32-bit architecture, so reads of the tick count do
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  123:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portENABLE_INTERRUPTS()                   vPortSetBASEPRI( 0 )
  124:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portENTER_CRITICAL()                      vPortEnterCritical()
  125:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portEXIT_CRITICAL()                       vPortExitCritical()
-ARM GAS  /tmp/ccpolCuQ.s 			page 39
+ARM GAS  /tmp/ccZINekD.s 			page 39
 
 
  126:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  180:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #endif
  181:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  182:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** /* portNOP() is not required by this port. */
-ARM GAS  /tmp/ccpolCuQ.s 			page 40
+ARM GAS  /tmp/ccZINekD.s 			page 40
 
 
  183:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portNOP()
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1040:middleware/FreeRTOS-Kernel/timers.c **** 
  793              		.loc 1 1040 25 discriminator 3 view .LVU221
  794 00d2 FEE7     		b	.L66
-ARM GAS  /tmp/ccpolCuQ.s 			page 41
+ARM GAS  /tmp/ccZINekD.s 			page 41
 
 
  795              	.L61:
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  751:middleware/FreeRTOS-Kernel/timers.c **** 
  843              		.loc 1 751 9 view .LVU230
  754:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 42
+ARM GAS  /tmp/ccZINekD.s 			page 42
 
 
  844              		.loc 1 754 9 view .LVU231
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1114:middleware/FreeRTOS-Kernel/timers.c ****          * queue used to communicate with the timer service, have been
 1115:middleware/FreeRTOS-Kernel/timers.c ****          * initialised. */
 1116:middleware/FreeRTOS-Kernel/timers.c ****         taskENTER_CRITICAL();
-ARM GAS  /tmp/ccpolCuQ.s 			page 43
+ARM GAS  /tmp/ccZINekD.s 			page 43
 
 
  888              		.loc 1 1116 9 view .LVU239
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  900 000e FFF7FEFF 		bl	vPortExitCritical
  901              	.LVL79:
 1159:middleware/FreeRTOS-Kernel/timers.c ****     }
-ARM GAS  /tmp/ccpolCuQ.s 			page 44
+ARM GAS  /tmp/ccZINekD.s 			page 44
 
 
  902              		.loc 1 1159 5 is_stmt 0 view .LVU245
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  945 0040 1860     		str	r0, [r3]
  946              	.LBE44:
 1142:middleware/FreeRTOS-Kernel/timers.c ****                     {
-ARM GAS  /tmp/ccpolCuQ.s 			page 45
+ARM GAS  /tmp/ccZINekD.s 			page 45
 
 
  947              		.loc 1 1142 21 is_stmt 1 view .LVU257
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  997              	.LBB45:
  998              	.LBI45:
  213:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** {
-ARM GAS  /tmp/ccpolCuQ.s 			page 46
+ARM GAS  /tmp/ccZINekD.s 			page 46
 
 
  999              		.loc 2 213 30 view .LVU264
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  436:middleware/FreeRTOS-Kernel/timers.c ****         vListInitialiseItem( &( pxNewTimer->xTimerListItem ) );
  1041              		.loc 1 436 9 is_stmt 1 view .LVU279
  436:middleware/FreeRTOS-Kernel/timers.c ****         vListInitialiseItem( &( pxNewTimer->xTimerListItem ) );
-ARM GAS  /tmp/ccpolCuQ.s 			page 47
+ARM GAS  /tmp/ccZINekD.s 			page 47
 
 
  1042              		.loc 1 436 40 is_stmt 0 view .LVU280
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1087              		.cfi_offset 14, -4
  1088 0002 88B0     		sub	sp, sp, #32
  1089              	.LCFI19:
-ARM GAS  /tmp/ccpolCuQ.s 			page 48
+ARM GAS  /tmp/ccZINekD.s 			page 48
 
 
  1090              		.cfi_def_cfa_offset 40
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1130 0032 FFF7FEFF 		bl	xTaskCreateStatic
  1131              	.LVL92:
  295:middleware/FreeRTOS-Kernel/timers.c ****                                                           configTIMER_SERVICE_TASK_NAME,
-ARM GAS  /tmp/ccpolCuQ.s 			page 49
+ARM GAS  /tmp/ccZINekD.s 			page 49
 
 
  1132              		.loc 1 295 38 discriminator 1 view .LVU305
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1178 0058 00000000 		.word	.LC1
  1179 005c 00000000 		.word	prvTimerTask
  1180 0060 00000000 		.word	xTimerTaskHandle
-ARM GAS  /tmp/ccpolCuQ.s 			page 50
+ARM GAS  /tmp/ccZINekD.s 			page 50
 
 
  1181              		.cfi_endproc
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1226              		.loc 2 215 5 view .LVU325
  1227              		.loc 2 217 5 view .LVU326
  1228              		.syntax unified
-ARM GAS  /tmp/ccpolCuQ.s 			page 51
+ARM GAS  /tmp/ccZINekD.s 			page 51
 
 
  1229              	@ 217 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h" 1
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1271 0038 FFF7FEFF 		bl	prvInitialiseNewTimer
  1272              	.LVL100:
  409:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 52
+ARM GAS  /tmp/ccZINekD.s 			page 52
 
 
  1273              		.loc 1 409 57 view .LVU340
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1322              	xTimerGenericCommandFromTask:
  1323              	.LVL103:
  1324              	.LFB8:
-ARM GAS  /tmp/ccpolCuQ.s 			page 53
+ARM GAS  /tmp/ccZINekD.s 			page 53
 
 
  453:middleware/FreeRTOS-Kernel/timers.c ****         BaseType_t xReturn = pdFAIL;
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1361              		.loc 1 470 49 is_stmt 0 view .LVU367
  1362 0012 0393     		str	r3, [sp, #12]
  472:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 54
+ARM GAS  /tmp/ccZINekD.s 			page 54
 
 
  1363              		.loc 1 472 13 is_stmt 1 view .LVU368
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1409              	
  1410              	@ 0 "" 2
  1411              	.LVL108:
-ARM GAS  /tmp/ccpolCuQ.s 			page 55
+ARM GAS  /tmp/ccZINekD.s 			page 55
 
 
  1412              		.thumb
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  478:middleware/FreeRTOS-Kernel/timers.c ****                 }
  1456              		.loc 1 478 21 is_stmt 1 view .LVU391
  478:middleware/FreeRTOS-Kernel/timers.c ****                 }
-ARM GAS  /tmp/ccpolCuQ.s 			page 56
+ARM GAS  /tmp/ccZINekD.s 			page 56
 
 
  1457              		.loc 1 478 31 is_stmt 0 view .LVU392
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  510:middleware/FreeRTOS-Kernel/timers.c **** 
  1503              		.loc 1 510 126 view .LVU403
  512:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 57
+ARM GAS  /tmp/ccZINekD.s 			page 57
 
 
  1504              		.loc 1 512 9 view .LVU404
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  215:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  1543              		.loc 2 215 5 view .LVU420
  1544              		.loc 2 217 5 view .LVU421
-ARM GAS  /tmp/ccpolCuQ.s 			page 58
+ARM GAS  /tmp/ccZINekD.s 			page 58
 
 
  1545              		.syntax unified
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1592 003c FEE7     		b	.L122
  1593              	.LVL121:
  1594              	.L124:
-ARM GAS  /tmp/ccpolCuQ.s 			page 59
+ARM GAS  /tmp/ccZINekD.s 			page 59
 
 
  1595              	.LCFI36:
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1636              	.LFE9:
  1638              		.section	.text.xTimerGetTimerDaemonTaskHandle,"ax",%progbits
  1639              		.align	1
-ARM GAS  /tmp/ccpolCuQ.s 			page 60
+ARM GAS  /tmp/ccZINekD.s 			page 60
 
 
  1640              		.global	xTimerGetTimerDaemonTaskHandle
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1686 001c 00000000 		.word	xTimerTaskHandle
  1687              		.cfi_endproc
  1688              	.LFE10:
-ARM GAS  /tmp/ccpolCuQ.s 			page 61
+ARM GAS  /tmp/ccZINekD.s 			page 61
 
 
  1690              		.section	.text.xTimerGetPeriod,"ax",%progbits
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1733              	@ 0 "" 2
  1734              		.thumb
  1735              		.syntax unified
-ARM GAS  /tmp/ccpolCuQ.s 			page 62
+ARM GAS  /tmp/ccZINekD.s 			page 62
 
 
  1736              	.L142:
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  583:middleware/FreeRTOS-Kernel/timers.c ****             }
  1781              		.loc 1 583 17 is_stmt 1 view .LVU479
  583:middleware/FreeRTOS-Kernel/timers.c ****             }
-ARM GAS  /tmp/ccpolCuQ.s 			page 63
+ARM GAS  /tmp/ccZINekD.s 			page 63
 
 
  1782              		.loc 1 583 24 is_stmt 0 view .LVU480
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1824              		.loc 1 587 35 view .LVU493
  1825 0036 23F00403 		bic	r3, r3, #4
  1826 003a 85F82430 		strb	r3, [r5, #36]
-ARM GAS  /tmp/ccpolCuQ.s 			page 64
+ARM GAS  /tmp/ccZINekD.s 			page 64
 
 
  1827 003e ECE7     		b	.L148
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  617:middleware/FreeRTOS-Kernel/timers.c **** 
  1871              		.loc 1 617 9 is_stmt 1 view .LVU506
  1872 0016 FFF7FEFF 		bl	vPortExitCritical
-ARM GAS  /tmp/ccpolCuQ.s 			page 65
+ARM GAS  /tmp/ccZINekD.s 			page 65
 
 
  1873              	.LVL139:
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1917              		.loc 1 614 25 view .LVU517
  1918 0032 F0E7     		b	.L154
  1919              		.cfi_endproc
-ARM GAS  /tmp/ccpolCuQ.s 			page 66
+ARM GAS  /tmp/ccZINekD.s 			page 66
 
 
  1920              	.LFE13:
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  1968              		@ frame_needed = 0, uses_anonymous_args = 0
  1969              		@ link register save eliminated.
  640:middleware/FreeRTOS-Kernel/timers.c ****         TickType_t xReturn;
-ARM GAS  /tmp/ccpolCuQ.s 			page 67
+ARM GAS  /tmp/ccZINekD.s 			page 67
 
 
  1970              		.loc 1 640 9 view .LVU528
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2010              		.cfi_endproc
  2011              	.LFE15:
  2013              		.section	.text.xTimerGetStaticBuffer,"ax",%progbits
-ARM GAS  /tmp/ccpolCuQ.s 			page 68
+ARM GAS  /tmp/ccZINekD.s 			page 68
 
 
  2014              		.align	1
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2054              	.LBI73:
  213:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** {
  2055              		.loc 2 213 30 view .LVU559
-ARM GAS  /tmp/ccpolCuQ.s 			page 69
+ARM GAS  /tmp/ccZINekD.s 			page 69
 
 
  2056              	.LBB74:
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2102              		.loc 1 689 44 view .LVU570
  691:middleware/FreeRTOS-Kernel/timers.c **** 
  2103              		.loc 1 691 9 view .LVU571
-ARM GAS  /tmp/ccpolCuQ.s 			page 70
+ARM GAS  /tmp/ccZINekD.s 			page 70
 
 
  2104 0000 08B1     		cbz	r0, .L174
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2150              	.LFB28:
 1160:middleware/FreeRTOS-Kernel/timers.c **** /*-----------------------------------------------------------*/
 1161:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 71
+ARM GAS  /tmp/ccZINekD.s 			page 71
 
 
 1162:middleware/FreeRTOS-Kernel/timers.c ****     BaseType_t xTimerIsTimerActive( TimerHandle_t xTimer )
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2182 0016 FFF7FEFF 		bl	vPortExitCritical
  2183              	.LVL160:
 1184:middleware/FreeRTOS-Kernel/timers.c **** 
-ARM GAS  /tmp/ccpolCuQ.s 			page 72
+ARM GAS  /tmp/ccZINekD.s 			page 72
 
 
 1185:middleware/FreeRTOS-Kernel/timers.c ****         traceRETURN_xTimerIsTimerActive( xReturn );
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2227              		.loc 1 1180 25 view .LVU606
  2228 0032 F0E7     		b	.L178
  2229              		.cfi_endproc
-ARM GAS  /tmp/ccpolCuQ.s 			page 73
+ARM GAS  /tmp/ccZINekD.s 			page 73
 
 
  2230              	.LFE28:
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1205:middleware/FreeRTOS-Kernel/timers.c **** 
 1206:middleware/FreeRTOS-Kernel/timers.c ****         traceRETURN_pvTimerGetTimerID( pvReturn );
  2269              		.loc 1 1206 50 view .LVU618
-ARM GAS  /tmp/ccpolCuQ.s 			page 74
+ARM GAS  /tmp/ccZINekD.s 			page 74
 
 
 1207:middleware/FreeRTOS-Kernel/timers.c **** 
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1212:middleware/FreeRTOS-Kernel/timers.c ****     void vTimerSetTimerID( TimerHandle_t xTimer,
 1213:middleware/FreeRTOS-Kernel/timers.c ****                            void * pvNewID )
 1214:middleware/FreeRTOS-Kernel/timers.c ****     {
-ARM GAS  /tmp/ccpolCuQ.s 			page 75
+ARM GAS  /tmp/ccZINekD.s 			page 75
 
 
  2316              		.loc 1 1214 5 view -0
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2354              	.LBB82:
  215:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  2355              		.loc 2 215 5 view .LVU641
-ARM GAS  /tmp/ccpolCuQ.s 			page 76
+ARM GAS  /tmp/ccZINekD.s 			page 76
 
 
  2356              		.loc 2 217 5 view .LVU642
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1254:middleware/FreeRTOS-Kernel/timers.c **** 
 1255:middleware/FreeRTOS-Kernel/timers.c ****             return xReturn;
 1256:middleware/FreeRTOS-Kernel/timers.c ****         }
-ARM GAS  /tmp/ccpolCuQ.s 			page 77
+ARM GAS  /tmp/ccZINekD.s 			page 77
 
 
 1257:middleware/FreeRTOS-Kernel/timers.c **** 
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
 1311:middleware/FreeRTOS-Kernel/timers.c **** 
 1312:middleware/FreeRTOS-Kernel/timers.c ****         void vTimerSetTimerNumber( TimerHandle_t xTimer,
 1313:middleware/FreeRTOS-Kernel/timers.c ****                                    UBaseType_t uxTimerNumber )
-ARM GAS  /tmp/ccpolCuQ.s 			page 78
+ARM GAS  /tmp/ccZINekD.s 			page 78
 
 
 1314:middleware/FreeRTOS-Kernel/timers.c ****         {
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2419              	ucStaticTimerQueueStorage.1:
  2420 0000 00000000 		.space	120
  2420      00000000 
-ARM GAS  /tmp/ccpolCuQ.s 			page 79
+ARM GAS  /tmp/ccZINekD.s 			page 79
 
 
  2420      00000000 
@@ -4730,104 +4730,104 @@ ARM GAS  /tmp/ccpolCuQ.s 			page 1
  2470              		.file 8 "middleware/FreeRTOS-Kernel/include/task.h"
  2471              		.file 9 "middleware/FreeRTOS-Kernel/include/queue.h"
  2472              		.file 10 "middleware/FreeRTOS-Kernel/include/timers.h"
-ARM GAS  /tmp/ccpolCuQ.s 			page 80
+ARM GAS  /tmp/ccZINekD.s 			page 80
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 timers.c
-     /tmp/ccpolCuQ.s:21     .text.prvGetNextExpireTime:00000000 $t
-     /tmp/ccpolCuQ.s:26     .text.prvGetNextExpireTime:00000000 prvGetNextExpireTime
-     /tmp/ccpolCuQ.s:72     .text.prvGetNextExpireTime:0000001c $d
-     /tmp/ccpolCuQ.s:2449   .bss.pxCurrentTimerList:00000000 pxCurrentTimerList
-     /tmp/ccpolCuQ.s:77     .text.prvInsertTimerInActiveList:00000000 $t
-     /tmp/ccpolCuQ.s:82     .text.prvInsertTimerInActiveList:00000000 prvInsertTimerInActiveList
-     /tmp/ccpolCuQ.s:172    .text.prvInsertTimerInActiveList:00000040 $d
-     /tmp/ccpolCuQ.s:2443   .bss.pxOverflowTimerList:00000000 pxOverflowTimerList
-     /tmp/ccpolCuQ.s:178    .text.prvReloadTimer:00000000 $t
-     /tmp/ccpolCuQ.s:183    .text.prvReloadTimer:00000000 prvReloadTimer
-     /tmp/ccpolCuQ.s:241    .text.prvProcessExpiredTimer:00000000 $t
-     /tmp/ccpolCuQ.s:246    .text.prvProcessExpiredTimer:00000000 prvProcessExpiredTimer
-     /tmp/ccpolCuQ.s:311    .text.prvProcessExpiredTimer:0000003c $d
-     /tmp/ccpolCuQ.s:316    .text.prvSwitchTimerLists:00000000 $t
-     /tmp/ccpolCuQ.s:321    .text.prvSwitchTimerLists:00000000 prvSwitchTimerLists
-     /tmp/ccpolCuQ.s:374    .text.prvSwitchTimerLists:00000028 $d
-     /tmp/ccpolCuQ.s:380    .text.prvSampleTimeNow:00000000 $t
-     /tmp/ccpolCuQ.s:385    .text.prvSampleTimeNow:00000000 prvSampleTimeNow
-     /tmp/ccpolCuQ.s:444    .text.prvSampleTimeNow:00000028 $d
-     /tmp/ccpolCuQ.s:2425   .bss.xLastTime.2:00000000 xLastTime.2
-     /tmp/ccpolCuQ.s:449    .text.prvProcessTimerOrBlockTask:00000000 $t
-     /tmp/ccpolCuQ.s:454    .text.prvProcessTimerOrBlockTask:00000000 prvProcessTimerOrBlockTask
-     /tmp/ccpolCuQ.s:580    .text.prvProcessTimerOrBlockTask:0000006c $d
-     /tmp/ccpolCuQ.s:2437   .bss.xTimerQueue:00000000 xTimerQueue
-     /tmp/ccpolCuQ.s:586    .text.prvProcessReceivedCommands:00000000 $t
-     /tmp/ccpolCuQ.s:591    .text.prvProcessReceivedCommands:00000000 prvProcessReceivedCommands
-     /tmp/ccpolCuQ.s:667    .text.prvProcessReceivedCommands:00000042 $d
-     /tmp/ccpolCuQ.s:815    .text.prvProcessReceivedCommands:000000e8 $d
-     /tmp/ccpolCuQ.s:820    .text.prvTimerTask:00000000 $t
-     /tmp/ccpolCuQ.s:825    .text.prvTimerTask:00000000 prvTimerTask
-     /tmp/ccpolCuQ.s:864    .rodata.prvCheckForValidListAndQueue.str1.4:00000000 $d
-     /tmp/ccpolCuQ.s:868    .text.prvCheckForValidListAndQueue:00000000 $t
-     /tmp/ccpolCuQ.s:873    .text.prvCheckForValidListAndQueue:00000000 prvCheckForValidListAndQueue
-     /tmp/ccpolCuQ.s:959    .text.prvCheckForValidListAndQueue:00000050 $d
-     /tmp/ccpolCuQ.s:2461   .bss.xActiveTimerList1:00000000 xActiveTimerList1
-     /tmp/ccpolCuQ.s:2455   .bss.xActiveTimerList2:00000000 xActiveTimerList2
-     /tmp/ccpolCuQ.s:2413   .bss.xStaticTimerQueue.0:00000000 xStaticTimerQueue.0
-     /tmp/ccpolCuQ.s:2419   .bss.ucStaticTimerQueueStorage.1:00000000 ucStaticTimerQueueStorage.1
-     /tmp/ccpolCuQ.s:971    .text.prvInitialiseNewTimer:00000000 $t
-     /tmp/ccpolCuQ.s:976    .text.prvInitialiseNewTimer:00000000 prvInitialiseNewTimer
-     /tmp/ccpolCuQ.s:1067   .rodata.xTimerCreateTimerTask.str1.4:00000000 $d
-     /tmp/ccpolCuQ.s:1071   .text.xTimerCreateTimerTask:00000000 $t
-     /tmp/ccpolCuQ.s:1077   .text.xTimerCreateTimerTask:00000000 xTimerCreateTimerTask
-     /tmp/ccpolCuQ.s:1177   .text.xTimerCreateTimerTask:00000054 $d
-     /tmp/ccpolCuQ.s:2431   .bss.xTimerTaskHandle:00000000 xTimerTaskHandle
-     /tmp/ccpolCuQ.s:1185   .text.xTimerCreateStatic:00000000 $t
-     /tmp/ccpolCuQ.s:1191   .text.xTimerCreateStatic:00000000 xTimerCreateStatic
-     /tmp/ccpolCuQ.s:1316   .text.xTimerGenericCommandFromTask:00000000 $t
-     /tmp/ccpolCuQ.s:1322   .text.xTimerGenericCommandFromTask:00000000 xTimerGenericCommandFromTask
-     /tmp/ccpolCuQ.s:1482   .text.xTimerGenericCommandFromTask:0000006c $d
-     /tmp/ccpolCuQ.s:1487   .text.xTimerGenericCommandFromISR:00000000 $t
-     /tmp/ccpolCuQ.s:1493   .text.xTimerGenericCommandFromISR:00000000 xTimerGenericCommandFromISR
-     /tmp/ccpolCuQ.s:1634   .text.xTimerGenericCommandFromISR:00000054 $d
-     /tmp/ccpolCuQ.s:1639   .text.xTimerGetTimerDaemonTaskHandle:00000000 $t
-     /tmp/ccpolCuQ.s:1645   .text.xTimerGetTimerDaemonTaskHandle:00000000 xTimerGetTimerDaemonTaskHandle
-ARM GAS  /tmp/ccpolCuQ.s 			page 81
+     /tmp/ccZINekD.s:21     .text.prvGetNextExpireTime:00000000 $t
+     /tmp/ccZINekD.s:26     .text.prvGetNextExpireTime:00000000 prvGetNextExpireTime
+     /tmp/ccZINekD.s:72     .text.prvGetNextExpireTime:0000001c $d
+     /tmp/ccZINekD.s:2449   .bss.pxCurrentTimerList:00000000 pxCurrentTimerList
+     /tmp/ccZINekD.s:77     .text.prvInsertTimerInActiveList:00000000 $t
+     /tmp/ccZINekD.s:82     .text.prvInsertTimerInActiveList:00000000 prvInsertTimerInActiveList
+     /tmp/ccZINekD.s:172    .text.prvInsertTimerInActiveList:00000040 $d
+     /tmp/ccZINekD.s:2443   .bss.pxOverflowTimerList:00000000 pxOverflowTimerList
+     /tmp/ccZINekD.s:178    .text.prvReloadTimer:00000000 $t
+     /tmp/ccZINekD.s:183    .text.prvReloadTimer:00000000 prvReloadTimer
+     /tmp/ccZINekD.s:241    .text.prvProcessExpiredTimer:00000000 $t
+     /tmp/ccZINekD.s:246    .text.prvProcessExpiredTimer:00000000 prvProcessExpiredTimer
+     /tmp/ccZINekD.s:311    .text.prvProcessExpiredTimer:0000003c $d
+     /tmp/ccZINekD.s:316    .text.prvSwitchTimerLists:00000000 $t
+     /tmp/ccZINekD.s:321    .text.prvSwitchTimerLists:00000000 prvSwitchTimerLists
+     /tmp/ccZINekD.s:374    .text.prvSwitchTimerLists:00000028 $d
+     /tmp/ccZINekD.s:380    .text.prvSampleTimeNow:00000000 $t
+     /tmp/ccZINekD.s:385    .text.prvSampleTimeNow:00000000 prvSampleTimeNow
+     /tmp/ccZINekD.s:444    .text.prvSampleTimeNow:00000028 $d
+     /tmp/ccZINekD.s:2425   .bss.xLastTime.2:00000000 xLastTime.2
+     /tmp/ccZINekD.s:449    .text.prvProcessTimerOrBlockTask:00000000 $t
+     /tmp/ccZINekD.s:454    .text.prvProcessTimerOrBlockTask:00000000 prvProcessTimerOrBlockTask
+     /tmp/ccZINekD.s:580    .text.prvProcessTimerOrBlockTask:0000006c $d
+     /tmp/ccZINekD.s:2437   .bss.xTimerQueue:00000000 xTimerQueue
+     /tmp/ccZINekD.s:586    .text.prvProcessReceivedCommands:00000000 $t
+     /tmp/ccZINekD.s:591    .text.prvProcessReceivedCommands:00000000 prvProcessReceivedCommands
+     /tmp/ccZINekD.s:667    .text.prvProcessReceivedCommands:00000042 $d
+     /tmp/ccZINekD.s:815    .text.prvProcessReceivedCommands:000000e8 $d
+     /tmp/ccZINekD.s:820    .text.prvTimerTask:00000000 $t
+     /tmp/ccZINekD.s:825    .text.prvTimerTask:00000000 prvTimerTask
+     /tmp/ccZINekD.s:864    .rodata.prvCheckForValidListAndQueue.str1.4:00000000 $d
+     /tmp/ccZINekD.s:868    .text.prvCheckForValidListAndQueue:00000000 $t
+     /tmp/ccZINekD.s:873    .text.prvCheckForValidListAndQueue:00000000 prvCheckForValidListAndQueue
+     /tmp/ccZINekD.s:959    .text.prvCheckForValidListAndQueue:00000050 $d
+     /tmp/ccZINekD.s:2461   .bss.xActiveTimerList1:00000000 xActiveTimerList1
+     /tmp/ccZINekD.s:2455   .bss.xActiveTimerList2:00000000 xActiveTimerList2
+     /tmp/ccZINekD.s:2413   .bss.xStaticTimerQueue.0:00000000 xStaticTimerQueue.0
+     /tmp/ccZINekD.s:2419   .bss.ucStaticTimerQueueStorage.1:00000000 ucStaticTimerQueueStorage.1
+     /tmp/ccZINekD.s:971    .text.prvInitialiseNewTimer:00000000 $t
+     /tmp/ccZINekD.s:976    .text.prvInitialiseNewTimer:00000000 prvInitialiseNewTimer
+     /tmp/ccZINekD.s:1067   .rodata.xTimerCreateTimerTask.str1.4:00000000 $d
+     /tmp/ccZINekD.s:1071   .text.xTimerCreateTimerTask:00000000 $t
+     /tmp/ccZINekD.s:1077   .text.xTimerCreateTimerTask:00000000 xTimerCreateTimerTask
+     /tmp/ccZINekD.s:1177   .text.xTimerCreateTimerTask:00000054 $d
+     /tmp/ccZINekD.s:2431   .bss.xTimerTaskHandle:00000000 xTimerTaskHandle
+     /tmp/ccZINekD.s:1185   .text.xTimerCreateStatic:00000000 $t
+     /tmp/ccZINekD.s:1191   .text.xTimerCreateStatic:00000000 xTimerCreateStatic
+     /tmp/ccZINekD.s:1316   .text.xTimerGenericCommandFromTask:00000000 $t
+     /tmp/ccZINekD.s:1322   .text.xTimerGenericCommandFromTask:00000000 xTimerGenericCommandFromTask
+     /tmp/ccZINekD.s:1482   .text.xTimerGenericCommandFromTask:0000006c $d
+     /tmp/ccZINekD.s:1487   .text.xTimerGenericCommandFromISR:00000000 $t
+     /tmp/ccZINekD.s:1493   .text.xTimerGenericCommandFromISR:00000000 xTimerGenericCommandFromISR
+     /tmp/ccZINekD.s:1634   .text.xTimerGenericCommandFromISR:00000054 $d
+     /tmp/ccZINekD.s:1639   .text.xTimerGetTimerDaemonTaskHandle:00000000 $t
+     /tmp/ccZINekD.s:1645   .text.xTimerGetTimerDaemonTaskHandle:00000000 xTimerGetTimerDaemonTaskHandle
+ARM GAS  /tmp/ccZINekD.s 			page 81
 
 
-     /tmp/ccpolCuQ.s:1686   .text.xTimerGetTimerDaemonTaskHandle:0000001c $d
-     /tmp/ccpolCuQ.s:1691   .text.xTimerGetPeriod:00000000 $t
-     /tmp/ccpolCuQ.s:1697   .text.xTimerGetPeriod:00000000 xTimerGetPeriod
-     /tmp/ccpolCuQ.s:1746   .text.vTimerSetReloadMode:00000000 $t
-     /tmp/ccpolCuQ.s:1752   .text.vTimerSetReloadMode:00000000 vTimerSetReloadMode
-     /tmp/ccpolCuQ.s:1832   .text.xTimerGetReloadMode:00000000 $t
-     /tmp/ccpolCuQ.s:1838   .text.xTimerGetReloadMode:00000000 xTimerGetReloadMode
-     /tmp/ccpolCuQ.s:1923   .text.uxTimerGetReloadMode:00000000 $t
-     /tmp/ccpolCuQ.s:1929   .text.uxTimerGetReloadMode:00000000 uxTimerGetReloadMode
-     /tmp/ccpolCuQ.s:1956   .text.xTimerGetExpiryTime:00000000 $t
-     /tmp/ccpolCuQ.s:1962   .text.xTimerGetExpiryTime:00000000 xTimerGetExpiryTime
-     /tmp/ccpolCuQ.s:2014   .text.xTimerGetStaticBuffer:00000000 $t
-     /tmp/ccpolCuQ.s:2020   .text.xTimerGetStaticBuffer:00000000 xTimerGetStaticBuffer
-     /tmp/ccpolCuQ.s:2087   .text.pcTimerGetName:00000000 $t
-     /tmp/ccpolCuQ.s:2093   .text.pcTimerGetName:00000000 pcTimerGetName
-     /tmp/ccpolCuQ.s:2142   .text.xTimerIsTimerActive:00000000 $t
-     /tmp/ccpolCuQ.s:2148   .text.xTimerIsTimerActive:00000000 xTimerIsTimerActive
-     /tmp/ccpolCuQ.s:2233   .text.pvTimerGetTimerID:00000000 $t
-     /tmp/ccpolCuQ.s:2239   .text.pvTimerGetTimerID:00000000 pvTimerGetTimerID
-     /tmp/ccpolCuQ.s:2307   .text.vTimerSetTimerID:00000000 $t
-     /tmp/ccpolCuQ.s:2313   .text.vTimerSetTimerID:00000000 vTimerSetTimerID
-     /tmp/ccpolCuQ.s:2377   .text.vTimerResetState:00000000 $t
-     /tmp/ccpolCuQ.s:2383   .text.vTimerResetState:00000000 vTimerResetState
-     /tmp/ccpolCuQ.s:2404   .text.vTimerResetState:0000000c $d
-     /tmp/ccpolCuQ.s:2410   .bss.xStaticTimerQueue.0:00000000 $d
-     /tmp/ccpolCuQ.s:2416   .bss.ucStaticTimerQueueStorage.1:00000000 $d
-     /tmp/ccpolCuQ.s:2422   .bss.xLastTime.2:00000000 $d
-     /tmp/ccpolCuQ.s:2428   .bss.xTimerTaskHandle:00000000 $d
-     /tmp/ccpolCuQ.s:2434   .bss.xTimerQueue:00000000 $d
-     /tmp/ccpolCuQ.s:2440   .bss.pxOverflowTimerList:00000000 $d
-     /tmp/ccpolCuQ.s:2446   .bss.pxCurrentTimerList:00000000 $d
-     /tmp/ccpolCuQ.s:2452   .bss.xActiveTimerList2:00000000 $d
-     /tmp/ccpolCuQ.s:2458   .bss.xActiveTimerList1:00000000 $d
-     /tmp/ccpolCuQ.s:676    .text.prvProcessReceivedCommands:0000004b $d
-     /tmp/ccpolCuQ.s:676    .text.prvProcessReceivedCommands:0000004c $t
+     /tmp/ccZINekD.s:1686   .text.xTimerGetTimerDaemonTaskHandle:0000001c $d
+     /tmp/ccZINekD.s:1691   .text.xTimerGetPeriod:00000000 $t
+     /tmp/ccZINekD.s:1697   .text.xTimerGetPeriod:00000000 xTimerGetPeriod
+     /tmp/ccZINekD.s:1746   .text.vTimerSetReloadMode:00000000 $t
+     /tmp/ccZINekD.s:1752   .text.vTimerSetReloadMode:00000000 vTimerSetReloadMode
+     /tmp/ccZINekD.s:1832   .text.xTimerGetReloadMode:00000000 $t
+     /tmp/ccZINekD.s:1838   .text.xTimerGetReloadMode:00000000 xTimerGetReloadMode
+     /tmp/ccZINekD.s:1923   .text.uxTimerGetReloadMode:00000000 $t
+     /tmp/ccZINekD.s:1929   .text.uxTimerGetReloadMode:00000000 uxTimerGetReloadMode
+     /tmp/ccZINekD.s:1956   .text.xTimerGetExpiryTime:00000000 $t
+     /tmp/ccZINekD.s:1962   .text.xTimerGetExpiryTime:00000000 xTimerGetExpiryTime
+     /tmp/ccZINekD.s:2014   .text.xTimerGetStaticBuffer:00000000 $t
+     /tmp/ccZINekD.s:2020   .text.xTimerGetStaticBuffer:00000000 xTimerGetStaticBuffer
+     /tmp/ccZINekD.s:2087   .text.pcTimerGetName:00000000 $t
+     /tmp/ccZINekD.s:2093   .text.pcTimerGetName:00000000 pcTimerGetName
+     /tmp/ccZINekD.s:2142   .text.xTimerIsTimerActive:00000000 $t
+     /tmp/ccZINekD.s:2148   .text.xTimerIsTimerActive:00000000 xTimerIsTimerActive
+     /tmp/ccZINekD.s:2233   .text.pvTimerGetTimerID:00000000 $t
+     /tmp/ccZINekD.s:2239   .text.pvTimerGetTimerID:00000000 pvTimerGetTimerID
+     /tmp/ccZINekD.s:2307   .text.vTimerSetTimerID:00000000 $t
+     /tmp/ccZINekD.s:2313   .text.vTimerSetTimerID:00000000 vTimerSetTimerID
+     /tmp/ccZINekD.s:2377   .text.vTimerResetState:00000000 $t
+     /tmp/ccZINekD.s:2383   .text.vTimerResetState:00000000 vTimerResetState
+     /tmp/ccZINekD.s:2404   .text.vTimerResetState:0000000c $d
+     /tmp/ccZINekD.s:2410   .bss.xStaticTimerQueue.0:00000000 $d
+     /tmp/ccZINekD.s:2416   .bss.ucStaticTimerQueueStorage.1:00000000 $d
+     /tmp/ccZINekD.s:2422   .bss.xLastTime.2:00000000 $d
+     /tmp/ccZINekD.s:2428   .bss.xTimerTaskHandle:00000000 $d
+     /tmp/ccZINekD.s:2434   .bss.xTimerQueue:00000000 $d
+     /tmp/ccZINekD.s:2440   .bss.pxOverflowTimerList:00000000 $d
+     /tmp/ccZINekD.s:2446   .bss.pxCurrentTimerList:00000000 $d
+     /tmp/ccZINekD.s:2452   .bss.xActiveTimerList2:00000000 $d
+     /tmp/ccZINekD.s:2458   .bss.xActiveTimerList1:00000000 $d
+     /tmp/ccZINekD.s:676    .text.prvProcessReceivedCommands:0000004b $d
+     /tmp/ccZINekD.s:676    .text.prvProcessReceivedCommands:0000004c $t
 
 UNDEFINED SYMBOLS
 vListInsert

@@ -1,0 +1,736 @@
+ARM GAS  /tmp/ccjIOFWS.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"IO_test.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c"
+  20              		.section	.text.Heartbeat_Clock_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	Heartbeat_Clock_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Heartbeat_Clock_Init:
+  28              	.LFB334:
+   1:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #include "stm32xx_hal.h"
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #include "Inputs.h"
+   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** /* LSOM
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     #define LED_PIN_OB GPIO_PIN_3
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     #define LED_PORT_OB GPIOB
+   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     #define LED_PIN GPIO_PIN_3 //3 LSOM
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     #define LED_PORT GPIOC //C LSOM
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** */
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** uint16_t input_state[INPUT_STATE_COUNT];
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** uint16_t led_state[LED_COUNT];
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define LED_PIN GPIO_PIN_10
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define LED_PORT GPIOC
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define LED_PIN2 GPIO_PIN_11
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define LED_PORT2 GPIOC
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define INPUT_PIN GPIO_PIN_6
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** #define INPUT_PORT GPIOA
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void update_leds();
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void logic(Input_Indexes input);
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** // Initialize clock for heartbeat LED port
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void Heartbeat_Clock_Init() {
+  29              		.loc 1 26 29 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccjIOFWS.s 			page 2
+
+
+  33              		@ link register save eliminated.
+  34 0000 82B0     		sub	sp, sp, #8
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     switch ((uint32_t)LED_PORT) {
+  37              		.loc 1 27 5 view .LVU1
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         case (uint32_t)GPIOA:
+  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             __HAL_RCC_GPIOA_CLK_ENABLE();
+  30:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             break;
+  31:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         case (uint32_t)GPIOB:
+  32:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             __HAL_RCC_GPIOB_CLK_ENABLE();
+  33:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             break;
+  34:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         case (uint32_t)GPIOC:
+  35:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             __HAL_RCC_GPIOC_CLK_ENABLE();
+  38              		.loc 1 35 13 view .LVU2
+  39              	.LBB2:
+  40              		.loc 1 35 13 view .LVU3
+  41              		.loc 1 35 13 view .LVU4
+  42 0002 064B     		ldr	r3, .L3
+  43 0004 DA6C     		ldr	r2, [r3, #76]
+  44 0006 42F00402 		orr	r2, r2, #4
+  45 000a DA64     		str	r2, [r3, #76]
+  46              		.loc 1 35 13 view .LVU5
+  47 000c DB6C     		ldr	r3, [r3, #76]
+  48 000e 03F00403 		and	r3, r3, #4
+  49 0012 0193     		str	r3, [sp, #4]
+  50              		.loc 1 35 13 view .LVU6
+  51 0014 019B     		ldr	r3, [sp, #4]
+  52              	.LBE2:
+  53              		.loc 1 35 13 view .LVU7
+  36:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****             break;
+  54              		.loc 1 36 13 view .LVU8
+  37:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  38:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  39:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  40:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+  55              		.loc 1 40 1 is_stmt 0 view .LVU9
+  56 0016 02B0     		add	sp, sp, #8
+  57              	.LCFI1:
+  58              		.cfi_def_cfa_offset 0
+  59              		@ sp needed
+  60 0018 7047     		bx	lr
+  61              	.L4:
+  62 001a 00BF     		.align	2
+  63              	.L3:
+  64 001c 00100240 		.word	1073876992
+  65              		.cfi_endproc
+  66              	.LFE334:
+  68              		.section	.text.logic,"ax",%progbits
+  69              		.align	1
+  70              		.global	logic
+  71              		.syntax unified
+  72              		.thumb
+  73              		.thumb_func
+  75              	logic:
+  76              	.LVL0:
+  77              	.LFB337:
+ARM GAS  /tmp/ccjIOFWS.s 			page 3
+
+
+  41:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  42:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void init(void) {
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < INPUT_STATE_COUNT; i++) {
+  44:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+  45:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < LED_COUNT; i++) {
+  47:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[i] = 0;
+  48:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  49:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     update_leds();
+  50:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+  51:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  52:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void update_inputs(void) {
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < INPUT_STATE_COUNT; i++) {
+  54:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = HAL_GPIO_ReadPin(pin.port, pin.pin);
+  56:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         logic((Input_Indexes)i);
+  57:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  58:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+  59:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  60:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void logic(Input_Indexes input) {
+  78              		.loc 1 60 33 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  61:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     if (input_state[input] == 1) {
+  83              		.loc 1 61 5 view .LVU11
+  84              		.loc 1 61 20 is_stmt 0 view .LVU12
+  85 0000 064B     		ldr	r3, .L9
+  86 0002 33F81030 		ldrh	r3, [r3, r0, lsl #1]
+  87              		.loc 1 61 8 view .LVU13
+  88 0006 012B     		cmp	r3, #1
+  89 0008 03D0     		beq	.L8
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[AKSHAY_LED] = 1;
+  63:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     } else {
+  64:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[AKSHAY_LED] = 0;
+  90              		.loc 1 64 9 is_stmt 1 view .LVU14
+  91              		.loc 1 64 31 is_stmt 0 view .LVU15
+  92 000a 054B     		ldr	r3, .L9+4
+  93 000c 0022     		movs	r2, #0
+  94 000e 1A80     		strh	r2, [r3]	@ movhi
+  65:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  66:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+  95              		.loc 1 66 1 view .LVU16
+  96 0010 7047     		bx	lr
+  97              	.L8:
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[AKSHAY_LED] = 1;
+  98              		.loc 1 62 9 is_stmt 1 view .LVU17
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[AKSHAY_LED] = 1;
+  99              		.loc 1 62 31 is_stmt 0 view .LVU18
+ 100 0012 034B     		ldr	r3, .L9+4
+ 101 0014 0122     		movs	r2, #1
+ 102 0016 1A80     		strh	r2, [r3]	@ movhi
+ 103 0018 7047     		bx	lr
+ 104              	.L10:
+ 105 001a 00BF     		.align	2
+ 106              	.L9:
+ARM GAS  /tmp/ccjIOFWS.s 			page 4
+
+
+ 107 001c 00000000 		.word	input_state
+ 108 0020 00000000 		.word	led_state
+ 109              		.cfi_endproc
+ 110              	.LFE337:
+ 112              		.section	.text.update_inputs,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	update_inputs
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	update_inputs:
+ 120              	.LFB336:
+  52:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < INPUT_STATE_COUNT; i++) {
+ 121              		.loc 1 52 26 is_stmt 1 view -0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 8
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125 0000 10B5     		push	{r4, lr}
+ 126              	.LCFI2:
+ 127              		.cfi_def_cfa_offset 8
+ 128              		.cfi_offset 4, -8
+ 129              		.cfi_offset 14, -4
+ 130 0002 82B0     		sub	sp, sp, #8
+ 131              	.LCFI3:
+ 132              		.cfi_def_cfa_offset 16
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 133              		.loc 1 53 5 view .LVU20
+ 134              	.LBB3:
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 135              		.loc 1 53 10 view .LVU21
+ 136              	.LVL1:
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 137              		.loc 1 53 14 is_stmt 0 view .LVU22
+ 138 0004 0024     		movs	r4, #0
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 139              		.loc 1 53 5 view .LVU23
+ 140 0006 12E0     		b	.L12
+ 141              	.LVL2:
+ 142              	.L13:
+ 143              	.LBB4:
+  54:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = HAL_GPIO_ReadPin(pin.port, pin.pin);
+ 144              		.loc 1 54 9 is_stmt 1 view .LVU24
+  54:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = HAL_GPIO_ReadPin(pin.port, pin.pin);
+ 145              		.loc 1 54 18 is_stmt 0 view .LVU25
+ 146 0008 0B4B     		ldr	r3, .L15
+ 147 000a 03EBC403 		add	r3, r3, r4, lsl #3
+ 148 000e 93E80300 		ldm	r3, {r0, r1}
+ 149 0012 02AB     		add	r3, sp, #8
+ 150 0014 03E90300 		stmdb	r3, {r0, r1}
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         logic((Input_Indexes)i);
+ 151              		.loc 1 55 9 is_stmt 1 view .LVU26
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         logic((Input_Indexes)i);
+ 152              		.loc 1 55 26 is_stmt 0 view .LVU27
+ 153 0018 BDF80410 		ldrh	r1, [sp, #4]
+ 154 001c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 155              	.LVL3:
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         logic((Input_Indexes)i);
+ARM GAS  /tmp/ccjIOFWS.s 			page 5
+
+
+ 156              		.loc 1 55 24 discriminator 1 view .LVU28
+ 157 0020 064B     		ldr	r3, .L15+4
+ 158 0022 23F81400 		strh	r0, [r3, r4, lsl #1]	@ movhi
+  56:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+ 159              		.loc 1 56 9 is_stmt 1 view .LVU29
+ 160 0026 E0B2     		uxtb	r0, r4
+ 161 0028 FFF7FEFF 		bl	logic
+ 162              	.LVL4:
+ 163              	.LBE4:
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 164              		.loc 1 53 45 discriminator 3 view .LVU30
+ 165 002c 0134     		adds	r4, r4, #1
+ 166              	.LVL5:
+ 167              	.L12:
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[i];
+ 168              		.loc 1 53 23 discriminator 1 view .LVU31
+ 169 002e 0A2C     		cmp	r4, #10
+ 170 0030 EADD     		ble	.L13
+ 171              	.LBE3:
+  58:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+ 172              		.loc 1 58 1 is_stmt 0 view .LVU32
+ 173 0032 02B0     		add	sp, sp, #8
+ 174              	.LCFI4:
+ 175              		.cfi_def_cfa_offset 8
+ 176              		@ sp needed
+ 177 0034 10BD     		pop	{r4, pc}
+ 178              	.LVL6:
+ 179              	.L16:
+  58:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+ 180              		.loc 1 58 1 view .LVU33
+ 181 0036 00BF     		.align	2
+ 182              	.L15:
+ 183 0038 00000000 		.word	gpio_map
+ 184 003c 00000000 		.word	input_state
+ 185              		.cfi_endproc
+ 186              	.LFE336:
+ 188              		.section	.text.update_leds,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	update_leds
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	update_leds:
+ 196              	.LFB338:
+  67:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  68:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** void update_leds(void) {
+ 197              		.loc 1 68 24 is_stmt 1 view -0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 8
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201 0000 10B5     		push	{r4, lr}
+ 202              	.LCFI5:
+ 203              		.cfi_def_cfa_offset 8
+ 204              		.cfi_offset 4, -8
+ 205              		.cfi_offset 14, -4
+ 206 0002 82B0     		sub	sp, sp, #8
+ 207              	.LCFI6:
+ARM GAS  /tmp/ccjIOFWS.s 			page 6
+
+
+ 208              		.cfi_def_cfa_offset 16
+  69:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < LED_COUNT; i++) {
+ 209              		.loc 1 69 5 view .LVU35
+ 210              	.LBB5:
+ 211              		.loc 1 69 10 view .LVU36
+ 212              	.LVL7:
+ 213              		.loc 1 69 14 is_stmt 0 view .LVU37
+ 214 0004 0024     		movs	r4, #0
+ 215              		.loc 1 69 5 view .LVU38
+ 216 0006 14E0     		b	.L18
+ 217              	.LVL8:
+ 218              	.L19:
+ 219              	.LBB6:
+  70:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  71:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         GPIO_Pin pin = gpio_map[AKSHAY_LED_PIN + i];
+ 220              		.loc 1 71 9 is_stmt 1 view .LVU39
+ 221              		.loc 1 71 48 is_stmt 0 view .LVU40
+ 222 0008 04F10B02 		add	r2, r4, #11
+ 223              		.loc 1 71 18 view .LVU41
+ 224 000c 0B4B     		ldr	r3, .L21
+ 225 000e 03EBC203 		add	r3, r3, r2, lsl #3
+ 226 0012 93E80300 		ldm	r3, {r0, r1}
+ 227 0016 02AB     		add	r3, sp, #8
+ 228 0018 03E90300 		stmdb	r3, {r0, r1}
+  72:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  73:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         HAL_GPIO_WritePin(pin.port, pin.pin, led_state[i] ? GPIO_PIN_SET : GPIO_PIN_RESET);
+ 229              		.loc 1 73 9 is_stmt 1 view .LVU42
+ 230              		.loc 1 73 55 is_stmt 0 view .LVU43
+ 231 001c 084B     		ldr	r3, .L21+4
+ 232 001e 33F81420 		ldrh	r2, [r3, r4, lsl #1]
+ 233              		.loc 1 73 9 view .LVU44
+ 234 0022 003A     		subs	r2, r2, #0
+ 235 0024 18BF     		it	ne
+ 236 0026 0122     		movne	r2, #1
+ 237 0028 BDF80410 		ldrh	r1, [sp, #4]
+ 238 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 239              	.LVL9:
+ 240              	.LBE6:
+  69:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+ 241              		.loc 1 69 37 is_stmt 1 discriminator 3 view .LVU45
+ 242 0030 0134     		adds	r4, r4, #1
+ 243              	.LVL10:
+ 244              	.L18:
+  69:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+ 245              		.loc 1 69 23 discriminator 1 view .LVU46
+ 246 0032 072C     		cmp	r4, #7
+ 247 0034 E8DD     		ble	.L19
+ 248              	.LBE5:
+  74:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+  75:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+ 249              		.loc 1 75 1 is_stmt 0 view .LVU47
+ 250 0036 02B0     		add	sp, sp, #8
+ 251              	.LCFI7:
+ 252              		.cfi_def_cfa_offset 8
+ 253              		@ sp needed
+ 254 0038 10BD     		pop	{r4, pc}
+ 255              	.LVL11:
+ARM GAS  /tmp/ccjIOFWS.s 			page 7
+
+
+ 256              	.L22:
+ 257              		.loc 1 75 1 view .LVU48
+ 258 003a 00BF     		.align	2
+ 259              	.L21:
+ 260 003c 00000000 		.word	gpio_map
+ 261 0040 00000000 		.word	led_state
+ 262              		.cfi_endproc
+ 263              	.LFE338:
+ 265              		.section	.text.init,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	init
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	init:
+ 273              	.LFB335:
+  42:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     for (int i = 0; i < INPUT_STATE_COUNT; i++) {
+ 274              		.loc 1 42 17 is_stmt 1 view -0
+ 275              		.cfi_startproc
+ 276              		@ args = 0, pretend = 0, frame = 0
+ 277              		@ frame_needed = 0, uses_anonymous_args = 0
+ 278 0000 08B5     		push	{r3, lr}
+ 279              	.LCFI8:
+ 280              		.cfi_def_cfa_offset 8
+ 281              		.cfi_offset 3, -8
+ 282              		.cfi_offset 14, -4
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 283              		.loc 1 43 5 view .LVU50
+ 284              	.LBB7:
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 285              		.loc 1 43 10 view .LVU51
+ 286              	.LVL12:
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 287              		.loc 1 43 14 is_stmt 0 view .LVU52
+ 288 0002 0023     		movs	r3, #0
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 289              		.loc 1 43 5 view .LVU53
+ 290 0004 04E0     		b	.L24
+ 291              	.LVL13:
+ 292              	.L25:
+  44:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+ 293              		.loc 1 44 9 is_stmt 1 view .LVU54
+  44:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+ 294              		.loc 1 44 24 is_stmt 0 view .LVU55
+ 295 0006 094A     		ldr	r2, .L29
+ 296 0008 0021     		movs	r1, #0
+ 297 000a 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 298              		.loc 1 43 45 is_stmt 1 discriminator 3 view .LVU56
+ 299 000e 0133     		adds	r3, r3, #1
+ 300              	.LVL14:
+ 301              	.L24:
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         input_state[i] = 0;
+ 302              		.loc 1 43 23 discriminator 1 view .LVU57
+ 303 0010 0A2B     		cmp	r3, #10
+ 304 0012 F8DD     		ble	.L25
+ 305              	.LBE7:
+ARM GAS  /tmp/ccjIOFWS.s 			page 8
+
+
+ 306              	.LBB8:
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[i] = 0;
+ 307              		.loc 1 46 14 is_stmt 0 view .LVU58
+ 308 0014 0023     		movs	r3, #0
+ 309              	.LVL15:
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[i] = 0;
+ 310              		.loc 1 46 14 view .LVU59
+ 311 0016 04E0     		b	.L26
+ 312              	.LVL16:
+ 313              	.L27:
+  47:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+ 314              		.loc 1 47 9 is_stmt 1 view .LVU60
+  47:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     }
+ 315              		.loc 1 47 22 is_stmt 0 view .LVU61
+ 316 0018 054A     		ldr	r2, .L29+4
+ 317 001a 0021     		movs	r1, #0
+ 318 001c 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[i] = 0;
+ 319              		.loc 1 46 37 is_stmt 1 discriminator 3 view .LVU62
+ 320 0020 0133     		adds	r3, r3, #1
+ 321              	.LVL17:
+ 322              	.L26:
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         led_state[i] = 0;
+ 323              		.loc 1 46 23 discriminator 1 view .LVU63
+ 324 0022 072B     		cmp	r3, #7
+ 325 0024 F8DD     		ble	.L27
+ 326              	.LBE8:
+  49:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** }
+ 327              		.loc 1 49 5 view .LVU64
+ 328 0026 FFF7FEFF 		bl	update_leds
+ 329              	.LVL18:
+  50:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+ 330              		.loc 1 50 1 is_stmt 0 view .LVU65
+ 331 002a 08BD     		pop	{r3, pc}
+ 332              	.L30:
+ 333              		.align	2
+ 334              	.L29:
+ 335 002c 00000000 		.word	input_state
+ 336 0030 00000000 		.word	led_state
+ 337              		.cfi_endproc
+ 338              	.LFE335:
+ 340              		.section	.text.main,"ax",%progbits
+ 341              		.align	1
+ 342              		.global	main
+ 343              		.syntax unified
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	main:
+ 348              	.LFB339:
+  76:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  77:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  78:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** int main(){
+ 349              		.loc 1 78 11 is_stmt 1 view -0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 40
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ARM GAS  /tmp/ccjIOFWS.s 			page 9
+
+
+ 354              	.LCFI9:
+ 355              		.cfi_def_cfa_offset 20
+ 356              		.cfi_offset 4, -20
+ 357              		.cfi_offset 5, -16
+ 358              		.cfi_offset 6, -12
+ 359              		.cfi_offset 7, -8
+ 360              		.cfi_offset 14, -4
+ 361 0002 8BB0     		sub	sp, sp, #44
+ 362              	.LCFI10:
+ 363              		.cfi_def_cfa_offset 64
+  79:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     HAL_Init();
+ 364              		.loc 1 79 5 view .LVU67
+ 365 0004 FFF7FEFF 		bl	HAL_Init
+ 366              	.LVL19:
+  80:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  81:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     GPIO_InitTypeDef led_config = {
+ 367              		.loc 1 81 5 view .LVU68
+ 368              		.loc 1 81 22 is_stmt 0 view .LVU69
+ 369 0008 0024     		movs	r4, #0
+ 370 000a 0594     		str	r4, [sp, #20]
+ 371 000c 0694     		str	r4, [sp, #24]
+ 372 000e 0794     		str	r4, [sp, #28]
+ 373 0010 0894     		str	r4, [sp, #32]
+ 374 0012 0994     		str	r4, [sp, #36]
+ 375 0014 4FF48067 		mov	r7, #1024
+ 376 0018 0597     		str	r7, [sp, #20]
+ 377 001a 0123     		movs	r3, #1
+ 378 001c 0693     		str	r3, [sp, #24]
+  82:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Mode = GPIO_MODE_OUTPUT_PP,
+  83:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Pull = GPIO_NOPULL,
+  84:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Pin = LED_PIN
+  85:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     };
+  86:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     GPIO_InitTypeDef led_config2 = {
+ 379              		.loc 1 86 5 is_stmt 1 view .LVU70
+ 380              		.loc 1 86 22 is_stmt 0 view .LVU71
+ 381 001e 0094     		str	r4, [sp]
+ 382 0020 0194     		str	r4, [sp, #4]
+ 383 0022 0294     		str	r4, [sp, #8]
+ 384 0024 0394     		str	r4, [sp, #12]
+ 385 0026 0494     		str	r4, [sp, #16]
+ 386 0028 4FF40066 		mov	r6, #2048
+ 387 002c 0096     		str	r6, [sp]
+ 388 002e 0193     		str	r3, [sp, #4]
+  87:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Mode = GPIO_MODE_OUTPUT_PP,
+  88:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Pull = GPIO_NOPULL,
+  89:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         .Pin = LED_PIN2
+  90:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     };
+  91:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c **** 
+  92:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     
+  93:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     Heartbeat_Clock_Init(); // enable clock for LED_PORT
+ 389              		.loc 1 93 5 is_stmt 1 view .LVU72
+ 390 0030 FFF7FEFF 		bl	Heartbeat_Clock_Init
+ 391              	.LVL20:
+  94:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     HAL_GPIO_Init(LED_PORT, &led_config); // initialize GPIOA with led_config
+ 392              		.loc 1 94 5 view .LVU73
+ 393 0034 154D     		ldr	r5, .L34
+ 394 0036 05A9     		add	r1, sp, #20
+ARM GAS  /tmp/ccjIOFWS.s 			page 10
+
+
+ 395 0038 2846     		mov	r0, r5
+ 396 003a FFF7FEFF 		bl	HAL_GPIO_Init
+ 397              	.LVL21:
+  95:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     HAL_GPIO_Init(LED_PORT2, &led_config2); // initialize GPIOA with led_config
+ 398              		.loc 1 95 5 view .LVU74
+ 399 003e 6946     		mov	r1, sp
+ 400 0040 2846     		mov	r0, r5
+ 401 0042 FFF7FEFF 		bl	HAL_GPIO_Init
+ 402              	.LVL22:
+  96:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_RESET);
+ 403              		.loc 1 96 5 view .LVU75
+ 404 0046 2246     		mov	r2, r4
+ 405 0048 3946     		mov	r1, r7
+ 406 004a 2846     		mov	r0, r5
+ 407 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 408              	.LVL23:
+  97:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     HAL_GPIO_WritePin(LED_PORT2, LED_PIN2, GPIO_PIN_RESET);
+ 409              		.loc 1 97 5 view .LVU76
+ 410 0050 2246     		mov	r2, r4
+ 411 0052 3146     		mov	r1, r6
+ 412 0054 2846     		mov	r0, r5
+ 413 0056 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 414              	.LVL24:
+ 415              	.L32:
+  98:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****     while(1){
+ 416              		.loc 1 98 5 view .LVU77
+ 417              	.LBB9:
+  99:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         bool input_check = (HAL_GPIO_ReadPin(INPUT_PORT, INPUT_PIN) == 0);
+ 418              		.loc 1 99 9 view .LVU78
+ 419              		.loc 1 99 29 is_stmt 0 view .LVU79
+ 420 005a 4021     		movs	r1, #64
+ 421 005c 4FF09040 		mov	r0, #1207959552
+ 422 0060 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 423              	.LVL25:
+ 424              		.loc 1 99 14 discriminator 1 view .LVU80
+ 425 0064 0546     		mov	r5, r0
+ 426              	.LVL26:
+ 100:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         HAL_GPIO_WritePin(LED_PORT, LED_PIN, input_check ? GPIO_PIN_SET : GPIO_PIN_RESET);
+ 427              		.loc 1 100 9 is_stmt 1 view .LVU81
+ 428 0066 094C     		ldr	r4, .L34
+ 429 0068 B0FA80F2 		clz	r2, r0
+ 430 006c 5209     		lsrs	r2, r2, #5
+ 431 006e 4FF48061 		mov	r1, #1024
+ 432 0072 2046     		mov	r0, r4
+ 433              	.LVL27:
+ 434              		.loc 1 100 9 is_stmt 0 view .LVU82
+ 435 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 436              	.LVL28:
+ 101:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         HAL_GPIO_WritePin(LED_PORT2, LED_PIN2, input_check ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 437              		.loc 1 101 9 is_stmt 1 discriminator 1 view .LVU83
+ 438 0078 2A1E     		subs	r2, r5, #0
+ 439 007a 18BF     		it	ne
+ 440 007c 0122     		movne	r2, #1
+ 441 007e 4FF40061 		mov	r1, #2048
+ 442 0082 2046     		mov	r0, r4
+ 443 0084 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 444              	.LVL29:
+ARM GAS  /tmp/ccjIOFWS.s 			page 11
+
+
+ 445              	.LBE9:
+  98:/home/pani_/LHRS/VCAT-Dashboard/firmware/tests/IO_test.c ****         bool input_check = (HAL_GPIO_ReadPin(INPUT_PORT, INPUT_PIN) == 0);
+ 446              		.loc 1 98 10 view .LVU84
+ 447 0088 E7E7     		b	.L32
+ 448              	.L35:
+ 449 008a 00BF     		.align	2
+ 450              	.L34:
+ 451 008c 00080048 		.word	1207961600
+ 452              		.cfi_endproc
+ 453              	.LFE339:
+ 455              		.global	led_state
+ 456              		.section	.bss.led_state,"aw",%nobits
+ 457              		.align	2
+ 460              	led_state:
+ 461 0000 00000000 		.space	16
+ 461      00000000 
+ 461      00000000 
+ 461      00000000 
+ 462              		.global	input_state
+ 463              		.section	.bss.input_state,"aw",%nobits
+ 464              		.align	2
+ 467              	input_state:
+ 468 0000 00000000 		.space	22
+ 468      00000000 
+ 468      00000000 
+ 468      00000000 
+ 468      00000000 
+ 469              		.section	.rodata.gpio_map,"a"
+ 470              		.align	2
+ 473              	gpio_map:
+ 474 0000 00040048 		.word	1207960576
+ 475 0004 0400     		.short	4
+ 476 0006 0000     		.space	2
+ 477 0008 00080048 		.word	1207961600
+ 478 000c 0200     		.short	2
+ 479 000e 0000     		.space	2
+ 480 0010 00040048 		.word	1207960576
+ 481 0014 0100     		.short	1
+ 482 0016 0000     		.space	2
+ 483 0018 00000048 		.word	1207959552
+ 484 001c 0100     		.short	1
+ 485 001e 0000     		.space	2
+ 486 0020 00000048 		.word	1207959552
+ 487 0024 8000     		.short	128
+ 488 0026 0000     		.space	2
+ 489 0028 00000048 		.word	1207959552
+ 490 002c 2000     		.short	32
+ 491 002e 0000     		.space	2
+ 492 0030 00080048 		.word	1207961600
+ 493 0034 8000     		.short	128
+ 494 0036 0000     		.space	2
+ 495 0038 00080048 		.word	1207961600
+ 496 003c 4000     		.short	64
+ 497 003e 0000     		.space	2
+ 498 0040 00080048 		.word	1207961600
+ 499 0044 0002     		.short	512
+ 500 0046 0000     		.space	2
+ARM GAS  /tmp/ccjIOFWS.s 			page 12
+
+
+ 501 0048 00000048 		.word	1207959552
+ 502 004c 0001     		.short	256
+ 503 004e 0000     		.space	2
+ 504 0050 00040048 		.word	1207960576
+ 505 0054 0800     		.short	8
+ 506 0056 0000     		.space	2
+ 507 0058 00080048 		.word	1207961600
+ 508 005c 0010     		.short	4096
+ 509 005e 0000     		.space	2
+ 510 0060 000C0048 		.word	1207962624
+ 511 0064 0400     		.short	4
+ 512 0066 0000     		.space	2
+ 513 0068 00040048 		.word	1207960576
+ 514 006c 0040     		.short	16384
+ 515 006e 0000     		.space	2
+ 516 0070 00040048 		.word	1207960576
+ 517 0074 0080     		.short	-32768
+ 518 0076 0000     		.space	2
+ 519 0078 00040048 		.word	1207960576
+ 520 007c 1000     		.short	16
+ 521 007e 0000     		.space	2
+ 522 0080 00000048 		.word	1207959552
+ 523 0084 0080     		.short	-32768
+ 524 0086 0000     		.space	2
+ 525 0088 00040048 		.word	1207960576
+ 526 008c 2000     		.short	32
+ 527 008e 0000     		.space	2
+ 528 0090 00040048 		.word	1207960576
+ 529 0094 0800     		.short	8
+ 530 0096 0000     		.space	2
+ 531              		.text
+ 532              	.Letext0:
+ 533              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 534              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 535              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 536              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 537              		.file 6 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Inputs.h"
+ 538              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ARM GAS  /tmp/ccjIOFWS.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO_test.c
+     /tmp/ccjIOFWS.s:21     .text.Heartbeat_Clock_Init:00000000 $t
+     /tmp/ccjIOFWS.s:27     .text.Heartbeat_Clock_Init:00000000 Heartbeat_Clock_Init
+     /tmp/ccjIOFWS.s:64     .text.Heartbeat_Clock_Init:0000001c $d
+     /tmp/ccjIOFWS.s:69     .text.logic:00000000 $t
+     /tmp/ccjIOFWS.s:75     .text.logic:00000000 logic
+     /tmp/ccjIOFWS.s:107    .text.logic:0000001c $d
+     /tmp/ccjIOFWS.s:467    .bss.input_state:00000000 input_state
+     /tmp/ccjIOFWS.s:460    .bss.led_state:00000000 led_state
+     /tmp/ccjIOFWS.s:113    .text.update_inputs:00000000 $t
+     /tmp/ccjIOFWS.s:119    .text.update_inputs:00000000 update_inputs
+     /tmp/ccjIOFWS.s:183    .text.update_inputs:00000038 $d
+     /tmp/ccjIOFWS.s:473    .rodata.gpio_map:00000000 gpio_map
+     /tmp/ccjIOFWS.s:189    .text.update_leds:00000000 $t
+     /tmp/ccjIOFWS.s:195    .text.update_leds:00000000 update_leds
+     /tmp/ccjIOFWS.s:260    .text.update_leds:0000003c $d
+     /tmp/ccjIOFWS.s:266    .text.init:00000000 $t
+     /tmp/ccjIOFWS.s:272    .text.init:00000000 init
+     /tmp/ccjIOFWS.s:335    .text.init:0000002c $d
+     /tmp/ccjIOFWS.s:341    .text.main:00000000 $t
+     /tmp/ccjIOFWS.s:347    .text.main:00000000 main
+     /tmp/ccjIOFWS.s:451    .text.main:0000008c $d
+     /tmp/ccjIOFWS.s:457    .bss.led_state:00000000 $d
+     /tmp/ccjIOFWS.s:464    .bss.input_state:00000000 $d
+     /tmp/ccjIOFWS.s:470    .rodata.gpio_map:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_ReadPin
+HAL_GPIO_WritePin
+HAL_Init
+HAL_GPIO_Init
