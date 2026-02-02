@@ -25,6 +25,7 @@ static const GPIO_Pin AKSHAY_LED      = { GPIOC, GPIO_PIN_10 };
 
 //void set_LED(GPIO_Pin LED, GPIO_PinState state);
 void set_LED(GPIO_Pin LED, GPIO_PinState state);
+void toggle_LED(GPIO_Pin LED);
 void flash_them();
 
 #endif

@@ -4,6 +4,10 @@ void set_LED(GPIO_Pin LED, GPIO_PinState state) {
     HAL_GPIO_WritePin(LED.port, LED.pin, state);
 }
 
+void toggle_LED(GPIO_Pin LED) {
+    HAL_GPIO_TogglePin(LED.port, LED.pin);
+}
+
 void flash_them() {
     while (1) {
         HAL_GPIO_TogglePin(PH_CAN_RX.port,       PH_CAN_RX.pin);

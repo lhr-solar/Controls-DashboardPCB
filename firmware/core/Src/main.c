@@ -1,8 +1,9 @@
 #include <stdio.h>
 
-int main(int argc, char const *argv[])
-{
-    /* code */
-    printf("Nucleo says hello.\n");
+int main(int argc, char const *argv[]) {
+
+    //RTOS
+     
+
     return 0;
 }

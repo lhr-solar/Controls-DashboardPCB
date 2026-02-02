@@ -100,6 +100,16 @@ endif
 flash: 	
 	$(MAKE) -C $(BUILD_MAKEFILE_DIR) flash
 
+#-------------------------------
+# Flash via UART
+flash-uart: 	
+	$(MAKE) -C $(BUILD_MAKEFILE_DIR) flash-uart
+
+#-------------------------------
+# OpenOCD debug
+debug: 	
+	$(MAKE) -C $(BUILD_MAKEFILE_DIR) debug
+
 #-------------- 
 # Documentation
 # .PHONY: docs

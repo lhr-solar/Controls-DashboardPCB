@@ -27,8 +27,8 @@ static const GPIO_Pin Hazard        = { GPIOC, GPIO_PIN_8 };
 static const GPIO_Pin Horn          = { GPIOD, GPIO_PIN_2 };
 
 typedef enum {
-    ON = 1,
-    OFF = 0
+    ON = GPIO_PIN_RESET,
+    OFF = GPIO_PIN_SET
 } SwitchState;
 
 SwitchState get_switch_state(GPIO_Pin sw);
