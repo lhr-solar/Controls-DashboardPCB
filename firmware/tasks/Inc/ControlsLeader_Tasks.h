@@ -1,5 +1,5 @@
-#ifndef RTOS_TASKS_H_
-#define RTOS_TASKS_H_
+#ifndef CONTROLSLEADER_TASKS_H_
+#define CONTROLSLEADER_TASKS_H_
 
 #include "stm32xx_hal.h"
 #include "FreeRTOS.h"
@@ -48,5 +48,9 @@ void ReadCarCAN_task(void *argument);
 void ReadControlsCAN_task(void *argument);
 void ReadSteeringAngCAN_task(void *argument);
 void UpdateSwitchStatesCAN_task(void *argument);
+
+/* ------| Switch States & Status LED Event Groups |------ */
+// extern EventGroupHandle_t SWITCH_STATES_EG;
+// extern EventGroupHandle_t STATUS_LED_STATES_EG;
 
 #endif

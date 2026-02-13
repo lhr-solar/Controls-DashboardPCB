@@ -1,4 +1,5 @@
 #include "ControlsLeader_Tasks.h"
+#include "init.h"
 
 StackType_t READ_CAR_CAN_Stack_Array[READ_CAR_CAN_STACK_SIZE];
 StackType_t READ_CONTROLS_CAN_Stack_Array[READ_CONTROLS_CAN_STACK_SIZE];
@@ -8,7 +9,11 @@ StackType_t UPDATE_SWITCH_STATES_Stack_Array[UPDATE_SWITCH_STATES_STACK_SIZE];
 StaticTask_t READ_CAR_CAN_TCB;
 StaticTask_t READ_CONTROLS_CAN_TCB;
 StaticTask_t READ_STEERING_ANGLE_CAN_TCB;
-StaticTask_t UPDATE_SWITCH_STATES_TCB;     
+StaticTask_t UPDATE_SWITCH_STATES_TCB;    
+
+// SWITCH_STATES_EG = xEventGroupCreate();
+// STATUS_LED_STATES_EG  = xEventGroupCreate();
+
 
 void InitTasks(void *argument) {
 
