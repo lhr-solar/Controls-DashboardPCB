@@ -1,7 +1,7 @@
 #include "ControlsLeader_Tasks.h"
 #include "init.h"
 
-void UpdateSwitchStatesCAN_task(void *argument) {
+void Polling_WriteCAN_Task(void *argument) {
 
     while(1) {
         set_LED(X_LED2, GPIO_PIN_SET);

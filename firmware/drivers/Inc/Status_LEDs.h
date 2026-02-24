@@ -22,6 +22,7 @@ extern const GPIO_Pin AKSHAY_LED;
 // #define Indicator_PWM_Pin    GPIO_PIN_15
 // #define Indicator_PWM_Port   GPIOB
 
+void LED_GPIO_Init();
 
 //void set_LED(GPIO_Pin LED, GPIO_PinState state);
 void set_LED(GPIO_Pin LED, GPIO_PinState state);

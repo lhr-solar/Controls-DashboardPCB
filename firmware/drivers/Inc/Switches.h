@@ -27,6 +27,7 @@ extern const GPIO_Pin Hazard;
 // Port D - input
 extern const GPIO_Pin Horn;
 
+extern uint8_t switchStates[];
 
 //Input State Bits Map
 #define FWD_SW_BIT          (1 << 0)
@@ -42,8 +43,8 @@ typedef enum {
     OFF = GPIO_PIN_SET
 } SwitchState;
 
+void Switch_GPIO_Init();
+void EXTI_Init(GPIO_Pin sw, uint32_t priority);
 SwitchState get_switch_state(GPIO_Pin sw);
-
-
 
 #endif
