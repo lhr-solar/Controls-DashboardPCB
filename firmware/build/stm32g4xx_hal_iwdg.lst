@@ -1,0 +1,486 @@
+ARM GAS  /tmp/ccjpAZ2o.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32g4xx_hal_iwdg.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c"
+  20              		.section	.text.HAL_IWDG_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	HAL_IWDG_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	HAL_IWDG_Init:
+  28              	.LVL0:
+  29              	.LFB329:
+   1:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /**
+   2:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ******************************************************************************
+   3:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @file    stm32g4xx_hal_iwdg.c
+   4:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @author  MCD Application Team
+   5:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @brief   IWDG HAL module driver.
+   6:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *          This file provides firmware functions to manage the following
+   7:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *          functionalities of the Independent Watchdog (IWDG) peripheral:
+   8:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *           + Initialization and Start functions
+   9:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *           + IO operation functions
+  10:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+  11:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ******************************************************************************
+  12:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @attention
+  13:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+  14:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * Copyright (c) 2019 STMicroelectronics.
+  15:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * All rights reserved.
+  16:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+  17:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  18:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * in the root directory of this software component.
+  19:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  20:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+  21:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ******************************************************************************
+  22:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   @verbatim
+  23:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ==============================================================================
+  24:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****                     ##### IWDG Generic features #####
+  25:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ==============================================================================
+  26:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   [..]
+  27:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) The IWDG can be started by either software or hardware (configurable
+  28:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         through option byte).
+  29:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ARM GAS  /tmp/ccjpAZ2o.s 			page 2
+
+
+  30:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) The IWDG is clocked by the Low-Speed Internal clock (LSI) and thus stays
+  31:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         active even if the main clock fails.
+  32:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  33:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) Once the IWDG is started, the LSI is forced ON and both cannot be
+  34:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         disabled. The counter starts counting down from the reset value (0xFFF).
+  35:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         When it reaches the end of count value (0x000) a reset signal is
+  36:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         generated (IWDG reset).
+  37:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  38:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) Whenever the key value 0x0000 AAAA is written in the IWDG_KR register,
+  39:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         the IWDG_RLR value is reloaded into the counter and the watchdog reset
+  40:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         is prevented.
+  41:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  42:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) The IWDG is implemented in the VDD voltage domain that is still functional
+  43:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         in STOP and STANDBY mode (IWDG reset can wake up the CPU from STANDBY).
+  44:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         IWDGRST flag in RCC_CSR register can be used to inform when an IWDG
+  45:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         reset occurs.
+  46:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  47:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (+) Debug mode: When the microcontroller enters debug mode (core halted),
+  48:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         the IWDG counter either continues to work normally or stops, depending
+  49:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         on DBG_IWDG_STOP configuration bit in DBG module, accessible through
+  50:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         __HAL_DBGMCU_FREEZE_IWDG() and __HAL_DBGMCU_UNFREEZE_IWDG() macros.
+  51:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  52:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     [..] Min-max timeout value @32KHz (LSI): ~125us / ~32.7s
+  53:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          The IWDG timeout may vary due to LSI clock frequency dispersion.
+  54:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          STM32G4xx devices provide the capability to measure the LSI clock
+  55:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          frequency (LSI clock is internally connected to TIM16 CH1 input capture).
+  56:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          The measured value can be used to have an IWDG timeout with an
+  57:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          acceptable accuracy.
+  58:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  59:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     [..] Default timeout value (necessary for IWDG_SR status register update):
+  60:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          Constant LSI_VALUE is defined based on the nominal LSI clock frequency.
+  61:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          This frequency being subject to variations as mentioned above, the
+  62:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          default timeout value (defined through constant HAL_IWDG_DEFAULT_TIMEOUT
+  63:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          below) may become too short or too long.
+  64:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          In such cases, this default timeout value can be tuned by redefining
+  65:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          the constant LSI_VALUE at user-application level (based, for instance,
+  66:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****          on the measured LSI clock frequency as explained above).
+  67:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  68:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****                      ##### How to use this driver #####
+  69:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   ==============================================================================
+  70:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   [..]
+  71:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (#) Use IWDG using HAL_IWDG_Init() function to :
+  72:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (++) Enable instance by writing Start keyword in IWDG_KEY register. LSI
+  73:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****            clock is forced ON and IWDG counter starts counting down.
+  74:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (++) Enable write access to configuration registers:
+  75:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****           IWDG_PR, IWDG_RLR and IWDG_WINR.
+  76:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (++) Configure the IWDG prescaler and counter reload value. This reload
+  77:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****            value will be loaded in the IWDG counter each time the watchdog is
+  78:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****            reloaded, then the IWDG will start counting down from this value.
+  79:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (++) Depending on window parameter:
+  80:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         (+++) If Window Init parameter is same as Window register value,
+  81:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****              nothing more is done but reload counter value in order to exit
+  82:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****              function with exact time base.
+  83:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         (+++) Else modify Window register. This will automatically reload
+  84:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****              watchdog counter.
+  85:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (++) Wait for status flags to be reset.
+  86:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ARM GAS  /tmp/ccjpAZ2o.s 			page 3
+
+
+  87:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     (#) Then the application program must refresh the IWDG counter at regular
+  88:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         intervals during normal operation to prevent an MCU reset, using
+  89:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         HAL_IWDG_Refresh() function.
+  90:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  91:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****      *** IWDG HAL driver macros list ***
+  92:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****      ====================================
+  93:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****      [..]
+  94:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****        Below the list of most used macros in IWDG HAL driver:
+  95:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) __HAL_IWDG_START: Enable the IWDG peripheral
+  96:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) __HAL_IWDG_RELOAD_COUNTER: Reloads IWDG counter with value defined in
+  97:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****           the reload register
+  98:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+  99:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   @endverbatim
+ 100:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 101:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 102:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Includes ------------------------------------------------------------------*/
+ 103:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** #include "stm32g4xx_hal.h"
+ 104:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 105:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @addtogroup STM32G4xx_HAL_Driver
+ 106:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 107:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 108:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 109:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** #ifdef HAL_IWDG_MODULE_ENABLED
+ 110:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @addtogroup IWDG
+ 111:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @brief IWDG HAL module driver.
+ 112:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 113:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 114:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 115:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Private typedef -----------------------------------------------------------*/
+ 116:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Private define ------------------------------------------------------------*/
+ 117:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @defgroup IWDG_Private_Defines IWDG Private Defines
+ 118:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 119:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 120:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Status register needs up to 5 LSI clock periods divided by the clock
+ 121:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    prescaler to be updated. The number of LSI clock periods is upper-rounded to
+ 122:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    6 for the timeout value calculation.
+ 123:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    The timeout value is calculated using the highest prescaler (256) and
+ 124:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    the LSI_VALUE constant. The value of this constant can be changed by the user
+ 125:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    to take into account possible LSI clock period variations.
+ 126:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    The timeout value is multiplied by 1000 to be converted in milliseconds.
+ 127:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    LSI startup time is also considered here by adding LSI_STARTUP_TIME
+ 128:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****    converted in milliseconds. */
+ 129:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** #define HAL_IWDG_DEFAULT_TIMEOUT        (((6UL * 256UL * 1000UL) / LSI_VALUE) + ((LSI_STARTUP_TIME 
+ 130:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** #define IWDG_KERNEL_UPDATE_FLAGS        (IWDG_SR_WVU | IWDG_SR_RVU | IWDG_SR_PVU)
+ 131:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /**
+ 132:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @}
+ 133:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 134:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 135:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Private macro -------------------------------------------------------------*/
+ 136:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Private variables ---------------------------------------------------------*/
+ 137:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Private function prototypes -----------------------------------------------*/
+ 138:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /* Exported functions --------------------------------------------------------*/
+ 139:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 140:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @addtogroup IWDG_Exported_Functions
+ 141:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 142:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 143:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ARM GAS  /tmp/ccjpAZ2o.s 			page 4
+
+
+ 144:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @addtogroup IWDG_Exported_Functions_Group1
+ 145:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *  @brief    Initialization and Start functions.
+ 146:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+ 147:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** @verbatim
+ 148:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  ===============================================================================
+ 149:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****           ##### Initialization and Start functions #####
+ 150:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  ===============================================================================
+ 151:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  [..]  This section provides functions allowing to:
+ 152:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) Initialize the IWDG according to the specified parameters in the
+ 153:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****           IWDG_InitTypeDef of associated handle.
+ 154:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) Manage Window option.
+ 155:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) Once initialization is performed in HAL_IWDG_Init function, Watchdog
+ 156:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****           is reloaded in order to exit function with correct time base.
+ 157:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 158:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** @endverbatim
+ 159:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 160:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 161:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 162:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /**
+ 163:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @brief  Initialize the IWDG according to the specified parameters in the
+ 164:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *         IWDG_InitTypeDef and start watchdog. Before exiting function,
+ 165:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *         watchdog is refreshed in order to have correct time base.
+ 166:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @param  hiwdg  pointer to a IWDG_HandleTypeDef structure that contains
+ 167:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *                the configuration information for the specified IWDG module.
+ 168:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @retval HAL status
+ 169:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 170:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** HAL_StatusTypeDef HAL_IWDG_Init(IWDG_HandleTypeDef *hiwdg)
+ 171:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** {
+  30              		.loc 1 171 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ 172:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   uint32_t tickstart;
+  34              		.loc 1 172 3 view .LVU1
+ 173:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 174:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Check the IWDG handle allocation */
+ 175:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   if (hiwdg == NULL)
+  35              		.loc 1 175 3 view .LVU2
+  36              		.loc 1 175 6 is_stmt 0 view .LVU3
+  37 0000 0028     		cmp	r0, #0
+  38 0002 2FD0     		beq	.L6
+ 171:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   uint32_t tickstart;
+  39              		.loc 1 171 1 view .LVU4
+  40 0004 38B5     		push	{r3, r4, r5, lr}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 16
+  43              		.cfi_offset 3, -16
+  44              		.cfi_offset 4, -12
+  45              		.cfi_offset 5, -8
+  46              		.cfi_offset 14, -4
+  47 0006 0446     		mov	r4, r0
+ 176:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   {
+ 177:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     return HAL_ERROR;
+ 178:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ 179:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 180:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Check the parameters */
+ 181:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   assert_param(IS_IWDG_ALL_INSTANCE(hiwdg->Instance));
+ARM GAS  /tmp/ccjpAZ2o.s 			page 5
+
+
+  48              		.loc 1 181 3 is_stmt 1 view .LVU5
+ 182:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   assert_param(IS_IWDG_PRESCALER(hiwdg->Init.Prescaler));
+  49              		.loc 1 182 3 view .LVU6
+ 183:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   assert_param(IS_IWDG_RELOAD(hiwdg->Init.Reload));
+  50              		.loc 1 183 3 view .LVU7
+ 184:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   assert_param(IS_IWDG_WINDOW(hiwdg->Init.Window));
+  51              		.loc 1 184 3 view .LVU8
+ 185:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 186:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Enable IWDG. LSI is turned on automatically */
+ 187:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   __HAL_IWDG_START(hiwdg);
+  52              		.loc 1 187 3 view .LVU9
+  53 0008 0368     		ldr	r3, [r0]
+  54 000a 4CF6CC42 		movw	r2, #52428
+  55 000e 1A60     		str	r2, [r3]
+ 188:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 189:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Enable write access to IWDG_PR, IWDG_RLR and IWDG_WINR registers by writing
+ 190:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   0x5555 in KR */
+ 191:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   IWDG_ENABLE_WRITE_ACCESS(hiwdg);
+  56              		.loc 1 191 3 view .LVU10
+  57 0010 0368     		ldr	r3, [r0]
+  58 0012 45F25552 		movw	r2, #21845
+  59 0016 1A60     		str	r2, [r3]
+ 192:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 193:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Write to IWDG registers the Prescaler & Reload values to work with */
+ 194:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   hiwdg->Instance->PR = hiwdg->Init.Prescaler;
+  60              		.loc 1 194 3 view .LVU11
+  61              		.loc 1 194 8 is_stmt 0 view .LVU12
+  62 0018 0368     		ldr	r3, [r0]
+  63              		.loc 1 194 36 view .LVU13
+  64 001a 4268     		ldr	r2, [r0, #4]
+  65              		.loc 1 194 23 view .LVU14
+  66 001c 5A60     		str	r2, [r3, #4]
+ 195:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   hiwdg->Instance->RLR = hiwdg->Init.Reload;
+  67              		.loc 1 195 3 is_stmt 1 view .LVU15
+  68              		.loc 1 195 8 is_stmt 0 view .LVU16
+  69 001e 0368     		ldr	r3, [r0]
+  70              		.loc 1 195 37 view .LVU17
+  71 0020 8268     		ldr	r2, [r0, #8]
+  72              		.loc 1 195 24 view .LVU18
+  73 0022 9A60     		str	r2, [r3, #8]
+ 196:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 197:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Check pending flag, if previous update not done, return timeout */
+ 198:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   tickstart = HAL_GetTick();
+  74              		.loc 1 198 3 is_stmt 1 view .LVU19
+  75              		.loc 1 198 15 is_stmt 0 view .LVU20
+  76 0024 FFF7FEFF 		bl	HAL_GetTick
+  77              	.LVL1:
+  78              		.loc 1 198 15 view .LVU21
+  79 0028 0546     		mov	r5, r0
+  80              	.LVL2:
+ 199:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 200:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Wait for register to be updated */
+ 201:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   while ((hiwdg->Instance->SR & IWDG_KERNEL_UPDATE_FLAGS) != 0x00u)
+  81              		.loc 1 201 3 is_stmt 1 view .LVU22
+  82              	.L3:
+  83              		.loc 1 201 59 view .LVU23
+  84              		.loc 1 201 16 is_stmt 0 view .LVU24
+ARM GAS  /tmp/ccjpAZ2o.s 			page 6
+
+
+  85 002a 2368     		ldr	r3, [r4]
+  86              		.loc 1 201 26 view .LVU25
+  87 002c DA68     		ldr	r2, [r3, #12]
+  88              		.loc 1 201 59 view .LVU26
+  89 002e 12F0070F 		tst	r2, #7
+  90 0032 0BD0     		beq	.L12
+ 202:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   {
+ 203:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     if ((HAL_GetTick() - tickstart) > HAL_IWDG_DEFAULT_TIMEOUT)
+  91              		.loc 1 203 5 is_stmt 1 view .LVU27
+  92              		.loc 1 203 10 is_stmt 0 view .LVU28
+  93 0034 FFF7FEFF 		bl	HAL_GetTick
+  94              	.LVL3:
+  95              		.loc 1 203 24 discriminator 1 view .LVU29
+  96 0038 401B     		subs	r0, r0, r5
+  97              		.loc 1 203 8 discriminator 1 view .LVU30
+  98 003a 3128     		cmp	r0, #49
+  99 003c F5D9     		bls	.L3
+ 204:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     {
+ 205:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       if ((hiwdg->Instance->SR & IWDG_KERNEL_UPDATE_FLAGS) != 0x00u)
+ 100              		.loc 1 205 7 is_stmt 1 view .LVU31
+ 101              		.loc 1 205 17 is_stmt 0 view .LVU32
+ 102 003e 2368     		ldr	r3, [r4]
+ 103              		.loc 1 205 27 view .LVU33
+ 104 0040 DB68     		ldr	r3, [r3, #12]
+ 105              		.loc 1 205 10 view .LVU34
+ 106 0042 13F0070F 		tst	r3, #7
+ 107 0046 F0D0     		beq	.L3
+ 206:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       {
+ 207:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****         return HAL_TIMEOUT;
+ 108              		.loc 1 207 16 view .LVU35
+ 109 0048 0320     		movs	r0, #3
+ 110 004a 05E0     		b	.L2
+ 111              	.L12:
+ 208:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       }
+ 209:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     }
+ 210:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ 211:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 212:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* If window parameter is different than current value, modify window
+ 213:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   register */
+ 214:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   if (hiwdg->Instance->WINR != hiwdg->Init.Window)
+ 112              		.loc 1 214 3 is_stmt 1 view .LVU36
+ 113              		.loc 1 214 22 is_stmt 0 view .LVU37
+ 114 004c 1969     		ldr	r1, [r3, #16]
+ 115              		.loc 1 214 43 view .LVU38
+ 116 004e E268     		ldr	r2, [r4, #12]
+ 117              		.loc 1 214 6 view .LVU39
+ 118 0050 9142     		cmp	r1, r2
+ 119 0052 02D0     		beq	.L5
+ 215:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   {
+ 216:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     /* Write to IWDG WINR the IWDG_Window value to compare with. In any case,
+ 217:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     even if window feature is disabled, Watchdog will be reloaded by writing
+ 218:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     windows register */
+ 219:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     hiwdg->Instance->WINR = hiwdg->Init.Window;
+ 120              		.loc 1 219 5 is_stmt 1 view .LVU40
+ 121              		.loc 1 219 27 is_stmt 0 view .LVU41
+ 122 0054 1A61     		str	r2, [r3, #16]
+ 220:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ARM GAS  /tmp/ccjpAZ2o.s 			page 7
+
+
+ 221:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   else
+ 222:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   {
+ 223:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     /* Reload IWDG counter with value defined in the reload register */
+ 224:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****     __HAL_IWDG_RELOAD_COUNTER(hiwdg);
+ 225:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ 226:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 227:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Return function status */
+ 228:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   return HAL_OK;
+ 123              		.loc 1 228 10 view .LVU42
+ 124 0056 0020     		movs	r0, #0
+ 125              	.L2:
+ 229:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** }
+ 126              		.loc 1 229 1 view .LVU43
+ 127 0058 38BD     		pop	{r3, r4, r5, pc}
+ 128              	.LVL4:
+ 129              	.L5:
+ 224:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ 130              		.loc 1 224 5 is_stmt 1 view .LVU44
+ 131 005a 4AF6AA22 		movw	r2, #43690
+ 132 005e 1A60     		str	r2, [r3]
+ 228:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** }
+ 133              		.loc 1 228 10 is_stmt 0 view .LVU45
+ 134 0060 0020     		movs	r0, #0
+ 135 0062 F9E7     		b	.L2
+ 136              	.LVL5:
+ 137              	.L6:
+ 138              	.LCFI1:
+ 139              		.cfi_def_cfa_offset 0
+ 140              		.cfi_restore 3
+ 141              		.cfi_restore 4
+ 142              		.cfi_restore 5
+ 143              		.cfi_restore 14
+ 177:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   }
+ 144              		.loc 1 177 12 view .LVU46
+ 145 0064 0120     		movs	r0, #1
+ 146              	.LVL6:
+ 147              		.loc 1 229 1 view .LVU47
+ 148 0066 7047     		bx	lr
+ 149              		.cfi_endproc
+ 150              	.LFE329:
+ 152              		.section	.text.HAL_IWDG_Refresh,"ax",%progbits
+ 153              		.align	1
+ 154              		.global	HAL_IWDG_Refresh
+ 155              		.syntax unified
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	HAL_IWDG_Refresh:
+ 160              	.LVL7:
+ 161              	.LFB330:
+ 230:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 231:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 232:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /**
+ 233:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @}
+ 234:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 235:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 236:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 237:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /** @addtogroup IWDG_Exported_Functions_Group2
+ARM GAS  /tmp/ccjpAZ2o.s 			page 8
+
+
+ 238:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *  @brief   IO operation functions
+ 239:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *
+ 240:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** @verbatim
+ 241:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  ===============================================================================
+ 242:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****                       ##### IO operation functions #####
+ 243:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  ===============================================================================
+ 244:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****  [..]  This section provides functions allowing to:
+ 245:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****       (+) Refresh the IWDG.
+ 246:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 247:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** @endverbatim
+ 248:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @{
+ 249:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 250:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 251:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** /**
+ 252:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @brief  Refresh the IWDG.
+ 253:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @param  hiwdg  pointer to a IWDG_HandleTypeDef structure that contains
+ 254:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   *                the configuration information for the specified IWDG module.
+ 255:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   * @retval HAL status
+ 256:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   */
+ 257:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** HAL_StatusTypeDef HAL_IWDG_Refresh(IWDG_HandleTypeDef *hiwdg)
+ 258:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** {
+ 162              		.loc 1 258 1 is_stmt 1 view -0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166              		@ link register save eliminated.
+ 259:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Reload IWDG counter with value defined in the reload register */
+ 260:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   __HAL_IWDG_RELOAD_COUNTER(hiwdg);
+ 167              		.loc 1 260 3 view .LVU49
+ 168 0000 0368     		ldr	r3, [r0]
+ 169 0002 4AF6AA22 		movw	r2, #43690
+ 170 0006 1A60     		str	r2, [r3]
+ 261:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** 
+ 262:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   /* Return function status */
+ 263:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c ****   return HAL_OK;
+ 171              		.loc 1 263 3 view .LVU50
+ 264:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c **** }
+ 172              		.loc 1 264 1 is_stmt 0 view .LVU51
+ 173 0008 0020     		movs	r0, #0
+ 174              	.LVL8:
+ 175              		.loc 1 264 1 view .LVU52
+ 176 000a 7047     		bx	lr
+ 177              		.cfi_endproc
+ 178              	.LFE330:
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 183              		.file 3 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 184              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 185              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_iwdg.h"
+ 186              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ARM GAS  /tmp/ccjpAZ2o.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32g4xx_hal_iwdg.c
+     /tmp/ccjpAZ2o.s:21     .text.HAL_IWDG_Init:00000000 $t
+     /tmp/ccjpAZ2o.s:27     .text.HAL_IWDG_Init:00000000 HAL_IWDG_Init
+     /tmp/ccjpAZ2o.s:153    .text.HAL_IWDG_Refresh:00000000 $t
+     /tmp/ccjpAZ2o.s:159    .text.HAL_IWDG_Refresh:00000000 HAL_IWDG_Refresh
+
+UNDEFINED SYMBOLS
+HAL_GetTick
