@@ -1,0 +1,306 @@
+ARM GAS  /tmp/cchubm9z.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ISRs.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c"
+  20              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+  21              		.align	1
+  22              		.global	HAL_GPIO_EXTI_Callback
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	HAL_GPIO_EXTI_Callback:
+  28              	.LVL0:
+  29              	.LFB334:
+   1:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** #include "init.h"
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+  30              		.loc 1 4 48 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 4 48 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0446     		mov	r4, r0
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     vTaskDelay(pdMS_TO_TICKS(250));
+  41              		.loc 1 6 5 is_stmt 1 view .LVU2
+  42 0004 FA20     		movs	r0, #250
+  43              	.LVL1:
+  44              		.loc 1 6 5 is_stmt 0 view .LVU3
+  45 0006 FFF7FEFF 		bl	vTaskDelay
+  46              	.LVL2:
+   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     if (GPIO_Pin == Neutral_Gear.pin) {
+  47              		.loc 1 7 5 is_stmt 1 view .LVU4
+  48              		.loc 1 7 33 is_stmt 0 view .LVU5
+  49 000a 234B     		ldr	r3, .L9
+  50 000c 9B88     		ldrh	r3, [r3, #4]
+  51              		.loc 1 7 8 view .LVU6
+ARM GAS  /tmp/cchubm9z.s 			page 2
+
+
+  52 000e A342     		cmp	r3, r4
+  53 0010 04D0     		beq	.L7
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         set_LED(PH_CAN_TX_LED, get_switch_state(Neutral_Gear));
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         if(get_switch_state(FWD_SW) == ON) {
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         } else if(get_switch_state(Rev_SW) == ON) {
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         } else { 
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(PH_CAN_TX_LED, get_switch_state(Neutral_Gear));
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         }
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     } else if (GPIO_Pin == Ign_OFF.pin) {
+  54              		.loc 1 16 12 is_stmt 1 view .LVU7
+  55              		.loc 1 16 35 is_stmt 0 view .LVU8
+  56 0012 224B     		ldr	r3, .L9+4
+  57 0014 9B88     		ldrh	r3, [r3, #4]
+  58              		.loc 1 16 15 view .LVU9
+  59 0016 A342     		cmp	r3, r4
+  60 0018 31D0     		beq	.L8
+  61              	.L1:
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         set_LED(PH_CAN_RX_LED, get_switch_state(Ign_OFF));
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     }
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** }
+  62              		.loc 1 20 1 view .LVU10
+  63 001a 10BD     		pop	{r4, pc}
+  64              	.LVL3:
+  65              	.L7:
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         set_LED(PH_CAN_TX_LED, get_switch_state(Neutral_Gear));
+  66              		.loc 1 8 9 is_stmt 1 view .LVU11
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         set_LED(PH_CAN_TX_LED, get_switch_state(Neutral_Gear));
+  67              		.loc 1 8 32 is_stmt 0 view .LVU12
+  68 001c 1E4B     		ldr	r3, .L9
+  69 001e 93E80300 		ldm	r3, {r0, r1}
+  70 0022 FFF7FEFF 		bl	get_switch_state
+  71              	.LVL4:
+  72 0026 0246     		mov	r2, r0
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         set_LED(PH_CAN_TX_LED, get_switch_state(Neutral_Gear));
+  73              		.loc 1 8 9 discriminator 1 view .LVU13
+  74 0028 1D4B     		ldr	r3, .L9+8
+  75 002a 93E80300 		ldm	r3, {r0, r1}
+  76 002e FFF7FEFF 		bl	set_LED
+  77              	.LVL5:
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  78              		.loc 1 9 9 is_stmt 1 view .LVU14
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  79              		.loc 1 9 12 is_stmt 0 view .LVU15
+  80 0032 1C4B     		ldr	r3, .L9+12
+  81 0034 93E80300 		ldm	r3, {r0, r1}
+  82 0038 FFF7FEFF 		bl	get_switch_state
+  83              	.LVL6:
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  84              		.loc 1 9 11 discriminator 1 view .LVU16
+  85 003c 30B9     		cbnz	r0, .L3
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         } else if(get_switch_state(Rev_SW) == ON) {
+  86              		.loc 1 10 13 is_stmt 1 view .LVU17
+  87 003e 1A4B     		ldr	r3, .L9+16
+  88 0040 0022     		movs	r2, #0
+ARM GAS  /tmp/cchubm9z.s 			page 3
+
+
+  89 0042 93E80300 		ldm	r3, {r0, r1}
+  90 0046 FFF7FEFF 		bl	set_LED
+  91              	.LVL7:
+  92 004a E6E7     		b	.L1
+  93              	.L3:
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  94              		.loc 1 11 16 view .LVU18
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+  95              		.loc 1 11 19 is_stmt 0 view .LVU19
+  96 004c 174B     		ldr	r3, .L9+20
+  97 004e 93E80300 		ldm	r3, {r0, r1}
+  98 0052 FFF7FEFF 		bl	get_switch_state
+  99              	.LVL8:
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****             set_LED(CarCAN_TX_LED, ON);
+ 100              		.loc 1 11 18 discriminator 1 view .LVU20
+ 101 0056 30B9     		cbnz	r0, .L5
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         } else { 
+ 102              		.loc 1 12 13 is_stmt 1 view .LVU21
+ 103 0058 134B     		ldr	r3, .L9+16
+ 104 005a 0022     		movs	r2, #0
+ 105 005c 93E80300 		ldm	r3, {r0, r1}
+ 106 0060 FFF7FEFF 		bl	set_LED
+ 107              	.LVL9:
+ 108 0064 D9E7     		b	.L1
+ 109              	.L5:
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         }
+ 110              		.loc 1 14 13 view .LVU22
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         }
+ 111              		.loc 1 14 36 is_stmt 0 view .LVU23
+ 112 0066 0C4B     		ldr	r3, .L9
+ 113 0068 93E80300 		ldm	r3, {r0, r1}
+ 114 006c FFF7FEFF 		bl	get_switch_state
+ 115              	.LVL10:
+ 116 0070 0246     		mov	r2, r0
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****         }
+ 117              		.loc 1 14 13 discriminator 1 view .LVU24
+ 118 0072 0B4B     		ldr	r3, .L9+8
+ 119 0074 93E80300 		ldm	r3, {r0, r1}
+ 120 0078 FFF7FEFF 		bl	set_LED
+ 121              	.LVL11:
+ 122 007c CDE7     		b	.L1
+ 123              	.L8:
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     }
+ 124              		.loc 1 17 9 is_stmt 1 view .LVU25
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     }
+ 125              		.loc 1 17 32 is_stmt 0 view .LVU26
+ 126 007e 074B     		ldr	r3, .L9+4
+ 127 0080 93E80300 		ldm	r3, {r0, r1}
+ 128 0084 FFF7FEFF 		bl	get_switch_state
+ 129              	.LVL12:
+ 130 0088 0246     		mov	r2, r0
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     }
+ 131              		.loc 1 17 9 discriminator 1 view .LVU27
+ 132 008a 094B     		ldr	r3, .L9+24
+ 133 008c 93E80300 		ldm	r3, {r0, r1}
+ 134 0090 FFF7FEFF 		bl	set_LED
+ 135              	.LVL13:
+ARM GAS  /tmp/cchubm9z.s 			page 4
+
+
+ 136              		.loc 1 20 1 view .LVU28
+ 137 0094 C1E7     		b	.L1
+ 138              	.L10:
+ 139 0096 00BF     		.align	2
+ 140              	.L9:
+ 141 0098 00000000 		.word	Neutral_Gear
+ 142 009c 00000000 		.word	Ign_OFF
+ 143 00a0 00000000 		.word	PH_CAN_TX_LED
+ 144 00a4 00000000 		.word	FWD_SW
+ 145 00a8 00000000 		.word	CarCAN_TX_LED
+ 146 00ac 00000000 		.word	Rev_SW
+ 147 00b0 00000000 		.word	PH_CAN_RX_LED
+ 148              		.cfi_endproc
+ 149              	.LFE334:
+ 151              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	EXTI0_IRQHandler
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	EXTI0_IRQHandler:
+ 159              	.LFB335:
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** void EXTI0_IRQHandler(void) {
+ 160              		.loc 1 23 29 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164 0000 08B5     		push	{r3, lr}
+ 165              	.LCFI1:
+ 166              		.cfi_def_cfa_offset 8
+ 167              		.cfi_offset 3, -8
+ 168              		.cfi_offset 14, -4
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     HAL_GPIO_EXTI_IRQHandler(Neutral_Gear.pin);
+ 169              		.loc 1 24 5 view .LVU30
+ 170 0002 024B     		ldr	r3, .L13
+ 171 0004 9888     		ldrh	r0, [r3, #4]
+ 172 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 173              	.LVL14:
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** }
+ 174              		.loc 1 25 1 is_stmt 0 view .LVU31
+ 175 000a 08BD     		pop	{r3, pc}
+ 176              	.L14:
+ 177              		.align	2
+ 178              	.L13:
+ 179 000c 00000000 		.word	Neutral_Gear
+ 180              		.cfi_endproc
+ 181              	.LFE335:
+ 183              		.section	.text.EXTI2_IRQHandler,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	EXTI2_IRQHandler
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	EXTI2_IRQHandler:
+ 191              	.LFB336:
+ARM GAS  /tmp/cchubm9z.s 			page 5
+
+
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** 
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** void EXTI2_IRQHandler(void) {
+ 192              		.loc 1 27 29 is_stmt 1 view -0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196 0000 08B5     		push	{r3, lr}
+ 197              	.LCFI2:
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 3, -8
+ 200              		.cfi_offset 14, -4
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c ****     HAL_GPIO_EXTI_IRQHandler(Ign_OFF.pin);
+ 201              		.loc 1 28 5 view .LVU33
+ 202 0002 024B     		ldr	r3, .L17
+ 203 0004 9888     		ldrh	r0, [r3, #4]
+ 204 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 205              	.LVL15:
+  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/ISRs/Src/ISRs.c **** }
+ 206              		.loc 1 29 1 is_stmt 0 view .LVU34
+ 207 000a 08BD     		pop	{r3, pc}
+ 208              	.L18:
+ 209              		.align	2
+ 210              	.L17:
+ 211 000c 00000000 		.word	Ign_OFF
+ 212              		.cfi_endproc
+ 213              	.LFE336:
+ 215              		.text
+ 216              	.Letext0:
+ 217              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 218              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 219              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 220              		.file 5 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 221              		.file 6 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h"
+ 222              		.file 7 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
+ 223              		.file 8 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
+ 224              		.file 9 "middleware/FreeRTOS-Kernel/include/task.h"
+ARM GAS  /tmp/cchubm9z.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ISRs.c
+     /tmp/cchubm9z.s:21     .text.HAL_GPIO_EXTI_Callback:00000000 $t
+     /tmp/cchubm9z.s:27     .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+     /tmp/cchubm9z.s:141    .text.HAL_GPIO_EXTI_Callback:00000098 $d
+     /tmp/cchubm9z.s:152    .text.EXTI0_IRQHandler:00000000 $t
+     /tmp/cchubm9z.s:158    .text.EXTI0_IRQHandler:00000000 EXTI0_IRQHandler
+     /tmp/cchubm9z.s:179    .text.EXTI0_IRQHandler:0000000c $d
+     /tmp/cchubm9z.s:184    .text.EXTI2_IRQHandler:00000000 $t
+     /tmp/cchubm9z.s:190    .text.EXTI2_IRQHandler:00000000 EXTI2_IRQHandler
+     /tmp/cchubm9z.s:211    .text.EXTI2_IRQHandler:0000000c $d
+
+UNDEFINED SYMBOLS
+vTaskDelay
+get_switch_state
+set_LED
+Neutral_Gear
+Ign_OFF
+PH_CAN_TX_LED
+FWD_SW
+CarCAN_TX_LED
+Rev_SW
+PH_CAN_RX_LED
+HAL_GPIO_EXTI_IRQHandler
