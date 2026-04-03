@@ -25,11 +25,11 @@ jobs:
 
       - name: Install Nix
         run: |
-          sudo ./Firmware/Embedded-Sharepoint/nix_install.sh
+          sudo ./firmware/Embedded-Sharepoint/nix_install.sh
 
       - name: Test Production Build
         run: |
-          nix develop ./Firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
+          nix develop ./firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
             cd Firmware/ && make clean && make
           "
       # TODO - make all tests
