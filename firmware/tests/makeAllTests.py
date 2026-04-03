@@ -114,7 +114,7 @@ def main():
     ####
 
     ####
-    tests_dir = Path("firmware/Tests")
+    tests_dir = Path("firmware/tests")
     ####
     tests = find_tests(git_dir / tests_dir)
 
