@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccMbvtlu.s 			page 1
+ARM GAS  /tmp/ccC3LvIn.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
    7:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(IGN_MTR_PORT,        IGN_MTR_PIN,        GPIO_MODE_INPUT);
   50              		.loc 1 7 5 view .LVU3
   51 001a 0022     		movs	r2, #0
-ARM GAS  /tmp/ccMbvtlu.s 			page 2
+ARM GAS  /tmp/ccC3LvIn.s 			page 2
 
 
   52 001c 0221     		movs	r1, #2
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
   99              	.LVL9:
   15:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN,  GPIO_MODE_INPUT);
  100              		.loc 1 15 5 view .LVU11
-ARM GAS  /tmp/ccMbvtlu.s 			page 3
+ARM GAS  /tmp/ccC3LvIn.s 			page 3
 
 
  101 0072 0022     		movs	r2, #0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
  150              		.loc 1 22 76 is_stmt 1 view -0
  151              		.cfi_startproc
  152              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccMbvtlu.s 			page 4
+ARM GAS  /tmp/ccC3LvIn.s 			page 4
 
 
  153              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
   37:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     HAL_NVIC_EnableIRQ(IRQn);
  193              		.loc 1 37 5 is_stmt 1 view .LVU30
  194 0024 2046     		mov	r0, r4
-ARM GAS  /tmp/ccMbvtlu.s 			page 5
+ARM GAS  /tmp/ccC3LvIn.s 			page 5
 
 
  195 0026 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
   53:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_REGEN_ENABLE]  = (switch_get_state(REGEN_ENABLE_PORT,  REGEN_ENABLE_PIN)  == ON ? 1 
   54:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_REGEN_ACTIVE]  = (switch_get_state(REGEN_ACTIVE_PORT,  REGEN_ACTIVE_PIN)  == ON ? 1 
   55:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** }
-ARM GAS  /tmp/ccMbvtlu.s 			page 6
+ARM GAS  /tmp/ccC3LvIn.s 			page 6
 
 
   56:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
  278 0006 0121     		movs	r1, #1
  279 0008 3046     		mov	r0, r6
  280              	.LVL30:
-ARM GAS  /tmp/ccMbvtlu.s 			page 7
+ARM GAS  /tmp/ccC3LvIn.s 			page 7
 
 
   41:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_IGN_ARR]       = (switch_get_state(IGN_ARR_PORT,       IGN_ARR_PIN)       == ON ? 1 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
   44:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_CRUISE_SET]    = (switch_get_state(CRUISE_SET_PORT,    CRUISE_SET_PIN)    == ON ? 1 
  321              		.loc 1 44 31 discriminator 1 view .LVU61
  322 004a E070     		strb	r0, [r4, #3]
-ARM GAS  /tmp/ccMbvtlu.s 			page 8
+ARM GAS  /tmp/ccC3LvIn.s 			page 8
 
 
   45:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_FWD]           = (switch_get_state(FWD_SW_PORT,        FWD_SW_PIN)        == ON ? 1 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
  362              		.loc 1 48 100 discriminator 1 view .LVU76
  363 0088 B0FA80F0 		clz	r0, r0
  364 008c 4009     		lsrs	r0, r0, #5
-ARM GAS  /tmp/ccMbvtlu.s 			page 9
+ARM GAS  /tmp/ccC3LvIn.s 			page 9
 
 
   48:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_HAZARD]        = (switch_get_state(HAZARD_PORT,        HAZARD_PIN)        == ON ? 1 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
  404 00c4 FFF7FEFF 		bl	switch_get_state
  405              	.LVL42:
   52:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     payload[SW_PTT]           = (switch_get_state(PTT_PORT,           PTT_PIN)           == ON ? 1 
-ARM GAS  /tmp/ccMbvtlu.s 			page 10
+ARM GAS  /tmp/ccC3LvIn.s 			page 10
 
 
  406              		.loc 1 52 100 discriminator 1 view .LVU92
@@ -598,24 +598,24 @@ ARM GAS  /tmp/ccMbvtlu.s 			page 1
  450              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
  451              		.file 5 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
  452              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
-ARM GAS  /tmp/ccMbvtlu.s 			page 11
+ARM GAS  /tmp/ccC3LvIn.s 			page 11
 
 
-ARM GAS  /tmp/ccMbvtlu.s 			page 12
+ARM GAS  /tmp/ccC3LvIn.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 Switches.c
-     /tmp/ccMbvtlu.s:21     .text.switch_GPIO_init:00000000 $t
-     /tmp/ccMbvtlu.s:27     .text.switch_GPIO_init:00000000 switch_GPIO_init
-     /tmp/ccMbvtlu.s:135    .text.switch_GPIO_init:000000ac $d
-     /tmp/ccMbvtlu.s:141    .text.switch_EXTI_Init:00000000 $t
-     /tmp/ccMbvtlu.s:147    .text.switch_EXTI_Init:00000000 switch_EXTI_Init
-     /tmp/ccMbvtlu.s:221    .text.switch_get_state:00000000 $t
-     /tmp/ccMbvtlu.s:227    .text.switch_get_state:00000000 switch_get_state
-     /tmp/ccMbvtlu.s:253    .text.switch_poll_all_inputs:00000000 $t
-     /tmp/ccMbvtlu.s:259    .text.switch_poll_all_inputs:00000000 switch_poll_all_inputs
-     /tmp/ccMbvtlu.s:440    .text.switch_poll_all_inputs:000000f4 $d
+     /tmp/ccC3LvIn.s:21     .text.switch_GPIO_init:00000000 $t
+     /tmp/ccC3LvIn.s:27     .text.switch_GPIO_init:00000000 switch_GPIO_init
+     /tmp/ccC3LvIn.s:135    .text.switch_GPIO_init:000000ac $d
+     /tmp/ccC3LvIn.s:141    .text.switch_EXTI_Init:00000000 $t
+     /tmp/ccC3LvIn.s:147    .text.switch_EXTI_Init:00000000 switch_EXTI_Init
+     /tmp/ccC3LvIn.s:221    .text.switch_get_state:00000000 $t
+     /tmp/ccC3LvIn.s:227    .text.switch_get_state:00000000 switch_get_state
+     /tmp/ccC3LvIn.s:253    .text.switch_poll_all_inputs:00000000 $t
+     /tmp/ccC3LvIn.s:259    .text.switch_poll_all_inputs:00000000 switch_poll_all_inputs
+     /tmp/ccC3LvIn.s:440    .text.switch_poll_all_inputs:000000f4 $d
 
 UNDEFINED SYMBOLS
 gpioPin_Init

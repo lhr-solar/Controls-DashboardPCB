@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccw5ZGPn.s 			page 1
+ARM GAS  /tmp/ccQMQWLI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
   27:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #include "stm32g4xx_hal.h"
   28:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** 
   29:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** /** @addtogroup STM32G4xx_HAL_Driver
-ARM GAS  /tmp/ccw5ZGPn.s 			page 2
+ARM GAS  /tmp/ccQMQWLI.s 			page 2
 
 
   30:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****   * @{
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
   84:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32G473xx) || defined(STM32G474xx) || defined(STM32G483xx) || defined(STM32G484xx)
   85:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** HAL_StatusTypeDef HAL_OPAMPEx_SelfCalibrateAll(OPAMP_HandleTypeDef *hopamp1, OPAMP_HandleTypeDef *h
   86:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****                                                OPAMP_HandleTypeDef *hopamp3, OPAMP_HandleTypeDef *h
-ARM GAS  /tmp/ccw5ZGPn.s 			page 3
+ARM GAS  /tmp/ccQMQWLI.s 			page 3
 
 
   87:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****                                                OPAMP_HandleTypeDef *hopamp5, OPAMP_HandleTypeDef *h
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
   47              		.loc 1 123 3 view .LVU14
   48              		.loc 1 123 6 is_stmt 0 view .LVU15
   49 0000 0028     		cmp	r0, #0
-ARM GAS  /tmp/ccw5ZGPn.s 			page 4
+ARM GAS  /tmp/ccQMQWLI.s 			page 4
 
 
   50 0002 00F01B84 		beq	.L43
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  138:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****   }
  139:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****   else if (hopamp1->State != HAL_OPAMP_STATE_READY)
   89              		.loc 1 139 8 is_stmt 1 view .LVU23
-ARM GAS  /tmp/ccw5ZGPn.s 			page 5
+ARM GAS  /tmp/ccQMQWLI.s 			page 5
 
 
   90              		.loc 1 139 19 is_stmt 0 view .LVU24
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  122              	.LVL3:
  123              		.loc 1 161 19 view .LVU38
  124 0066 92F83A00 		ldrb	r0, [r2, #58]	@ zero_extendqisi2
-ARM GAS  /tmp/ccw5ZGPn.s 			page 6
+ARM GAS  /tmp/ccQMQWLI.s 			page 6
 
 
  125 006a C0B2     		uxtb	r0, r0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  143              		.loc 1 197 5 view .LVU49
  144 0080 3A68     		ldr	r2, [r7]
  145 0082 1368     		ldr	r3, [r2]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 7
+ARM GAS  /tmp/ccQMQWLI.s 			page 7
 
 
  146 0084 43F00203 		orr	r3, r3, #2
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  218:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     SET_BIT(hopamp2->Instance->CSR, OPAMP_CSR_USERTRIM);
  180              		.loc 1 218 5 view .LVU56
  181 00ca 0A68     		ldr	r2, [r1]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 8
+ARM GAS  /tmp/ccQMQWLI.s 			page 8
 
 
  182 00cc 1368     		ldr	r3, [r2]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  218 0114 2A68     		ldr	r2, [r5]
  219 0116 1368     		ldr	r3, [r2]
  220 0118 43F40063 		orr	r3, r3, #2048
-ARM GAS  /tmp/ccw5ZGPn.s 			page 9
+ARM GAS  /tmp/ccQMQWLI.s 			page 9
 
 
  221 011c 1360     		str	r3, [r2]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  258:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     MODIFY_REG(hopamp4->Instance->CSR, OPAMP_CSR_CALSEL, OPAMP_VREF_90VDDA);
  254              		.loc 1 258 5 view .LVU70
  255 015e 3268     		ldr	r2, [r6]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 10
+ARM GAS  /tmp/ccQMQWLI.s 			page 10
 
 
  256 0160 1368     		ldr	r3, [r2]
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  292 01a8 169B     		ldr	r3, [sp, #88]
  293 01aa 1A68     		ldr	r2, [r3]
  294 01ac 1368     		ldr	r3, [r2]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 11
+ARM GAS  /tmp/ccQMQWLI.s 			page 11
 
 
  295 01ae 43F00103 		orr	r3, r3, #1
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  288:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     trimmingvaluen3 = 16UL;
  320              		.loc 1 288 21 view .LVU91
  321 01d0 CDF814A0 		str	r10, [sp, #20]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 12
+ARM GAS  /tmp/ccQMQWLI.s 			page 12
 
 
  284:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) ||
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  339:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       {
  340:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****         /* OPAMP_CSR_OUTCAL is HIGH try higher trimming */
  341:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****         trimmingvaluen2 += delta;
-ARM GAS  /tmp/ccw5ZGPn.s 			page 13
+ARM GAS  /tmp/ccQMQWLI.s 			page 13
 
 
  342:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       }
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  362 01f8 0493     		str	r3, [sp, #16]
  363              	.LVL11:
  364              		.loc 1 371 25 view .LVU105
-ARM GAS  /tmp/ccw5ZGPn.s 			page 14
+ARM GAS  /tmp/ccQMQWLI.s 			page 14
 
 
  365 01fa 59E0     		b	.L11
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  381              		.loc 1 409 13 is_stmt 0 view .LVU112
  382 0206 6408     		lsrs	r4, r4, #1
  383              	.LVL15:
-ARM GAS  /tmp/ccw5ZGPn.s 			page 15
+ARM GAS  /tmp/ccQMQWLI.s 			page 15
 
 
  384              	.L3:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  430 026c 0220     		movs	r0, #2
  431 026e FFF7FEFF 		bl	HAL_Delay
  432              	.LVL16:
-ARM GAS  /tmp/ccw5ZGPn.s 			page 16
+ARM GAS  /tmp/ccQMQWLI.s 			page 16
 
 
  325:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       {
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  352:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       }
  470              		.loc 1 352 25 is_stmt 0 view .LVU138
  471 029a 069B     		ldr	r3, [sp, #24]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 17
+ARM GAS  /tmp/ccQMQWLI.s 			page 17
 
 
  472 029c 2344     		add	r3, r3, r4
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  385:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       {
  511              		.loc 1 385 10 view .LVU154
  512 02c4 13F0804F 		tst	r3, #1073741824
-ARM GAS  /tmp/ccw5ZGPn.s 			page 18
+ARM GAS  /tmp/ccQMQWLI.s 			page 18
 
 
  513 02c8 9BD0     		beq	.L14
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  550 030e 43EA0163 		orr	r3, r3, r1, lsl #24
  551 0312 1360     		str	r3, [r2]
  424:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     MODIFY_REG(hopamp5->Instance->CSR, OPAMP_CSR_TRIMOFFSETN, trimmingvaluen5 << OPAMP_INPUT_INVERT
-ARM GAS  /tmp/ccw5ZGPn.s 			page 19
+ARM GAS  /tmp/ccQMQWLI.s 			page 19
 
 
  552              		.loc 1 424 5 view .LVU163
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  442:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) ||
  443:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     defined(STM32G473xx) || defined(STM32G474xx) || defined(STM32G483xx) || defined(STM32G484xx) ||
  444:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     defined(STM32G491xx) || defined(STM32G4A1xx)
-ARM GAS  /tmp/ccw5ZGPn.s 			page 20
+ARM GAS  /tmp/ccQMQWLI.s 			page 20
 
 
  445:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     if ((hopamp2->Instance->CSR & OPAMP_CSR_OUTCAL) != 0UL)
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  629              	.LVL30:
  630              	.L19:
  459:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     }
-ARM GAS  /tmp/ccw5ZGPn.s 			page 21
+ARM GAS  /tmp/ccQMQWLI.s 			page 21
 
 
  460:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  667              		.loc 1 477 7 is_stmt 1 view .LVU200
  668 03ba 1A68     		ldr	r2, [r3]
  669 03bc 22F0F852 		bic	r2, r2, #520093696
-ARM GAS  /tmp/ccw5ZGPn.s 			page 22
+ARM GAS  /tmp/ccQMQWLI.s 			page 22
 
 
  670 03c0 42EA0162 		orr	r2, r2, r1, lsl #24
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  503:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     defined(STM32G491xx) || defined(STM32G4A1xx)
  504:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     MODIFY_REG(hopamp2->Instance->CSR, OPAMP_CSR_CALSEL, OPAMP_VREF_10VDDA);
  699              		.loc 1 504 5 view .LVU209
-ARM GAS  /tmp/ccw5ZGPn.s 			page 23
+ARM GAS  /tmp/ccQMQWLI.s 			page 23
 
 
  700 03f0 2268     		ldr	r2, [r4]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  524:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #endif /* STM32GBK1CB || STM32G431xx || STM32G441xx || STM32G471xx || STM32G473xx || STM32G474xx ||
  525:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****           STM32G483xx || STM32G484xx || STM32G491xx || STM32G4A1xx */
  526:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32G473xx) || defined(STM32G474xx) || defined(STM32G483xx) || defined(STM32G484xx)
-ARM GAS  /tmp/ccw5ZGPn.s 			page 24
+ARM GAS  /tmp/ccQMQWLI.s 			page 24
 
 
  527:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     trimmingvaluep4 = 16UL;
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  542:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     defined(STM32G491xx) || defined(STM32G4A1xx)
  543:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       MODIFY_REG(hopamp2->Instance->CSR, OPAMP_CSR_TRIMOFFSETP, trimmingvaluep2 << OPAMP_INPUT_NONI
  544:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       MODIFY_REG(hopamp3->Instance->CSR, OPAMP_CSR_TRIMOFFSETP, trimmingvaluep3 << OPAMP_INPUT_NONI
-ARM GAS  /tmp/ccw5ZGPn.s 			page 25
+ARM GAS  /tmp/ccQMQWLI.s 			page 25
 
 
  545:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #endif /* STM32GBK1CB || STM32G431xx || STM32G441xx || STM32G471xx || STM32G473xx || STM32G474xx ||
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  784              	.LVL44:
  785              	.L28:
  581:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       }
-ARM GAS  /tmp/ccw5ZGPn.s 			page 26
+ARM GAS  /tmp/ccQMQWLI.s 			page 26
 
 
  582:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** 
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  808 0482 5DE0     		b	.L33
  809              	.L34:
  614:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       }
-ARM GAS  /tmp/ccw5ZGPn.s 			page 27
+ARM GAS  /tmp/ccQMQWLI.s 			page 27
 
 
  615:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  544:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #endif /* STM32GBK1CB || STM32G431xx || STM32G441xx || STM32G471xx || STM32G473xx || STM32G474xx ||
  837              		.loc 1 544 7 view .LVU253
  838 04b0 2A68     		ldr	r2, [r5]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 28
+ARM GAS  /tmp/ccQMQWLI.s 			page 28
 
 
  839 04b2 1368     		ldr	r3, [r2]
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  573:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       {
  883              		.loc 1 573 7 is_stmt 1 view .LVU264
  573:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       {
-ARM GAS  /tmp/ccw5ZGPn.s 			page 29
+ARM GAS  /tmp/ccQMQWLI.s 			page 29
 
 
  884              		.loc 1 573 19 is_stmt 0 view .LVU265
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  922              		.loc 1 599 25 is_stmt 0 view .LVU281
  923 0530 A044     		add	r8, r8, r4
  924              	.LVL55:
-ARM GAS  /tmp/ccw5ZGPn.s 			page 30
+ARM GAS  /tmp/ccQMQWLI.s 			page 30
 
 
  925              	.L31:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  960 055a DDF82CA0 		ldr	r10, [sp, #44]
  961              	.LVL58:
  962              		.loc 1 644 5 view .LVU296
-ARM GAS  /tmp/ccw5ZGPn.s 			page 31
+ARM GAS  /tmp/ccQMQWLI.s 			page 31
 
 
  963 055e 5C46     		mov	r4, fp
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1006 05b8 23F47803 		bic	r3, r3, #16252928
  1007 05bc 43EAC943 		orr	r3, r3, r9, lsl #19
  1008 05c0 1360     		str	r3, [r2]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 32
+ARM GAS  /tmp/ccQMQWLI.s 			page 32
 
 
  656:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #elif defined(STM32G491xx) || defined(STM32G4A1xx)
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  677:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     {
  678:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       /* Trimming value is actually one value more */
  679:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****       trimmingvaluep2++;
-ARM GAS  /tmp/ccw5ZGPn.s 			page 33
+ARM GAS  /tmp/ccQMQWLI.s 			page 33
 
 
  1042              		.loc 1 679 7 is_stmt 1 view .LVU316
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1080 061e 1A68     		ldr	r2, [r3]
  1081              		.loc 1 695 8 view .LVU329
  1082 0620 12F0804F 		tst	r2, #1073741824
-ARM GAS  /tmp/ccw5ZGPn.s 			page 34
+ARM GAS  /tmp/ccQMQWLI.s 			page 34
 
 
  1083 0624 08D0     		beq	.L40
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1121 0656 179B     		ldr	r3, [sp, #92]
  1122 0658 1B68     		ldr	r3, [r3]
  1123              		.loc 1 711 27 view .LVU342
-ARM GAS  /tmp/ccw5ZGPn.s 			page 35
+ARM GAS  /tmp/ccQMQWLI.s 			page 35
 
 
  1124 065a 1A68     		ldr	r2, [r3]
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  737:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****           STM32G483xx || STM32G484xx || STM32G491xx || STM32G4A1xx */
  738:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32G473xx) || defined(STM32G474xx) || defined(STM32G483xx) || defined(STM32G484xx)
  739:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     CLEAR_BIT(hopamp4->Instance->CSR, OPAMP_CSR_CALON);
-ARM GAS  /tmp/ccw5ZGPn.s 			page 36
+ARM GAS  /tmp/ccQMQWLI.s 			page 36
 
 
  1153              		.loc 1 739 5 view .LVU350
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  757:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     CLEAR_BIT(hopamp5->Instance->CSR, OPAMP_CSR_OPAMPxEN);
  1190              		.loc 1 757 5 view .LVU357
  1191 06da 169B     		ldr	r3, [sp, #88]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 37
+ARM GAS  /tmp/ccQMQWLI.s 			page 37
 
 
  1192 06dc 1A68     		ldr	r2, [r3]
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1228              		.loc 1 775 5 view .LVU364
  1229 0726 179B     		ldr	r3, [sp, #92]
  1230 0728 1A68     		ldr	r2, [r3]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 38
+ARM GAS  /tmp/ccQMQWLI.s 			page 38
 
 
  1231 072a 1368     		ldr	r3, [r2]
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1258              		.loc 1 802 5 is_stmt 1 view .LVU377
  1259              		.loc 1 802 34 is_stmt 0 view .LVU378
  1260 074e 019B     		ldr	r3, [sp, #4]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 39
+ARM GAS  /tmp/ccQMQWLI.s 			page 39
 
 
  1261 0750 3B63     		str	r3, [r7, #48]
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1292 0770 EB62     		str	r3, [r5, #44]
  826:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #endif /* STM32GBK1CB || STM32G431xx || STM32G441xx || STM32G471xx || STM32G473xx || STM32G474xx ||
  827:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****           STM32G483xx || STM32G484xx || STM32G491xx || STM32G4A1xx */
-ARM GAS  /tmp/ccw5ZGPn.s 			page 40
+ARM GAS  /tmp/ccQMQWLI.s 			page 40
 
 
  828:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c **** #if defined(STM32G473xx) || defined(STM32G474xx) || defined(STM32G483xx) || defined(STM32G484xx)
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  846:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     MODIFY_REG(hopamp5->Instance->CSR, OPAMP_CSR_TRIMOFFSETN, trimmingvaluen5 << OPAMP_INPUT_INVERT
  1329              		.loc 1 846 5 view .LVU405
  1330 07b6 1698     		ldr	r0, [sp, #88]
-ARM GAS  /tmp/ccw5ZGPn.s 			page 41
+ARM GAS  /tmp/ccQMQWLI.s 			page 41
 
 
  1331 07b8 0268     		ldr	r2, [r0]
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1370 0812 43EAC143 		orr	r3, r3, r1, lsl #19
  1371 0816 1360     		str	r3, [r2]
  862:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_opamp_ex.c ****     MODIFY_REG(hopamp5->Instance->CSR, OPAMP_CSR_TRIMOFFSETP, trimmingvaluep5 << OPAMP_INPUT_NONINV
-ARM GAS  /tmp/ccw5ZGPn.s 			page 42
+ARM GAS  /tmp/ccQMQWLI.s 			page 42
 
 
  1372              		.loc 1 862 5 view .LVU411
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1416              		.cfi_offset 8, -20
  1417              		.cfi_offset 9, -16
  1418              		.cfi_offset 10, -12
-ARM GAS  /tmp/ccw5ZGPn.s 			page 43
+ARM GAS  /tmp/ccQMQWLI.s 			page 43
 
 
  1419              		.cfi_offset 11, -8
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1462              		.cfi_remember_state
  1463              		.cfi_def_cfa_offset 36
  1464              		@ sp needed
-ARM GAS  /tmp/ccw5ZGPn.s 			page 44
+ARM GAS  /tmp/ccQMQWLI.s 			page 44
 
 
  1465 0858 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
@@ -2606,13 +2606,13 @@ ARM GAS  /tmp/ccw5ZGPn.s 			page 1
  1486              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  1487              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h"
  1488              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
-ARM GAS  /tmp/ccw5ZGPn.s 			page 45
+ARM GAS  /tmp/ccQMQWLI.s 			page 45
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32g4xx_hal_opamp_ex.c
-     /tmp/ccw5ZGPn.s:21     .text.HAL_OPAMPEx_SelfCalibrateAll:00000000 $t
-     /tmp/ccw5ZGPn.s:27     .text.HAL_OPAMPEx_SelfCalibrateAll:00000000 HAL_OPAMPEx_SelfCalibrateAll
+     /tmp/ccQMQWLI.s:21     .text.HAL_OPAMPEx_SelfCalibrateAll:00000000 $t
+     /tmp/ccQMQWLI.s:27     .text.HAL_OPAMPEx_SelfCalibrateAll:00000000 HAL_OPAMPEx_SelfCalibrateAll
 
 UNDEFINED SYMBOLS
 HAL_Delay

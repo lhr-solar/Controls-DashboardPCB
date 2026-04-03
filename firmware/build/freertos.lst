@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccLmadXj.s 			page 1
+ARM GAS  /tmp/ccaZGRRP.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccLmadXj.s 			page 1
   40              		.loc 1 16 27 is_stmt 0 view .LVU4
   41 0004 034B     		ldr	r3, .L2+4
   42 0006 0B60     		str	r3, [r1]
-ARM GAS  /tmp/ccLmadXj.s 			page 2
+ARM GAS  /tmp/ccaZGRRP.s 			page 2
 
 
   17:common/Src/freertos.c ****   *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccLmadXj.s 			page 1
   81              		.loc 1 34 26 is_stmt 0 view .LVU14
   82 0008 4FF48073 		mov	r3, #256
   83 000c 1360     		str	r3, [r2]
-ARM GAS  /tmp/ccLmadXj.s 			page 3
+ARM GAS  /tmp/ccaZGRRP.s 			page 3
 
 
   35:common/Src/freertos.c **** }...
@@ -172,24 +172,24 @@ ARM GAS  /tmp/ccLmadXj.s 			page 1
  124              		.file 6 "/usr/include/newlib/sys/reent.h"
  125              		.file 7 "/usr/include/newlib/sys/lock.h"
  126              		.file 8 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
-ARM GAS  /tmp/ccLmadXj.s 			page 4
+ARM GAS  /tmp/ccaZGRRP.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 freertos.c
-     /tmp/ccLmadXj.s:21     .text.vApplicationGetIdleTaskMemory:00000000 $t
-     /tmp/ccLmadXj.s:27     .text.vApplicationGetIdleTaskMemory:00000000 vApplicationGetIdleTaskMemory
-     /tmp/ccLmadXj.s:52     .text.vApplicationGetIdleTaskMemory:00000010 $d
-     /tmp/ccLmadXj.s:116    .bss.xIdleTaskTCBBuffer:00000000 xIdleTaskTCBBuffer
-     /tmp/ccLmadXj.s:110    .bss.xIdleStack:00000000 xIdleStack
-     /tmp/ccLmadXj.s:58     .text.vApplicationGetTimerTaskMemory:00000000 $t
-     /tmp/ccLmadXj.s:64     .text.vApplicationGetTimerTaskMemory:00000000 vApplicationGetTimerTaskMemory
-     /tmp/ccLmadXj.s:89     .text.vApplicationGetTimerTaskMemory:00000010 $d
-     /tmp/ccLmadXj.s:104    .bss.xTimerTaskTCBBuffer:00000000 xTimerTaskTCBBuffer
-     /tmp/ccLmadXj.s:98     .bss.xTimerStack:00000000 xTimerStack
-     /tmp/ccLmadXj.s:95     .bss.xTimerStack:00000000 $d
-     /tmp/ccLmadXj.s:101    .bss.xTimerTaskTCBBuffer:00000000 $d
-     /tmp/ccLmadXj.s:107    .bss.xIdleStack:00000000 $d
-     /tmp/ccLmadXj.s:113    .bss.xIdleTaskTCBBuffer:00000000 $d
+     /tmp/ccaZGRRP.s:21     .text.vApplicationGetIdleTaskMemory:00000000 $t
+     /tmp/ccaZGRRP.s:27     .text.vApplicationGetIdleTaskMemory:00000000 vApplicationGetIdleTaskMemory
+     /tmp/ccaZGRRP.s:52     .text.vApplicationGetIdleTaskMemory:00000010 $d
+     /tmp/ccaZGRRP.s:116    .bss.xIdleTaskTCBBuffer:00000000 xIdleTaskTCBBuffer
+     /tmp/ccaZGRRP.s:110    .bss.xIdleStack:00000000 xIdleStack
+     /tmp/ccaZGRRP.s:58     .text.vApplicationGetTimerTaskMemory:00000000 $t
+     /tmp/ccaZGRRP.s:64     .text.vApplicationGetTimerTaskMemory:00000000 vApplicationGetTimerTaskMemory
+     /tmp/ccaZGRRP.s:89     .text.vApplicationGetTimerTaskMemory:00000010 $d
+     /tmp/ccaZGRRP.s:104    .bss.xTimerTaskTCBBuffer:00000000 xTimerTaskTCBBuffer
+     /tmp/ccaZGRRP.s:98     .bss.xTimerStack:00000000 xTimerStack
+     /tmp/ccaZGRRP.s:95     .bss.xTimerStack:00000000 $d
+     /tmp/ccaZGRRP.s:101    .bss.xTimerTaskTCBBuffer:00000000 $d
+     /tmp/ccaZGRRP.s:107    .bss.xIdleStack:00000000 $d
+     /tmp/ccaZGRRP.s:113    .bss.xIdleTaskTCBBuffer:00000000 $d
 
 NO UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2cVZ0t.s 			page 1
+ARM GAS  /tmp/ccmg8fwi.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
   29:driver/Src/EMC2305.c **** static EMC2305_HandleTypeDef* chip_I2C1 = NULL;
   30:driver/Src/EMC2305.c **** #ifdef I2C2
   31:driver/Src/EMC2305.c **** static EMC2305_HandleTypeDef* chip_I2C2 = NULL;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 2
+ARM GAS  /tmp/ccmg8fwi.s 			page 2
 
 
   32:driver/Src/EMC2305.c **** #endif
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
   67 0020 F8E7     		b	.L2
   68              	.LVL4:
   69              	.L9:
-ARM GAS  /tmp/cc2cVZ0t.s 			page 3
+ARM GAS  /tmp/ccmg8fwi.s 			page 3
 
 
   43:driver/Src/EMC2305.c ****         for (int i = 0; i < EMC2305_SEMAPHORE_POOL_SIZE; i++) {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  112              	.LVL11:
  113              	.L13:
  114              		.loc 1 53 1 view .LVU25
-ARM GAS  /tmp/cc2cVZ0t.s 			page 4
+ARM GAS  /tmp/ccmg8fwi.s 			page 4
 
 
  115              		.align	2
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  161 0016 0021     		movs	r1, #0
  162 0018 054B     		ldr	r3, .L18+4
  163 001a 1955     		strb	r1, [r3, r4]
-ARM GAS  /tmp/cc2cVZ0t.s 			page 5
+ARM GAS  /tmp/ccmg8fwi.s 			page 5
 
 
   59:driver/Src/EMC2305.c ****     }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
   90:driver/Src/EMC2305.c **** 
   91:driver/Src/EMC2305.c ****     // Create RTOS semaphore
   92:driver/Src/EMC2305.c ****     chip->i2c_complete = xSemaphoreCreateBinaryStatic(&worker_semaphore_buffer);
-ARM GAS  /tmp/cc2cVZ0t.s 			page 6
+ARM GAS  /tmp/ccmg8fwi.s 			page 6
 
 
   93:driver/Src/EMC2305.c ****     if (chip->i2c_complete == NULL) {
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  147:driver/Src/EMC2305.c ****         // ur cooked lmao
  148:driver/Src/EMC2305.c ****         return EMC2305_ERR;
  149:driver/Src/EMC2305.c ****     }
-ARM GAS  /tmp/cc2cVZ0t.s 			page 7
+ARM GAS  /tmp/ccmg8fwi.s 			page 7
 
 
  150:driver/Src/EMC2305.c **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  204:driver/Src/EMC2305.c ****         return EMC2305_ERR;
  205:driver/Src/EMC2305.c ****     }
  206:driver/Src/EMC2305.c **** 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 8
+ARM GAS  /tmp/ccmg8fwi.s 			page 8
 
 
  207:driver/Src/EMC2305.c ****     // Determine which register to use
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  261:driver/Src/EMC2305.c ****  * @param   config1 Configuration for register 1
  262:driver/Src/EMC2305.c ****  * @param   config2 Configuration for register 2
  263:driver/Src/EMC2305.c ****  * @return  OK if successful, ERR otherwise
-ARM GAS  /tmp/cc2cVZ0t.s 			page 9
+ARM GAS  /tmp/ccmg8fwi.s 			page 9
 
 
  264:driver/Src/EMC2305.c ****  */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  318:driver/Src/EMC2305.c ****     }
  319:driver/Src/EMC2305.c **** 
  320:driver/Src/EMC2305.c ****     // Write back PWM output config
-ARM GAS  /tmp/cc2cVZ0t.s 			page 10
+ARM GAS  /tmp/ccmg8fwi.s 			page 10
 
 
  321:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_PWM_OUTPUT_CONFIG, val);
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  375:driver/Src/EMC2305.c ****     uint8_t high_byte = (tach_target >> 5) & 0xFF;     // bits [12:5]
  376:driver/Src/EMC2305.c ****     uint8_t low_byte = (tach_target & 0x1F) << 3;      // bits [4:0]
  377:driver/Src/EMC2305.c **** 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 11
+ARM GAS  /tmp/ccmg8fwi.s 			page 11
 
 
  378:driver/Src/EMC2305.c ****     // Must write low byte first, value is saved once high byte is written
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  432:driver/Src/EMC2305.c ****     // Read PWM from drive register
  433:driver/Src/EMC2305.c ****     uint8_t val = 0;
  434:driver/Src/EMC2305.c ****     if (EMC2305_ReadReg(chip, EMC2305_FAN_REG_ADDR(fan, EMC2305_REG_FAN1_SETTING), &val) != EMC2305
-ARM GAS  /tmp/cc2cVZ0t.s 			page 12
+ARM GAS  /tmp/ccmg8fwi.s 			page 12
 
 
  435:driver/Src/EMC2305.c ****         return UINT8_MAX;
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  489:driver/Src/EMC2305.c ****     // Ensure semaphore is taken
  490:driver/Src/EMC2305.c ****     xSemaphoreTake(complete, 0);
  491:driver/Src/EMC2305.c **** 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 13
+ARM GAS  /tmp/ccmg8fwi.s 			page 13
 
 
  492:driver/Src/EMC2305.c ****     // Pack message struct
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  546:driver/Src/EMC2305.c ****         .write_data = data,
  547:driver/Src/EMC2305.c ****         .read_data = NULL,
  548:driver/Src/EMC2305.c ****         .semaphore_index = (uint8_t)index,
-ARM GAS  /tmp/cc2cVZ0t.s 			page 14
+ARM GAS  /tmp/ccmg8fwi.s 			page 14
 
 
  549:driver/Src/EMC2305.c ****     };
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  576:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
  577:driver/Src/EMC2305.c ****             SemaphoreHandle_t complete = caller_semaphore_handle_pool[msg.semaphore_index];
  578:driver/Src/EMC2305.c ****             status = EMC2305_OK;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 15
+ARM GAS  /tmp/ccmg8fwi.s 			page 15
 
 
  579:driver/Src/EMC2305.c **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  233              	.LBE4:
  573:driver/Src/EMC2305.c ****         // Block until message enters the queue
  234              		.loc 1 573 5 is_stmt 1 view .LVU47
-ARM GAS  /tmp/cc2cVZ0t.s 			page 16
+ARM GAS  /tmp/ccmg8fwi.s 			page 16
 
 
  575:driver/Src/EMC2305.c ****             // Retrieve the correct semaphore handle using the index
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  272              		.loc 1 585 51 is_stmt 0 view .LVU64
  273 0054 0298     		ldr	r0, [sp, #8]
  585:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 17
+ARM GAS  /tmp/ccmg8fwi.s 			page 17
 
 
  274              		.loc 1 585 21 view .LVU65
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  316              	.LVL28:
  601:driver/Src/EMC2305.c ****                     status = EMC2305_ERR;
  317              		.loc 1 601 44 discriminator 1 view .LVU78
-ARM GAS  /tmp/cc2cVZ0t.s 			page 18
+ARM GAS  /tmp/ccmg8fwi.s 			page 18
 
 
  318 008e 0128     		cmp	r0, #1
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  365              		@ frame_needed = 0, uses_anonymous_args = 0
  477:driver/Src/EMC2305.c ****     // Acquire semaphore from the pool
  366              		.loc 1 477 89 is_stmt 0 view .LVU88
-ARM GAS  /tmp/cc2cVZ0t.s 			page 19
+ARM GAS  /tmp/ccmg8fwi.s 			page 19
 
 
  367 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  409 002a 8DF80430 		strb	r3, [sp, #4]
  410 002e 8DF80560 		strb	r6, [sp, #5]
  411 0032 0022     		movs	r2, #0
-ARM GAS  /tmp/cc2cVZ0t.s 			page 20
+ARM GAS  /tmp/ccmg8fwi.s 			page 20
 
 
  412 0034 8DF80620 		strb	r2, [sp, #6]
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  512:driver/Src/EMC2305.c ****     }
  453              		.loc 1 512 16 is_stmt 0 view .LVU114
  454 006c 0120     		movs	r0, #1
-ARM GAS  /tmp/cc2cVZ0t.s 			page 21
+ARM GAS  /tmp/ccmg8fwi.s 			page 21
 
 
  455 006e 05E0     		b	.L31
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  499              		.section	.text.EMC2305_Init,"ax",%progbits
  500              		.align	1
  501              		.global	EMC2305_Init
-ARM GAS  /tmp/cc2cVZ0t.s 			page 22
+ARM GAS  /tmp/ccmg8fwi.s 			page 22
 
 
  502              		.syntax unified
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  545              		.loc 1 78 39 discriminator 1 view .LVU133
  546 0016 404B     		ldr	r3, .L61+4
  547 0018 1860     		str	r0, [r3]
-ARM GAS  /tmp/cc2cVZ0t.s 			page 23
+ARM GAS  /tmp/ccmg8fwi.s 			page 23
 
 
   79:driver/Src/EMC2305.c ****         return EMC2305_ERR;
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  588              		.loc 1 92 26 is_stmt 0 view .LVU147
  589 0048 0323     		movs	r3, #3
  590 004a 0093     		str	r3, [sp]
-ARM GAS  /tmp/cc2cVZ0t.s 			page 24
+ARM GAS  /tmp/ccmg8fwi.s 			page 24
 
 
  591 004c 354B     		ldr	r3, .L61+16
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  634              		.loc 1 113 13 is_stmt 0 view .LVU158
  635 008e 3368     		ldr	r3, [r6]
  113:driver/Src/EMC2305.c ****         chip_I2C1 = chip;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 25
+ARM GAS  /tmp/ccmg8fwi.s 			page 25
 
 
  636              		.loc 1 113 8 view .LVU159
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  675              		.loc 1 135 8 view .LVU174
  676 00c2 13F0030F 		tst	r3, #3
  677 00c6 07D0     		beq	.L60
-ARM GAS  /tmp/cc2cVZ0t.s 			page 26
+ARM GAS  /tmp/ccmg8fwi.s 			page 26
 
 
  138:driver/Src/EMC2305.c ****     }
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
   80:driver/Src/EMC2305.c ****     }
  718              		.loc 1 80 16 view .LVU189
  719 00f8 0120     		movs	r0, #1
-ARM GAS  /tmp/cc2cVZ0t.s 			page 27
+ARM GAS  /tmp/ccmg8fwi.s 			page 27
 
 
  720 00fa 00E0     		b	.L40
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  767 0134 00000000 		.word	EMC2305_I2C_TaskBuffer
  768 0138 00000000 		.word	EMC2305_I2C_TaskStack
  769 013c 00000000 		.word	.LC0
-ARM GAS  /tmp/cc2cVZ0t.s 			page 28
+ARM GAS  /tmp/ccmg8fwi.s 			page 28
 
 
  770 0140 00000000 		.word	EMC2305_I2C_Worker_Task
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  401:driver/Src/EMC2305.c ****         return UINT16_MAX;
  817              		.loc 1 401 31 is_stmt 0 view .LVU206
  818 0014 0901     		lsls	r1, r1, #4
-ARM GAS  /tmp/cc2cVZ0t.s 			page 29
+ARM GAS  /tmp/ccmg8fwi.s 			page 29
 
 
  819              	.LVL64:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  417:driver/Src/EMC2305.c ****     return rpm;
  858              		.loc 1 417 14 view .LVU222
  859 0058 80B2     		uxth	r0, r0
-ARM GAS  /tmp/cc2cVZ0t.s 			page 30
+ARM GAS  /tmp/ccmg8fwi.s 			page 30
 
 
  860              	.LVL68:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  908              		.thumb_func
  910              	EMC2305_GetFanPWM:
  911              	.LVL73:
-ARM GAS  /tmp/cc2cVZ0t.s 			page 31
+ARM GAS  /tmp/ccmg8fwi.s 			page 31
 
 
  912              	.LFB345:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  952              		.loc 1 439 31 view .LVU243
  953 002a A0F17F30 		sub	r0, r0, #2139062143
  954 002e 80FB0320 		smull	r2, r0, r0, r3
-ARM GAS  /tmp/cc2cVZ0t.s 			page 32
+ARM GAS  /tmp/ccmg8fwi.s 			page 32
 
 
  955 0032 1844     		add	r0, r0, r3
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1003 0000 00B5     		push	{lr}
  1004              	.LCFI22:
  1005              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/cc2cVZ0t.s 			page 33
+ARM GAS  /tmp/ccmg8fwi.s 			page 33
 
 
  1006              		.cfi_offset 14, -4
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1042              		.loc 1 463 50 is_stmt 0 view .LVU269
  1043 0032 03F00103 		and	r3, r3, #1
  463:driver/Src/EMC2305.c **** 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 34
+ARM GAS  /tmp/ccmg8fwi.s 			page 34
 
 
  1044              		.loc 1 463 20 view .LVU270
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1093 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
  1094              	.LCFI26:
  1095              		.cfi_def_cfa_offset 24
-ARM GAS  /tmp/cc2cVZ0t.s 			page 35
+ARM GAS  /tmp/ccmg8fwi.s 			page 35
 
 
  1096              		.cfi_offset 4, -24
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1138 0036 0292     		str	r2, [sp, #8]
  548:driver/Src/EMC2305.c ****     };
  1139              		.loc 1 548 28 view .LVU290
-ARM GAS  /tmp/cc2cVZ0t.s 			page 36
+ARM GAS  /tmp/ccmg8fwi.s 			page 36
 
 
  1140 0038 E4B2     		uxtb	r4, r4
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1181              	.L89:
  564:driver/Src/EMC2305.c ****     return EMC2305_OK;
  1182              		.loc 1 564 5 is_stmt 1 view .LVU304
-ARM GAS  /tmp/cc2cVZ0t.s 			page 37
+ARM GAS  /tmp/ccmg8fwi.s 			page 37
 
 
  1183 006e 2046     		mov	r0, r4
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1232              		@ args = 0, pretend = 0, frame = 0
  1233              		@ frame_needed = 0, uses_anonymous_args = 0
  159:driver/Src/EMC2305.c ****     return EMC2305_WriteReg(chip, EMC2305_REG_SW_LOCK, EMC2305_SWL);
-ARM GAS  /tmp/cc2cVZ0t.s 			page 38
+ARM GAS  /tmp/ccmg8fwi.s 			page 38
 
 
  1234              		.loc 1 159 66 is_stmt 0 view .LVU312
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1280              	.L98:
  1281              	.LVL102:
  175:driver/Src/EMC2305.c ****         config_bits |= EMC2305_CFG_DIS_TO;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 39
+ARM GAS  /tmp/ccmg8fwi.s 			page 39
 
 
  1282              		.loc 1 175 5 is_stmt 1 view .LVU323
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  185:driver/Src/EMC2305.c ****     }
  1318              		.loc 1 185 21 is_stmt 0 view .LVU342
  1319 0024 42F00102 		orr	r2, r2, #1
-ARM GAS  /tmp/cc2cVZ0t.s 			page 40
+ARM GAS  /tmp/ccmg8fwi.s 			page 40
 
 
  1320              	.LVL106:
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1367              	.LCFI33:
  1368              		.cfi_def_cfa_offset 32
  1369 0008 0646     		mov	r6, r0
-ARM GAS  /tmp/cc2cVZ0t.s 			page 41
+ARM GAS  /tmp/ccmg8fwi.s 			page 41
 
 
  1370 000a 0C46     		mov	r4, r1
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1410 0037 16       		.byte	(.L112-.L109)/2
  1411 0038 21       		.byte	(.L111-.L109)/2
  1412 0039 2C       		.byte	(.L110-.L109)/2
-ARM GAS  /tmp/cc2cVZ0t.s 			page 42
+ARM GAS  /tmp/ccmg8fwi.s 			page 42
 
 
  1413 003a 36       		.byte	(.L108-.L109)/2
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1455 0062 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
  1456 0066 03F0F303 		and	r3, r3, #243
  1457 006a 8DF80730 		strb	r3, [sp, #7]
-ARM GAS  /tmp/cc2cVZ0t.s 			page 43
+ARM GAS  /tmp/ccmg8fwi.s 			page 43
 
 
  233:driver/Src/EMC2305.c ****         break;
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1495              		.loc 1 245 13 is_stmt 0 view .LVU394
  1496 00ae 43EA8503 		orr	r3, r3, r5, lsl #2
  1497 00b2 8DF80730 		strb	r3, [sp, #7]
-ARM GAS  /tmp/cc2cVZ0t.s 			page 44
+ARM GAS  /tmp/ccmg8fwi.s 			page 44
 
 
  246:driver/Src/EMC2305.c ****     default:
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1547              		.loc 1 266 5 view .LVU401
  266:driver/Src/EMC2305.c ****         return EMC2305_ERR;
  1548              		.loc 1 266 8 is_stmt 0 view .LVU402
-ARM GAS  /tmp/cc2cVZ0t.s 			page 45
+ARM GAS  /tmp/ccmg8fwi.s 			page 45
 
 
  1549 0000 0429     		cmp	r1, #4
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  275:driver/Src/EMC2305.c **** 
  1590              		.loc 1 275 5 is_stmt 1 view .LVU416
  275:driver/Src/EMC2305.c **** 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 46
+ARM GAS  /tmp/ccmg8fwi.s 			page 46
 
 
  1591              		.loc 1 275 29 is_stmt 0 view .LVU417
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1629 004a CEB2     		uxtb	r6, r1
  285:driver/Src/EMC2305.c ****         return EMC2305_ERR;
  1630              		.loc 1 285 9 view .LVU434
-ARM GAS  /tmp/cc2cVZ0t.s 			page 47
+ARM GAS  /tmp/ccmg8fwi.s 			page 47
 
 
  1631 004c 06F13201 		add	r1, r6, #50
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  302:driver/Src/EMC2305.c ****     }
  1678              		.loc 1 302 16 view .LVU444
  1679 0004 0120     		movs	r0, #1
-ARM GAS  /tmp/cc2cVZ0t.s 			page 48
+ARM GAS  /tmp/ccmg8fwi.s 			page 48
 
 
  1680              	.LVL144:
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1721 0028 A340     		lsls	r3, r3, r4
  313:driver/Src/EMC2305.c ****     }
  1722              		.loc 1 313 13 view .LVU458
-ARM GAS  /tmp/cc2cVZ0t.s 			page 49
+ARM GAS  /tmp/ccmg8fwi.s 			page 49
 
 
  1723 002a DB43     		mvns	r3, r3
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1772              	.LVL151:
  1773              	.LFB342:
  333:driver/Src/EMC2305.c ****     if (EMC2305_INVALID_FAN(fan)) {
-ARM GAS  /tmp/cc2cVZ0t.s 			page 50
+ARM GAS  /tmp/ccmg8fwi.s 			page 50
 
 
  1774              		.loc 1 333 100 is_stmt 1 view -0
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1815 0022 D2B2     		uxtb	r2, r2
  347:driver/Src/EMC2305.c **** }
  1816              		.loc 1 347 12 view .LVU480
-ARM GAS  /tmp/cc2cVZ0t.s 			page 51
+ARM GAS  /tmp/ccmg8fwi.s 			page 51
 
 
  1817 0024 01F0F001 		and	r1, r1, #240
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1866 0006 0546     		mov	r5, r0
  363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
  1867              		.loc 1 363 5 is_stmt 1 view .LVU488
-ARM GAS  /tmp/cc2cVZ0t.s 			page 52
+ARM GAS  /tmp/ccmg8fwi.s 			page 52
 
 
  363:driver/Src/EMC2305.c ****         return EMC2305_ERR;
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1906              		.loc 1 379 32 view .LVU504
  1907 002e CCB2     		uxtb	r4, r1
  379:driver/Src/EMC2305.c ****         return EMC2305_ERR;
-ARM GAS  /tmp/cc2cVZ0t.s 			page 53
+ARM GAS  /tmp/ccmg8fwi.s 			page 53
 
 
  1908              		.loc 1 379 9 view .LVU505
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1957              	.LFB350:
  618:driver/Src/EMC2305.c ****         }
  619:driver/Src/EMC2305.c ****     }
-ARM GAS  /tmp/cc2cVZ0t.s 			page 54
+ARM GAS  /tmp/ccmg8fwi.s 			page 54
 
 
  620:driver/Src/EMC2305.c **** }
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  1993              		.loc 1 638 9 is_stmt 1 view .LVU525
  1994              		.loc 1 638 14 is_stmt 0 view .LVU526
  1995 001c 104B     		ldr	r3, .L176+12
-ARM GAS  /tmp/cc2cVZ0t.s 			page 55
+ARM GAS  /tmp/ccmg8fwi.s 			page 55
 
 
  1996 001e 1B68     		ldr	r3, [r3]
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2039              		.loc 1 647 5 discriminator 3 view .LVU542
  2040              		.thumb
  2041              		.syntax unified
-ARM GAS  /tmp/cc2cVZ0t.s 			page 56
+ARM GAS  /tmp/ccmg8fwi.s 			page 56
 
 
  2042              	.L167:
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2091              		.cfi_offset 14, -4
  2092 0002 83B0     		sub	sp, sp, #12
  2093              	.LCFI52:
-ARM GAS  /tmp/cc2cVZ0t.s 			page 57
+ARM GAS  /tmp/ccmg8fwi.s 			page 57
 
 
  2094              		.cfi_def_cfa_offset 16
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2131              	.LVL187:
  2132              	.L180:
  667:driver/Src/EMC2305.c ****     }
-ARM GAS  /tmp/cc2cVZ0t.s 			page 58
+ARM GAS  /tmp/ccmg8fwi.s 			page 58
 
 
  668:driver/Src/EMC2305.c **** #endif
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2178              		.cfi_restore_state
  661:driver/Src/EMC2305.c ****     }
  2179              		.loc 1 661 9 is_stmt 1 view .LVU578
-ARM GAS  /tmp/cc2cVZ0t.s 			page 59
+ARM GAS  /tmp/ccmg8fwi.s 			page 59
 
 
  661:driver/Src/EMC2305.c ****     }
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2235      00000000 
  2235      00000000 
  2235      00000000 
-ARM GAS  /tmp/cc2cVZ0t.s 			page 60
+ARM GAS  /tmp/ccmg8fwi.s 			page 60
 
 
  2236              		.global	ucQueueStorageArea
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2286              		.section	.bss.worker_semaphore_buffer,"aw",%nobits
  2287              		.align	2
  2290              	worker_semaphore_buffer:
-ARM GAS  /tmp/cc2cVZ0t.s 			page 61
+ARM GAS  /tmp/ccmg8fwi.s 			page 61
 
 
  2291 0000 00000000 		.space	76
@@ -3624,91 +3624,91 @@ ARM GAS  /tmp/cc2cVZ0t.s 			page 1
  2307              		.file 15 "middleware/FreeRTOS-Kernel/include/queue.h"
  2308              		.file 16 "middleware/FreeRTOS-Kernel/include/semphr.h"
  2309              		.file 17 "driver/Inc/EMC2305.h"
-ARM GAS  /tmp/cc2cVZ0t.s 			page 62
+ARM GAS  /tmp/ccmg8fwi.s 			page 62
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 EMC2305.c
-     /tmp/cc2cVZ0t.s:21     .text.prvAcquireFreeSemaphore:00000000 $t
-     /tmp/cc2cVZ0t.s:26     .text.prvAcquireFreeSemaphore:00000000 prvAcquireFreeSemaphore
-     /tmp/cc2cVZ0t.s:117    .text.prvAcquireFreeSemaphore:00000048 $d
-     /tmp/cc2cVZ0t.s:2255   .bss.caller_semaphore_pool_usage_mutex:00000000 caller_semaphore_pool_usage_mutex
-     /tmp/cc2cVZ0t.s:2269   .bss.caller_semaphore_in_use:00000000 caller_semaphore_in_use
-     /tmp/cc2cVZ0t.s:123    .text.prvReturnSemaphore:00000000 $t
-     /tmp/cc2cVZ0t.s:128    .text.prvReturnSemaphore:00000000 prvReturnSemaphore
-     /tmp/cc2cVZ0t.s:176    .text.prvReturnSemaphore:0000002c $d
-     /tmp/cc2cVZ0t.s:182    .text.EMC2305_I2C_Worker_Task:00000000 $t
-     /tmp/cc2cVZ0t.s:188    .text.EMC2305_I2C_Worker_Task:00000000 EMC2305_I2C_Worker_Task
-     /tmp/cc2cVZ0t.s:346    .text.EMC2305_I2C_Worker_Task:000000b0 $d
-     /tmp/cc2cVZ0t.s:2248   .bss.EMC2305_I2C_Queue:00000000 EMC2305_I2C_Queue
-     /tmp/cc2cVZ0t.s:2276   .bss.caller_semaphore_handle_pool:00000000 caller_semaphore_handle_pool
-     /tmp/cc2cVZ0t.s:353    .text.EMC2305_ReadReg:00000000 $t
-     /tmp/cc2cVZ0t.s:359    .text.EMC2305_ReadReg:00000000 EMC2305_ReadReg
-     /tmp/cc2cVZ0t.s:490    .text.EMC2305_ReadReg:00000088 $d
-     /tmp/cc2cVZ0t.s:496    .rodata.EMC2305_Init.str1.4:00000000 $d
-     /tmp/cc2cVZ0t.s:500    .text.EMC2305_Init:00000000 $t
-     /tmp/cc2cVZ0t.s:506    .text.EMC2305_Init:00000000 EMC2305_Init
-     /tmp/cc2cVZ0t.s:759    .text.EMC2305_Init:00000114 $d
-     /tmp/cc2cVZ0t.s:2262   .bss.caller_semaphore_pool_usage_buffer:00000000 caller_semaphore_pool_usage_buffer
-     /tmp/cc2cVZ0t.s:2283   .bss.caller_semaphore_buffer_pool:00000000 caller_semaphore_buffer_pool
-     /tmp/cc2cVZ0t.s:2290   .bss.worker_semaphore_buffer:00000000 worker_semaphore_buffer
-     /tmp/cc2cVZ0t.s:2234   .bss.xStaticQueue:00000000 xStaticQueue
-     /tmp/cc2cVZ0t.s:2241   .bss.ucQueueStorageArea:00000000 ucQueueStorageArea
-     /tmp/cc2cVZ0t.s:2228   .bss.EMC2305_I2C_TaskBuffer:00000000 EMC2305_I2C_TaskBuffer
-     /tmp/cc2cVZ0t.s:2221   .bss.EMC2305_I2C_TaskStack:00000000 EMC2305_I2C_TaskStack
-     /tmp/cc2cVZ0t.s:2214   .bss.chip_I2C1:00000000 chip_I2C1
-     /tmp/cc2cVZ0t.s:2208   .bss.chip_I2C2:00000000 chip_I2C2
-     /tmp/cc2cVZ0t.s:2202   .bss.chip_I2C3:00000000 chip_I2C3
-     /tmp/cc2cVZ0t.s:781    .text.EMC2305_GetFanRPM:00000000 $t
-     /tmp/cc2cVZ0t.s:787    .text.EMC2305_GetFanRPM:00000000 EMC2305_GetFanRPM
-     /tmp/cc2cVZ0t.s:904    .text.EMC2305_GetFanPWM:00000000 $t
-     /tmp/cc2cVZ0t.s:910    .text.EMC2305_GetFanPWM:00000000 EMC2305_GetFanPWM
-     /tmp/cc2cVZ0t.s:989    .text.EMC2305_GetFanStatus:00000000 $t
-     /tmp/cc2cVZ0t.s:995    .text.EMC2305_GetFanStatus:00000000 EMC2305_GetFanStatus
-     /tmp/cc2cVZ0t.s:1079   .text.EMC2305_WriteReg:00000000 $t
-     /tmp/cc2cVZ0t.s:1085   .text.EMC2305_WriteReg:00000000 EMC2305_WriteReg
-     /tmp/cc2cVZ0t.s:1215   .text.EMC2305_WriteReg:00000084 $d
-     /tmp/cc2cVZ0t.s:1221   .text.EMC2305_EnableSWLock:00000000 $t
-     /tmp/cc2cVZ0t.s:1227   .text.EMC2305_EnableSWLock:00000000 EMC2305_EnableSWLock
-     /tmp/cc2cVZ0t.s:1252   .text.EMC2305_SetGlobalConfig:00000000 $t
-     /tmp/cc2cVZ0t.s:1258   .text.EMC2305_SetGlobalConfig:00000000 EMC2305_SetGlobalConfig
-     /tmp/cc2cVZ0t.s:1340   .text.EMC2305_SetPWMBaseFrequency:00000000 $t
-     /tmp/cc2cVZ0t.s:1346   .text.EMC2305_SetPWMBaseFrequency:00000000 EMC2305_SetPWMBaseFrequency
-     /tmp/cc2cVZ0t.s:1409   .text.EMC2305_SetPWMBaseFrequency:00000036 $d
-     /tmp/cc2cVZ0t.s:1534   .text.EMC2305_SetFanConfig:00000000 $t
-     /tmp/cc2cVZ0t.s:1540   .text.EMC2305_SetFanConfig:00000000 EMC2305_SetFanConfig
-     /tmp/cc2cVZ0t.s:1661   .text.EMC2305_SetPWMOutputMode:00000000 $t
-     /tmp/cc2cVZ0t.s:1667   .text.EMC2305_SetPWMOutputMode:00000000 EMC2305_SetPWMOutputMode
-     /tmp/cc2cVZ0t.s:1765   .text.EMC2305_SetFanPWM:00000000 $t
-     /tmp/cc2cVZ0t.s:1771   .text.EMC2305_SetFanPWM:00000000 EMC2305_SetFanPWM
-     /tmp/cc2cVZ0t.s:1836   .text.EMC2305_SetFanPWM:00000034 $d
-     /tmp/cc2cVZ0t.s:1841   .text.EMC2305_SetFanRPM:00000000 $t
-     /tmp/cc2cVZ0t.s:1847   .text.EMC2305_SetFanRPM:00000000 EMC2305_SetFanRPM
-ARM GAS  /tmp/cc2cVZ0t.s 			page 63
+     /tmp/ccmg8fwi.s:21     .text.prvAcquireFreeSemaphore:00000000 $t
+     /tmp/ccmg8fwi.s:26     .text.prvAcquireFreeSemaphore:00000000 prvAcquireFreeSemaphore
+     /tmp/ccmg8fwi.s:117    .text.prvAcquireFreeSemaphore:00000048 $d
+     /tmp/ccmg8fwi.s:2255   .bss.caller_semaphore_pool_usage_mutex:00000000 caller_semaphore_pool_usage_mutex
+     /tmp/ccmg8fwi.s:2269   .bss.caller_semaphore_in_use:00000000 caller_semaphore_in_use
+     /tmp/ccmg8fwi.s:123    .text.prvReturnSemaphore:00000000 $t
+     /tmp/ccmg8fwi.s:128    .text.prvReturnSemaphore:00000000 prvReturnSemaphore
+     /tmp/ccmg8fwi.s:176    .text.prvReturnSemaphore:0000002c $d
+     /tmp/ccmg8fwi.s:182    .text.EMC2305_I2C_Worker_Task:00000000 $t
+     /tmp/ccmg8fwi.s:188    .text.EMC2305_I2C_Worker_Task:00000000 EMC2305_I2C_Worker_Task
+     /tmp/ccmg8fwi.s:346    .text.EMC2305_I2C_Worker_Task:000000b0 $d
+     /tmp/ccmg8fwi.s:2248   .bss.EMC2305_I2C_Queue:00000000 EMC2305_I2C_Queue
+     /tmp/ccmg8fwi.s:2276   .bss.caller_semaphore_handle_pool:00000000 caller_semaphore_handle_pool
+     /tmp/ccmg8fwi.s:353    .text.EMC2305_ReadReg:00000000 $t
+     /tmp/ccmg8fwi.s:359    .text.EMC2305_ReadReg:00000000 EMC2305_ReadReg
+     /tmp/ccmg8fwi.s:490    .text.EMC2305_ReadReg:00000088 $d
+     /tmp/ccmg8fwi.s:496    .rodata.EMC2305_Init.str1.4:00000000 $d
+     /tmp/ccmg8fwi.s:500    .text.EMC2305_Init:00000000 $t
+     /tmp/ccmg8fwi.s:506    .text.EMC2305_Init:00000000 EMC2305_Init
+     /tmp/ccmg8fwi.s:759    .text.EMC2305_Init:00000114 $d
+     /tmp/ccmg8fwi.s:2262   .bss.caller_semaphore_pool_usage_buffer:00000000 caller_semaphore_pool_usage_buffer
+     /tmp/ccmg8fwi.s:2283   .bss.caller_semaphore_buffer_pool:00000000 caller_semaphore_buffer_pool
+     /tmp/ccmg8fwi.s:2290   .bss.worker_semaphore_buffer:00000000 worker_semaphore_buffer
+     /tmp/ccmg8fwi.s:2234   .bss.xStaticQueue:00000000 xStaticQueue
+     /tmp/ccmg8fwi.s:2241   .bss.ucQueueStorageArea:00000000 ucQueueStorageArea
+     /tmp/ccmg8fwi.s:2228   .bss.EMC2305_I2C_TaskBuffer:00000000 EMC2305_I2C_TaskBuffer
+     /tmp/ccmg8fwi.s:2221   .bss.EMC2305_I2C_TaskStack:00000000 EMC2305_I2C_TaskStack
+     /tmp/ccmg8fwi.s:2214   .bss.chip_I2C1:00000000 chip_I2C1
+     /tmp/ccmg8fwi.s:2208   .bss.chip_I2C2:00000000 chip_I2C2
+     /tmp/ccmg8fwi.s:2202   .bss.chip_I2C3:00000000 chip_I2C3
+     /tmp/ccmg8fwi.s:781    .text.EMC2305_GetFanRPM:00000000 $t
+     /tmp/ccmg8fwi.s:787    .text.EMC2305_GetFanRPM:00000000 EMC2305_GetFanRPM
+     /tmp/ccmg8fwi.s:904    .text.EMC2305_GetFanPWM:00000000 $t
+     /tmp/ccmg8fwi.s:910    .text.EMC2305_GetFanPWM:00000000 EMC2305_GetFanPWM
+     /tmp/ccmg8fwi.s:989    .text.EMC2305_GetFanStatus:00000000 $t
+     /tmp/ccmg8fwi.s:995    .text.EMC2305_GetFanStatus:00000000 EMC2305_GetFanStatus
+     /tmp/ccmg8fwi.s:1079   .text.EMC2305_WriteReg:00000000 $t
+     /tmp/ccmg8fwi.s:1085   .text.EMC2305_WriteReg:00000000 EMC2305_WriteReg
+     /tmp/ccmg8fwi.s:1215   .text.EMC2305_WriteReg:00000084 $d
+     /tmp/ccmg8fwi.s:1221   .text.EMC2305_EnableSWLock:00000000 $t
+     /tmp/ccmg8fwi.s:1227   .text.EMC2305_EnableSWLock:00000000 EMC2305_EnableSWLock
+     /tmp/ccmg8fwi.s:1252   .text.EMC2305_SetGlobalConfig:00000000 $t
+     /tmp/ccmg8fwi.s:1258   .text.EMC2305_SetGlobalConfig:00000000 EMC2305_SetGlobalConfig
+     /tmp/ccmg8fwi.s:1340   .text.EMC2305_SetPWMBaseFrequency:00000000 $t
+     /tmp/ccmg8fwi.s:1346   .text.EMC2305_SetPWMBaseFrequency:00000000 EMC2305_SetPWMBaseFrequency
+     /tmp/ccmg8fwi.s:1409   .text.EMC2305_SetPWMBaseFrequency:00000036 $d
+     /tmp/ccmg8fwi.s:1534   .text.EMC2305_SetFanConfig:00000000 $t
+     /tmp/ccmg8fwi.s:1540   .text.EMC2305_SetFanConfig:00000000 EMC2305_SetFanConfig
+     /tmp/ccmg8fwi.s:1661   .text.EMC2305_SetPWMOutputMode:00000000 $t
+     /tmp/ccmg8fwi.s:1667   .text.EMC2305_SetPWMOutputMode:00000000 EMC2305_SetPWMOutputMode
+     /tmp/ccmg8fwi.s:1765   .text.EMC2305_SetFanPWM:00000000 $t
+     /tmp/ccmg8fwi.s:1771   .text.EMC2305_SetFanPWM:00000000 EMC2305_SetFanPWM
+     /tmp/ccmg8fwi.s:1836   .text.EMC2305_SetFanPWM:00000034 $d
+     /tmp/ccmg8fwi.s:1841   .text.EMC2305_SetFanRPM:00000000 $t
+     /tmp/ccmg8fwi.s:1847   .text.EMC2305_SetFanRPM:00000000 EMC2305_SetFanRPM
+ARM GAS  /tmp/ccmg8fwi.s 			page 63
 
 
-     /tmp/cc2cVZ0t.s:1949   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 $t
-     /tmp/cc2cVZ0t.s:1955   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 EMC2305_I2C_MasterTxCpltCallback
-     /tmp/cc2cVZ0t.s:2064   .text.EMC2305_I2C_MasterTxCpltCallback:00000054 $d
-     /tmp/cc2cVZ0t.s:2074   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 $t
-     /tmp/cc2cVZ0t.s:2080   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 EMC2305_I2C_MasterRxCpltCallback
-     /tmp/cc2cVZ0t.s:2189   .text.EMC2305_I2C_MasterRxCpltCallback:00000054 $d
-     /tmp/cc2cVZ0t.s:2199   .bss.chip_I2C3:00000000 $d
-     /tmp/cc2cVZ0t.s:2205   .bss.chip_I2C2:00000000 $d
-     /tmp/cc2cVZ0t.s:2211   .bss.chip_I2C1:00000000 $d
-     /tmp/cc2cVZ0t.s:2218   .bss.EMC2305_I2C_TaskStack:00000000 $d
-     /tmp/cc2cVZ0t.s:2225   .bss.EMC2305_I2C_TaskBuffer:00000000 $d
-     /tmp/cc2cVZ0t.s:2231   .bss.xStaticQueue:00000000 $d
-     /tmp/cc2cVZ0t.s:2238   .bss.ucQueueStorageArea:00000000 $d
-     /tmp/cc2cVZ0t.s:2245   .bss.EMC2305_I2C_Queue:00000000 $d
-     /tmp/cc2cVZ0t.s:2252   .bss.caller_semaphore_pool_usage_mutex:00000000 $d
-     /tmp/cc2cVZ0t.s:2259   .bss.caller_semaphore_pool_usage_buffer:00000000 $d
-     /tmp/cc2cVZ0t.s:2266   .bss.caller_semaphore_in_use:00000000 $d
-     /tmp/cc2cVZ0t.s:2273   .bss.caller_semaphore_handle_pool:00000000 $d
-     /tmp/cc2cVZ0t.s:2280   .bss.caller_semaphore_buffer_pool:00000000 $d
-     /tmp/cc2cVZ0t.s:2287   .bss.worker_semaphore_buffer:00000000 $d
-     /tmp/cc2cVZ0t.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003b $d
-     /tmp/cc2cVZ0t.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003c $t
+     /tmp/ccmg8fwi.s:1949   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 $t
+     /tmp/ccmg8fwi.s:1955   .text.EMC2305_I2C_MasterTxCpltCallback:00000000 EMC2305_I2C_MasterTxCpltCallback
+     /tmp/ccmg8fwi.s:2064   .text.EMC2305_I2C_MasterTxCpltCallback:00000054 $d
+     /tmp/ccmg8fwi.s:2074   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 $t
+     /tmp/ccmg8fwi.s:2080   .text.EMC2305_I2C_MasterRxCpltCallback:00000000 EMC2305_I2C_MasterRxCpltCallback
+     /tmp/ccmg8fwi.s:2189   .text.EMC2305_I2C_MasterRxCpltCallback:00000054 $d
+     /tmp/ccmg8fwi.s:2199   .bss.chip_I2C3:00000000 $d
+     /tmp/ccmg8fwi.s:2205   .bss.chip_I2C2:00000000 $d
+     /tmp/ccmg8fwi.s:2211   .bss.chip_I2C1:00000000 $d
+     /tmp/ccmg8fwi.s:2218   .bss.EMC2305_I2C_TaskStack:00000000 $d
+     /tmp/ccmg8fwi.s:2225   .bss.EMC2305_I2C_TaskBuffer:00000000 $d
+     /tmp/ccmg8fwi.s:2231   .bss.xStaticQueue:00000000 $d
+     /tmp/ccmg8fwi.s:2238   .bss.ucQueueStorageArea:00000000 $d
+     /tmp/ccmg8fwi.s:2245   .bss.EMC2305_I2C_Queue:00000000 $d
+     /tmp/ccmg8fwi.s:2252   .bss.caller_semaphore_pool_usage_mutex:00000000 $d
+     /tmp/ccmg8fwi.s:2259   .bss.caller_semaphore_pool_usage_buffer:00000000 $d
+     /tmp/ccmg8fwi.s:2266   .bss.caller_semaphore_in_use:00000000 $d
+     /tmp/ccmg8fwi.s:2273   .bss.caller_semaphore_handle_pool:00000000 $d
+     /tmp/ccmg8fwi.s:2280   .bss.caller_semaphore_buffer_pool:00000000 $d
+     /tmp/ccmg8fwi.s:2287   .bss.worker_semaphore_buffer:00000000 $d
+     /tmp/ccmg8fwi.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003b $d
+     /tmp/ccmg8fwi.s:1415   .text.EMC2305_SetPWMBaseFrequency:0000003c $t
 
 UNDEFINED SYMBOLS
 xQueueSemaphoreTake

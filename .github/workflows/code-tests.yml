@@ -1,40 +1,30 @@
-name: I'm him test
+name: Build Tests
 
 on:
   push:
   pull_request:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Initialize Submodules
-        run: git submodule update --init --recursive
+    steps: 
+       - name: Checkout repository
+         uses: actions/checkout@v3
 
-      - name: Cache Nix
-        uses: actions/cache@v3
-        with:
-          path: |
-            /nix/store
-            ~/.cache/nix
-          key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
-          restore-keys: |
-            nix-${{ runner.os }}-
+       - name: Install
+         run: |
+          sudo apt -y update
+          sudo apt -y install gcc-arm-none-eabi
+       - name: Update Submodules
+         run: |
+          git submodule update --init --recursive
 
-      - name: Install Nix
-        run: |
-          sudo ./firmware/Embedded-Sharepoint/nix_install.sh
+       - name: Clean
+         run: |
+          cd Software/
+          make clean
 
-      - name: Test Production Build
-        run: |
-          nix develop ./firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
-            cd firmware/ && make clean && make
-          "
-      # TODO - make all tests
-      # - name: Clean & Build tests
-      #   run: |
-      #     nix develop ./Firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
-      #       cd Firmware/ && make clean && python tests/makeAllTests.py
-      #     "
+       - name: Build tests
+         run: |
+          cd firmware/tests/
+          python3 makeAllTests.py
+          cd ..
