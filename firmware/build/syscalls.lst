@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccwtu8ZR.s 			page 1
+ARM GAS  /tmp/cchc8lpb.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
   28:common/Src/syscalls.c **** #include <sys/stat.h>
   29:common/Src/syscalls.c **** #include <sys/time.h>
   30:common/Src/syscalls.c **** #include <sys/times.h>
-ARM GAS  /tmp/ccwtu8ZR.s 			page 2
+ARM GAS  /tmp/cchc8lpb.s 			page 2
 
 
   31:common/Src/syscalls.c **** #include <time.h>
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
   68 0008 0360     		str	r3, [r0]
   48:common/Src/syscalls.c ****   return -1;
   69              		.loc 1 48 3 is_stmt 1 view .LVU9
-ARM GAS  /tmp/ccwtu8ZR.s 			page 3
+ARM GAS  /tmp/cchc8lpb.s 			page 3
 
 
   49:common/Src/syscalls.c **** }
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
   57:common/Src/syscalls.c **** __weak int _read(int file, char *ptr, int len) {
  119              		.loc 1 57 48 view -0
  120              		.cfi_startproc
-ARM GAS  /tmp/ccwtu8ZR.s 			page 4
+ARM GAS  /tmp/cchc8lpb.s 			page 4
 
 
  121              		@ args = 0, pretend = 0, frame = 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  164              		.loc 1 66 1 is_stmt 0 view .LVU32
  165 001c 3046     		mov	r0, r6
  166 001e 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  /tmp/ccwtu8ZR.s 			page 5
+ARM GAS  /tmp/cchc8lpb.s 			page 5
 
 
  167              		.loc 1 66 1 view .LVU33
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  215              	.L12:
   72:common/Src/syscalls.c ****     __io_putchar(*ptr++);
  216              		.loc 1 72 29 discriminator 1 view .LVU45
-ARM GAS  /tmp/ccwtu8ZR.s 			page 6
+ARM GAS  /tmp/cchc8lpb.s 			page 6
 
 
  217 0014 B542     		cmp	r5, r6
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  265              		@ frame_needed = 0, uses_anonymous_args = 0
  266              		@ link register save eliminated.
   84:common/Src/syscalls.c ****   (void)file;
-ARM GAS  /tmp/ccwtu8ZR.s 			page 7
+ARM GAS  /tmp/cchc8lpb.s 			page 7
 
 
  267              		.loc 1 84 3 view .LVU55
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
   94:common/Src/syscalls.c **** int _lseek(int file, int ptr, int dir) {
  316              		.loc 1 94 40 is_stmt 1 view -0
  317              		.cfi_startproc
-ARM GAS  /tmp/ccwtu8ZR.s 			page 8
+ARM GAS  /tmp/cchc8lpb.s 			page 8
 
 
  318              		@ args = 0, pretend = 0, frame = 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  362 0006 03B0     		add	sp, sp, #12
  363              	.LCFI5:
  364              		.cfi_restore 3
-ARM GAS  /tmp/ccwtu8ZR.s 			page 9
+ARM GAS  /tmp/cchc8lpb.s 			page 9
 
 
  365              		.cfi_restore 2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  114:common/Src/syscalls.c **** int _unlink(char *name) {
  416              		.loc 1 114 25 is_stmt 1 view -0
  417              		.cfi_startproc
-ARM GAS  /tmp/ccwtu8ZR.s 			page 10
+ARM GAS  /tmp/cchc8lpb.s 			page 10
 
 
  418              		@ args = 0, pretend = 0, frame = 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  466              		.align	1
  467              		.global	_stat
  468              		.syntax unified
-ARM GAS  /tmp/ccwtu8ZR.s 			page 11
+ARM GAS  /tmp/cchc8lpb.s 			page 11
 
 
  469              		.thumb
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  134:common/Src/syscalls.c ****   errno = EMLINK;
  516              		.loc 1 134 3 view .LVU110
  517 0002 FFF7FEFF 		bl	__errno
-ARM GAS  /tmp/ccwtu8ZR.s 			page 12
+ARM GAS  /tmp/cchc8lpb.s 			page 12
 
 
  518              	.LVL37:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  569              	.LFB375:
  142:common/Src/syscalls.c **** 
  143:common/Src/syscalls.c **** int _execve(char *name, char **argv, char **env) {
-ARM GAS  /tmp/ccwtu8ZR.s 			page 13
+ARM GAS  /tmp/cchc8lpb.s 			page 13
 
 
  570              		.loc 1 143 50 is_stmt 1 view -0
@@ -774,49 +774,49 @@ ARM GAS  /tmp/ccwtu8ZR.s 			page 1
  619              		.file 7 "/usr/include/newlib/sys/stat.h"
  620              		.file 8 "/usr/include/newlib/sys/times.h"
  621              		.file 9 "/usr/include/newlib/sys/errno.h"
-ARM GAS  /tmp/ccwtu8ZR.s 			page 14
+ARM GAS  /tmp/cchc8lpb.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/ccwtu8ZR.s:21     .text._getpid:00000000 $t
-     /tmp/ccwtu8ZR.s:27     .text._getpid:00000000 _getpid
-     /tmp/ccwtu8ZR.s:42     .text._kill:00000000 $t
-     /tmp/ccwtu8ZR.s:48     .text._kill:00000000 _kill
-     /tmp/ccwtu8ZR.s:77     .text._exit:00000000 $t
-     /tmp/ccwtu8ZR.s:83     .text._exit:00000000 _exit
-     /tmp/ccwtu8ZR.s:110    .text._read:00000000 $t
-     /tmp/ccwtu8ZR.s:116    .text._read:00000000 _read
-     /tmp/ccwtu8ZR.s:172    .text._write:00000000 $t
-     /tmp/ccwtu8ZR.s:178    .text._write:00000000 _write
-     /tmp/ccwtu8ZR.s:228    .text._close:00000000 $t
-     /tmp/ccwtu8ZR.s:234    .text._close:00000000 _close
-     /tmp/ccwtu8ZR.s:253    .text._fstat:00000000 $t
-     /tmp/ccwtu8ZR.s:259    .text._fstat:00000000 _fstat
-     /tmp/ccwtu8ZR.s:282    .text._isatty:00000000 $t
-     /tmp/ccwtu8ZR.s:288    .text._isatty:00000000 _isatty
-     /tmp/ccwtu8ZR.s:307    .text._lseek:00000000 $t
-     /tmp/ccwtu8ZR.s:313    .text._lseek:00000000 _lseek
-     /tmp/ccwtu8ZR.s:334    .text._open:00000000 $t
-     /tmp/ccwtu8ZR.s:340    .text._open:00000000 _open
-     /tmp/ccwtu8ZR.s:373    .text._wait:00000000 $t
-     /tmp/ccwtu8ZR.s:379    .text._wait:00000000 _wait
-     /tmp/ccwtu8ZR.s:407    .text._unlink:00000000 $t
-     /tmp/ccwtu8ZR.s:413    .text._unlink:00000000 _unlink
-     /tmp/ccwtu8ZR.s:441    .text._times:00000000 $t
-     /tmp/ccwtu8ZR.s:447    .text._times:00000000 _times
-     /tmp/ccwtu8ZR.s:466    .text._stat:00000000 $t
-     /tmp/ccwtu8ZR.s:472    .text._stat:00000000 _stat
-     /tmp/ccwtu8ZR.s:495    .text._link:00000000 $t
-     /tmp/ccwtu8ZR.s:501    .text._link:00000000 _link
-     /tmp/ccwtu8ZR.s:530    .text._fork:00000000 $t
-     /tmp/ccwtu8ZR.s:536    .text._fork:00000000 _fork
-     /tmp/ccwtu8ZR.s:561    .text._execve:00000000 $t
-     /tmp/ccwtu8ZR.s:567    .text._execve:00000000 _execve
-     /tmp/ccwtu8ZR.s:601    .data.environ:00000000 environ
-     /tmp/ccwtu8ZR.s:598    .data.environ:00000000 $d
-     /tmp/ccwtu8ZR.s:608    .bss.__env:00000000 __env
-     /tmp/ccwtu8ZR.s:605    .bss.__env:00000000 $d
+     /tmp/cchc8lpb.s:21     .text._getpid:00000000 $t
+     /tmp/cchc8lpb.s:27     .text._getpid:00000000 _getpid
+     /tmp/cchc8lpb.s:42     .text._kill:00000000 $t
+     /tmp/cchc8lpb.s:48     .text._kill:00000000 _kill
+     /tmp/cchc8lpb.s:77     .text._exit:00000000 $t
+     /tmp/cchc8lpb.s:83     .text._exit:00000000 _exit
+     /tmp/cchc8lpb.s:110    .text._read:00000000 $t
+     /tmp/cchc8lpb.s:116    .text._read:00000000 _read
+     /tmp/cchc8lpb.s:172    .text._write:00000000 $t
+     /tmp/cchc8lpb.s:178    .text._write:00000000 _write
+     /tmp/cchc8lpb.s:228    .text._close:00000000 $t
+     /tmp/cchc8lpb.s:234    .text._close:00000000 _close
+     /tmp/cchc8lpb.s:253    .text._fstat:00000000 $t
+     /tmp/cchc8lpb.s:259    .text._fstat:00000000 _fstat
+     /tmp/cchc8lpb.s:282    .text._isatty:00000000 $t
+     /tmp/cchc8lpb.s:288    .text._isatty:00000000 _isatty
+     /tmp/cchc8lpb.s:307    .text._lseek:00000000 $t
+     /tmp/cchc8lpb.s:313    .text._lseek:00000000 _lseek
+     /tmp/cchc8lpb.s:334    .text._open:00000000 $t
+     /tmp/cchc8lpb.s:340    .text._open:00000000 _open
+     /tmp/cchc8lpb.s:373    .text._wait:00000000 $t
+     /tmp/cchc8lpb.s:379    .text._wait:00000000 _wait
+     /tmp/cchc8lpb.s:407    .text._unlink:00000000 $t
+     /tmp/cchc8lpb.s:413    .text._unlink:00000000 _unlink
+     /tmp/cchc8lpb.s:441    .text._times:00000000 $t
+     /tmp/cchc8lpb.s:447    .text._times:00000000 _times
+     /tmp/cchc8lpb.s:466    .text._stat:00000000 $t
+     /tmp/cchc8lpb.s:472    .text._stat:00000000 _stat
+     /tmp/cchc8lpb.s:495    .text._link:00000000 $t
+     /tmp/cchc8lpb.s:501    .text._link:00000000 _link
+     /tmp/cchc8lpb.s:530    .text._fork:00000000 $t
+     /tmp/cchc8lpb.s:536    .text._fork:00000000 _fork
+     /tmp/cchc8lpb.s:561    .text._execve:00000000 $t
+     /tmp/cchc8lpb.s:567    .text._execve:00000000 _execve
+     /tmp/cchc8lpb.s:601    .data.environ:00000000 environ
+     /tmp/cchc8lpb.s:598    .data.environ:00000000 $d
+     /tmp/cchc8lpb.s:608    .bss.__env:00000000 __env
+     /tmp/cchc8lpb.s:605    .bss.__env:00000000 $d
 
 UNDEFINED SYMBOLS
 __errno

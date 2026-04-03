@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1ssgaQ.s 			page 1
+ARM GAS  /tmp/ccc73iiR.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1ssgaQ.s 			page 1
   27:bsp/Src/ADC.c **** 
   28:bsp/Src/ADC.c **** #ifdef ADC5
   29:bsp/Src/ADC.c **** static ADC_HandleTypeDef hadc5_ = {.Instance = ADC5};
-ARM GAS  /tmp/cc1ssgaQ.s 			page 2
+ARM GAS  /tmp/ccc73iiR.s 			page 2
 
 
   30:bsp/Src/ADC.c **** ADC_HandleTypeDef* hadc5 = &hadc5_;
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1ssgaQ.s 			page 1
   70              		.section	.text.adc_deinit,"ax",%progbits
   71              		.align	1
   72              		.global	adc_deinit
-ARM GAS  /tmp/cc1ssgaQ.s 			page 3
+ARM GAS  /tmp/ccc73iiR.s 			page 3
 
 
   73              		.syntax unified
@@ -171,902 +171,876 @@ ARM GAS  /tmp/cc1ssgaQ.s 			page 1
  115              	.LFB336:
   51:bsp/Src/ADC.c **** 
   52:bsp/Src/ADC.c **** 
-  53:bsp/Src/ADC.c **** adc_status_t adc_read(uint32_t channel, uint32_t samplingTime, ADC_HandleTypeDef *h, QueueHandle_t 
- 116              		.loc 1 53 103 is_stmt 1 view -0
+  53:bsp/Src/ADC.c **** adc_status_t adc_read(ADC_HandleTypeDef *h, ADC_ChannelConfTypeDef* sConfig, QueueHandle_t q) {
+ 116              		.loc 1 53 95 is_stmt 1 view -0
  117              		.cfi_startproc
- 118              		@ args = 0, pretend = 0, frame = 32
+ 118              		@ args = 0, pretend = 0, frame = 0
  119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120              		.loc 1 53 103 is_stmt 0 view .LVU19
- 121 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-ARM GAS  /tmp/cc1ssgaQ.s 			page 4
+ 120              		.loc 1 53 95 is_stmt 0 view .LVU19
+ 121 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  /tmp/ccc73iiR.s 			page 4
 
 
  122              	.LCFI2:
- 123              		.cfi_def_cfa_offset 20
- 124              		.cfi_offset 4, -20
- 125              		.cfi_offset 5, -16
- 126              		.cfi_offset 6, -12
- 127              		.cfi_offset 7, -8
- 128              		.cfi_offset 14, -4
- 129 0002 89B0     		sub	sp, sp, #36
- 130              	.LCFI3:
- 131              		.cfi_def_cfa_offset 56
- 132 0004 0746     		mov	r7, r0
- 133 0006 0E46     		mov	r6, r1
- 134 0008 1446     		mov	r4, r2
- 135 000a 1D46     		mov	r5, r3
-  54:bsp/Src/ADC.c ****     ADC_ChannelConfTypeDef sConfig = {};
- 136              		.loc 1 54 5 is_stmt 1 view .LVU20
- 137              		.loc 1 54 28 is_stmt 0 view .LVU21
- 138 000c 2022     		movs	r2, #32
- 139              	.LVL9:
- 140              		.loc 1 54 28 view .LVU22
- 141 000e 0021     		movs	r1, #0
- 142              	.LVL10:
- 143              		.loc 1 54 28 view .LVU23
- 144 0010 6846     		mov	r0, sp
- 145              	.LVL11:
- 146              		.loc 1 54 28 view .LVU24
- 147 0012 FFF7FEFF 		bl	memset
- 148              	.LVL12:
-  55:bsp/Src/ADC.c ****     sConfig.Channel = channel;
- 149              		.loc 1 55 5 is_stmt 1 view .LVU25
- 150              		.loc 1 55 21 is_stmt 0 view .LVU26
- 151 0016 0097     		str	r7, [sp]
-  56:bsp/Src/ADC.c ****     #if defined(STM32F4xx)
-  57:bsp/Src/ADC.c ****     sConfig.Rank = 1; 
-  58:bsp/Src/ADC.c ****     #endif
-  59:bsp/Src/ADC.c ****     #if defined(STM32G4xx) || defined(STM32L4xx)
-  60:bsp/Src/ADC.c ****     sConfig.Rank = ADC_REGULAR_RANK_1;
- 152              		.loc 1 60 5 is_stmt 1 view .LVU27
- 153              		.loc 1 60 18 is_stmt 0 view .LVU28
- 154 0018 0623     		movs	r3, #6
- 155 001a 0193     		str	r3, [sp, #4]
+ 123              		.cfi_def_cfa_offset 16
+ 124              		.cfi_offset 4, -16
+ 125              		.cfi_offset 5, -12
+ 126              		.cfi_offset 6, -8
+ 127              		.cfi_offset 14, -4
+  54:bsp/Src/ADC.c ****     if (sConfig == NULL || h == NULL || q == NULL) {
+ 128              		.loc 1 54 5 is_stmt 1 view .LVU20
+ 129              		.loc 1 54 8 is_stmt 0 view .LVU21
+ 130 0002 0029     		cmp	r1, #0
+ 131 0004 3ED0     		beq	.L18
+ 132 0006 0446     		mov	r4, r0
+ 133 0008 1546     		mov	r5, r2
+ 134              		.loc 1 54 25 discriminator 1 view .LVU22
+ 135 000a 0028     		cmp	r0, #0
+ 136 000c 3CD0     		beq	.L19
+ 137              		.loc 1 54 38 discriminator 2 view .LVU23
+ 138 000e 002A     		cmp	r2, #0
+ 139 0010 3CD0     		beq	.L20
+  55:bsp/Src/ADC.c ****         return ADC_CHANNEL_CONFIG_FAIL;
+  56:bsp/Src/ADC.c ****     }
+  57:bsp/Src/ADC.c **** 
+  58:bsp/Src/ADC.c ****     // BSP only configures channel ranks 
+  59:bsp/Src/ADC.c ****     #if defined(STM32F4xx)
+  60:bsp/Src/ADC.c ****     sConfig->Rank = 1; 
   61:bsp/Src/ADC.c ****     #endif
-  62:bsp/Src/ADC.c ****     sConfig.SamplingTime = samplingTime;
- 156              		.loc 1 62 5 is_stmt 1 view .LVU29
- 157              		.loc 1 62 26 is_stmt 0 view .LVU30
- 158 001c 0296     		str	r6, [sp, #8]
-  63:bsp/Src/ADC.c **** 
-  64:bsp/Src/ADC.c ****     if (HAL_ADC_ConfigChannel(hadc1, &sConfig) != HAL_OK)
- 159              		.loc 1 64 5 is_stmt 1 view .LVU31
- 160              		.loc 1 64 9 is_stmt 0 view .LVU32
- 161 001e 6946     		mov	r1, sp
- 162 0020 214B     		ldr	r3, .L30
- 163 0022 1868     		ldr	r0, [r3]
- 164 0024 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
- 165              	.LVL13:
- 166              		.loc 1 64 8 discriminator 1 view .LVU33
- 167 0028 10BB     		cbnz	r0, .L24
-ARM GAS  /tmp/cc1ssgaQ.s 			page 5
+  62:bsp/Src/ADC.c ****     #if defined(STM32G4xx) || defined(STM32L4xx)
+  63:bsp/Src/ADC.c ****     sConfig->Rank = ADC_REGULAR_RANK_1;
+ 140              		.loc 1 63 5 is_stmt 1 view .LVU24
+ 141              		.loc 1 63 19 is_stmt 0 view .LVU25
+ 142 0012 0622     		movs	r2, #6
+ 143              	.LVL9:
+ 144              		.loc 1 63 19 view .LVU26
+ 145 0014 4A60     		str	r2, [r1, #4]
+  64:bsp/Src/ADC.c ****     #endif 
+  65:bsp/Src/ADC.c **** 
+  66:bsp/Src/ADC.c ****     if (HAL_ADC_ConfigChannel(h, sConfig) != HAL_OK)
+ 146              		.loc 1 66 5 is_stmt 1 view .LVU27
+ 147              		.loc 1 66 9 is_stmt 0 view .LVU28
+ 148 0016 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 149              	.LVL10:
+ 150              		.loc 1 66 8 discriminator 1 view .LVU29
+ 151 001a 0646     		mov	r6, r0
+ 152 001c 0028     		cmp	r0, #0
+ 153 001e 37D1     		bne	.L21
+  67:bsp/Src/ADC.c ****     {
+  68:bsp/Src/ADC.c ****       return ADC_CHANNEL_CONFIG_FAIL;
+  69:bsp/Src/ADC.c ****     } 
+  70:bsp/Src/ADC.c ****     
+  71:bsp/Src/ADC.c ****     // Queue Arbitration for later
+  72:bsp/Src/ADC.c ****     #ifdef ADC1
+  73:bsp/Src/ADC.c ****     if (h->Instance == ADC1) adc1_q = q;
+ 154              		.loc 1 73 5 is_stmt 1 view .LVU30
+ 155              		.loc 1 73 10 is_stmt 0 view .LVU31
+ 156 0020 2368     		ldr	r3, [r4]
+ 157              		.loc 1 73 8 view .LVU32
+ 158 0022 B3F1A04F 		cmp	r3, #1342177280
+ARM GAS  /tmp/ccc73iiR.s 			page 5
 
 
- 168              	.L12:
-  65:bsp/Src/ADC.c ****     {
-  66:bsp/Src/ADC.c ****       Error_Handler();
-  67:bsp/Src/ADC.c ****     } 
-  68:bsp/Src/ADC.c ****     
-  69:bsp/Src/ADC.c ****     // Queue Arbitration for later
-  70:bsp/Src/ADC.c ****     #ifdef ADC1
-  71:bsp/Src/ADC.c ****     if (h->Instance == ADC1) adc1_q = q;
- 169              		.loc 1 71 5 is_stmt 1 view .LVU34
- 170              		.loc 1 71 10 is_stmt 0 view .LVU35
- 171 002a 2368     		ldr	r3, [r4]
- 172              		.loc 1 71 8 view .LVU36
- 173 002c B3F1A04F 		cmp	r3, #1342177280
- 174 0030 21D0     		beq	.L25
- 175              	.L13:
-  72:bsp/Src/ADC.c ****     #endif
-  73:bsp/Src/ADC.c ****     #ifdef ADC2
-  74:bsp/Src/ADC.c ****     if (h->Instance == ADC2) adc2_q = q;
- 176              		.loc 1 74 5 is_stmt 1 view .LVU37
- 177              		.loc 1 74 10 is_stmt 0 view .LVU38
- 178 0032 2268     		ldr	r2, [r4]
- 179              		.loc 1 74 8 view .LVU39
- 180 0034 1D4B     		ldr	r3, .L30+4
- 181 0036 9A42     		cmp	r2, r3
- 182 0038 20D0     		beq	.L26
- 183              	.L14:
-  75:bsp/Src/ADC.c ****     #endif
-  76:bsp/Src/ADC.c ****     #ifdef ADC3
-  77:bsp/Src/ADC.c ****     if (h->Instance == ADC3) adc3_q = q;
- 184              		.loc 1 77 5 is_stmt 1 view .LVU40
- 185              		.loc 1 77 10 is_stmt 0 view .LVU41
- 186 003a 2268     		ldr	r2, [r4]
- 187              		.loc 1 77 8 view .LVU42
- 188 003c 1C4B     		ldr	r3, .L30+8
- 189 003e 9A42     		cmp	r2, r3
- 190 0040 1FD0     		beq	.L27
- 191              	.L15:
-  78:bsp/Src/ADC.c ****     #endif
-  79:bsp/Src/ADC.c ****     #ifdef ADC4
-  80:bsp/Src/ADC.c ****     if (h->Instance == ADC4) adc4_q = q;
- 192              		.loc 1 80 5 is_stmt 1 view .LVU43
- 193              		.loc 1 80 10 is_stmt 0 view .LVU44
- 194 0042 2268     		ldr	r2, [r4]
- 195              		.loc 1 80 8 view .LVU45
- 196 0044 1B4B     		ldr	r3, .L30+12
- 197 0046 9A42     		cmp	r2, r3
- 198 0048 1ED0     		beq	.L28
- 199              	.L16:
-  81:bsp/Src/ADC.c ****     #endif
-  82:bsp/Src/ADC.c ****     #ifdef ADC5
-  83:bsp/Src/ADC.c ****     if (h->Instance == ADC5) adc5_q = q;
- 200              		.loc 1 83 5 is_stmt 1 view .LVU46
- 201              		.loc 1 83 10 is_stmt 0 view .LVU47
- 202 004a 2268     		ldr	r2, [r4]
- 203              		.loc 1 83 8 view .LVU48
- 204 004c 1A4B     		ldr	r3, .L30+16
- 205 004e 9A42     		cmp	r2, r3
-ARM GAS  /tmp/cc1ssgaQ.s 			page 6
-
-
- 206 0050 1DD0     		beq	.L29
- 207              	.L17:
-  84:bsp/Src/ADC.c ****     #endif
-  85:bsp/Src/ADC.c ****     
-  86:bsp/Src/ADC.c ****     // Check Queue Full
-  87:bsp/Src/ADC.c ****     if (uxQueueSpacesAvailable(q) == 0) {
- 208              		.loc 1 87 5 is_stmt 1 view .LVU49
- 209              		.loc 1 87 9 is_stmt 0 view .LVU50
- 210 0052 2846     		mov	r0, r5
- 211 0054 FFF7FEFF 		bl	uxQueueSpacesAvailable
- 212              	.LVL14:
- 213              		.loc 1 87 8 discriminator 1 view .LVU51
- 214 0058 E0B1     		cbz	r0, .L19
-  88:bsp/Src/ADC.c ****         return ADC_QUEUE_FULL;
-  89:bsp/Src/ADC.c ****     }
-  90:bsp/Src/ADC.c **** 
-  91:bsp/Src/ADC.c ****     // Trigger Interrupt
-  92:bsp/Src/ADC.c ****     HAL_StatusTypeDef adc_it_stat = HAL_ADC_Start_IT(h);
- 215              		.loc 1 92 5 is_stmt 1 view .LVU52
- 216              		.loc 1 92 37 is_stmt 0 view .LVU53
- 217 005a 2046     		mov	r0, r4
- 218 005c FFF7FEFF 		bl	HAL_ADC_Start_IT
- 219              	.LVL15:
-  93:bsp/Src/ADC.c **** 
-  94:bsp/Src/ADC.c ****     // Handling
-  95:bsp/Src/ADC.c ****     switch (adc_it_stat) {
- 220              		.loc 1 95 5 is_stmt 1 view .LVU54
- 221 0060 0228     		cmp	r0, #2
- 222 0062 1AD0     		beq	.L20
- 223 0064 0328     		cmp	r0, #3
- 224 0066 1AD0     		beq	.L21
- 225 0068 0128     		cmp	r0, #1
- 226 006a 1AD1     		bne	.L22
-  96:bsp/Src/ADC.c ****         case HAL_BUSY:
-  97:bsp/Src/ADC.c ****             return ADC_INTERRUPT_BUSY;
-  98:bsp/Src/ADC.c ****             break;
-  99:bsp/Src/ADC.c ****         case HAL_TIMEOUT:
- 100:bsp/Src/ADC.c ****             return ADC_INTERRUPT_TIMEOUT;
- 101:bsp/Src/ADC.c ****             break;
- 102:bsp/Src/ADC.c ****         case HAL_ERROR:
- 103:bsp/Src/ADC.c ****             return ADC_INTERRUPT_ERROR;
- 227              		.loc 1 103 20 is_stmt 0 view .LVU55
- 228 006c 0620     		movs	r0, #6
- 229              	.LVL16:
- 230              		.loc 1 103 20 view .LVU56
- 231 006e 12E0     		b	.L18
- 232              	.LVL17:
- 233              	.L24:
-  66:bsp/Src/ADC.c ****     } 
- 234              		.loc 1 66 7 is_stmt 1 view .LVU57
- 235 0070 FFF7FEFF 		bl	Error_Handler
- 236              	.LVL18:
- 237 0074 D9E7     		b	.L12
- 238              	.L25:
-  71:bsp/Src/ADC.c ****     #endif
- 239              		.loc 1 71 30 discriminator 1 view .LVU58
-  71:bsp/Src/ADC.c ****     #endif
-ARM GAS  /tmp/cc1ssgaQ.s 			page 7
-
-
- 240              		.loc 1 71 37 is_stmt 0 discriminator 1 view .LVU59
- 241 0076 114B     		ldr	r3, .L30+20
- 242 0078 1D60     		str	r5, [r3]
- 243 007a DAE7     		b	.L13
- 244              	.L26:
+ 159 0026 1ED0     		beq	.L26
+ 160              	.L13:
   74:bsp/Src/ADC.c ****     #endif
- 245              		.loc 1 74 30 is_stmt 1 discriminator 1 view .LVU60
-  74:bsp/Src/ADC.c ****     #endif
- 246              		.loc 1 74 37 is_stmt 0 discriminator 1 view .LVU61
- 247 007c 104B     		ldr	r3, .L30+24
- 248 007e 1D60     		str	r5, [r3]
- 249 0080 DBE7     		b	.L14
- 250              	.L27:
+  75:bsp/Src/ADC.c ****     #ifdef ADC2
+  76:bsp/Src/ADC.c ****     if (h->Instance == ADC2) adc2_q = q;
+ 161              		.loc 1 76 5 is_stmt 1 view .LVU33
+ 162              		.loc 1 76 10 is_stmt 0 view .LVU34
+ 163 0028 2268     		ldr	r2, [r4]
+ 164              		.loc 1 76 8 view .LVU35
+ 165 002a 1E4B     		ldr	r3, .L31
+ 166 002c 9A42     		cmp	r2, r3
+ 167 002e 1DD0     		beq	.L27
+ 168              	.L14:
   77:bsp/Src/ADC.c ****     #endif
- 251              		.loc 1 77 30 is_stmt 1 discriminator 1 view .LVU62
-  77:bsp/Src/ADC.c ****     #endif
- 252              		.loc 1 77 37 is_stmt 0 discriminator 1 view .LVU63
- 253 0082 104B     		ldr	r3, .L30+28
- 254 0084 1D60     		str	r5, [r3]
- 255 0086 DCE7     		b	.L15
- 256              	.L28:
+  78:bsp/Src/ADC.c ****     #ifdef ADC3
+  79:bsp/Src/ADC.c ****     if (h->Instance == ADC3) adc3_q = q;
+ 169              		.loc 1 79 5 is_stmt 1 view .LVU36
+ 170              		.loc 1 79 10 is_stmt 0 view .LVU37
+ 171 0030 2268     		ldr	r2, [r4]
+ 172              		.loc 1 79 8 view .LVU38
+ 173 0032 1D4B     		ldr	r3, .L31+4
+ 174 0034 9A42     		cmp	r2, r3
+ 175 0036 1CD0     		beq	.L28
+ 176              	.L15:
   80:bsp/Src/ADC.c ****     #endif
- 257              		.loc 1 80 30 is_stmt 1 discriminator 1 view .LVU64
-  80:bsp/Src/ADC.c ****     #endif
- 258              		.loc 1 80 37 is_stmt 0 discriminator 1 view .LVU65
- 259 0088 0F4B     		ldr	r3, .L30+32
- 260 008a 1D60     		str	r5, [r3]
- 261 008c DDE7     		b	.L16
- 262              	.L29:
+  81:bsp/Src/ADC.c ****     #ifdef ADC4
+  82:bsp/Src/ADC.c ****     if (h->Instance == ADC4) adc4_q = q;
+ 177              		.loc 1 82 5 is_stmt 1 view .LVU39
+ 178              		.loc 1 82 10 is_stmt 0 view .LVU40
+ 179 0038 2268     		ldr	r2, [r4]
+ 180              		.loc 1 82 8 view .LVU41
+ 181 003a 1C4B     		ldr	r3, .L31+8
+ 182 003c 9A42     		cmp	r2, r3
+ 183 003e 1BD0     		beq	.L29
+ 184              	.L16:
   83:bsp/Src/ADC.c ****     #endif
- 263              		.loc 1 83 30 is_stmt 1 discriminator 1 view .LVU66
-  83:bsp/Src/ADC.c ****     #endif
- 264              		.loc 1 83 37 is_stmt 0 discriminator 1 view .LVU67
- 265 008e 0F4B     		ldr	r3, .L30+36
- 266 0090 1D60     		str	r5, [r3]
- 267 0092 DEE7     		b	.L17
- 268              	.L19:
-  88:bsp/Src/ADC.c ****     }
- 269              		.loc 1 88 16 view .LVU68
- 270 0094 0720     		movs	r0, #7
- 271              	.L18:
- 104:bsp/Src/ADC.c ****             break;
- 105:bsp/Src/ADC.c ****         default: break;
- 106:bsp/Src/ADC.c ****     }
- 107:bsp/Src/ADC.c ****     
- 108:bsp/Src/ADC.c ****     return ADC_OK; 
- 109:bsp/Src/ADC.c **** }
- 272              		.loc 1 109 1 view .LVU69
- 273 0096 09B0     		add	sp, sp, #36
- 274              	.LCFI4:
- 275              		.cfi_remember_state
- 276              		.cfi_def_cfa_offset 20
- 277              		@ sp needed
- 278 0098 F0BD     		pop	{r4, r5, r6, r7, pc}
- 279              	.LVL19:
- 280              	.L20:
- 281              	.LCFI5:
-ARM GAS  /tmp/cc1ssgaQ.s 			page 8
+  84:bsp/Src/ADC.c ****     #ifdef ADC5
+  85:bsp/Src/ADC.c ****     if (h->Instance == ADC5) adc5_q = q;
+ 185              		.loc 1 85 5 is_stmt 1 view .LVU42
+ 186              		.loc 1 85 10 is_stmt 0 view .LVU43
+ 187 0040 2268     		ldr	r2, [r4]
+ 188              		.loc 1 85 8 view .LVU44
+ 189 0042 1B4B     		ldr	r3, .L31+12
+ 190 0044 9A42     		cmp	r2, r3
+ 191 0046 1AD0     		beq	.L30
+ 192              	.L17:
+  86:bsp/Src/ADC.c ****     #endif
+  87:bsp/Src/ADC.c ****     
+  88:bsp/Src/ADC.c ****     // Check Queue Full
+  89:bsp/Src/ADC.c ****     if (uxQueueSpacesAvailable(q) == 0) {
+ 193              		.loc 1 89 5 is_stmt 1 view .LVU45
+ 194              		.loc 1 89 9 is_stmt 0 view .LVU46
+ 195 0048 2846     		mov	r0, r5
+ 196 004a FFF7FEFF 		bl	uxQueueSpacesAvailable
+ 197              	.LVL11:
+ 198              		.loc 1 89 8 discriminator 1 view .LVU47
+ 199 004e 08B3     		cbz	r0, .L22
+ARM GAS  /tmp/ccc73iiR.s 			page 6
 
 
- 282              		.cfi_restore_state
-  95:bsp/Src/ADC.c ****         case HAL_BUSY:
- 283              		.loc 1 95 5 view .LVU70
- 284 009a 0420     		movs	r0, #4
- 285              	.LVL20:
-  95:bsp/Src/ADC.c ****         case HAL_BUSY:
- 286              		.loc 1 95 5 view .LVU71
- 287 009c FBE7     		b	.L18
- 288              	.LVL21:
- 289              	.L21:
+  90:bsp/Src/ADC.c ****         return ADC_QUEUE_FULL;
+  91:bsp/Src/ADC.c ****     }
+  92:bsp/Src/ADC.c **** 
+  93:bsp/Src/ADC.c ****     // Trigger Interrupt
+  94:bsp/Src/ADC.c ****     HAL_StatusTypeDef adc_it_stat = HAL_ADC_Start_IT(h);
+ 200              		.loc 1 94 5 is_stmt 1 view .LVU48
+ 201              		.loc 1 94 37 is_stmt 0 view .LVU49
+ 202 0050 2046     		mov	r0, r4
+ 203 0052 FFF7FEFF 		bl	HAL_ADC_Start_IT
+ 204              	.LVL12:
+  95:bsp/Src/ADC.c **** 
+  96:bsp/Src/ADC.c ****     // Handling
+  97:bsp/Src/ADC.c ****     switch (adc_it_stat) {
+ 205              		.loc 1 97 5 is_stmt 1 view .LVU50
+ 206 0056 0228     		cmp	r0, #2
+ 207 0058 1FD0     		beq	.L23
+ 208 005a 0328     		cmp	r0, #3
+ 209 005c 1FD0     		beq	.L24
+ 210 005e 0128     		cmp	r0, #1
+ 211 0060 19D1     		bne	.L12
+  98:bsp/Src/ADC.c ****         case HAL_BUSY:
+  99:bsp/Src/ADC.c ****             return ADC_INTERRUPT_BUSY;
  100:bsp/Src/ADC.c ****             break;
- 290              		.loc 1 100 20 view .LVU72
- 291 009e 0520     		movs	r0, #5
- 292              	.LVL22:
- 100:bsp/Src/ADC.c ****             break;
- 293              		.loc 1 100 20 view .LVU73
- 294 00a0 F9E7     		b	.L18
- 295              	.LVL23:
- 296              	.L22:
- 108:bsp/Src/ADC.c **** }
- 297              		.loc 1 108 12 view .LVU74
- 298 00a2 0020     		movs	r0, #0
- 299              	.LVL24:
- 108:bsp/Src/ADC.c **** }
- 300              		.loc 1 108 12 view .LVU75
- 301 00a4 F7E7     		b	.L18
- 302              	.L31:
- 303 00a6 00BF     		.align	2
- 304              	.L30:
- 305 00a8 00000000 		.word	hadc1
- 306 00ac 00010050 		.word	1342177536
- 307 00b0 00040050 		.word	1342178304
- 308 00b4 00050050 		.word	1342178560
- 309 00b8 00060050 		.word	1342178816
- 310 00bc 00000000 		.word	adc1_q
- 311 00c0 00000000 		.word	adc2_q
- 312 00c4 00000000 		.word	adc3_q
- 313 00c8 00000000 		.word	adc4_q
- 314 00cc 00000000 		.word	adc5_q
- 315              		.cfi_endproc
- 316              	.LFE336:
- 318              		.section	.text.adc_hook,"ax",%progbits
- 319              		.align	1
- 320              		.weak	adc_hook
- 321              		.syntax unified
- 322              		.thumb
- 323              		.thumb_func
- 325              	adc_hook:
- 326              	.LVL25:
- 327              	.LFB337:
- 110:bsp/Src/ADC.c **** 
- 111:bsp/Src/ADC.c **** __weak adc_status_t adc_hook(ADC_HandleTypeDef *h) {
- 328              		.loc 1 111 52 is_stmt 1 view -0
- 329              		.cfi_startproc
- 330              		@ args = 0, pretend = 0, frame = 0
- 331              		@ frame_needed = 0, uses_anonymous_args = 0
- 332              		@ link register save eliminated.
-ARM GAS  /tmp/cc1ssgaQ.s 			page 9
+ 101:bsp/Src/ADC.c ****         case HAL_TIMEOUT:
+ 102:bsp/Src/ADC.c ****             return ADC_INTERRUPT_TIMEOUT;
+ 103:bsp/Src/ADC.c ****             break;
+ 104:bsp/Src/ADC.c ****         case HAL_ERROR:
+ 105:bsp/Src/ADC.c ****             return ADC_INTERRUPT_ERROR;
+ 212              		.loc 1 105 20 is_stmt 0 view .LVU51
+ 213 0062 0626     		movs	r6, #6
+ 214 0064 17E0     		b	.L12
+ 215              	.LVL13:
+ 216              	.L26:
+  73:bsp/Src/ADC.c ****     #endif
+ 217              		.loc 1 73 30 is_stmt 1 discriminator 1 view .LVU52
+  73:bsp/Src/ADC.c ****     #endif
+ 218              		.loc 1 73 37 is_stmt 0 discriminator 1 view .LVU53
+ 219 0066 134B     		ldr	r3, .L31+16
+ 220 0068 1D60     		str	r5, [r3]
+ 221 006a DDE7     		b	.L13
+ 222              	.L27:
+  76:bsp/Src/ADC.c ****     #endif
+ 223              		.loc 1 76 30 is_stmt 1 discriminator 1 view .LVU54
+  76:bsp/Src/ADC.c ****     #endif
+ 224              		.loc 1 76 37 is_stmt 0 discriminator 1 view .LVU55
+ 225 006c 124B     		ldr	r3, .L31+20
+ 226 006e 1D60     		str	r5, [r3]
+ 227 0070 DEE7     		b	.L14
+ 228              	.L28:
+  79:bsp/Src/ADC.c ****     #endif
+ 229              		.loc 1 79 30 is_stmt 1 discriminator 1 view .LVU56
+  79:bsp/Src/ADC.c ****     #endif
+ 230              		.loc 1 79 37 is_stmt 0 discriminator 1 view .LVU57
+ 231 0072 124B     		ldr	r3, .L31+24
+ 232 0074 1D60     		str	r5, [r3]
+ 233 0076 DFE7     		b	.L15
+ 234              	.L29:
+ARM GAS  /tmp/ccc73iiR.s 			page 7
 
 
- 112:bsp/Src/ADC.c ****   /*** Callback hook if you're feeling creative ***/
- 113:bsp/Src/ADC.c ****   return ADC_OK;
- 333              		.loc 1 113 3 view .LVU77
- 114:bsp/Src/ADC.c **** }
- 334              		.loc 1 114 1 is_stmt 0 view .LVU78
- 335 0000 0020     		movs	r0, #0
- 336              	.LVL26:
- 337              		.loc 1 114 1 view .LVU79
- 338 0002 7047     		bx	lr
- 339              		.cfi_endproc
- 340              	.LFE337:
- 342              		.section	.text.HAL_ADC_ConvCpltCallback,"ax",%progbits
- 343              		.align	1
- 344              		.global	HAL_ADC_ConvCpltCallback
- 345              		.syntax unified
- 346              		.thumb
- 347              		.thumb_func
- 349              	HAL_ADC_ConvCpltCallback:
- 350              	.LVL27:
- 351              	.LFB338:
- 115:bsp/Src/ADC.c **** 
- 116:bsp/Src/ADC.c **** void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *h) {
- 352              		.loc 1 116 53 is_stmt 1 view -0
- 353              		.cfi_startproc
- 354              		@ args = 0, pretend = 0, frame = 8
- 355              		@ frame_needed = 0, uses_anonymous_args = 0
- 356              		.loc 1 116 53 is_stmt 0 view .LVU81
- 357 0000 30B5     		push	{r4, r5, lr}
- 358              	.LCFI6:
- 359              		.cfi_def_cfa_offset 12
- 360              		.cfi_offset 4, -12
- 361              		.cfi_offset 5, -8
- 362              		.cfi_offset 14, -4
- 363 0002 83B0     		sub	sp, sp, #12
- 364              	.LCFI7:
- 365              		.cfi_def_cfa_offset 24
- 366 0004 0446     		mov	r4, r0
- 117:bsp/Src/ADC.c ****     /*
- 118:bsp/Src/ADC.c ****     Interrupt triggers this callback when the conversion is complete
- 119:bsp/Src/ADC.c ****     */ 
- 120:bsp/Src/ADC.c ****     BaseType_t higherPriorityTaskWoken = pdFALSE;
- 367              		.loc 1 120 5 is_stmt 1 view .LVU82
- 368              		.loc 1 120 16 is_stmt 0 view .LVU83
- 369 0006 0023     		movs	r3, #0
- 370 0008 0193     		str	r3, [sp, #4]
- 121:bsp/Src/ADC.c ****     QueueHandle_t q = NULL; // Queue will never be null by the call [placeholder]
- 371              		.loc 1 121 5 is_stmt 1 view .LVU84
- 372              	.LVL28:
- 122:bsp/Src/ADC.c ****     int rawVal;
- 373              		.loc 1 122 5 view .LVU85
- 123:bsp/Src/ADC.c **** 
- 124:bsp/Src/ADC.c ****     if (h->Instance == ADC1) q = adc1_q;
- 374              		.loc 1 124 5 view .LVU86
- 375              		.loc 1 124 10 is_stmt 0 view .LVU87
- 376 000a 0368     		ldr	r3, [r0]
- 377              		.loc 1 124 8 view .LVU88
- 378 000c B3F1A04F 		cmp	r3, #1342177280
-ARM GAS  /tmp/cc1ssgaQ.s 			page 10
+  82:bsp/Src/ADC.c ****     #endif
+ 235              		.loc 1 82 30 is_stmt 1 discriminator 1 view .LVU58
+  82:bsp/Src/ADC.c ****     #endif
+ 236              		.loc 1 82 37 is_stmt 0 discriminator 1 view .LVU59
+ 237 0078 114B     		ldr	r3, .L31+28
+ 238 007a 1D60     		str	r5, [r3]
+ 239 007c E0E7     		b	.L16
+ 240              	.L30:
+  85:bsp/Src/ADC.c ****     #endif
+ 241              		.loc 1 85 30 is_stmt 1 discriminator 1 view .LVU60
+  85:bsp/Src/ADC.c ****     #endif
+ 242              		.loc 1 85 37 is_stmt 0 discriminator 1 view .LVU61
+ 243 007e 114B     		ldr	r3, .L31+32
+ 244 0080 1D60     		str	r5, [r3]
+ 245 0082 E1E7     		b	.L17
+ 246              	.LVL14:
+ 247              	.L18:
+  55:bsp/Src/ADC.c ****     }
+ 248              		.loc 1 55 16 view .LVU62
+ 249 0084 0326     		movs	r6, #3
+ 250 0086 06E0     		b	.L12
+ 251              	.L19:
+  55:bsp/Src/ADC.c ****     }
+ 252              		.loc 1 55 16 view .LVU63
+ 253 0088 0326     		movs	r6, #3
+ 254 008a 04E0     		b	.L12
+ 255              	.L20:
+ 256 008c 0326     		movs	r6, #3
+ 257 008e 02E0     		b	.L12
+ 258              	.LVL15:
+ 259              	.L21:
+  68:bsp/Src/ADC.c ****     } 
+ 260              		.loc 1 68 14 view .LVU64
+ 261 0090 0326     		movs	r6, #3
+ 262 0092 00E0     		b	.L12
+ 263              	.L22:
+  90:bsp/Src/ADC.c ****     }
+ 264              		.loc 1 90 16 view .LVU65
+ 265 0094 0726     		movs	r6, #7
+ 266              	.LVL16:
+ 267              	.L12:
+ 106:bsp/Src/ADC.c ****             break;
+ 107:bsp/Src/ADC.c ****         default: break;
+ 108:bsp/Src/ADC.c ****     }
+ 109:bsp/Src/ADC.c ****     
+ 110:bsp/Src/ADC.c ****     return ADC_OK; 
+ 111:bsp/Src/ADC.c **** }
+ 268              		.loc 1 111 1 view .LVU66
+ 269 0096 3046     		mov	r0, r6
+ 270 0098 70BD     		pop	{r4, r5, r6, pc}
+ 271              	.LVL17:
+ 272              	.L23:
+  97:bsp/Src/ADC.c ****         case HAL_BUSY:
+ 273              		.loc 1 97 5 view .LVU67
+ 274 009a 0426     		movs	r6, #4
+ 275 009c FBE7     		b	.L12
+ 276              	.L24:
+ARM GAS  /tmp/ccc73iiR.s 			page 8
 
 
- 379 0010 27D0     		beq	.L42
- 121:bsp/Src/ADC.c ****     int rawVal;
- 380              		.loc 1 121 19 view .LVU89
- 381 0012 0025     		movs	r5, #0
- 382              	.LVL29:
- 383              	.L34:
- 125:bsp/Src/ADC.c ****     #ifdef ADC2
- 126:bsp/Src/ADC.c ****     if (h->Instance == ADC2) q = adc2_q;
- 384              		.loc 1 126 5 is_stmt 1 view .LVU90
- 385              		.loc 1 126 8 is_stmt 0 view .LVU91
- 386 0014 1A4A     		ldr	r2, .L47
- 387 0016 9342     		cmp	r3, r2
- 388 0018 26D0     		beq	.L43
- 389              	.L35:
- 127:bsp/Src/ADC.c ****     #endif
- 128:bsp/Src/ADC.c ****     #ifdef ADC3
- 129:bsp/Src/ADC.c ****     if (h->Instance == ADC3) q = adc3_q;
- 390              		.loc 1 129 5 is_stmt 1 view .LVU92
- 391              		.loc 1 129 8 is_stmt 0 view .LVU93
- 392 001a 1A4A     		ldr	r2, .L47+4
- 393 001c 9342     		cmp	r3, r2
- 394 001e 26D0     		beq	.L44
- 395              	.L36:
- 130:bsp/Src/ADC.c ****     #endif
- 131:bsp/Src/ADC.c ****     #ifdef ADC4
- 132:bsp/Src/ADC.c ****     if (h->Instance == ADC4) q = adc4_q;
- 396              		.loc 1 132 5 is_stmt 1 view .LVU94
- 397              		.loc 1 132 8 is_stmt 0 view .LVU95
- 398 0020 194A     		ldr	r2, .L47+8
- 399 0022 9342     		cmp	r3, r2
- 400 0024 26D0     		beq	.L45
- 401              	.L37:
- 133:bsp/Src/ADC.c ****     #endif
- 134:bsp/Src/ADC.c ****     #ifdef ADC5
- 135:bsp/Src/ADC.c ****     if (h->Instance == ADC5) q = adc5_q;
- 402              		.loc 1 135 5 is_stmt 1 view .LVU96
- 403              		.loc 1 135 8 is_stmt 0 view .LVU97
- 404 0026 194A     		ldr	r2, .L47+12
- 405 0028 9342     		cmp	r3, r2
- 406 002a 26D0     		beq	.L46
- 407              	.L38:
- 136:bsp/Src/ADC.c ****     #endif
- 137:bsp/Src/ADC.c **** 
- 138:bsp/Src/ADC.c ****     rawVal = HAL_ADC_GetValue(h); // reads DR reg
- 408              		.loc 1 138 5 is_stmt 1 view .LVU98
- 409              		.loc 1 138 14 is_stmt 0 view .LVU99
- 410 002c 2046     		mov	r0, r4
- 411              	.LVL30:
- 412              		.loc 1 138 14 view .LVU100
- 413 002e FFF7FEFF 		bl	HAL_ADC_GetValue
- 414              	.LVL31:
- 415              		.loc 1 138 12 discriminator 1 view .LVU101
- 416 0032 0090     		str	r0, [sp]
- 139:bsp/Src/ADC.c ****     
- 140:bsp/Src/ADC.c ****     xQueueSendFromISR(q, &rawVal, &higherPriorityTaskWoken);
- 417              		.loc 1 140 5 is_stmt 1 view .LVU102
- 418 0034 0023     		movs	r3, #0
-ARM GAS  /tmp/cc1ssgaQ.s 			page 11
+ 102:bsp/Src/ADC.c ****             break;
+ 277              		.loc 1 102 20 view .LVU68
+ 278 009e 0526     		movs	r6, #5
+ 279 00a0 F9E7     		b	.L12
+ 280              	.L32:
+ 281 00a2 00BF     		.align	2
+ 282              	.L31:
+ 283 00a4 00010050 		.word	1342177536
+ 284 00a8 00040050 		.word	1342178304
+ 285 00ac 00050050 		.word	1342178560
+ 286 00b0 00060050 		.word	1342178816
+ 287 00b4 00000000 		.word	adc1_q
+ 288 00b8 00000000 		.word	adc2_q
+ 289 00bc 00000000 		.word	adc3_q
+ 290 00c0 00000000 		.word	adc4_q
+ 291 00c4 00000000 		.word	adc5_q
+ 292              		.cfi_endproc
+ 293              	.LFE336:
+ 295              		.section	.text.adc_hook,"ax",%progbits
+ 296              		.align	1
+ 297              		.weak	adc_hook
+ 298              		.syntax unified
+ 299              		.thumb
+ 300              		.thumb_func
+ 302              	adc_hook:
+ 303              	.LVL18:
+ 304              	.LFB337:
+ 112:bsp/Src/ADC.c **** 
+ 113:bsp/Src/ADC.c **** __weak adc_status_t adc_hook(ADC_HandleTypeDef *h) {
+ 305              		.loc 1 113 52 is_stmt 1 view -0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              		@ link register save eliminated.
+ 114:bsp/Src/ADC.c ****   /*** Callback hook if you're feeling creative ***/
+ 115:bsp/Src/ADC.c ****   return ADC_OK;
+ 310              		.loc 1 115 3 view .LVU70
+ 116:bsp/Src/ADC.c **** }
+ 311              		.loc 1 116 1 is_stmt 0 view .LVU71
+ 312 0000 0020     		movs	r0, #0
+ 313              	.LVL19:
+ 314              		.loc 1 116 1 view .LVU72
+ 315 0002 7047     		bx	lr
+ 316              		.cfi_endproc
+ 317              	.LFE337:
+ 319              		.section	.text.HAL_ADC_ConvCpltCallback,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	HAL_ADC_ConvCpltCallback
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	HAL_ADC_ConvCpltCallback:
+ 327              	.LVL20:
+ 328              	.LFB338:
+ 117:bsp/Src/ADC.c **** 
+ 118:bsp/Src/ADC.c **** void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *h) {
+ 329              		.loc 1 118 53 is_stmt 1 view -0
+ARM GAS  /tmp/ccc73iiR.s 			page 9
 
 
- 419 0036 01AA     		add	r2, sp, #4
- 420 0038 6946     		mov	r1, sp
- 421 003a 2846     		mov	r0, r5
- 422 003c FFF7FEFF 		bl	xQueueGenericSendFromISR
- 423              	.LVL32:
- 141:bsp/Src/ADC.c **** 
- 142:bsp/Src/ADC.c ****     // isr done
- 143:bsp/Src/ADC.c ****     adc_hook(h); // lakman
- 424              		.loc 1 143 5 view .LVU103
- 425 0040 2046     		mov	r0, r4
- 426 0042 FFF7FEFF 		bl	adc_hook
- 427              	.LVL33:
- 144:bsp/Src/ADC.c ****     portYIELD_FROM_ISR(higherPriorityTaskWoken);
- 428              		.loc 1 144 5 view .LVU104
- 429              		.loc 1 144 5 view .LVU105
- 430 0046 019B     		ldr	r3, [sp, #4]
- 431 0048 4BB1     		cbz	r3, .L33
- 432              		.loc 1 144 5 discriminator 1 view .LVU106
- 433              		.loc 1 144 5 discriminator 1 view .LVU107
- 434 004a 4FF0E023 		mov	r3, #-536813568
- 435 004e 4FF08052 		mov	r2, #268435456
- 436 0052 C3F8042D 		str	r2, [r3, #3332]
- 437              		.loc 1 144 5 discriminator 1 view .LVU108
- 438              		.syntax unified
- 439              	@ 144 "bsp/Src/ADC.c" 1
- 440 0056 BFF34F8F 		dsb
- 441              	@ 0 "" 2
- 442              		.loc 1 144 5 discriminator 1 view .LVU109
- 443              	@ 144 "bsp/Src/ADC.c" 1
- 444 005a BFF36F8F 		isb
- 445              	@ 0 "" 2
- 446              		.loc 1 144 5 discriminator 1 view .LVU110
- 447              		.loc 1 144 5 discriminator 3 view .LVU111
- 448              		.loc 1 144 5 discriminator 3 view .LVU112
- 449              		.thumb
- 450              		.syntax unified
- 451              	.L33:
- 145:bsp/Src/ADC.c **** }
- 452              		.loc 1 145 1 is_stmt 0 view .LVU113
- 453 005e 03B0     		add	sp, sp, #12
- 454              	.LCFI8:
- 455              		.cfi_remember_state
- 456              		.cfi_def_cfa_offset 12
- 457              		@ sp needed
- 458 0060 30BD     		pop	{r4, r5, pc}
- 459              	.LVL34:
- 460              	.L42:
- 461              	.LCFI9:
- 462              		.cfi_restore_state
- 124:bsp/Src/ADC.c ****     #ifdef ADC2
- 463              		.loc 1 124 30 is_stmt 1 discriminator 1 view .LVU114
- 124:bsp/Src/ADC.c ****     #ifdef ADC2
- 464              		.loc 1 124 32 is_stmt 0 discriminator 1 view .LVU115
- 465 0062 0B4A     		ldr	r2, .L47+16
- 466 0064 1568     		ldr	r5, [r2]
- 467              	.LVL35:
- 124:bsp/Src/ADC.c ****     #ifdef ADC2
-ARM GAS  /tmp/cc1ssgaQ.s 			page 12
-
-
- 468              		.loc 1 124 32 discriminator 1 view .LVU116
- 469 0066 D5E7     		b	.L34
- 470              	.L43:
- 126:bsp/Src/ADC.c ****     #endif
- 471              		.loc 1 126 30 is_stmt 1 discriminator 1 view .LVU117
- 126:bsp/Src/ADC.c ****     #endif
- 472              		.loc 1 126 32 is_stmt 0 discriminator 1 view .LVU118
- 473 0068 0A4A     		ldr	r2, .L47+20
- 474 006a 1568     		ldr	r5, [r2]
- 475              	.LVL36:
- 126:bsp/Src/ADC.c ****     #endif
- 476              		.loc 1 126 32 discriminator 1 view .LVU119
- 477 006c D5E7     		b	.L35
- 478              	.L44:
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333              		.loc 1 118 53 is_stmt 0 view .LVU74
+ 334 0000 30B5     		push	{r4, r5, lr}
+ 335              	.LCFI3:
+ 336              		.cfi_def_cfa_offset 12
+ 337              		.cfi_offset 4, -12
+ 338              		.cfi_offset 5, -8
+ 339              		.cfi_offset 14, -4
+ 340 0002 83B0     		sub	sp, sp, #12
+ 341              	.LCFI4:
+ 342              		.cfi_def_cfa_offset 24
+ 343 0004 0446     		mov	r4, r0
+ 119:bsp/Src/ADC.c ****     /*
+ 120:bsp/Src/ADC.c ****     Interrupt triggers this callback when the conversion is complete
+ 121:bsp/Src/ADC.c ****     */ 
+ 122:bsp/Src/ADC.c ****     BaseType_t higherPriorityTaskWoken = pdFALSE;
+ 344              		.loc 1 122 5 is_stmt 1 view .LVU75
+ 345              		.loc 1 122 16 is_stmt 0 view .LVU76
+ 346 0006 0023     		movs	r3, #0
+ 347 0008 0193     		str	r3, [sp, #4]
+ 123:bsp/Src/ADC.c ****     QueueHandle_t q = NULL; // Queue will never be null by the call [placeholder]
+ 348              		.loc 1 123 5 is_stmt 1 view .LVU77
+ 349              	.LVL21:
+ 124:bsp/Src/ADC.c ****     int rawVal;
+ 350              		.loc 1 124 5 view .LVU78
+ 125:bsp/Src/ADC.c **** 
+ 126:bsp/Src/ADC.c ****     if (h->Instance == ADC1) q = adc1_q;
+ 351              		.loc 1 126 5 view .LVU79
+ 352              		.loc 1 126 10 is_stmt 0 view .LVU80
+ 353 000a 0368     		ldr	r3, [r0]
+ 354              		.loc 1 126 8 view .LVU81
+ 355 000c B3F1A04F 		cmp	r3, #1342177280
+ 356 0010 27D0     		beq	.L43
+ 123:bsp/Src/ADC.c ****     int rawVal;
+ 357              		.loc 1 123 19 view .LVU82
+ 358 0012 0025     		movs	r5, #0
+ 359              	.LVL22:
+ 360              	.L35:
+ 127:bsp/Src/ADC.c ****     #ifdef ADC2
+ 128:bsp/Src/ADC.c ****     if (h->Instance == ADC2) q = adc2_q;
+ 361              		.loc 1 128 5 is_stmt 1 view .LVU83
+ 362              		.loc 1 128 8 is_stmt 0 view .LVU84
+ 363 0014 1A4A     		ldr	r2, .L48
+ 364 0016 9342     		cmp	r3, r2
+ 365 0018 26D0     		beq	.L44
+ 366              	.L36:
  129:bsp/Src/ADC.c ****     #endif
- 479              		.loc 1 129 30 is_stmt 1 discriminator 1 view .LVU120
- 129:bsp/Src/ADC.c ****     #endif
- 480              		.loc 1 129 32 is_stmt 0 discriminator 1 view .LVU121
- 481 006e 0A4A     		ldr	r2, .L47+24
- 482 0070 1568     		ldr	r5, [r2]
- 483              	.LVL37:
- 129:bsp/Src/ADC.c ****     #endif
- 484              		.loc 1 129 32 discriminator 1 view .LVU122
- 485 0072 D5E7     		b	.L36
- 486              	.L45:
- 132:bsp/Src/ADC.c ****     #endif
- 487              		.loc 1 132 30 is_stmt 1 discriminator 1 view .LVU123
- 132:bsp/Src/ADC.c ****     #endif
- 488              		.loc 1 132 32 is_stmt 0 discriminator 1 view .LVU124
- 489 0074 094A     		ldr	r2, .L47+28
- 490 0076 1568     		ldr	r5, [r2]
- 491              	.LVL38:
- 132:bsp/Src/ADC.c ****     #endif
- 492              		.loc 1 132 32 discriminator 1 view .LVU125
- 493 0078 D5E7     		b	.L37
- 494              	.L46:
- 135:bsp/Src/ADC.c ****     #endif
- 495              		.loc 1 135 30 is_stmt 1 discriminator 1 view .LVU126
- 135:bsp/Src/ADC.c ****     #endif
- 496              		.loc 1 135 32 is_stmt 0 discriminator 1 view .LVU127
- 497 007a 094B     		ldr	r3, .L47+32
- 498 007c 1D68     		ldr	r5, [r3]
- 499              	.LVL39:
- 135:bsp/Src/ADC.c ****     #endif
- 500              		.loc 1 135 32 discriminator 1 view .LVU128
- 501 007e D5E7     		b	.L38
- 502              	.L48:
- 503              		.align	2
- 504              	.L47:
- 505 0080 00010050 		.word	1342177536
- 506 0084 00040050 		.word	1342178304
- 507 0088 00050050 		.word	1342178560
- 508 008c 00060050 		.word	1342178816
- 509 0090 00000000 		.word	adc1_q
- 510 0094 00000000 		.word	adc2_q
- 511 0098 00000000 		.word	adc3_q
- 512 009c 00000000 		.word	adc4_q
-ARM GAS  /tmp/cc1ssgaQ.s 			page 13
+ 130:bsp/Src/ADC.c ****     #ifdef ADC3
+ 131:bsp/Src/ADC.c ****     if (h->Instance == ADC3) q = adc3_q;
+ 367              		.loc 1 131 5 is_stmt 1 view .LVU85
+ 368              		.loc 1 131 8 is_stmt 0 view .LVU86
+ 369 001a 1A4A     		ldr	r2, .L48+4
+ 370 001c 9342     		cmp	r3, r2
+ 371 001e 26D0     		beq	.L45
+ 372              	.L37:
+ARM GAS  /tmp/ccc73iiR.s 			page 10
 
 
- 513 00a0 00000000 		.word	adc5_q
- 514              		.cfi_endproc
- 515              	.LFE338:
- 517              		.section	.text.ADC1_2_IRQHandler,"ax",%progbits
- 518              		.align	1
- 519              		.global	ADC1_2_IRQHandler
- 520              		.syntax unified
- 521              		.thumb
- 522              		.thumb_func
- 524              	ADC1_2_IRQHandler:
- 525              	.LFB339:
- 146:bsp/Src/ADC.c **** 
- 147:bsp/Src/ADC.c **** 
+ 132:bsp/Src/ADC.c ****     #endif
+ 133:bsp/Src/ADC.c ****     #ifdef ADC4
+ 134:bsp/Src/ADC.c ****     if (h->Instance == ADC4) q = adc4_q;
+ 373              		.loc 1 134 5 is_stmt 1 view .LVU87
+ 374              		.loc 1 134 8 is_stmt 0 view .LVU88
+ 375 0020 194A     		ldr	r2, .L48+8
+ 376 0022 9342     		cmp	r3, r2
+ 377 0024 26D0     		beq	.L46
+ 378              	.L38:
+ 135:bsp/Src/ADC.c ****     #endif
+ 136:bsp/Src/ADC.c ****     #ifdef ADC5
+ 137:bsp/Src/ADC.c ****     if (h->Instance == ADC5) q = adc5_q;
+ 379              		.loc 1 137 5 is_stmt 1 view .LVU89
+ 380              		.loc 1 137 8 is_stmt 0 view .LVU90
+ 381 0026 194A     		ldr	r2, .L48+12
+ 382 0028 9342     		cmp	r3, r2
+ 383 002a 26D0     		beq	.L47
+ 384              	.L39:
+ 138:bsp/Src/ADC.c ****     #endif
+ 139:bsp/Src/ADC.c **** 
+ 140:bsp/Src/ADC.c ****     rawVal = HAL_ADC_GetValue(h); // reads DR reg
+ 385              		.loc 1 140 5 is_stmt 1 view .LVU91
+ 386              		.loc 1 140 14 is_stmt 0 view .LVU92
+ 387 002c 2046     		mov	r0, r4
+ 388              	.LVL23:
+ 389              		.loc 1 140 14 view .LVU93
+ 390 002e FFF7FEFF 		bl	HAL_ADC_GetValue
+ 391              	.LVL24:
+ 392              		.loc 1 140 12 discriminator 1 view .LVU94
+ 393 0032 0090     		str	r0, [sp]
+ 141:bsp/Src/ADC.c ****     
+ 142:bsp/Src/ADC.c ****     xQueueSendFromISR(q, &rawVal, &higherPriorityTaskWoken);
+ 394              		.loc 1 142 5 is_stmt 1 view .LVU95
+ 395 0034 0023     		movs	r3, #0
+ 396 0036 01AA     		add	r2, sp, #4
+ 397 0038 6946     		mov	r1, sp
+ 398 003a 2846     		mov	r0, r5
+ 399 003c FFF7FEFF 		bl	xQueueGenericSendFromISR
+ 400              	.LVL25:
+ 143:bsp/Src/ADC.c **** 
+ 144:bsp/Src/ADC.c ****     // isr done
+ 145:bsp/Src/ADC.c ****     adc_hook(h); // lakman
+ 401              		.loc 1 145 5 view .LVU96
+ 402 0040 2046     		mov	r0, r4
+ 403 0042 FFF7FEFF 		bl	adc_hook
+ 404              	.LVL26:
+ 146:bsp/Src/ADC.c ****     portYIELD_FROM_ISR(higherPriorityTaskWoken);
+ 405              		.loc 1 146 5 view .LVU97
+ 406              		.loc 1 146 5 view .LVU98
+ 407 0046 019B     		ldr	r3, [sp, #4]
+ 408 0048 4BB1     		cbz	r3, .L34
+ 409              		.loc 1 146 5 discriminator 1 view .LVU99
+ 410              		.loc 1 146 5 discriminator 1 view .LVU100
+ 411 004a 4FF0E023 		mov	r3, #-536813568
+ 412 004e 4FF08052 		mov	r2, #268435456
+ 413 0052 C3F8042D 		str	r2, [r3, #3332]
+ 414              		.loc 1 146 5 discriminator 1 view .LVU101
+ARM GAS  /tmp/ccc73iiR.s 			page 11
+
+
+ 415              		.syntax unified
+ 416              	@ 146 "bsp/Src/ADC.c" 1
+ 417 0056 BFF34F8F 		dsb
+ 418              	@ 0 "" 2
+ 419              		.loc 1 146 5 discriminator 1 view .LVU102
+ 420              	@ 146 "bsp/Src/ADC.c" 1
+ 421 005a BFF36F8F 		isb
+ 422              	@ 0 "" 2
+ 423              		.loc 1 146 5 discriminator 1 view .LVU103
+ 424              		.loc 1 146 5 discriminator 3 view .LVU104
+ 425              		.loc 1 146 5 discriminator 3 view .LVU105
+ 426              		.thumb
+ 427              		.syntax unified
+ 428              	.L34:
+ 147:bsp/Src/ADC.c **** }
+ 429              		.loc 1 147 1 is_stmt 0 view .LVU106
+ 430 005e 03B0     		add	sp, sp, #12
+ 431              	.LCFI5:
+ 432              		.cfi_remember_state
+ 433              		.cfi_def_cfa_offset 12
+ 434              		@ sp needed
+ 435 0060 30BD     		pop	{r4, r5, pc}
+ 436              	.LVL27:
+ 437              	.L43:
+ 438              	.LCFI6:
+ 439              		.cfi_restore_state
+ 126:bsp/Src/ADC.c ****     #ifdef ADC2
+ 440              		.loc 1 126 30 is_stmt 1 discriminator 1 view .LVU107
+ 126:bsp/Src/ADC.c ****     #ifdef ADC2
+ 441              		.loc 1 126 32 is_stmt 0 discriminator 1 view .LVU108
+ 442 0062 0B4A     		ldr	r2, .L48+16
+ 443 0064 1568     		ldr	r5, [r2]
+ 444              	.LVL28:
+ 126:bsp/Src/ADC.c ****     #ifdef ADC2
+ 445              		.loc 1 126 32 discriminator 1 view .LVU109
+ 446 0066 D5E7     		b	.L35
+ 447              	.L44:
+ 128:bsp/Src/ADC.c ****     #endif
+ 448              		.loc 1 128 30 is_stmt 1 discriminator 1 view .LVU110
+ 128:bsp/Src/ADC.c ****     #endif
+ 449              		.loc 1 128 32 is_stmt 0 discriminator 1 view .LVU111
+ 450 0068 0A4A     		ldr	r2, .L48+20
+ 451 006a 1568     		ldr	r5, [r2]
+ 452              	.LVL29:
+ 128:bsp/Src/ADC.c ****     #endif
+ 453              		.loc 1 128 32 discriminator 1 view .LVU112
+ 454 006c D5E7     		b	.L36
+ 455              	.L45:
+ 131:bsp/Src/ADC.c ****     #endif
+ 456              		.loc 1 131 30 is_stmt 1 discriminator 1 view .LVU113
+ 131:bsp/Src/ADC.c ****     #endif
+ 457              		.loc 1 131 32 is_stmt 0 discriminator 1 view .LVU114
+ 458 006e 0A4A     		ldr	r2, .L48+24
+ 459 0070 1568     		ldr	r5, [r2]
+ 460              	.LVL30:
+ 131:bsp/Src/ADC.c ****     #endif
+ 461              		.loc 1 131 32 discriminator 1 view .LVU115
+ARM GAS  /tmp/ccc73iiR.s 			page 12
+
+
+ 462 0072 D5E7     		b	.L37
+ 463              	.L46:
+ 134:bsp/Src/ADC.c ****     #endif
+ 464              		.loc 1 134 30 is_stmt 1 discriminator 1 view .LVU116
+ 134:bsp/Src/ADC.c ****     #endif
+ 465              		.loc 1 134 32 is_stmt 0 discriminator 1 view .LVU117
+ 466 0074 094A     		ldr	r2, .L48+28
+ 467 0076 1568     		ldr	r5, [r2]
+ 468              	.LVL31:
+ 134:bsp/Src/ADC.c ****     #endif
+ 469              		.loc 1 134 32 discriminator 1 view .LVU118
+ 470 0078 D5E7     		b	.L38
+ 471              	.L47:
+ 137:bsp/Src/ADC.c ****     #endif
+ 472              		.loc 1 137 30 is_stmt 1 discriminator 1 view .LVU119
+ 137:bsp/Src/ADC.c ****     #endif
+ 473              		.loc 1 137 32 is_stmt 0 discriminator 1 view .LVU120
+ 474 007a 094B     		ldr	r3, .L48+32
+ 475 007c 1D68     		ldr	r5, [r3]
+ 476              	.LVL32:
+ 137:bsp/Src/ADC.c ****     #endif
+ 477              		.loc 1 137 32 discriminator 1 view .LVU121
+ 478 007e D5E7     		b	.L39
+ 479              	.L49:
+ 480              		.align	2
+ 481              	.L48:
+ 482 0080 00010050 		.word	1342177536
+ 483 0084 00040050 		.word	1342178304
+ 484 0088 00050050 		.word	1342178560
+ 485 008c 00060050 		.word	1342178816
+ 486 0090 00000000 		.word	adc1_q
+ 487 0094 00000000 		.word	adc2_q
+ 488 0098 00000000 		.word	adc3_q
+ 489 009c 00000000 		.word	adc4_q
+ 490 00a0 00000000 		.word	adc5_q
+ 491              		.cfi_endproc
+ 492              	.LFE338:
+ 494              		.section	.text.ADC1_2_IRQHandler,"ax",%progbits
+ 495              		.align	1
+ 496              		.global	ADC1_2_IRQHandler
+ 497              		.syntax unified
+ 498              		.thumb
+ 499              		.thumb_func
+ 501              	ADC1_2_IRQHandler:
+ 502              	.LFB339:
  148:bsp/Src/ADC.c **** 
- 149:bsp/Src/ADC.c **** #if defined(STM32L4xx) || defined(STM32G4xx)
- 150:bsp/Src/ADC.c **** void ADC1_2_IRQHandler() {
- 526              		.loc 1 150 26 is_stmt 1 view -0
- 527              		.cfi_startproc
- 528              		@ args = 0, pretend = 0, frame = 0
- 529              		@ frame_needed = 0, uses_anonymous_args = 0
- 530 0000 08B5     		push	{r3, lr}
- 531              	.LCFI10:
- 532              		.cfi_def_cfa_offset 8
- 533              		.cfi_offset 3, -8
- 534              		.cfi_offset 14, -4
- 151:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc1);
- 535              		.loc 1 151 5 view .LVU130
- 536 0002 044B     		ldr	r3, .L51
- 537 0004 1868     		ldr	r0, [r3]
- 538 0006 FFF7FEFF 		bl	HAL_ADC_IRQHandler
- 539              	.LVL40:
- 152:bsp/Src/ADC.c ****     #ifdef ADC2
- 153:bsp/Src/ADC.c ****         HAL_ADC_IRQHandler(hadc2);
- 540              		.loc 1 153 9 view .LVU131
- 541 000a 034B     		ldr	r3, .L51+4
- 542 000c 1868     		ldr	r0, [r3]
- 543 000e FFF7FEFF 		bl	HAL_ADC_IRQHandler
- 544              	.LVL41:
- 154:bsp/Src/ADC.c **** 
- 155:bsp/Src/ADC.c ****     #endif
- 156:bsp/Src/ADC.c **** }
- 545              		.loc 1 156 1 is_stmt 0 view .LVU132
- 546 0012 08BD     		pop	{r3, pc}
- 547              	.L52:
- 548              		.align	2
- 549              	.L51:
- 550 0014 00000000 		.word	hadc1
- 551 0018 00000000 		.word	hadc2
- 552              		.cfi_endproc
- 553              	.LFE339:
- 555              		.section	.text.ADC3_IRQHandler,"ax",%progbits
- 556              		.align	1
- 557              		.global	ADC3_IRQHandler
- 558              		.syntax unified
- 559              		.thumb
- 560              		.thumb_func
- 562              	ADC3_IRQHandler:
-ARM GAS  /tmp/cc1ssgaQ.s 			page 14
+ 149:bsp/Src/ADC.c **** 
+ 150:bsp/Src/ADC.c **** 
+ 151:bsp/Src/ADC.c **** #if defined(STM32L4xx) || defined(STM32G4xx)
+ 152:bsp/Src/ADC.c **** void ADC1_2_IRQHandler() {
+ 503              		.loc 1 152 26 is_stmt 1 view -0
+ 504              		.cfi_startproc
+ 505              		@ args = 0, pretend = 0, frame = 0
+ 506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 507 0000 08B5     		push	{r3, lr}
+ 508              	.LCFI7:
+ 509              		.cfi_def_cfa_offset 8
+ARM GAS  /tmp/ccc73iiR.s 			page 13
 
 
- 563              	.LFB340:
- 157:bsp/Src/ADC.c **** 
- 158:bsp/Src/ADC.c **** #ifdef ADC3
- 159:bsp/Src/ADC.c **** void ADC3_IRQHandler() {
- 564              		.loc 1 159 24 is_stmt 1 view -0
- 565              		.cfi_startproc
- 566              		@ args = 0, pretend = 0, frame = 0
- 567              		@ frame_needed = 0, uses_anonymous_args = 0
- 568 0000 08B5     		push	{r3, lr}
- 569              	.LCFI11:
- 570              		.cfi_def_cfa_offset 8
- 571              		.cfi_offset 3, -8
- 572              		.cfi_offset 14, -4
- 160:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc3);
- 573              		.loc 1 160 5 view .LVU134
- 574 0002 024B     		ldr	r3, .L55
- 575 0004 1868     		ldr	r0, [r3]
- 576 0006 FFF7FEFF 		bl	HAL_ADC_IRQHandler
- 577              	.LVL42:
- 161:bsp/Src/ADC.c **** 
- 162:bsp/Src/ADC.c **** }
- 578              		.loc 1 162 1 is_stmt 0 view .LVU135
- 579 000a 08BD     		pop	{r3, pc}
- 580              	.L56:
- 581              		.align	2
- 582              	.L55:
- 583 000c 00000000 		.word	hadc3
- 584              		.cfi_endproc
- 585              	.LFE340:
- 587              		.section	.text.HAL_ADC_ErrorCallback,"ax",%progbits
- 588              		.align	1
- 589              		.global	HAL_ADC_ErrorCallback
- 590              		.syntax unified
- 591              		.thumb
- 592              		.thumb_func
- 594              	HAL_ADC_ErrorCallback:
- 595              	.LVL43:
- 596              	.LFB341:
- 163:bsp/Src/ADC.c **** #endif
- 164:bsp/Src/ADC.c **** #endif
- 165:bsp/Src/ADC.c **** 
- 166:bsp/Src/ADC.c **** #if defined(STM32G4xx)
- 167:bsp/Src/ADC.c **** #ifdef ADC4_IRQHandler
- 168:bsp/Src/ADC.c **** void ADC4_IRQHandler() {
- 169:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc4);
- 170:bsp/Src/ADC.c **** }
- 171:bsp/Src/ADC.c **** #endif
- 172:bsp/Src/ADC.c **** 
- 173:bsp/Src/ADC.c **** #ifdef ADC5_IRQHandler
- 174:bsp/Src/ADC.c **** void ADC5_IRQHandler() {
- 175:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc5);
- 176:bsp/Src/ADC.c **** }
- 177:bsp/Src/ADC.c **** #endif
- 178:bsp/Src/ADC.c **** #endif
- 179:bsp/Src/ADC.c **** 
- 180:bsp/Src/ADC.c **** #if defined(STM32F4xx)
- 181:bsp/Src/ADC.c **** void ADC_IRQHandler() {
-ARM GAS  /tmp/cc1ssgaQ.s 			page 15
+ 510              		.cfi_offset 3, -8
+ 511              		.cfi_offset 14, -4
+ 153:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc1);
+ 512              		.loc 1 153 5 view .LVU123
+ 513 0002 044B     		ldr	r3, .L52
+ 514 0004 1868     		ldr	r0, [r3]
+ 515 0006 FFF7FEFF 		bl	HAL_ADC_IRQHandler
+ 516              	.LVL33:
+ 154:bsp/Src/ADC.c ****     #ifdef ADC2
+ 155:bsp/Src/ADC.c ****         HAL_ADC_IRQHandler(hadc2);
+ 517              		.loc 1 155 9 view .LVU124
+ 518 000a 034B     		ldr	r3, .L52+4
+ 519 000c 1868     		ldr	r0, [r3]
+ 520 000e FFF7FEFF 		bl	HAL_ADC_IRQHandler
+ 521              	.LVL34:
+ 156:bsp/Src/ADC.c **** 
+ 157:bsp/Src/ADC.c ****     #endif
+ 158:bsp/Src/ADC.c **** }
+ 522              		.loc 1 158 1 is_stmt 0 view .LVU125
+ 523 0012 08BD     		pop	{r3, pc}
+ 524              	.L53:
+ 525              		.align	2
+ 526              	.L52:
+ 527 0014 00000000 		.word	hadc1
+ 528 0018 00000000 		.word	hadc2
+ 529              		.cfi_endproc
+ 530              	.LFE339:
+ 532              		.section	.text.ADC3_IRQHandler,"ax",%progbits
+ 533              		.align	1
+ 534              		.global	ADC3_IRQHandler
+ 535              		.syntax unified
+ 536              		.thumb
+ 537              		.thumb_func
+ 539              	ADC3_IRQHandler:
+ 540              	.LFB340:
+ 159:bsp/Src/ADC.c **** 
+ 160:bsp/Src/ADC.c **** #ifdef ADC3
+ 161:bsp/Src/ADC.c **** void ADC3_IRQHandler() {
+ 541              		.loc 1 161 24 is_stmt 1 view -0
+ 542              		.cfi_startproc
+ 543              		@ args = 0, pretend = 0, frame = 0
+ 544              		@ frame_needed = 0, uses_anonymous_args = 0
+ 545 0000 08B5     		push	{r3, lr}
+ 546              	.LCFI8:
+ 547              		.cfi_def_cfa_offset 8
+ 548              		.cfi_offset 3, -8
+ 549              		.cfi_offset 14, -4
+ 162:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc3);
+ 550              		.loc 1 162 5 view .LVU127
+ 551 0002 024B     		ldr	r3, .L56
+ 552 0004 1868     		ldr	r0, [r3]
+ 553 0006 FFF7FEFF 		bl	HAL_ADC_IRQHandler
+ 554              	.LVL35:
+ 163:bsp/Src/ADC.c **** 
+ 164:bsp/Src/ADC.c **** }
+ 555              		.loc 1 164 1 is_stmt 0 view .LVU128
+ 556 000a 08BD     		pop	{r3, pc}
+ARM GAS  /tmp/ccc73iiR.s 			page 14
 
 
- 182:bsp/Src/ADC.c ****     // w simplicity
- 183:bsp/Src/ADC.c ****     // F4 IRQ Handler 
- 184:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc1);
- 185:bsp/Src/ADC.c ****     #ifdef ADC2
- 186:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc2);
- 187:bsp/Src/ADC.c ****     #endif
- 188:bsp/Src/ADC.c ****     #ifdef ADC3
- 189:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc3);
- 190:bsp/Src/ADC.c ****     #endif
- 191:bsp/Src/ADC.c **** }
- 192:bsp/Src/ADC.c **** #endif
- 193:bsp/Src/ADC.c **** 
- 194:bsp/Src/ADC.c **** void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *h) {
- 597              		.loc 1 194 50 is_stmt 1 view -0
- 598              		.cfi_startproc
- 599              		@ args = 0, pretend = 0, frame = 0
- 600              		@ frame_needed = 0, uses_anonymous_args = 0
- 601              		@ link register save eliminated.
- 195:bsp/Src/ADC.c ****     adc_err_code = h->ErrorCode;
- 602              		.loc 1 195 5 view .LVU137
- 603              		.loc 1 195 21 is_stmt 0 view .LVU138
- 604 0000 026E     		ldr	r2, [r0, #96]
- 605              		.loc 1 195 18 view .LVU139
- 606 0002 014B     		ldr	r3, .L58
- 607 0004 1A60     		str	r2, [r3]
- 196:bsp/Src/ADC.c ****     
- 197:bsp/Src/ADC.c ****     // todo 
- 198:bsp/Src/ADC.c **** }...
- 608              		.loc 1 198 1 view .LVU140
- 609 0006 7047     		bx	lr
- 610              	.L59:
- 611              		.align	2
- 612              	.L58:
- 613 0008 00000000 		.word	adc_err_code
- 614              		.cfi_endproc
- 615              	.LFE341:
- 617              		.global	adc_err_code
- 618              		.section	.bss.adc_err_code,"aw",%nobits
- 619              		.align	2
- 622              	adc_err_code:
- 623 0000 00000000 		.space	4
- 624              		.global	adc5_q
- 625              		.section	.bss.adc5_q,"aw",%nobits
- 626              		.align	2
- 629              	adc5_q:
- 630 0000 00000000 		.space	4
- 631              		.global	hadc5
- 632              		.section	.data.hadc5,"aw"
- 633              		.align	2
- 636              	hadc5:
- 637 0000 00000000 		.word	hadc5_
- 638              		.section	.data.hadc5_,"aw"
- 639              		.align	2
- 642              	hadc5_:
- 643 0000 00060050 		.word	1342178816
- 644 0004 00000000 		.space	104
- 644      00000000 
-ARM GAS  /tmp/cc1ssgaQ.s 			page 16
+ 557              	.L57:
+ 558              		.align	2
+ 559              	.L56:
+ 560 000c 00000000 		.word	hadc3
+ 561              		.cfi_endproc
+ 562              	.LFE340:
+ 564              		.section	.text.HAL_ADC_ErrorCallback,"ax",%progbits
+ 565              		.align	1
+ 566              		.global	HAL_ADC_ErrorCallback
+ 567              		.syntax unified
+ 568              		.thumb
+ 569              		.thumb_func
+ 571              	HAL_ADC_ErrorCallback:
+ 572              	.LVL36:
+ 573              	.LFB341:
+ 165:bsp/Src/ADC.c **** #endif
+ 166:bsp/Src/ADC.c **** #endif
+ 167:bsp/Src/ADC.c **** 
+ 168:bsp/Src/ADC.c **** #if defined(STM32G4xx)
+ 169:bsp/Src/ADC.c **** #ifdef ADC4_IRQHandler
+ 170:bsp/Src/ADC.c **** void ADC4_IRQHandler() {
+ 171:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc4);
+ 172:bsp/Src/ADC.c **** }
+ 173:bsp/Src/ADC.c **** #endif
+ 174:bsp/Src/ADC.c **** 
+ 175:bsp/Src/ADC.c **** #ifdef ADC5_IRQHandler
+ 176:bsp/Src/ADC.c **** void ADC5_IRQHandler() {
+ 177:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc5);
+ 178:bsp/Src/ADC.c **** }
+ 179:bsp/Src/ADC.c **** #endif
+ 180:bsp/Src/ADC.c **** #endif
+ 181:bsp/Src/ADC.c **** 
+ 182:bsp/Src/ADC.c **** #if defined(STM32F4xx)
+ 183:bsp/Src/ADC.c **** void ADC_IRQHandler() {
+ 184:bsp/Src/ADC.c ****     // w simplicity
+ 185:bsp/Src/ADC.c ****     // F4 IRQ Handler 
+ 186:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc1);
+ 187:bsp/Src/ADC.c ****     #ifdef ADC2
+ 188:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc2);
+ 189:bsp/Src/ADC.c ****     #endif
+ 190:bsp/Src/ADC.c ****     #ifdef ADC3
+ 191:bsp/Src/ADC.c ****     HAL_ADC_IRQHandler(hadc3);
+ 192:bsp/Src/ADC.c ****     #endif
+ 193:bsp/Src/ADC.c **** }
+ 194:bsp/Src/ADC.c **** #endif
+ 195:bsp/Src/ADC.c **** 
+ 196:bsp/Src/ADC.c **** void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *h) {
+ 574              		.loc 1 196 50 is_stmt 1 view -0
+ 575              		.cfi_startproc
+ 576              		@ args = 0, pretend = 0, frame = 0
+ 577              		@ frame_needed = 0, uses_anonymous_args = 0
+ 578              		@ link register save eliminated.
+ 197:bsp/Src/ADC.c ****     adc_err_code = h->ErrorCode;
+ 579              		.loc 1 197 5 view .LVU130
+ 580              		.loc 1 197 21 is_stmt 0 view .LVU131
+ 581 0000 026E     		ldr	r2, [r0, #96]
+ 582              		.loc 1 197 18 view .LVU132
+ARM GAS  /tmp/ccc73iiR.s 			page 15
 
 
- 644      00000000 
- 644      00000000 
- 644      00000000 
- 645              		.global	adc4_q
- 646              		.section	.bss.adc4_q,"aw",%nobits
- 647              		.align	2
- 650              	adc4_q:
- 651 0000 00000000 		.space	4
- 652              		.global	hadc4
- 653              		.section	.data.hadc4,"aw"
- 654              		.align	2
- 657              	hadc4:
- 658 0000 00000000 		.word	hadc4_
- 659              		.section	.data.hadc4_,"aw"
- 660              		.align	2
- 663              	hadc4_:
- 664 0000 00050050 		.word	1342178560
- 665 0004 00000000 		.space	104
- 665      00000000 
- 665      00000000 
- 665      00000000 
- 665      00000000 
- 666              		.global	adc3_q
- 667              		.section	.bss.adc3_q,"aw",%nobits
- 668              		.align	2
- 671              	adc3_q:
- 672 0000 00000000 		.space	4
- 673              		.global	hadc3
- 674              		.section	.data.hadc3,"aw"
- 675              		.align	2
- 678              	hadc3:
- 679 0000 00000000 		.word	hadc3_
- 680              		.section	.data.hadc3_,"aw"
- 681              		.align	2
- 684              	hadc3_:
- 685 0000 00040050 		.word	1342178304
- 686 0004 00000000 		.space	104
- 686      00000000 
- 686      00000000 
- 686      00000000 
- 686      00000000 
- 687              		.global	adc2_q
- 688              		.section	.bss.adc2_q,"aw",%nobits
- 689              		.align	2
- 692              	adc2_q:
- 693 0000 00000000 		.space	4
- 694              		.global	hadc2
- 695              		.section	.data.hadc2,"aw"
- 696              		.align	2
- 699              	hadc2:
- 700 0000 00000000 		.word	hadc2_
- 701              		.section	.data.hadc2_,"aw"
- 702              		.align	2
- 705              	hadc2_:
- 706 0000 00010050 		.word	1342177536
- 707 0004 00000000 		.space	104
- 707      00000000 
-ARM GAS  /tmp/cc1ssgaQ.s 			page 17
+ 583 0002 014B     		ldr	r3, .L59
+ 584 0004 1A60     		str	r2, [r3]
+ 198:bsp/Src/ADC.c ****     
+ 199:bsp/Src/ADC.c ****     // todo 
+ 200:bsp/Src/ADC.c **** }...
+ 585              		.loc 1 200 1 view .LVU133
+ 586 0006 7047     		bx	lr
+ 587              	.L60:
+ 588              		.align	2
+ 589              	.L59:
+ 590 0008 00000000 		.word	adc_err_code
+ 591              		.cfi_endproc
+ 592              	.LFE341:
+ 594              		.global	adc_err_code
+ 595              		.section	.bss.adc_err_code,"aw",%nobits
+ 596              		.align	2
+ 599              	adc_err_code:
+ 600 0000 00000000 		.space	4
+ 601              		.global	adc5_q
+ 602              		.section	.bss.adc5_q,"aw",%nobits
+ 603              		.align	2
+ 606              	adc5_q:
+ 607 0000 00000000 		.space	4
+ 608              		.global	hadc5
+ 609              		.section	.data.hadc5,"aw"
+ 610              		.align	2
+ 613              	hadc5:
+ 614 0000 00000000 		.word	hadc5_
+ 615              		.section	.data.hadc5_,"aw"
+ 616              		.align	2
+ 619              	hadc5_:
+ 620 0000 00060050 		.word	1342178816
+ 621 0004 00000000 		.space	104
+ 621      00000000 
+ 621      00000000 
+ 621      00000000 
+ 621      00000000 
+ 622              		.global	adc4_q
+ 623              		.section	.bss.adc4_q,"aw",%nobits
+ 624              		.align	2
+ 627              	adc4_q:
+ 628 0000 00000000 		.space	4
+ 629              		.global	hadc4
+ 630              		.section	.data.hadc4,"aw"
+ 631              		.align	2
+ 634              	hadc4:
+ 635 0000 00000000 		.word	hadc4_
+ 636              		.section	.data.hadc4_,"aw"
+ 637              		.align	2
+ 640              	hadc4_:
+ 641 0000 00050050 		.word	1342178560
+ 642 0004 00000000 		.space	104
+ 642      00000000 
+ 642      00000000 
+ 642      00000000 
+ 642      00000000 
+ 643              		.global	adc3_q
+ARM GAS  /tmp/ccc73iiR.s 			page 16
 
 
- 707      00000000 
- 707      00000000 
- 707      00000000 
- 708              		.global	adc1_q
- 709              		.section	.bss.adc1_q,"aw",%nobits
- 710              		.align	2
- 713              	adc1_q:
- 714 0000 00000000 		.space	4
- 715              		.global	hadc1
- 716              		.section	.data.hadc1,"aw"
- 717              		.align	2
- 720              	hadc1:
- 721 0000 00000000 		.word	hadc1_
- 722              		.section	.data.hadc1_,"aw"
- 723              		.align	2
- 726              	hadc1_:
- 727 0000 00000050 		.word	1342177280
- 728 0004 00000000 		.space	104
- 728      00000000 
- 728      00000000 
- 728      00000000 
- 728      00000000 
- 729              		.text
- 730              	.Letext0:
- 731              		.file 2 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
- 732              		.file 3 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 733              		.file 4 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h"
- 734              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
- 735              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h"
- 736              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h"
- 737              		.file 8 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
- 738              		.file 9 "middleware/FreeRTOS-Kernel/include/queue.h"
- 739              		.file 10 "bsp/Inc/ADC.h"
- 740              		.file 11 "<built-in>"
- 741              		.file 12 "common/Inc/stm32xx_hal.h"
-ARM GAS  /tmp/cc1ssgaQ.s 			page 18
+ 644              		.section	.bss.adc3_q,"aw",%nobits
+ 645              		.align	2
+ 648              	adc3_q:
+ 649 0000 00000000 		.space	4
+ 650              		.global	hadc3
+ 651              		.section	.data.hadc3,"aw"
+ 652              		.align	2
+ 655              	hadc3:
+ 656 0000 00000000 		.word	hadc3_
+ 657              		.section	.data.hadc3_,"aw"
+ 658              		.align	2
+ 661              	hadc3_:
+ 662 0000 00040050 		.word	1342178304
+ 663 0004 00000000 		.space	104
+ 663      00000000 
+ 663      00000000 
+ 663      00000000 
+ 663      00000000 
+ 664              		.global	adc2_q
+ 665              		.section	.bss.adc2_q,"aw",%nobits
+ 666              		.align	2
+ 669              	adc2_q:
+ 670 0000 00000000 		.space	4
+ 671              		.global	hadc2
+ 672              		.section	.data.hadc2,"aw"
+ 673              		.align	2
+ 676              	hadc2:
+ 677 0000 00000000 		.word	hadc2_
+ 678              		.section	.data.hadc2_,"aw"
+ 679              		.align	2
+ 682              	hadc2_:
+ 683 0000 00010050 		.word	1342177536
+ 684 0004 00000000 		.space	104
+ 684      00000000 
+ 684      00000000 
+ 684      00000000 
+ 684      00000000 
+ 685              		.global	adc1_q
+ 686              		.section	.bss.adc1_q,"aw",%nobits
+ 687              		.align	2
+ 690              	adc1_q:
+ 691 0000 00000000 		.space	4
+ 692              		.global	hadc1
+ 693              		.section	.data.hadc1,"aw"
+ 694              		.align	2
+ 697              	hadc1:
+ 698 0000 00000000 		.word	hadc1_
+ 699              		.section	.data.hadc1_,"aw"
+ 700              		.align	2
+ 703              	hadc1_:
+ 704 0000 00000050 		.word	1342177280
+ 705 0004 00000000 		.space	104
+ 705      00000000 
+ 705      00000000 
+ 705      00000000 
+ 705      00000000 
+ 706              		.text
+ARM GAS  /tmp/ccc73iiR.s 			page 17
+
+
+ 707              	.Letext0:
+ 708              		.file 2 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 709              		.file 3 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 710              		.file 4 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h"
+ 711              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 712              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h"
+ 713              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h"
+ 714              		.file 8 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 715              		.file 9 "middleware/FreeRTOS-Kernel/include/queue.h"
+ 716              		.file 10 "bsp/Inc/ADC.h"
+ 717              		.file 11 "<built-in>"
+ARM GAS  /tmp/ccc73iiR.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ADC.c
-     /tmp/cc1ssgaQ.s:21     .text.adc_init:00000000 $t
-     /tmp/cc1ssgaQ.s:27     .text.adc_init:00000000 adc_init
-     /tmp/cc1ssgaQ.s:71     .text.adc_deinit:00000000 $t
-     /tmp/cc1ssgaQ.s:77     .text.adc_deinit:00000000 adc_deinit
-     /tmp/cc1ssgaQ.s:107    .text.adc_read:00000000 $t
-     /tmp/cc1ssgaQ.s:113    .text.adc_read:00000000 adc_read
-     /tmp/cc1ssgaQ.s:305    .text.adc_read:000000a8 $d
-     /tmp/cc1ssgaQ.s:720    .data.hadc1:00000000 hadc1
-     /tmp/cc1ssgaQ.s:713    .bss.adc1_q:00000000 adc1_q
-     /tmp/cc1ssgaQ.s:692    .bss.adc2_q:00000000 adc2_q
-     /tmp/cc1ssgaQ.s:671    .bss.adc3_q:00000000 adc3_q
-     /tmp/cc1ssgaQ.s:650    .bss.adc4_q:00000000 adc4_q
-     /tmp/cc1ssgaQ.s:629    .bss.adc5_q:00000000 adc5_q
-     /tmp/cc1ssgaQ.s:319    .text.adc_hook:00000000 $t
-     /tmp/cc1ssgaQ.s:325    .text.adc_hook:00000000 adc_hook
-     /tmp/cc1ssgaQ.s:343    .text.HAL_ADC_ConvCpltCallback:00000000 $t
-     /tmp/cc1ssgaQ.s:349    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
-     /tmp/cc1ssgaQ.s:505    .text.HAL_ADC_ConvCpltCallback:00000080 $d
-     /tmp/cc1ssgaQ.s:518    .text.ADC1_2_IRQHandler:00000000 $t
-     /tmp/cc1ssgaQ.s:524    .text.ADC1_2_IRQHandler:00000000 ADC1_2_IRQHandler
-     /tmp/cc1ssgaQ.s:550    .text.ADC1_2_IRQHandler:00000014 $d
-     /tmp/cc1ssgaQ.s:699    .data.hadc2:00000000 hadc2
-     /tmp/cc1ssgaQ.s:556    .text.ADC3_IRQHandler:00000000 $t
-     /tmp/cc1ssgaQ.s:562    .text.ADC3_IRQHandler:00000000 ADC3_IRQHandler
-     /tmp/cc1ssgaQ.s:583    .text.ADC3_IRQHandler:0000000c $d
-     /tmp/cc1ssgaQ.s:678    .data.hadc3:00000000 hadc3
-     /tmp/cc1ssgaQ.s:588    .text.HAL_ADC_ErrorCallback:00000000 $t
-     /tmp/cc1ssgaQ.s:594    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
-     /tmp/cc1ssgaQ.s:613    .text.HAL_ADC_ErrorCallback:00000008 $d
-     /tmp/cc1ssgaQ.s:622    .bss.adc_err_code:00000000 adc_err_code
-     /tmp/cc1ssgaQ.s:619    .bss.adc_err_code:00000000 $d
-     /tmp/cc1ssgaQ.s:626    .bss.adc5_q:00000000 $d
-     /tmp/cc1ssgaQ.s:636    .data.hadc5:00000000 hadc5
-     /tmp/cc1ssgaQ.s:633    .data.hadc5:00000000 $d
-     /tmp/cc1ssgaQ.s:642    .data.hadc5_:00000000 hadc5_
-     /tmp/cc1ssgaQ.s:639    .data.hadc5_:00000000 $d
-     /tmp/cc1ssgaQ.s:647    .bss.adc4_q:00000000 $d
-     /tmp/cc1ssgaQ.s:657    .data.hadc4:00000000 hadc4
-     /tmp/cc1ssgaQ.s:654    .data.hadc4:00000000 $d
-     /tmp/cc1ssgaQ.s:663    .data.hadc4_:00000000 hadc4_
-     /tmp/cc1ssgaQ.s:660    .data.hadc4_:00000000 $d
-     /tmp/cc1ssgaQ.s:668    .bss.adc3_q:00000000 $d
-     /tmp/cc1ssgaQ.s:675    .data.hadc3:00000000 $d
-     /tmp/cc1ssgaQ.s:684    .data.hadc3_:00000000 hadc3_
-     /tmp/cc1ssgaQ.s:681    .data.hadc3_:00000000 $d
-     /tmp/cc1ssgaQ.s:689    .bss.adc2_q:00000000 $d
-     /tmp/cc1ssgaQ.s:696    .data.hadc2:00000000 $d
-     /tmp/cc1ssgaQ.s:705    .data.hadc2_:00000000 hadc2_
-     /tmp/cc1ssgaQ.s:702    .data.hadc2_:00000000 $d
-     /tmp/cc1ssgaQ.s:710    .bss.adc1_q:00000000 $d
-     /tmp/cc1ssgaQ.s:717    .data.hadc1:00000000 $d
-     /tmp/cc1ssgaQ.s:726    .data.hadc1_:00000000 hadc1_
-     /tmp/cc1ssgaQ.s:723    .data.hadc1_:00000000 $d
+     /tmp/ccc73iiR.s:21     .text.adc_init:00000000 $t
+     /tmp/ccc73iiR.s:27     .text.adc_init:00000000 adc_init
+     /tmp/ccc73iiR.s:71     .text.adc_deinit:00000000 $t
+     /tmp/ccc73iiR.s:77     .text.adc_deinit:00000000 adc_deinit
+     /tmp/ccc73iiR.s:107    .text.adc_read:00000000 $t
+     /tmp/ccc73iiR.s:113    .text.adc_read:00000000 adc_read
+     /tmp/ccc73iiR.s:283    .text.adc_read:000000a4 $d
+     /tmp/ccc73iiR.s:690    .bss.adc1_q:00000000 adc1_q
+     /tmp/ccc73iiR.s:669    .bss.adc2_q:00000000 adc2_q
+     /tmp/ccc73iiR.s:648    .bss.adc3_q:00000000 adc3_q
+     /tmp/ccc73iiR.s:627    .bss.adc4_q:00000000 adc4_q
+     /tmp/ccc73iiR.s:606    .bss.adc5_q:00000000 adc5_q
+     /tmp/ccc73iiR.s:296    .text.adc_hook:00000000 $t
+     /tmp/ccc73iiR.s:302    .text.adc_hook:00000000 adc_hook
+     /tmp/ccc73iiR.s:320    .text.HAL_ADC_ConvCpltCallback:00000000 $t
+     /tmp/ccc73iiR.s:326    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
+     /tmp/ccc73iiR.s:482    .text.HAL_ADC_ConvCpltCallback:00000080 $d
+     /tmp/ccc73iiR.s:495    .text.ADC1_2_IRQHandler:00000000 $t
+     /tmp/ccc73iiR.s:501    .text.ADC1_2_IRQHandler:00000000 ADC1_2_IRQHandler
+     /tmp/ccc73iiR.s:527    .text.ADC1_2_IRQHandler:00000014 $d
+     /tmp/ccc73iiR.s:697    .data.hadc1:00000000 hadc1
+     /tmp/ccc73iiR.s:676    .data.hadc2:00000000 hadc2
+     /tmp/ccc73iiR.s:533    .text.ADC3_IRQHandler:00000000 $t
+     /tmp/ccc73iiR.s:539    .text.ADC3_IRQHandler:00000000 ADC3_IRQHandler
+     /tmp/ccc73iiR.s:560    .text.ADC3_IRQHandler:0000000c $d
+     /tmp/ccc73iiR.s:655    .data.hadc3:00000000 hadc3
+     /tmp/ccc73iiR.s:565    .text.HAL_ADC_ErrorCallback:00000000 $t
+     /tmp/ccc73iiR.s:571    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
+     /tmp/ccc73iiR.s:590    .text.HAL_ADC_ErrorCallback:00000008 $d
+     /tmp/ccc73iiR.s:599    .bss.adc_err_code:00000000 adc_err_code
+     /tmp/ccc73iiR.s:596    .bss.adc_err_code:00000000 $d
+     /tmp/ccc73iiR.s:603    .bss.adc5_q:00000000 $d
+     /tmp/ccc73iiR.s:613    .data.hadc5:00000000 hadc5
+     /tmp/ccc73iiR.s:610    .data.hadc5:00000000 $d
+     /tmp/ccc73iiR.s:619    .data.hadc5_:00000000 hadc5_
+     /tmp/ccc73iiR.s:616    .data.hadc5_:00000000 $d
+     /tmp/ccc73iiR.s:624    .bss.adc4_q:00000000 $d
+     /tmp/ccc73iiR.s:634    .data.hadc4:00000000 hadc4
+     /tmp/ccc73iiR.s:631    .data.hadc4:00000000 $d
+     /tmp/ccc73iiR.s:640    .data.hadc4_:00000000 hadc4_
+     /tmp/ccc73iiR.s:637    .data.hadc4_:00000000 $d
+     /tmp/ccc73iiR.s:645    .bss.adc3_q:00000000 $d
+     /tmp/ccc73iiR.s:652    .data.hadc3:00000000 $d
+     /tmp/ccc73iiR.s:661    .data.hadc3_:00000000 hadc3_
+     /tmp/ccc73iiR.s:658    .data.hadc3_:00000000 $d
+     /tmp/ccc73iiR.s:666    .bss.adc2_q:00000000 $d
+     /tmp/ccc73iiR.s:673    .data.hadc2:00000000 $d
+     /tmp/ccc73iiR.s:682    .data.hadc2_:00000000 hadc2_
+     /tmp/ccc73iiR.s:679    .data.hadc2_:00000000 $d
+     /tmp/ccc73iiR.s:687    .bss.adc1_q:00000000 $d
+     /tmp/ccc73iiR.s:694    .data.hadc1:00000000 $d
+     /tmp/ccc73iiR.s:703    .data.hadc1_:00000000 hadc1_
+     /tmp/ccc73iiR.s:700    .data.hadc1_:00000000 $d
 
 UNDEFINED SYMBOLS
-ARM GAS  /tmp/cc1ssgaQ.s 			page 19
+ARM GAS  /tmp/ccc73iiR.s 			page 19
 
 
 memcpy
 HAL_ADC_Init
 HAL_ADC_DeInit
-memset
 HAL_ADC_ConfigChannel
 uxQueueSpacesAvailable
 HAL_ADC_Start_IT
-Error_Handler
 HAL_ADC_GetValue
 xQueueGenericSendFromISR
 HAL_ADC_IRQHandler

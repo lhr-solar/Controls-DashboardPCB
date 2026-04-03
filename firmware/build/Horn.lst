@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc8ta8Kf.s 			page 1
+ARM GAS  /tmp/ccuGHTVW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -20,20 +20,21 @@ ARM GAS  /tmp/cc8ta8Kf.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c"
-  20              		.section	.text.Horn_GPIO_Init,"ax",%progbits
+  20              		.section	.text.horn_GPIO_init,"ax",%progbits
   21              		.align	1
-  22              		.global	Horn_GPIO_Init
+  22              		.global	horn_GPIO_init
   23              		.syntax unified
   24              		.thumb
   25              		.thumb_func
-  27              	Horn_GPIO_Init:
+  27              	horn_GPIO_init:
   28              	.LFB334:
    1:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** #include "init.h"
-   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** 
-   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** const GPIO_Pin Horn_OUT = { GPIOB, GPIO_PIN_1 };
-   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** 
-   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** void Horn_GPIO_Init() {
-  29              		.loc 1 5 23 view -0
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** #include "Status_LEDs.h"
+   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** #include "Horn.h"
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** #include "Switches.h"
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** 
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** void horn_GPIO_init() {
+  29              		.loc 1 6 23 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -42,111 +43,100 @@ ARM GAS  /tmp/cc8ta8Kf.s 			page 1
   35              		.cfi_def_cfa_offset 8
   36              		.cfi_offset 3, -8
   37              		.cfi_offset 14, -4
-   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     gpioPin_Init(Horn_OUT, GPIO_MODE_OUTPUT_PP);
-  38              		.loc 1 6 5 view .LVU1
-  39 0002 034B     		ldr	r3, .L3
-  40 0004 0122     		movs	r2, #1
-  41 0006 93E80300 		ldm	r3, {r0, r1}
-  42 000a FFF7FEFF 		bl	gpioPin_Init
+   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     gpioPin_Init(HORN_OUT_PORT, HORN_OUT_PIN, GPIO_MODE_OUTPUT_PP);
+  38              		.loc 1 7 5 view .LVU1
+  39 0002 0122     		movs	r2, #1
+  40 0004 0221     		movs	r1, #2
+  41 0006 0248     		ldr	r0, .L3
+  42 0008 FFF7FEFF 		bl	gpioPin_Init
   43              	.LVL0:
-   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** }
-  44              		.loc 1 7 1 is_stmt 0 view .LVU2
-  45 000e 08BD     		pop	{r3, pc}
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** }
+  44              		.loc 1 8 1 is_stmt 0 view .LVU2
+  45 000c 08BD     		pop	{r3, pc}
   46              	.L4:
-  47              		.align	2
+  47 000e 00BF     		.align	2
   48              	.L3:
-  49 0010 00000000 		.word	Horn_OUT
+  49 0010 00040048 		.word	1207960576
   50              		.cfi_endproc
+ARM GAS  /tmp/ccuGHTVW.s 			page 2
+
+
   51              	.LFE334:
-ARM GAS  /tmp/cc8ta8Kf.s 			page 2
-
-
-  53              		.section	.text.set_Horn,"ax",%progbits
+  53              		.section	.text.horn_set,"ax",%progbits
   54              		.align	1
-  55              		.global	set_Horn
+  55              		.global	horn_set
   56              		.syntax unified
   57              		.thumb
   58              		.thumb_func
-  60              	set_Horn:
+  60              	horn_set:
   61              	.LVL1:
   62              	.LFB335:
-   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** 
-   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** void set_Horn(SwitchState state) {
-  63              		.loc 1 9 34 is_stmt 1 view -0
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** 
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** void horn_set(switch_state_t state) {
+  63              		.loc 1 10 37 is_stmt 1 view -0
   64              		.cfi_startproc
   65              		@ args = 0, pretend = 0, frame = 0
   66              		@ frame_needed = 0, uses_anonymous_args = 0
-  67              		.loc 1 9 34 is_stmt 0 view .LVU4
-  68 0000 10B5     		push	{r4, lr}
+  67              		.loc 1 10 37 is_stmt 0 view .LVU4
+  68 0000 38B5     		push	{r3, r4, r5, lr}
   69              	.LCFI1:
-  70              		.cfi_def_cfa_offset 8
-  71              		.cfi_offset 4, -8
-  72              		.cfi_offset 14, -4
-  73 0002 0446     		mov	r4, r0
-  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     set_LED(AKSHAY_LED, state);
-  74              		.loc 1 10 5 is_stmt 1 view .LVU5
-  75 0004 054B     		ldr	r3, .L7
-  76 0006 0246     		mov	r2, r0
-  77 0008 93E80300 		ldm	r3, {r0, r1}
-  78              	.LVL2:
-  79              		.loc 1 10 5 is_stmt 0 view .LVU6
-  80 000c FFF7FEFF 		bl	set_LED
-  81              	.LVL3:
-  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     HAL_GPIO_WritePin(Horn_OUT.port, Horn_OUT.pin, state);
-  82              		.loc 1 11 5 is_stmt 1 view .LVU7
-  83 0010 2246     		mov	r2, r4
-  84 0012 0221     		movs	r1, #2
-  85 0014 0248     		ldr	r0, .L7+4
-  86 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  87              	.LVL4:
-  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** }...
-  88              		.loc 1 12 1 is_stmt 0 view .LVU8
-  89 001a 10BD     		pop	{r4, pc}
-  90              	.LVL5:
-  91              	.L8:
-  92              		.loc 1 12 1 view .LVU9
-  93              		.align	2
-  94              	.L7:
-  95 001c 00000000 		.word	AKSHAY_LED
-  96 0020 00040048 		.word	1207960576
-  97              		.cfi_endproc
-  98              	.LFE335:
- 100              		.global	Horn_OUT
- 101              		.section	.rodata.Horn_OUT,"a"
- 102              		.align	2
- 105              	Horn_OUT:
- 106 0000 00040048 		.word	1207960576
- 107 0004 0200     		.short	2
- 108 0006 0000     		.space	2
-ARM GAS  /tmp/cc8ta8Kf.s 			page 3
+  70              		.cfi_def_cfa_offset 16
+  71              		.cfi_offset 3, -16
+  72              		.cfi_offset 4, -12
+  73              		.cfi_offset 5, -8
+  74              		.cfi_offset 14, -4
+  75 0002 0446     		mov	r4, r0
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     led_set(AKSHAY_LED_PORT, AKSHAY_LED_PIN, state);
+  76              		.loc 1 11 5 is_stmt 1 view .LVU5
+  77 0004 064D     		ldr	r5, .L7
+  78 0006 0246     		mov	r2, r0
+  79 0008 4FF40061 		mov	r1, #2048
+  80 000c 2846     		mov	r0, r5
+  81              	.LVL2:
+  82              		.loc 1 11 5 is_stmt 0 view .LVU6
+  83 000e FFF7FEFF 		bl	led_set
+  84              	.LVL3:
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c ****     HAL_GPIO_WritePin(HORN_OUT_PORT, HORN_OUT_PIN, state);
+  85              		.loc 1 12 5 is_stmt 1 view .LVU7
+  86 0012 2246     		mov	r2, r4
+  87 0014 0221     		movs	r1, #2
+  88 0016 2846     		mov	r0, r5
+  89 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  90              	.LVL4:
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c **** }...
+  91              		.loc 1 13 1 is_stmt 0 view .LVU8
+  92 001c 38BD     		pop	{r3, r4, r5, pc}
+  93              	.LVL5:
+  94              	.L8:
+  95              		.loc 1 13 1 view .LVU9
+  96 001e 00BF     		.align	2
+  97              	.L7:
+  98 0020 00040048 		.word	1207960576
+  99              		.cfi_endproc
+ 100              	.LFE335:
+ 102              		.text
+ 103              	.Letext0:
+ 104              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 105              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ARM GAS  /tmp/ccuGHTVW.s 			page 3
 
 
- 109              		.text
- 110              	.Letext0:
- 111              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 112              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
- 113              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
- 114              		.file 5 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h"
- 115              		.file 6 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
- 116              		.file 7 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
- 117              		.file 8 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h"
- 118              		.file 9 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/init.h"
-ARM GAS  /tmp/cc8ta8Kf.s 			page 4
+ 106              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 107              		.file 5 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
+ 108              		.file 6 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
+ARM GAS  /tmp/ccuGHTVW.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 Horn.c
-     /tmp/cc8ta8Kf.s:21     .text.Horn_GPIO_Init:00000000 $t
-     /tmp/cc8ta8Kf.s:27     .text.Horn_GPIO_Init:00000000 Horn_GPIO_Init
-     /tmp/cc8ta8Kf.s:49     .text.Horn_GPIO_Init:00000010 $d
-     /tmp/cc8ta8Kf.s:105    .rodata.Horn_OUT:00000000 Horn_OUT
-     /tmp/cc8ta8Kf.s:54     .text.set_Horn:00000000 $t
-     /tmp/cc8ta8Kf.s:60     .text.set_Horn:00000000 set_Horn
-     /tmp/cc8ta8Kf.s:95     .text.set_Horn:0000001c $d
-     /tmp/cc8ta8Kf.s:102    .rodata.Horn_OUT:00000000 $d
+     /tmp/ccuGHTVW.s:21     .text.horn_GPIO_init:00000000 $t
+     /tmp/ccuGHTVW.s:27     .text.horn_GPIO_init:00000000 horn_GPIO_init
+     /tmp/ccuGHTVW.s:49     .text.horn_GPIO_init:00000010 $d
+     /tmp/ccuGHTVW.s:54     .text.horn_set:00000000 $t
+     /tmp/ccuGHTVW.s:60     .text.horn_set:00000000 horn_set
+     /tmp/ccuGHTVW.s:98     .text.horn_set:00000020 $d
 
 UNDEFINED SYMBOLS
 gpioPin_Init
-set_LED
+led_set
 HAL_GPIO_WritePin
-AKSHAY_LED

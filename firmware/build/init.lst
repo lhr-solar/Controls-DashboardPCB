@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQ4jiRp.s 			page 1
+ARM GAS  /tmp/ccvookJ8.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -19,7 +19,7 @@ ARM GAS  /tmp/ccQ4jiRp.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c"
+  19              		.file 1 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c"
   20              		.section	.text.GPIO_Init,"ax",%progbits
   21              		.align	1
   22              		.global	GPIO_Init
@@ -28,211 +28,482 @@ ARM GAS  /tmp/ccQ4jiRp.s 			page 1
   25              		.thumb_func
   27              	GPIO_Init:
   28              	.LFB334:
-   1:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** #include "init.h"
-   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** #include "stm32xx_hal.h"
-   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** 
-   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** void GPIO_Init() {
-  29              		.loc 1 4 18 view -0
+   1:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "init.h"
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "Switches.h"
+   3:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "Horn.h"
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "Status_LEDs.h"
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "pinDefs.h"
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "stm32xx_hal.h"
+   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void GPIO_Init() {
+  29              		.loc 1 8 18 view -0
   30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
+  31              		@ args = 0, pretend = 0, frame = 16
   32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33 0000 08B5     		push	{r3, lr}
+  33 0000 00B5     		push	{lr}
   34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 3, -8
-  37              		.cfi_offset 14, -4
-   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     LED_GPIO_Init();
-  38              		.loc 1 5 5 view .LVU1
-  39 0002 FFF7FEFF 		bl	LED_GPIO_Init
-  40              	.LVL0:
-   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     Switch_GPIO_Init();
-  41              		.loc 1 6 5 view .LVU2
-  42 0006 FFF7FEFF 		bl	Switch_GPIO_Init
-  43              	.LVL1:
-   7:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     Horn_GPIO_Init();
-  44              		.loc 1 7 5 view .LVU3
-  45 000a FFF7FEFF 		bl	Horn_GPIO_Init
-  46              	.LVL2:
-   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** }
-  47              		.loc 1 8 1 is_stmt 0 view .LVU4
-  48 000e 08BD     		pop	{r3, pc}
-  49              		.cfi_endproc
-  50              	.LFE334:
-ARM GAS  /tmp/ccQ4jiRp.s 			page 2
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 14, -4
+  37 0002 85B0     		sub	sp, sp, #20
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 	__HAL_RCC_GPIOA_CLK_ENABLE();
+  40              		.loc 1 9 2 view .LVU1
+  41              	.LBB2:
+  42              		.loc 1 9 2 view .LVU2
+  43              		.loc 1 9 2 view .LVU3
+  44 0004 164B     		ldr	r3, .L3
+  45 0006 DA6C     		ldr	r2, [r3, #76]
+  46 0008 42F00102 		orr	r2, r2, #1
+  47 000c DA64     		str	r2, [r3, #76]
+  48              		.loc 1 9 2 view .LVU4
+  49 000e DA6C     		ldr	r2, [r3, #76]
+ARM GAS  /tmp/ccvookJ8.s 			page 2
 
 
-  52              		.section	.text.gpioPin_Init,"ax",%progbits
-  53              		.align	1
-  54              		.global	gpioPin_Init
-  55              		.syntax unified
-  56              		.thumb
-  57              		.thumb_func
-  59              	gpioPin_Init:
-  60              	.LVL3:
-  61              	.LFB335:
-   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** 
-  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** void gpioPin_Init(GPIO_Pin pin, uint32_t mode) {
-  62              		.loc 1 10 48 is_stmt 1 view -0
-  63              		.cfi_startproc
-  64              		@ args = 0, pretend = 0, frame = 32
-  65              		@ frame_needed = 0, uses_anonymous_args = 0
-  66              		.loc 1 10 48 is_stmt 0 view .LVU6
-  67 0000 70B5     		push	{r4, r5, r6, lr}
-  68              	.LCFI1:
-  69              		.cfi_def_cfa_offset 16
-  70              		.cfi_offset 4, -16
-  71              		.cfi_offset 5, -12
-  72              		.cfi_offset 6, -8
-  73              		.cfi_offset 14, -4
-  74 0002 88B0     		sub	sp, sp, #32
-  75              	.LCFI2:
-  76              		.cfi_def_cfa_offset 48
-  77 0004 6B46     		mov	r3, sp
-  78 0006 83E80300 		stm	r3, {r0, r1}
-  79 000a 1446     		mov	r4, r2
-  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
-  80              		.loc 1 11 5 is_stmt 1 view .LVU7
-  81              		.loc 1 11 22 is_stmt 0 view .LVU8
-  82 000c 0023     		movs	r3, #0
-  83 000e 0393     		str	r3, [sp, #12]
-  84 0010 0493     		str	r3, [sp, #16]
-  85 0012 0593     		str	r3, [sp, #20]
-  86 0014 0693     		str	r3, [sp, #24]
-  87 0016 0793     		str	r3, [sp, #28]
-  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Mode = mode,
-  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Pull = GPIO_NOPULL,
-  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Pin  = pin.pin
-  88              		.loc 1 14 20 view .LVU9
-  89 0018 BDF80460 		ldrh	r6, [sp, #4]
-  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
-  90              		.loc 1 11 22 view .LVU10
-  91 001c 0396     		str	r6, [sp, #12]
-  92 001e 0492     		str	r2, [sp, #16]
-  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     };
-  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** 
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     HAL_GPIO_Init(pin.port, &GPIO_init);
-  93              		.loc 1 17 5 is_stmt 1 view .LVU11
-  94 0020 0546     		mov	r5, r0
-  95 0022 03A9     		add	r1, sp, #12
-  96 0024 FFF7FEFF 		bl	HAL_GPIO_Init
-  97              	.LVL4:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     if(mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(pin.port, pin.pin, GPIO_PIN_RESET);
-  98              		.loc 1 18 5 view .LVU12
-ARM GAS  /tmp/ccQ4jiRp.s 			page 3
+  50 0010 02F00102 		and	r2, r2, #1
+  51 0014 0092     		str	r2, [sp]
+  52              		.loc 1 9 2 view .LVU5
+  53 0016 009A     		ldr	r2, [sp]
+  54              	.LBE2:
+  55              		.loc 1 9 2 view .LVU6
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+  56              		.loc 1 10 5 view .LVU7
+  57              	.LBB3:
+  58              		.loc 1 10 5 view .LVU8
+  59              		.loc 1 10 5 view .LVU9
+  60 0018 DA6C     		ldr	r2, [r3, #76]
+  61 001a 42F00202 		orr	r2, r2, #2
+  62 001e DA64     		str	r2, [r3, #76]
+  63              		.loc 1 10 5 view .LVU10
+  64 0020 DA6C     		ldr	r2, [r3, #76]
+  65 0022 02F00202 		and	r2, r2, #2
+  66 0026 0192     		str	r2, [sp, #4]
+  67              		.loc 1 10 5 view .LVU11
+  68 0028 019A     		ldr	r2, [sp, #4]
+  69              	.LBE3:
+  70              		.loc 1 10 5 view .LVU12
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     __HAL_RCC_GPIOC_CLK_ENABLE();
+  71              		.loc 1 11 5 view .LVU13
+  72              	.LBB4:
+  73              		.loc 1 11 5 view .LVU14
+  74              		.loc 1 11 5 view .LVU15
+  75 002a DA6C     		ldr	r2, [r3, #76]
+  76 002c 42F00402 		orr	r2, r2, #4
+  77 0030 DA64     		str	r2, [r3, #76]
+  78              		.loc 1 11 5 view .LVU16
+  79 0032 DA6C     		ldr	r2, [r3, #76]
+  80 0034 02F00402 		and	r2, r2, #4
+  81 0038 0292     		str	r2, [sp, #8]
+  82              		.loc 1 11 5 view .LVU17
+  83 003a 029A     		ldr	r2, [sp, #8]
+  84              	.LBE4:
+  85              		.loc 1 11 5 view .LVU18
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
+  86              		.loc 1 12 5 view .LVU19
+  87              	.LBB5:
+  88              		.loc 1 12 5 view .LVU20
+  89              		.loc 1 12 5 view .LVU21
+  90 003c DA6C     		ldr	r2, [r3, #76]
+  91 003e 42F00802 		orr	r2, r2, #8
+  92 0042 DA64     		str	r2, [r3, #76]
+  93              		.loc 1 12 5 view .LVU22
+  94 0044 DB6C     		ldr	r3, [r3, #76]
+  95 0046 03F00803 		and	r3, r3, #8
+  96 004a 0393     		str	r3, [sp, #12]
+  97              		.loc 1 12 5 view .LVU23
+  98 004c 039B     		ldr	r3, [sp, #12]
+  99              	.LBE5:
+ 100              		.loc 1 12 5 view .LVU24
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     led_GPIO_init();
+ 101              		.loc 1 13 5 view .LVU25
+ 102 004e FFF7FEFF 		bl	led_GPIO_init
+ARM GAS  /tmp/ccvookJ8.s 			page 3
 
 
-  99              		.loc 1 18 7 is_stmt 0 view .LVU13
- 100 0028 012C     		cmp	r4, #1
- 101 002a 01D1     		bne	.L6
- 102              	.L3:
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** }
- 103              		.loc 1 19 1 view .LVU14
- 104 002c 08B0     		add	sp, sp, #32
- 105              	.LCFI3:
- 106              		.cfi_remember_state
- 107              		.cfi_def_cfa_offset 16
- 108              		@ sp needed
- 109 002e 70BD     		pop	{r4, r5, r6, pc}
- 110              	.LVL5:
- 111              	.L6:
- 112              	.LCFI4:
- 113              		.cfi_restore_state
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     if(mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(pin.port, pin.pin, GPIO_PIN_RESET);
- 114              		.loc 1 18 37 is_stmt 1 discriminator 1 view .LVU15
- 115 0030 0022     		movs	r2, #0
- 116 0032 3146     		mov	r1, r6
- 117 0034 2846     		mov	r0, r5
- 118 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 119              	.LVL6:
- 120              		.loc 1 19 1 is_stmt 0 view .LVU16
- 121 003a F7E7     		b	.L3
- 122              		.cfi_endproc
- 123              	.LFE335:
- 125              		.section	.text.gpioEXTI_Init,"ax",%progbits
- 126              		.align	1
- 127              		.global	gpioEXTI_Init
- 128              		.syntax unified
- 129              		.thumb
- 130              		.thumb_func
- 132              	gpioEXTI_Init:
- 133              	.LFB336:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** 
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** void gpioEXTI_Init(GPIO_Pin pin) {
- 134              		.loc 1 21 34 is_stmt 1 view -0
- 135              		.cfi_startproc
- 136              		@ args = 0, pretend = 0, frame = 32
- 137              		@ frame_needed = 0, uses_anonymous_args = 0
- 138 0000 00B5     		push	{lr}
- 139              	.LCFI5:
- 140              		.cfi_def_cfa_offset 4
- 141              		.cfi_offset 14, -4
- 142 0002 89B0     		sub	sp, sp, #36
- 143              	.LCFI6:
- 144              		.cfi_def_cfa_offset 40
- 145 0004 6B46     		mov	r3, sp
- 146 0006 83E80300 		stm	r3, {r0, r1}
-  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
- 147              		.loc 1 22 5 view .LVU18
- 148              		.loc 1 22 22 is_stmt 0 view .LVU19
- 149 000a 0023     		movs	r3, #0
- 150 000c 0393     		str	r3, [sp, #12]
- 151 000e 0493     		str	r3, [sp, #16]
- 152 0010 0593     		str	r3, [sp, #20]
-ARM GAS  /tmp/ccQ4jiRp.s 			page 4
+ 103              	.LVL0:
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     switch_GPIO_init();
+ 104              		.loc 1 14 5 view .LVU26
+ 105 0052 FFF7FEFF 		bl	switch_GPIO_init
+ 106              	.LVL1:
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     horn_GPIO_init();
+ 107              		.loc 1 15 5 view .LVU27
+ 108 0056 FFF7FEFF 		bl	horn_GPIO_init
+ 109              	.LVL2:
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 110              		.loc 1 16 1 is_stmt 0 view .LVU28
+ 111 005a 05B0     		add	sp, sp, #20
+ 112              	.LCFI2:
+ 113              		.cfi_def_cfa_offset 4
+ 114              		@ sp needed
+ 115 005c 5DF804FB 		ldr	pc, [sp], #4
+ 116              	.L4:
+ 117              		.align	2
+ 118              	.L3:
+ 119 0060 00100240 		.word	1073876992
+ 120              		.cfi_endproc
+ 121              	.LFE334:
+ 123              		.section	.text.gpioPin_Init,"ax",%progbits
+ 124              		.align	1
+ 125              		.global	gpioPin_Init
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	gpioPin_Init:
+ 131              	.LVL3:
+ 132              	.LFB335:
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
+ 133              		.loc 1 18 68 is_stmt 1 view -0
+ 134              		.cfi_startproc
+ 135              		@ args = 0, pretend = 0, frame = 24
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137              		.loc 1 18 68 is_stmt 0 view .LVU30
+ 138 0000 70B5     		push	{r4, r5, r6, lr}
+ 139              	.LCFI3:
+ 140              		.cfi_def_cfa_offset 16
+ 141              		.cfi_offset 4, -16
+ 142              		.cfi_offset 5, -12
+ 143              		.cfi_offset 6, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 86B0     		sub	sp, sp, #24
+ 146              	.LCFI4:
+ 147              		.cfi_def_cfa_offset 40
+ 148 0004 0646     		mov	r6, r0
+ 149 0006 0D46     		mov	r5, r1
+ 150 0008 1446     		mov	r4, r2
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
+ 151              		.loc 1 19 5 is_stmt 1 view .LVU31
+ 152              		.loc 1 19 22 is_stmt 0 view .LVU32
+ 153 000a 0023     		movs	r3, #0
+ 154 000c 0193     		str	r3, [sp, #4]
+ 155 000e 0293     		str	r3, [sp, #8]
+ARM GAS  /tmp/ccvookJ8.s 			page 4
 
 
- 153 0012 0693     		str	r3, [sp, #24]
- 154 0014 0793     		str	r3, [sp, #28]
-  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Mode = GPIO_MODE_IT_RISING_FALLING,
-  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Pull = GPIO_NOPULL,
-  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****         .Pin  = pin.pin
- 155              		.loc 1 25 20 view .LVU20
- 156 0016 BDF80430 		ldrh	r3, [sp, #4]
-  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
- 157              		.loc 1 22 22 view .LVU21
- 158 001a 0393     		str	r3, [sp, #12]
- 159 001c 4FF44413 		mov	r3, #3211264
- 160 0020 0493     		str	r3, [sp, #16]
-  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     };
-  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** 
-  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c ****     HAL_GPIO_Init(pin.port, &GPIO_init);
- 161              		.loc 1 28 5 is_stmt 1 view .LVU22
- 162 0022 03A9     		add	r1, sp, #12
- 163 0024 FFF7FEFF 		bl	HAL_GPIO_Init
- 164              	.LVL7:
-  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Src/init.c **** }...
- 165              		.loc 1 29 1 is_stmt 0 view .LVU23
- 166 0028 09B0     		add	sp, sp, #36
- 167              	.LCFI7:
- 168              		.cfi_def_cfa_offset 4
- 169              		@ sp needed
- 170 002a 5DF804FB 		ldr	pc, [sp], #4
- 171              		.cfi_endproc
- 172              	.LFE336:
- 174              		.text
- 175              	.Letext0:
- 176              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 177              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
- 178              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
- 179              		.file 5 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h"
- 180              		.file 6 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h"
- 181              		.file 7 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
- 182              		.file 8 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
-ARM GAS  /tmp/ccQ4jiRp.s 			page 5
+ 156 0010 0393     		str	r3, [sp, #12]
+ 157 0012 0493     		str	r3, [sp, #16]
+ 158 0014 0593     		str	r3, [sp, #20]
+ 159 0016 0191     		str	r1, [sp, #4]
+ 160 0018 0292     		str	r2, [sp, #8]
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Mode = mode,
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pull = GPIO_NOPULL,
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pin  = pin
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     };
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     HAL_GPIO_Init(port, &GPIO_init);
+ 161              		.loc 1 25 5 is_stmt 1 view .LVU33
+ 162 001a 01A9     		add	r1, sp, #4
+ 163              	.LVL4:
+ 164              		.loc 1 25 5 is_stmt 0 view .LVU34
+ 165 001c FFF7FEFF 		bl	HAL_GPIO_Init
+ 166              	.LVL5:
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+ 167              		.loc 1 26 5 is_stmt 1 view .LVU35
+ 168              		.loc 1 26 8 is_stmt 0 view .LVU36
+ 169 0020 012C     		cmp	r4, #1
+ 170 0022 01D1     		bne	.L8
+ 171              	.L5:
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 172              		.loc 1 27 1 view .LVU37
+ 173 0024 06B0     		add	sp, sp, #24
+ 174              	.LCFI5:
+ 175              		.cfi_remember_state
+ 176              		.cfi_def_cfa_offset 16
+ 177              		@ sp needed
+ 178 0026 70BD     		pop	{r4, r5, r6, pc}
+ 179              	.LVL6:
+ 180              	.L8:
+ 181              	.LCFI6:
+ 182              		.cfi_restore_state
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+ 183              		.loc 1 26 38 is_stmt 1 discriminator 1 view .LVU38
+ 184 0028 0022     		movs	r2, #0
+ 185 002a 2946     		mov	r1, r5
+ 186 002c 3046     		mov	r0, r6
+ 187 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 188              	.LVL7:
+ 189              		.loc 1 27 1 is_stmt 0 view .LVU39
+ 190 0032 F7E7     		b	.L5
+ 191              		.cfi_endproc
+ 192              	.LFE335:
+ 194              		.section	.text.gpioEXTI_Init,"ax",%progbits
+ 195              		.align	1
+ 196              		.global	gpioEXTI_Init
+ 197              		.syntax unified
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	gpioEXTI_Init:
+ 202              	.LVL8:
+ 203              	.LFB336:
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin) {
+ARM GAS  /tmp/ccvookJ8.s 			page 5
+
+
+ 204              		.loc 1 29 54 is_stmt 1 view -0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 24
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208              		.loc 1 29 54 is_stmt 0 view .LVU41
+ 209 0000 00B5     		push	{lr}
+ 210              	.LCFI7:
+ 211              		.cfi_def_cfa_offset 4
+ 212              		.cfi_offset 14, -4
+ 213 0002 87B0     		sub	sp, sp, #28
+ 214              	.LCFI8:
+ 215              		.cfi_def_cfa_offset 32
+  30:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
+ 216              		.loc 1 30 5 is_stmt 1 view .LVU42
+ 217              		.loc 1 30 22 is_stmt 0 view .LVU43
+ 218 0004 0023     		movs	r3, #0
+ 219 0006 0193     		str	r3, [sp, #4]
+ 220 0008 0293     		str	r3, [sp, #8]
+ 221 000a 0393     		str	r3, [sp, #12]
+ 222 000c 0493     		str	r3, [sp, #16]
+ 223 000e 0593     		str	r3, [sp, #20]
+ 224 0010 0191     		str	r1, [sp, #4]
+ 225 0012 4FF44413 		mov	r3, #3211264
+ 226 0016 0293     		str	r3, [sp, #8]
+  31:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Mode = GPIO_MODE_IT_RISING_FALLING,
+  32:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pull = GPIO_NOPULL,
+  33:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pin  = pin
+  34:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     };
+  35:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  36:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     HAL_GPIO_Init(port, &GPIO_init);
+ 227              		.loc 1 36 5 is_stmt 1 view .LVU44
+ 228 0018 01A9     		add	r1, sp, #4
+ 229              	.LVL9:
+ 230              		.loc 1 36 5 is_stmt 0 view .LVU45
+ 231 001a FFF7FEFF 		bl	HAL_GPIO_Init
+ 232              	.LVL10:
+  37:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 233              		.loc 1 37 1 view .LVU46
+ 234 001e 07B0     		add	sp, sp, #28
+ 235              	.LCFI9:
+ 236              		.cfi_def_cfa_offset 4
+ 237              		@ sp needed
+ 238 0020 5DF804FB 		ldr	pc, [sp], #4
+ 239              		.cfi_endproc
+ 240              	.LFE336:
+ 242              		.section	.text.SystemClock_Config,"ax",%progbits
+ 243              		.align	1
+ 244              		.weak	SystemClock_Config
+ 245              		.syntax unified
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	SystemClock_Config:
+ 250              	.LFB337:
+  38:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  39:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  40:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void SystemClock_Config(void) {
+ 251              		.loc 1 40 31 is_stmt 1 view -0
+ARM GAS  /tmp/ccvookJ8.s 			page 6
+
+
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 80
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255 0000 00B5     		push	{lr}
+ 256              	.LCFI10:
+ 257              		.cfi_def_cfa_offset 4
+ 258              		.cfi_offset 14, -4
+ 259 0002 95B0     		sub	sp, sp, #84
+ 260              	.LCFI11:
+ 261              		.cfi_def_cfa_offset 88
+  41:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 262              		.loc 1 41 3 view .LVU48
+ 263              		.loc 1 41 22 is_stmt 0 view .LVU49
+ 264 0004 3822     		movs	r2, #56
+ 265 0006 0021     		movs	r1, #0
+ 266 0008 06A8     		add	r0, sp, #24
+ 267 000a FFF7FEFF 		bl	memset
+ 268              	.LVL11:
+  42:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 269              		.loc 1 42 3 is_stmt 1 view .LVU50
+ 270              		.loc 1 42 22 is_stmt 0 view .LVU51
+ 271 000e 0023     		movs	r3, #0
+ 272 0010 0193     		str	r3, [sp, #4]
+ 273 0012 0293     		str	r3, [sp, #8]
+ 274 0014 0393     		str	r3, [sp, #12]
+ 275 0016 0493     		str	r3, [sp, #16]
+ 276 0018 0593     		str	r3, [sp, #20]
+  43:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  44:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   /** Configure the main internal regulator output voltage
+  45:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   */
+  46:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+ 277              		.loc 1 46 3 is_stmt 1 view .LVU52
+ 278 001a 4FF40070 		mov	r0, #512
+ 279 001e FFF7FEFF 		bl	HAL_PWREx_ControlVoltageScaling
+ 280              	.LVL12:
+  47:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  48:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   /** Initializes the RCC Oscillators according to the specified parameters
+  49:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   * in the RCC_OscInitTypeDef structure.
+  50:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   */
+  51:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+ 281              		.loc 1 51 3 view .LVU53
+ 282              		.loc 1 51 36 is_stmt 0 view .LVU54
+ 283 0022 0122     		movs	r2, #1
+ 284 0024 0692     		str	r2, [sp, #24]
+  52:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 285              		.loc 1 52 3 is_stmt 1 view .LVU55
+ 286              		.loc 1 52 30 is_stmt 0 view .LVU56
+ 287 0026 4FF48033 		mov	r3, #65536
+ 288 002a 0793     		str	r3, [sp, #28]
+  53:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 289              		.loc 1 53 3 is_stmt 1 view .LVU57
+ 290              		.loc 1 53 34 is_stmt 0 view .LVU58
+ 291 002c 0223     		movs	r3, #2
+ 292 002e 0D93     		str	r3, [sp, #52]
+  54:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 293              		.loc 1 54 3 is_stmt 1 view .LVU59
+ 294              		.loc 1 54 35 is_stmt 0 view .LVU60
+ARM GAS  /tmp/ccvookJ8.s 			page 7
+
+
+ 295 0030 0321     		movs	r1, #3
+ 296 0032 0E91     		str	r1, [sp, #56]
+  55:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
+ 297              		.loc 1 55 3 is_stmt 1 view .LVU61
+ 298              		.loc 1 55 30 is_stmt 0 view .LVU62
+ 299 0034 0F92     		str	r2, [sp, #60]
+  56:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLN = 20;
+ 300              		.loc 1 56 3 is_stmt 1 view .LVU63
+ 301              		.loc 1 56 30 is_stmt 0 view .LVU64
+ 302 0036 1422     		movs	r2, #20
+ 303 0038 1092     		str	r2, [sp, #64]
+  57:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+ 304              		.loc 1 57 3 is_stmt 1 view .LVU65
+ 305              		.loc 1 57 30 is_stmt 0 view .LVU66
+ 306 003a 1193     		str	r3, [sp, #68]
+  58:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+ 307              		.loc 1 58 3 is_stmt 1 view .LVU67
+ 308              		.loc 1 58 30 is_stmt 0 view .LVU68
+ 309 003c 1293     		str	r3, [sp, #72]
+  59:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+ 310              		.loc 1 59 3 is_stmt 1 view .LVU69
+ 311              		.loc 1 59 30 is_stmt 0 view .LVU70
+ 312 003e 1393     		str	r3, [sp, #76]
+  60:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 313              		.loc 1 60 3 is_stmt 1 view .LVU71
+ 314              		.loc 1 60 7 is_stmt 0 view .LVU72
+ 315 0040 06A8     		add	r0, sp, #24
+ 316 0042 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 317              	.LVL13:
+ 318              		.loc 1 60 6 discriminator 1 view .LVU73
+ 319 0046 78B9     		cbnz	r0, .L15
+ 320              	.L12:
+  61:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   {
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     Error_Handler();
+  63:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   }
+  64:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  65:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   /** Initializes the CPU, AHB and APB buses clocks
+  66:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   */
+  67:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 321              		.loc 1 67 3 is_stmt 1 view .LVU74
+ 322              		.loc 1 67 31 is_stmt 0 view .LVU75
+ 323 0048 0F23     		movs	r3, #15
+ 324 004a 0193     		str	r3, [sp, #4]
+  68:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  69:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 325              		.loc 1 69 3 is_stmt 1 view .LVU76
+ 326              		.loc 1 69 34 is_stmt 0 view .LVU77
+ 327 004c 0323     		movs	r3, #3
+ 328 004e 0293     		str	r3, [sp, #8]
+  70:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 329              		.loc 1 70 3 is_stmt 1 view .LVU78
+ 330              		.loc 1 70 35 is_stmt 0 view .LVU79
+ 331 0050 0023     		movs	r3, #0
+ 332 0052 0393     		str	r3, [sp, #12]
+  71:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 333              		.loc 1 71 3 is_stmt 1 view .LVU80
+ 334              		.loc 1 71 36 is_stmt 0 view .LVU81
+ARM GAS  /tmp/ccvookJ8.s 			page 8
+
+
+ 335 0054 0493     		str	r3, [sp, #16]
+  72:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 336              		.loc 1 72 3 is_stmt 1 view .LVU82
+ 337              		.loc 1 72 36 is_stmt 0 view .LVU83
+ 338 0056 0593     		str	r3, [sp, #20]
+  73:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  74:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 339              		.loc 1 74 3 is_stmt 1 view .LVU84
+ 340              		.loc 1 74 7 is_stmt 0 view .LVU85
+ 341 0058 0221     		movs	r1, #2
+ 342 005a 01A8     		add	r0, sp, #4
+ 343 005c FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 344              	.LVL14:
+ 345              		.loc 1 74 6 discriminator 1 view .LVU86
+ 346 0060 28B9     		cbnz	r0, .L16
+ 347              	.L11:
+  75:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   {
+  76:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     Error_Handler();
+  77:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   }
+  78:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 348              		.loc 1 78 1 view .LVU87
+ 349 0062 15B0     		add	sp, sp, #84
+ 350              	.LCFI12:
+ 351              		.cfi_remember_state
+ 352              		.cfi_def_cfa_offset 4
+ 353              		@ sp needed
+ 354 0064 5DF804FB 		ldr	pc, [sp], #4
+ 355              	.L15:
+ 356              	.LCFI13:
+ 357              		.cfi_restore_state
+  62:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   }
+ 358              		.loc 1 62 5 is_stmt 1 view .LVU88
+ 359 0068 FFF7FEFF 		bl	Error_Handler
+ 360              	.LVL15:
+ 361 006c ECE7     		b	.L12
+ 362              	.L16:
+  76:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   }
+ 363              		.loc 1 76 5 view .LVU89
+ 364 006e FFF7FEFF 		bl	Error_Handler
+ 365              	.LVL16:
+ 366              		.loc 1 78 1 is_stmt 0 view .LVU90
+ 367 0072 F6E7     		b	.L11
+ 368              		.cfi_endproc
+ 369              	.LFE337:
+ 371              		.text
+ 372              	.Letext0:
+ 373              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 374              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 375              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 376              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h"
+ 377              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 378              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h"
+ 379              		.file 8 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h"
+ 380              		.file 9 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
+ 381              		.file 10 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
+ 382              		.file 11 "common/Inc/stm32xx_hal.h"
+ 383              		.file 12 "<built-in>"
+ARM GAS  /tmp/ccvookJ8.s 			page 9
+
+
+ARM GAS  /tmp/ccvookJ8.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 init.c
-     /tmp/ccQ4jiRp.s:21     .text.GPIO_Init:00000000 $t
-     /tmp/ccQ4jiRp.s:27     .text.GPIO_Init:00000000 GPIO_Init
-     /tmp/ccQ4jiRp.s:53     .text.gpioPin_Init:00000000 $t
-     /tmp/ccQ4jiRp.s:59     .text.gpioPin_Init:00000000 gpioPin_Init
-     /tmp/ccQ4jiRp.s:126    .text.gpioEXTI_Init:00000000 $t
-     /tmp/ccQ4jiRp.s:132    .text.gpioEXTI_Init:00000000 gpioEXTI_Init
+     /tmp/ccvookJ8.s:21     .text.GPIO_Init:00000000 $t
+     /tmp/ccvookJ8.s:27     .text.GPIO_Init:00000000 GPIO_Init
+     /tmp/ccvookJ8.s:119    .text.GPIO_Init:00000060 $d
+     /tmp/ccvookJ8.s:124    .text.gpioPin_Init:00000000 $t
+     /tmp/ccvookJ8.s:130    .text.gpioPin_Init:00000000 gpioPin_Init
+     /tmp/ccvookJ8.s:195    .text.gpioEXTI_Init:00000000 $t
+     /tmp/ccvookJ8.s:201    .text.gpioEXTI_Init:00000000 gpioEXTI_Init
+     /tmp/ccvookJ8.s:243    .text.SystemClock_Config:00000000 $t
+     /tmp/ccvookJ8.s:249    .text.SystemClock_Config:00000000 SystemClock_Config
 
 UNDEFINED SYMBOLS
-LED_GPIO_Init
-Switch_GPIO_Init
-Horn_GPIO_Init
+led_GPIO_init
+switch_GPIO_init
+horn_GPIO_init
 HAL_GPIO_Init
 HAL_GPIO_WritePin
+memset
+HAL_PWREx_ControlVoltageScaling
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+Error_Handler

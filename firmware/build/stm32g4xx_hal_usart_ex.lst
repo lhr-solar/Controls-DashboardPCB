@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cclTxypi.s 			page 1
+ARM GAS  /tmp/ccvVlzxK.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
   28:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
   29:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****         -@- When USART operates in FIFO mode, FIFO mode must be enabled prior
   30:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****             starting RX/TX transfers. Also RX/TX FIFO thresholds must be
-ARM GAS  /tmp/cclTxypi.s 			page 2
+ARM GAS  /tmp/ccvVlzxK.s 			page 2
 
 
   31:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****             configured prior starting RX/TX transfers.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
   85:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   */
   86:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
   87:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** /** @defgroup USARTEx_Exported_Functions_Group1 IO operation functions
-ARM GAS  /tmp/cclTxypi.s 			page 3
+ARM GAS  /tmp/ccvVlzxK.s 			page 3
 
 
   88:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   * @brief Extended USART Transmit/Receive functions
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  142:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****  ===============================================================================
  143:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****                       ##### Peripheral Control functions #####
  144:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****  ===============================================================================
-ARM GAS  /tmp/cclTxypi.s 			page 4
+ARM GAS  /tmp/ccvVlzxK.s 			page 4
 
 
  145:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****     [..] This section provides the following functions:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  199:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   SET_BIT(husart->Instance->CR2, USART_CR2_SLVEN);
  200:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  201:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   /* Restore USART configuration */
-ARM GAS  /tmp/cclTxypi.s 			page 5
+ARM GAS  /tmp/ccvVlzxK.s 			page 5
 
 
  202:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  256:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** /**
  257:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   * @brief  Configure the Slave Select input pin (NSS).
  258:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   * @note Software NSS management: SPI slave will always be selected and NSS
-ARM GAS  /tmp/cclTxypi.s 			page 6
+ARM GAS  /tmp/ccvVlzxK.s 			page 6
 
 
  259:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   *       input pin will be ignored.
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  313:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   assert_param(IS_UART_FIFO_INSTANCE(husart->Instance));
  314:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  315:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   /* Process Locked */
-ARM GAS  /tmp/cclTxypi.s 			page 7
+ARM GAS  /tmp/ccvVlzxK.s 			page 7
 
 
  316:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  370:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  371:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   /* Restore USART configuration */
  372:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
-ARM GAS  /tmp/cclTxypi.s 			page 8
+ARM GAS  /tmp/ccvVlzxK.s 			page 8
 
 
  373:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  427:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  428:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   return HAL_OK;
  429:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** }
-ARM GAS  /tmp/cclTxypi.s 			page 9
+ARM GAS  /tmp/ccvVlzxK.s 			page 9
 
 
  430:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  484:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** /**
  485:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   * @}
  486:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****   */
-ARM GAS  /tmp/cclTxypi.s 			page 10
+ARM GAS  /tmp/ccvVlzxK.s 			page 10
 
 
  487:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
   56              	.LCFI0:
   57              		.cfi_def_cfa_offset 8
   58              		.cfi_offset 4, -8
-ARM GAS  /tmp/cclTxypi.s 			page 11
+ARM GAS  /tmp/ccvVlzxK.s 			page 11
 
 
   59              		.cfi_offset 5, -4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  524:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = ((uint16_t)rx_fifo_depth * numerator[rx_fifo_threshold]) /
   98              		.loc 1 524 90 view .LVU33
   99 0030 93FBF2F3 		sdiv	r3, r3, r2
-ARM GAS  /tmp/cclTxypi.s 			page 12
+ARM GAS  /tmp/ccvVlzxK.s 			page 12
 
 
  524:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = ((uint16_t)rx_fifo_depth * numerator[rx_fifo_threshold]) /
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  151              		@ frame_needed = 0, uses_anonymous_args = 0
  152              		@ link register save eliminated.
  127:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
-ARM GAS  /tmp/cclTxypi.s 			page 13
+ARM GAS  /tmp/ccvVlzxK.s 			page 13
 
 
  153              		.loc 1 127 3 view .LVU40
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  196              		.loc 1 187 12 is_stmt 0 view .LVU53
  197 0018 0168     		ldr	r1, [r0]
  187:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
-ARM GAS  /tmp/cclTxypi.s 			page 14
+ARM GAS  /tmp/ccvVlzxK.s 			page 14
 
 
  198              		.loc 1 187 10 view .LVU54
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  239 0056 83F85800 		strb	r0, [r3, #88]
  212:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  240              		.loc 1 212 3 view .LVU68
-ARM GAS  /tmp/cclTxypi.s 			page 15
+ARM GAS  /tmp/ccvVlzxK.s 			page 15
 
 
  214:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** }
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  286              		.cfi_offset 4, -4
  230:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  287              		.loc 1 230 3 is_stmt 1 discriminator 2 view .LVU80
-ARM GAS  /tmp/cclTxypi.s 			page 16
+ARM GAS  /tmp/ccvVlzxK.s 			page 16
 
 
  288 000a 0121     		movs	r1, #1
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  253:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** }
  325              		.loc 1 253 10 is_stmt 0 view .LVU98
  326 003c 1846     		mov	r0, r3
-ARM GAS  /tmp/cclTxypi.s 			page 17
+ARM GAS  /tmp/ccvVlzxK.s 			page 17
 
 
  327              	.LVL16:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  372              		.cfi_def_cfa_offset 4
  373              		.cfi_offset 4, -4
  374 000a 0346     		mov	r3, r0
-ARM GAS  /tmp/cclTxypi.s 			page 18
+ARM GAS  /tmp/ccvVlzxK.s 			page 18
 
 
  279:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  298:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  413              		.loc 1 298 3 view .LVU126
  300:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** }
-ARM GAS  /tmp/cclTxypi.s 			page 19
+ARM GAS  /tmp/ccvVlzxK.s 			page 19
 
 
  414              		.loc 1 300 3 view .LVU127
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  460 0006 012B     		cmp	r3, #1
  461 0008 1BD0     		beq	.L34
  462 000a 0446     		mov	r4, r0
-ARM GAS  /tmp/cclTxypi.s 			page 20
+ARM GAS  /tmp/ccvVlzxK.s 			page 20
 
 
  316:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  500 003c 84F85800 		strb	r0, [r4, #88]
  339:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  501              		.loc 1 339 3 view .LVU155
-ARM GAS  /tmp/cclTxypi.s 			page 21
+ARM GAS  /tmp/ccvVlzxK.s 			page 21
 
 
  341:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** }
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  545 0010 0223     		movs	r3, #2
  546 0012 80F85930 		strb	r3, [r0, #89]
  362:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
-ARM GAS  /tmp/cclTxypi.s 			page 22
+ARM GAS  /tmp/ccvVlzxK.s 			page 22
 
 
  547              		.loc 1 362 3 is_stmt 1 view .LVU169
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  380:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  585              		.loc 1 380 1 view .LVU186
  586 003c 7047     		bx	lr
-ARM GAS  /tmp/cclTxypi.s 			page 23
+ARM GAS  /tmp/ccvVlzxK.s 			page 23
 
 
  587              		.cfi_endproc
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  630              		.loc 1 409 12 is_stmt 0 view .LVU199
  631 0018 0368     		ldr	r3, [r0]
  409:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
-ARM GAS  /tmp/cclTxypi.s 			page 24
+ARM GAS  /tmp/ccvVlzxK.s 			page 24
 
 
  632              		.loc 1 409 10 view .LVU200
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  673 0044 0220     		movs	r0, #2
  674              	.LVL45:
  429:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
-ARM GAS  /tmp/cclTxypi.s 			page 25
+ARM GAS  /tmp/ccvVlzxK.s 			page 25
 
 
  675              		.loc 1 429 1 view .LVU214
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  719              		.loc 1 458 3 is_stmt 1 view .LVU226
  458:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  720              		.loc 1 458 12 is_stmt 0 view .LVU227
-ARM GAS  /tmp/cclTxypi.s 			page 26
+ARM GAS  /tmp/ccvVlzxK.s 			page 26
 
 
  721 0018 0368     		ldr	r3, [r0]
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  453:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_usart_ex.c **** 
  762              		.loc 1 453 3 discriminator 1 view .LVU241
  763 0044 0220     		movs	r0, #2
-ARM GAS  /tmp/cclTxypi.s 			page 27
+ARM GAS  /tmp/ccvVlzxK.s 			page 27
 
 
  764              	.LVL51:
@@ -1584,35 +1584,35 @@ ARM GAS  /tmp/cclTxypi.s 			page 1
  786              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  787              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h"
  788              		.file 6 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_usart.h"
-ARM GAS  /tmp/cclTxypi.s 			page 28
+ARM GAS  /tmp/ccvVlzxK.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32g4xx_hal_usart_ex.c
-     /tmp/cclTxypi.s:21     .text.USARTEx_SetNbDataToProcess:00000000 $t
-     /tmp/cclTxypi.s:26     .text.USARTEx_SetNbDataToProcess:00000000 USARTEx_SetNbDataToProcess
-     /tmp/cclTxypi.s:112    .text.USARTEx_SetNbDataToProcess:0000003c $d
-     /tmp/cclTxypi.s:780    .rodata.numerator.1:00000000 numerator.1
-     /tmp/cclTxypi.s:774    .rodata.denominator.0:00000000 denominator.0
-     /tmp/cclTxypi.s:118    .text.HAL_USARTEx_RxFifoFullCallback:00000000 $t
-     /tmp/cclTxypi.s:124    .text.HAL_USARTEx_RxFifoFullCallback:00000000 HAL_USARTEx_RxFifoFullCallback
-     /tmp/cclTxypi.s:139    .text.HAL_USARTEx_TxFifoEmptyCallback:00000000 $t
-     /tmp/cclTxypi.s:145    .text.HAL_USARTEx_TxFifoEmptyCallback:00000000 HAL_USARTEx_TxFifoEmptyCallback
-     /tmp/cclTxypi.s:160    .text.HAL_USARTEx_EnableSlaveMode:00000000 $t
-     /tmp/cclTxypi.s:166    .text.HAL_USARTEx_EnableSlaveMode:00000000 HAL_USARTEx_EnableSlaveMode
-     /tmp/cclTxypi.s:261    .text.HAL_USARTEx_DisableSlaveMode:00000000 $t
-     /tmp/cclTxypi.s:267    .text.HAL_USARTEx_DisableSlaveMode:00000000 HAL_USARTEx_DisableSlaveMode
-     /tmp/cclTxypi.s:347    .text.HAL_USARTEx_ConfigNSS:00000000 $t
-     /tmp/cclTxypi.s:353    .text.HAL_USARTEx_ConfigNSS:00000000 HAL_USARTEx_ConfigNSS
-     /tmp/cclTxypi.s:434    .text.HAL_USARTEx_EnableFifoMode:00000000 $t
-     /tmp/cclTxypi.s:440    .text.HAL_USARTEx_EnableFifoMode:00000000 HAL_USARTEx_EnableFifoMode
-     /tmp/cclTxypi.s:518    .text.HAL_USARTEx_DisableFifoMode:00000000 $t
-     /tmp/cclTxypi.s:524    .text.HAL_USARTEx_DisableFifoMode:00000000 HAL_USARTEx_DisableFifoMode
-     /tmp/cclTxypi.s:591    .text.HAL_USARTEx_SetTxFifoThreshold:00000000 $t
-     /tmp/cclTxypi.s:597    .text.HAL_USARTEx_SetTxFifoThreshold:00000000 HAL_USARTEx_SetTxFifoThreshold
-     /tmp/cclTxypi.s:681    .text.HAL_USARTEx_SetRxFifoThreshold:00000000 $t
-     /tmp/cclTxypi.s:687    .text.HAL_USARTEx_SetRxFifoThreshold:00000000 HAL_USARTEx_SetRxFifoThreshold
-     /tmp/cclTxypi.s:771    .rodata.denominator.0:00000000 $d
-     /tmp/cclTxypi.s:777    .rodata.numerator.1:00000000 $d
+     /tmp/ccvVlzxK.s:21     .text.USARTEx_SetNbDataToProcess:00000000 $t
+     /tmp/ccvVlzxK.s:26     .text.USARTEx_SetNbDataToProcess:00000000 USARTEx_SetNbDataToProcess
+     /tmp/ccvVlzxK.s:112    .text.USARTEx_SetNbDataToProcess:0000003c $d
+     /tmp/ccvVlzxK.s:780    .rodata.numerator.1:00000000 numerator.1
+     /tmp/ccvVlzxK.s:774    .rodata.denominator.0:00000000 denominator.0
+     /tmp/ccvVlzxK.s:118    .text.HAL_USARTEx_RxFifoFullCallback:00000000 $t
+     /tmp/ccvVlzxK.s:124    .text.HAL_USARTEx_RxFifoFullCallback:00000000 HAL_USARTEx_RxFifoFullCallback
+     /tmp/ccvVlzxK.s:139    .text.HAL_USARTEx_TxFifoEmptyCallback:00000000 $t
+     /tmp/ccvVlzxK.s:145    .text.HAL_USARTEx_TxFifoEmptyCallback:00000000 HAL_USARTEx_TxFifoEmptyCallback
+     /tmp/ccvVlzxK.s:160    .text.HAL_USARTEx_EnableSlaveMode:00000000 $t
+     /tmp/ccvVlzxK.s:166    .text.HAL_USARTEx_EnableSlaveMode:00000000 HAL_USARTEx_EnableSlaveMode
+     /tmp/ccvVlzxK.s:261    .text.HAL_USARTEx_DisableSlaveMode:00000000 $t
+     /tmp/ccvVlzxK.s:267    .text.HAL_USARTEx_DisableSlaveMode:00000000 HAL_USARTEx_DisableSlaveMode
+     /tmp/ccvVlzxK.s:347    .text.HAL_USARTEx_ConfigNSS:00000000 $t
+     /tmp/ccvVlzxK.s:353    .text.HAL_USARTEx_ConfigNSS:00000000 HAL_USARTEx_ConfigNSS
+     /tmp/ccvVlzxK.s:434    .text.HAL_USARTEx_EnableFifoMode:00000000 $t
+     /tmp/ccvVlzxK.s:440    .text.HAL_USARTEx_EnableFifoMode:00000000 HAL_USARTEx_EnableFifoMode
+     /tmp/ccvVlzxK.s:518    .text.HAL_USARTEx_DisableFifoMode:00000000 $t
+     /tmp/ccvVlzxK.s:524    .text.HAL_USARTEx_DisableFifoMode:00000000 HAL_USARTEx_DisableFifoMode
+     /tmp/ccvVlzxK.s:591    .text.HAL_USARTEx_SetTxFifoThreshold:00000000 $t
+     /tmp/ccvVlzxK.s:597    .text.HAL_USARTEx_SetTxFifoThreshold:00000000 HAL_USARTEx_SetTxFifoThreshold
+     /tmp/ccvVlzxK.s:681    .text.HAL_USARTEx_SetRxFifoThreshold:00000000 $t
+     /tmp/ccvVlzxK.s:687    .text.HAL_USARTEx_SetRxFifoThreshold:00000000 HAL_USARTEx_SetRxFifoThreshold
+     /tmp/ccvVlzxK.s:771    .rodata.denominator.0:00000000 $d
+     /tmp/ccvVlzxK.s:777    .rodata.numerator.1:00000000 $d
 
 NO UNDEFINED SYMBOLS

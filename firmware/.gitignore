@@ -1,5 +1,5 @@
 # VSCode settings
-.vscode/*
+firmware/.vscode/*
 !.vscode/c_cpp_properties.json
 compile_commands.json
 

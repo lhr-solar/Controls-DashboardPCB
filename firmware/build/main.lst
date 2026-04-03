@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbDPp4P.s 			page 1
+ARM GAS  /tmp/ccchIq5P.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -34,182 +34,162 @@ ARM GAS  /tmp/ccbDPp4P.s 			page 1
   28              		.thumb
   29              		.thumb_func
   31              	main:
-  32              	.LVL0:
-  33              	.LFB334:
+  32              	.LFB334:
    1:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "FreeRTOS.h"
-   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "ControlsLeader_Tasks.h"
+   2:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "Tasks.h"
    3:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "init.h"
-   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
-   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** StaticTask_t INIT_TASK_TCB;
-   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** StackType_t INIT_TASK_Stack_Array[INIT_TASK_STACK_SIZE];
+   4:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "Switches.h"
+   5:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "Status_LEDs.h"
+   6:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** #include "Horn.h"
    7:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
-   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** int main(int argc, char const *argv[]) {
-  34              		.loc 1 8 40 view -0
-  35              		.cfi_startproc
-  36              		@ Volatile: function does not return.
-  37              		@ args = 0, pretend = 0, frame = 0
-  38              		@ frame_needed = 0, uses_anonymous_args = 0
-  39              		.loc 1 8 40 is_stmt 0 view .LVU1
-  40 0000 00B5     		push	{lr}
-  41              	.LCFI0:
-  42              		.cfi_def_cfa_offset 4
-  43              		.cfi_offset 14, -4
-  44 0002 85B0     		sub	sp, sp, #20
-  45              	.LCFI1:
-  46              		.cfi_def_cfa_offset 24
-   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     HAL_Init();
-ARM GAS  /tmp/ccbDPp4P.s 			page 2
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** StaticTask_t INIT_TASK_TCB;
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** StackType_t INIT_TASK_Stack_Array[INIT_TASK_STACK_SIZE];
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** int main(void) {
+  33              		.loc 1 11 16 view -0
+  34              		.cfi_startproc
+  35              		@ Volatile: function does not return.
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38 0000 00B5     		push	{lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 4
+  41              		.cfi_offset 14, -4
+  42 0002 85B0     		sub	sp, sp, #20
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 24
+ARM GAS  /tmp/ccchIq5P.s 			page 2
 
 
-  47              		.loc 1 9 5 is_stmt 1 view .LVU2
-  48 0004 FFF7FEFF 		bl	HAL_Init
-  49              	.LVL1:
-  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     GPIO_Init();
-  50              		.loc 1 10 5 view .LVU3
-  51 0008 FFF7FEFF 		bl	GPIO_Init
-  52              	.LVL2:
-  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     EXTI_Init(Neutral_Gear, 5);
-  53              		.loc 1 11 5 view .LVU4
-  54 000c 114B     		ldr	r3, .L4
-  55 000e 0522     		movs	r2, #5
-  56 0010 93E80300 		ldm	r3, {r0, r1}
-  57 0014 FFF7FEFF 		bl	EXTI_Init
-  58              	.LVL3:
-  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     EXTI_Init(Ign_OFF, 4);
-  59              		.loc 1 12 5 view .LVU5
-  60 0018 0F4B     		ldr	r3, .L4+4
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     HAL_Init();
+  45              		.loc 1 12 5 view .LVU1
+  46 0004 FFF7FEFF 		bl	HAL_Init
+  47              	.LVL0:
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 	SystemClock_Config();
+  48              		.loc 1 13 2 view .LVU2
+  49 0008 FFF7FEFF 		bl	SystemClock_Config
+  50              	.LVL1:
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     GPIO_Init();
+  51              		.loc 1 14 5 view .LVU3
+  52 000c FFF7FEFF 		bl	GPIO_Init
+  53              	.LVL2:
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, 5);
+  54              		.loc 1 15 5 view .LVU4
+  55 0010 0522     		movs	r2, #5
+  56 0012 0121     		movs	r1, #1
+  57 0014 0B48     		ldr	r0, .L4
+  58 0016 FFF7FEFF 		bl	switch_EXTI_Init
+  59              	.LVL3:
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     switch_EXTI_Init(IGN_OFF_PORT, IGN_OFF_PIN, 4);
+  60              		.loc 1 16 5 view .LVU5
   61 001a 0422     		movs	r2, #4
-  62 001c 93E80300 		ldm	r3, {r0, r1}
-  63 0020 FFF7FEFF 		bl	EXTI_Init
-  64              	.LVL4:
-  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
-  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     RainbowLED();
-  65              		.loc 1 14 5 view .LVU6
-  66 0024 FFF7FEFF 		bl	RainbowLED
-  67              	.LVL5:
-  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     flash_them();
-  68              		.loc 1 15 5 view .LVU7
-  69 0028 FFF7FEFF 		bl	flash_them
-  70              	.LVL6:
-  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     flash_them();
-  71              		.loc 1 16 5 view .LVU8
-  72 002c FFF7FEFF 		bl	flash_them
-  73              	.LVL7:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     flash_them();
-  74              		.loc 1 17 5 view .LVU9
-  75 0030 FFF7FEFF 		bl	flash_them
-  76              	.LVL8:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     xTaskCreateStatic(
-  77              		.loc 1 19 5 view .LVU10
-  78 0034 094B     		ldr	r3, .L4+8
-  79 0036 0293     		str	r3, [sp, #8]
-  80 0038 094B     		ldr	r3, .L4+12
-  81 003a 0193     		str	r3, [sp, #4]
-  82 003c 0123     		movs	r3, #1
-  83 003e 0093     		str	r3, [sp]
-  84 0040 0023     		movs	r3, #0
-  85 0042 8022     		movs	r2, #128
-  86 0044 0749     		ldr	r1, .L4+16
-  87 0046 0848     		ldr	r0, .L4+20
-  88 0048 FFF7FEFF 		bl	xTaskCreateStatic
-  89              	.LVL9:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         InitTasks,
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         "Init All Tasks",
-  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_STACK_SIZE,
-  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         NULL,
-ARM GAS  /tmp/ccbDPp4P.s 			page 3
+  62 001c 1146     		mov	r1, r2
+  63 001e 4FF09040 		mov	r0, #1207959552
+  64 0022 FFF7FEFF 		bl	switch_EXTI_Init
+  65              	.LVL4:
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     xTaskCreateStatic(
+  66              		.loc 1 18 5 view .LVU6
+  67 0026 084B     		ldr	r3, .L4+4
+  68 0028 0293     		str	r3, [sp, #8]
+  69 002a 084B     		ldr	r3, .L4+8
+  70 002c 0193     		str	r3, [sp, #4]
+  71 002e 0123     		movs	r3, #1
+  72 0030 0093     		str	r3, [sp]
+  73 0032 0023     		movs	r3, #0
+  74 0034 8022     		movs	r2, #128
+  75 0036 0649     		ldr	r1, .L4+12
+  76 0038 0648     		ldr	r0, .L4+16
+  77 003a FFF7FEFF 		bl	xTaskCreateStatic
+  78              	.LVL5:
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         InitTasks,
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         "Init All Tasks",
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_STACK_SIZE,
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         NULL,
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_PRIORITY,
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_Stack_Array,
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         &INIT_TASK_TCB
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     );
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     vTaskStartScheduler();
+  79              		.loc 1 27 5 view .LVU7
+  80 003e FFF7FEFF 		bl	vTaskStartScheduler
+  81              	.LVL6:
+  82              	.L2:
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
+  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     while(1) {}
+  83              		.loc 1 29 5 view .LVU8
+ARM GAS  /tmp/ccchIq5P.s 			page 3
 
 
-  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_PRIORITY,
-  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         INIT_TASK_Stack_Array,
-  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         &INIT_TASK_TCB
-  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
-  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     );
-  29:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     vTaskStartScheduler();
-  90              		.loc 1 29 5 view .LVU11
-  91 004c FFF7FEFF 		bl	vTaskStartScheduler
-  92              	.LVL10:
-  93              	.L2:
-  30:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c **** 
-  31:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     while(1){
-  94              		.loc 1 31 5 view .LVU12
-  32:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         
-  33:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****     }
-  95              		.loc 1 33 5 view .LVU13
-  31:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/main.c ****         
-  96              		.loc 1 31 10 view .LVU14
-  97 0050 FEE7     		b	.L2
-  98              	.L5:
-  99 0052 00BF     		.align	2
- 100              	.L4:
- 101 0054 00000000 		.word	Neutral_Gear
- 102 0058 00000000 		.word	Ign_OFF
- 103 005c 00000000 		.word	INIT_TASK_TCB
- 104 0060 00000000 		.word	INIT_TASK_Stack_Array
- 105 0064 00000000 		.word	.LC0
- 106 0068 00000000 		.word	InitTasks
- 107              		.cfi_endproc
- 108              	.LFE334:
- 110              		.global	INIT_TASK_Stack_Array
- 111              		.section	.bss.INIT_TASK_Stack_Array,"aw",%nobits
- 112              		.align	2
- 115              	INIT_TASK_Stack_Array:
- 116 0000 00000000 		.space	512
- 116      00000000 
- 116      00000000 
- 116      00000000 
- 116      00000000 
- 117              		.global	INIT_TASK_TCB
- 118              		.section	.bss.INIT_TASK_TCB,"aw",%nobits
- 119              		.align	2
- 122              	INIT_TASK_TCB:
- 123 0000 00000000 		.space	84
- 123      00000000 
- 123      00000000 
- 123      00000000 
- 123      00000000 
- 124              		.text
- 125              	.Letext0:
- 126              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 127              		.file 3 "middleware/FreeRTOS-Kernel/include/projdefs.h"
- 128              		.file 4 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
- 129              		.file 5 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
- 130              		.file 6 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
- 131              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
- 132              		.file 8 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
-ARM GAS  /tmp/ccbDPp4P.s 			page 4
-
-
- 133              		.file 9 "middleware/FreeRTOS-Kernel/include/task.h"
- 134              		.file 10 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h"
- 135              		.file 11 "/home/pani_/LHRS/VCAT-Dashboard/firmware/tasks/Inc/ControlsLeader_Tasks.h"
- 136              		.file 12 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
- 137              		.file 13 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h"
- 138              		.file 14 "/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/init.h"
- 139              		.file 15 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
-ARM GAS  /tmp/ccbDPp4P.s 			page 5
+  84              		.loc 1 29 15 view .LVU9
+  85              		.loc 1 29 10 view .LVU10
+  86 0042 FEE7     		b	.L2
+  87              	.L5:
+  88              		.align	2
+  89              	.L4:
+  90 0044 00080048 		.word	1207961600
+  91 0048 00000000 		.word	INIT_TASK_TCB
+  92 004c 00000000 		.word	INIT_TASK_Stack_Array
+  93 0050 00000000 		.word	.LC0
+  94 0054 00000000 		.word	InitTasks
+  95              		.cfi_endproc
+  96              	.LFE334:
+  98              		.global	INIT_TASK_Stack_Array
+  99              		.section	.bss.INIT_TASK_Stack_Array,"aw",%nobits
+ 100              		.align	2
+ 103              	INIT_TASK_Stack_Array:
+ 104 0000 00000000 		.space	512
+ 104      00000000 
+ 104      00000000 
+ 104      00000000 
+ 104      00000000 
+ 105              		.global	INIT_TASK_TCB
+ 106              		.section	.bss.INIT_TASK_TCB,"aw",%nobits
+ 107              		.align	3
+ 110              	INIT_TASK_TCB:
+ 111 0000 00000000 		.space	376
+ 111      00000000 
+ 111      00000000 
+ 111      00000000 
+ 111      00000000 
+ 112              		.weak	SystemClock_Config
+ 113              		.text
+ 114              	.Letext0:
+ 115              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 116              		.file 3 "middleware/FreeRTOS-Kernel/include/projdefs.h"
+ 117              		.file 4 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 118              		.file 5 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h"
+ 119              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 120              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 121              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 122              		.file 9 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
+ 123              		.file 10 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 124              		.file 11 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 125              		.file 12 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 126              		.file 13 "middleware/FreeRTOS-Kernel/include/task.h"
+ 127              		.file 14 "/home/pani_/LHRS/VCAT-Dashboard/firmware/tasks/Inc/Tasks.h"
+ 128              		.file 15 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
+ 129              		.file 16 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
+ 130              		.file 17 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ARM GAS  /tmp/ccchIq5P.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccbDPp4P.s:21     .rodata.main.str1.4:00000000 $d
-     /tmp/ccbDPp4P.s:25     .text.main:00000000 $t
-     /tmp/ccbDPp4P.s:31     .text.main:00000000 main
-     /tmp/ccbDPp4P.s:101    .text.main:00000054 $d
-     /tmp/ccbDPp4P.s:122    .bss.INIT_TASK_TCB:00000000 INIT_TASK_TCB
-     /tmp/ccbDPp4P.s:115    .bss.INIT_TASK_Stack_Array:00000000 INIT_TASK_Stack_Array
-     /tmp/ccbDPp4P.s:112    .bss.INIT_TASK_Stack_Array:00000000 $d
-     /tmp/ccbDPp4P.s:119    .bss.INIT_TASK_TCB:00000000 $d
+     /tmp/ccchIq5P.s:21     .rodata.main.str1.4:00000000 $d
+     /tmp/ccchIq5P.s:25     .text.main:00000000 $t
+     /tmp/ccchIq5P.s:31     .text.main:00000000 main
+     /tmp/ccchIq5P.s:90     .text.main:00000044 $d
+     /tmp/ccchIq5P.s:110    .bss.INIT_TASK_TCB:00000000 INIT_TASK_TCB
+     /tmp/ccchIq5P.s:103    .bss.INIT_TASK_Stack_Array:00000000 INIT_TASK_Stack_Array
+     /tmp/ccchIq5P.s:100    .bss.INIT_TASK_Stack_Array:00000000 $d
+     /tmp/ccchIq5P.s:107    .bss.INIT_TASK_TCB:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_Init
+SystemClock_Config
 GPIO_Init
-EXTI_Init
-RainbowLED
-flash_them
+switch_EXTI_Init
 xTaskCreateStatic
 vTaskStartScheduler
-Neutral_Gear
-Ign_OFF
 InitTasks

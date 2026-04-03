@@ -1,14 +1,51 @@
-#include "init.h"
+/**
+ * @file IO_test.c
+ * @brief Basic GPIO input/output test converted to FreeRTOS task.
+ *        Verifies switch input and LED output by toggling LSOM_HB at 1Hz
+ *        and mirroring the IGN_OFF switch state to X_LED2.
+ */
 
-int main() {
+#include "FreeRTOS.h"
+#include "Tasks.h"
+#include "init.h"
+#include "Status_LEDs.h"
+#include "Switches.h"
+
+/* Task control block and stack for the IO test task */
+static StaticTask_t IO_TEST_TASK_TCB;
+static StackType_t  IO_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
+
+/**
+ * @brief  FreeRTOS task that toggles LSOM_HB at 1Hz and mirrors
+ *         the IGN_OFF switch state to X_LED2.
+ * @param  argument  Unused task parameter.
+ */
+static void IOTest_Task(void *argument) {
+    while (1) {
+        led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+        led_set(X_LED2_PORT, X_LED2_PIN, switch_get_state(HAZARD_PORT, HAZARD_PIN));
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
+int main(void) {
     HAL_Init();
+    SystemClock_Config();
     GPIO_Init();
 
-    while(1) {
-        toggle_LED(LSOM_HB);
-        set_LED(X_LED2, get_switch_state(Ign_OFF));
-        HAL_Delay(500);
-    }
+    xTaskCreateStatic(
+        IOTest_Task,
+        "IO_test",
+        configMINIMAL_STACK_SIZE,
+        NULL,
+        tskIDLE_PRIORITY + 1,
+        IO_TEST_TASK_Stack_Array,
+        &IO_TEST_TASK_TCB
+    );
+
+    vTaskStartScheduler();
+
+    while (1) {}
 
     return 0;
 }

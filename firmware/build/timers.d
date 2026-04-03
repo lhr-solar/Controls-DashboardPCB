@@ -7,6 +7,7 @@
  middleware/FreeRTOS-Kernel/include/deprecated_definitions.h \
  middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h \
  middleware/FreeRTOS-Kernel/include/mpu_wrappers.h \
+ middleware/FreeRTOS-Kernel/include/newlib-freertos.h \
  middleware/FreeRTOS-Kernel/include/task.h \
  middleware/FreeRTOS-Kernel/include/list.h \
  middleware/FreeRTOS-Kernel/include/queue.h \
@@ -19,6 +20,7 @@ middleware/FreeRTOS-Kernel/include/portable.h:
 middleware/FreeRTOS-Kernel/include/deprecated_definitions.h:
 middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h:
 middleware/FreeRTOS-Kernel/include/mpu_wrappers.h:
+middleware/FreeRTOS-Kernel/include/newlib-freertos.h:
 middleware/FreeRTOS-Kernel/include/task.h:
 middleware/FreeRTOS-Kernel/include/list.h:
 middleware/FreeRTOS-Kernel/include/queue.h:

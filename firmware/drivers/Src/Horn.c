@@ -1,12 +1,13 @@
 #include "init.h"
+#include "Status_LEDs.h"
+#include "Horn.h"
+#include "Switches.h"
 
-const GPIO_Pin Horn_OUT = { GPIOB, GPIO_PIN_1 };
-
-void Horn_GPIO_Init() {
-    gpioPin_Init(Horn_OUT, GPIO_MODE_OUTPUT_PP);
+void horn_GPIO_init() {
+    gpioPin_Init(HORN_OUT_PORT, HORN_OUT_PIN, GPIO_MODE_OUTPUT_PP);
 }
 
-void set_Horn(SwitchState state) {
-    set_LED(AKSHAY_LED, state);
-    HAL_GPIO_WritePin(Horn_OUT.port, Horn_OUT.pin, state);
+void horn_set(switch_state_t state) {
+    led_set(AKSHAY_LED_PORT, AKSHAY_LED_PIN, state);
+    HAL_GPIO_WritePin(HORN_OUT_PORT, HORN_OUT_PIN, state);
 }

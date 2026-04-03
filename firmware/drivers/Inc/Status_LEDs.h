@@ -1,33 +1,30 @@
-#include "pinMode.h"
+#pragma once
 
-#ifndef STATUS_LEDS_H
-#define STATUS_LEDS_H
+#include "pinDefs.h"
 
-//Port A - out
-extern const GPIO_Pin PH_CAN_RX_LED;
-extern const GPIO_Pin BPS_Fault_LED;
+/**
+ * @brief  Initializes all LED GPIO pins as push-pull outputs.
+ * 
+ */
+void led_GPIO_init();
 
-//Port B - out
-extern const GPIO_Pin CarCAN_RX_LED;
-extern const GPIO_Pin CarCAN_TX_LED;
-extern const GPIO_Pin PH_CAN_TX_LED;
-extern const GPIO_Pin X_LED2;
+/**
+ * @brief  Sets an LED to the specified state (on or off).
+ * @param  port   GPIO port of the LED (e.g. GPIOA, GPIOB).
+ * @param  pin    GPIO pin number (e.g. GPIO_PIN_10, GPIO_PIN_3).
+ * @param  state  Desired pin state (GPIO_PIN_SET or GPIO_PIN_RESET).
+ */
+void led_set(GPIO_TypeDef *port, uint16_t pin, GPIO_PinState state);
 
-//Port C - out
-extern const GPIO_Pin Controls_HB_LED;
-extern const GPIO_Pin LSOM_HB;
-extern const GPIO_Pin AKSHAY_LED;
+/**
+ * @brief  Toggles an LED from its current state.
+ * @param  port  GPIO port of the LED (e.g. GPIOA, GPIOB).
+ * @param  pin   GPIO pin number (e.g. GPIO_PIN_10, GPIO_PIN_3).
+ */
+void led_toggle(GPIO_TypeDef *port, uint16_t pin);
 
-
-// #define Indicator_PWM_Pin    GPIO_PIN_15
-// #define Indicator_PWM_Port   GPIOB
-
-void LED_GPIO_Init();
-
-//void set_LED(GPIO_Pin LED, GPIO_PinState state);
-void set_LED(GPIO_Pin LED, GPIO_PinState state);
-void toggle_LED(GPIO_Pin LED);
+/**
+ * @brief  Flashes all LEDs on and off together once with a 250ms on/off period.
+ * 
+ */
 void flash_them();
-void RainbowLED();
-
-#endif

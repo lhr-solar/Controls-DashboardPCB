@@ -1,11 +1,16 @@
-#include "pinMode.h"
+#pragma once
 
-#ifndef HORN_H
-#define HORN_H
+#include "Switches.h"
+#include "pinDefs.h"
 
-extern const GPIO_Pin Horn_OUT;
+/**
+ * @brief  Initializes the horn output GPIO pin as a push-pull output
+ */
+void horn_GPIO_init();
 
-void Horn_GPIO_Init();
-void set_Horn(SwitchState state);
-
-#endif
+/**
+ * @brief  Sets the horn output to the specified state.
+ *         Also mirrors the state to AKSHAY_LED for debugging.
+ * @param  state  ON to activate the horn, OFF to deactivate.
+ */
+void horn_set(switch_state_t state);

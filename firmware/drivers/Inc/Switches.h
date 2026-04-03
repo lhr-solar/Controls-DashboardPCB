@@ -1,50 +1,38 @@
-#include "pinMode.h"
+#pragma once
 
-#ifndef SWITCHES_H
-#define SWITCHES_H
+#include "pinDefs.h"
 
-// Port A - input
-extern const GPIO_Pin FWD_SW;
-extern const GPIO_Pin Ign_OFF;
-extern const GPIO_Pin Ign_MTR;
-
-// Port B - input
-extern const GPIO_Pin Ign_ARR;
-extern const GPIO_Pin PTT;
-
-// Port C - input
-extern const GPIO_Pin Neutral_Gear;
-extern const GPIO_Pin Rev_SW;
-
-extern const GPIO_Pin Regen_Enable;
-extern const GPIO_Pin Right_Blinker;
-extern const GPIO_Pin Left_Blinker;
-extern const GPIO_Pin Cruise_Enable;
-extern const GPIO_Pin Cruise_Set;
-extern const GPIO_Pin Regen_Active;
-extern const GPIO_Pin Hazard;
-
-// Port D - input
-extern const GPIO_Pin Horn;
-
-extern uint8_t switchStates[];
-
-//Input State Bits Map
-#define FWD_SW_BIT          (1 << 0)
-#define IGN_OFF_BIT         (1 << 1)
-#define IGN_MTR_BIT         (1 << 2)
-#define IGN_ARR_BIT         (1 << 3)
-#define NEUTRAL_GEAR_BIT    (1 << 4)
-#define REV_SW_BIT          (1 << 5)
+#define INTERRUPT_0_TO_4_BOUND	4
+#define INTERRUPT_5_TO_9_BOUND	9
 
 
-typedef enum {
-    ON = GPIO_PIN_RESET,
-    OFF = GPIO_PIN_SET
-} SwitchState;
+/**
+ * @brief  Initializes all switch GPIO pins as inputs.
+ * 
+ */
+void switch_GPIO_init();
 
-void Switch_GPIO_Init();
-void EXTI_Init(GPIO_Pin sw, uint32_t priority);
-SwitchState get_switch_state(GPIO_Pin sw);
+/**
+ * @brief  Configures a GPIO pin as an external interrupt and enables it in the NVIC
+ *         Triggers on both rising and falling edges.
+ * @param  port      GPIO port of the switch (e.g. GPIOA, GPIOB).
+ * @param  pin       GPIO pin number (e.g. GPIO_PIN_5).
+ * @param  priority  NVIC priority to assign to the interrupt.
+ */
+void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t priority);
 
-#endif
+/**
+ * @brief 	Polls all switch inputs and updates the switch_state[] array passed into paylod
+ * @param payload	Pointer to uint8_t array that stores switch states to be written to/by CAN rx and tx
+ * @attention 		Each entry is 1 if the switch is ON (active low), 0 if OFF.
+ */
+void switch_poll_all_inputs(uint8_t* payload);
+
+/**
+ * @brief  Reads the current state of a single switch.
+ * @param  port  GPIO port of the switch (e.g. GPIOA, GPIOB).
+ * @param  pin   GPIO pin number (e.g. GPIO_PIN_5).
+ * 
+ * @return ON if the pin is low (active), OFF if the pin is high.
+ */
+switch_state_t switch_get_state(GPIO_TypeDef *port, uint16_t pin);

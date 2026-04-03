@@ -1,8 +1,6 @@
 /home/pani_/LHRS/VCAT-Dashboard/firmware/build/Horn.o: \
  /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Horn.c \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/init.h \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h \
  common/Inc/stm32xx_hal.h \
  stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h \
@@ -61,6 +59,7 @@
  middleware/FreeRTOS-Kernel/include/deprecated_definitions.h \
  middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h \
  middleware/FreeRTOS-Kernel/include/mpu_wrappers.h \
+ middleware/FreeRTOS-Kernel/include/newlib-freertos.h \
  middleware/FreeRTOS-Kernel/include/task.h \
  middleware/FreeRTOS-Kernel/include/list.h \
  middleware/FreeRTOS-Kernel/include/queue.h \
@@ -68,11 +67,11 @@
  middleware/FreeRTOS-Kernel/include/timers.h \
  middleware/FreeRTOS-Kernel/include/semphr.h \
  middleware/FreeRTOS-Kernel/include/queue.h \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h
-/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/init.h:
-/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h:
-/home/pani_/LHRS/VCAT-Dashboard/firmware/config/Inc/pinMode.h:
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/pinDefs.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h
+/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h:
 common/Inc/stm32xx_hal.h:
 stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h:
@@ -131,6 +130,7 @@ middleware/FreeRTOS-Kernel/include/portable.h:
 middleware/FreeRTOS-Kernel/include/deprecated_definitions.h:
 middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h:
 middleware/FreeRTOS-Kernel/include/mpu_wrappers.h:
+middleware/FreeRTOS-Kernel/include/newlib-freertos.h:
 middleware/FreeRTOS-Kernel/include/task.h:
 middleware/FreeRTOS-Kernel/include/list.h:
 middleware/FreeRTOS-Kernel/include/queue.h:
@@ -138,5 +138,7 @@ middleware/FreeRTOS-Kernel/include/task.h:
 middleware/FreeRTOS-Kernel/include/timers.h:
 middleware/FreeRTOS-Kernel/include/semphr.h:
 middleware/FreeRTOS-Kernel/include/queue.h:
-/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h:
+/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h:
+/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/pinDefs.h:
 /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h:
+/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h:

@@ -1,16 +1,52 @@
-#include "init.h"
+/**
+ * @file Horn_test.c
+ * @brief Horn output test converted to FreeRTOS task.
+ *        Verifies horn output and LSOM_HB LED by toggling the LED at 1Hz
+ *        and continuously mirroring the horn switch state to the horn output.
+ */
 
-int main() {
+#include "FreeRTOS.h"
+#include "Tasks.h"
+#include "init.h"
+#include "Status_LEDs.h"
+#include "Horn.h"
+#include "Switches.h"
+
+/* Task control block and stack for the horn test task */
+static StaticTask_t HORN_TEST_TASK_TCB;
+static StackType_t  HORN_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
+
+/**
+ * @brief  FreeRTOS task that blinks LSOM_HB at 1Hz and mirrors
+ *         the horn switch state to the horn output.
+ * @param  argument  Unused task parameter.
+ */
+static void HornTest_Task(void *argument) {
+    while (1) {
+        led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+        vTaskDelay(pdMS_TO_TICKS(500));
+        horn_set(switch_get_state(HORN_PORT, HORN_PIN));
+    }
+}
+
+int main(void) {
     HAL_Init();
+    SystemClock_Config();
     GPIO_Init();
 
-    while(1) {
-        set_LED(LSOM_HB, GPIO_PIN_SET);
-        HAL_Delay(500);
-        set_LED(LSOM_HB, GPIO_PIN_RESET);
-        HAL_Delay(500);
-        set_Horn(get_switch_state(Horn));
-    }
+    xTaskCreateStatic(
+        HornTest_Task,
+        "Horn_test",
+        configMINIMAL_STACK_SIZE,
+        NULL,
+        tskIDLE_PRIORITY + 1,
+        HORN_TEST_TASK_Stack_Array,
+        &HORN_TEST_TASK_TCB
+    );
+
+    vTaskStartScheduler();
+
+    while (1) {}
 
     return 0;
 }
