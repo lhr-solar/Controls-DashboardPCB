@@ -20,7 +20,7 @@ jobs:
 
        - name: Clean
          run: |
-          cd Software/
+          cd firmware/
           make clean
 
        - name: Build tests
