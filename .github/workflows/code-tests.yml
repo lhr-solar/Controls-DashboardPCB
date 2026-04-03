@@ -30,7 +30,7 @@ jobs:
       - name: Test Production Build
         run: |
           nix develop ./firmware/Embedded-Sharepoint --accept-flake-config --command bash -c "
-            cd Firmware/ && make clean && make
+            cd firmware/ && make clean && make
           "
       # TODO - make all tests
       # - name: Clean & Build tests
