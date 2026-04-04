@@ -4,7 +4,6 @@
 #include "Switches.h"
 
 void horn_GPIO_init() {
-    __HAL_RCC_GPIOB_CLK_ENABLE();
     gpioPin_Init(HORN_OUT_PORT, HORN_OUT_PIN, GPIO_MODE_OUTPUT_PP);
 }
 

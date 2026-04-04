@@ -28,11 +28,11 @@ static StackType_t  IO_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
 static void IOTest_Task(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
-    while (1) {
-        led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
-        led_set(X_LED2_PORT, X_LED2_PIN, switch_get_state(HAZARD_PORT, HAZARD_PIN));
-        vTaskDelayUntil(&xLastWakeTime, IO_TASK_DELAY_TICKS);
-    }
+	while (1) {
+		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+		led_set(X_LED2_PORT, X_LED2_PIN, switch_get_state(SW_HAZARD));
+		vTaskDelayUntil(&xLastWakeTime, IO_TASK_DELAY_TICKS);
+	}
 }
 
 int main(void) {

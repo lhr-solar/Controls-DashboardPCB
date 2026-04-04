@@ -28,11 +28,11 @@ static void HornTest_Task(void *argument) {
 	xLastWakeTime = xTaskGetTickCount();
 
 
-    while (1) {
-        led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
-        vTaskDelayUntil( &xLastWakeTime, HORN_TASK_DELAY_TICKS);
-        horn_set(switch_get_state(HORN_PORT, HORN_PIN));
-    }
+	while (1) {
+		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+		horn_set(switch_get_state(SW_HORN));
+		vTaskDelayUntil(&xLastWakeTime, HORN_TASK_DELAY_TICKS);
+	}
 }
 
 int main(void) {

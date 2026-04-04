@@ -2,9 +2,6 @@
 
 #include "stm32xx_hal.h"
 
-#define COMMON_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
-#define CL_MAX_PRIO					tskIDLE_PRIORITY + 5
-
 
 /**
  * 
@@ -26,31 +23,6 @@ typedef enum {
     SWITCH_OFF = GPIO_PIN_SET
 } switch_state_t;
 
-
-
-/**
- * @brief  Adresses switches to specific index on
- * 		   data payload to be sent on CAN
- * 
- */
-typedef enum {
-    SW_IGN_ARR       = 0,
-    SW_IGN_MTR       = 1,
-    SW_CRUISE_ENABLE = 2,
-    SW_CRUISE_SET    = 3,
-    SW_FWD           = 4,
-    SW_NEUTRAL_GEAR  = 5,
-    SW_REV           = 6,
-    SW_HAZARD        = 7,
-    SW_LEFT_BLINKER  = 8,
-    SW_RIGHT_BLINKER = 9,
-    SW_HORN          = 10,
-    SW_PTT           = 11,
-    SW_REGEN_ENABLE  = 12,
-    SW_REGEN_ACTIVE  = 13,
-	SW_TBD			 = 14,
-    SW_COUNT         = 15   // total number of switches, use for array size
-} state_bit_t;
 
 /**
  * 

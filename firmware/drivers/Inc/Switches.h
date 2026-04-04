@@ -5,8 +5,37 @@
 #define INTERRUPT_0_TO_4_BOUND	4
 #define INTERRUPT_5_TO_9_BOUND	9
 
-//convert state_bit_t -> bit mask
+#define SWITCH_MAX_PRIO				tskIDLE_PRIORITY + 5
+
+//convert switch_bit_t -> bit mask
 #define GET_MASK(bit)   ((uint32_t)(1U << (bit)))
+
+
+/**
+ * @brief  Adresses switches to specific index on
+ * 		   data payload to be sent on CAN
+ * 
+ */
+typedef enum {
+    SW_IGN_OFF       = 0,
+    SW_IGN_ARR       = 1,
+    SW_IGN_MTR       = 2,
+    SW_CRUISE_ENABLE = 3,
+    SW_CRUISE_SET    = 4,
+    SW_FWD           = 5,
+    SW_NEUTRAL_GEAR  = 6,
+    SW_REV           = 7,
+    SW_HAZARD        = 8,
+    SW_LEFT_BLINKER  = 9,
+    SW_RIGHT_BLINKER = 10,
+    SW_HORN          = 11,
+    SW_PTT           = 12,
+    SW_REGEN_ENABLE  = 13,
+    SW_REGEN_ACTIVE  = 14,
+    SW_COUNT         = 15
+} switch_bit_t;
+
+
 
 /**
  * @brief  Initializes all switch GPIO pins as inputs.
@@ -47,7 +76,7 @@ uint32_t switch_read_all_inputs();
  * 
  * @return ON if the pin is low (active), OFF if the pin is high.
  */
-switch_state_t switch_get_state(GPIO_TypeDef *port, uint16_t pin);
+switch_state_t switch_get_state(switch_bit_t sw);
 
 
 /**
@@ -58,7 +87,7 @@ switch_state_t switch_get_state(GPIO_TypeDef *port, uint16_t pin);
  * 
  * @return switch_bitmaps bitmap
  */
-uint32_t switch_bitmap_setBit(state_bit_t bit, switch_state_t state);
+uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state);
 
 /**
  * @brief Set all state bits

@@ -27,10 +27,6 @@ static uint32_t switch_bitmap = 0;
 
 
 void switch_GPIO_init() {
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
     gpioPin_Init(FWD_SW_PORT,         FWD_SW_PIN,         GPIO_MODE_INPUT);
     gpioPin_Init(IGN_OFF_PORT,        IGN_OFF_PIN,        GPIO_MODE_INPUT);
     gpioPin_Init(IGN_MTR_PORT,        IGN_MTR_PIN,        GPIO_MODE_INPUT);
@@ -48,8 +44,8 @@ void switch_GPIO_init() {
     gpioPin_Init(HORN_PORT,           HORN_PIN,           GPIO_MODE_INPUT);
 
 	
-    switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, CL_MAX_PRIO);
-    switch_EXTI_Init(IGN_OFF_PORT, IGN_OFF_PIN, CL_MAX_PRIO);
+    switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, SWITCH_MAX_PRIO);
+    switch_EXTI_Init(IGN_OFF_PORT, IGN_OFF_PIN, SWITCH_MAX_PRIO);
 }
 
 void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin) {
@@ -63,7 +59,7 @@ void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin) {
     HAL_GPIO_Init(port, &GPIO_init);
 }
 
-void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t priority) {
+void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t NVIC_GPIO_EXT_PRIORITY) {
 	if(port == NULL) return;
     gpioEXTI_Init(port, pin);
 
@@ -78,41 +74,43 @@ void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t priority) {
         IRQn = EXTI15_10_IRQn;
     }
 	
-    HAL_NVIC_SetPriority(IRQn, priority, 0);
+    HAL_NVIC_SetPriority(IRQn, NVIC_GPIO_EXT_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(IRQn);
 }
 
 uint32_t switch_read_all_inputs() {
-    uint32_t newBits = 0;
-	
     portENTER_CRITICAL();
-
-    newBits |= (switch_get_state(IGN_ARR_PORT,       IGN_ARR_PIN)       == SWITCH_ON ? GET_MASK(SW_IGN_ARR)       : 0);
-    newBits |= (switch_get_state(IGN_MTR_PORT,       IGN_MTR_PIN)       == SWITCH_ON ? GET_MASK(SW_IGN_MTR)       : 0);
-    newBits |= (switch_get_state(CRUISE_ENABLE_PORT, CRUISE_ENABLE_PIN) == SWITCH_ON ? GET_MASK(SW_CRUISE_ENABLE) : 0);
-    newBits |= (switch_get_state(CRUISE_SET_PORT,    CRUISE_SET_PIN)    == SWITCH_ON ? GET_MASK(SW_CRUISE_SET)    : 0);
-    newBits |= (switch_get_state(FWD_SW_PORT,        FWD_SW_PIN)        == SWITCH_ON ? GET_MASK(SW_FWD)           : 0);
-    newBits |= (switch_get_state(NEUTRAL_GEAR_PORT,  NEUTRAL_GEAR_PIN)  == SWITCH_ON ? GET_MASK(SW_NEUTRAL_GEAR)  : 0);
-    newBits |= (switch_get_state(REV_SW_PORT,        REV_SW_PIN)        == SWITCH_ON ? GET_MASK(SW_REV)           : 0);
-    newBits |= (switch_get_state(HAZARD_PORT,        HAZARD_PIN)        == SWITCH_ON ? GET_MASK(SW_HAZARD)        : 0);
-    newBits |= (switch_get_state(LEFT_BLINKER_PORT,  LEFT_BLINKER_PIN)  == SWITCH_ON ? GET_MASK(SW_LEFT_BLINKER)  : 0);
-    newBits |= (switch_get_state(RIGHT_BLINKER_PORT, RIGHT_BLINKER_PIN) == SWITCH_ON ? GET_MASK(SW_RIGHT_BLINKER) : 0);
-    newBits |= (switch_get_state(HORN_PORT,          HORN_PIN)          == SWITCH_ON ? GET_MASK(SW_HORN)          : 0);
-    newBits |= (switch_get_state(PTT_PORT,           PTT_PIN)           == SWITCH_ON ? GET_MASK(SW_PTT)           : 0);
-    newBits |= (switch_get_state(REGEN_ENABLE_PORT,  REGEN_ENABLE_PIN)  == SWITCH_ON ? GET_MASK(SW_REGEN_ENABLE)  : 0);
-    newBits |= (switch_get_state(REGEN_ACTIVE_PORT,  REGEN_ACTIVE_PIN)  == SWITCH_ON ? GET_MASK(SW_REGEN_ACTIVE)  : 0);
-
-    switch_bitmap = newBits;
+    switch_bitmap = 0;
+    for (int i = 0; i < SW_COUNT; i++) {
+        switch_bitmap |= (switch_get_state(i) == SWITCH_ON ? GET_MASK(i) : 0);
+    }
     portEXIT_CRITICAL();
-	return switch_bitmap;
+    return switch_bitmap;
 }
 
-switch_state_t switch_get_state(GPIO_TypeDef *port, uint16_t pin) {
-    return (HAL_GPIO_ReadPin(port, pin) == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+switch_state_t switch_get_state(switch_bit_t sw) {
+    switch(sw) {
+        case SW_IGN_OFF:       return (HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN)        == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_IGN_ARR:       return (HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_IGN_MTR:       return (HAL_GPIO_ReadPin(IGN_MTR_PORT,        IGN_MTR_PIN)        == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_CRUISE_ENABLE: return (HAL_GPIO_ReadPin(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN)  == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_CRUISE_SET:    return (HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN)     == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_FWD:           return (HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_NEUTRAL_GEAR:  return (HAL_GPIO_ReadPin(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN)   == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_REV:           return (HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN)         == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_HAZARD:        return (HAL_GPIO_ReadPin(HAZARD_PORT,         HAZARD_PIN)         == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_LEFT_BLINKER:  return (HAL_GPIO_ReadPin(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN)   == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_RIGHT_BLINKER: return (HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_HORN:          return (HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_PTT:           return (HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_REGEN_ENABLE:  return (HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        case SW_REGEN_ACTIVE:  return (HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET) ? SWITCH_ON : SWITCH_OFF;
+        default:               return SWITCH_OFF;
+    }
 }
 
 
-uint32_t switch_bitmap_setBit(state_bit_t bit, switch_state_t state) {
+uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state) {
 	if(bit >= SW_COUNT) return switch_bitmap;
 
 	uint32_t mask = GET_MASK(bit);
@@ -133,7 +131,6 @@ uint32_t switch_bitmap_read() {
 }
 
 
-
 /**
  * @brief  EXTI callback fired on any configured external interrupt edge.
  *         Handles debounce, then updates LEDs based on switch states.
@@ -144,20 +141,21 @@ uint32_t switch_bitmap_read() {
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == NEUTRAL_GEAR_PIN) {
-		led_set(AKSHAY_LED_PORT, AKSHAY_LED_PIN, switch_get_state(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN));
-        if (switch_get_state(FWD_SW_PORT, FWD_SW_PIN) == SWITCH_ON) {
-        } else if (switch_get_state(REV_SW_PORT, REV_SW_PIN) == SWITCH_ON) {
+        if (switch_get_state(SW_FWD) == SWITCH_ON) {
+            switch_bitmap_setBit(SW_FWD, SWITCH_ON);
+			
+        } else if (switch_get_state(SW_REV) == SWITCH_ON) {
+            switch_bitmap_setBit(SW_REV, SWITCH_ON);
         } else {
+            switch_bitmap_setBit(SW_NEUTRAL_GEAR, switch_get_state(SW_NEUTRAL_GEAR));
         }
     } else if (GPIO_Pin == IGN_OFF_PIN) {
-		led_set(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN, switch_get_state(IGN_OFF_PORT, IGN_OFF_PIN));
+        switch_bitmap_setBit(SW_IGN_OFF, switch_get_state(SW_IGN_OFF));
     }
 
-	/**
-	 * 
-	 * @todo 	write Neautral Gear and Ign Off States to the switch states payload
-	 * 
-	*/
+    /**
+     * @todo    write Neutral Gear and Ign Off states to the switch states payload
+     */
 }
 
 /**

@@ -12,6 +12,16 @@ void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
         .Pin  = pin
     };
 
+	switch((uint32_t)port) {
+		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
+		case (uint32_t)GPIOB: __HAL_RCC_GPIOB_CLK_ENABLE(); break;
+		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+    	default: break;
+	}
+
     HAL_GPIO_Init(port, &GPIO_init);
     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
 }

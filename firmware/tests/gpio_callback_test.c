@@ -34,6 +34,7 @@ static void GPIO_Callback_Task(void *argument) {
     }
 }
 
+
 int main(void) {
     HAL_Init();
     SystemClock_Config();
