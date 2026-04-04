@@ -41,7 +41,7 @@ static void displayStates_onLEDs() {
 	uint32_t bits;
 
     portENTER_CRITICAL();
-    bits = stateBit_read();
+    bits = switch_bitmap_read();
     portEXIT_CRITICAL();
 
 	for(int i = 0; i < NUM_STATUS_LEDS; i++) {
@@ -70,7 +70,7 @@ static void switch_bitmap_test(void *argument) {
         led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
 
 		displayStates_onLEDs();
-		stateBits_setAll(i);
+		switch_bitmap_setAll(i);
 		i += i;
 
 		
