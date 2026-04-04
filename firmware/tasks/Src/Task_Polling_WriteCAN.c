@@ -17,6 +17,10 @@ void Polling_WriteCAN_Task(void *argument) {
         vTaskDelay(pdMS_TO_TICKS(500));
 
 		UNUSED(switch_states);
+
+		portENTER_CRITICAL();
+		switch_bitmap_setBit(SW_IGN_ARR, SWITCH_ON);
+		portEXIT_CRITICAL();
 		
 		/**
 		 * 

@@ -68,7 +68,9 @@
  middleware/FreeRTOS-Kernel/include/semphr.h \
  middleware/FreeRTOS-Kernel/include/queue.h \
  /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h \
- /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/pinDefs.h
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/pinDefs.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h \
+ /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h
 /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h:
 common/Inc/stm32xx_hal.h:
 stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
@@ -138,3 +140,5 @@ middleware/FreeRTOS-Kernel/include/semphr.h:
 middleware/FreeRTOS-Kernel/include/queue.h:
 /home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h:
 /home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/pinDefs.h:
+/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Status_LEDs.h:
+/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Horn.h:

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccMXnl7f.s 			page 1
+ARM GAS  /tmp/ccBAj3HV.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
   11:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****  *
   12:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
-ARM GAS  /tmp/ccMXnl7f.s 			page 2
+ARM GAS  /tmp/ccBAj3HV.s 			page 2
 
 
   14:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
   68:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
   69:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** #endif
   70:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
-ARM GAS  /tmp/ccMXnl7f.s 			page 3
+ARM GAS  /tmp/ccBAj3HV.s 			page 3
 
 
   71:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
  125:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****   \brief   Initializes data and bss sections
  126:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
  127:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
-ARM GAS  /tmp/ccMXnl7f.s 			page 4
+ARM GAS  /tmp/ccBAj3HV.s 			page 4
 
 
  128:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h ****            in the used linker script.
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
  182:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
  183:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** #endif
  184:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccMXnl7f.s 			page 5
+ARM GAS  /tmp/ccBAj3HV.s 			page 5
 
 
  185:stm/stm32g4xx/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
   11:stm/stm32g4xx/stm32g4xx_hal_init.c **** }
   12:stm/stm32g4xx/stm32g4xx_hal_init.c **** 
   13:stm/stm32g4xx/stm32g4xx_hal_init.c **** /**
-ARM GAS  /tmp/ccMXnl7f.s 			page 6
+ARM GAS  /tmp/ccBAj3HV.s 			page 6
 
 
   14:stm/stm32g4xx/stm32g4xx_hal_init.c ****  * @brief Initializes the Global MSP.
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
   23:stm/stm32g4xx/stm32g4xx_hal_init.c ****   /* System interrupt init*/
   24:stm/stm32g4xx/stm32g4xx_hal_init.c ****   /* PendSV_IRQn interrupt configuration */
   25:stm/stm32g4xx/stm32g4xx_hal_init.c ****   HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
-ARM GAS  /tmp/ccMXnl7f.s 			page 7
+ARM GAS  /tmp/ccBAj3HV.s 			page 7
 
 
  111              		.loc 1 25 3 view .LVU21
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
  157              		.loc 1 35 3 is_stmt 1 view .LVU26
  158              		.loc 1 35 22 is_stmt 0 view .LVU27
  159 000e 0023     		movs	r3, #0
-ARM GAS  /tmp/ccMXnl7f.s 			page 8
+ARM GAS  /tmp/ccBAj3HV.s 			page 8
 
 
  160 0010 0193     		str	r3, [sp, #4]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
   52:stm/stm32g4xx/stm32g4xx_hal_init.c ****   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
  198              		.loc 1 52 3 is_stmt 1 view .LVU45
  199              		.loc 1 52 30 is_stmt 0 view .LVU46
-ARM GAS  /tmp/ccMXnl7f.s 			page 9
+ARM GAS  /tmp/ccBAj3HV.s 			page 9
 
 
  200 003e 1293     		str	r3, [sp, #72]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
  238              	.L7:
   69:stm/stm32g4xx/stm32g4xx_hal_init.c ****   {
   70:stm/stm32g4xx/stm32g4xx_hal_init.c ****     Error_Handler();
-ARM GAS  /tmp/ccMXnl7f.s 			page 10
+ARM GAS  /tmp/ccBAj3HV.s 			page 10
 
 
   71:stm/stm32g4xx/stm32g4xx_hal_init.c ****   }
@@ -576,18 +576,18 @@ ARM GAS  /tmp/ccMXnl7f.s 			page 1
  268              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h"
  269              		.file 8 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
  270              		.file 9 "<built-in>"
-ARM GAS  /tmp/ccMXnl7f.s 			page 11
+ARM GAS  /tmp/ccBAj3HV.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32g4xx_hal_init.c
-     /tmp/ccMXnl7f.s:21     .text.Error_Handler:00000000 $t
-     /tmp/ccMXnl7f.s:27     .text.Error_Handler:00000000 Error_Handler
-     /tmp/ccMXnl7f.s:58     .text.HAL_MspInit:00000000 $t
-     /tmp/ccMXnl7f.s:64     .text.HAL_MspInit:00000000 HAL_MspInit
-     /tmp/ccMXnl7f.s:126    .text.HAL_MspInit:00000040 $d
-     /tmp/ccMXnl7f.s:131    .text.SystemClock_Config:00000000 $t
-     /tmp/ccMXnl7f.s:137    .text.SystemClock_Config:00000000 SystemClock_Config
+     /tmp/ccBAj3HV.s:21     .text.Error_Handler:00000000 $t
+     /tmp/ccBAj3HV.s:27     .text.Error_Handler:00000000 Error_Handler
+     /tmp/ccBAj3HV.s:58     .text.HAL_MspInit:00000000 $t
+     /tmp/ccBAj3HV.s:64     .text.HAL_MspInit:00000000 HAL_MspInit
+     /tmp/ccBAj3HV.s:126    .text.HAL_MspInit:00000040 $d
+     /tmp/ccBAj3HV.s:131    .text.SystemClock_Config:00000000 $t
+     /tmp/ccBAj3HV.s:137    .text.SystemClock_Config:00000000 SystemClock_Config
 
 UNDEFINED SYMBOLS
 HAL_PWREx_DisableUCPDDeadBattery

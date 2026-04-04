@@ -8,8 +8,13 @@
 #include "FreeRTOS.h"
 #include "Tasks.h"
 #include "init.h"
-#include "Status_LEDs.h"
 #include "Switches.h"
+#include "Horn.h"
+#include "Status_LEDs.h"
+
+
+#define IO_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+
 
 /* Task control block and stack for the IO test task */
 static StaticTask_t IO_TEST_TASK_TCB;
@@ -21,17 +26,21 @@ static StackType_t  IO_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
  * @param  argument  Unused task parameter.
  */
 static void IOTest_Task(void *argument) {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+
     while (1) {
         led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
         led_set(X_LED2_PORT, X_LED2_PIN, switch_get_state(HAZARD_PORT, HAZARD_PIN));
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelayUntil(&xLastWakeTime, IO_TASK_DELAY_TICKS);
     }
 }
 
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    GPIO_Init();
+	led_GPIO_init();
+    switch_GPIO_init();
+    horn_GPIO_init();
 
     xTaskCreateStatic(
         IOTest_Task,

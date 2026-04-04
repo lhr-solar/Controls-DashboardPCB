@@ -12,6 +12,8 @@
 #include "Horn.h"
 #include "Switches.h"
 
+#define HORN_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+
 /* Task control block and stack for the horn test task */
 static StaticTask_t HORN_TEST_TASK_TCB;
 static StackType_t  HORN_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
@@ -22,9 +24,13 @@ static StackType_t  HORN_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
  * @param  argument  Unused task parameter.
  */
 static void HornTest_Task(void *argument) {
+	TickType_t xLastWakeTime;
+	xLastWakeTime = xTaskGetTickCount();
+
+
     while (1) {
         led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelayUntil( &xLastWakeTime, HORN_TASK_DELAY_TICKS);
         horn_set(switch_get_state(HORN_PORT, HORN_PIN));
     }
 }
@@ -32,7 +38,9 @@ static void HornTest_Task(void *argument) {
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    GPIO_Init();
+	led_GPIO_init();
+    switch_GPIO_init();
+    horn_GPIO_init();
 
     xTaskCreateStatic(
         HornTest_Task,

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccHpaTKt.s 			page 1
+ARM GAS  /tmp/cc77NwfZ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
   29:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** /*-----------------------------------------------------------
   30:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** * Implementation of functions defined in portable.h for the ARM CM4F port.
   31:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** *----------------------------------------------------------*/
-ARM GAS  /tmp/ccHpaTKt.s 			page 2
+ARM GAS  /tmp/cc77NwfZ.s 			page 2
 
 
   32:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
   86:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
   87:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** /* Constants required to manipulate the VFP. */
   88:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** #define portFPCCR                             ( ( volatile uint32_t * ) 0xe000ef34 ) /* Floating po
-ARM GAS  /tmp/ccHpaTKt.s 			page 3
+ARM GAS  /tmp/cc77NwfZ.s 			page 3
 
 
   89:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** #define portASPEN_AND_LSPEN_BITS              ( 0x3UL << 30UL )
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  143:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****  * Start first task is a separate function so it can be tested in isolation.
  144:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****  */
  145:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** static void prvPortStartFirstTask( void ) __attribute__( ( naked ) );
-ARM GAS  /tmp/ccHpaTKt.s 			page 4
+ARM GAS  /tmp/cc77NwfZ.s 			page 4
 
 
  146:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  200:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****  * See header file for description.
  201:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****  */
  202:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** StackType_t * pxPortInitialiseStack( StackType_t * pxTopOfStack,
-ARM GAS  /tmp/ccHpaTKt.s 			page 5
+ARM GAS  /tmp/cc77NwfZ.s 			page 5
 
 
  203:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                                      TaskFunction_t pxCode,
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
   40              		.loc 1 244 5 is_stmt 1 view .LVU3
   41 0006 0D4B     		ldr	r3, .L6
   42 0008 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/ccHpaTKt.s 			page 6
+ARM GAS  /tmp/cc77NwfZ.s 			page 6
 
 
   43 000a B3F1FF3F 		cmp	r3, #-1
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
   49:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** /* Type definitions. */
   50:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portCHAR          char
   51:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portFLOAT         float
-ARM GAS  /tmp/ccHpaTKt.s 			page 7
+ARM GAS  /tmp/cc77NwfZ.s 			page 7
 
 
   52:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** #define portDOUBLE        double
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  106:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****             traceISR_EXIT_TO_SCHEDULER();        \
  107:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****             portYIELD();                         \
  108:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****         }                                        \
-ARM GAS  /tmp/ccHpaTKt.s 			page 8
+ARM GAS  /tmp/cc77NwfZ.s 			page 8
 
 
  109:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****         else                                     \
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  163:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     #endif
  164:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  165:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** /* Store/clear the ready priorities in a bit map. */
-ARM GAS  /tmp/ccHpaTKt.s 			page 9
+ARM GAS  /tmp/cc77NwfZ.s 			page 9
 
 
  166:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     #define portRECORD_READY_PRIORITY( uxPriority, uxReadyPriorities )    ( uxReadyPriorities ) |= 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  217:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     __asm volatile
   52              		.loc 2 217 5 view .LVU7
   53              		.syntax unified
-ARM GAS  /tmp/ccHpaTKt.s 			page 10
+ARM GAS  /tmp/cc77NwfZ.s 			page 10
 
 
   54              	@ 217 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h" 1
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
   93              		.loc 1 247 20 discriminator 1 view .LVU17
   94 0032 019B     		ldr	r3, [sp, #4]
   95 0034 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccHpaTKt.s 			page 11
+ARM GAS  /tmp/cc77NwfZ.s 			page 11
 
 
   96 0036 FCD0     		beq	.L4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  269:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "   mov r0, #0                      \n"
  270:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "   msr basepri, r0                 \n"
  271:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "   bx r14                          \n"
-ARM GAS  /tmp/ccHpaTKt.s 			page 12
+ARM GAS  /tmp/cc77NwfZ.s 			page 12
 
 
  272:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "                                   \n"
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  290:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         " msr control, r0       \n"
  291:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         " cpsie i               \n" /* Globally enable interrupts. */
  292:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         " cpsie f               \n"
-ARM GAS  /tmp/ccHpaTKt.s 			page 13
+ARM GAS  /tmp/cc77NwfZ.s 			page 13
 
 
  293:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         " dsb                   \n"
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  334:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****          *
  335:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****          * Assertion failures here indicate incorrect installation of the
  336:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****          * FreeRTOS handlers. For help installing the FreeRTOS handlers, see
-ARM GAS  /tmp/ccHpaTKt.s 			page 14
+ARM GAS  /tmp/cc77NwfZ.s 			page 14
 
 
  337:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****          * https://www.freertos.org/Why-FreeRTOS/FAQs.
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  391:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         }
  392:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  393:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         if( ulImplementedPrioBits == 8 )
-ARM GAS  /tmp/ccHpaTKt.s 			page 15
+ARM GAS  /tmp/cc77NwfZ.s 			page 15
 
 
  394:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         {
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  448:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     *( portFPCCR ) |= portASPEN_AND_LSPEN_BITS;
  449:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  450:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     /* Start the first task. */
-ARM GAS  /tmp/ccHpaTKt.s 			page 16
+ARM GAS  /tmp/cc77NwfZ.s 			page 16
 
 
  451:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     prvPortStartFirstTask();
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  505:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** {
  192              		.loc 1 505 1 is_stmt 1 view -0
  193              		.cfi_startproc
-ARM GAS  /tmp/ccHpaTKt.s 			page 17
+ARM GAS  /tmp/cc77NwfZ.s 			page 17
 
 
  194              		@ Naked Function: prologue and epilogue provided by programmer.
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  512:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "                                       \n"
  513:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "   ldr r3, =pxCurrentTCB               \n" /* Get the location of the current TCB. */
  514:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "   ldr r2, [r3]                        \n"
-ARM GAS  /tmp/ccHpaTKt.s 			page 18
+ARM GAS  /tmp/cc77NwfZ.s 			page 18
 
 
  515:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         "                                       \n"
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  254              	.LFB17:
  558:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** /*-----------------------------------------------------------*/
  559:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
-ARM GAS  /tmp/ccHpaTKt.s 			page 19
+ARM GAS  /tmp/cc77NwfZ.s 			page 19
 
 
  560:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** void xPortSysTickHandler( void )
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  614:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         else
  615:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         {
  616:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             /* Stop the SysTick momentarily.  The time the SysTick is stopped for
-ARM GAS  /tmp/ccHpaTKt.s 			page 20
+ARM GAS  /tmp/cc77NwfZ.s 			page 20
 
 
  617:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****              * is accounted for as best it can be, but using the tickless mode will
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  671:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             if( xModifiableIdleTime > 0 )
  672:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             {
  673:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                 __asm volatile ( "dsb" ::: "memory" );
-ARM GAS  /tmp/ccHpaTKt.s 			page 21
+ARM GAS  /tmp/cc77NwfZ.s 			page 21
 
 
  674:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                 __asm volatile ( "wfi" );
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  728:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                 ulCompleteTickPeriods = xExpectedIdleTime - 1UL;
  729:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             }
  730:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             else
-ARM GAS  /tmp/ccHpaTKt.s 			page 22
+ARM GAS  /tmp/cc77NwfZ.s 			page 22
 
 
  731:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             {
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  785:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                 if( ( portNVIC_SYSTICK_CTRL_REG & portNVIC_SYSTICK_COUNT_FLAG_BIT ) != 0 )
  786:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                 {
  787:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                     /* The partial tick period already ended.  Be sure the SysTick
-ARM GAS  /tmp/ccHpaTKt.s 			page 23
+ARM GAS  /tmp/cc77NwfZ.s 			page 23
 
 
  788:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****                      * counts it only once. */
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  260              		.loc 1 836 5 view .LVU29
  261              		.syntax unified
  262              	@ 836 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c" 1
-ARM GAS  /tmp/ccHpaTKt.s 			page 24
+ARM GAS  /tmp/cc77NwfZ.s 			page 24
 
 
  263 0000 DFF80C00 		   ldr.w r0, =0xE000ED88       
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  301              		.loc 1 215 48 is_stmt 0 view .LVU37
  302 0008 21F00101 		bic	r1, r1, #1
  303              	.LVL2:
-ARM GAS  /tmp/ccHpaTKt.s 			page 25
+ARM GAS  /tmp/cc77NwfZ.s 			page 25
 
 
  215:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     pxTopOfStack--;
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  344              		.thumb_func
  346              	vPortEndScheduler:
  347              	.LFB10:
-ARM GAS  /tmp/ccHpaTKt.s 			page 26
+ARM GAS  /tmp/cc77NwfZ.s 			page 26
 
 
  468:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     /* Not implemented in ports where there is nothing to return to.
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  395              		.thumb
  396              		.thumb_func
  398              	vPortEnterCritical:
-ARM GAS  /tmp/ccHpaTKt.s 			page 27
+ARM GAS  /tmp/cc77NwfZ.s 			page 27
 
 
  399              	.LFB11:
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  487:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     }
  443              		.loc 1 487 9 discriminator 1 view .LVU73
  444              	.LBB46:
-ARM GAS  /tmp/ccHpaTKt.s 			page 28
+ARM GAS  /tmp/cc77NwfZ.s 			page 28
 
 
  445              	.LBI46:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  213:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** {
  494              		.loc 2 213 30 view .LVU82
  495              	.LBB49:
-ARM GAS  /tmp/ccHpaTKt.s 			page 29
+ARM GAS  /tmp/cc77NwfZ.s 			page 29
 
 
  215:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  231:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     uint32_t ulOriginalBASEPRI, ulNewBASEPRI;
  232:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  233:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     __asm volatile
-ARM GAS  /tmp/ccHpaTKt.s 			page 30
+ARM GAS  /tmp/cc77NwfZ.s 			page 30
 
 
  234:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     (
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  564 0000 08B5     		push	{r3, lr}
  565              	.LCFI2:
  566              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/ccHpaTKt.s 			page 31
+ARM GAS  /tmp/cc77NwfZ.s 			page 31
 
 
  567              		.cfi_offset 3, -8
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  607              		.loc 2 249 30 view .LVU111
  608              	.LBB55:
  609              		.loc 2 251 5 view .LVU112
-ARM GAS  /tmp/ccHpaTKt.s 			page 32
+ARM GAS  /tmp/cc77NwfZ.s 			page 32
 
 
  610 0024 0023     		movs	r3, #0
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  602:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         __asm volatile ( "dsb" );
  658              		.loc 1 602 9 is_stmt 1 view .LVU122
  659              		.syntax unified
-ARM GAS  /tmp/ccHpaTKt.s 			page 33
+ARM GAS  /tmp/cc77NwfZ.s 			page 33
 
 
  660              	@ 602 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c" 1
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  629:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             {
  702              		.loc 1 629 15 is_stmt 0 view .LVU135
  703 002a 0BB9     		cbnz	r3, .L39
-ARM GAS  /tmp/ccHpaTKt.s 			page 34
+ARM GAS  /tmp/cc77NwfZ.s 			page 34
 
 
  631:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             }
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  742 005a 2D4A     		ldr	r2, .L48+8
  743 005c 1268     		ldr	r2, [r2]
  648:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             {
-ARM GAS  /tmp/ccHpaTKt.s 			page 35
+ARM GAS  /tmp/cc77NwfZ.s 			page 35
 
 
  744              		.loc 1 648 15 view .LVU152
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  783              	@ 0 "" 2
  784              		.thumb
  785              		.syntax unified
-ARM GAS  /tmp/ccHpaTKt.s 			page 36
+ARM GAS  /tmp/cc77NwfZ.s 			page 36
 
 
  786              	.L42:
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  827              		.loc 1 707 17 is_stmt 1 view .LVU180
  712:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  828              		.loc 1 712 17 view .LVU181
-ARM GAS  /tmp/ccHpaTKt.s 			page 37
+ARM GAS  /tmp/cc77NwfZ.s 			page 37
 
 
  712:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  773:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT | portNVIC_SYSTICK_INT_BIT | portN
  868              		.loc 1 773 13 is_stmt 1 view .LVU197
  773:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****             portNVIC_SYSTICK_CTRL_REG = portNVIC_SYSTICK_CLK_BIT | portNVIC_SYSTICK_INT_BIT | portN
-ARM GAS  /tmp/ccHpaTKt.s 			page 38
+ARM GAS  /tmp/cc77NwfZ.s 			page 38
 
 
  869              		.loc 1 773 48 is_stmt 0 view .LVU198
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  910 00f4 E01A     		subs	r0, r4, r3
  911              	.LVL33:
  759:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
-ARM GAS  /tmp/ccHpaTKt.s 			page 39
+ARM GAS  /tmp/cc77NwfZ.s 			page 39
 
 
  912              		.loc 1 759 17 is_stmt 1 view .LVU212
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  958 000c 0E4A     		ldr	r2, .L51+8
  959 000e 1360     		str	r3, [r2]
  818:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         ulStoppedTimerCompensation = portMISSED_COUNTS_FACTOR / ( configCPU_CLOCK_HZ / configSYSTIC
-ARM GAS  /tmp/ccHpaTKt.s 			page 40
+ARM GAS  /tmp/cc77NwfZ.s 			page 40
 
 
  960              		.loc 1 818 9 is_stmt 1 view .LVU223
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  999 0044 D34D6210 		.word	274877907
  1000 0048 00000000 		.word	ulTimerCountsForOneTick
  1001 004c 00000000 		.word	xMaximumPossibleSuppressedTicks
-ARM GAS  /tmp/ccHpaTKt.s 			page 41
+ARM GAS  /tmp/cc77NwfZ.s 			page 41
 
 
  1002 0050 00000000 		.word	ulStoppedTimerCompensation
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1048              	.LBB59:
  215:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h **** 
  1049              		.loc 2 215 5 view .LVU249
-ARM GAS  /tmp/ccHpaTKt.s 			page 42
+ARM GAS  /tmp/cc77NwfZ.s 			page 42
 
 
  217:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h ****     (
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  310:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     configASSERT( portCPUID != portCORTEX_M7_r0p0_ID );
  1094              		.loc 1 310 5 discriminator 3 view .LVU260
  1095 004e FEE7     		b	.L55
-ARM GAS  /tmp/ccHpaTKt.s 			page 43
+ARM GAS  /tmp/cc77NwfZ.s 			page 43
 
 
  1096              	.L72:
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1137              		.loc 2 217 5 view .LVU273
  1138              		.syntax unified
  1139              	@ 217 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h" 1
-ARM GAS  /tmp/ccHpaTKt.s 			page 44
+ARM GAS  /tmp/cc77NwfZ.s 			page 44
 
 
  1140 006a 4FF05003 		   mov r3, #80                                              
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  360:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  1183              		.loc 1 360 28 view .LVU285
  1184 008a 8DF80220 		strb	r2, [sp, #2]
-ARM GAS  /tmp/ccHpaTKt.s 			page 45
+ARM GAS  /tmp/cc77NwfZ.s 			page 45
 
 
  364:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  378:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  1225              		.loc 1 378 9 discriminator 3 view .LVU300
  1226 00b8 FEE7     		b	.L63
-ARM GAS  /tmp/ccHpaTKt.s 			page 46
+ARM GAS  /tmp/cc77NwfZ.s 			page 46
 
 
  1227              	.L62:
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1268 00e6 0193     		str	r3, [sp, #4]
  390:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         }
  1269              		.loc 1 390 13 is_stmt 1 view .LVU314
-ARM GAS  /tmp/ccHpaTKt.s 			page 47
+ARM GAS  /tmp/cc77NwfZ.s 			page 47
 
 
  390:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         }
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1310 0122 D4F8203D 		ldr	r3, [r4, #3360]
  433:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****     portNVIC_SHPR3_REG |= portNVIC_SYSTICK_PRI;
  1311              		.loc 1 433 24 is_stmt 0 view .LVU329
-ARM GAS  /tmp/ccHpaTKt.s 			page 48
+ARM GAS  /tmp/cc77NwfZ.s 			page 48
 
 
  1312 0126 43F47F03 		orr	r3, r3, #16711680
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1351              	.LCFI6:
  1352              		.cfi_remember_state
  1353              		.cfi_def_cfa_offset 12
-ARM GAS  /tmp/ccHpaTKt.s 			page 49
+ARM GAS  /tmp/cc77NwfZ.s 			page 49
 
 
  1354              		@ sp needed
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1398              		.loc 1 854 9 view .LVU351
  855:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c **** 
  856:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         /* Obtain the number of the currently executing interrupt. */
-ARM GAS  /tmp/ccHpaTKt.s 			page 50
+ARM GAS  /tmp/cc77NwfZ.s 			page 50
 
 
  857:middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c ****         __asm volatile ( "mrs %0, ipsr" : "=r" ( ulCurrentInterrupt )::"memory" );
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1421 000e 114A     		ldr	r2, .L82+4
  1422 0010 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
  1423 0012 9A42     		cmp	r2, r3
-ARM GAS  /tmp/ccHpaTKt.s 			page 51
+ARM GAS  /tmp/cc77NwfZ.s 			page 51
 
 
  1424 0014 08D9     		bls	.L78
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1458 0036 1268     		ldr	r2, [r2]
  1459 0038 9342     		cmp	r3, r2
  1460 003a 08D9     		bls	.L77
-ARM GAS  /tmp/ccHpaTKt.s 			page 52
+ARM GAS  /tmp/cc77NwfZ.s 			page 52
 
 
  1461              		.loc 1 904 9 discriminator 1 view .LVU369
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1520              		.align	2
  1523              	ulTimerCountsForOneTick:
  1524 0000 00000000 		.space	4
-ARM GAS  /tmp/ccHpaTKt.s 			page 53
+ARM GAS  /tmp/cc77NwfZ.s 			page 53
 
 
  1525              		.section	.data.uxCriticalNesting,"aw"
@@ -3131,70 +3131,70 @@ ARM GAS  /tmp/ccHpaTKt.s 			page 1
  1534              		.file 4 "middleware/FreeRTOS-Kernel/include/projdefs.h"
  1535              		.file 5 "middleware/FreeRTOS-Kernel/include/task.h"
  1536              		.file 6 "common/Inc/FreeRTOSConfig.h"
-ARM GAS  /tmp/ccHpaTKt.s 			page 54
+ARM GAS  /tmp/cc77NwfZ.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 port.c
-     /tmp/ccHpaTKt.s:21     .text.prvTaskExitError:00000000 $t
-     /tmp/ccHpaTKt.s:26     .text.prvTaskExitError:00000000 prvTaskExitError
-     /tmp/ccHpaTKt.s:106    .text.prvTaskExitError:0000003c $d
-     /tmp/ccHpaTKt.s:1529   .data.uxCriticalNesting:00000000 uxCriticalNesting
-     /tmp/ccHpaTKt.s:111    .text.SVC_Handler:00000000 $t
-     /tmp/ccHpaTKt.s:117    .text.SVC_Handler:00000000 SVC_Handler
-     /tmp/ccHpaTKt.s:137    .text.SVC_Handler:0000001c $d
-     /tmp/ccHpaTKt.s:147    .text.prvPortStartFirstTask:00000000 $t
-     /tmp/ccHpaTKt.s:152    .text.prvPortStartFirstTask:00000000 prvPortStartFirstTask
-     /tmp/ccHpaTKt.s:174    .text.prvPortStartFirstTask:00000022 $d
-     /tmp/ccHpaTKt.s:174    .text.prvPortStartFirstTask:00000024 $d
-     /tmp/ccHpaTKt.s:184    .text.PendSV_Handler:00000000 $t
-     /tmp/ccHpaTKt.s:190    .text.PendSV_Handler:00000000 PendSV_Handler
-     /tmp/ccHpaTKt.s:238    .text.PendSV_Handler:0000005a $d
-     /tmp/ccHpaTKt.s:238    .text.PendSV_Handler:0000005c $d
-     /tmp/ccHpaTKt.s:248    .text.vPortEnableVFP:00000000 $t
-     /tmp/ccHpaTKt.s:253    .text.vPortEnableVFP:00000000 vPortEnableVFP
-     /tmp/ccHpaTKt.s:269    .text.vPortEnableVFP:0000000e $d
-     /tmp/ccHpaTKt.s:269    .text.vPortEnableVFP:00000010 $d
-     /tmp/ccHpaTKt.s:279    .text.pxPortInitialiseStack:00000000 $t
-     /tmp/ccHpaTKt.s:285    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
-     /tmp/ccHpaTKt.s:335    .text.pxPortInitialiseStack:00000028 $d
-     /tmp/ccHpaTKt.s:340    .text.vPortEndScheduler:00000000 $t
-     /tmp/ccHpaTKt.s:346    .text.vPortEndScheduler:00000000 vPortEndScheduler
-     /tmp/ccHpaTKt.s:387    .text.vPortEndScheduler:00000020 $d
-     /tmp/ccHpaTKt.s:392    .text.vPortEnterCritical:00000000 $t
-     /tmp/ccHpaTKt.s:398    .text.vPortEnterCritical:00000000 vPortEnterCritical
-     /tmp/ccHpaTKt.s:469    .text.vPortEnterCritical:00000040 $d
-     /tmp/ccHpaTKt.s:474    .text.vPortExitCritical:00000000 $t
-     /tmp/ccHpaTKt.s:480    .text.vPortExitCritical:00000000 vPortExitCritical
-     /tmp/ccHpaTKt.s:547    .text.vPortExitCritical:00000028 $d
-     /tmp/ccHpaTKt.s:552    .text.SysTick_Handler:00000000 $t
-     /tmp/ccHpaTKt.s:558    .text.SysTick_Handler:00000000 SysTick_Handler
-     /tmp/ccHpaTKt.s:627    .text.vPortSuppressTicksAndSleep:00000000 $t
-     /tmp/ccHpaTKt.s:633    .text.vPortSuppressTicksAndSleep:00000000 vPortSuppressTicksAndSleep
-     /tmp/ccHpaTKt.s:930    .text.vPortSuppressTicksAndSleep:00000108 $d
-     /tmp/ccHpaTKt.s:1517   .bss.xMaximumPossibleSuppressedTicks:00000000 xMaximumPossibleSuppressedTicks
-     /tmp/ccHpaTKt.s:1523   .bss.ulTimerCountsForOneTick:00000000 ulTimerCountsForOneTick
-     /tmp/ccHpaTKt.s:1511   .bss.ulStoppedTimerCompensation:00000000 ulStoppedTimerCompensation
-     /tmp/ccHpaTKt.s:937    .text.vPortSetupTimerInterrupt:00000000 $t
-     /tmp/ccHpaTKt.s:943    .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
-     /tmp/ccHpaTKt.s:998    .text.vPortSetupTimerInterrupt:00000040 $d
-     /tmp/ccHpaTKt.s:1007   .text.xPortStartScheduler:00000000 $t
-     /tmp/ccHpaTKt.s:1013   .text.xPortStartScheduler:00000000 xPortStartScheduler
-     /tmp/ccHpaTKt.s:1371   .text.xPortStartScheduler:00000174 $d
-     /tmp/ccHpaTKt.s:1505   .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
-     /tmp/ccHpaTKt.s:1500   .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
-     /tmp/ccHpaTKt.s:1384   .text.vPortValidateInterruptPriority:00000000 $t
-     /tmp/ccHpaTKt.s:1390   .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
-     /tmp/ccHpaTKt.s:1490   .text.vPortValidateInterruptPriority:00000050 $d
-     /tmp/ccHpaTKt.s:1497   .bss.ulMaxPRIGROUPValue:00000000 $d
-     /tmp/ccHpaTKt.s:1506   .bss.ucMaxSysCallPriority:00000000 $d
-     /tmp/ccHpaTKt.s:1508   .bss.ulStoppedTimerCompensation:00000000 $d
-     /tmp/ccHpaTKt.s:1514   .bss.xMaximumPossibleSuppressedTicks:00000000 $d
-     /tmp/ccHpaTKt.s:1520   .bss.ulTimerCountsForOneTick:00000000 $d
-ARM GAS  /tmp/ccHpaTKt.s 			page 55
+     /tmp/cc77NwfZ.s:21     .text.prvTaskExitError:00000000 $t
+     /tmp/cc77NwfZ.s:26     .text.prvTaskExitError:00000000 prvTaskExitError
+     /tmp/cc77NwfZ.s:106    .text.prvTaskExitError:0000003c $d
+     /tmp/cc77NwfZ.s:1529   .data.uxCriticalNesting:00000000 uxCriticalNesting
+     /tmp/cc77NwfZ.s:111    .text.SVC_Handler:00000000 $t
+     /tmp/cc77NwfZ.s:117    .text.SVC_Handler:00000000 SVC_Handler
+     /tmp/cc77NwfZ.s:137    .text.SVC_Handler:0000001c $d
+     /tmp/cc77NwfZ.s:147    .text.prvPortStartFirstTask:00000000 $t
+     /tmp/cc77NwfZ.s:152    .text.prvPortStartFirstTask:00000000 prvPortStartFirstTask
+     /tmp/cc77NwfZ.s:174    .text.prvPortStartFirstTask:00000022 $d
+     /tmp/cc77NwfZ.s:174    .text.prvPortStartFirstTask:00000024 $d
+     /tmp/cc77NwfZ.s:184    .text.PendSV_Handler:00000000 $t
+     /tmp/cc77NwfZ.s:190    .text.PendSV_Handler:00000000 PendSV_Handler
+     /tmp/cc77NwfZ.s:238    .text.PendSV_Handler:0000005a $d
+     /tmp/cc77NwfZ.s:238    .text.PendSV_Handler:0000005c $d
+     /tmp/cc77NwfZ.s:248    .text.vPortEnableVFP:00000000 $t
+     /tmp/cc77NwfZ.s:253    .text.vPortEnableVFP:00000000 vPortEnableVFP
+     /tmp/cc77NwfZ.s:269    .text.vPortEnableVFP:0000000e $d
+     /tmp/cc77NwfZ.s:269    .text.vPortEnableVFP:00000010 $d
+     /tmp/cc77NwfZ.s:279    .text.pxPortInitialiseStack:00000000 $t
+     /tmp/cc77NwfZ.s:285    .text.pxPortInitialiseStack:00000000 pxPortInitialiseStack
+     /tmp/cc77NwfZ.s:335    .text.pxPortInitialiseStack:00000028 $d
+     /tmp/cc77NwfZ.s:340    .text.vPortEndScheduler:00000000 $t
+     /tmp/cc77NwfZ.s:346    .text.vPortEndScheduler:00000000 vPortEndScheduler
+     /tmp/cc77NwfZ.s:387    .text.vPortEndScheduler:00000020 $d
+     /tmp/cc77NwfZ.s:392    .text.vPortEnterCritical:00000000 $t
+     /tmp/cc77NwfZ.s:398    .text.vPortEnterCritical:00000000 vPortEnterCritical
+     /tmp/cc77NwfZ.s:469    .text.vPortEnterCritical:00000040 $d
+     /tmp/cc77NwfZ.s:474    .text.vPortExitCritical:00000000 $t
+     /tmp/cc77NwfZ.s:480    .text.vPortExitCritical:00000000 vPortExitCritical
+     /tmp/cc77NwfZ.s:547    .text.vPortExitCritical:00000028 $d
+     /tmp/cc77NwfZ.s:552    .text.SysTick_Handler:00000000 $t
+     /tmp/cc77NwfZ.s:558    .text.SysTick_Handler:00000000 SysTick_Handler
+     /tmp/cc77NwfZ.s:627    .text.vPortSuppressTicksAndSleep:00000000 $t
+     /tmp/cc77NwfZ.s:633    .text.vPortSuppressTicksAndSleep:00000000 vPortSuppressTicksAndSleep
+     /tmp/cc77NwfZ.s:930    .text.vPortSuppressTicksAndSleep:00000108 $d
+     /tmp/cc77NwfZ.s:1517   .bss.xMaximumPossibleSuppressedTicks:00000000 xMaximumPossibleSuppressedTicks
+     /tmp/cc77NwfZ.s:1523   .bss.ulTimerCountsForOneTick:00000000 ulTimerCountsForOneTick
+     /tmp/cc77NwfZ.s:1511   .bss.ulStoppedTimerCompensation:00000000 ulStoppedTimerCompensation
+     /tmp/cc77NwfZ.s:937    .text.vPortSetupTimerInterrupt:00000000 $t
+     /tmp/cc77NwfZ.s:943    .text.vPortSetupTimerInterrupt:00000000 vPortSetupTimerInterrupt
+     /tmp/cc77NwfZ.s:998    .text.vPortSetupTimerInterrupt:00000040 $d
+     /tmp/cc77NwfZ.s:1007   .text.xPortStartScheduler:00000000 $t
+     /tmp/cc77NwfZ.s:1013   .text.xPortStartScheduler:00000000 xPortStartScheduler
+     /tmp/cc77NwfZ.s:1371   .text.xPortStartScheduler:00000174 $d
+     /tmp/cc77NwfZ.s:1505   .bss.ucMaxSysCallPriority:00000000 ucMaxSysCallPriority
+     /tmp/cc77NwfZ.s:1500   .bss.ulMaxPRIGROUPValue:00000000 ulMaxPRIGROUPValue
+     /tmp/cc77NwfZ.s:1384   .text.vPortValidateInterruptPriority:00000000 $t
+     /tmp/cc77NwfZ.s:1390   .text.vPortValidateInterruptPriority:00000000 vPortValidateInterruptPriority
+     /tmp/cc77NwfZ.s:1490   .text.vPortValidateInterruptPriority:00000050 $d
+     /tmp/cc77NwfZ.s:1497   .bss.ulMaxPRIGROUPValue:00000000 $d
+     /tmp/cc77NwfZ.s:1506   .bss.ucMaxSysCallPriority:00000000 $d
+     /tmp/cc77NwfZ.s:1508   .bss.ulStoppedTimerCompensation:00000000 $d
+     /tmp/cc77NwfZ.s:1514   .bss.xMaximumPossibleSuppressedTicks:00000000 $d
+     /tmp/cc77NwfZ.s:1520   .bss.ulTimerCountsForOneTick:00000000 $d
+ARM GAS  /tmp/cc77NwfZ.s 			page 55
 
 
-     /tmp/ccHpaTKt.s:1526   .data.uxCriticalNesting:00000000 $d
+     /tmp/cc77NwfZ.s:1526   .data.uxCriticalNesting:00000000 $d
 
 UNDEFINED SYMBOLS
 pxCurrentTCB

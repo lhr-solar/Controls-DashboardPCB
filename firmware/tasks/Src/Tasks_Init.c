@@ -1,5 +1,8 @@
 #include "Tasks.h"
 #include "init.h"
+#include "Switches.h"
+#include "Status_LEDs.h"
+#include "Horn.h"
 
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
@@ -12,10 +15,6 @@ StaticTask_t readSteeringAngleCAN_tcb;
 StaticTask_t pollingWriteCAN_tcb;
 
 
-// SWITCH_STATES_EG = xEventGroupCreate();
-// STATUS_LED_STATES_EG  = xEventGroupCreate();
-
-
 void InitTasks(void *argument) {
 
     /**
@@ -23,6 +22,11 @@ void InitTasks(void *argument) {
 	 * @todo     Add BPS fault watchdog here
 	 * 
 	*/
+
+    led_GPIO_init();
+    switch_GPIO_init();
+    horn_GPIO_init();
+	
 
     //Task 1
     xTaskCreateStatic(

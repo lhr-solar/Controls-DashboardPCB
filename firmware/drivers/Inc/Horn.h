@@ -11,6 +11,6 @@ void horn_GPIO_init();
 /**
  * @brief  Sets the horn output to the specified state.
  *         Also mirrors the state to AKSHAY_LED for debugging.
- * @param  state  ON to activate the horn, OFF to deactivate.
+ * @param  state  SWITCH_ON to activate the horn, SWITCH_OFF to deactivate.
  */
 void horn_set(switch_state_t state);

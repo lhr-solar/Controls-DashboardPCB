@@ -8,7 +8,13 @@
 #include "FreeRTOS.h"
 #include "Tasks.h"
 #include "init.h"
+#include "Switches.h"
+#include "Horn.h"
 #include "Status_LEDs.h"
+
+
+#define GET_FLASHED_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+
 
 /* Task control block and stack for the flash task */
 static StaticTask_t FLASH_TASK_TCB;
@@ -21,16 +27,20 @@ static StackType_t  FLASH_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
  * @param  argument  Unused task parameter
  */
 static void FlashLEDs_Task(void *argument) {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+
     while (1) {
         flash_them();
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelayUntil(&xLastWakeTime, GET_FLASHED_TASK_DELAY_TICKS);
     }
 }
 
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    GPIO_Init();
+	led_GPIO_init();
+    switch_GPIO_init();
+    horn_GPIO_init();
 
     xTaskCreateStatic(
         FlashLEDs_Task,

@@ -11,6 +11,10 @@
 #include "init.h"
 #include "Status_LEDs.h"
 #include "Switches.h"
+#include "Horn.h"
+
+
+#define GPIO_CALLBACK_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
 
 /* Task control block and stack for the ISR test task */
 static StaticTask_t ISR_TEST_TASK_TCB;
@@ -21,25 +25,25 @@ static StackType_t  ISR_TEST_TASK_Stack_Array[configMINIMAL_STACK_SIZE];
  *         to confirm the scheduler is running while EXTIs are active.
  * @param  argument  Unused task parameter.
  */
-static void ISRTest_Task(void *argument) {
+static void GPIO_Callback_Task(void *argument) {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+
     while (1) {
-        led_set(LSOM_HB_PORT, LSOM_HB_PIN, GPIO_PIN_SET);
-        vTaskDelay(pdMS_TO_TICKS(1000));
-        led_set(LSOM_HB_PORT, LSOM_HB_PIN, GPIO_PIN_RESET);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+        vTaskDelayUntil(&xLastWakeTime, GPIO_CALLBACK_TASK_DELAY_TICKS);
     }
 }
 
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    GPIO_Init();
-    switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, 5);
-    switch_EXTI_Init(IGN_OFF_PORT, IGN_OFF_PIN, 4);
+	led_GPIO_init();
+    switch_GPIO_init();
+    horn_GPIO_init();
 
     xTaskCreateStatic(
-        ISRTest_Task,
-        "ISR_test",
+        GPIO_Callback_Task,
+        "Testing Neutral Gear and Ign off gpio interrupts",
         configMINIMAL_STACK_SIZE,
         NULL,
         tskIDLE_PRIORITY + 1,

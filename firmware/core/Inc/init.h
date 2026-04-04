@@ -2,7 +2,9 @@
 
 #include "stm32xx_hal.h"
 
-#define COMMON_TASK_DELAY		250
+#define COMMON_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+#define CL_MAX_PRIO					tskIDLE_PRIORITY + 5
+
 
 /**
  * 
@@ -20,8 +22,8 @@ typedef enum CL_status_t {
  *         OFF maps to GPIO_PIN_SET.
  */
 typedef enum {
-    ON  = GPIO_PIN_RESET,
-    OFF = GPIO_PIN_SET
+    SWITCH_ON  = GPIO_PIN_RESET,
+    SWITCH_OFF = GPIO_PIN_SET
 } switch_state_t;
 
 
@@ -58,13 +60,6 @@ typedef enum {
 void SystemClock_Config(void);
 
 /**
- * @brief  Initializes all GPIO pins and ports
- *         
- * 		   Enables clocks for GPIOA, GPIOB, GPIOC, and GPIOD.
- */
-void GPIO_Init();
-
-/**
  * @brief  Initializes a single GPIO pin with the specified mode.
  * @param  port  GPIO port (e.g. GPIOA, GPIOB).
  * @param  pin   GPIO pin number (e.g. GPIO_PIN_10, GPIO_PIN_3).
@@ -73,11 +68,3 @@ void GPIO_Init();
  * @attention if mode is not output, pin is driven low on init.
  */
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode);
-
-/**
- * @brief  Initializes a GPIO pin as an external interrupt source,
- *         triggering on both rising and falling edges.
- * @param  port  GPIO port (e.g. GPIOA, GPIOB).
- * @param  pin   GPIO pin number (e.g. GPIO_PIN_10, GPIO_PIN_3).
- */
-void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin);

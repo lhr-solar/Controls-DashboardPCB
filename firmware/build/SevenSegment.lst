@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccEyRjPJ.s 			page 1
+ARM GAS  /tmp/ccBvAZ3O.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
   31              		@ args = 0, pretend = 0, frame = 16
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33 0000 00B5     		push	{lr}
-ARM GAS  /tmp/ccEyRjPJ.s 			page 2
+ARM GAS  /tmp/ccBvAZ3O.s 			page 2
 
 
   34              	.LCFI0:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
   85              		.loc 1 28 5 view .LVU18
   29:driver/Src/SevenSegment.c **** 
   30:driver/Src/SevenSegment.c ****     for (uint8_t i = 0; i < NUMBER_SEVEN_SEGMENTS; i++) {
-ARM GAS  /tmp/ccEyRjPJ.s 			page 3
+ARM GAS  /tmp/ccBvAZ3O.s 			page 3
 
 
   86              		.loc 1 30 5 view .LVU19
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  127 0066 02EBC102 		add	r2, r2, r1, lsl #3
  128 006a 5268     		ldr	r2, [r2, #4]
   32:driver/Src/SevenSegment.c ****                 case (uint32_t)GPIOA:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 4
+ARM GAS  /tmp/ccBvAZ3O.s 			page 4
 
 
  129              		.loc 1 32 13 view .LVU34
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  173              	.LVL4:
   30:driver/Src/SevenSegment.c ****         for (uint8_t j = 0; j < NUMBER_SEGMENTS; j++){
  174              		.loc 1 30 53 is_stmt 0 discriminator 2 view .LVU48
-ARM GAS  /tmp/ccEyRjPJ.s 			page 5
+ARM GAS  /tmp/ccBvAZ3O.s 			page 5
 
 
  175 00b0 5FFA8CFC 		uxtb	ip, ip
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  217 00f4 00000000 		.word	led_configC
  218 00f8 00080048 		.word	1207961600
  219              		.cfi_endproc
-ARM GAS  /tmp/ccEyRjPJ.s 			page 6
+ARM GAS  /tmp/ccBvAZ3O.s 			page 6
 
 
  220              	.LFE334:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  261 0012 35E0     		b	.L16
  262              	.LVL10:
  263              	.L17:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 7
+ARM GAS  /tmp/ccBvAZ3O.s 			page 7
 
 
  264              	.LBB21:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  300 0040 27E0     		b	.L18
  301              	.LVL16:
  302              	.L31:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 8
+ARM GAS  /tmp/ccBvAZ3O.s 			page 8
 
 
   78:driver/Src/SevenSegment.c ****         }
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
   82:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i < 6; i++){
  348              		.loc 1 82 35 is_stmt 0 discriminator 1 view .LVU89
  349              	.LBE9:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 9
+ARM GAS  /tmp/ccBvAZ3O.s 			page 9
 
 
   64:driver/Src/SevenSegment.c ****         if ((number/10) == 0){
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
   86:driver/Src/SevenSegment.c ****             //On:LED1 PB10, LED2 PB1, LED3 PB14, LED4 PB2, LED5 PB0, LED6 PC5
   87:driver/Src/SevenSegment.c ****             //On:LED8 PC6, LED9 PC7, LED10 PB15, LED11 PA15, LED12 PC10, LED13 PC11
   88:driver/Src/SevenSegment.c ****             break;
-ARM GAS  /tmp/ccEyRjPJ.s 			page 10
+ARM GAS  /tmp/ccBvAZ3O.s 			page 10
 
 
   89:driver/Src/SevenSegment.c ****          case 1:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  435 0104 FFF7FEFF 		bl	HAL_GPIO_WritePin
  436              	.LVL30:
  437              	.L35:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 11
+ARM GAS  /tmp/ccBvAZ3O.s 			page 11
 
 
   90:driver/Src/SevenSegment.c ****                 if (i !=4 && i !=5){
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  103:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
  475              		.loc 1 103 20 is_stmt 0 view .LVU122
  476 012e 022E     		cmp	r6, #2
-ARM GAS  /tmp/ccEyRjPJ.s 			page 12
+ARM GAS  /tmp/ccBvAZ3O.s 			page 12
 
 
  477 0130 EDD0     		beq	.L37
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  516 016c 12E0     		b	.L42
  517              	.LVL41:
  518              	.L68:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 13
+ARM GAS  /tmp/ccBvAZ3O.s 			page 13
 
 
  519              		.loc 1 117 21 view .LVU132
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  561              	.LBB15:
  121:driver/Src/SevenSegment.c ****                 }
  122:driver/Src/SevenSegment.c ****             }
-ARM GAS  /tmp/ccEyRjPJ.s 			page 14
+ARM GAS  /tmp/ccBvAZ3O.s 			page 14
 
 
  123:driver/Src/SevenSegment.c ****     
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  599 01d0 0022     		movs	r2, #0
  600 01d2 31F83310 		ldrh	r1, [r1, r3, lsl #3]
  601 01d6 4068     		ldr	r0, [r0, #4]
-ARM GAS  /tmp/ccEyRjPJ.s 			page 15
+ARM GAS  /tmp/ccBvAZ3O.s 			page 15
 
 
  602 01d8 FFF7FEFF 		bl	HAL_GPIO_WritePin
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  640 0204 012E     		cmp	r6, #1
  641 0206 ECD0     		beq	.L48
  142:driver/Src/SevenSegment.c ****                     HAL_GPIO_WritePin(seven_segment_led[display][i].Port, seven_segment_led[display
-ARM GAS  /tmp/ccEyRjPJ.s 			page 16
+ARM GAS  /tmp/ccBvAZ3O.s 			page 16
 
 
  642              		.loc 1 142 30 discriminator 1 view .LVU167
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  681              		.loc 1 154 42 is_stmt 1 discriminator 2 view .LVU176
  682 0242 0136     		adds	r6, r6, #1
  683              	.LVL60:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 17
+ARM GAS  /tmp/ccBvAZ3O.s 			page 17
 
 
  154:driver/Src/SevenSegment.c ****                 if (i == 4) {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  720 026e 2F49     		ldr	r1, .L86+4
  721 0270 C4EBC403 		rsb	r3, r4, r4, lsl #3
  722 0274 3344     		add	r3, r3, r6
-ARM GAS  /tmp/ccEyRjPJ.s 			page 18
+ARM GAS  /tmp/ccBvAZ3O.s 			page 18
 
 
  723 0276 01EBC300 		add	r0, r1, r3, lsl #3
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  767 02b4 E9E7     		b	.L24
  768              	.L73:
  769 02b6 0026     		movs	r6, #0
-ARM GAS  /tmp/ccEyRjPJ.s 			page 19
+ARM GAS  /tmp/ccBvAZ3O.s 			page 19
 
 
  770              	.L23:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  803 02dc 1349     		ldr	r1, .L86+4
  804 02de C4EBC403 		rsb	r3, r4, r4, lsl #3
  805 02e2 3344     		add	r3, r3, r6
-ARM GAS  /tmp/ccEyRjPJ.s 			page 20
+ARM GAS  /tmp/ccBvAZ3O.s 			page 20
 
 
  806 02e4 01EBC300 		add	r0, r1, r3, lsl #3
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  850              	.LBE21:
  193:driver/Src/SevenSegment.c ****                 }
  194:driver/Src/SevenSegment.c ****             }
-ARM GAS  /tmp/ccEyRjPJ.s 			page 21
+ARM GAS  /tmp/ccBvAZ3O.s 			page 21
 
 
  195:driver/Src/SevenSegment.c ****             
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  895 0336 F4E7     		b	.L15
  896              	.LBE22:
  897              		.cfi_endproc
-ARM GAS  /tmp/ccEyRjPJ.s 			page 22
+ARM GAS  /tmp/ccBvAZ3O.s 			page 22
 
 
  898              	.LFE335:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  947              		.loc 1 211 39 is_stmt 0 view .LVU235
  948 0000 38B5     		push	{r3, r4, r5, lr}
  949              	.LCFI7:
-ARM GAS  /tmp/ccEyRjPJ.s 			page 23
+ARM GAS  /tmp/ccBvAZ3O.s 			page 23
 
 
  950              		.cfi_def_cfa_offset 16
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  980              	.LVL90:
  214:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
  981              		.loc 1 214 42 is_stmt 1 discriminator 3 view .LVU241
-ARM GAS  /tmp/ccEyRjPJ.s 			page 24
+ARM GAS  /tmp/ccBvAZ3O.s 			page 24
 
 
  982 0028 0135     		adds	r5, r5, #1
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  1026              	.L100:
  219:driver/Src/SevenSegment.c ****             for (uint8_t i = 0; i <= 6; i++){
  1027              		.loc 1 219 35 is_stmt 0 discriminator 1 view .LVU252
-ARM GAS  /tmp/ccEyRjPJ.s 			page 25
+ARM GAS  /tmp/ccBvAZ3O.s 			page 25
 
 
  1028              	.LBE24:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  1071              	.LBB27:
  228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
  1072              		.loc 1 228 17 is_stmt 1 view .LVU264
-ARM GAS  /tmp/ccEyRjPJ.s 			page 26
+ARM GAS  /tmp/ccBvAZ3O.s 			page 26
 
 
  228:driver/Src/SevenSegment.c ****                 HAL_GPIO_WritePin(seven_segment_led[1][i].Port, seven_segment_led[1][i].Pin, 1);
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  1125 0044 00080048 		.word	1207961600
  1126 0048 00800000 		.word	32768
  1127 004c 00040048 		.word	1207960576
-ARM GAS  /tmp/ccEyRjPJ.s 			page 27
+ARM GAS  /tmp/ccBvAZ3O.s 			page 27
 
 
  1128 0050 00800000 		.word	32768
@@ -1599,33 +1599,33 @@ ARM GAS  /tmp/ccEyRjPJ.s 			page 1
  1166              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
  1167              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
  1168              		.file 5 "driver/Inc/SevenSegment.h"
-ARM GAS  /tmp/ccEyRjPJ.s 			page 28
+ARM GAS  /tmp/ccBvAZ3O.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 SevenSegment.c
-     /tmp/ccEyRjPJ.s:21     .text.SevenSegment_Init:00000000 $t
-     /tmp/ccEyRjPJ.s:27     .text.SevenSegment_Init:00000000 SevenSegment_Init
-     /tmp/ccEyRjPJ.s:212    .text.SevenSegment_Init:000000e0 $d
-     /tmp/ccEyRjPJ.s:1107   .rodata.seven_segment_led:00000000 seven_segment_led
-     /tmp/ccEyRjPJ.s:1149   .data.led_configB:00000000 led_configB
-     /tmp/ccEyRjPJ.s:1158   .data.led_configA:00000000 led_configA
-     /tmp/ccEyRjPJ.s:1140   .data.led_configC:00000000 led_configC
-     /tmp/ccEyRjPJ.s:223    .text.displayNum_SevenSegment:00000000 $t
-     /tmp/ccEyRjPJ.s:229    .text.displayNum_SevenSegment:00000000 displayNum_SevenSegment
-     /tmp/ccEyRjPJ.s:379    .text.displayNum_SevenSegment:000000a0 $d
-     /tmp/ccEyRjPJ.s:390    .text.displayNum_SevenSegment:000000c8 $t
-     /tmp/ccEyRjPJ.s:861    .text.displayNum_SevenSegment:00000328 $d
-     /tmp/ccEyRjPJ.s:876    .text.displayNum_SevenSegment:00000330 $t
-     /tmp/ccEyRjPJ.s:901    .text.displayTwoNum_SevenSegment:00000000 $t
-     /tmp/ccEyRjPJ.s:907    .text.displayTwoNum_SevenSegment:00000000 displayTwoNum_SevenSegment
-     /tmp/ccEyRjPJ.s:934    .text.off_SevenSegment:00000000 $t
-     /tmp/ccEyRjPJ.s:940    .text.off_SevenSegment:00000000 off_SevenSegment
-     /tmp/ccEyRjPJ.s:1097   .text.off_SevenSegment:0000009c $d
-     /tmp/ccEyRjPJ.s:1104   .rodata.seven_segment_led:00000000 $d
-     /tmp/ccEyRjPJ.s:1137   .data.led_configC:00000000 $d
-     /tmp/ccEyRjPJ.s:1146   .data.led_configB:00000000 $d
-     /tmp/ccEyRjPJ.s:1155   .data.led_configA:00000000 $d
+     /tmp/ccBvAZ3O.s:21     .text.SevenSegment_Init:00000000 $t
+     /tmp/ccBvAZ3O.s:27     .text.SevenSegment_Init:00000000 SevenSegment_Init
+     /tmp/ccBvAZ3O.s:212    .text.SevenSegment_Init:000000e0 $d
+     /tmp/ccBvAZ3O.s:1107   .rodata.seven_segment_led:00000000 seven_segment_led
+     /tmp/ccBvAZ3O.s:1149   .data.led_configB:00000000 led_configB
+     /tmp/ccBvAZ3O.s:1158   .data.led_configA:00000000 led_configA
+     /tmp/ccBvAZ3O.s:1140   .data.led_configC:00000000 led_configC
+     /tmp/ccBvAZ3O.s:223    .text.displayNum_SevenSegment:00000000 $t
+     /tmp/ccBvAZ3O.s:229    .text.displayNum_SevenSegment:00000000 displayNum_SevenSegment
+     /tmp/ccBvAZ3O.s:379    .text.displayNum_SevenSegment:000000a0 $d
+     /tmp/ccBvAZ3O.s:390    .text.displayNum_SevenSegment:000000c8 $t
+     /tmp/ccBvAZ3O.s:861    .text.displayNum_SevenSegment:00000328 $d
+     /tmp/ccBvAZ3O.s:876    .text.displayNum_SevenSegment:00000330 $t
+     /tmp/ccBvAZ3O.s:901    .text.displayTwoNum_SevenSegment:00000000 $t
+     /tmp/ccBvAZ3O.s:907    .text.displayTwoNum_SevenSegment:00000000 displayTwoNum_SevenSegment
+     /tmp/ccBvAZ3O.s:934    .text.off_SevenSegment:00000000 $t
+     /tmp/ccBvAZ3O.s:940    .text.off_SevenSegment:00000000 off_SevenSegment
+     /tmp/ccBvAZ3O.s:1097   .text.off_SevenSegment:0000009c $d
+     /tmp/ccBvAZ3O.s:1104   .rodata.seven_segment_led:00000000 $d
+     /tmp/ccBvAZ3O.s:1137   .data.led_configC:00000000 $d
+     /tmp/ccBvAZ3O.s:1146   .data.led_configB:00000000 $d
+     /tmp/ccBvAZ3O.s:1155   .data.led_configA:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init

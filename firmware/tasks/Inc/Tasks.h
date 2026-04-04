@@ -43,49 +43,15 @@ extern StaticTask_t POLLING_WRITE_CAN_TCB;
 
 /* ------| Task Functions |------ */
 
-/**
- * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FSC) disabled
- * @param   chip EMC2305 to set
- * @param   fan Fan to set (1-5)
- * @param   duty_cycle PWM duty cycle percentage (0 to 100)
- * @return  OK if successful, ERR otherwise
- */
+
 void InitTasks(void *argument);
 
-/**
- * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FSC) disabled
- * @param   chip EMC2305 to set
- * @param   fan Fan to set (1-5)
- * @param   duty_cycle PWM duty cycle percentage (0 to 100)
- * @return  OK if successful, ERR otherwise
- */
 void ReadCarCAN_task(void *argument);
 
-/**
- * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FSC) disabled
- * @param   chip EMC2305 to set
- * @param   fan Fan to set (1-5)
- * @param   duty_cycle PWM duty cycle percentage (0 to 100)
- * @return  OK if successful, ERR otherwise
- */
 void ReadControlsCAN_task(void *argument);
 
-/**
- * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FSC) disabled
- * @param   chip EMC2305 to set
- * @param   fan Fan to set (1-5)
- * @param   duty_cycle PWM duty cycle percentage (0 to 100)
- * @return  OK if successful, ERR otherwise
- */
 void ReadSteeringAngCAN_task(void *argument);
 
-/**
- * @brief   Sets the PWM drive of the specified fan directly. Works only with fan speed control (FSC) disabled
- * @param   chip EMC2305 to set
- * @param   fan Fan to set (1-5)
- * @param   duty_cycle PWM duty cycle percentage (0 to 100)
- * @return  OK if successful, ERR otherwise
- */
 void Polling_WriteCAN_Task(void *argument);
 
 /* ------| Switch States & Status LED Event Groups |------ */
