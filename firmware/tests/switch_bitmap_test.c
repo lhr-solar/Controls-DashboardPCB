@@ -14,6 +14,7 @@
 
 
 #define SWITCH_BITMAP_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+#define NUM_STATUS_LEDS		8
 
 
 /* Task control block and stack for the LED test task */

@@ -2,8 +2,6 @@
 
 #include "pinDefs.h"
 
-#define NUM_STATUS_LEDS		8
-
 /**
  * @brief  Initializes all LED GPIO pins as push-pull outputs.
  * 
