@@ -133,11 +133,10 @@ uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state) {
 	return switch_bitmap;
 }
 
-uint32_t switch_bitmap_setAll(uint32_t bits) {
+void switch_bitmap_setAll(uint32_t bits) {
 	portENTER_CRITICAL();
 	switch_bitmap = bits;
 	portEXIT_CRITICAL();
-	return switch_bitmap;
 }
 
 uint32_t switch_bitmap_read() {

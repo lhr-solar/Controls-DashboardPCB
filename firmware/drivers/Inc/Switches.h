@@ -102,9 +102,9 @@ uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state);
  *
  * @param bits new bitmap with all switch states
  * 
- * @return switch_bitmaps bitmap
+ * @return none
  */
-uint32_t switch_bitmap_setAll(uint32_t bits);
+void switch_bitmap_setAll(uint32_t bits);
 
 /**
  * @brief returns switch_bitmaps bitmap
