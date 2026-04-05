@@ -161,7 +161,7 @@ static void vTimerCallback_GearSW(TimerHandle_t xTimer) {
 }
 
 /**
- * @brief  Tiemr callback fired after debounce delay
+ * @brief  Timer callback fired after debounce delay
  * 			
  * 		Updates LEDs based on switch states.
  *         - IGN_OFF
