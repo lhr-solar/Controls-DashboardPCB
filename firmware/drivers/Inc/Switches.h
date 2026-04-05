@@ -10,6 +10,14 @@
 //convert switch_bit_t -> bit mask
 #define GET_MASK(bit)   ((uint32_t)(1U << (bit)))
 
+/**
+ * @brief  Switch states are active low — ON maps to GPIO_PIN_RESET,
+ *         OFF maps to GPIO_PIN_SET.
+ */
+typedef enum {
+    SWITCH_ON  = GPIO_PIN_RESET,
+    SWITCH_OFF = GPIO_PIN_SET
+} switch_state_t;
 
 /**
  * @brief  Adresses switches to specific index on
@@ -74,7 +82,7 @@ uint32_t switch_read_all_inputs();
  * @param  port  GPIO port of the switch (e.g. GPIOA, GPIOB).
  * @param  pin   GPIO pin number (e.g. GPIO_PIN_5).
  * 
- * @return ON if the pin is low (active), OFF if the pin is high.
+ * @return SWITCH_ON = logic high, SWITCH_OFF = logic low.
  */
 switch_state_t switch_get_state(switch_bit_t sw);
 

@@ -4,16 +4,6 @@
 
 
 /**
- * @brief  Switch states are active low — ON maps to GPIO_PIN_RESET,
- *         OFF maps to GPIO_PIN_SET.
- */
-typedef enum {
-    SWITCH_ON  = GPIO_PIN_RESET,
-    SWITCH_OFF = GPIO_PIN_SET
-} switch_state_t;
-
-
-/**
  * 
  * @brief System Clock Configuration - Cube MX
  * 

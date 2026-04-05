@@ -50,6 +50,7 @@ static void displayStates_onLEDs() {
     	led_set(statusLEDs[i].port, statusLEDs[i].pin, state);
 	}
 }
+
 /**
  * @brief  Task to test stateBits bitamp
  * 

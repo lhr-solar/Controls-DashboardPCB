@@ -4,8 +4,6 @@
 #include "Horn.h"
 #include "Switches.h"
 
-#define READ_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
-
 void ReadCarCAN_task(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 

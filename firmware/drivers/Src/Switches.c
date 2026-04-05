@@ -93,31 +93,29 @@ void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t NVIC_GPIO_EXT_P
 
 uint32_t switch_read_all_inputs() {
     for (int i = 0; i < SW_COUNT; i++) {
-    	portENTER_CRITICAL();
         switch_bitmap_setBit(i, switch_get_state(i));
-		portEXIT_CRITICAL();
     }
     return switch_bitmap;
 }
 
 switch_state_t switch_get_state(switch_bit_t sw) {
     switch(sw) {
-        case SW_IGN_OFF:       return (switch_state_t)HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN);
-        case SW_IGN_ARR:       return (switch_state_t)HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN);
-        case SW_IGN_MTR:       return (switch_state_t)HAL_GPIO_ReadPin(IGN_MTR_PORT,        IGN_MTR_PIN);
-        case SW_FWD:           return (switch_state_t)HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN);
-        case SW_NEUTRAL_GEAR:  return (switch_state_t)HAL_GPIO_ReadPin(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN);
-        case SW_REV:           return (switch_state_t)HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN);
-        case SW_CRUISE_ENABLE: return (switch_state_t)HAL_GPIO_ReadPin(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN);
-        case SW_CRUISE_SET:    return (switch_state_t)HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN);
-        case SW_HAZARD:        return (switch_state_t)HAL_GPIO_ReadPin(HAZARD_PORT,         HAZARD_PIN);
-        case SW_LEFT_BLINKER:  return (switch_state_t)HAL_GPIO_ReadPin(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN);
-        case SW_RIGHT_BLINKER: return (switch_state_t)HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN);
-        case SW_HORN:          return (switch_state_t)HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN);
-        case SW_PTT:           return (switch_state_t)HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN);
-        case SW_REGEN_ENABLE:  return (switch_state_t)HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN);
-        case SW_REGEN_ACTIVE:  return (switch_state_t)HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN);
-        default:               return SWITCH_OFF;
+		case SW_IGN_OFF:       return HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_IGN_MTR:       return HAL_GPIO_ReadPin(IGN_MTR_PORT,        IGN_MTR_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_FWD:           return HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_NEUTRAL_GEAR:  return HAL_GPIO_ReadPin(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_REV:           return HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_CRUISE_ENABLE: return HAL_GPIO_ReadPin(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN)  == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_CRUISE_SET:    return HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN)     == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_HAZARD:        return HAL_GPIO_ReadPin(HAZARD_PORT,         HAZARD_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_LEFT_BLINKER:  return HAL_GPIO_ReadPin(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_HORN:          return HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
+		default:               return SWITCH_OFF;
     }
 }
 
@@ -127,14 +125,18 @@ uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state) {
 
 	uint32_t mask = GET_MASK(bit);
 
+	portENTER_CRITICAL();
 	if(state == SWITCH_ON) switch_bitmap |= mask;
 	else switch_bitmap &= ~(mask);
+	portEXIT_CRITICAL();
 
 	return switch_bitmap;
 }
 
 uint32_t switch_bitmap_setAll(uint32_t bits) {
+	portENTER_CRITICAL();
 	switch_bitmap = bits;
+	portEXIT_CRITICAL();
 	return switch_bitmap;
 }
 
@@ -143,7 +145,7 @@ uint32_t switch_bitmap_read() {
 }
 
 /**
- * @brief  Tiemr callback fired after debounce delay
+ * @brief  Timer callback fired after debounce delay
  * 			
  * 		Updates LEDs based on switch states.
  *         - NEUTRAL_GEAR

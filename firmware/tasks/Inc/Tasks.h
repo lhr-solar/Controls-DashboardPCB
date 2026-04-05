@@ -7,6 +7,11 @@
 #include "event_groups.h"
 
 
+#define READ_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
+#define READ_CONTROLS_CAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
+#define READ_WRITE_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
+
+
 /* ------| Task Priorities |------ */
 #define INIT_TASK_PRIORITY                  (tskIDLE_PRIORITY+1)
 #define READ_CAR_CAN_PRIORITY               (tskIDLE_PRIORITY+3) //BPS fault detection
