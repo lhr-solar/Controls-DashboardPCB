@@ -3,6 +3,7 @@
 #include "stm32xx_hal.h"
 
 
+/**
  * @brief  Switch states are active low — ON maps to GPIO_PIN_RESET,
  *         OFF maps to GPIO_PIN_SET.
  */

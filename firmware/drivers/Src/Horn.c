@@ -5,6 +5,7 @@
 
 void horn_GPIO_init() {
     gpioPin_Init(HORN_OUT_PORT, HORN_OUT_PIN, GPIO_MODE_OUTPUT_PP);
+	horn_set(SWITCH_OFF);
 }
 
 void horn_set(switch_state_t state) {

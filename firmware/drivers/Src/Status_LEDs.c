@@ -4,9 +4,6 @@
 static bool bps_strobe = false;
 
 void led_GPIO_init() {
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
     gpioPin_Init(PH_CAN_RX_LED_PORT,  PH_CAN_RX_LED_PIN,  GPIO_MODE_OUTPUT_PP);
     gpioPin_Init(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN, GPIO_MODE_OUTPUT_PP);
     gpioPin_Init(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, GPIO_MODE_OUTPUT_PP);

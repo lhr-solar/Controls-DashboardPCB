@@ -5,7 +5,7 @@
 #define INTERRUPT_0_TO_4_BOUND	4
 #define INTERRUPT_5_TO_9_BOUND	9
 
-#define SWITCH_MAX_PRIO				tskIDLE_PRIORITY + 5
+#define SWITCH_MAX_PRIO				configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY
 
 //convert switch_bit_t -> bit mask
 #define GET_MASK(bit)   ((uint32_t)(1U << (bit)))
