@@ -1,7 +1,11 @@
 # For PCBs designed using KiCad: https://www.kicad.org/
 # Format documentation: https://kicad.org/help/file-formats/
 
+build/
+.vscode/
+
 # Temporary files
+*.venv
 *.000
 *.bak
 *.bck
