@@ -6,7 +6,7 @@
 /**
  * @brief  Initializes the horn output GPIO pin as a push-pull output
  */
-void horn_GPIO_init();
+void horn_gpio_init();
 
 /**
  * @brief  Sets the horn output to the specified state.

@@ -21,9 +21,9 @@ void InitTasks(void *argument) {
 	 * 
 	*/
 
-    led_GPIO_init();
-    switch_GPIO_init();
-    horn_GPIO_init();
+    led_gpio_init();
+    switch_init();
+    horn_gpio_init();
 	
 
     xTaskCreateStatic(
@@ -38,8 +38,8 @@ void InitTasks(void *argument) {
 
 
     xTaskCreateStatic(
-        Polling_WriteCAN_Task,
-        "Polling Switches & Writing CAN Task",
+        Read_Switches_WriteCAN_Task,
+        "Reading All Switches & Writing CAN Task",
         POLLING_WRITE_CAN_STACK_SIZE,
         NULL,
         POLLING_WRITE_CAN_PRIORITY,

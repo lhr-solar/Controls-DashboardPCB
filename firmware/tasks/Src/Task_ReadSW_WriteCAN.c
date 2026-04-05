@@ -6,7 +6,7 @@
 
 #define READ_WRITE_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
 
-void Polling_WriteCAN_Task(void *argument) {
+void Read_Switches_WriteCAN_Task(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
     while (1) {

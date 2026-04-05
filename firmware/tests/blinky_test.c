@@ -34,9 +34,9 @@ static void LEDTest_Task(void *argument) {
 int main(void) {
     HAL_Init();
     SystemClock_Config();
-    led_GPIO_init();
-    switch_GPIO_init();
-    horn_GPIO_init();
+    led_gpio_init();
+    switch_init();
+    horn_gpio_init();
 
     xTaskCreateStatic(
         LEDTest_Task,

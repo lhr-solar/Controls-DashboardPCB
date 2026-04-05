@@ -4,7 +4,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
-#include <event_groups.h>
+#include "event_groups.h"
 
 
 /* ------| Task Priorities |------ */
@@ -36,4 +36,4 @@ void ReadCarCAN_task(void *argument);
 
 void ReadControlsCAN_task(void *argument);
 
-void Polling_WriteCAN_Task(void *argument);
+void Read_Switches_WriteCAN_Task(void *argument);

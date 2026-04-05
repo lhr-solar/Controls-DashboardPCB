@@ -6,7 +6,7 @@
  * @brief  Initializes all LED GPIO pins as push-pull outputs.
  * 
  */
-void led_GPIO_init();
+void led_gpio_init();
 
 /**
  * @brief  Sets an LED to the specified state (on or off).

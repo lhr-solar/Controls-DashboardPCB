@@ -41,7 +41,7 @@ typedef enum {
  * @brief  Initializes all switch GPIO pins as inputs.
  * 
  */
-void switch_GPIO_init();
+void switch_init();
 
 /**
  * @brief  Initializes a GPIO pin as an external interrupt source,
