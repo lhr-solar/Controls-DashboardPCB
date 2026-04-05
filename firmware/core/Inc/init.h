@@ -3,18 +3,6 @@
 #include "stm32xx_hal.h"
 
 
-/**
- * 
- * @brief Controls Leade Status Message
- * 
- */
-typedef enum CL_status_t {
-    CL_EVENT_GROUP_INIT_FAIL,
-	CL_OK
-} CL_status_t;
-
-
-/**
  * @brief  Switch states are active low — ON maps to GPIO_PIN_RESET,
  *         OFF maps to GPIO_PIN_SET.
  */
