@@ -5,16 +5,6 @@
 #include "pinDefs.h"
 #include "stm32xx_hal.h"
 
-void GPIO_Init() {
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    led_GPIO_init();
-    switch_GPIO_init();
-    horn_GPIO_init();
-}
-
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
     GPIO_InitTypeDef GPIO_init = {
         .Mode = mode,
@@ -22,18 +12,18 @@ void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
         .Pin  = pin
     };
 
+	switch((uint32_t)port) {
+		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
+		case (uint32_t)GPIOB: __HAL_RCC_GPIOB_CLK_ENABLE(); break;
+		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+    	default: break;
+	}
+
     HAL_GPIO_Init(port, &GPIO_init);
     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
-}
-
-void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin) {
-    GPIO_InitTypeDef GPIO_init = {
-        .Mode = GPIO_MODE_IT_RISING_FALLING,
-        .Pull = GPIO_NOPULL,
-        .Pin  = pin
-    };
-
-    HAL_GPIO_Init(port, &GPIO_init);
 }
 
 

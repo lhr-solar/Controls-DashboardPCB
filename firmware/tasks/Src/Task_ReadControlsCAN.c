@@ -5,20 +5,15 @@
 #include "Switches.h"
 
 void ReadControlsCAN_task(void *argument) {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
 
-    while(1) {
-        led_set(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN, GPIO_PIN_SET);
-        vTaskDelay(pdMS_TO_TICKS(500));
-        led_set(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN, GPIO_PIN_RESET);
-        vTaskDelay(pdMS_TO_TICKS(500));
+    while (1) {
+        led_toggle(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN);
 
+        /**
+         * @todo    implement fdcan1 rx driver here
+         */
 
-		/**
-		 * 
-		 * @todo 	implement fdcan1 rx driver here
-		 * 
-		 */
-
-
+        vTaskDelayUntil(&xLastWakeTime, READ_CONTROLS_CAN_TASK_DELAY_TICKS);
     }
 }

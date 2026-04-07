@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccq3WGUX.s 			page 1
+ARM GAS  /tmp/ccsmA5nh.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
   27:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** 
   28:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****   [..] Comparing to other previous devices, the SMBUS interface for STM32G4xx
   29:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****        devices contains the following additional features
-ARM GAS  /tmp/ccq3WGUX.s 			page 2
+ARM GAS  /tmp/ccsmA5nh.s 			page 2
 
 
   30:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
   84:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** /**
   85:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****   * @brief  Enable SMBUS wakeup from Stop mode(s).
   86:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****   * @param  hsmbus Pointer to a SMBUS_HandleTypeDef structure that contains
-ARM GAS  /tmp/ccq3WGUX.s 			page 3
+ARM GAS  /tmp/ccsmA5nh.s 			page 3
 
 
   87:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****   *                the configuration information for the specified SMBUSx peripheral.
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
   64              		.loc 1 106 5 is_stmt 1 view .LVU14
   65              		.loc 1 106 11 is_stmt 0 view .LVU15
   66 0024 1868     		ldr	r0, [r3]
-ARM GAS  /tmp/ccq3WGUX.s 			page 4
+ARM GAS  /tmp/ccsmA5nh.s 			page 4
 
 
   67              		.loc 1 106 21 view .LVU16
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  106              		.align	1
  107              		.global	HAL_SMBUSEx_DisableWakeUp
  108              		.syntax unified
-ARM GAS  /tmp/ccq3WGUX.s 			page 5
+ARM GAS  /tmp/ccsmA5nh.s 			page 5
 
 
  109              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  143 001a 0068     		ldr	r0, [r0]
  144              	.LVL7:
  145              		.loc 1 142 5 is_stmt 0 view .LVU43
-ARM GAS  /tmp/ccq3WGUX.s 			page 6
+ARM GAS  /tmp/ccsmA5nh.s 			page 6
 
 
  146 001c 0268     		ldr	r2, [r0]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  183 0044 0220     		movs	r0, #2
  184              	.LVL11:
  159:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c ****   }
-ARM GAS  /tmp/ccq3WGUX.s 			page 7
+ARM GAS  /tmp/ccsmA5nh.s 			page 7
 
 
  160:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** }
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  203              		@ frame_needed = 0, uses_anonymous_args = 0
  204              		@ link register save eliminated.
  205              		.loc 1 197 1 is_stmt 0 view .LVU61
-ARM GAS  /tmp/ccq3WGUX.s 			page 8
+ARM GAS  /tmp/ccsmA5nh.s 			page 8
 
 
  206 0000 82B0     		sub	sp, sp, #8
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  253              	.LVL13:
  254              	.LFB332:
  207:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** 
-ARM GAS  /tmp/ccq3WGUX.s 			page 9
+ARM GAS  /tmp/ccsmA5nh.s 			page 9
 
 
  208:stm/stm32g4xx/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_smbus_ex.c **** /**
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  282 0016 044A     		ldr	r2, .L15+4
  283 0018 5368     		ldr	r3, [r2, #4]
  284 001a 23EA0003 		bic	r3, r3, r0
-ARM GAS  /tmp/ccq3WGUX.s 			page 10
+ARM GAS  /tmp/ccsmA5nh.s 			page 10
 
 
  285 001e 5360     		str	r3, [r2, #4]
@@ -562,20 +562,20 @@ ARM GAS  /tmp/ccq3WGUX.s 			page 1
  303              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
  304              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  305              		.file 5 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_smbus.h"
-ARM GAS  /tmp/ccq3WGUX.s 			page 11
+ARM GAS  /tmp/ccsmA5nh.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32g4xx_hal_smbus_ex.c
-     /tmp/ccq3WGUX.s:21     .text.HAL_SMBUSEx_EnableWakeUp:00000000 $t
-     /tmp/ccq3WGUX.s:27     .text.HAL_SMBUSEx_EnableWakeUp:00000000 HAL_SMBUSEx_EnableWakeUp
-     /tmp/ccq3WGUX.s:106    .text.HAL_SMBUSEx_DisableWakeUp:00000000 $t
-     /tmp/ccq3WGUX.s:112    .text.HAL_SMBUSEx_DisableWakeUp:00000000 HAL_SMBUSEx_DisableWakeUp
-     /tmp/ccq3WGUX.s:191    .text.HAL_SMBUSEx_EnableFastModePlus:00000000 $t
-     /tmp/ccq3WGUX.s:197    .text.HAL_SMBUSEx_EnableFastModePlus:00000000 HAL_SMBUSEx_EnableFastModePlus
-     /tmp/ccq3WGUX.s:240    .text.HAL_SMBUSEx_EnableFastModePlus:00000024 $d
-     /tmp/ccq3WGUX.s:246    .text.HAL_SMBUSEx_DisableFastModePlus:00000000 $t
-     /tmp/ccq3WGUX.s:252    .text.HAL_SMBUSEx_DisableFastModePlus:00000000 HAL_SMBUSEx_DisableFastModePlus
-     /tmp/ccq3WGUX.s:295    .text.HAL_SMBUSEx_DisableFastModePlus:00000024 $d
+     /tmp/ccsmA5nh.s:21     .text.HAL_SMBUSEx_EnableWakeUp:00000000 $t
+     /tmp/ccsmA5nh.s:27     .text.HAL_SMBUSEx_EnableWakeUp:00000000 HAL_SMBUSEx_EnableWakeUp
+     /tmp/ccsmA5nh.s:106    .text.HAL_SMBUSEx_DisableWakeUp:00000000 $t
+     /tmp/ccsmA5nh.s:112    .text.HAL_SMBUSEx_DisableWakeUp:00000000 HAL_SMBUSEx_DisableWakeUp
+     /tmp/ccsmA5nh.s:191    .text.HAL_SMBUSEx_EnableFastModePlus:00000000 $t
+     /tmp/ccsmA5nh.s:197    .text.HAL_SMBUSEx_EnableFastModePlus:00000000 HAL_SMBUSEx_EnableFastModePlus
+     /tmp/ccsmA5nh.s:240    .text.HAL_SMBUSEx_EnableFastModePlus:00000024 $d
+     /tmp/ccsmA5nh.s:246    .text.HAL_SMBUSEx_DisableFastModePlus:00000000 $t
+     /tmp/ccsmA5nh.s:252    .text.HAL_SMBUSEx_DisableFastModePlus:00000000 HAL_SMBUSEx_DisableFastModePlus
+     /tmp/ccsmA5nh.s:295    .text.HAL_SMBUSEx_DisableFastModePlus:00000024 $d
 
 NO UNDEFINED SYMBOLS

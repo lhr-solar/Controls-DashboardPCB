@@ -6,7 +6,7 @@
  * @brief  Initializes all LED GPIO pins as push-pull outputs.
  * 
  */
-void led_GPIO_init();
+void led_gpio_init();
 
 /**
  * @brief  Sets an LED to the specified state (on or off).
@@ -24,7 +24,7 @@ void led_set(GPIO_TypeDef *port, uint16_t pin, GPIO_PinState state);
 void led_toggle(GPIO_TypeDef *port, uint16_t pin);
 
 /**
- * @brief  Flashes all LEDs on and off together once with a 250ms on/off period.
+ * @brief  Flashes all LEDs on and off together once
  * 
  */
 void flash_them();
