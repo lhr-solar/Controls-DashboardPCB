@@ -69,3 +69,11 @@
 #define LEFT_BLINKER_PIN        GPIO_PIN_5
 #define HAZARD_PORT             GPIOC
 #define HAZARD_PIN              GPIO_PIN_8
+
+
+/* -------- Output - GPIO -------- */
+#define CAR_CAN_TX_PORT			GPIOA
+#define CAR_CAN_TX_PIN			GPIO_PIN_15
+
+#define CAR_CAN_RX_PORT			GPIOA
+#define CAR_CAN_RX_PIN			GPIO_PIN_8

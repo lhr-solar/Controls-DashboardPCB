@@ -19,3 +19,4 @@ void SystemClock_Config(void);
  * @attention if mode is not output, pin is driven low on init.
  */
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode);
+

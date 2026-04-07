@@ -19,6 +19,11 @@ typedef enum {
     SWITCH_OFF = GPIO_PIN_SET
 } switch_state_t;
 
+typedef enum {
+    LED_ON  = GPIO_PIN_SET,
+    LED_OFF = GPIO_PIN_RESET
+} led_state_t;
+
 /**
  * @brief  Adresses switches to specific index on
  * 		   data payload to be sent on CAN

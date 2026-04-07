@@ -5,6 +5,7 @@
 #include "pinDefs.h"
 #include "stm32xx_hal.h"
 
+
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
     GPIO_InitTypeDef GPIO_init = {
         .Mode = mode,
@@ -25,7 +26,6 @@ void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
     HAL_GPIO_Init(port, &GPIO_init);
     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
 }
-
 
 void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};

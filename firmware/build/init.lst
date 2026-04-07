@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccjWiugw.s 			page 1
+ARM GAS  /tmp/ccnUBO62.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -36,12 +36,13 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
    5:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "pinDefs.h"
    6:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** #include "stm32xx_hal.h"
    7:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
-   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
-  30              		.loc 1 8 68 view -0
+   8:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
+  30              		.loc 1 9 68 view -0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 48
   33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		.loc 1 8 68 is_stmt 0 view .LVU1
+  34              		.loc 1 9 68 is_stmt 0 view .LVU1
   35 0000 70B5     		push	{r4, r5, r6, lr}
   36              	.LCFI0:
   37              		.cfi_def_cfa_offset 16
@@ -55,12 +56,12 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
   45 0004 0446     		mov	r4, r0
   46 0006 0E46     		mov	r6, r1
   47 0008 1546     		mov	r5, r2
-   9:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
-  48              		.loc 1 9 5 is_stmt 1 view .LVU2
-  49              		.loc 1 9 22 is_stmt 0 view .LVU3
-ARM GAS  /tmp/ccjWiugw.s 			page 2
+  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     GPIO_InitTypeDef GPIO_init = {
+  48              		.loc 1 10 5 is_stmt 1 view .LVU2
+ARM GAS  /tmp/ccnUBO62.s 			page 2
 
 
+  49              		.loc 1 10 22 is_stmt 0 view .LVU3
   50 000a 0023     		movs	r3, #0
   51 000c 0793     		str	r3, [sp, #28]
   52 000e 0893     		str	r3, [sp, #32]
@@ -69,13 +70,13 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
   55 0014 0B93     		str	r3, [sp, #44]
   56 0016 0791     		str	r1, [sp, #28]
   57 0018 0892     		str	r2, [sp, #32]
-  10:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Mode = mode,
-  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pull = GPIO_NOPULL,
-  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pin  = pin
-  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     };
-  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
-  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 	switch((uint32_t)port) {
-  58              		.loc 1 15 2 is_stmt 1 view .LVU4
+  11:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Mode = mode,
+  12:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pull = GPIO_NOPULL,
+  13:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****         .Pin  = pin
+  14:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     };
+  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 	switch((uint32_t)port) {
+  58              		.loc 1 16 2 is_stmt 1 view .LVU4
   59 001a 324B     		ldr	r3, .L13
   60 001c 9842     		cmp	r0, r3
   61 001e 45D0     		beq	.L2
@@ -88,56 +89,56 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
   68 0030 31D0     		beq	.L5
   69 0032 B0F1904F 		cmp	r0, #1207959552
   70 0036 09D1     		bne	.L7
-  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
-  71              		.loc 1 16 25 view .LVU5
+  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
+  71              		.loc 1 17 25 view .LVU5
   72              	.LBB2:
-  73              		.loc 1 16 25 view .LVU6
-  74              		.loc 1 16 25 view .LVU7
+  73              		.loc 1 17 25 view .LVU6
+  74              		.loc 1 17 25 view .LVU7
   75 0038 2B4B     		ldr	r3, .L13+4
   76 003a DA6C     		ldr	r2, [r3, #76]
   77              	.LVL1:
-  78              		.loc 1 16 25 is_stmt 0 view .LVU8
+  78              		.loc 1 17 25 is_stmt 0 view .LVU8
   79 003c 42F00102 		orr	r2, r2, #1
   80 0040 DA64     		str	r2, [r3, #76]
-  81              		.loc 1 16 25 is_stmt 1 view .LVU9
+  81              		.loc 1 17 25 is_stmt 1 view .LVU9
   82 0042 DB6C     		ldr	r3, [r3, #76]
   83 0044 03F00103 		and	r3, r3, #1
   84 0048 0193     		str	r3, [sp, #4]
-  85              		.loc 1 16 25 view .LVU10
+  85              		.loc 1 17 25 view .LVU10
   86 004a 019B     		ldr	r3, [sp, #4]
   87              	.LBE2:
-  88              		.loc 1 16 25 view .LVU11
-  89              		.loc 1 16 55 view .LVU12
+  88              		.loc 1 17 25 view .LVU11
+  89              		.loc 1 17 55 view .LVU12
   90              	.L7:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOB: __HAL_RCC_GPIOB_CLK_ENABLE(); break;
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
-  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
-  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 	}
-  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
-  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     HAL_GPIO_Init(port, &GPIO_init);
-ARM GAS  /tmp/ccjWiugw.s 			page 3
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOB: __HAL_RCC_GPIOB_CLK_ENABLE(); break;
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+  23:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+  24:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 	}
+  25:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
+ARM GAS  /tmp/ccnUBO62.s 			page 3
 
 
-  91              		.loc 1 25 5 view .LVU13
+  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     HAL_GPIO_Init(port, &GPIO_init);
+  91              		.loc 1 26 5 view .LVU13
   92 004c 07A9     		add	r1, sp, #28
   93              	.LVL2:
-  94              		.loc 1 25 5 is_stmt 0 view .LVU14
+  94              		.loc 1 26 5 is_stmt 0 view .LVU14
   95 004e 2046     		mov	r0, r4
   96              	.LVL3:
-  97              		.loc 1 25 5 view .LVU15
+  97              		.loc 1 26 5 view .LVU15
   98 0050 FFF7FEFF 		bl	HAL_GPIO_Init
   99              	.LVL4:
-  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
- 100              		.loc 1 26 5 is_stmt 1 view .LVU16
- 101              		.loc 1 26 8 is_stmt 0 view .LVU17
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     if (mode != GPIO_MODE_OUTPUT_PP) HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+ 100              		.loc 1 27 5 is_stmt 1 view .LVU16
+ 101              		.loc 1 27 8 is_stmt 0 view .LVU17
  102 0054 012D     		cmp	r5, #1
  103 0056 3FD1     		bne	.L12
  104              	.L1:
-  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
- 105              		.loc 1 27 1 view .LVU18
+  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 105              		.loc 1 28 1 view .LVU18
  106 0058 0CB0     		add	sp, sp, #48
  107              	.LCFI2:
  108              		.cfi_remember_state
@@ -148,181 +149,181 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
  113              	.L3:
  114              	.LCFI3:
  115              		.cfi_restore_state
-  15:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
- 116              		.loc 1 15 2 view .LVU19
+  16:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOA: __HAL_RCC_GPIOA_CLK_ENABLE(); break;
+ 116              		.loc 1 16 2 view .LVU19
  117 005c 234B     		ldr	r3, .L13+8
  118 005e 9842     		cmp	r0, r3
  119 0060 2FD0     		beq	.L8
  120 0062 03F58063 		add	r3, r3, #1024
  121 0066 9842     		cmp	r0, r3
  122 0068 F0D1     		bne	.L7
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 123              		.loc 1 21 25 is_stmt 1 view .LVU20
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 123              		.loc 1 22 25 is_stmt 1 view .LVU20
  124              	.LBB3:
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 125              		.loc 1 21 25 view .LVU21
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 126              		.loc 1 21 25 view .LVU22
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 125              		.loc 1 22 25 view .LVU21
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 126              		.loc 1 22 25 view .LVU22
  127 006a 1F4B     		ldr	r3, .L13+4
  128 006c DA6C     		ldr	r2, [r3, #76]
  129              	.LVL6:
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 130              		.loc 1 21 25 is_stmt 0 view .LVU23
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 130              		.loc 1 22 25 is_stmt 0 view .LVU23
  131 006e 42F02002 		orr	r2, r2, #32
  132 0072 DA64     		str	r2, [r3, #76]
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 133              		.loc 1 21 25 is_stmt 1 view .LVU24
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 133              		.loc 1 22 25 is_stmt 1 view .LVU24
  134 0074 DB6C     		ldr	r3, [r3, #76]
  135 0076 03F02003 		and	r3, r3, #32
  136 007a 0693     		str	r3, [sp, #24]
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 137              		.loc 1 21 25 view .LVU25
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 137              		.loc 1 22 25 view .LVU25
+ARM GAS  /tmp/ccnUBO62.s 			page 4
+
+
  138 007c 069B     		ldr	r3, [sp, #24]
-ARM GAS  /tmp/ccjWiugw.s 			page 4
-
-
  139              	.LBE3:
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 140              		.loc 1 21 25 view .LVU26
-  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
- 141              		.loc 1 21 55 view .LVU27
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 140              		.loc 1 22 25 view .LVU26
+  22:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****     	default: break;
+ 141              		.loc 1 22 55 view .LVU27
  142 007e E5E7     		b	.L7
  143              	.LVL7:
  144              	.L4:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 145              		.loc 1 17 25 view .LVU28
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 145              		.loc 1 18 25 view .LVU28
  146              	.LBB4:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 147              		.loc 1 17 25 view .LVU29
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 148              		.loc 1 17 25 view .LVU30
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 147              		.loc 1 18 25 view .LVU29
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 148              		.loc 1 18 25 view .LVU30
  149 0080 194B     		ldr	r3, .L13+4
  150 0082 DA6C     		ldr	r2, [r3, #76]
  151              	.LVL8:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 152              		.loc 1 17 25 is_stmt 0 view .LVU31
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 152              		.loc 1 18 25 is_stmt 0 view .LVU31
  153 0084 42F00202 		orr	r2, r2, #2
  154 0088 DA64     		str	r2, [r3, #76]
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 155              		.loc 1 17 25 is_stmt 1 view .LVU32
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 155              		.loc 1 18 25 is_stmt 1 view .LVU32
  156 008a DB6C     		ldr	r3, [r3, #76]
  157 008c 03F00203 		and	r3, r3, #2
  158 0090 0293     		str	r3, [sp, #8]
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 159              		.loc 1 17 25 view .LVU33
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 159              		.loc 1 18 25 view .LVU33
  160 0092 029B     		ldr	r3, [sp, #8]
  161              	.LBE4:
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 162              		.loc 1 17 25 view .LVU34
-  17:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
- 163              		.loc 1 17 55 view .LVU35
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 162              		.loc 1 18 25 view .LVU34
+  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOC: __HAL_RCC_GPIOC_CLK_ENABLE(); break;
+ 163              		.loc 1 18 55 view .LVU35
  164 0094 DAE7     		b	.L7
  165              	.LVL9:
  166              	.L5:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 167              		.loc 1 18 25 view .LVU36
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 167              		.loc 1 19 25 view .LVU36
  168              	.LBB5:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 169              		.loc 1 18 25 view .LVU37
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 170              		.loc 1 18 25 view .LVU38
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 169              		.loc 1 19 25 view .LVU37
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 170              		.loc 1 19 25 view .LVU38
  171 0096 144B     		ldr	r3, .L13+4
  172 0098 DA6C     		ldr	r2, [r3, #76]
  173              	.LVL10:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 174              		.loc 1 18 25 is_stmt 0 view .LVU39
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 174              		.loc 1 19 25 is_stmt 0 view .LVU39
  175 009a 42F00402 		orr	r2, r2, #4
  176 009e DA64     		str	r2, [r3, #76]
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 177              		.loc 1 18 25 is_stmt 1 view .LVU40
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 177              		.loc 1 19 25 is_stmt 1 view .LVU40
  178 00a0 DB6C     		ldr	r3, [r3, #76]
  179 00a2 03F00403 		and	r3, r3, #4
+ARM GAS  /tmp/ccnUBO62.s 			page 5
+
+
  180 00a6 0393     		str	r3, [sp, #12]
-ARM GAS  /tmp/ccjWiugw.s 			page 5
-
-
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 181              		.loc 1 18 25 view .LVU41
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 181              		.loc 1 19 25 view .LVU41
  182 00a8 039B     		ldr	r3, [sp, #12]
  183              	.LBE5:
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 184              		.loc 1 18 25 view .LVU42
-  18:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
- 185              		.loc 1 18 55 view .LVU43
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 184              		.loc 1 19 25 view .LVU42
+  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOD: __HAL_RCC_GPIOD_CLK_ENABLE(); break;
+ 185              		.loc 1 19 55 view .LVU43
  186 00aa CFE7     		b	.L7
  187              	.LVL11:
  188              	.L2:
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 189              		.loc 1 19 25 view .LVU44
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 189              		.loc 1 20 25 view .LVU44
  190              	.LBB6:
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 191              		.loc 1 19 25 view .LVU45
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 192              		.loc 1 19 25 view .LVU46
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 191              		.loc 1 20 25 view .LVU45
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 192              		.loc 1 20 25 view .LVU46
  193 00ac 0E4B     		ldr	r3, .L13+4
  194 00ae DA6C     		ldr	r2, [r3, #76]
  195              	.LVL12:
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 196              		.loc 1 19 25 is_stmt 0 view .LVU47
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 196              		.loc 1 20 25 is_stmt 0 view .LVU47
  197 00b0 42F00802 		orr	r2, r2, #8
  198 00b4 DA64     		str	r2, [r3, #76]
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 199              		.loc 1 19 25 is_stmt 1 view .LVU48
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 199              		.loc 1 20 25 is_stmt 1 view .LVU48
  200 00b6 DB6C     		ldr	r3, [r3, #76]
  201 00b8 03F00803 		and	r3, r3, #8
  202 00bc 0493     		str	r3, [sp, #16]
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 203              		.loc 1 19 25 view .LVU49
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 203              		.loc 1 20 25 view .LVU49
  204 00be 049B     		ldr	r3, [sp, #16]
  205              	.LBE6:
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 206              		.loc 1 19 25 view .LVU50
-  19:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
- 207              		.loc 1 19 55 view .LVU51
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 206              		.loc 1 20 25 view .LVU50
+  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOE: __HAL_RCC_GPIOE_CLK_ENABLE(); break;
+ 207              		.loc 1 20 55 view .LVU51
  208 00c0 C4E7     		b	.L7
  209              	.LVL13:
  210              	.L8:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 211              		.loc 1 20 25 view .LVU52
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 211              		.loc 1 21 25 view .LVU52
  212              	.LBB7:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 213              		.loc 1 20 25 view .LVU53
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 214              		.loc 1 20 25 view .LVU54
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 213              		.loc 1 21 25 view .LVU53
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 214              		.loc 1 21 25 view .LVU54
  215 00c2 094B     		ldr	r3, .L13+4
  216 00c4 DA6C     		ldr	r2, [r3, #76]
  217              	.LVL14:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 218              		.loc 1 20 25 is_stmt 0 view .LVU55
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 218              		.loc 1 21 25 is_stmt 0 view .LVU55
  219 00c6 42F01002 		orr	r2, r2, #16
  220 00ca DA64     		str	r2, [r3, #76]
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 221              		.loc 1 20 25 is_stmt 1 view .LVU56
-ARM GAS  /tmp/ccjWiugw.s 			page 6
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ARM GAS  /tmp/ccnUBO62.s 			page 6
 
 
+ 221              		.loc 1 21 25 is_stmt 1 view .LVU56
  222 00cc DB6C     		ldr	r3, [r3, #76]
  223 00ce 03F01003 		and	r3, r3, #16
  224 00d2 0593     		str	r3, [sp, #20]
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 225              		.loc 1 20 25 view .LVU57
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 225              		.loc 1 21 25 view .LVU57
  226 00d4 059B     		ldr	r3, [sp, #20]
  227              	.LBE7:
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 228              		.loc 1 20 25 view .LVU58
-  20:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
- 229              		.loc 1 20 55 view .LVU59
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 228              		.loc 1 21 25 view .LVU58
+  21:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 		case (uint32_t)GPIOF: __HAL_RCC_GPIOF_CLK_ENABLE(); break;
+ 229              		.loc 1 21 55 view .LVU59
  230 00d6 B9E7     		b	.L7
  231              	.LVL15:
  232              	.L12:
-  26:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
- 233              		.loc 1 26 38 discriminator 1 view .LVU60
+  27:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** }
+ 233              		.loc 1 27 38 discriminator 1 view .LVU60
  234 00d8 0022     		movs	r2, #0
  235 00da 3146     		mov	r1, r6
  236 00dc 2046     		mov	r0, r4
  237 00de FFF7FEFF 		bl	HAL_GPIO_WritePin
  238              	.LVL16:
- 239              		.loc 1 27 1 is_stmt 0 view .LVU61
+ 239              		.loc 1 28 1 is_stmt 0 view .LVU61
  240 00e2 B9E7     		b	.L1
  241              	.L14:
  242              		.align	2
@@ -340,7 +341,6 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
  255              		.thumb_func
  257              	SystemClock_Config:
  258              	.LFB335:
-  28:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
   29:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** 
   30:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c **** void SystemClock_Config(void) {
  259              		.loc 1 30 31 is_stmt 1 view -0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
  270              		.loc 1 31 3 view .LVU63
  271              		.loc 1 31 22 is_stmt 0 view .LVU64
  272 0004 3822     		movs	r2, #56
-ARM GAS  /tmp/ccjWiugw.s 			page 7
+ARM GAS  /tmp/ccnUBO62.s 			page 7
 
 
  273 0006 0021     		movs	r1, #0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
   47:/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Src/init.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
  312              		.loc 1 47 3 is_stmt 1 view .LVU80
  313              		.loc 1 47 30 is_stmt 0 view .LVU81
-ARM GAS  /tmp/ccjWiugw.s 			page 8
+ARM GAS  /tmp/ccnUBO62.s 			page 8
 
 
  314 003a 1193     		str	r3, [sp, #68]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
  351 005c FFF7FEFF 		bl	HAL_RCC_ClockConfig
  352              	.LVL20:
  353              		.loc 1 64 6 discriminator 1 view .LVU101
-ARM GAS  /tmp/ccjWiugw.s 			page 9
+ARM GAS  /tmp/ccnUBO62.s 			page 9
 
 
  354 0060 28B9     		cbnz	r0, .L20
@@ -521,16 +521,16 @@ ARM GAS  /tmp/ccjWiugw.s 			page 1
  386              		.file 7 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h"
  387              		.file 8 "common/Inc/stm32xx_hal.h"
  388              		.file 9 "<built-in>"
-ARM GAS  /tmp/ccjWiugw.s 			page 10
+ARM GAS  /tmp/ccnUBO62.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 init.c
-     /tmp/ccjWiugw.s:21     .text.gpioPin_Init:00000000 $t
-     /tmp/ccjWiugw.s:27     .text.gpioPin_Init:00000000 gpioPin_Init
-     /tmp/ccjWiugw.s:244    .text.gpioPin_Init:000000e4 $d
-     /tmp/ccjWiugw.s:251    .text.SystemClock_Config:00000000 $t
-     /tmp/ccjWiugw.s:257    .text.SystemClock_Config:00000000 SystemClock_Config
+     /tmp/ccnUBO62.s:21     .text.gpioPin_Init:00000000 $t
+     /tmp/ccnUBO62.s:27     .text.gpioPin_Init:00000000 gpioPin_Init
+     /tmp/ccnUBO62.s:244    .text.gpioPin_Init:000000e4 $d
+     /tmp/ccnUBO62.s:251    .text.SystemClock_Config:00000000 $t
+     /tmp/ccnUBO62.s:257    .text.SystemClock_Config:00000000 SystemClock_Config
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init
