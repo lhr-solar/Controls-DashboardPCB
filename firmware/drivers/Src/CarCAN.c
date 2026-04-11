@@ -8,6 +8,8 @@
 
 /* ================= CarCAN (fdcan3) ================= */
 static uint32_t HAL_RCC_FDCAN_CLK_ENABLED = 0;
+FDCAN_HandleTypeDef *CarCAN = NULL;
+FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
 // Single MspInit handles both FDCAN instances — HAL only allows one definition project-wide
 void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *fdcanHandle)
@@ -47,8 +49,6 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *fdcanHandle)
     }
 }
 
-
-static FDCAN_HandleTypeDef *CarCAN = NULL;
 
 static FDCAN_TxHeaderTypeDef carCAN_tx_header = {
 	.Identifier = CAN_ID_DRIVER_INPUT_STATUS,
@@ -114,36 +114,27 @@ can_status_t CarCAN_Send(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
 		return CAN_ERR;
 	}
 
-	// Blink to indicate activity rather than holding ON
 	led_toggle(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN);
 	return CAN_OK;
 }
 
-// can_status_t CarCAN_Receive(uint32_t *id_out, uint8_t data[8],
-//							TickType_t delay_ticks) {
-//	static const uint32_t CL_ids[] = {CAN_ID_DRIVER_INPUT_STATUS,
-// CAN_ID_CONTROLS_STATUS}; 	TickType_t ticks = delay_ticks; 	can_status_t
-// result = can_fd_recv(CarCAN, CL_ids[0], &carCAN_rx_header, data, ticks);
-// if (result == CAN_OK) { 		*id_out = CL_ids[0]; 		return CAN_OK;
-//	}
-//	return CAN_EMPTY;
-// }
+can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
+	if(can_fd_recv(CarCAN, id, &carCAN_rx_header, data, delay_ticks) == CAN_ERR) {
+		led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);
+		return CAN_ERR;
+	}
 
-// void CarCAN_Unpack_CL_Payload(const uint8_t data[8],
-//							  CarCAN_BPS_Aggregate_t *agg) {
-//	uint8_t idx = data[0] & 0x1F;
-//	if (idx >= BPS_TAP_COUNT) {
-//		return;
-//	}
+	led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);
+	return CAN_OK;
+}
 
-//	// BPS_Voltage_Tap_Data: start bit 8, length 16, scale 0.001
-//	uint16_t raw_v = (uint16_t)data[1] | ((uint16_t)data[2] << 8);
-//	agg->taps[idx].voltage = raw_v * 0.001f;
 
-//	// BPS_Temperature_Tap_Data: start bit 24, length 32, scale 0.001
-//	int32_t raw_t = (int32_t)data[3] | ((int32_t)data[4] << 8) |
-//					((int32_t)data[5] << 16) | ((int32_t)data[6] << 24);
-//	agg->taps[idx].temperature = raw_t * 0.001f;
 
-//	agg->last_updated_idx = idx;
-//}
+can_status_t CL_SendDriverStatus(uint16_t bitmap, TickType_t delay) {
+    uint8_t tx_data[8] = {0};
+    
+    tx_data[0] = bitmap & 0xFF;         // bits 7-0
+    tx_data[1] = (bitmap >> 8) & 0xFF;  // bits 15-8
+
+    return CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, tx_data, delay);
+}

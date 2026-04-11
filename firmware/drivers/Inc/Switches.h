@@ -30,21 +30,21 @@ typedef enum {
  * 
  */
 typedef enum {
-    SW_IGN_OFF       = 0,
-    SW_IGN_ARR       = 1,
-    SW_IGN_MTR       = 2,
-    SW_CRUISE_ENABLE = 3,
-    SW_CRUISE_SET    = 4,
-    SW_FWD           = 5,
-    SW_NEUTRAL_GEAR  = 6,
-    SW_REV           = 7,
-    SW_HAZARD        = 8,
-    SW_LEFT_BLINKER  = 9,
-    SW_RIGHT_BLINKER = 10,
-    SW_HORN          = 11,
-    SW_PTT           = 12,
-    SW_REGEN_ENABLE  = 13,
-    SW_REGEN_ACTIVE  = 14,
+    SW_IGN_ARR       = 0,   // bit 0  - Ignition_Array
+    SW_IGN_MTR       = 1,   // bit 1  - Ignition_Motor
+    SW_IGN_OFF       = 2,   // bit 2  - Ignition_Off
+    SW_CRUISE_ENABLE = 3,   // bit 3  - Cruise_Enable
+    SW_CRUISE_SET    = 4,   // bit 4  - Cruise_Set
+    SW_FWD           = 5,   // bit 5  - Gear_Forward
+    SW_NEUTRAL_GEAR  = 6,   // bit 6  - Gear_Neutral
+    SW_REV           = 7,   // bit 7  - Gear_Reverse
+    SW_HAZARD        = 8,   // bit 8  - Hazard_Pressed
+    SW_HORN          = 9,   // bit 9  - Horn_Pressed
+    SW_LEFT_BLINKER  = 10,  // bit 10 - Blinker_Left
+    SW_RIGHT_BLINKER = 11,  // bit 11 - Blinker_Right
+    SW_PTT           = 12,  // bit 12 - PushToTalk_Pressed
+    SW_REGEN_ACTIVE  = 13,  // bit 13 - Regen_Activate
+    SW_REGEN_ENABLE  = 14,  // bit 14 - Regen_Enable
     SW_COUNT         = 15
 } switch_bit_t;
 

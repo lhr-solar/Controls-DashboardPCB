@@ -48,10 +48,15 @@
   * 
   */
 
+
+
+extern FDCAN_HandleTypeDef *CarCAN;
+extern FDCAN_RxHeaderTypeDef carCAN_rx_header;
+
 can_status_t CarCAN_Init(void);
 
 can_status_t CarCAN_Send(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
 
-//can_status_t CarCAN_Receive(uint32_t *id_out, uint8_t data[8], TickType_t delay_ticks);
+can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
 
-//void CarCAN_Unpack_CL_Payload(const uint8_t data[8], CarCAN_BPS_Aggregate_t *agg);
+can_status_t CL_SendDriverStatus(uint16_t bitmap, TickType_t delay);

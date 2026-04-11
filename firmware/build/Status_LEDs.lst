@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccmqeohy.s 			page 1
+ARM GAS  /tmp/ccd1iHig.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
   48 0016 2046     		mov	r0, r4
   49 0018 FFF7FEFF 		bl	gpioPin_Init
   50              	.LVL1:
-ARM GAS  /tmp/ccmqeohy.s 			page 2
+ARM GAS  /tmp/ccd1iHig.s 			page 2
 
 
    9:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Status_LEDs.c ****     gpioPin_Init(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, GPIO_MODE_OUTPUT_PP);
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
   97 006e 00BF     		.align	2
   98              	.L3:
   99 0070 00040048 		.word	1207960576
-ARM GAS  /tmp/ccmqeohy.s 			page 3
+ARM GAS  /tmp/ccd1iHig.s 			page 3
 
 
  100              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
   22:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Status_LEDs.c **** 
   23:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Status_LEDs.c **** void led_toggle(GPIO_TypeDef *port, uint16_t pin) {
  152              		.loc 1 23 51 is_stmt 1 view -0
-ARM GAS  /tmp/ccmqeohy.s 			page 4
+ARM GAS  /tmp/ccd1iHig.s 			page 4
 
 
  153              		.cfi_startproc
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
  202 0002 4FF48061 		mov	r1, #1024
  203 0006 4FF09040 		mov	r0, #1207959552
  204 000a FFF7FEFF 		bl	led_toggle
-ARM GAS  /tmp/ccmqeohy.s 			page 5
+ARM GAS  /tmp/ccd1iHig.s 			page 5
 
 
  205              	.LVL15:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
  250              	.L20:
  251 005a 00BF     		.align	2
  252              	.L19:
-ARM GAS  /tmp/ccmqeohy.s 			page 6
+ARM GAS  /tmp/ccd1iHig.s 			page 6
 
 
  253 005c 00080048 		.word	1207961600
@@ -358,33 +358,33 @@ ARM GAS  /tmp/ccmqeohy.s 			page 1
  301 0000 00       		.space	1
  302              		.text
  303              	.Letext0:
-ARM GAS  /tmp/ccmqeohy.s 			page 7
+ARM GAS  /tmp/ccd1iHig.s 			page 7
 
 
  304              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
  305              		.file 3 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
  306              		.file 4 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
  307              		.file 5 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
-ARM GAS  /tmp/ccmqeohy.s 			page 8
+ARM GAS  /tmp/ccd1iHig.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 Status_LEDs.c
-     /tmp/ccmqeohy.s:21     .text.led_gpio_init:00000000 $t
-     /tmp/ccmqeohy.s:27     .text.led_gpio_init:00000000 led_gpio_init
-     /tmp/ccmqeohy.s:99     .text.led_gpio_init:00000070 $d
-     /tmp/ccmqeohy.s:104    .text.led_set:00000000 $t
-     /tmp/ccmqeohy.s:110    .text.led_set:00000000 led_set
-     /tmp/ccmqeohy.s:143    .text.led_toggle:00000000 $t
-     /tmp/ccmqeohy.s:149    .text.led_toggle:00000000 led_toggle
-     /tmp/ccmqeohy.s:182    .text.flash_them:00000000 $t
-     /tmp/ccmqeohy.s:188    .text.flash_them:00000000 flash_them
-     /tmp/ccmqeohy.s:253    .text.flash_them:0000005c $d
-     /tmp/ccmqeohy.s:259    .text.updateBPS_strobe:00000000 $t
-     /tmp/ccmqeohy.s:265    .text.updateBPS_strobe:00000000 updateBPS_strobe
-     /tmp/ccmqeohy.s:293    .text.updateBPS_strobe:00000014 $d
-     /tmp/ccmqeohy.s:300    .bss.bps_strobe:00000000 bps_strobe
-     /tmp/ccmqeohy.s:301    .bss.bps_strobe:00000000 $d
+     /tmp/ccd1iHig.s:21     .text.led_gpio_init:00000000 $t
+     /tmp/ccd1iHig.s:27     .text.led_gpio_init:00000000 led_gpio_init
+     /tmp/ccd1iHig.s:99     .text.led_gpio_init:00000070 $d
+     /tmp/ccd1iHig.s:104    .text.led_set:00000000 $t
+     /tmp/ccd1iHig.s:110    .text.led_set:00000000 led_set
+     /tmp/ccd1iHig.s:143    .text.led_toggle:00000000 $t
+     /tmp/ccd1iHig.s:149    .text.led_toggle:00000000 led_toggle
+     /tmp/ccd1iHig.s:182    .text.flash_them:00000000 $t
+     /tmp/ccd1iHig.s:188    .text.flash_them:00000000 flash_them
+     /tmp/ccd1iHig.s:253    .text.flash_them:0000005c $d
+     /tmp/ccd1iHig.s:259    .text.updateBPS_strobe:00000000 $t
+     /tmp/ccd1iHig.s:265    .text.updateBPS_strobe:00000000 updateBPS_strobe
+     /tmp/ccd1iHig.s:293    .text.updateBPS_strobe:00000014 $d
+     /tmp/ccd1iHig.s:300    .bss.bps_strobe:00000000 bps_strobe
+     /tmp/ccd1iHig.s:301    .bss.bps_strobe:00000000 $d
 
 UNDEFINED SYMBOLS
 gpioPin_Init

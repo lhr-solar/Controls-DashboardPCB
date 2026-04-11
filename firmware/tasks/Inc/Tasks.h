@@ -7,7 +7,8 @@
 #include "event_groups.h"
 
 
-#define READ_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
+#define HEARTBEAT_DELAY_TICKS 				pdMS_TO_TICKS(250)
+#define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(250)
 #define READ_CONTROLS_CAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
 #define READ_WRITE_CARCAN_TASK_DELAY_TICKS 	pdMS_TO_TICKS(250)
 
@@ -16,14 +17,16 @@
 #define INIT_TASK_PRIORITY                  (tskIDLE_PRIORITY+1)
 #define READ_CAR_CAN_PRIORITY               (tskIDLE_PRIORITY+3) //BPS fault detection
 #define READ_CONTROLS_CAN_PRIORITY          (tskIDLE_PRIORITY+4) //want to run immidetly after CAN ISR
-#define POLLING_WRITE_CAN_PRIORITY       (tskIDLE_PRIORITY+2) //general IO updates, BPS fault detection is more important
+#define POLLING_WRITE_CAN_PRIORITY       	(tskIDLE_PRIORITY+2) //general IO updates, BPS fault detection is more important
+#define HEARTBEAT_PROIRITY       			(tskIDLE_PRIORITY+2) //heartbeat
 
 /* ------| Task Stack Sizes |------ */
 //setting stack sizes for each stack to the minimum (128 words)
 #define INIT_TASK_STACK_SIZE                configMINIMAL_STACK_SIZE
 #define READ_CAR_CAN_STACK_SIZE             configMINIMAL_STACK_SIZE
 #define READ_CONTROLS_CAN_STACK_SIZE        configMINIMAL_STACK_SIZE
-#define POLLING_WRITE_CAN_STACK_SIZE     configMINIMAL_STACK_SIZE
+#define POLLING_WRITE_CAN_STACK_SIZE     	configMINIMAL_STACK_SIZE
+#define HEARTBEAT_STACK_SIZE     			configMINIMAL_STACK_SIZE
 
 /* ------| TCBs |------ */
 // Task Control Blocks for each task
@@ -31,9 +34,11 @@ extern StaticTask_t INIT_TASK_TCB;
 extern StaticTask_t READ_CAR_CAN_TCB;
 extern StaticTask_t READ_CONTROLS_CAN_TCB;
 extern StaticTask_t POLLING_WRITE_CAN_TCB;
+extern StaticTask_t HEARTBEAT_TCB;
 
-/* ------| Task Functions |------ */
+/* ------| Tasks |------ */
 
+void HeartBeat(void *argument);
 
 void InitTasks(void *argument);
 

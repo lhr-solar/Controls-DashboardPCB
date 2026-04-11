@@ -205,7 +205,7 @@ void HAL_GPIO_EXTI_IgnitionSW_Callback(uint16_t GPIO_Pin) {
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == NEUTRAL_GEAR_PIN) HAL_GPIO_EXTI_GearSW_Callback(GPIO_Pin);
-    else if (GPIO_Pin == IGN_OFF_PIN) HAL_GPIO_EXTI_IgnitionSW_Callback(GPIO_Pin);
+    else if (GPIO_Pin == IGN_ARR_PIN) HAL_GPIO_EXTI_IgnitionSW_Callback(GPIO_Pin);
 }
 
 /**
@@ -219,5 +219,5 @@ void EXTI0_IRQHandler(void) {
  * @brief  EXTI line 2 interrupt handler. Routed to IGN_OFF_PIN.
  */
 void EXTI2_IRQHandler(void) {
-    HAL_GPIO_EXTI_IRQHandler(IGN_OFF_PIN);
+    HAL_GPIO_EXTI_IRQHandler(IGN_ARR_PIN);
 }

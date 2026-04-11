@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc32q1pv.s 			page 1
+ARM GAS  /tmp/ccYwU7cq.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
   27:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(IGN_MTR_PORT,        IGN_MTR_PIN,        GPIO_MODE_INPUT);
   28:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(IGN_ARR_PORT,        IGN_ARR_PIN,        GPIO_MODE_INPUT);
   29:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(PTT_PORT,            PTT_PIN,            GPIO_MODE_INPUT);
-ARM GAS  /tmp/cc32q1pv.s 			page 2
+ARM GAS  /tmp/ccYwU7cq.s 			page 2
 
 
   30:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN,   GPIO_MODE_INPUT);
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
   41              		.cfi_offset 3, -8
   42              		.cfi_offset 14, -4
   72:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	gpioPin_Init(port, pin, GPIO_MODE_IT_RISING_FALLING);
-ARM GAS  /tmp/cc32q1pv.s 			page 3
+ARM GAS  /tmp/ccYwU7cq.s 			page 3
 
 
   43              		.loc 1 72 2 is_stmt 1 view .LVU4
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
   80:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     uint32_t pin_index = __builtin_ctz(pin);
   91              		.loc 1 80 5 view .LVU13
   92              		.loc 1 80 26 is_stmt 0 view .LVU14
-ARM GAS  /tmp/cc32q1pv.s 			page 4
+ARM GAS  /tmp/ccYwU7cq.s 			page 4
 
 
   93 000c 94FAA4F4 		rbit	r4, r4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  131              		.loc 1 85 14 view .LVU27
  132 0034 F1E7     		b	.L10
  133              	.LVL13:
-ARM GAS  /tmp/cc32q1pv.s 			page 5
+ARM GAS  /tmp/ccYwU7cq.s 			page 5
 
 
  134              	.L11:
@@ -296,26 +296,26 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  175 0004 00F28880 		bhi	.L34
  176 0008 DFE800F0 		tbb	[pc, r0]
  177              	.L19:
- 178 000c 08       		.byte	(.L33-.L19)/2
- 179 000d 11       		.byte	(.L32-.L19)/2
-ARM GAS  /tmp/cc32q1pv.s 			page 6
+ 178 000c 11       		.byte	(.L33-.L19)/2
+ 179 000d 19       		.byte	(.L32-.L19)/2
+ARM GAS  /tmp/ccYwU7cq.s 			page 6
 
 
- 180 000e 19       		.byte	(.L31-.L19)/2
+ 180 000e 08       		.byte	(.L31-.L19)/2
  181 000f 3B       		.byte	(.L30-.L19)/2
  182 0010 43       		.byte	(.L29-.L19)/2
  183 0011 22       		.byte	(.L28-.L19)/2
  184 0012 2B       		.byte	(.L27-.L19)/2
  185 0013 33       		.byte	(.L26-.L19)/2
  186 0014 4C       		.byte	(.L25-.L19)/2
- 187 0015 55       		.byte	(.L24-.L19)/2
- 188 0016 5D       		.byte	(.L23-.L19)/2
- 189 0017 65       		.byte	(.L22-.L19)/2
+ 187 0015 65       		.byte	(.L24-.L19)/2
+ 188 0016 55       		.byte	(.L23-.L19)/2
+ 189 0017 5D       		.byte	(.L22-.L19)/2
  190 0018 6D       		.byte	(.L21-.L19)/2
- 191 0019 75       		.byte	(.L20-.L19)/2
- 192 001a 7D       		.byte	(.L18-.L19)/2
+ 191 0019 7D       		.byte	(.L20-.L19)/2
+ 192 001a 75       		.byte	(.L18-.L19)/2
  193 001b 00       		.p2align 1
- 194              	.L33:
+ 194              	.L31:
  103:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_IGN_OFF:       return HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN)        == GPIO_P
  195              		.loc 1 103 26 view .LVU34
  196              		.loc 1 103 33 is_stmt 0 view .LVU35
@@ -350,7 +350,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  208              		.loc 1 120 1 view .LVU38
  209 002c 08BD     		pop	{r3, pc}
  210              	.LVL19:
- 211              	.L32:
+ 211              	.L33:
  104:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_P
  212              		.loc 1 104 26 is_stmt 1 view .LVU39
  104:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_P
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  214 002e 0121     		movs	r1, #1
  215 0030 3A48     		ldr	r0, .L36
  216              	.LVL20:
-ARM GAS  /tmp/cc32q1pv.s 			page 7
+ARM GAS  /tmp/ccYwU7cq.s 			page 7
 
 
  104:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_P
@@ -374,7 +374,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  224              		.loc 1 104 119 view .LVU43
  225 003c F6E7     		b	.L17
  226              	.LVL22:
- 227              	.L31:
+ 227              	.L32:
  105:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_FWD:           return HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_P
  228              		.loc 1 105 26 is_stmt 1 view .LVU44
  105:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_FWD:           return HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_P
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  258              	.LVL28:
  259              	.L27:
  107:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_REV:           return HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN)         == GPIO_P
-ARM GAS  /tmp/cc32q1pv.s 			page 8
+ARM GAS  /tmp/ccYwU7cq.s 			page 8
 
 
  260              		.loc 1 107 26 is_stmt 1 view .LVU54
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  301 008a 0138     		subs	r0, r0, #1
  302 008c 18BF     		it	ne
  303 008e 0120     		movne	r0, #1
-ARM GAS  /tmp/cc32q1pv.s 			page 9
+ARM GAS  /tmp/ccYwU7cq.s 			page 9
 
 
  109:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_CRUISE_SET:    return HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN)     == GPIO_P
@@ -527,7 +527,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  336              		.loc 1 111 119 view .LVU78
  337 00b4 BAE7     		b	.L17
  338              	.LVL43:
- 339              	.L24:
+ 339              	.L23:
  112:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_P
  340              		.loc 1 112 26 is_stmt 1 view .LVU79
  112:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_P
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  112:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_P
  345              		.loc 1 112 33 view .LVU81
  346 00ba FFF7FEFF 		bl	HAL_GPIO_ReadPin
-ARM GAS  /tmp/cc32q1pv.s 			page 10
+ARM GAS  /tmp/ccYwU7cq.s 			page 10
 
 
  347              	.LVL45:
@@ -551,7 +551,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  352              		.loc 1 112 119 view .LVU83
  353 00c4 B2E7     		b	.L17
  354              	.LVL46:
- 355              	.L23:
+ 355              	.L22:
  113:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_HORN:          return HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_P
  356              		.loc 1 113 26 is_stmt 1 view .LVU84
  113:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_HORN:          return HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_P
@@ -572,7 +572,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  368              		.loc 1 113 119 view .LVU88
  369 00d4 AAE7     		b	.L17
  370              	.LVL49:
- 371              	.L22:
+ 371              	.L24:
  114:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_P
  372              		.loc 1 114 26 is_stmt 1 view .LVU89
  114:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_P
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  388              		.loc 1 115 26 is_stmt 1 view .LVU94
  115:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_P
  389              		.loc 1 115 33 is_stmt 0 view .LVU95
-ARM GAS  /tmp/cc32q1pv.s 			page 11
+ARM GAS  /tmp/ccYwU7cq.s 			page 11
 
 
  390 00e6 0421     		movs	r1, #4
@@ -617,7 +617,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  400              		.loc 1 115 119 view .LVU98
  401 00f4 9AE7     		b	.L17
  402              	.LVL55:
- 403              	.L20:
+ 403              	.L18:
  116:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_P
  404              		.loc 1 116 26 is_stmt 1 view .LVU99
  116:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_P
@@ -638,7 +638,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  416              		.loc 1 116 119 view .LVU103
  417 0104 92E7     		b	.L17
  418              	.LVL58:
- 419              	.L18:
+ 419              	.L20:
  117:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		default:               return SWITCH_OFF;
  420              		.loc 1 117 26 is_stmt 1 view .LVU104
  117:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		default:               return SWITCH_OFF;
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  117:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 		default:               return SWITCH_OFF;
  432              		.loc 1 117 119 view .LVU108
  433 0116 89E7     		b	.L17
-ARM GAS  /tmp/cc32q1pv.s 			page 12
+ARM GAS  /tmp/ccYwU7cq.s 			page 12
 
 
  434              	.LVL61:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  127:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
  128:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	portENTER_CRITICAL();
  129:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	if(state == SWITCH_ON) switch_bitmap |= mask;
-ARM GAS  /tmp/cc32q1pv.s 			page 13
+ARM GAS  /tmp/ccYwU7cq.s 			page 13
 
 
  130:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	else switch_bitmap &= ~(mask);
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  519 002e 23EA0503 		bic	r3, r3, r5
  520 0032 1360     		str	r3, [r2]
  521 0034 F4E7     		b	.L42
-ARM GAS  /tmp/cc32q1pv.s 			page 14
+ARM GAS  /tmp/ccYwU7cq.s 			page 14
 
 
  522              	.L45:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  570 0024 FFF7FEFF 		bl	gpioPin_Init
  571              	.LVL71:
   28:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(PTT_PORT,            PTT_PIN,            GPIO_MODE_INPUT);
-ARM GAS  /tmp/cc32q1pv.s 			page 15
+ARM GAS  /tmp/ccYwU7cq.s 			page 15
 
 
  572              		.loc 1 28 5 view .LVU135
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  619 0078 2046     		mov	r0, r4
  620 007a FFF7FEFF 		bl	gpioPin_Init
  621              	.LVL79:
-ARM GAS  /tmp/cc32q1pv.s 			page 16
+ARM GAS  /tmp/ccYwU7cq.s 			page 16
 
 
   36:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     gpioPin_Init(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN,   GPIO_MODE_INPUT);
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  668 00d2 2046     		mov	r0, r4
  669 00d4 FFF7FEFF 		bl	xTimerCreateStatic
  670              	.LVL86:
-ARM GAS  /tmp/cc32q1pv.s 			page 17
+ARM GAS  /tmp/ccYwU7cq.s 			page 17
 
 
   46:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****         "EXTI Callback Delay",
@@ -985,13 +985,13 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  688 00f2 1860     		str	r0, [r3]
   65:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	switch_bitmap_setBit(SW_NEUTRAL_GEAR, switch_get_state(SW_NEUTRAL_GEAR));
  689              		.loc 1 65 2 is_stmt 1 view .LVU155
- 690 00f4 0020     		movs	r0, #0
+ 690 00f4 0220     		movs	r0, #2
  691 00f6 FFF7FEFF 		bl	switch_get_state
  692              	.LVL88:
  693 00fa 0146     		mov	r1, r0
   65:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	switch_bitmap_setBit(SW_NEUTRAL_GEAR, switch_get_state(SW_NEUTRAL_GEAR));
  694              		.loc 1 65 2 is_stmt 0 discriminator 1 view .LVU156
- 695 00fc 0020     		movs	r0, #0
+ 695 00fc 0220     		movs	r0, #2
  696 00fe FFF7FEFF 		bl	switch_bitmap_setBit
  697              	.LVL89:
   66:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  716 0114 00040048 		.word	1207960576
  717 0118 000C0048 		.word	1207962624
  718 011c 00000000 		.word	.LC0
-ARM GAS  /tmp/cc32q1pv.s 			page 18
+ARM GAS  /tmp/ccYwU7cq.s 			page 18
 
 
  719 0120 00000000 		.word	xTimerBuffer_GearSW
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  173:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** static void vTimerCallback_IgnitionSW(TimerHandle_t xTimer) {
  737              		.loc 1 173 61 is_stmt 1 view -0
  738              		.cfi_startproc
-ARM GAS  /tmp/cc32q1pv.s 			page 19
+ARM GAS  /tmp/ccYwU7cq.s 			page 19
 
 
  739              		@ args = 0, pretend = 0, frame = 0
@@ -1091,34 +1091,34 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  746              		.cfi_offset 14, -4
  174:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	switch_bitmap_setBit(SW_IGN_OFF, switch_get_state(SW_IGN_OFF));
  747              		.loc 1 174 2 is_stmt 1 view .LVU162
- 748 0002 0020     		movs	r0, #0
+ 748 0002 0220     		movs	r0, #2
  749              	.LVL93:
  750              		.loc 1 174 2 is_stmt 0 view .LVU163
  751 0004 FFF7FEFF 		bl	switch_get_state
  752              	.LVL94:
  753 0008 0146     		mov	r1, r0
  754              		.loc 1 174 2 discriminator 1 view .LVU164
- 755 000a 0020     		movs	r0, #0
+ 755 000a 0220     		movs	r0, #2
  756 000c FFF7FEFF 		bl	switch_bitmap_setBit
  757              	.LVL95:
  175:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	switch_bitmap_setBit(SW_IGN_ARR, switch_get_state(SW_IGN_ARR));
  758              		.loc 1 175 2 is_stmt 1 view .LVU165
- 759 0010 0120     		movs	r0, #1
+ 759 0010 0020     		movs	r0, #0
  760 0012 FFF7FEFF 		bl	switch_get_state
  761              	.LVL96:
  762 0016 0146     		mov	r1, r0
  763              		.loc 1 175 2 is_stmt 0 discriminator 1 view .LVU166
- 764 0018 0120     		movs	r0, #1
+ 764 0018 0020     		movs	r0, #0
  765 001a FFF7FEFF 		bl	switch_bitmap_setBit
  766              	.LVL97:
  176:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 	switch_bitmap_setBit(SW_IGN_MTR, switch_get_state(SW_IGN_MTR));
  767              		.loc 1 176 2 is_stmt 1 view .LVU167
- 768 001e 0220     		movs	r0, #2
+ 768 001e 0120     		movs	r0, #1
  769 0020 FFF7FEFF 		bl	switch_get_state
  770              	.LVL98:
  771 0024 0146     		mov	r1, r0
  772              		.loc 1 176 2 is_stmt 0 discriminator 1 view .LVU168
- 773 0026 0220     		movs	r0, #2
+ 773 0026 0120     		movs	r0, #1
  774 0028 FFF7FEFF 		bl	switch_bitmap_setBit
  775              	.LVL99:
  177:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  156:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     switch_bitmap_setBit(SW_FWD,          switch_get_state(SW_FWD));
  790              		.loc 1 156 57 is_stmt 1 view -0
  791              		.cfi_startproc
-ARM GAS  /tmp/cc32q1pv.s 			page 20
+ARM GAS  /tmp/ccYwU7cq.s 			page 20
 
 
  792              		@ args = 0, pretend = 0, frame = 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  838              		.thumb
  839              		.thumb_func
  841              	switch_read_all_inputs:
-ARM GAS  /tmp/cc32q1pv.s 			page 21
+ARM GAS  /tmp/ccYwU7cq.s 			page 21
 
 
  842              	.LFB337:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  885 001e 1868     		ldr	r0, [r3]
  886 0020 38BD     		pop	{r3, r4, r5, pc}
  887              	.LVL113:
-ARM GAS  /tmp/cc32q1pv.s 			page 22
+ARM GAS  /tmp/ccYwU7cq.s 			page 22
 
 
  888              	.L59:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  935              		.cfi_endproc
  936              	.LFE340:
  938              		.section	.text.switch_bitmap_read,"ax",%progbits
-ARM GAS  /tmp/cc32q1pv.s 			page 23
+ARM GAS  /tmp/ccYwU7cq.s 			page 23
 
 
  939              		.align	1
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  985 0002 85B0     		sub	sp, sp, #20
  986              	.LCFI14:
  987              		.cfi_def_cfa_offset 32
-ARM GAS  /tmp/cc32q1pv.s 			page 24
+ARM GAS  /tmp/ccYwU7cq.s 			page 24
 
 
  187:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     UNUSED(GPIO_Pin);
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  1037              	.L71:
  1038 003a 00BF     		.align	2
  1039              	.L70:
-ARM GAS  /tmp/cc32q1pv.s 			page 25
+ARM GAS  /tmp/ccYwU7cq.s 			page 25
 
 
  1040 003c 00000000 		.word	xDebounceTimer_GearSW
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  1085 001a FFF7FEFF 		bl	xTimerGenericCommandFromISR
  1086              	.LVL123:
  203:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-ARM GAS  /tmp/cc32q1pv.s 			page 26
+ARM GAS  /tmp/ccYwU7cq.s 			page 26
 
 
  1087              		.loc 1 203 5 is_stmt 1 view .LVU229
@@ -1553,221 +1553,204 @@ ARM GAS  /tmp/cc32q1pv.s 			page 1
  1135              		.cfi_startproc
  1136              		@ args = 0, pretend = 0, frame = 0
  1137              		@ frame_needed = 0, uses_anonymous_args = 0
- 1138              		.loc 1 206 48 is_stmt 0 view .LVU240
- 1139 0000 08B5     		push	{r3, lr}
- 1140              	.LCFI19:
- 1141              		.cfi_def_cfa_offset 8
- 1142              		.cfi_offset 3, -8
-ARM GAS  /tmp/cc32q1pv.s 			page 27
-
-
- 1143              		.cfi_offset 14, -4
  207:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     if (GPIO_Pin == NEUTRAL_GEAR_PIN) HAL_GPIO_EXTI_GearSW_Callback(GPIO_Pin);
- 1144              		.loc 1 207 5 is_stmt 1 view .LVU241
- 1145              		.loc 1 207 8 is_stmt 0 view .LVU242
- 1146 0002 0128     		cmp	r0, #1
- 1147 0004 02D0     		beq	.L81
- 208:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     else if (GPIO_Pin == IGN_OFF_PIN) HAL_GPIO_EXTI_IgnitionSW_Callback(GPIO_Pin);
- 1148              		.loc 1 208 10 is_stmt 1 view .LVU243
- 1149              		.loc 1 208 13 is_stmt 0 view .LVU244
- 1150 0006 0428     		cmp	r0, #4
- 1151 0008 03D0     		beq	.L82
+ 1138              		.loc 1 207 5 view .LVU240
+ 1139              		.loc 1 207 8 is_stmt 0 view .LVU241
+ 1140 0000 0128     		cmp	r0, #1
+ 1141 0002 00D0     		beq	.L83
+ARM GAS  /tmp/ccYwU7cq.s 			page 27
+
+
+ 1142 0004 7047     		bx	lr
+ 1143              	.L83:
+ 206:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     if (GPIO_Pin == NEUTRAL_GEAR_PIN) HAL_GPIO_EXTI_GearSW_Callback(GPIO_Pin);
+ 1144              		.loc 1 206 48 view .LVU242
+ 1145 0006 08B5     		push	{r3, lr}
+ 1146              	.LCFI19:
+ 1147              		.cfi_def_cfa_offset 8
+ 1148              		.cfi_offset 3, -8
+ 1149              		.cfi_offset 14, -4
+ 1150              		.loc 1 207 39 is_stmt 1 discriminator 1 view .LVU243
+ 1151 0008 FFF7FEFF 		bl	HAL_GPIO_EXTI_GearSW_Callback
  1152              	.LVL125:
- 1153              	.L77:
+ 208:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     else if (GPIO_Pin == IGN_ARR_PIN) HAL_GPIO_EXTI_IgnitionSW_Callback(GPIO_Pin);
  209:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** }
- 1154              		.loc 1 209 1 view .LVU245
- 1155 000a 08BD     		pop	{r3, pc}
- 1156              	.LVL126:
- 1157              	.L81:
- 207:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     if (GPIO_Pin == NEUTRAL_GEAR_PIN) HAL_GPIO_EXTI_GearSW_Callback(GPIO_Pin);
- 1158              		.loc 1 207 39 is_stmt 1 discriminator 1 view .LVU246
- 1159 000c FFF7FEFF 		bl	HAL_GPIO_EXTI_GearSW_Callback
- 1160              	.LVL127:
- 207:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     if (GPIO_Pin == NEUTRAL_GEAR_PIN) HAL_GPIO_EXTI_GearSW_Callback(GPIO_Pin);
- 1161              		.loc 1 207 39 is_stmt 0 discriminator 1 view .LVU247
- 1162 0010 FBE7     		b	.L77
- 1163              	.LVL128:
- 1164              	.L82:
- 208:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     else if (GPIO_Pin == IGN_OFF_PIN) HAL_GPIO_EXTI_IgnitionSW_Callback(GPIO_Pin);
- 1165              		.loc 1 208 39 is_stmt 1 discriminator 1 view .LVU248
- 1166 0012 FFF7FEFF 		bl	HAL_GPIO_EXTI_IgnitionSW_Callback
- 1167              	.LVL129:
- 1168              		.loc 1 209 1 is_stmt 0 view .LVU249
- 1169 0016 F8E7     		b	.L77
- 1170              		.cfi_endproc
- 1171              	.LFE346:
- 1173              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
- 1174              		.align	1
- 1175              		.global	EXTI0_IRQHandler
- 1176              		.syntax unified
- 1177              		.thumb
- 1178              		.thumb_func
- 1180              	EXTI0_IRQHandler:
- 1181              	.LFB347:
+ 1153              		.loc 1 209 1 is_stmt 0 view .LVU244
+ 1154 000c 08BD     		pop	{r3, pc}
+ 1155              		.cfi_endproc
+ 1156              	.LFE346:
+ 1158              		.section	.text.EXTI0_IRQHandler,"ax",%progbits
+ 1159              		.align	1
+ 1160              		.global	EXTI0_IRQHandler
+ 1161              		.syntax unified
+ 1162              		.thumb
+ 1163              		.thumb_func
+ 1165              	EXTI0_IRQHandler:
+ 1166              	.LFB347:
  210:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
  211:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** /**
  212:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****  * @brief  EXTI line 0 interrupt handler. Routed to NEUTRAL_GEAR_PIN.
  213:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****  */
  214:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** void EXTI0_IRQHandler(void) {
- 1182              		.loc 1 214 29 is_stmt 1 view -0
- 1183              		.cfi_startproc
- 1184              		@ args = 0, pretend = 0, frame = 0
- 1185              		@ frame_needed = 0, uses_anonymous_args = 0
- 1186 0000 08B5     		push	{r3, lr}
- 1187              	.LCFI20:
- 1188              		.cfi_def_cfa_offset 8
- 1189              		.cfi_offset 3, -8
- 1190              		.cfi_offset 14, -4
-ARM GAS  /tmp/cc32q1pv.s 			page 28
-
-
+ 1167              		.loc 1 214 29 is_stmt 1 view -0
+ 1168              		.cfi_startproc
+ 1169              		@ args = 0, pretend = 0, frame = 0
+ 1170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1171 0000 08B5     		push	{r3, lr}
+ 1172              	.LCFI20:
+ 1173              		.cfi_def_cfa_offset 8
+ 1174              		.cfi_offset 3, -8
+ 1175              		.cfi_offset 14, -4
  215:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     HAL_GPIO_EXTI_IRQHandler(NEUTRAL_GEAR_PIN);
- 1191              		.loc 1 215 5 view .LVU251
- 1192 0002 0120     		movs	r0, #1
- 1193 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
- 1194              	.LVL130:
+ 1176              		.loc 1 215 5 view .LVU246
+ 1177 0002 0120     		movs	r0, #1
+ 1178 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 1179              	.LVL126:
  216:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** }
- 1195              		.loc 1 216 1 is_stmt 0 view .LVU252
- 1196 0008 08BD     		pop	{r3, pc}
- 1197              		.cfi_endproc
- 1198              	.LFE347:
- 1200              		.section	.text.EXTI2_IRQHandler,"ax",%progbits
- 1201              		.align	1
- 1202              		.global	EXTI2_IRQHandler
- 1203              		.syntax unified
- 1204              		.thumb
- 1205              		.thumb_func
- 1207              	EXTI2_IRQHandler:
- 1208              	.LFB348:
+ 1180              		.loc 1 216 1 is_stmt 0 view .LVU247
+ 1181 0008 08BD     		pop	{r3, pc}
+ 1182              		.cfi_endproc
+ 1183              	.LFE347:
+ 1185              		.section	.text.EXTI2_IRQHandler,"ax",%progbits
+ 1186              		.align	1
+ 1187              		.global	EXTI2_IRQHandler
+ 1188              		.syntax unified
+ 1189              		.thumb
+ 1190              		.thumb_func
+ 1192              	EXTI2_IRQHandler:
+ARM GAS  /tmp/ccYwU7cq.s 			page 28
+
+
+ 1193              	.LFB348:
  217:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** 
  218:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** /**
  219:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****  * @brief  EXTI line 2 interrupt handler. Routed to IGN_OFF_PIN.
  220:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****  */
  221:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** void EXTI2_IRQHandler(void) {
- 1209              		.loc 1 221 29 is_stmt 1 view -0
- 1210              		.cfi_startproc
- 1211              		@ args = 0, pretend = 0, frame = 0
- 1212              		@ frame_needed = 0, uses_anonymous_args = 0
- 1213 0000 08B5     		push	{r3, lr}
- 1214              	.LCFI21:
- 1215              		.cfi_def_cfa_offset 8
- 1216              		.cfi_offset 3, -8
- 1217              		.cfi_offset 14, -4
- 222:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     HAL_GPIO_EXTI_IRQHandler(IGN_OFF_PIN);
- 1218              		.loc 1 222 5 view .LVU254
- 1219 0002 0420     		movs	r0, #4
- 1220 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
- 1221              	.LVL131:
+ 1194              		.loc 1 221 29 is_stmt 1 view -0
+ 1195              		.cfi_startproc
+ 1196              		@ args = 0, pretend = 0, frame = 0
+ 1197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1198 0000 08B5     		push	{r3, lr}
+ 1199              	.LCFI21:
+ 1200              		.cfi_def_cfa_offset 8
+ 1201              		.cfi_offset 3, -8
+ 1202              		.cfi_offset 14, -4
+ 222:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c ****     HAL_GPIO_EXTI_IRQHandler(IGN_ARR_PIN);
+ 1203              		.loc 1 222 5 view .LVU249
+ 1204 0002 0120     		movs	r0, #1
+ 1205 0004 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 1206              	.LVL127:
  223:/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Src/Switches.c **** }...
- 1222              		.loc 1 223 1 is_stmt 0 view .LVU255
- 1223 0008 08BD     		pop	{r3, pc}
- 1224              		.cfi_endproc
- 1225              	.LFE348:
- 1227              		.section	.bss.switch_bitmap,"aw",%nobits
- 1228              		.align	2
- 1231              	switch_bitmap:
- 1232 0000 00000000 		.space	4
- 1233              		.section	.bss.xDebounceTimer_IgnitionSW,"aw",%nobits
- 1234              		.align	2
- 1237              	xDebounceTimer_IgnitionSW:
- 1238 0000 00000000 		.space	4
- 1239              		.section	.bss.xTimerBuffer_IgnitionSW,"aw",%nobits
- 1240              		.align	2
- 1243              	xTimerBuffer_IgnitionSW:
- 1244 0000 00000000 		.space	40
- 1244      00000000 
- 1244      00000000 
- 1244      00000000 
-ARM GAS  /tmp/cc32q1pv.s 			page 29
+ 1207              		.loc 1 223 1 is_stmt 0 view .LVU250
+ 1208 0008 08BD     		pop	{r3, pc}
+ 1209              		.cfi_endproc
+ 1210              	.LFE348:
+ 1212              		.section	.bss.switch_bitmap,"aw",%nobits
+ 1213              		.align	2
+ 1216              	switch_bitmap:
+ 1217 0000 00000000 		.space	4
+ 1218              		.section	.bss.xDebounceTimer_IgnitionSW,"aw",%nobits
+ 1219              		.align	2
+ 1222              	xDebounceTimer_IgnitionSW:
+ 1223 0000 00000000 		.space	4
+ 1224              		.section	.bss.xTimerBuffer_IgnitionSW,"aw",%nobits
+ 1225              		.align	2
+ 1228              	xTimerBuffer_IgnitionSW:
+ 1229 0000 00000000 		.space	40
+ 1229      00000000 
+ 1229      00000000 
+ 1229      00000000 
+ 1229      00000000 
+ 1230              		.section	.bss.xDebounceTimer_GearSW,"aw",%nobits
+ 1231              		.align	2
+ 1234              	xDebounceTimer_GearSW:
+ 1235 0000 00000000 		.space	4
+ 1236              		.section	.bss.xTimerBuffer_GearSW,"aw",%nobits
+ 1237              		.align	2
+ 1240              	xTimerBuffer_GearSW:
+ 1241 0000 00000000 		.space	40
+ 1241      00000000 
+ 1241      00000000 
+ 1241      00000000 
+ 1241      00000000 
+ 1242              		.text
+ 1243              	.Letext0:
+ 1244              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
+ 1245              		.file 3 "middleware/FreeRTOS-Kernel/include/projdefs.h"
+ARM GAS  /tmp/ccYwU7cq.s 			page 29
 
 
- 1244      00000000 
- 1245              		.section	.bss.xDebounceTimer_GearSW,"aw",%nobits
- 1246              		.align	2
- 1249              	xDebounceTimer_GearSW:
- 1250 0000 00000000 		.space	4
- 1251              		.section	.bss.xTimerBuffer_GearSW,"aw",%nobits
- 1252              		.align	2
- 1255              	xTimerBuffer_GearSW:
- 1256 0000 00000000 		.space	40
- 1256      00000000 
- 1256      00000000 
- 1256      00000000 
- 1256      00000000 
- 1257              		.text
- 1258              	.Letext0:
- 1259              		.file 2 "/usr/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h"
- 1260              		.file 3 "middleware/FreeRTOS-Kernel/include/projdefs.h"
- 1261              		.file 4 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
- 1262              		.file 5 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
- 1263              		.file 6 "middleware/FreeRTOS-Kernel/include/timers.h"
- 1264              		.file 7 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
- 1265              		.file 8 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
- 1266              		.file 9 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
- 1267              		.file 10 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
- 1268              		.file 11 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
- 1269              		.file 12 "middleware/FreeRTOS-Kernel/include/task.h"
-ARM GAS  /tmp/cc32q1pv.s 			page 30
+ 1246              		.file 4 "middleware/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/portmacro.h"
+ 1247              		.file 5 "middleware/FreeRTOS-Kernel/include/FreeRTOS.h"
+ 1248              		.file 6 "middleware/FreeRTOS-Kernel/include/timers.h"
+ 1249              		.file 7 "stm/stm32g4xx/CMSIS/Device/ST/STM32G4xx/Include/stm32g473xx.h"
+ 1250              		.file 8 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h"
+ 1251              		.file 9 "/home/pani_/LHRS/VCAT-Dashboard/firmware/drivers/Inc/Switches.h"
+ 1252              		.file 10 "stm/stm32g4xx/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
+ 1253              		.file 11 "/home/pani_/LHRS/VCAT-Dashboard/firmware/core/Inc/init.h"
+ 1254              		.file 12 "middleware/FreeRTOS-Kernel/include/task.h"
+ARM GAS  /tmp/ccYwU7cq.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 Switches.c
-     /tmp/cc32q1pv.s:21     .text.gpioEXTI_Init:00000000 $t
-     /tmp/cc32q1pv.s:27     .text.gpioEXTI_Init:00000000 gpioEXTI_Init
-     /tmp/cc32q1pv.s:61     .text.switch_EXTI_Init:00000000 $t
-     /tmp/cc32q1pv.s:67     .text.switch_EXTI_Init:00000000 switch_EXTI_Init
-     /tmp/cc32q1pv.s:154    .text.switch_get_state:00000000 $t
-     /tmp/cc32q1pv.s:160    .text.switch_get_state:00000000 switch_get_state
-     /tmp/cc32q1pv.s:178    .text.switch_get_state:0000000c $d
-     /tmp/cc32q1pv.s:444    .text.switch_get_state:0000011c $d
-     /tmp/cc32q1pv.s:451    .text.switch_bitmap_setBit:00000000 $t
-     /tmp/cc32q1pv.s:457    .text.switch_bitmap_setBit:00000000 switch_bitmap_setBit
-     /tmp/cc32q1pv.s:525    .text.switch_bitmap_setBit:00000038 $d
-     /tmp/cc32q1pv.s:1231   .bss.switch_bitmap:00000000 switch_bitmap
-     /tmp/cc32q1pv.s:530    .rodata.switch_init.str1.4:00000000 $d
-     /tmp/cc32q1pv.s:534    .text.switch_init:00000000 $t
-     /tmp/cc32q1pv.s:540    .text.switch_init:00000000 switch_init
-     /tmp/cc32q1pv.s:716    .text.switch_init:00000114 $d
-     /tmp/cc32q1pv.s:1255   .bss.xTimerBuffer_GearSW:00000000 xTimerBuffer_GearSW
-     /tmp/cc32q1pv.s:787    .text.vTimerCallback_GearSW:00000000 vTimerCallback_GearSW
-     /tmp/cc32q1pv.s:1249   .bss.xDebounceTimer_GearSW:00000000 xDebounceTimer_GearSW
-     /tmp/cc32q1pv.s:1243   .bss.xTimerBuffer_IgnitionSW:00000000 xTimerBuffer_IgnitionSW
-     /tmp/cc32q1pv.s:734    .text.vTimerCallback_IgnitionSW:00000000 vTimerCallback_IgnitionSW
-     /tmp/cc32q1pv.s:1237   .bss.xDebounceTimer_IgnitionSW:00000000 xDebounceTimer_IgnitionSW
-     /tmp/cc32q1pv.s:729    .text.vTimerCallback_IgnitionSW:00000000 $t
-     /tmp/cc32q1pv.s:782    .text.vTimerCallback_GearSW:00000000 $t
-     /tmp/cc32q1pv.s:835    .text.switch_read_all_inputs:00000000 $t
-     /tmp/cc32q1pv.s:841    .text.switch_read_all_inputs:00000000 switch_read_all_inputs
-     /tmp/cc32q1pv.s:892    .text.switch_read_all_inputs:00000024 $d
-     /tmp/cc32q1pv.s:897    .text.switch_bitmap_setAll:00000000 $t
-     /tmp/cc32q1pv.s:903    .text.switch_bitmap_setAll:00000000 switch_bitmap_setAll
-     /tmp/cc32q1pv.s:934    .text.switch_bitmap_setAll:00000014 $d
-     /tmp/cc32q1pv.s:939    .text.switch_bitmap_read:00000000 $t
-     /tmp/cc32q1pv.s:945    .text.switch_bitmap_read:00000000 switch_bitmap_read
-     /tmp/cc32q1pv.s:960    .text.switch_bitmap_read:00000008 $d
-     /tmp/cc32q1pv.s:965    .text.HAL_GPIO_EXTI_GearSW_Callback:00000000 $t
-     /tmp/cc32q1pv.s:971    .text.HAL_GPIO_EXTI_GearSW_Callback:00000000 HAL_GPIO_EXTI_GearSW_Callback
-     /tmp/cc32q1pv.s:1040   .text.HAL_GPIO_EXTI_GearSW_Callback:0000003c $d
-     /tmp/cc32q1pv.s:1045   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:00000000 $t
-     /tmp/cc32q1pv.s:1051   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:00000000 HAL_GPIO_EXTI_IgnitionSW_Callback
-     /tmp/cc32q1pv.s:1120   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:0000003c $d
-     /tmp/cc32q1pv.s:1125   .text.HAL_GPIO_EXTI_Callback:00000000 $t
-     /tmp/cc32q1pv.s:1131   .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
-     /tmp/cc32q1pv.s:1174   .text.EXTI0_IRQHandler:00000000 $t
-     /tmp/cc32q1pv.s:1180   .text.EXTI0_IRQHandler:00000000 EXTI0_IRQHandler
-     /tmp/cc32q1pv.s:1201   .text.EXTI2_IRQHandler:00000000 $t
-     /tmp/cc32q1pv.s:1207   .text.EXTI2_IRQHandler:00000000 EXTI2_IRQHandler
-     /tmp/cc32q1pv.s:1228   .bss.switch_bitmap:00000000 $d
-     /tmp/cc32q1pv.s:1234   .bss.xDebounceTimer_IgnitionSW:00000000 $d
-     /tmp/cc32q1pv.s:1240   .bss.xTimerBuffer_IgnitionSW:00000000 $d
-     /tmp/cc32q1pv.s:1246   .bss.xDebounceTimer_GearSW:00000000 $d
-     /tmp/cc32q1pv.s:1252   .bss.xTimerBuffer_GearSW:00000000 $d
-     /tmp/cc32q1pv.s:193    .text.switch_get_state:0000001b $d
-     /tmp/cc32q1pv.s:193    .text.switch_get_state:0000001c $t
+     /tmp/ccYwU7cq.s:21     .text.gpioEXTI_Init:00000000 $t
+     /tmp/ccYwU7cq.s:27     .text.gpioEXTI_Init:00000000 gpioEXTI_Init
+     /tmp/ccYwU7cq.s:61     .text.switch_EXTI_Init:00000000 $t
+     /tmp/ccYwU7cq.s:67     .text.switch_EXTI_Init:00000000 switch_EXTI_Init
+     /tmp/ccYwU7cq.s:154    .text.switch_get_state:00000000 $t
+     /tmp/ccYwU7cq.s:160    .text.switch_get_state:00000000 switch_get_state
+     /tmp/ccYwU7cq.s:178    .text.switch_get_state:0000000c $d
+     /tmp/ccYwU7cq.s:444    .text.switch_get_state:0000011c $d
+     /tmp/ccYwU7cq.s:451    .text.switch_bitmap_setBit:00000000 $t
+     /tmp/ccYwU7cq.s:457    .text.switch_bitmap_setBit:00000000 switch_bitmap_setBit
+     /tmp/ccYwU7cq.s:525    .text.switch_bitmap_setBit:00000038 $d
+     /tmp/ccYwU7cq.s:1216   .bss.switch_bitmap:00000000 switch_bitmap
+     /tmp/ccYwU7cq.s:530    .rodata.switch_init.str1.4:00000000 $d
+     /tmp/ccYwU7cq.s:534    .text.switch_init:00000000 $t
+     /tmp/ccYwU7cq.s:540    .text.switch_init:00000000 switch_init
+     /tmp/ccYwU7cq.s:716    .text.switch_init:00000114 $d
+     /tmp/ccYwU7cq.s:1240   .bss.xTimerBuffer_GearSW:00000000 xTimerBuffer_GearSW
+     /tmp/ccYwU7cq.s:787    .text.vTimerCallback_GearSW:00000000 vTimerCallback_GearSW
+     /tmp/ccYwU7cq.s:1234   .bss.xDebounceTimer_GearSW:00000000 xDebounceTimer_GearSW
+     /tmp/ccYwU7cq.s:1228   .bss.xTimerBuffer_IgnitionSW:00000000 xTimerBuffer_IgnitionSW
+     /tmp/ccYwU7cq.s:734    .text.vTimerCallback_IgnitionSW:00000000 vTimerCallback_IgnitionSW
+     /tmp/ccYwU7cq.s:1222   .bss.xDebounceTimer_IgnitionSW:00000000 xDebounceTimer_IgnitionSW
+     /tmp/ccYwU7cq.s:729    .text.vTimerCallback_IgnitionSW:00000000 $t
+     /tmp/ccYwU7cq.s:782    .text.vTimerCallback_GearSW:00000000 $t
+     /tmp/ccYwU7cq.s:835    .text.switch_read_all_inputs:00000000 $t
+     /tmp/ccYwU7cq.s:841    .text.switch_read_all_inputs:00000000 switch_read_all_inputs
+     /tmp/ccYwU7cq.s:892    .text.switch_read_all_inputs:00000024 $d
+     /tmp/ccYwU7cq.s:897    .text.switch_bitmap_setAll:00000000 $t
+     /tmp/ccYwU7cq.s:903    .text.switch_bitmap_setAll:00000000 switch_bitmap_setAll
+     /tmp/ccYwU7cq.s:934    .text.switch_bitmap_setAll:00000014 $d
+     /tmp/ccYwU7cq.s:939    .text.switch_bitmap_read:00000000 $t
+     /tmp/ccYwU7cq.s:945    .text.switch_bitmap_read:00000000 switch_bitmap_read
+     /tmp/ccYwU7cq.s:960    .text.switch_bitmap_read:00000008 $d
+     /tmp/ccYwU7cq.s:965    .text.HAL_GPIO_EXTI_GearSW_Callback:00000000 $t
+     /tmp/ccYwU7cq.s:971    .text.HAL_GPIO_EXTI_GearSW_Callback:00000000 HAL_GPIO_EXTI_GearSW_Callback
+     /tmp/ccYwU7cq.s:1040   .text.HAL_GPIO_EXTI_GearSW_Callback:0000003c $d
+     /tmp/ccYwU7cq.s:1045   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:00000000 $t
+     /tmp/ccYwU7cq.s:1051   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:00000000 HAL_GPIO_EXTI_IgnitionSW_Callback
+     /tmp/ccYwU7cq.s:1120   .text.HAL_GPIO_EXTI_IgnitionSW_Callback:0000003c $d
+     /tmp/ccYwU7cq.s:1125   .text.HAL_GPIO_EXTI_Callback:00000000 $t
+     /tmp/ccYwU7cq.s:1131   .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+     /tmp/ccYwU7cq.s:1159   .text.EXTI0_IRQHandler:00000000 $t
+     /tmp/ccYwU7cq.s:1165   .text.EXTI0_IRQHandler:00000000 EXTI0_IRQHandler
+     /tmp/ccYwU7cq.s:1186   .text.EXTI2_IRQHandler:00000000 $t
+     /tmp/ccYwU7cq.s:1192   .text.EXTI2_IRQHandler:00000000 EXTI2_IRQHandler
+     /tmp/ccYwU7cq.s:1213   .bss.switch_bitmap:00000000 $d
+     /tmp/ccYwU7cq.s:1219   .bss.xDebounceTimer_IgnitionSW:00000000 $d
+     /tmp/ccYwU7cq.s:1225   .bss.xTimerBuffer_IgnitionSW:00000000 $d
+     /tmp/ccYwU7cq.s:1231   .bss.xDebounceTimer_GearSW:00000000 $d
+     /tmp/ccYwU7cq.s:1237   .bss.xTimerBuffer_GearSW:00000000 $d
+     /tmp/ccYwU7cq.s:193    .text.switch_get_state:0000001b $d
+     /tmp/ccYwU7cq.s:193    .text.switch_get_state:0000001c $t
 
 UNDEFINED SYMBOLS
 gpioPin_Init
-ARM GAS  /tmp/cc32q1pv.s 			page 31
+ARM GAS  /tmp/ccYwU7cq.s 			page 31
 
 
 HAL_NVIC_SetPriority

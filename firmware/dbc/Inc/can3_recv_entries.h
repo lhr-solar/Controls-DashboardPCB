@@ -1,0 +1,1 @@
+CAN_RECV_ENTRY(0x60, 4, true) //circular queue

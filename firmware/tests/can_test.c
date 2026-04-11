@@ -17,38 +17,46 @@
 #include "Switches.h"
 #include "Horn.h"
 #include "CarCAN.h"
+#include "Debugging.h"
 
 
-#define CAN_TEST_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
+#define CAN_TEST_TASK_DELAY_TICKS		pdMS_TO_TICKS(2000)
 
 static StaticTask_t CAN_Test_Task_TCB;
 static StackType_t  CAN_Test_Task_Stack[configMINIMAL_STACK_SIZE];
 
-static can_status_t CL_SendDriverStatus(uint32_t driver_status_payload) {
-
-	uint8_t tx_data[8] = {0};
-
-	tx_data[0] = driver_status_payload & ~(0xFFFFFFF0);
-	tx_data[1] = driver_status_payload & ~(0xFFFFFF0F);
-	tx_data[2] = driver_status_payload & ~(0xFFFFF0FF);
-	tx_data[3] = driver_status_payload & ~(0xFFFF0FFF);
-	tx_data[4] = driver_status_payload & ~(0xFFF0FFFF);
-
+static can_status_t CL_SendDriverStatus_Test(uint8_t tx_data[8]) {
 	return CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, tx_data, CAN_TEST_TASK_DELAY_TICKS);
 }
 
-void CAN_Send_Test(void *argument) {
+static can_status_t CL_ReadDriverStatus_Test(uint8_t rx_data[8]) {
+    return CarCAN_Receive(CAN_ID_DRIVER_INPUT_STATUS, rx_data, CAN_TEST_TASK_DELAY_TICKS);
+}
+
+void CAN_Test(void *argument) {
+	initPrintf();
 
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 	
-	uint32_t payload = 0x00054321;
+	uint32_t payload = 0;
+
+	uint8_t	tx_data[8];
+	uint8_t rx_data[8];
 
 	while(1) {
-		if (CL_SendDriverStatus(payload) != CAN_OK) {
-			led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
-		}
+		printf("bruh\n\r");
+			
+		tx_data[0] = payload;
+		tx_data[1] = 0;
+		tx_data[2] = 0;
+		tx_data[3] = 0;
 
-		payload -= 5;
+		CL_SendDriverStatus_Test(tx_data);
+		payload += 1;
+
+		if(CL_ReadDriverStatus_Test(rx_data) != CAN_OK) {
+			printf("data: %d\n\r", rx_data[0]);
+		} else led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
 		
 		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
 		vTaskDelayUntil(&xLastWakeTime, CAN_TEST_TASK_DELAY_TICKS);
@@ -64,8 +72,8 @@ int main(void) {
     horn_gpio_init();
 
     xTaskCreateStatic(
-        CAN_Send_Test,
-        "Can Send Test Task",
+        CAN_Test,
+        "Can Send & Read Test Task",
         configMINIMAL_STACK_SIZE,
         NULL,
         tskIDLE_PRIORITY + 1,

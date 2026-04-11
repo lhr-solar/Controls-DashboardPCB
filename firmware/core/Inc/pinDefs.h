@@ -77,3 +77,9 @@
 
 #define CAR_CAN_RX_PORT			GPIOA
 #define CAR_CAN_RX_PIN			GPIO_PIN_8
+
+
+/* -------- Output - UART printf -------- */
+#define USART3_PORT				GPIOC
+#define USART3_TX_PIN			GPIO_PIN_10
+#define USART3_RX_PIN			GPIO_PIN_11
