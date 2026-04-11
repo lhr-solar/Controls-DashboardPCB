@@ -67,6 +67,7 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 		.MessageMarker = 0,
 	};
 
+	if(CarCAN == NULL) return CAN_ERR;
 	if (can_fd_send(CarCAN, &carCAN_tx_header, data, delay_ticks) == CAN_ERR) {
 		led_set(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, LED_OFF);
 		return CAN_ERR;
@@ -95,7 +96,26 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 
 
 void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data) {
-	if(tx_data == NULL) return;
-    tx_data[0] = bitmap & 0xFF;         // bits 7-0
-    tx_data[1] = (bitmap >> 8) & 0xFF;  // bits 15-8
+    if(tx_data == NULL) return;
+
+    // byte 0 - bits 7-0
+    tx_data[0]  = 0;
+    tx_data[0] |= ((bitmap >> SW_IGN_ARR)       & 0x1) << 0; //change the numbers after << to change bit positions on payload
+    tx_data[0] |= ((bitmap >> SW_IGN_MTR)       & 0x1) << 1; // << to change bit positions on payload
+    tx_data[0] |= ((bitmap >> SW_IGN_OFF)       & 0x1) << 2;
+    tx_data[0] |= ((bitmap >> SW_CRUISE_ENABLE) & 0x1) << 3;
+    tx_data[0] |= ((bitmap >> SW_CRUISE_SET)    & 0x1) << 4;
+    tx_data[0] |= ((bitmap >> SW_FWD)           & 0x1) << 5;
+    tx_data[0] |= ((bitmap >> SW_NEUTRAL_GEAR)  & 0x1) << 6;
+    tx_data[0] |= ((bitmap >> SW_REV)           & 0x1) << 7;
+
+    // byte 1 - bits 15-8
+    tx_data[1]  = 0;
+    tx_data[1] |= ((bitmap >> SW_HAZARD)        & 0x1) << 0;
+    tx_data[1] |= ((bitmap >> SW_HORN)          & 0x1) << 1;
+    tx_data[1] |= ((bitmap >> SW_LEFT_BLINKER)  & 0x1) << 2;
+    tx_data[1] |= ((bitmap >> SW_RIGHT_BLINKER) & 0x1) << 3;
+    tx_data[1] |= ((bitmap >> SW_PTT)           & 0x1) << 4;
+    tx_data[1] |= ((bitmap >> SW_REGEN_ACTIVE)  & 0x1) << 5;
+    tx_data[1] |= ((bitmap >> SW_REGEN_ENABLE)  & 0x1) << 6;
 }

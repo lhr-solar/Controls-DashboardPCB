@@ -94,9 +94,9 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *fdcanHandle)
 
     if (fdcanHandle->Instance == FDCAN3)
     {
-        HAL_NVIC_SetPriority(FDCAN3_IT0_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
+        HAL_NVIC_SetPriority(FDCAN3_IT0_IRQn, FDCAN_NVIC_PRIO, 0);
         HAL_NVIC_EnableIRQ(FDCAN3_IT0_IRQn);
-        HAL_NVIC_SetPriority(FDCAN3_IT1_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
+        HAL_NVIC_SetPriority(FDCAN3_IT1_IRQn, FDCAN_NVIC_PRIO, 0);
         HAL_NVIC_EnableIRQ(FDCAN3_IT1_IRQn);
         // ElconCAN: PA8 (RX), PA15 (TX), AF11
         GPIO_InitStruct.Pin = CAR_CAN_TX_PIN | CAR_CAN_RX_PIN;

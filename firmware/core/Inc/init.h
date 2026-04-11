@@ -2,6 +2,7 @@
 
 #include "stm32xx_hal.h"
 
+#define FDCAN_NVIC_PRIO		configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY
 
 /**
  * 

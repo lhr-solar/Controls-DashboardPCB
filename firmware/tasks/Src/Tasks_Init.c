@@ -7,11 +7,11 @@
 
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
-StackType_t pollingWriteCAN_stackArray[POLLING_WRITE_CAN_STACK_SIZE];
+StackType_t send_switch_states_stackArray[SEND_SWITCH_STATES_STACK_SIZE];
 
 StaticTask_t readCarCAN_tcb;
 StaticTask_t readControlsCAN_tcb;
-StaticTask_t pollingWriteCAN_tcb;
+StaticTask_t send_switch_states_tcb;
 
 void InitTasks(void *argument) {
 
@@ -29,11 +29,11 @@ void InitTasks(void *argument) {
 	xTaskCreateStatic(
         Task_Send_Switch_States,
         "Reading All Switches & Writing to CarCan",
-        POLLING_WRITE_CAN_STACK_SIZE,
+        SEND_SWITCH_STATES_STACK_SIZE,
         NULL,
-        POLLING_WRITE_CAN_PRIORITY,
-        pollingWriteCAN_stackArray,
-        &pollingWriteCAN_tcb
+        SEND_SWITCH_STATES_PRIORITY,
+        send_switch_states_stackArray,
+        &send_switch_states_tcb
     );
 
 /*
