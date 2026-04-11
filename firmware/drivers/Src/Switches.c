@@ -40,7 +40,7 @@ void switch_init() {
 
 	
     switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, SWITCH_MAX_PRIO);
-    switch_EXTI_Init(IGN_OFF_PORT, IGN_OFF_PIN, SWITCH_MAX_PRIO);
+    switch_EXTI_Init(IGN_ARR_PORT, IGN_ARR_PIN, SWITCH_MAX_PRIO);
 
 	//Timer for 3-state Gear switch debounce... used in callbacks later in the file
 	xDebounceTimer_GearSW = xTimerCreateStatic(
