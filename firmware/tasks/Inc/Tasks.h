@@ -28,6 +28,8 @@
 #define POLLING_WRITE_CAN_STACK_SIZE     	configMINIMAL_STACK_SIZE
 #define HEARTBEAT_STACK_SIZE     			configMINIMAL_STACK_SIZE
 
+#define NUM_STATUS_LEDS		6
+
 /* ------| TCBs |------ */
 // Task Control Blocks for each task
 extern StaticTask_t INIT_TASK_TCB;

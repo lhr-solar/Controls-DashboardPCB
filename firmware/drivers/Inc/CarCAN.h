@@ -55,8 +55,8 @@ extern FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
 can_status_t CarCAN_Init(void);
 
-can_status_t CarCAN_Send(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
+can_status_t CarCAN_Send(uint32_t id, uint32_t byteSize, uint8_t data[byteSize], TickType_t delay_ticks);
 
 can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
 
-can_status_t CL_SendDriverStatus(uint16_t bitmap, TickType_t delay);
+void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data);

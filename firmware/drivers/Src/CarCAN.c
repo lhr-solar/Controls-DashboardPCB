@@ -106,7 +106,7 @@ can_status_t CarCAN_Init(void) {
 	return CAN_OK;
 }
 
-can_status_t CarCAN_Send(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
+can_status_t CarCAN_Send(uint32_t id, uint32_t byteSize, uint8_t data[byteSize], TickType_t delay_ticks) {
 	carCAN_tx_header.Identifier = id;
 
 	if (can_fd_send(CarCAN, &carCAN_tx_header, data, delay_ticks) == CAN_ERR) {
@@ -130,11 +130,8 @@ can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks
 
 
 
-can_status_t CL_SendDriverStatus(uint16_t bitmap, TickType_t delay) {
-    uint8_t tx_data[8] = {0};
-    
+void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data) {
+
     tx_data[0] = bitmap & 0xFF;         // bits 7-0
     tx_data[1] = (bitmap >> 8) & 0xFF;  // bits 15-8
-
-    return CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, tx_data, delay);
 }
