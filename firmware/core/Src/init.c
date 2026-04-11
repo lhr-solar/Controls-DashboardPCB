@@ -5,6 +5,7 @@
 #include "pinDefs.h"
 #include "stm32xx_hal.h"
 
+static uint32_t HAL_RCC_FDCAN_CLK_ENABLED = 0;
 
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
     GPIO_InitTypeDef GPIO_init = {
@@ -65,4 +66,44 @@ void SystemClock_Config(void) {
   {
     Error_Handler();
   }
+}
+
+
+
+// Single MspInit handles both FDCAN instances — HAL only allows one definition project-wide
+void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *fdcanHandle)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+    // Shared clock source config (only needs to run once, same source for all FDCAN)
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_FDCAN;
+    PeriphClkInit.FdcanClockSelection = RCC_FDCANCLKSOURCE_PCLK1;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    HAL_RCC_FDCAN_CLK_ENABLED++;
+    if (HAL_RCC_FDCAN_CLK_ENABLED == 1)
+    {
+        __HAL_RCC_FDCAN_CLK_ENABLE();
+    }
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    if (fdcanHandle->Instance == FDCAN3)
+    {
+        HAL_NVIC_SetPriority(FDCAN3_IT0_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
+        HAL_NVIC_EnableIRQ(FDCAN3_IT0_IRQn);
+        HAL_NVIC_SetPriority(FDCAN3_IT1_IRQn, configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY, 0);
+        HAL_NVIC_EnableIRQ(FDCAN3_IT1_IRQn);
+        // ElconCAN: PA8 (RX), PA15 (TX), AF11
+        GPIO_InitStruct.Pin = CAR_CAN_TX_PIN | CAR_CAN_RX_PIN;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Alternate = GPIO_AF11_FDCAN3;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    }
 }

@@ -1,1 +1,3 @@
-CAN_RECV_ENTRY(0x60, 4, true) //circular queue
+#include "CarCAN.h"
+
+CAN_RECV_ENTRY(CAN_ID_DRIVER_INPUT_STATUS, 4, true) //circular queue = true

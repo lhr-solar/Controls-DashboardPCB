@@ -6,57 +6,28 @@
 #include "CAN_FD.h"
 #include "CarCAN_can_msgs.h"
 
-/** CAN IDs and DLCs
- * CAN_ID_CONTROLS_STATUS
- * CAN_DLC_CONTROLS_STATUS
- * CAN_ID_DRIVER_INPUT_STATUS
- * CAN_DLC_DRIVER_INPUT_STATUS
-*/
-
-/**	BPS fault status enum
- * BPS_STATUS_BPS_FAULT_OK = YAY
- * other values for BPS = bad
+/**
+ * @brief 				 Initiliaize FDCAN3 - CarCAN Peripheral
+ * @return can_status_t  success = CAN_OK, fail = anything else get to debugging bro
  */
-
-/** helpful enums
- * controls_status_controls_leader_fault_e
- * controls_status_lightingboard_front_status_e
- * controls_status_lightingboard_left_status_e
- * controls_status_lightingboard_right_status_e
- * controls_status_lightingboard_rear_status_e
- * controls_status_lightingboard_canopy_status_e
- * 
- * driver_input_status_ignition_array_e
- * driver_input_status_ignition_motor_e
- * driver_input_status_ignition_off_e
- * driver_input_status_cruise_enable_e
- * driver_input_status_cruise_set_e
- * driver_input_status_gear_forward_e
- * driver_input_status_gear_neutral_e
- * driver_input_status_hazard_pressed_e
- * driver_input_status_horn_pressed_e
- * driver_input_status_blinker_left_e
- * driver_input_status_blinker_right_e
- * driver_input_status_regen_activate_e
- * driver_input_status_regen_enable_e
- */
-
-
- /**helpful structs
-  * controls_status_t
-  * driver_input_status_t
-  * 
-  */
-
-
-
-extern FDCAN_HandleTypeDef *CarCAN;
-extern FDCAN_RxHeaderTypeDef carCAN_rx_header;
-
 can_status_t CarCAN_Init(void);
 
-can_status_t CarCAN_Send(uint32_t id, uint32_t byteSize, uint8_t data[byteSize], TickType_t delay_ticks);
+/**
+ * @brief  Wrapper function for sending payload over CarCAN
+ * @param  id   			CAN ID of message (ID macro)
+ * @param  payloadSize_dlc	size of CAN payload (DLC macro)
+ * @param  data  			payload to send over CAN
+ * @param  delay_ticks  	timeout time (in ticks)
+ * @return can_status_t  	success = CAN_OK, fail = anything else get to debugging bro
+ */
+can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, TickType_t delay_ticks);
 
-can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
+//can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
 
+/**
+ * @brief  Packs bitmap into dbc format
+ * @param  bitmap   switch_states bitmap, holds all switch states
+ * @param  tx_data  formatted data to be sent on CAN
+ * @return NONE
+ */
 void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data);

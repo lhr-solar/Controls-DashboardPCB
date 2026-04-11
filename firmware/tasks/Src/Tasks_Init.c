@@ -8,12 +8,10 @@
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
 StackType_t pollingWriteCAN_stackArray[POLLING_WRITE_CAN_STACK_SIZE];
-StackType_t heartbeat_stackArray[HEARTBEAT_STACK_SIZE];
 
 StaticTask_t readCarCAN_tcb;
 StaticTask_t readControlsCAN_tcb;
 StaticTask_t pollingWriteCAN_tcb;
-StaticTask_t heartbeat_tcb;
 
 void InitTasks(void *argument) {
 
@@ -27,25 +25,14 @@ void InitTasks(void *argument) {
 	led_gpio_init();
     switch_init();
     horn_gpio_init();
-
-
-	xTaskCreateStatic(
-        HeartBeat,
-        "LSOM Heartbeat",
-        HEARTBEAT_STACK_SIZE,
-        NULL,
-        HEARTBEAT_PROIRITY,
-        pollingWriteCAN_stackArray,
-        &heartbeat_tcb
-    );
 	
 	xTaskCreateStatic(
-        Read_Switches_WriteCAN_Task,
-        "Reading All Switches & Writing CAN Task",
+        Task_Send_Switch_States,
+        "Reading All Switches & Writing to CarCan",
         POLLING_WRITE_CAN_STACK_SIZE,
         NULL,
         POLLING_WRITE_CAN_PRIORITY,
-        heartbeat_stackArray,
+        pollingWriteCAN_stackArray,
         &pollingWriteCAN_tcb
     );
 
@@ -72,16 +59,5 @@ void InitTasks(void *argument) {
 */
 
     vTaskDelete(NULL);
-}
-
-void HeartBeat(void *argument) {
-    TickType_t xLastWakeTime = xTaskGetTickCount();
-
-    while (1) {
-		
-		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
-
-        vTaskDelayUntil(&xLastWakeTime, HEARTBEAT_DELAY_TICKS);
-    }
 }
 

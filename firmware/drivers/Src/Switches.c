@@ -6,7 +6,7 @@
 #include "Horn.h"
 
 
-#define EXTI_TIMER_PERIOD 	pdMS_TO_TICKS(200)  // 250 ms
+#define EXTI_TIMER_PERIOD 	pdMS_TO_TICKS(1000)  // 200 ms
 
 static StaticTimer_t xTimerBuffer_GearSW;
 static TimerHandle_t xDebounceTimer_GearSW = NULL;
@@ -99,24 +99,24 @@ uint32_t switch_read_all_inputs() {
 }
 
 switch_state_t switch_get_state(switch_bit_t sw) {
-    switch(sw) {
-		case SW_IGN_OFF:       return HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_IGN_MTR:       return HAL_GPIO_ReadPin(IGN_MTR_PORT,        IGN_MTR_PIN)        == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_FWD:           return HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_NEUTRAL_GEAR:  return HAL_GPIO_ReadPin(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_REV:           return HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_CRUISE_ENABLE: return HAL_GPIO_ReadPin(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN)  == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_CRUISE_SET:    return HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN)     == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_HAZARD:        return HAL_GPIO_ReadPin(HAZARD_PORT,         HAZARD_PIN)         == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_LEFT_BLINKER:  return HAL_GPIO_ReadPin(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_HORN:          return HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET ? SWITCH_ON : SWITCH_OFF;
-		default:               return SWITCH_OFF;
-    }
+	switch(sw) {
+		case SW_IGN_OFF:       return HAL_GPIO_ReadPin(IGN_OFF_PORT,        IGN_OFF_PIN)        == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_IGN_ARR:       return HAL_GPIO_ReadPin(IGN_ARR_PORT,        IGN_ARR_PIN)        == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_IGN_MTR:       return HAL_GPIO_ReadPin(IGN_MTR_PORT,        IGN_MTR_PIN)        == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_FWD:           return HAL_GPIO_ReadPin(FWD_SW_PORT,         FWD_SW_PIN)         == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_NEUTRAL_GEAR:  return HAL_GPIO_ReadPin(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_REV:           return HAL_GPIO_ReadPin(REV_SW_PORT,         REV_SW_PIN)         == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_CRUISE_ENABLE: return HAL_GPIO_ReadPin(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN)  == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_CRUISE_SET:    return HAL_GPIO_ReadPin(CRUISE_SET_PORT,     CRUISE_SET_PIN)     == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_HAZARD:        return HAL_GPIO_ReadPin(HAZARD_PORT,         HAZARD_PIN)         == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_LEFT_BLINKER:  return HAL_GPIO_ReadPin(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_RIGHT_BLINKER: return HAL_GPIO_ReadPin(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN)  == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_HORN:          return HAL_GPIO_ReadPin(HORN_PORT,           HORN_PIN)           == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		default:               return SWITCH_ON;
+	}
 }
 
 

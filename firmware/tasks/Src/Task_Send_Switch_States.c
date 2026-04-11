@@ -33,7 +33,7 @@ static void displayStates_onLEDs() {
 	}
 }
 
-void Read_Switches_WriteCAN_Task(void *argument) {
+void Task_Send_Switch_States(void *argument) {
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 
 	while (1) {
@@ -52,6 +52,8 @@ void Read_Switches_WriteCAN_Task(void *argument) {
 		 * SW_IGN_OFF - PCAN_TX
 		 */
 		displayStates_onLEDs();
+
+		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
 
 		vTaskDelayUntil(&xLastWakeTime, READ_WRITE_CARCAN_TASK_DELAY_TICKS);
 	}
