@@ -25,13 +25,13 @@
 static StaticTask_t CAN_Test_Task_TCB;
 static StackType_t  CAN_Test_Task_Stack[configMINIMAL_STACK_SIZE];
 
-static can_status_t CL_SendDriverStatus_Test(uint8_t tx_data[8]) {
-	return CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, tx_data, CAN_TEST_TASK_DELAY_TICKS);
+static can_status_t CL_SendDriverStatus_Test(uint8_t* tx_data) {
+	return CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, CAN_DLC_DRIVER_INPUT_STATUS, tx_data, CAN_TEST_TASK_DELAY_TICKS);
 }
 
-static can_status_t CL_ReadDriverStatus_Test(uint8_t rx_data[8]) {
-    return CarCAN_Receive(CAN_ID_DRIVER_INPUT_STATUS, rx_data, CAN_TEST_TASK_DELAY_TICKS);
-}
+//static can_status_t CL_ReadDriverStatus_Test(uint8_t rx_data[8]) {
+//    return CarCAN_Receive(CAN_ID_DRIVER_INPUT_STATUS, rx_data, CAN_TEST_TASK_DELAY_TICKS);
+//}
 
 void CAN_Test(void *argument) {
 	initPrintf();
@@ -41,7 +41,7 @@ void CAN_Test(void *argument) {
 	uint32_t payload = 0;
 
 	uint8_t	tx_data[8];
-	uint8_t rx_data[8];
+	//uint8_t rx_data[8];
 
 	while(1) {
 		printf("bruh\n\r");
@@ -54,9 +54,9 @@ void CAN_Test(void *argument) {
 		CL_SendDriverStatus_Test(tx_data);
 		payload += 1;
 
-		if(CL_ReadDriverStatus_Test(rx_data) != CAN_OK) {
-			printf("data: %d\n\r", rx_data[0]);
-		} else led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
+		//if(CL_ReadDriverStatus_Test(rx_data) != CAN_OK) {
+		//	printf("data: %d\n\r", rx_data[0]);
+		//} else led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
 		
 		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
 		vTaskDelayUntil(&xLastWakeTime, CAN_TEST_TASK_DELAY_TICKS);
