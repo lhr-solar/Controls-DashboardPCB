@@ -5,16 +5,37 @@
 #include "Tasks.h"
 #include "init.h"
 
+
 void Task_Send_Switch_States(void *argument) {
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 
+	uint32_t reset_ign = 0;
+	uint32_t bitmap = 0;
+
 	while (1) {
-		uint32_t bitmap = switch_read_all_inputs();
+		bitmap = switch_read_all_inputs();
+
+		bitmap |= (0x1 << SW_FWD);
+
+		if((bitmap >> SW_IGN_OFF) & 0x01){
+			reset_ign = 1;
+		}
+
+		if (reset_ign == 0) {
+			bitmap |= (0x1 << SW_IGN_OFF);
+			bitmap &= ~(0x1 << SW_IGN_MTR);
+			bitmap &= ~(0x1 << SW_IGN_ARR);
+		}
+
+		if((bitmap >> SW_IGN_MTR)&0x1) bitmap |= (0x1 << SW_IGN_ARR);
+
 		uint8_t tx_data_driver_status[CAN_DLC_DRIVER_INPUT_STATUS];
 
 		CL_Pack_DriverStatus(bitmap, tx_data_driver_status);
 
-		if (CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, CAN_DLC_DRIVER_INPUT_STATUS, tx_data_driver_status, SEND_SWITCH_STATES_TASK_DELAY_TICKS) != CAN_OK) {
+		if (CarCAN_Send(CAN_ID_DRIVER_INPUT_STATUS, CAN_DLC_DRIVER_INPUT_STATUS,
+						tx_data_driver_status,
+						SEND_SWITCH_STATES_TASK_DELAY_TICKS) != CAN_OK) {
 			led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
 		}
 

@@ -174,7 +174,6 @@ static void vTimerCallback_IgnitionSW(TimerHandle_t xTimer) {
 	switch_bitmap_setBit(SW_IGN_OFF, switch_get_state(SW_IGN_OFF));
 	switch_bitmap_setBit(SW_IGN_ARR, switch_get_state(SW_IGN_ARR));
 	switch_bitmap_setBit(SW_IGN_MTR, switch_get_state(SW_IGN_MTR));
-
 }
 
 /**
