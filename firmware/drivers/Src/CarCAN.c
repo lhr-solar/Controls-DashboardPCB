@@ -1,10 +1,8 @@
 #include "CarCAN.h"
-#include "CAN_FD.h"
 #include "Horn.h"
 #include "Status_LEDs.h"
 #include "Switches.h"
 #include "init.h"
-#include "stm32xx_hal.h"
 
 /* ================= CarCAN (fdcan3) ================= */
 FDCAN_HandleTypeDef *CarCAN = NULL;

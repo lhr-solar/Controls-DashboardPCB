@@ -47,6 +47,8 @@ void InitTasks(void *argument) {
         &readCarCAN_tcb
     );
 
+*/
+
     xTaskCreateStatic(
         ReadControlsCAN_task,
         "Read Controls CAN Task",
@@ -56,7 +58,6 @@ void InitTasks(void *argument) {
         readControlsCAN_stackArray,
         &readControlsCAN_tcb
     );
-*/
 
     vTaskDelete(NULL);
 }
