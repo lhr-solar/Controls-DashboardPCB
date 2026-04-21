@@ -5,8 +5,8 @@
 #include "init.h"
 
 /* ================= CarCAN (fdcan3) ================= */
-FDCAN_HandleTypeDef *CarCAN = NULL;
-FDCAN_RxHeaderTypeDef carCAN_rx_header;
+static FDCAN_HandleTypeDef *CarCAN = NULL;
+static FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
 
 can_status_t CarCAN_Init(void) {
@@ -75,21 +75,16 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 	return CAN_OK;
 }
 
-//0011 - BAD
-//0000 - fault/uknown
-//0001 - ign_mtr x1
-//0100 - ign_off x4	
-//0010 - ign_arr x2
+can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
+	can_status_t rx_status = can_fd_recv(CarCAN, id, &carCAN_rx_header, data, delay_ticks);
+	if(rx_status != CAN_OK) {
+		led_set(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN, LED_ON);
+		return rx_status;
+	}
 
-//can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
-//	if(can_fd_recv(CarCAN, id, &carCAN_rx_header, data, delay_ticks) == CAN_ERR) {
-//		led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);
-//		return CAN_ERR;
-//	}
-
-//	led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);
-//	return CAN_OK;
-//}
+	led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);
+	return CAN_OK;
+}
 
 
 

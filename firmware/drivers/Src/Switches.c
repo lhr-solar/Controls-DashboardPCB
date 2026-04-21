@@ -5,6 +5,8 @@
 #include "Status_LEDs.h"
 #include "Horn.h"
 
+#include "LightingCAN.h"
+
 
 #define EXTI_TIMER_PERIOD 	pdMS_TO_TICKS(1000)  // 200 ms
 
@@ -157,7 +159,6 @@ static void vTimerCallback_GearSW(TimerHandle_t xTimer) {
     switch_bitmap_setBit(SW_FWD,          switch_get_state(SW_FWD));
     switch_bitmap_setBit(SW_REV,          switch_get_state(SW_REV));
     switch_bitmap_setBit(SW_NEUTRAL_GEAR, switch_get_state(SW_NEUTRAL_GEAR));
-
 }
 
 /**

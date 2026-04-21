@@ -8,7 +8,6 @@ FDCAN_HandleTypeDef *LightingCAN = NULL;
 FDCAN_RxHeaderTypeDef LightingCAN_rx_header;
 
 
-
 can_status_t LightingCAN_Init(void) {
 	LightingCAN = hfdcan1;
 
@@ -67,7 +66,7 @@ can_status_t LightingCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* da
 
 	if(LightingCAN == NULL) return CAN_ERR;
 	if (can_fd_send(LightingCAN, &LightingCAN_tx_header, data, delay_ticks) == CAN_ERR) {
-		led_set(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN, LED_OFF);
+		led_set(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN, LED_ON);
 		return CAN_ERR;
 	}
 
@@ -76,6 +75,3 @@ can_status_t LightingCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* da
 }
 
 
-void CL_Pack_UnveilingLights(unveiling_lighting_t lighting_mode, uint8_t* tx_data) {
-	tx_data[0] = (uint8_t) lighting_mode;
-}

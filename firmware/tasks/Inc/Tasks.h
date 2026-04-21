@@ -7,9 +7,10 @@
 #include "event_groups.h"
 
 
-#define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(250)
-#define CONTROLS_CAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(250)
+#define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
+#define CONTROLS_CAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
 #define SEND_SWITCH_STATES_TASK_DELAY_TICKS pdMS_TO_TICKS(300)
+#define HAZARD_PERIOD_TICKS					pdMS_TO_TICKS(500)
 
 
 /* ------| Task Priorities |------ */
@@ -33,6 +34,9 @@ extern StaticTask_t INIT_TASK_TCB;
 extern StaticTask_t READ_CAR_CAN_TCB;
 extern StaticTask_t READ_CONTROLS_CAN_TCB;
 extern StaticTask_t SEND_SWITCH_STATES_TCB;
+
+extern TaskHandle_t ReadControlsCAN_TaskHandle;
+
 
 /* ------| Tasks |------ */
 

@@ -22,7 +22,7 @@ can_status_t CarCAN_Init(void);
  */
 can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, TickType_t delay_ticks);
 
-//can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
+can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks);
 
 /**
  * @brief  Packs bitmap into dbc format

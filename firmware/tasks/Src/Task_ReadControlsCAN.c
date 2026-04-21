@@ -8,27 +8,56 @@
 void ReadControlsCAN_task(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
-	uint32_t bitmap = 0;
-	unveiling_lighting_t lighting_mode = LIGHTS_OFF;
-
+	
+	lighting_command_t lighting_command = {0};
+	uint8_t tx_payload[CAN_DLC_LIGHTING_COMMAND] = {0};
 
     while (1) {
-		uint8_t tx_data_light_command[CAN_DLC_LIGHTING_COMMAND] = {0};
-		bitmap = switch_read_all_inputs();
+		
 
-		if((bitmap >> SW_HAZARD) & 0x01){
-			lighting_mode = LIGHTS_HOOK_EM;
-		} else if((bitmap >> SW_CRUISE_ENABLE) & 0x01){
-			lighting_mode = LIGHTS_FADE_IN_OUT;
-		}
+		///**
+		// * 
+		// * Hazard -> create a while loop that runs while button is on, and have lights
+		// * flash periodically?
+		// * 
+		// * Brake -> needs to be read from CarCAN and update lighting status
+		// * 
+		// * BPS_Strobe -> needs to be read from CarCAN and udpate lighting status
+		// * 
+		// */
 
-		CL_Pack_UnveilingLights(lighting_mode, tx_data_light_command);
-		if(LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_data_light_command, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
+
+        // --- HAZARD LOGIC WITH INTERRUPTIBLE DELAY ---
+        if ((switch_bitmap_read() >> SW_HAZARD) & 0x1) {
+
+            while ((switch_bitmap_read() >> SW_HAZARD) & 0x1) {
+
+                lighting_command.Lighting_Blink_Sync ^= 0x1;
+
+                uint32_t notified = 0;
+                BaseType_t result = xTaskNotifyWait(0, 0, &notified, HAZARD_PERIOD_TICKS);
+
+                if (result == pdTRUE) {
+                    // hazard turned off → break immediately
+                    break;
+                }
+            }
+        }
+
+
+		lighting_command.Lighting_Set_Left_Indicator = (switch_bitmap_read() >> SW_LEFT_BLINKER) & 0x1;
+		lighting_command.Lighting_Set_Right_Indicator = (switch_bitmap_read() >> SW_RIGHT_BLINKER) & 0x1;
+		lighting_command.Lighting_Set_BPS_Strobe = 0;
+		lighting_command.Lighting_Set_Headlights = 0;
+		lighting_command.Lighting_Set_Custom_Mode = 0;
+		lighting_command.Lighting_Set_Brake = 0;
+
+
+		if(LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
 			led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
 		}
 
-        
 		led_toggle(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN);
-        vTaskDelayUntil(&xLastWakeTime, CONTROLS_CAN_TASK_DELAY_TICKS);
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(5000));
     }
 }
