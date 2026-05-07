@@ -8,9 +8,23 @@
 static FDCAN_HandleTypeDef *CarCAN = NULL;
 static FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
+static can_status_t CarCAN_Recover(void) {
+	if ((CarCAN == NULL) || (CarCAN->Instance == NULL)) {
+		return CAN_ERR;
+	}
+
+	if (can_fd_start(CarCAN) != CAN_OK) {
+		return CAN_ERR;
+	}
+
+	return CAN_OK;
+}
 
 can_status_t CarCAN_Init(void) {
 	CarCAN = hfdcan3;
+	if (CarCAN == NULL) {
+		return CAN_ERR;
+	}
 
 	CarCAN->Instance = FDCAN3;
 	CarCAN->Init.ClockDivider = FDCAN_CLOCK_DIV1;
@@ -65,10 +79,17 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 		.MessageMarker = 0,
 	};
 
-	if(CarCAN == NULL) return CAN_ERR;
+	if ((CarCAN == NULL) || (data == NULL)) return CAN_ERR;
 	if (can_fd_send(CarCAN, &carCAN_tx_header, data, delay_ticks) == CAN_ERR) {
-		led_set(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, LED_OFF);
-		return CAN_ERR;
+		if (CarCAN_Recover() != CAN_OK) {
+			led_set(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, LED_OFF);
+			return CAN_ERR;
+		}
+
+		if (can_fd_send(CarCAN, &carCAN_tx_header, data, delay_ticks) == CAN_ERR) {
+			led_set(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN, LED_OFF);
+			return CAN_ERR;
+		}
 	}
 
 	led_toggle(CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN);
@@ -76,10 +97,22 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 }
 
 can_status_t CarCAN_Receive(uint32_t id, uint8_t data[8], TickType_t delay_ticks) {
+	if ((CarCAN == NULL) || (data == NULL)) {
+		return CAN_ERR;
+	}
+
 	can_status_t rx_status = can_fd_recv(CarCAN, id, &carCAN_rx_header, data, delay_ticks);
 	if(rx_status != CAN_OK) {
-		led_set(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN, LED_ON);
-		return rx_status;
+		if (CarCAN_Recover() != CAN_OK) {
+			led_set(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN, LED_ON);
+			return rx_status;
+		}
+
+		rx_status = can_fd_recv(CarCAN, id, &carCAN_rx_header, data, delay_ticks);
+		if (rx_status != CAN_OK) {
+			led_set(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN, LED_ON);
+			return rx_status;
+		}
 	}
 
 	led_toggle(CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN);

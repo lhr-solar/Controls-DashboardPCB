@@ -16,7 +16,7 @@ void Task_Send_Switch_States(void *argument) {
 	while (1) {
 		bitmap = switch_read_all_inputs();
 
-		if (((bitmap >> SW_HAZARD) & 0x1)) {
+		if ((((bitmap >> SW_HAZARD) & 0x1)) && (ReadControlsCAN_TaskHandle != NULL)) {
     		xTaskNotifyGive(ReadControlsCAN_TaskHandle);
 		}
 

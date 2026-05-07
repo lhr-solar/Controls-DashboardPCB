@@ -31,17 +31,6 @@ void InitTasks(void *argument) {
 	LightingCAN_Init();
 	
 	
-	xTaskCreateStatic(
-        Task_Send_Switch_States,
-        "Reading All Switches & Writing to CarCan",
-        SEND_SWITCH_STATES_STACK_SIZE,
-        NULL,
-        SEND_SWITCH_STATES_PRIORITY,
-        send_switch_states_stackArray,
-        &send_switch_states_tcb
-    );
-
-
     xTaskCreateStatic(
         ReadCarCAN_task,
         "Read CarCAN Task",
@@ -62,6 +51,16 @@ void InitTasks(void *argument) {
         READ_CONTROLS_CAN_PRIORITY,
         readControlsCAN_stackArray,
         &readControlsCAN_tcb
+    );
+
+	xTaskCreateStatic(
+        Task_Send_Switch_States,
+        "Reading All Switches & Writing to CarCan",
+        SEND_SWITCH_STATES_STACK_SIZE,
+        NULL,
+        SEND_SWITCH_STATES_PRIORITY,
+        send_switch_states_stackArray,
+        &send_switch_states_tcb
     );
 
     vTaskDelete(NULL);

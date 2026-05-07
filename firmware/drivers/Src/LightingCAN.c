@@ -7,9 +7,23 @@
 FDCAN_HandleTypeDef *LightingCAN = NULL;
 FDCAN_RxHeaderTypeDef LightingCAN_rx_header;
 
+static can_status_t LightingCAN_Recover(void) {
+	if ((LightingCAN == NULL) || (LightingCAN->Instance == NULL)) {
+		return CAN_ERR;
+	}
+
+	if (can_fd_start(LightingCAN) != CAN_OK) {
+		return CAN_ERR;
+	}
+
+	return CAN_OK;
+}
 
 can_status_t LightingCAN_Init(void) {
 	LightingCAN = hfdcan1;
+	if (LightingCAN == NULL) {
+		return CAN_ERR;
+	}
 
 	LightingCAN->Instance = FDCAN1;
 	LightingCAN->Init.ClockDivider = FDCAN_CLOCK_DIV1;
@@ -64,10 +78,17 @@ can_status_t LightingCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* da
 		.MessageMarker = 0,
 	};
 
-	if(LightingCAN == NULL) return CAN_ERR;
+	if ((LightingCAN == NULL) || (data == NULL)) return CAN_ERR;
 	if (can_fd_send(LightingCAN, &LightingCAN_tx_header, data, delay_ticks) == CAN_ERR) {
-		led_set(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN, LED_ON);
-		return CAN_ERR;
+		if (LightingCAN_Recover() != CAN_OK) {
+			led_set(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN, LED_ON);
+			return CAN_ERR;
+		}
+
+		if (can_fd_send(LightingCAN, &LightingCAN_tx_header, data, delay_ticks) == CAN_ERR) {
+			led_set(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN, LED_ON);
+			return CAN_ERR;
+		}
 	}
 
 	led_toggle(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN);
