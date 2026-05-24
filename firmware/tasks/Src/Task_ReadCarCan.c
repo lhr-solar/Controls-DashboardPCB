@@ -11,11 +11,11 @@ void ReadCarCAN_task(void *argument) {
 
     while (1) {
         
-		uint8_t data[CAN_DLC_DRIVER_INPUT_STATUS] = {0};
+		//uint8_t data[CAN_DLC_DRIVER_INPUT_STATUS] = {0};
 
-		if(CarCAN_Receive(CAN_ID_DRIVER_INPUT_STATUS, data, READ_CARCAN_TASK_DELAY_TICKS) == CAN_EMPTY) {
-			led_toggle(X_LED2_PORT, X_LED2_PIN);
-		}
+		//if(CarCAN_Receive(CAN_ID_DRIVER_INPUT_STATUS, data, READ_CARCAN_TASK_DELAY_TICKS) == CAN_EMPTY) {
+		//	led_toggle(X_LED2_PORT, X_LED2_PIN);
+		//}
 
         vTaskDelayUntil(&xLastWakeTime, READ_CARCAN_TASK_DELAY_TICKS);
     }
