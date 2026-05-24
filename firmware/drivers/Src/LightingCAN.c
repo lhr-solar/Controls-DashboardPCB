@@ -29,7 +29,7 @@ can_status_t LightingCAN_Init(void) {
 	LightingCAN->Init.ClockDivider = FDCAN_CLOCK_DIV1;
 	LightingCAN->Init.FrameFormat = FDCAN_FRAME_CLASSIC;
 	LightingCAN->Init.Mode = FDCAN_MODE_NORMAL;
-	LightingCAN->Init.AutoRetransmission = DISABLE;
+	LightingCAN->Init.AutoRetransmission = ENABLE;
 	LightingCAN->Init.TransmitPause = DISABLE;
 	LightingCAN->Init.ProtocolException = DISABLE;
 	LightingCAN->Init.NominalPrescaler = 20;
@@ -94,5 +94,7 @@ can_status_t LightingCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* da
 	led_toggle(PH_CAN_TX_LED_PORT, PH_CAN_TX_LED_PIN);
 	return CAN_OK;
 }
+
+
 
 

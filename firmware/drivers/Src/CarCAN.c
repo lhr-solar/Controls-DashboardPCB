@@ -30,7 +30,7 @@ can_status_t CarCAN_Init(void) {
 	CarCAN->Init.ClockDivider = FDCAN_CLOCK_DIV1;
 	CarCAN->Init.FrameFormat = FDCAN_FRAME_CLASSIC;
 	CarCAN->Init.Mode = FDCAN_MODE_NORMAL;
-	CarCAN->Init.AutoRetransmission = DISABLE;
+	CarCAN->Init.AutoRetransmission = ENABLE;
 	CarCAN->Init.TransmitPause = DISABLE;
 	CarCAN->Init.ProtocolException = DISABLE;
 	CarCAN->Init.NominalPrescaler = 20;

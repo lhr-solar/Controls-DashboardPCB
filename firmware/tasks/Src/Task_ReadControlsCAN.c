@@ -54,10 +54,10 @@ void ReadControlsCAN_task(void *argument) {
 
 
 		if(LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
-			led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
+			led_toggle(BPS_FAULT_LED_PORT, BPS_FAULT_LED_PIN);
 		}
 
 		led_toggle(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN);
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(5000));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(500));
     }
 }
