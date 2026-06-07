@@ -10,7 +10,6 @@
 #define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
 #define CONTROLS_CAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
 #define SEND_SWITCH_STATES_TASK_DELAY_TICKS pdMS_TO_TICKS(300)
-#define HAZARD_PERIOD_TICKS					pdMS_TO_TICKS(500)
 
 
 /* ------| Task Priorities |------ */
@@ -27,6 +26,9 @@
 #define SEND_SWITCH_STATES_STACK_SIZE     	configMINIMAL_STACK_SIZE
 
 #define NUM_STATUS_LEDS		6
+#define BPS_WATCHDOG_TIMEOUT_MS	   1000
+
+#define LIGHHTING_HAZARD_TICKS				pdMS_TO_TICKS(500)
 
 /* ------| TCBs |------ */
 // Task Control Blocks for each task

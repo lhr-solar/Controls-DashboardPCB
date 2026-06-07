@@ -5,27 +5,25 @@
 #include "Horn.h"
 #include "Switches.h"
 
+static uint8_t bps_strobe_state = 0;
+
+static void vBPS_StrobeCallback(TimerHandle_t timer) {
+    // No BPS messages received within timeout
+	// Only resets with car power cycle
+    set_high_noon_state(BPS_FAULT, ON);
+
+}
+
 void ReadControlsCAN_task(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
-	
 	lighting_command_t lighting_command = {0};
 	uint8_t tx_payload[CAN_DLC_LIGHTING_COMMAND] = {0};
 
     while (1) {
 		
-
-		///**
-		// * 
-		// * Hazard -> create a while loop that runs while button is on, and have lights
-		// * flash periodically?
-		// * 
-		// * Brake -> needs to be read from CarCAN and update lighting status
-		// * 
-		// * BPS_Strobe -> needs to be read from CarCAN and udpate lighting status
-		// * 
-		// */
-
+		lighting_command.Lighting_Set_BPS_Strobe = ;
+		lighting_command.Lighting_Set_Headlights = (switch_bitmap_read() >> SW_IGN_ARR) & 0x1;
 
         // --- HAZARD LOGIC WITH INTERRUPTIBLE DELAY ---
         if ((switch_bitmap_read() >> SW_HAZARD) & 0x1) {
@@ -47,10 +45,8 @@ void ReadControlsCAN_task(void *argument) {
 
 		lighting_command.Lighting_Set_Left_Indicator = (switch_bitmap_read() >> SW_LEFT_BLINKER) & 0x1;
 		lighting_command.Lighting_Set_Right_Indicator = (switch_bitmap_read() >> SW_RIGHT_BLINKER) & 0x1;
-		lighting_command.Lighting_Set_BPS_Strobe = 0;
-		lighting_command.Lighting_Set_Headlights = 0;
 		lighting_command.Lighting_Set_Custom_Mode = 0;
-		lighting_command.Lighting_Set_Brake = 0;
+		lighting_command.Lighting_Set_Brake = ((high_noon_bitmap >> VCU_REGEN_STATUS) & 0x1) || ((high_noon_bitmap >> VCU_BRAKE_STATUS) & 0x1);
 
 
 		if(LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){

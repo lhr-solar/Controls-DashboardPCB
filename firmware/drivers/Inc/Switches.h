@@ -20,6 +20,11 @@ typedef enum {
 } switch_state_t;
 
 typedef enum {
+	ON,
+	OFF
+} high_noon_state_t;
+
+typedef enum {
     LED_ON  = GPIO_PIN_SET,
     LED_OFF = GPIO_PIN_RESET
 } led_state_t;
@@ -45,9 +50,15 @@ typedef enum {
     SW_PTT           = 12,  // bit 12 - PushToTalk_Pressed
     SW_REGEN_ACTIVE  = 13,  // bit 13 - Regen_Activate
     SW_REGEN_ENABLE  = 14,  // bit 14 - Regen_Enable
-    SW_COUNT         = 15
+    SW_COUNT
 } switch_bit_t;
 
+typedef enum {
+	VCU_REGEN_STATUS = 0,  // bit 0 - VCU Regen Status read from CarCAN
+	BPS_FAULT = 1,		   // bit 1 - BPS faults read from CarCAN
+	VCU_BRAKE_STATUS = 2,	   // bit 2 - Brake status read from CarCAN
+	STATUS_COUNT
+} high_noon_state_bit_t;
 
 
 /**
@@ -91,6 +102,7 @@ uint32_t switch_read_all_inputs();
  */
 switch_state_t switch_get_state(switch_bit_t sw);
 
+high_noon_state_t get_high_noon_state(high_noon_state_bit_t b);
 
 /**
  * @brief Set a state in the fault bitmap
@@ -101,6 +113,8 @@ switch_state_t switch_get_state(switch_bit_t sw);
  * @return switch_bitmaps bitmap
  */
 uint32_t switch_bitmap_setBit(switch_bit_t bit, switch_state_t state);
+
+uint32_t set_high_noon_state(high_noon_state_bit_t bit, high_noon_state_t state);
 
 /**
  * @brief Set all state bits

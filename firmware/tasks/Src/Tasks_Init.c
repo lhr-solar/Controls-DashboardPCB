@@ -30,6 +30,7 @@ void InitTasks(void *argument) {
 	CarCAN_Init();
 	LightingCAN_Init();
 	
+	set_high_noon_state(BPS_FAULT, OFF);
 	
     xTaskCreateStatic(
         ReadCarCAN_task,

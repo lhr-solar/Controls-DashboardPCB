@@ -18,6 +18,7 @@ static TimerHandle_t xDebounceTimer_IgnitionSW = NULL;
 
 // Bit map to store all switch states as a payload
 static uint32_t switch_bitmap = 0;
+static uint32_t high_noon_bitmap = 0;
 
 
 static void vTimerCallback_GearSW(TimerHandle_t xTimer);
@@ -117,8 +118,29 @@ switch_state_t switch_get_state(switch_bit_t sw) {
 		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
 		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
 		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
+		case VCU_REGEN_STATUS: return (switch_bitmap >> VCU_REGEN_STATUS) & 0x1 ? SWITCH_ON : SWITCH_OFF;
 		default:               return SWITCH_ON;
 	}
+}
+
+high_noon_state_t get_high_noon_state(high_noon_state_bit_t b) {
+	switch(b) {
+		case VCU_REGEN_STATUS: return (high_noon_bitmap >> VCU_REGEN_STATUS) & 0x1 ? ON : OFF;
+		default:              return OFF;
+	}
+}
+
+uint32_t set_high_noon_state(high_noon_state_bit_t bit, high_noon_state_t state) {
+	if(bit >= STATUS_COUNT) return high_noon_bitmap;
+
+	uint32_t mask = GET_MASK(bit);
+
+	portENTER_CRITICAL();
+	if(state == ON) high_noon_bitmap |= mask;
+	else high_noon_bitmap &= ~(mask);
+	portEXIT_CRITICAL();
+
+	return high_noon_bitmap;
 }
 
 
