@@ -28,6 +28,7 @@ void InitTasks(void *argument) {
     switch_init();
     horn_gpio_init();
 	CarCAN_Init();
+	SteeringCAN_Init();
 	LightingCAN_Init();
 	
 	set_high_noon_state(BPS_FAULT, OFF);

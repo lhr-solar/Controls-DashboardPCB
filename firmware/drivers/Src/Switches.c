@@ -118,7 +118,6 @@ switch_state_t switch_get_state(switch_bit_t sw) {
 		case SW_PTT:           return HAL_GPIO_ReadPin(PTT_PORT,            PTT_PIN)            == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
 		case SW_REGEN_ENABLE:  return HAL_GPIO_ReadPin(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
 		case SW_REGEN_ACTIVE:  return HAL_GPIO_ReadPin(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN)   == GPIO_PIN_SET ? SWITCH_OFF : SWITCH_ON;
-		case VCU_REGEN_STATUS: return (switch_bitmap >> VCU_REGEN_STATUS) & 0x1 ? SWITCH_ON : SWITCH_OFF;
 		default:               return SWITCH_ON;
 	}
 }

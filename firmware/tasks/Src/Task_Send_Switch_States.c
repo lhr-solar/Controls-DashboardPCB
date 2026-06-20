@@ -5,7 +5,6 @@
 #include "Tasks.h"
 #include "init.h"
 
-
 void Task_Send_Switch_States(void *argument) {
 	TickType_t xLastWakeTime = xTaskGetTickCount();
 

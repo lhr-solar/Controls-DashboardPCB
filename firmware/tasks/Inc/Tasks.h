@@ -7,7 +7,7 @@
 #include "event_groups.h"
 
 
-#define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
+#define READ_CARCAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(150)
 #define CONTROLS_CAN_TASK_DELAY_TICKS 		pdMS_TO_TICKS(300)
 #define SEND_SWITCH_STATES_TASK_DELAY_TICKS pdMS_TO_TICKS(300)
 
@@ -28,7 +28,7 @@
 #define NUM_STATUS_LEDS		6
 #define BPS_WATCHDOG_TIMEOUT_MS	   1000
 
-#define LIGHHTING_HAZARD_TICKS				pdMS_TO_TICKS(500)
+#define HAZARD_PERIOD_TICKS				pdMS_TO_TICKS(500)
 
 /* ------| TCBs |------ */
 // Task Control Blocks for each task
@@ -49,3 +49,4 @@ void ReadCarCAN_task(void *argument);
 void ReadControlsCAN_task(void *argument);
 
 void Task_Send_Switch_States(void *argument);
+

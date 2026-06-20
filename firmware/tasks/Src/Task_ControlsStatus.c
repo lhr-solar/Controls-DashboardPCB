@@ -23,7 +23,7 @@ void ReadCarCAN_task(void *argument) {
 	bps_watchdog_timer = xTimerCreateStatic(
     	"BPS Watchdog",
     	pdMS_TO_TICKS(BPS_WATCHDOG_TIMEOUT_MS),
-    	pdFALSE,                    // one-shot timer
+    	pdFALSE,
     	NULL,
     	vBPSWatchdogCallback,
     	&bps_timer_buffer
