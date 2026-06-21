@@ -49,7 +49,8 @@ void Task_Send_Switch_States(void *argument) {
 						SEND_SWITCH_STATES_TASK_DELAY_TICKS) != CAN_OK) {
 			led_toggle(AKSHAY_LED_PORT, AKSHAY_LED_PIN);
 		}
-
+		
+		horn_set(switch_get_state(SW_HORN));
 		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
 
 		vTaskDelayUntil(&xLastWakeTime, SEND_SWITCH_STATES_TASK_DELAY_TICKS);

@@ -12,7 +12,7 @@ static FDCAN_HandleTypeDef *CarCAN = NULL;
 static FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
 can_status_t SteeringCAN_Init(void) {
-	steering_hfdcan = hfdcan2;
+	steering_hfdcan = hfdcan2;    
 	if (steering_hfdcan == NULL) {
 		return CAN_ERR;
 	}
