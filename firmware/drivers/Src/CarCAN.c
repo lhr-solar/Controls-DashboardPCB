@@ -4,7 +4,7 @@
 #include "Switches.h"
 #include "init.h"
 
-/* ================= SteeringCAN (fdcan1) ================= */
+/* ================= SteeringCAN (fdcan2) ================= */
 FDCAN_HandleTypeDef *steering_hfdcan = NULL;
 
 /* ================= CarCAN (fdcan3) ================= */
@@ -12,12 +12,12 @@ static FDCAN_HandleTypeDef *CarCAN = NULL;
 static FDCAN_RxHeaderTypeDef carCAN_rx_header;
 
 can_status_t SteeringCAN_Init(void) {
-	steering_hfdcan = hfdcan1;
+	steering_hfdcan = hfdcan2;
 	if (steering_hfdcan == NULL) {
 		return CAN_ERR;
 	}
 
-	steering_hfdcan->Instance = FDCAN1;
+	steering_hfdcan->Instance = FDCAN2;
 	steering_hfdcan->Init.ClockDivider = FDCAN_CLOCK_DIV1;
 	steering_hfdcan->Init.FrameFormat = FDCAN_FRAME_CLASSIC;
 	steering_hfdcan->Init.Mode = FDCAN_MODE_NORMAL;
