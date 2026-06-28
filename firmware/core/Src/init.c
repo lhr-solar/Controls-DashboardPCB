@@ -107,6 +107,29 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *fdcanHandle)
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
     }
 
+    // steering CAN
+    if(fdcanHandle->Instance == FDCAN2)
+    {
+
+         __HAL_RCC_GPIOB_CLK_ENABLE();
+
+
+        /**FDCAN2 GPIO Configuration
+        PB12     ------> FDCAN2_RX
+        PB13     ------> FDCAN2_TX
+        */
+        HAL_NVIC_SetPriority(FDCAN2_IT0_IRQn, FDCAN_NVIC_PRIO, 0);
+        HAL_NVIC_EnableIRQ(FDCAN2_IT0_IRQn);
+        HAL_NVIC_SetPriority(FDCAN2_IT1_IRQn, FDCAN_NVIC_PRIO, 0);
+        HAL_NVIC_EnableIRQ(FDCAN2_IT1_IRQn);
+        GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Alternate = GPIO_AF9_FDCAN2;
+        HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    }
+
 	if(fdcanHandle->Instance == FDCAN1)
 	{
 		HAL_NVIC_SetPriority(FDCAN1_IT0_IRQn, FDCAN_NVIC_PRIO, 0);

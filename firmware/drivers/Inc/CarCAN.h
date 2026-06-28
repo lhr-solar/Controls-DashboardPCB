@@ -6,13 +6,7 @@
 #include "CAN_FD.h"
 #include "CarCAN_can_msgs.h"
 
-extern FDCAN_HandleTypeDef *steering_hfdcan;;
-
-/**
- * @brief 				 Initiliaize FDCAN1 - SteeringCAN Peripheral
- * @return can_status_t  success = CAN_OK, fail = anything else get to debugging lil man
- */
-can_status_t SteeringCAN_Init(void);
+extern FDCAN_HandleTypeDef *CarCAN;
 
 /**
  * @brief 				 Initiliaize FDCAN3 - CarCAN Peripheral

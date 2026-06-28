@@ -5,6 +5,7 @@
 #include "Horn.h"
 #include "CarCAN.h"
 #include "LightingCAN.h"
+#include "SteeringCAN.h"
 
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
