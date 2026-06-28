@@ -196,11 +196,11 @@ void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data) {
 }
 
 
-void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, can_rx_payload_t recv_payload ){
-    
+void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, can_rx_payload_t recv_payload) {
+
     // only forward motorCAN messages to CarCAN
     if (steering_hfdcan != NULL && hfdcan->Instance == steering_hfdcan->Instance){
-
+		led_toggle(X_LED2_PORT, X_LED2_PIN);
         BaseType_t higherPriorityTaskWoken = pdFALSE;
 
         // don't yield at the end of this since the rest of the ISR needs to run
