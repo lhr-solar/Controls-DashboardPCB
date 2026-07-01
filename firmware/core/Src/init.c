@@ -8,9 +8,13 @@
 static uint32_t HAL_RCC_FDCAN_CLK_ENABLED = 0;
 
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode) {
+    gpioPin_InitPull(port, pin, mode, GPIO_NOPULL);
+}
+
+void gpioPin_InitPull(GPIO_TypeDef *port, uint16_t pin, uint32_t mode, uint32_t pull) {
     GPIO_InitTypeDef GPIO_init = {
         .Mode = mode,
-        .Pull = GPIO_NOPULL,
+        .Pull = pull,
         .Pin  = pin
     };
 

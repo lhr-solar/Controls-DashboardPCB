@@ -21,3 +21,12 @@ void SystemClock_Config(void);
  */
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode);
 
+/**
+ * @brief  Same as gpioPin_Init but with explicit pull configuration.
+ * @param  pull  GPIO_NOPULL, GPIO_PULLUP, or GPIO_PULLDOWN.
+ *
+ * @attention Switch inputs must NEVER be GPIO_NOPULL — an unplugged or
+ *            idle harness line floats and reads as a phantom press.
+ */
+void gpioPin_InitPull(GPIO_TypeDef *port, uint16_t pin, uint32_t mode, uint32_t pull);
+
