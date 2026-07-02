@@ -21,9 +21,3 @@ void SystemClock_Config(void);
  */
 void gpioPin_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t mode);
 
-/**
- * @brief  Same as gpioPin_Init but with explicit pull configuration.
- * @param  pull  GPIO_NOPULL, GPIO_PULLUP, or GPIO_PULLDOWN.
- */
-void gpioPin_InitPull(GPIO_TypeDef *port, uint16_t pin, uint32_t mode, uint32_t pull);
-

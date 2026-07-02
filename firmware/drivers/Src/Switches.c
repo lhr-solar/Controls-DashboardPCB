@@ -25,21 +25,21 @@ static void vTimerCallback_GearSW(TimerHandle_t xTimer);
 static void vTimerCallback_IgnitionSW(TimerHandle_t xTimer);
 
 void switch_init() {
-    gpioPin_InitPull(FWD_SW_PORT,         FWD_SW_PIN,         GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(IGN_OFF_PORT,        IGN_OFF_PIN,        GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(IGN_MTR_PORT,        IGN_MTR_PIN,        GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(IGN_ARR_PORT,        IGN_ARR_PIN,        GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(PTT_PORT,            PTT_PIN,            GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN,   GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(REV_SW_PORT,         REV_SW_PIN,         GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN,   GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN,  GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN,   GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN,  GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(CRUISE_SET_PORT,     CRUISE_SET_PIN,     GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN,   GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(HAZARD_PORT,         HAZARD_PIN,         GPIO_MODE_INPUT, GPIO_PULLUP);
-    gpioPin_InitPull(HORN_PORT,           HORN_PIN,           GPIO_MODE_INPUT, GPIO_PULLUP);
+    gpioPin_Init(FWD_SW_PORT,         FWD_SW_PIN,         GPIO_MODE_INPUT);
+    gpioPin_Init(IGN_OFF_PORT,        IGN_OFF_PIN,        GPIO_MODE_INPUT);
+    gpioPin_Init(IGN_MTR_PORT,        IGN_MTR_PIN,        GPIO_MODE_INPUT);
+    gpioPin_Init(IGN_ARR_PORT,        IGN_ARR_PIN,        GPIO_MODE_INPUT);
+    gpioPin_Init(PTT_PORT,            PTT_PIN,            GPIO_MODE_INPUT);
+    gpioPin_Init(NEUTRAL_GEAR_PORT,   NEUTRAL_GEAR_PIN,   GPIO_MODE_INPUT);
+    gpioPin_Init(REV_SW_PORT,         REV_SW_PIN,         GPIO_MODE_INPUT);
+    gpioPin_Init(REGEN_ENABLE_PORT,   REGEN_ENABLE_PIN,   GPIO_MODE_INPUT);
+    gpioPin_Init(RIGHT_BLINKER_PORT,  RIGHT_BLINKER_PIN,  GPIO_MODE_INPUT);
+    gpioPin_Init(LEFT_BLINKER_PORT,   LEFT_BLINKER_PIN,   GPIO_MODE_INPUT);
+    gpioPin_Init(CRUISE_ENABLE_PORT,  CRUISE_ENABLE_PIN,  GPIO_MODE_INPUT);
+    gpioPin_Init(CRUISE_SET_PORT,     CRUISE_SET_PIN,     GPIO_MODE_INPUT);
+    gpioPin_Init(REGEN_ACTIVE_PORT,   REGEN_ACTIVE_PIN,   GPIO_MODE_INPUT);
+    gpioPin_Init(HAZARD_PORT,         HAZARD_PIN,         GPIO_MODE_INPUT);
+    gpioPin_Init(HORN_PORT,           HORN_PIN,           GPIO_MODE_INPUT);
 
 	
     switch_EXTI_Init(NEUTRAL_GEAR_PORT, NEUTRAL_GEAR_PIN, SWITCH_MAX_PRIO);
@@ -72,7 +72,7 @@ void switch_init() {
 
 void gpioEXTI_Init(GPIO_TypeDef *port, uint16_t pin) {
 	if(port == NULL) return;
-	gpioPin_InitPull(port, pin, GPIO_MODE_IT_RISING_FALLING, GPIO_PULLUP);
+	gpioPin_Init(port, pin, GPIO_MODE_IT_RISING_FALLING);
 }
 
 void switch_EXTI_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t NVIC_GPIO_EXT_PRIORITY) {
