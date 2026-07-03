@@ -53,6 +53,8 @@ typedef enum {
     SW_COUNT
 } switch_bit_t;
 
+extern const char *const switch_names[SW_COUNT];
+
 typedef enum {
 	VCU_REGEN_STATUS = 0,  // bit 0 - VCU Regen Status read from CarCAN
 	BPS_FAULT = 1,		   // bit 1 - BPS faults read from CarCAN

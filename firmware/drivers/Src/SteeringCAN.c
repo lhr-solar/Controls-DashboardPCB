@@ -49,6 +49,41 @@ can_status_t SteeringCAN_Init(void) {
 	return CAN_OK;
 }
 
+can_status_t SteeringCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, TickType_t delay_ticks) {
+
+	if(data == NULL || payloadSize_dlc > 64) {
+		return CAN_ERR;
+	}
+
+	FDCAN_TxHeaderTypeDef steeringCAN_tx_header = {
+		.Identifier = id,
+		.IdType = FDCAN_STANDARD_ID,
+		.TxFrameType = FDCAN_DATA_FRAME,
+		.DataLength = payloadSize_dlc,
+		.ErrorStateIndicator = FDCAN_ESI_ACTIVE,
+		.BitRateSwitch = FDCAN_BRS_OFF,
+		.FDFormat = FDCAN_CLASSIC_CAN,
+		.TxEventFifoControl = FDCAN_NO_TX_EVENTS,
+		.MessageMarker = 0,
+	};
+	if (steering_hfdcan == NULL) {
+		return CAN_ERR;
+	}
+	return can_fd_send(steering_hfdcan, &steeringCAN_tx_header, data, delay_ticks);
+}
+
+can_status_t SteeringCAN_ResetAngle(TickType_t delay_ticks) {
+	
+	uint8_t steering_tx_payload[CAN_DLC_LWS_CONFIG] = {0};
+	// clear the CCW bits (bits 0-2)
+	steering_tx_payload[0] &= ~(0x07);
+
+	// set the CCW bits to 3 (0b011) to reset the angle
+	steering_tx_payload[0] |= (LWS_CONFIG_LWS_CCW_SETS_THE_SIGNAL_LWS_ANGLE_TO_0Ã_Â_ & 0x07);
+
+	return SteeringCAN_Send(CAN_ID_LWS_CONFIG, CAN_DLC_LWS_CONFIG, steering_tx_payload, delay_ticks);
+}
+
 
 void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, can_rx_payload_t recv_payload) {
 

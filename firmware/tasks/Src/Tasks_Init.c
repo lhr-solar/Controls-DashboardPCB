@@ -6,6 +6,7 @@
 #include "CarCAN.h"
 #include "LightingCAN.h"
 #include "SteeringCAN.h"
+#include "Debugging.h"
 
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
@@ -31,6 +32,7 @@ void InitTasks(void *argument) {
 	CarCAN_Init();
 	SteeringCAN_Init();
 	LightingCAN_Init();
+    initPrintf();
 	
 	set_high_noon_state(BPS_FAULT, OFF);
 	

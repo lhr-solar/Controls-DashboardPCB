@@ -7,6 +7,24 @@
 
 #include "LightingCAN.h"
 
+const char *const switch_names[SW_COUNT] = {
+		"SW_IGN_ARR",
+		"SW_IGN_MTR",
+		"SW_IGN_OFF",
+		"SW_CRUISE_ENABLE",
+		"SW_CRUISE_SET",
+		"SW_FWD",
+		"SW_NEUTRAL_GEAR",
+		"SW_REV",
+		"SW_HAZARD",
+		"SW_HORN",
+		"SW_LEFT_BLINKER",
+		"SW_RIGHT_BLINKER",
+		"SW_PTT",
+		"SW_REGEN_ACTIVE",
+		"SW_REGEN_ENABLE"
+	};
+
 
 #define EXTI_TIMER_PERIOD 	pdMS_TO_TICKS(1000)  // 200 ms
 

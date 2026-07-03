@@ -4,6 +4,24 @@
 #include "Switches.h"
 #include "Tasks.h"
 #include "init.h"
+#include "printf.h"
+
+static void print_changed_switches(uint32_t previous_bitmap, uint32_t new_bitmap) {
+
+	// see which bits have changed
+	const uint32_t changed_bits = previous_bitmap ^ new_bitmap;
+	if (changed_bits == 0U) {
+		return;
+	}
+
+	printf("Switches changed:");
+	for (size_t i = 0; i < SW_COUNT; i++) {
+		if (((changed_bits >> i) & 0x1U) != 0U) {
+			printf("%s changed from state: %u to : %u", switch_names[i], (unsigned int)((previous_bitmap >> i) & 0x1U), (unsigned int)((new_bitmap >> i) & 0x1U));
+		}
+	}
+	printf("\r\n");
+}
 
 void Task_Send_Switch_States(void *argument) {
 	TickType_t xLastWakeTime = xTaskGetTickCount();
@@ -11,8 +29,10 @@ void Task_Send_Switch_States(void *argument) {
 	uint32_t reset_ign = 0;
 	uint32_t reset_gear = 0;
 	uint32_t bitmap = 0;
+	uint32_t previous_bitmap = 0;
 
 	while (1) {
+		previous_bitmap = bitmap;
 		bitmap = switch_read_all_inputs();
 
 		if ((((bitmap >> SW_HAZARD) & 0x1)) && (ReadControlsCAN_TaskHandle != NULL)) {
@@ -52,6 +72,9 @@ void Task_Send_Switch_States(void *argument) {
 		
 		horn_set(switch_get_state(SW_HORN));
 		led_toggle(LSOM_HB_PORT, LSOM_HB_PIN);
+
+		print_changed_switches(previous_bitmap, bitmap);
+
 
 		vTaskDelayUntil(&xLastWakeTime, SEND_SWITCH_STATES_TASK_DELAY_TICKS);
 	}
