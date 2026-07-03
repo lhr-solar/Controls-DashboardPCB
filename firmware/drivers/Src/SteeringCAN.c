@@ -84,6 +84,18 @@ can_status_t SteeringCAN_ResetAngle(TickType_t delay_ticks) {
 	return SteeringCAN_Send(CAN_ID_LWS_CONFIG, CAN_DLC_LWS_CONFIG, steering_tx_payload, delay_ticks);
 }
 
+can_status_t SteeringCAN_ResetCalibration(TickType_t delay_ticks){
+
+	uint8_t steering_tx_payload[CAN_DLC_LWS_CONFIG] = {0};
+	// clear the CCW bits (bits 0-2)
+	steering_tx_payload[0] &= ~(0x07);
+
+	// set the CCW bits to 3 (0b011) to reset the angle
+	steering_tx_payload[0] |= (LWS_CONFIG_LWS_CCW_RESETS_CALIBRATION_STATUS & 0x07);
+
+	return SteeringCAN_Send(CAN_ID_LWS_CONFIG, CAN_DLC_LWS_CONFIG, steering_tx_payload, delay_ticks);
+}
+
 
 void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, can_rx_payload_t recv_payload) {
 

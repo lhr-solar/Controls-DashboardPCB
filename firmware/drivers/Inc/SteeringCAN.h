@@ -11,10 +11,24 @@
 extern FDCAN_HandleTypeDef *steering_hfdcan;;
 
 /**
- * @brief 				 Initiliaize FDCAN1 - SteeringCAN Peripheral
- * @return can_status_t  success = CAN_OK, fail = anything else get to debugging lil man
+ * @brief 				    Initiliaize FDCAN1 - SteeringCAN Peripheral
+ * @return can_status_t     success = CAN_OK, fail = anything else get to debugging lil man
  */
 can_status_t SteeringCAN_Init(void);
+
+/**
+ * @brief 				    Reset the steering angle sensor to 0 angle
+  * @param  delay_ticks  	timeout time (in ticks)
+ * @return can_status_t     success = CAN_OK, fail = CAN_ERR
+ */
+can_status_t SteeringCAN_ResetAngle(TickType_t delay_ticks);
+
+/**
+ * @brief 				    Reset the steering angle calibration status
+  * @param  delay_ticks  	timeout time (in ticks)
+ * @return can_status_t     success = CAN_OK, fail = CAN_ERR
+ */
+can_status_t SteeringCAN_ResetCalibration(TickType_t delay_ticks);
 
 /**
  * @brief  Wrapper function for sending payload over steeringCAN
