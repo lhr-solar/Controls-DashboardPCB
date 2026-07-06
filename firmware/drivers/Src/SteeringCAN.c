@@ -1,4 +1,5 @@
 #include "SteeringCAN.h"
+#include "LightingCAN.h"
 
 /* ================= SteeringCAN (fdcan2) ================= */
 FDCAN_HandleTypeDef *steering_hfdcan = NULL;
@@ -99,7 +100,6 @@ can_status_t SteeringCAN_ResetCalibration(TickType_t delay_ticks){
 
 void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, can_rx_payload_t recv_payload) {
 
-    // only forward motorCAN messages to CarCAN
     if (steering_hfdcan != NULL && hfdcan->Instance == steering_hfdcan->Instance && CarCAN != NULL){
         BaseType_t higherPriorityTaskWoken = pdFALSE;
 
@@ -118,4 +118,23 @@ void can_fd_rx_callback_hook(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs, c
 
         can_fd_send_isr(CarCAN, &tx_header, recv_payload.data, &higherPriorityTaskWoken);
     }
+	// forward LightingCAN messages to CarCAN as well
+	else if(LightingCAN != NULL && hfdcan->Instance == LightingCAN->Instance && CarCAN != NULL){
+		BaseType_t higherPriorityTaskWoken = pdFALSE;
+
+		// don't yield at the end of this since the rest of the ISR needs to run
+		
+		FDCAN_TxHeaderTypeDef tx_header = {0};   
+		tx_header.Identifier = recv_payload.header.Identifier;
+		tx_header.IdType = recv_payload.header.IdType;
+		tx_header.TxFrameType = FDCAN_DATA_FRAME;
+		tx_header.DataLength = recv_payload.header.DataLength;
+		tx_header.ErrorStateIndicator = recv_payload.header.ErrorStateIndicator;
+		tx_header.BitRateSwitch = recv_payload.header.BitRateSwitch;
+		tx_header.FDFormat = recv_payload.header.FDFormat;
+		tx_header.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+		tx_header.MessageMarker = 0;
+
+		can_fd_send_isr(CarCAN, &tx_header, recv_payload.data, &higherPriorityTaskWoken);
+	}
 }

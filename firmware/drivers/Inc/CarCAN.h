@@ -33,3 +33,12 @@ can_status_t CarCAN_Receive(uint32_t id, uint8_t data[], TickType_t delay_ticks)
  * @return NONE
  */
 void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data);
+
+can_status_t CarCAN_Recv_BPS_Status(bps_status_t *out, TickType_t delay);
+can_status_t CarCAN_Recv_Brake_Pressure1(brake_pressure_1_t *out, TickType_t delay);
+can_status_t CarCAN_Recv_Brake_Pressure2(brake_pressure_2_t *out, TickType_t delay);
+
+
+can_status_t CarCAN_Recv_VCU_Status(vcu_status_t *out, TickType_t delay);
+
+can_status_t CarCAN_Recv_Brake_Pressure2(brake_pressure_2_t *out, TickType_t delay);

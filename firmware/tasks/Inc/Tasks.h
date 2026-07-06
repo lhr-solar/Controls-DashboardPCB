@@ -17,6 +17,7 @@
 #define READ_CAR_CAN_PRIORITY               (tskIDLE_PRIORITY+2) //BPS fault detection
 #define READ_CONTROLS_CAN_PRIORITY          (tskIDLE_PRIORITY+4) //want to run immidetly after CAN ISR
 #define SEND_SWITCH_STATES_PRIORITY       	(tskIDLE_PRIORITY+3) //general IO updates + CAN
+#define SEND_LIGHTING_COMMANDS_PRIORITY   	(tskIDLE_PRIORITY+3)
 
 /* ------| Task Stack Sizes |------ */
 //setting stack sizes for each stack to the minimum (128 words)
@@ -24,6 +25,7 @@
 #define READ_CAR_CAN_STACK_SIZE             configMINIMAL_STACK_SIZE
 #define READ_CONTROLS_CAN_STACK_SIZE        configMINIMAL_STACK_SIZE
 #define SEND_SWITCH_STATES_STACK_SIZE     	configMINIMAL_STACK_SIZE
+#define SEND_LIGHTING_COMMANDS_STACK_SIZE   configMINIMAL_STACK_SIZE
 
 #define NUM_STATUS_LEDS		6
 #define BPS_WATCHDOG_TIMEOUT_MS	   1000
@@ -36,6 +38,7 @@ extern StaticTask_t INIT_TASK_TCB;
 extern StaticTask_t READ_CAR_CAN_TCB;
 extern StaticTask_t READ_CONTROLS_CAN_TCB;
 extern StaticTask_t SEND_SWITCH_STATES_TCB;
+extern StaticTask_t SEND_LIGHTING_COMMANDS_TCB;
 
 extern TaskHandle_t ReadControlsCAN_TaskHandle;
 
@@ -49,4 +52,6 @@ void ReadCarCAN_task(void *argument);
 void ReadControlsCAN_task(void *argument);
 
 void Task_Send_Switch_States(void *argument);
+
+void Task_Send_Lighting_Commands(void *argument);
 

@@ -4,45 +4,152 @@
 #include "Status_LEDs.h"
 #include "Horn.h"
 #include "Switches.h"
+#include "CarCAN_can_msgs.h"
+#include "CarCAN.h"
+#include "LightingCAN_can_msgs.h"
+#include "printf.h"
 
-//static uint8_t bps_strobe_state = 0;
+#define BRAKE_PRESSURE_THRESH_PSI 120
+#define BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI 10
 
-void ReadControlsCAN_task(void *argument) {
+static void print_updated_lighting_command(lighting_command_t old_command, lighting_command_t new_command){
+    int first = 1;
+    int printed = 0;
+
+    if(old_command.Lighting_Set_Headlights != new_command.Lighting_Set_Headlights){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sHeadlights = %s", first ? "" : ", ", new_command.Lighting_Set_Headlights ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(old_command.Lighting_Set_Left_Indicator != new_command.Lighting_Set_Left_Indicator){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sLEFT_INDICATOR = %s", first ? "" : ", ", new_command.Lighting_Set_Left_Indicator ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(old_command.Lighting_Set_Right_Indicator != new_command.Lighting_Set_Right_Indicator){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sRIGHT_INDICATOR = %s", first ? "" : ", ", new_command.Lighting_Set_Right_Indicator ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(old_command.Lighting_Blink_Sync != new_command.Lighting_Blink_Sync){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sBLINK_SYNC = %s", first ? "" : ", ", new_command.Lighting_Blink_Sync ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(old_command.Lighting_Set_Brake != new_command.Lighting_Set_Brake){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sBrake = %s", first ? "" : ", ", new_command.Lighting_Set_Brake ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(old_command.Lighting_Set_BPS_Strobe != new_command.Lighting_Set_BPS_Strobe){
+        if(!printed){
+            printf("Lighting Command Update: {");
+            printed = 1;
+        }
+        printf("%sBPS_STROBE = %s", first ? "" : ", ", new_command.Lighting_Set_BPS_Strobe ? "ON" : "OFF");
+        first = 0;
+    }
+
+    if(printed){
+        printf("}\r\n");
+    }
+}
+
+void Task_Send_Lighting_Commands(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
 	lighting_command_t lighting_command = {0};
-	uint8_t tx_payload[CAN_DLC_LIGHTING_COMMAND] = {0};
+    lighting_command_t old_lighting_command = {0};
+    bps_status_t bps_status = {0};
+    vcu_status_t vcu_status = {0};
+    brake_pressure_2_t brake_pressure_2 = {0};
 
     while (1) {
-		lighting_command.Lighting_Set_Headlights = (switch_bitmap_read() >> SW_IGN_ARR) & 0x1;
 
-        // --- HAZARD LOGIC WITH INTERRUPTIBLE DELAY ---
-        if ((switch_bitmap_read() >> SW_HAZARD) & 0x1) {
+        // save a copy so we can print out the difference
+        old_lighting_command = lighting_command;
 
-            while ((switch_bitmap_read() >> SW_HAZARD) & 0x1) {
+        // in general, if we fail to read a CAN message then we can default to the previous values
+        // everything is off by default at the start
 
-                lighting_command.Lighting_Blink_Sync ^= 0x1;
+        // no need for custom messages in production firmware
+        lighting_command.Lighting_Set_Custom_Mode = 0;
 
-                uint32_t notified = 0;
-                BaseType_t result = xTaskNotifyWait(0, 0, &notified, HAZARD_PERIOD_TICKS);
+        CarCAN_Recv_BPS_Status(&bps_status, 0);
+        can_status_t vcu_stat = CarCAN_Recv_VCU_Status(&vcu_status, 0);
+        if(vcu_stat == CAN_OK){
+            printf("Recieved VCU Status msg\r\n");
+        }
+        CarCAN_Recv_Brake_Pressure2(&brake_pressure_2, 0);
 
-                if (result == pdTRUE) {
-                    // hazard turned off → break immediately
-                    break;
-                }
-            }
+        // BPS has faulted, turn on bps strobe and hazards
+        // BPS fault is latching so don't need to have logic to clear strobe and hazards in a bps fault
+        if(bps_status.BPS_Fault != BPS_STATUS_BPS_FAULT_OK){
+            lighting_command.Lighting_Set_BPS_Strobe = LIGHTING_COMMAND_LIGHTING_SET_BPS_STROBE_ON;
+            lighting_command.Lighting_Blink_Sync = 1;
+
+            // turn on hazards
+            lighting_command.Lighting_Set_Left_Indicator = LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON;
+            lighting_command.Lighting_Set_Right_Indicator = LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON;
+        }
+
+        bool hazards_enabled = ((switch_bitmap_read() >> SW_HAZARD) & 0x1);
+        if(hazards_enabled){
+            lighting_command.Lighting_Set_Left_Indicator = LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON;
+            lighting_command.Lighting_Set_Right_Indicator = LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON;
+        }
+        // even if the hazard switch was not pressed, if we're in a BPS fault state we want to keep the hazards on
+        else if(bps_status.BPS_Fault == BPS_STATUS_BPS_FAULT_OK) {
+            // if the hazards are not set and bps is in a good state, left and right indicators can be set based on switch input
+            lighting_command.Lighting_Set_Left_Indicator = (switch_bitmap_read() >> SW_LEFT_BLINKER) & 0x1 ? LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON : LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_OFF;
+            lighting_command.Lighting_Set_Right_Indicator = (switch_bitmap_read() >> SW_RIGHT_BLINKER) & 0x1 ? LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON : LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_OFF;
+        }
+
+        // if the brake is pressed far enough or regen is active, turn on the brakelight
+        if(brake_pressure_2.Brake_Pressure >= BRAKE_PRESSURE_THRESH_PSI || vcu_status.VCU_Regen_Active == VCU_STATUS_VCU_REGEN_ACTIVE_ACTIVE){
+            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
+        }
+        // if the brake is released enough, and regen is not active, turn off the brakelight
+        else if(brake_pressure_2.Brake_Pressure <= (BRAKE_PRESSURE_THRESH_PSI - BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI) && vcu_status.VCU_Regen_Active == VCU_STATUS_VCU_REGEN_ACTIVE_INACTIVE){
+            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
+        }
+        
+        // only need to turn on headlights if the car is in a driveable state
+        if(vcu_status.Motor_Ready == VCU_STATUS_MOTOR_READY_OK){
+            lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_ON;
+        }
+        else{
+            lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_OFF;
         }
 
 
-		lighting_command.Lighting_Set_Left_Indicator = (switch_bitmap_read() >> SW_LEFT_BLINKER) & 0x1;
-		lighting_command.Lighting_Set_Right_Indicator = (switch_bitmap_read() >> SW_RIGHT_BLINKER) & 0x1;
-		lighting_command.Lighting_Set_Custom_Mode = 0;
-        lighting_command.Lighting_Set_Brake = (get_high_noon_state(VCU_REGEN_STATUS) == ON) || (get_high_noon_state(VCU_BRAKE_STATUS) == ON);
-
-
-		if(LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
+		if(LightingCAN_SendLightingCommand(lighting_command, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
 			led_toggle(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN);
 		}
+
+        print_updated_lighting_command(old_lighting_command, lighting_command);
+
+
         vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(500));
     }
 }

@@ -14,7 +14,7 @@ static void print_changed_switches(uint32_t previous_bitmap, uint32_t new_bitmap
 		return;
 	}
 
-	printf("Switches changed:");
+	printf("Switches changed: ");
 	for (size_t i = 0; i < SW_COUNT; i++) {
 		if (((changed_bits >> i) & 0x1U) != 0U) {
 			printf("%s changed from state: %u to : %u", switch_names[i], (unsigned int)((previous_bitmap >> i) & 0x1U), (unsigned int)((new_bitmap >> i) & 0x1U));

@@ -11,20 +11,16 @@
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
 StackType_t send_switch_states_stackArray[SEND_SWITCH_STATES_STACK_SIZE];
+StackType_t send_lighting_commands_stackArray[SEND_LIGHTING_COMMANDS_STACK_SIZE];
 
 StaticTask_t readCarCAN_tcb;
 StaticTask_t readControlsCAN_tcb;
 StaticTask_t send_switch_states_tcb;
+StaticTask_t send_lighting_commands_tcb;
 
 TaskHandle_t ReadControlsCAN_TaskHandle;
 
 void InitTasks(void *argument) {
-
-    /**
-	 * 
-	 * @todo     Add BPS fault watchdog here
-	 * 
-	*/
 
 	led_gpio_init();
     switch_init();
@@ -46,18 +42,6 @@ void InitTasks(void *argument) {
         &readCarCAN_tcb
     );
 
-
-
-   	ReadControlsCAN_TaskHandle = xTaskCreateStatic(
-        ReadControlsCAN_task,
-        "Read Controls CAN Task",
-        READ_CONTROLS_CAN_STACK_SIZE,
-        NULL,
-        READ_CONTROLS_CAN_PRIORITY,
-        readControlsCAN_stackArray,
-        &readControlsCAN_tcb
-    );
-
 	xTaskCreateStatic(
         Task_Send_Switch_States,
         "Reading All Switches & Writing to CarCan",
@@ -66,6 +50,16 @@ void InitTasks(void *argument) {
         SEND_SWITCH_STATES_PRIORITY,
         send_switch_states_stackArray,
         &send_switch_states_tcb
+    );
+
+    xTaskCreateStatic(
+        Task_Send_Lighting_Commands,
+        "Sending Lighting Commands",
+        SEND_LIGHTING_COMMANDS_STACK_SIZE,
+        NULL,
+        SEND_LIGHTING_COMMANDS_PRIORITY,
+        send_lighting_commands_stackArray,
+        &send_lighting_commands_tcb
     );
 
     vTaskDelete(NULL);

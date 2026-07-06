@@ -3,6 +3,8 @@
 #include "Status_LEDs.h"
 #include "Switches.h"
 #include "init.h"
+#include "CarCAN_can_msgs.h"
+
 /* ================= CarCAN (fdcan3) ================= */
 FDCAN_HandleTypeDef *CarCAN = NULL;
 static FDCAN_RxHeaderTypeDef carCAN_rx_header;
@@ -118,7 +120,131 @@ can_status_t CarCAN_Receive(uint32_t id, uint8_t data[], TickType_t delay_ticks)
 	return CAN_OK;
 }
 
+can_status_t CarCAN_Recv_BPS_Status(bps_status_t *out, TickType_t delay) {
+    if (out == NULL) return CAN_EMPTY;
 
+    FDCAN_RxHeaderTypeDef header = {0};
+    uint8_t bps_status_rx_data[CAN_DLC_BPS_STATUS] = {0};
+
+    can_status_t result =
+        can_fd_recv(CarCAN, CAN_ID_BPS_STATUS, &header, bps_status_rx_data, delay);
+
+    if (result == CAN_OK) {
+        out->BPS_Fault = bps_status_rx_data[0];
+        out->BPS_Regen_OK = (bps_status_rx_data[1] >> 0) & 1;
+        out->BPS_Charge_OK = (bps_status_rx_data[1] >> 1) & 1;
+        out->HV_Plus_Contactor_State = (bps_status_rx_data[1] >> 2) & 1;
+        out->HV_Minus_Contactor_State = (bps_status_rx_data[1] >> 3) & 1;
+        out->Array_Contactor_State = (bps_status_rx_data[1] >> 4) & 1;
+        out->Array_Precharge_Contactor_State = (bps_status_rx_data[1] >> 5) & 1;
+        out->Main_Battery_Voltage = (uint32_t)(bps_status_rx_data[4] | 
+                                    ((uint32_t)bps_status_rx_data[5] << 8) |
+                                    ((uint32_t)bps_status_rx_data[6] << 16) |
+                                    ((uint32_t)bps_status_rx_data[7] << 24));
+        out->Main_Battery_Avg_Temperature = (int16_t)((uint16_t)bps_status_rx_data[2] | ((uint16_t)bps_status_rx_data[3] << 8));
+    }
+    return result;
+}
+
+can_status_t CarCAN_Recv_Brake_Pressure1(brake_pressure_1_t *out, TickType_t delay) {
+    if (out == NULL) return CAN_EMPTY;
+
+    FDCAN_RxHeaderTypeDef header = {0};
+    uint8_t brake_pressure1_rx_data[CAN_DLC_BRAKE_PRESSURE_1] = {0};
+
+    can_status_t result =
+        can_fd_recv(CarCAN, CAN_ID_BRAKE_PRESSURE_1, &header, brake_pressure1_rx_data, delay);
+        
+    if (result == CAN_OK) {
+        out->Brake_Pressure = (uint16_t)(brake_pressure1_rx_data[0] | ((uint16_t)brake_pressure1_rx_data[1] << 8));
+        out->Brake_Pressure_ADC = (uint16_t)(brake_pressure1_rx_data[2] | ((uint16_t)brake_pressure1_rx_data[3] << 8));
+        out->FrameID_Pedals = brake_pressure1_rx_data[4];
+    }
+
+    return result;
+}
+
+can_status_t CarCAN_Recv_Brake_Pressure2(brake_pressure_2_t *out, TickType_t delay) {
+    if (out == NULL) return CAN_EMPTY;
+
+    FDCAN_RxHeaderTypeDef header = {0};
+    uint8_t brake_pressure2_rx_data[CAN_DLC_BRAKE_PRESSURE_2] = {0};
+
+    can_status_t result =
+        can_fd_recv(CarCAN, CAN_ID_BRAKE_PRESSURE_2, &header, brake_pressure2_rx_data, delay);
+        
+    if (result == CAN_OK) {
+        out->Brake_Pressure = (uint16_t)(brake_pressure2_rx_data[0] | ((uint16_t)brake_pressure2_rx_data[1] << 8));
+        out->Brake_Pressure_ADC = (uint16_t)(brake_pressure2_rx_data[2] | ((uint16_t)brake_pressure2_rx_data[3] << 8));
+        out->FrameID_Pedals = brake_pressure2_rx_data[4];
+    }
+
+    return result;
+}
+
+can_status_t CarCAN_Recv_VCU_Status(vcu_status_t *out, TickType_t delay) {
+	if (out == NULL) return CAN_EMPTY;
+
+	FDCAN_RxHeaderTypeDef header = {0};
+	uint8_t vcu_status_rx_data[CAN_DLC_VCU_STATUS] = {0};
+
+	can_status_t result =
+		can_fd_recv(CarCAN, CAN_ID_VCU_STATUS, &header, vcu_status_rx_data, delay);
+		
+	if (result == CAN_OK) {
+		// bits 0 - 3: VCU_FSM_State
+		out->VCU_FSM_State = vcu_status_rx_data[0] & 0x0F;
+		// bit 4: Motor Ready
+		out->Motor_Ready = (vcu_status_rx_data[0] >> 4) & 0x01;
+		// bit 5: Motor_Precharge_Contactor_State
+		out->Motor_Precharge_Contactor_State = (vcu_status_rx_data[0] >> 5) & 0x01;
+		// bit 6: Motor_Contactor_State
+		out->Motor_Contactor_State = (vcu_status_rx_data[0] >> 6) & 0x01;
+		// bit 7: VCU_Driver_Input_Watchdog
+		out->VCU_Driver_Input_Watchdog = (vcu_status_rx_data[0] >> 7) & 0x01;
+		// bits 8 - 15: VCU_Pedals_Watchdog, VCU_BPS_Watchdog, VCU_Steering_Angle_Watchdog, VCU_BPS_FAULT_DETECTED, VCU_CONTROLS_FAULT_DETECTED, VCU_MTR_FAULT_DETECTED, VCU_PEDALS_FAULT_DETECTED, VCU_STEERING_FAULT_DETECTED
+		out->VCU_Pedals_Watchdog = vcu_status_rx_data[1] & 0x01;
+		out->VCU_BPS_Watchdog = (vcu_status_rx_data[1] >> 1) & 0x01;
+		out->VCU_Steering_Angle_Watchdog = (vcu_status_rx_data[1] >> 2) & 0x01;
+		out->VCU_BPS_FAULT_DETECTED = (vcu_status_rx_data[1] >> 3) & 0x01;
+		out->VCU_CONTROLS_FAULT_DETECTED = (vcu_status_rx_data[1] >> 4) & 0x01;
+		out->VCU_MTR_FAULT_DETECTED = (vcu_status_rx_data[1] >> 5) & 0x01;
+		out->VCU_PEDALS_FAULT_DETECTED = (vcu_status_rx_data[1] >> 6) & 0x01;
+		out->VCU_STEERING_FAULT_DETECTED = (vcu_status_rx_data[1] >> 7) & 0x01;
+		// bits 16 - 23: VCU_MotorCommandSource, VCU_Regen_Active, VCU_Regen_OK, VCU_MTR_PCHG_TIMEOUT, VCU_MTR_PCHG_CONT_TIMEOUT, VCU_MTR_PCHG_CONT_MISMATCH, VCU_MTR_CONT_MISMATCH, VCU_MTR_CONT_TIMEOUT
+		out->VCU_MotorCommandSource = vcu_status_rx_data[2] & 0x01;
+		out->VCU_Regen_Active = (vcu_status_rx_data[2] >> 1) & 0x01;
+		out->VCU_Regen_OK = (vcu_status_rx_data[2] >> 2) & 0x01;
+		out->VCU_MTR_PCHG_TIMEOUT = (vcu_status_rx_data[2] >> 3) & 0x01;
+		out->VCU_MTR_PCHG_CONT_TIMEOUT = (vcu_status_rx_data[2] >> 4) & 0x01;
+		out->VCU_MTR_PCHG_CONT_MISMATCH = (vcu_status_rx_data[2] >> 5) & 0x01;
+		out->VCU_MTR_CONT_MISMATCH = (vcu_status_rx_data[2] >> 6) & 0x01;
+		out->VCU_MTR_CONT_TIMEOUT = (vcu_status_rx_data[2] >> 7) & 0x01;
+		// bits 24 - 31: VCU_PCHG_OV, VCU_PCHG_UV, VCU_MTR_OV, VCU_MTR_UV, VCU_OTHER_FAULT, VCU_MTR_DIR_CHANGE_LOCKOUT, VCU_TIPPING_WARNING, VCU_WARN_REGEN_NOT_ALLOW
+		out->VCU_PCHG_OV = vcu_status_rx_data[3] & 0x01;
+		out->VCU_PCHG_UV = (vcu_status_rx_data[3] >> 1) & 0x01;
+		out->VCU_MTR_OV = (vcu_status_rx_data[3] >> 2) & 0x01;
+		out->VCU_MTR_UV = (vcu_status_rx_data[3] >> 3) & 0x01;
+		out->VCU_OTHER_FAULT = (vcu_status_rx_data[3] >> 4) & 0x01;
+		out->VCU_MTR_DIR_CHANGE_LOCKOUT = (vcu_status_rx_data[3] >> 5) & 0x01;
+		out->VCU_TIPPING_WARNING = (vcu_status_rx_data[3] >> 6) & 0x01;
+		out->VCU_WARN_REGEN_NOT_ALLOW = (vcu_status_rx_data[3] >> 7) & 0x01;
+		// bits 32 - 39: VCU_WARN_REGEN_NOT_EN, VCU_FSM_INP_BRAKE, VCU_FSM_INP_PCHG_OK, VCU_FSM_INP_CRUISE_REQ, VCU_FSM_INP_REGEN_REQ, VCU_FSM_INP_REGEN_ENABLE, VCU_FSM_INP_REGEN_RDY, VCU_FSM_INP_FORWARD
+		out->VCU_WARN_REGEN_NOT_EN = vcu_status_rx_data[4] & 0x01;
+		out->VCU_FSM_INP_BRAKE = (vcu_status_rx_data[4] >> 1) & 0x01;
+		out->VCU_FSM_INP_PCHG_OK = (vcu_status_rx_data[4] >> 2) & 0x01;
+		out->VCU_FSM_INP_CRUISE_REQ = (vcu_status_rx_data[4] >> 3) & 0x01;
+		out->VCU_FSM_INP_REGEN_REQ = (vcu_status_rx_data[4] >> 4) & 0x01;
+		out->VCU_FSM_INP_REGEN_ENABLE = (vcu_status_rx_data	[4] >> 5) & 0x01;
+		out->VCU_FSM_INP_REGEN_RDY = (vcu_status_rx_data[4] >> 6) & 0x01;
+		out->VCU_FSM_INP_FORWARD = (vcu_status_rx_data[4] >> 7) & 0x01;
+		// bits 40 - 47: VCU_FSM_INP_NEUTRAL, VCU_FSM_INP_REVERSE
+		out->VCU_FSM_INP_NEUTRAL = vcu_status_rx_data[5] & 0x01;
+		out->VCU_FSM_INP_REVERSE = (vcu_status_rx_data[5] >> 1) & 0x01;	
+	}
+
+	return result;
+}
 
 void CL_Pack_DriverStatus(uint16_t bitmap, uint8_t* tx_data) {
     if(tx_data == NULL) return;

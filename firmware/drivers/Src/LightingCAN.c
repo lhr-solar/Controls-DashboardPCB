@@ -3,6 +3,8 @@
 #include "Status_LEDs.h"
 #include "Switches.h"
 #include "init.h"
+#include "LightingCAN_can_msgs.h"
+#include "CarCAN.h"
 
 FDCAN_HandleTypeDef *LightingCAN = NULL;
 FDCAN_RxHeaderTypeDef LightingCAN_rx_header;
@@ -63,6 +65,31 @@ can_status_t LightingCAN_Init(void) {
 	}
 
 	return CAN_OK;
+}
+
+can_status_t LightingCAN_SendLightingCommand(lighting_command_t command, TickType_t delay_ticks) {
+	
+	uint8_t tx_payload[CAN_DLC_LIGHTING_COMMAND] = {0};
+	// Lighting_Set_Headlights is bit 0 
+	tx_payload[0] |= (command.Lighting_Set_Headlights & 0x1) << 0;
+	// Lighting_Set_Left_Indicator is bit 1
+	tx_payload[0] |= (command.Lighting_Set_Left_Indicator & 0x1) << 1;
+	// Lighting_Set_Right_Indicator is bit 2
+	tx_payload[0] |= (command.Lighting_Set_Right_Indicator & 0x1) << 2;
+	// Lighting_Blink_Sync is bit 3
+	tx_payload[0] |= (command.Lighting_Blink_Sync & 0x1) << 3;
+	// Lighting_Set_Brake is bit 4
+	tx_payload[0] |= (command.Lighting_Set_Brake & 0x1) << 4;
+	// Lighting_Set_BPS_Strobe is bit 5
+	tx_payload[0] |= (command.Lighting_Set_BPS_Strobe & 0x1) << 5;
+	// Lighting_Set_Custom_Mode is bits 6-7
+	tx_payload[0] |= (command.Lighting_Set_Custom_Mode & 0x3) << 6;
+
+	can_status_t lighting_can_send_status = LightingCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, delay_ticks);
+
+	// also forward the lighting command to CarCAN
+	can_status_t car_can_send_status = CarCAN_Send(CAN_ID_LIGHTING_COMMAND, CAN_DLC_LIGHTING_COMMAND, tx_payload, delay_ticks);
+	return lighting_can_send_status == CAN_OK && car_can_send_status == CAN_OK;
 }
 
 can_status_t LightingCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, TickType_t delay_ticks) {
