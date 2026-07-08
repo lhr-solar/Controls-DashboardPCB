@@ -143,6 +143,7 @@ void Task_Send_Lighting_Commands(void *argument) {
         }
 
 
+        // send lighting command on carcan and light can
 		if(LightingCAN_SendLightingCommand(lighting_command, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){
 			led_toggle(CONTROLS_HB_LED_PORT, CONTROLS_HB_LED_PIN);
 		}
@@ -150,6 +151,7 @@ void Task_Send_Lighting_Commands(void *argument) {
         print_updated_lighting_command(old_lighting_command, lighting_command);
 
 
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(500));
+        // leds are cleared on the lighting board after 500ms of no lighting command, so we send at higher rate than that
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(300));
     }
 }
