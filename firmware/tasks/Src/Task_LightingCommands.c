@@ -12,6 +12,17 @@
 #define BRAKE_PRESSURE_THRESH_PSI 120
 #define BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI 10
 
+static TimerHandle_t bps_watchdog_timer;
+static StaticTimer_t bps_timer_buffer;
+
+static void vBPSWatchdogCallback(TimerHandle_t timer)
+{
+    // No BPS messages received within timeout
+	// Only resets with car power cycle
+    set_high_noon_state(BPS_FAULT, ON);
+
+}
+
 static void print_updated_lighting_command(lighting_command_t old_command, lighting_command_t new_command){
     int first = 1;
     int printed = 0;
@@ -78,13 +89,53 @@ static void print_updated_lighting_command(lighting_command_t old_command, light
 void Task_Send_Lighting_Commands(void *argument) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
+	bps_watchdog_timer = xTimerCreateStatic(
+    	"BPS Watchdog",
+    	pdMS_TO_TICKS(BPS_WATCHDOG_TIMEOUT_MS),
+    	pdFALSE,
+    	NULL,
+    	vBPSWatchdogCallback,
+    	&bps_timer_buffer
+	);
+
+	xTimerStart(bps_watchdog_timer, 0);
+
 	lighting_command_t lighting_command = {0};
     lighting_command_t old_lighting_command = {0};
     bps_status_t bps_status = {0};
-    vcu_status_t vcu_status = {0};
     brake_pressure_2_t brake_pressure_2 = {0};
 
     while (1) {
+
+
+		uint8_t data[CAN_DLC_VCU_STATUS] = {0};
+		uint8_t regen_status = 0;
+		uint8_t brake_status = 0;
+		uint8_t motor_ready_status = 0;
+
+		if(CarCAN_Receive(CAN_ID_VCU_STATUS, data, READ_CARCAN_TASK_DELAY_TICKS) == CAN_OK) {
+			regen_status = (data[2] >> 1) & 0x1;
+			brake_status = (data[4] >> 1) & 0x1;
+			motor_ready_status = (data[0] >> 4) & 0x1;
+
+
+			// only need to turn on headlights if the car is in a driveable state
+        	if(motor_ready_status == 1){
+				lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_ON;
+			}
+        	else if(motor_ready_status == 0){
+            	lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_OFF;
+        	}
+
+			if(regen_status == 1 || brake_status == 1){
+				lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
+}
+			else {
+				lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
+			}
+
+			xTimerReset(bps_watchdog_timer, 0);
+		}
 
         // save a copy so we can print out the difference
         old_lighting_command = lighting_command;
@@ -96,10 +147,6 @@ void Task_Send_Lighting_Commands(void *argument) {
         lighting_command.Lighting_Set_Custom_Mode = 0;
 
         CarCAN_Recv_BPS_Status(&bps_status, 0);
-        can_status_t vcu_stat = CarCAN_Recv_VCU_Status(&vcu_status, 0);
-        if(vcu_stat == CAN_OK){
-            printf("Recieved VCU Status msg\r\n");
-        }
         CarCAN_Recv_Brake_Pressure2(&brake_pressure_2, 0);
 
         // BPS has faulted, turn on bps strobe and hazards
@@ -124,24 +171,6 @@ void Task_Send_Lighting_Commands(void *argument) {
             lighting_command.Lighting_Set_Left_Indicator = (switch_bitmap_read() >> SW_LEFT_BLINKER) & 0x1 ? LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON : LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_OFF;
             lighting_command.Lighting_Set_Right_Indicator = (switch_bitmap_read() >> SW_RIGHT_BLINKER) & 0x1 ? LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON : LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_OFF;
         }
-
-        // if the brake is pressed far enough or regen is active, turn on the brakelight
-        if(brake_pressure_2.Brake_Pressure >= BRAKE_PRESSURE_THRESH_PSI || vcu_status.VCU_Regen_Active == VCU_STATUS_VCU_REGEN_ACTIVE_ACTIVE){
-            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
-        }
-        // if the brake is released enough, and regen is not active, turn off the brakelight
-        else if(brake_pressure_2.Brake_Pressure <= (BRAKE_PRESSURE_THRESH_PSI - BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI) && vcu_status.VCU_Regen_Active == VCU_STATUS_VCU_REGEN_ACTIVE_INACTIVE){
-            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
-        }
-        
-        // only need to turn on headlights if the car is in a driveable state
-        if(vcu_status.Motor_Ready == VCU_STATUS_MOTOR_READY_OK){
-            lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_ON;
-        }
-        else{
-            lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_OFF;
-        }
-
 
         // send lighting command on carcan and light can
 		if(LightingCAN_SendLightingCommand(lighting_command, CONTROLS_CAN_TASK_DELAY_TICKS) != CAN_OK){

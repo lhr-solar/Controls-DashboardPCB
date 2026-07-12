@@ -4,6 +4,29 @@
 #include "Switches.h"
 #include "init.h"
 #include "CarCAN_can_msgs.h"
+#include "printf.h"
+
+static uint32_t fdcan_dlc_from_bytes(uint32_t len) {
+    switch (len) {
+        case 0:  return FDCAN_DLC_BYTES_0;
+        case 1:  return FDCAN_DLC_BYTES_1;
+        case 2:  return FDCAN_DLC_BYTES_2;
+        case 3:  return FDCAN_DLC_BYTES_3;
+        case 4:  return FDCAN_DLC_BYTES_4;
+        case 5:  return FDCAN_DLC_BYTES_5;
+        case 6:  return FDCAN_DLC_BYTES_6;
+        case 7:  return FDCAN_DLC_BYTES_7;
+        case 8:  return FDCAN_DLC_BYTES_8;
+        case 12: return FDCAN_DLC_BYTES_12;
+        case 16: return FDCAN_DLC_BYTES_16;
+        case 20: return FDCAN_DLC_BYTES_20;
+        case 24: return FDCAN_DLC_BYTES_24;
+        case 32: return FDCAN_DLC_BYTES_32;
+        case 48: return FDCAN_DLC_BYTES_48;
+        case 64: return FDCAN_DLC_BYTES_64;
+        default: return FDCAN_DLC_BYTES_8;
+    }
+}
 
 /* ================= CarCAN (fdcan3) ================= */
 FDCAN_HandleTypeDef *CarCAN = NULL;
@@ -51,7 +74,6 @@ can_status_t CarCAN_Init(void) {
 	sFilterConfig.FilterIndex = 0;
 	sFilterConfig.FilterType = FDCAN_FILTER_MASK;
 	sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
-
 	// no filter yet
 	sFilterConfig.FilterID1 = 0x00000000;
 	sFilterConfig.FilterID2 = 0x00000000;
@@ -72,7 +94,7 @@ can_status_t CarCAN_Send(uint32_t id, uint32_t payloadSize_dlc, uint8_t* data, T
 		.Identifier = id,
 		.IdType = FDCAN_STANDARD_ID,
 		.TxFrameType = FDCAN_DATA_FRAME,
-		.DataLength = payloadSize_dlc,
+		.DataLength = fdcan_dlc_from_bytes(payloadSize_dlc),
 		.ErrorStateIndicator = FDCAN_ESI_ACTIVE,
 		.BitRateSwitch = FDCAN_BRS_OFF,
 		.FDFormat = FDCAN_CLASSIC_CAN,
@@ -183,14 +205,14 @@ can_status_t CarCAN_Recv_Brake_Pressure2(brake_pressure_2_t *out, TickType_t del
 }
 
 can_status_t CarCAN_Recv_VCU_Status(vcu_status_t *out, TickType_t delay) {
-	if (out == NULL) return CAN_EMPTY;
+	if (out == NULL) {
+		return CAN_EMPTY;
+	}
 
-	FDCAN_RxHeaderTypeDef header = {0};
 	uint8_t vcu_status_rx_data[CAN_DLC_VCU_STATUS] = {0};
 
-	can_status_t result =
-		can_fd_recv(CarCAN, CAN_ID_VCU_STATUS, &header, vcu_status_rx_data, delay);
-		
+	can_status_t result = CarCAN_Receive(CAN_ID_VCU_STATUS, vcu_status_rx_data, delay);
+	
 	if (result == CAN_OK) {
 		// bits 0 - 3: VCU_FSM_State
 		out->VCU_FSM_State = vcu_status_rx_data[0] & 0x0F;

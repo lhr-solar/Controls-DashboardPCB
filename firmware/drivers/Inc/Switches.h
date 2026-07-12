@@ -59,6 +59,7 @@ typedef enum {
 	VCU_REGEN_STATUS = 0,  // bit 0 - VCU Regen Status read from CarCAN
 	BPS_FAULT = 1,		   // bit 1 - BPS faults read from CarCAN
 	VCU_BRAKE_STATUS = 2,	   // bit 2 - Brake status read from CarCAN
+	VCU_MOTOR_STATUS = 3,	   // bit 3 - Motor status read from CarCAN (VCU)
 	STATUS_COUNT
 } high_noon_state_bit_t;
 
