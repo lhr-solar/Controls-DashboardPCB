@@ -115,7 +115,6 @@ void Task_Send_Lighting_Commands(void *argument) {
 
 		if(CarCAN_Receive(CAN_ID_VCU_STATUS, data, READ_CARCAN_TASK_DELAY_TICKS) == CAN_OK) {
 			regen_status = (data[2] >> 1) & 0x1;
-			brake_status = (data[4] >> 1) & 0x1;
 			motor_ready_status = (data[0] >> 4) & 0x1;
 
 
@@ -158,6 +157,15 @@ void Task_Send_Lighting_Commands(void *argument) {
             // turn on hazards
             lighting_command.Lighting_Set_Left_Indicator = LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON;
             lighting_command.Lighting_Set_Right_Indicator = LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON;
+        }
+
+		// if the brake is pressed far enough or regen is active, turn on the brakelight
+        if(brake_pressure_2.Brake_Pressure >= BRAKE_PRESSURE_THRESH_PSI || regen_status == 1){
+            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
+        }
+        // if the brake is released enough, and regen is not active, turn off the brakelight
+        else if(brake_pressure_2.Brake_Pressure <= (BRAKE_PRESSURE_THRESH_PSI - BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI) && regen_status == 0){
+            lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
         }
 
         bool hazards_enabled = ((switch_bitmap_read() >> SW_HAZARD) & 0x1);
