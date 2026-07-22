@@ -6,6 +6,7 @@
 #include "init.h"
 #include "printf.h"
 #include "overrides.h"
+#include "SteeringCAN.h"
 
 static void print_changed_switches(uint32_t previous_bitmap, uint32_t new_bitmap) {
 
@@ -31,6 +32,7 @@ void Task_Send_Switch_States(void *argument) {
 	uint32_t reset_gear = 0;
 	uint32_t bitmap = 0;
 	uint32_t previous_bitmap = 0;
+	uint32_t steering_angle_reset = 0;
 
 	while (1) {
 		previous_bitmap = bitmap;
@@ -59,7 +61,25 @@ void Task_Send_Switch_States(void *argument) {
 			bitmap |= (0x1 << SW_NEUTRAL_GEAR);
 		}
 
-		if((bitmap >> SW_IGN_MTR)&0x1) bitmap |= (0x1 << SW_IGN_ARR);
+		if((((bitmap >> SW_REGEN_ENABLE) & 0x1) == 1) && (((bitmap >> SW_CRUISE_ENABLE) & 0x1) == 1)) {
+			steering_angle_reset += 1;
+		} else {
+			steering_angle_reset = 0;
+		}
+
+		if(steering_angle_reset >= 10 && ((bitmap >> SW_REV) & 0x1) != 1) {
+			if(SteeringCAN_ResetAngle(SEND_SWITCH_STATES_TASK_DELAY_TICKS) != CAN_OK) {
+				printf("SteeringCAN_ResetAngle failed to send\r\n");
+			}
+			steering_angle_reset = 0;
+		} else if(steering_angle_reset >= 10 && ((bitmap >> SW_REV) & 0x1) == 1) {
+			if(SteeringCAN_ResetCalibration(SEND_SWITCH_STATES_TASK_DELAY_TICKS) != CAN_OK) {
+				printf("SteeringCAN_ResetCalibration failed to send\r\n");
+			}
+			steering_angle_reset = 0;
+		}
+
+		if((bitmap >> SW_IGN_MTR) & 0x1) bitmap |= (0x1 << SW_IGN_ARR);
 
 		uint8_t tx_data_driver_status[CAN_DLC_DRIVER_INPUT_STATUS];
 

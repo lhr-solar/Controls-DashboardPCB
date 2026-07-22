@@ -9,7 +9,8 @@
 #include "LightingCAN_can_msgs.h"
 #include "printf.h"
 
-#define BRAKE_PRESSURE_THRESH_PSI 120
+#define BRAKE_PRESSURE_RESET_PSI 1
+#define BRAKE_PRESSURE_THRESH_PSI 2
 #define BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI 10
 
 static TimerHandle_t bps_watchdog_timer;
@@ -104,6 +105,7 @@ void Task_Send_Lighting_Commands(void *argument) {
     lighting_command_t old_lighting_command = {0};
     bps_status_t bps_status = {0};
     brake_pressure_2_t brake_pressure_2 = {0};
+	int i = 0;
 
     while (1) {
 
@@ -112,6 +114,7 @@ void Task_Send_Lighting_Commands(void *argument) {
 		uint8_t regen_status = 0;
 		uint8_t brake_status = 0;
 		uint8_t motor_ready_status = 0;
+		bool hazards_vcu_fault = false;
 
 		if(CarCAN_Receive(CAN_ID_VCU_STATUS, data, READ_CARCAN_TASK_DELAY_TICKS) == CAN_OK) {
 			regen_status = (data[2] >> 1) & 0x1;
@@ -119,19 +122,27 @@ void Task_Send_Lighting_Commands(void *argument) {
 
 
 			// only need to turn on headlights if the car is in a driveable state
-        	if(motor_ready_status == 1){
+        	if(motor_ready_status == 1) {
 				lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_ON;
 			}
         	else if(motor_ready_status == 0){
             	lighting_command.Lighting_Set_Headlights = LIGHTING_COMMAND_LIGHTING_SET_HEADLIGHTS_OFF;
         	}
 
-			if(regen_status == 1 || brake_status == 1){
+			if(regen_status == 1 || brake_status == 1) {
 				lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
-}
+			}
 			else {
 				lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
 			}
+
+			if((data[1] >> 3) & 0x1 || (data[1] >> 4) & 0x1 || (data[1] >> 5) & 0x1) {
+				hazards_vcu_fault = true;
+			} else if((data[2] >> 3) & 0x1 || (data[2] >> 4) & 0x1 || (data[2] >> 5) & 0x1 || (data[2] >> 6) & 0x1 || (data[2] >> 7) & 0x1) {
+				hazards_vcu_fault = true;
+			} else if((data[3] >> 1) & 0x1 || (data[3] >> 3) & 0x1 || (data[3] >> 4) & 0x1) {
+				hazards_vcu_fault = true;
+			} else hazards_vcu_fault = false;
 
 			xTimerReset(bps_watchdog_timer, 0);
 		}
@@ -159,17 +170,23 @@ void Task_Send_Lighting_Commands(void *argument) {
             lighting_command.Lighting_Set_Right_Indicator = LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON;
         }
 
+		if(brake_pressure_2.Brake_Pressure <= BRAKE_PRESSURE_RESET_PSI) {
+			i++;
+		}
+
+
 		// if the brake is pressed far enough or regen is active, turn on the brakelight
         if(brake_pressure_2.Brake_Pressure >= BRAKE_PRESSURE_THRESH_PSI || regen_status == 1){
             lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_ON;
         }
         // if the brake is released enough, and regen is not active, turn off the brakelight
-        else if(brake_pressure_2.Brake_Pressure <= (BRAKE_PRESSURE_THRESH_PSI - BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI) && regen_status == 0){
+        else if(brake_pressure_2.Brake_Pressure <= (BRAKE_PRESSURE_THRESH_PSI - BRAKE_PRESSURE_THRESH_HYSTERESIS_PSI) && regen_status == 0 && i == 2){
             lighting_command.Lighting_Set_Brake = LIGHTING_COMMAND_LIGHTING_SET_BRAKE_OFF;
+			i = 0;
         }
 
         bool hazards_enabled = ((switch_bitmap_read() >> SW_HAZARD) & 0x1);
-        if(hazards_enabled){
+        if(hazards_enabled || hazards_vcu_fault){
             lighting_command.Lighting_Set_Left_Indicator = LIGHTING_COMMAND_LIGHTING_SET_LEFT_INDICATOR_ON;
             lighting_command.Lighting_Set_Right_Indicator = LIGHTING_COMMAND_LIGHTING_SET_RIGHT_INDICATOR_ON;
         }
