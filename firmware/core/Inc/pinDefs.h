@@ -69,3 +69,24 @@
 #define LEFT_BLINKER_PIN        GPIO_PIN_5
 #define HAZARD_PORT             GPIOC
 #define HAZARD_PIN              GPIO_PIN_8
+
+
+/* -------- Output - GPIO -------- */
+#define CAR_CAN_TX_PORT			GPIOA
+#define CAR_CAN_TX_PIN			GPIO_PIN_15
+
+#define CAR_CAN_RX_PORT			GPIOA
+#define CAR_CAN_RX_PIN			GPIO_PIN_8
+
+#define LIGHTING_CAN_TX_PORT	GPIOA
+#define LIGHTING_CAN_TX_PIN		GPIO_PIN_12
+
+#define LIGHTING_CAN_RX_PORT	GPIOA
+#define LIGHTING_CAN_RX_PIN		GPIO_PIN_11
+
+
+
+/* -------- Output - UART printf -------- */
+#define USART3_PORT				GPIOC
+#define USART3_TX_PIN			GPIO_PIN_10
+#define USART3_RX_PIN			GPIO_PIN_11

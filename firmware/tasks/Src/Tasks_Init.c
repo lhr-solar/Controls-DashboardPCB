@@ -3,29 +3,35 @@
 #include "Switches.h"
 #include "Status_LEDs.h"
 #include "Horn.h"
+#include "CarCAN.h"
+#include "LightingCAN.h"
+#include "SteeringCAN.h"
+#include "Debugging.h"
 
 StackType_t readCarCAN_stackArray[READ_CAR_CAN_STACK_SIZE];
 StackType_t readControlsCAN_stackArray[READ_CONTROLS_CAN_STACK_SIZE];
-StackType_t pollingWriteCAN_stackArray[POLLING_WRITE_CAN_STACK_SIZE];
+StackType_t send_switch_states_stackArray[SEND_SWITCH_STATES_STACK_SIZE];
+StackType_t send_lighting_commands_stackArray[SEND_LIGHTING_COMMANDS_STACK_SIZE];
 
 StaticTask_t readCarCAN_tcb;
 StaticTask_t readControlsCAN_tcb;
-StaticTask_t pollingWriteCAN_tcb;
+StaticTask_t send_switch_states_tcb;
+StaticTask_t send_lighting_commands_tcb;
 
+TaskHandle_t ReadControlsCAN_TaskHandle;
 
 void InitTasks(void *argument) {
 
-    /**
-	 * 
-	 * @todo     Add BPS fault watchdog here
-	 * 
-	*/
-
-    led_gpio_init();
+	led_gpio_init();
     switch_init();
     horn_gpio_init();
+	CarCAN_Init();
+	SteeringCAN_Init();
+	LightingCAN_Init();
+    initPrintf();
 	
-
+	set_high_noon_state(BPS_FAULT, OFF);
+	
     xTaskCreateStatic(
         ReadCarCAN_task,
         "Read CarCAN Task",
@@ -36,25 +42,24 @@ void InitTasks(void *argument) {
         &readCarCAN_tcb
     );
 
-
-    xTaskCreateStatic(
-        Read_Switches_WriteCAN_Task,
-        "Reading All Switches & Writing CAN Task",
-        POLLING_WRITE_CAN_STACK_SIZE,
+	xTaskCreateStatic(
+        Task_Send_Switch_States,
+        "Reading All Switches & Writing to CarCan",
+        SEND_SWITCH_STATES_STACK_SIZE,
         NULL,
-        POLLING_WRITE_CAN_PRIORITY,
-        pollingWriteCAN_stackArray,
-        &pollingWriteCAN_tcb
+        SEND_SWITCH_STATES_PRIORITY,
+        send_switch_states_stackArray,
+        &send_switch_states_tcb
     );
 
     xTaskCreateStatic(
-        ReadControlsCAN_task,
-        "Read Controls CAN Task",
-        READ_CONTROLS_CAN_STACK_SIZE,
+        Task_Send_Lighting_Commands,
+        "Sending Lighting Commands",
+        SEND_LIGHTING_COMMANDS_STACK_SIZE,
         NULL,
-        READ_CONTROLS_CAN_PRIORITY,
-        readControlsCAN_stackArray,
-        &readControlsCAN_tcb
+        SEND_LIGHTING_COMMANDS_PRIORITY,
+        send_lighting_commands_stackArray,
+        &send_lighting_commands_tcb
     );
 
     vTaskDelete(NULL);

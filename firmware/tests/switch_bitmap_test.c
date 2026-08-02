@@ -14,7 +14,7 @@
 
 
 #define SWITCH_BITMAP_TASK_DELAY_TICKS		pdMS_TO_TICKS(250)
-#define NUM_STATUS_LEDS		8
+#define NUM_STATUS_LEDS_TEST		8
 
 
 /* Task control block and stack for the LED test task */
@@ -26,7 +26,7 @@ typedef struct {
     uint16_t      pin;
 } LED_t;
 
-static const LED_t statusLEDs[NUM_STATUS_LEDS] = {
+static const LED_t statusLEDs[NUM_STATUS_LEDS_TEST] = {
     { X_LED2_PORT,        X_LED2_PIN        },    // bit 0
     { CAR_CAN_RX_LED_PORT, CAR_CAN_RX_LED_PIN },  // bit 1
     { CAR_CAN_TX_LED_PORT, CAR_CAN_TX_LED_PIN },  // bit 2
